@@ -45,6 +45,9 @@ public static partial class KDefine {
 	public const string G_IMG_P_SETTINGS_P_NOTI_ON = "G_NotiOn";
 	public const string G_IMG_P_SETTINGS_P_NOTI_OFF = "G_NotiOff";
 	// 설정 팝업 }
+
+	// 씬 이름
+	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";
 	#endregion			// 기본
 }
 #endif			// #if EXTRA_SCRIPT_ENABLE
