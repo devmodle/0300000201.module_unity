@@ -6,13 +6,6 @@ using MessagePack;
 
 #if EXTRA_SCRIPT_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 #region 기본
-/** 아이템 정보 */
-[System.Serializable]
-public struct STItemInfo {
-	public long m_nNumItems;
-	public EItemKinds m_eItemKinds;
-}
-
 /** 설명 정보 */
 [System.Serializable]
 public struct STDescInfo {
@@ -22,8 +15,8 @@ public struct STDescInfo {
 	#region 함수
 	/** 생성자 */
 	public STDescInfo(SimpleJSON.JSONNode a_oDescInfo) {
-		m_oName = a_oDescInfo[KCDefine.U_KEY_NAME].Value.Equals(KCDefine.B_TEXT_NULL) ? string.Empty : a_oDescInfo[KCDefine.U_KEY_NAME];
-		m_oDesc = a_oDescInfo[KCDefine.U_KEY_DESC].Value.Equals(KCDefine.B_TEXT_NULL) ? string.Empty : a_oDescInfo[KCDefine.U_KEY_DESC];
+		m_oName = a_oDescInfo[KCDefine.U_KEY_NAME].ExIsValid() ? a_oDescInfo[KCDefine.U_KEY_NAME] : string.Empty;
+		m_oDesc = a_oDescInfo[KCDefine.U_KEY_DESC].ExIsValid() ? a_oDescInfo[KCDefine.U_KEY_DESC] : string.Empty;
 	}
 	#endregion			// 함수
 
@@ -36,6 +29,13 @@ public struct STDescInfo {
 	}
 #endif			// #if UNITY_EDITOR || UNITY_STANDALONE
 	#endregion			// 조건부 함수
+}
+
+/** 아이템 개수 정보 */
+[System.Serializable]
+public struct STNumItemsInfo {
+	public long m_nNumItems;
+	public EItemKinds m_eItemKinds;
 }
 
 /** 게임 속성 */

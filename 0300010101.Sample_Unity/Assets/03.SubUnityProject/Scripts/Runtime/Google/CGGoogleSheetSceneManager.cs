@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Google {
-	/** 파이어 베이스 씬 관리자 */
-	public partial class CGFirebaseSceneManager : StudyScene.CStudySceneManager {
+	/** 구글 시트 씬 관리자 */
+	public partial class CGGoogleSheetSceneManager : StudyScene.CStudySceneManager {
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_G_FIREBASE;
+		public override string SceneName => KDefine.G_SCENE_N_G_GOOGLE_SHEET;
 		#endregion			// 프로퍼티
 
 		#region 함수
@@ -17,9 +17,9 @@ namespace Google {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-#if FIREBASE_MODULE_ENABLE
+#if GOOGLE_SHEET_ENABLE
 
-#endif			// #if FIREBASE_MODULE_ENABLE
+#endif			// #if GOOGLE_SHEET_ENABLE
 			}
 		}
 		#endregion			// 함수

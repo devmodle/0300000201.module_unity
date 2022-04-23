@@ -48,6 +48,8 @@ public static partial class KDefine {
 
 	// 씬 이름
 	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";
+	public const string G_SCENE_N_G_GAME_CENTER = "02.GGameCenterScene";
+	public const string G_SCENE_N_G_GOOGLE_SHEET = "03.GGoogleSheetScene";
 	#endregion			// 기본
 }
 #endif			// #if EXTRA_SCRIPT_ENABLE
