@@ -18,7 +18,13 @@ namespace Google {
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 #if GAME_CENTER_MODULE_ENABLE
+				this.ScrollViewContents.ExFindComponent<Button>("LoginBtn").onClick.AddListener(() => {
+					Func.GameCenterLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup($"Login: {a_bIsSuccess}", null, false));
+				});
 
+				this.ScrollViewContents.ExFindComponent<Button>("LogoutBtn").onClick.AddListener(() => {
+					Func.GameCenterLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup("Logout", null, false));
+				});
 #endif			// #if GAME_CENTER_MODULE_ENABLE
 			}
 		}
