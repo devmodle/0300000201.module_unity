@@ -46,10 +46,14 @@ public static partial class KDefine {
 	public const string G_IMG_P_SETTINGS_P_NOTI_OFF = "G_NotiOff";
 	// 설정 팝업 }
 
-	// 씬 이름
-	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";
-	public const string G_SCENE_N_G_GAME_CENTER = "02.GGameCenterScene";
-	public const string G_SCENE_N_G_GOOGLE_SHEET = "03.GGoogleSheetScene";
+	// 씬 이름 {
+	public const string G_SCENE_N_E_FACEBOOK = "EFacebookScene";
+	public const string G_SCENE_N_E_GAME_CENTER = "EGameCenterScene";
+	public const string G_SCENE_N_E_PURCHASE = "EPurchaseScene";
+
+	public const string G_SCENE_N_G_FIREBASE = "GFirebaseScene";
+	public const string G_SCENE_N_G_GOOGLE_SHEET = "GGoogleSheetScene";
+	// 씬 이름 }
 	#endregion			// 기본
 }
 #endif			// #if EXTRA_SCRIPT_ENABLE

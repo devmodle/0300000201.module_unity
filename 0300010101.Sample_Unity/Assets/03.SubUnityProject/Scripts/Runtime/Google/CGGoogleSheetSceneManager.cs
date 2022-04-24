@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if EXTRA_SCRIPT_ENABLE
 namespace Google {
 	/** 구글 시트 씬 관리자 */
 	public partial class CGGoogleSheetSceneManager : StudyScene.CStudySceneManager {
@@ -31,3 +32,4 @@ namespace Google {
 		#endregion			// 함수
 	}
 }
+#endif			// #if EXTRA_SCRIPT_ENABLE

@@ -144,6 +144,11 @@ public enum EProductSaleKinds {
 	[HideInInspector] SINGLE_PRODUCT_SALE = EEnumVal.TYPE * 1,
 	SINGLE_SALE_COINS = EProductSaleKinds.SINGLE_PRODUCT_SALE + (EEnumVal.KINDS_TYPE * 0),			//!< 판매 코인 10,000,000
 	SINGLE_REMOVE_ADS = EProductSaleKinds.SINGLE_PRODUCT_SALE + (EEnumVal.KINDS_TYPE * 1),			//!< 광고 제거 10,010,000
+
+#region 추가
+	SINGLE_CONSUMABLE_SAMPLE = EProductSaleKinds.SINGLE_PRODUCT_SALE + (EEnumVal.KINDS_TYPE * 2),			//!< 소모품 샘플 10,020,000
+	SINGLE_NON_CONSUMABLE_SAMPLE = EProductSaleKinds.SINGLE_PRODUCT_SALE + (EEnumVal.KINDS_TYPE * 3),			//!< 소모품 샘플 10,030,000
+#endregion			// 추가
 	#endregion			// 단일
 
 	[HideInInspector] MAX_VAL
