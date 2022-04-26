@@ -55,5 +55,22 @@ public static partial class KDefine {
 	public const string G_SCENE_N_G_GOOGLE_SHEET = "GGoogleSheetScene";
 	// 씬 이름 }
 	#endregion			// 기본
+
+	#region 런타임 상수
+	// 일일 보상
+	public static readonly List<ERewardKinds> G_REWARDS_KINDS_DAILY_REWARD_LIST = new List<ERewardKinds>() {
+		// Do Something
+	};
+
+	// 상점 상품 판매
+	public static readonly List<EProductSaleKinds> G_STORE_PRODUCT_SALE_KINDS_LIST = new List<EProductSaleKinds>() {
+		// Do Something
+	};
+
+	// 특수 패키지 상품 판매
+	public static readonly List<EProductSaleKinds> G_PRODUCT_SALE_KINDS_PRODUCT_SPECIAL_PKGS_LIST = new List<EProductSaleKinds>() {
+		// Do Something
+	};
+	#endregion			// 런타임 상수
 }
 #endif			// #if EXTRA_SCRIPT_ENABLE
