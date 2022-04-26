@@ -6,7 +6,7 @@ using TMPro;
 
 #if EXTRA_SCRIPT_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 /** 코인 상자 팝업 */
-public partial class CSaleCoinsPopup : CSubPopup {
+public partial class CCoinsBoxPopup : CSubPopup {
 	/** 식별자 */
 	private enum EKey {
 		NONE = -1,
