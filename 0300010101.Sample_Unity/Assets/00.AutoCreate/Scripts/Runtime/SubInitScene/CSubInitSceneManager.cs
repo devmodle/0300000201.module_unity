@@ -12,7 +12,7 @@ namespace InitScene {
 		protected override void Setup() {
 			base.Setup();
 			
-#if EXTRA_SCRIPT_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 			// 테이블을 생성한다 {
 			CLevelInfoTable.Create();
 
@@ -31,7 +31,7 @@ namespace InitScene {
 			CAppInfoStorage.Create();
 			CUserInfoStorage.Create();
 			CGameInfoStorage.Create();
-#endif			// #if EXTRA_SCRIPT_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 		}
 		#endregion			// 함수
 	}

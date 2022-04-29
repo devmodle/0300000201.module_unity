@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_EDITOR && EXTRA_SCRIPT_ENABLE
+#if UNITY_EDITOR && EXTRA_SCRIPT_MODULE_ENABLE
 using UnityEditor;
 
 /** 에디터 서브 전역 상수 */
@@ -49,4 +49,4 @@ public static partial class KEditorDefine {
 	};
 	#endregion			// 런타임 상수
 }
-#endif			// #if UNITY_EDITOR && EXTRA_SCRIPT_ENABLE
+#endif			// #if UNITY_EDITOR && EXTRA_SCRIPT_MODULE_ENABLE

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if EXTRA_SCRIPT_ENABLE
+#if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Etc {
 	/** 결제 씬 관리자 */
 	public class CEPurchaseSceneManager : StudyScene.CStudySceneManager {
@@ -36,4 +36,4 @@ namespace Etc {
 		#endregion			// 함수
 	}
 }
-#endif			// #if EXTRA_SCRIPT_ENABLE
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE
