@@ -60,8 +60,8 @@ namespace StartScene {
 			base.OnDestroy();
 
 			try {
-				// 실행 중 일 경우
-				if(CSceneManager.IsRunning) {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
 					m_oGaugeAni?.Kill();
 				}
 			} catch(System.Exception oException) {
