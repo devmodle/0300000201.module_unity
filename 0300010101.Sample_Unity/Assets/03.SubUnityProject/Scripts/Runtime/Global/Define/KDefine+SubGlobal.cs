@@ -46,6 +46,7 @@ public static partial class KDefine {
 	public const string G_SCENE_N_E_FX = "EFXScene";
 	public const string G_SCENE_N_E_SND = "ESndScene";
 	public const string G_SCENE_N_E_SHADER = "EShaderScene";
+	public const string G_SCENE_N_E_NOTI = "ENotiScene";
 	#endregion			// 기본
 
 	#region 런타임 상수
