@@ -26,7 +26,7 @@ namespace Etc {
 				this.UIs.ExFindComponent<Button>("AddNotiBtn").onClick.AddListener(() => {
 					m_nNum += 1;
 
-					CNotiManager.Inst.AddNoti($"{System.DateTime.Today.Ticks}", new STNotiInfo() {
+					CNotiManager.Inst.AddNoti($"{System.DateTime.Today.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}", new STNotiInfo() {
 						m_bIsRepeat = false,
 						
 						m_oTitle = "Title",
@@ -40,7 +40,7 @@ namespace Etc {
 				this.UIs.ExFindComponent<Button>("AddUniqueNotiBtn").onClick.AddListener(() => {
 					m_nNum += 1;
 					
-					CNotiManager.Inst.AddNoti($"{System.DateTime.Now.Ticks}", new STNotiInfo() {
+					CNotiManager.Inst.AddNoti($"{System.DateTime.Now.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}", new STNotiInfo() {
 						m_bIsRepeat = false,
 						
 						m_oTitle = "Title",
@@ -50,9 +50,9 @@ namespace Etc {
 						m_stNotiTime = System.DateTime.Now + new System.TimeSpan(0, 0, 5)
 					});
 				});
-
+				
 				this.UIs.ExFindComponent<Button>("RemoveNotiBtn").onClick.AddListener(() => {
-					CNotiManager.Inst.RemoveNoti($"{System.DateTime.Today.Ticks}");
+					CNotiManager.Inst.RemoveNoti($"{System.DateTime.Today.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}");
 				});
 #endif			// #if NOTI_MODULE_ENABLE
 			}
