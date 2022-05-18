@@ -7,6 +7,10 @@ using UnityEngine.UI;
 namespace Etc {
 	/** 알림 씬 관리자 */
 	public class CENotiSceneManager : StudyScene.CStudySceneManager {
+		#region 변수
+		private int m_nNum = 0;
+		#endregion			// 변수
+
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_E_NOTI;
 		#endregion			// 프로퍼티
@@ -20,24 +24,28 @@ namespace Etc {
 			if(CSceneManager.IsAppInit) {
 #if NOTI_MODULE_ENABLE
 				this.UIs.ExFindComponent<Button>("AddNotiBtn").onClick.AddListener(() => {
+					m_nNum += 1;
+
 					CNotiManager.Inst.AddNoti($"{System.DateTime.Today.Ticks}", new STNotiInfo() {
 						m_bIsRepeat = false,
 						
 						m_oTitle = "Title",
 						m_oSubTitle = "SubTitle",
-						m_oMsg = "Msg",
+						m_oMsg = $"Msg_{m_nNum:00}",
 						
 						m_stNotiTime = System.DateTime.Now + new System.TimeSpan(0, 0, 5)
 					});
 				});
 
 				this.UIs.ExFindComponent<Button>("AddUniqueNotiBtn").onClick.AddListener(() => {
+					m_nNum += 1;
+					
 					CNotiManager.Inst.AddNoti($"{System.DateTime.Now.Ticks}", new STNotiInfo() {
 						m_bIsRepeat = false,
 						
 						m_oTitle = "Title",
 						m_oSubTitle = "SubTitle",
-						m_oMsg = "Msg",
+						m_oMsg = $"Msg_{m_nNum:00}",
 						
 						m_stNotiTime = System.DateTime.Now + new System.TimeSpan(0, 0, 5)
 					});
