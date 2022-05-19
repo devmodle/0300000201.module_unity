@@ -43,7 +43,7 @@ namespace StartScene {
 			[EKey.GAUGE_HANDLER] = null
 		};
 		#endregion			// 변수
-
+		
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {

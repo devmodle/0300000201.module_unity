@@ -88,7 +88,6 @@ public static partial class CBuildProcessor {
 		if(File.Exists(oPlistPath)) {
 			var oDoc = new PlistDocument();
 			oDoc.ReadFromFile(oPlistPath);
-
 			oDoc.root.SetBoolean(KCEditorDefine.B_KEY_IOS_FIREBASE_APP_STORE_RECEIPT_URL_CHECK_ENABLE, false);
 			
 			oDoc.root.SetString(KCEditorDefine.B_KEY_IOS_ENCRYPTION_ENABLE, KCEditorDefine.B_TEXT_IOS_FALSE);
@@ -193,4 +192,3 @@ public static partial class CBuildProcessor {
 	#endregion			// 클래스 함수
 }
 #endif			// #if UNITY_EDITOR
- 
