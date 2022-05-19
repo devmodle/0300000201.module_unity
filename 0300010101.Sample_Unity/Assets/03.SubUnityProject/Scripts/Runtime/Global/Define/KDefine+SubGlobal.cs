@@ -43,10 +43,9 @@ public static partial class KDefine {
 	// 설정 팝업 }
 
 	// 씬 이름
-	public const string G_SCENE_N_E_FX = "EFXScene";
-	public const string G_SCENE_N_E_SND = "ESndScene";
-	public const string G_SCENE_N_E_SHADER = "EShaderScene";
-	public const string G_SCENE_N_E_NOTI = "ENotiScene";
+	public const string G_SCENE_N_E_ETC = "01.EEtcScene";
+	public const string G_SCENE_N_E_SHADER = "02.EShaderScene";
+	public const string G_SCENE_N_E_PARTICLE = "03.EParticleScene";
 	#endregion			// 기본
 
 	#region 런타임 상수

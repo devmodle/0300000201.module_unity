@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Etc {
-	/** 알림 씬 관리자 */
-	public class CENotiSceneManager : StudyScene.CStudySceneManager {
-		#region 변수
-		private int m_nNum = 0;
-		#endregion			// 변수
-
+	/** 기타 씬 관리자 */
+	public class CEEtcSceneManager : StudyScene.CStudySceneManager {
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_E_NOTI;
+		public override string SceneName => KDefine.G_SCENE_N_E_ETC;
 		#endregion			// 프로퍼티
 
 		#region 함수
@@ -22,35 +17,24 @@ namespace Etc {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
+				this.UIs.ExFindComponent<Button>("ShowIndicatorBtn").onClick.AddListener(() => {
+					CIndicatorManager.Inst.Show();
+					this.ExLateCallFunc((a_oSender) => CIndicatorManager.Inst.Close(), KCDefine.B_VAL_5_FLT);
+				});
+
 #if NOTI_MODULE_ENABLE
 				this.UIs.ExFindComponent<Button>("AddNotiBtn").onClick.AddListener(() => {
-					m_nNum += 1;
-
 					CNotiManager.Inst.AddNoti($"{System.DateTime.Today.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}", new STNotiInfo() {
 						m_bIsRepeat = false,
 						
 						m_oTitle = "Title",
 						m_oSubTitle = "SubTitle",
-						m_oMsg = $"Msg_{m_nNum:00}",
+						m_oMsg = "Msg",
 						
 						m_stNotiTime = System.DateTime.Now + new System.TimeSpan(0, 0, 5)
 					});
 				});
 
-				this.UIs.ExFindComponent<Button>("AddUniqueNotiBtn").onClick.AddListener(() => {
-					m_nNum += 1;
-					
-					CNotiManager.Inst.AddNoti($"{System.DateTime.Now.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}", new STNotiInfo() {
-						m_bIsRepeat = false,
-						
-						m_oTitle = "Title",
-						m_oSubTitle = "SubTitle",
-						m_oMsg = $"Msg_{m_nNum:00}",
-						
-						m_stNotiTime = System.DateTime.Now + new System.TimeSpan(0, 0, 5)
-					});
-				});
-				
 				this.UIs.ExFindComponent<Button>("RemoveNotiBtn").onClick.AddListener(() => {
 					CNotiManager.Inst.RemoveNoti($"{System.DateTime.Today.Ticks % KCDefine.B_UNIT_MICRO_SECS_PER_SEC}");
 				});
@@ -60,4 +44,3 @@ namespace Etc {
 		#endregion			// 함수
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE

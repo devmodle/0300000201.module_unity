@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Etc {
-	/** 사운드 씬 관리자 */
-	public class CESndSceneManager : StudyScene.CStudySceneManager {
+	/** 파티클 씬 관리자 */
+	public class CEParticleSceneManager : StudyScene.CStudySceneManager {
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_E_SND;
+		public override string SceneName => KDefine.G_SCENE_N_E_PARTICLE;
 		#endregion			// 프로퍼티
 
 		#region 함수

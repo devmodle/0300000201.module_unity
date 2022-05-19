@@ -30,18 +30,16 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
-		[typeof(Etc.CEFXSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Etc.CESndSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Etc.CEEtcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(Etc.CEShaderSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Etc.CENotiSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
+		[typeof(Etc.CEParticleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
-		[KDefine.G_SCENE_N_E_FX] = typeof(Etc.CEFXSceneManager),
-		[KDefine.G_SCENE_N_E_SND] = typeof(Etc.CESndSceneManager),
+		[KDefine.G_SCENE_N_E_ETC] = typeof(Etc.CEEtcSceneManager),
 		[KDefine.G_SCENE_N_E_SHADER] = typeof(Etc.CEShaderSceneManager),
-		[KDefine.G_SCENE_N_E_NOTI] = typeof(Etc.CENotiSceneManager)
+		[KDefine.G_SCENE_N_E_PARTICLE] = typeof(Etc.CEParticleSceneManager)
 	};
 	#endregion			// 런타임 상수
 }
