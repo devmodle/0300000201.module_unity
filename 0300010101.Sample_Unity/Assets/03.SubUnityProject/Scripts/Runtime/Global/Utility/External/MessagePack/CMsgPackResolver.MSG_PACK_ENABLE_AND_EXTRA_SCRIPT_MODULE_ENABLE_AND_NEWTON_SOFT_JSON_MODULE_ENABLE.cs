@@ -851,8 +851,89 @@ namespace MessagePack.Formatters
 
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             value.OnBeforeSerialize();
-            writer.WriteArrayHeader(1);
+            writer.WriteArrayHeader(82);
             formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>().Serialize(ref writer, value.m_oSendLogList, options);
         }
 
         public global::CCommonAppInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -873,6 +954,9 @@ namespace MessagePack.Formatters
                 {
                     case 0:
                         ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
+                        break;
+                    case 81:
+                        ____result.m_oSendLogList = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>().Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();
