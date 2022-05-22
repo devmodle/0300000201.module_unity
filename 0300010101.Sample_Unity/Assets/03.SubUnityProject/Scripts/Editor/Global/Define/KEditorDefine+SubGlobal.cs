@@ -33,6 +33,8 @@ public static partial class KEditorDefine {
 		[typeof(Etc.CEEtcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(Etc.CEShaderSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(Etc.CEParticleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Etc.CEBackendSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Etc.CEFacebookSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 
 		[typeof(Google.CGFirebaseSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
@@ -42,6 +44,8 @@ public static partial class KEditorDefine {
 		[KDefine.G_SCENE_N_E_ETC] = typeof(Etc.CEEtcSceneManager),
 		[KDefine.G_SCENE_N_E_SHADER] = typeof(Etc.CEShaderSceneManager),
 		[KDefine.G_SCENE_N_E_PARTICLE] = typeof(Etc.CEParticleSceneManager),
+		[KDefine.G_SCENE_N_E_BACKEND] = typeof(Etc.CEBackendSceneManager),
+		[KDefine.G_SCENE_N_E_FACEBOOK] = typeof(Etc.CEFacebookSceneManager),
 
 		[KDefine.G_SCENE_N_G_FIREBASE] = typeof(Google.CGFirebaseSceneManager)
 	};

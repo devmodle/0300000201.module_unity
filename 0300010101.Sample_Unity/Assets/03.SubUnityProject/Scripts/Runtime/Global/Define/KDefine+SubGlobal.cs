@@ -46,6 +46,8 @@ public static partial class KDefine {
 	public const string G_SCENE_N_E_ETC = "01.EEtcScene";
 	public const string G_SCENE_N_E_SHADER = "02.EShaderScene";
 	public const string G_SCENE_N_E_PARTICLE = "03.EParticleScene";
+	public const string G_SCENE_N_E_BACKEND = "04.EBackendScene";
+	public const string G_SCENE_N_E_FACEBOOK = "05.EFacebookScene";
 
 	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";
 	// 씬 이름 }
@@ -57,12 +59,12 @@ public static partial class KDefine {
 		// Do Something
 	};
 
-	// 상점 상품 판매
+	// 상점 상품 판매 종류
 	public static readonly List<EProductSaleKinds> G_STORE_PRODUCT_SALE_KINDS_LIST = new List<EProductSaleKinds>() {
 		// Do Something
 	};
 
-	// 특수 패키지 상품 판매
+	// 특수 패키지 상품 판매 종류
 	public static readonly List<EProductSaleKinds> G_PRODUCT_SALE_KINDS_PRODUCT_SPECIAL_PKGS_LIST = new List<EProductSaleKinds>() {
 		// Do Something
 	};

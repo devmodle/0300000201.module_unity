@@ -21,7 +21,7 @@ namespace Google {
 				this.UIs.ExFindComponent<Button>("LoginBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
 
-					CFirebaseManager.Inst.Login((a_oSender, a_bIsSuccess) => {
+					CFirebaseManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, (a_oSender, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
 						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
@@ -75,43 +75,20 @@ namespace Google {
 				this.UIs.ExFindComponent<Button>("LoginWithFacebookBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
 
-					CServicesManager.Inst.LoginWithApple((a_oSender, a_bIsSuccess) => {
+					CFacebookManager.Inst.Login(KCDefine.U_PERMISSION_LIST_FACEBOOK, (a_oSender, a_bIsSuccess) => {
 						// 로그인 되었을 경우
 						if(a_bIsSuccess) {
-							CFirebaseManager.Inst.LoginWithApple(CServicesManager.Inst.AppleUserID, CServicesManager.Inst.AppleIDToken, (a_oFirebaseSender, a_bIsFirebaseSuccess) => {
+							CFirebaseManager.Inst.LoginWithFacebook(CFacebookManager.Inst.AccessToken, (a_oBackendSender, a_bIsBackendSuccess) => {
 								CIndicatorManager.Inst.Close();
-								Func.ShowAlertPopup($"{a_bIsFirebaseSuccess}", null, false);
+								Func.ShowAlertPopup($"{a_bIsBackendSuccess}", null, false);
 							});
 						} else {
 							CIndicatorManager.Inst.Close();
 							Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 						}
 					});
-
-					Func.FirebaseLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup($"{a_bIsSuccess}", null, false));
 				});
 #endif			// #if FACEBOOK_MODULE_ENABLE
-
-#if GAME_CENTER_MODULE_ENABLE
-				this.UIs.ExFindComponent<Button>("LoginWithGameCenterBtn").onClick.AddListener(() => {
-					CIndicatorManager.Inst.Show();
-
-					CServicesManager.Inst.LoginWithApple((a_oSender, a_bIsSuccess) => {
-						// 로그인 되었을 경우
-						if(a_bIsSuccess) {
-							CFirebaseManager.Inst.LoginWithApple(CServicesManager.Inst.AppleUserID, CServicesManager.Inst.AppleIDToken, (a_oFirebaseSender, a_bIsFirebaseSuccess) => {
-								CIndicatorManager.Inst.Close();
-								Func.ShowAlertPopup($"{a_bIsFirebaseSuccess}", null, false);
-							});
-						} else {
-							CIndicatorManager.Inst.Close();
-							Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
-						}
-					});
-
-					Func.FirebaseLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup($"{a_bIsSuccess}", null, false));
-				});
-#endif			// #if GAME_CENTER_MODULE_ENABLE
 #endif			// #if FIREBASE_MODULE_ENABLE
 			}
 		}
