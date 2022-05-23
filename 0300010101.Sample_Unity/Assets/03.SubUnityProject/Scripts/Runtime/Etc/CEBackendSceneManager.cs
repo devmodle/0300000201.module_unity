@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Etc {
 	/** 백엔드 씬 관리자 */
 	public class CEBackendSceneManager : StudyScene.CStudySceneManager {
@@ -77,3 +78,4 @@ namespace Etc {
 		#endregion			// 함수
 	}
 }
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE

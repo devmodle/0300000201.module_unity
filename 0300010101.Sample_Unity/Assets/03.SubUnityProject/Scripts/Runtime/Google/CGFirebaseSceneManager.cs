@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Google {
 	/** 파이어 베이스 씬 관리자 */
 	public class CGFirebaseSceneManager : StudyScene.CStudySceneManager {
@@ -95,3 +96,4 @@ namespace Google {
 		#endregion			// 함수
 	}
 }
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE
