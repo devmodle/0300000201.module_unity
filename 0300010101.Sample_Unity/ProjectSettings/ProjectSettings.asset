@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 24
-  productGUID: cba0564d67c6445c0b6d0725769eb5fd
+  productGUID: 613239243ed99495a937b716c7682eb8
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -623,74 +623,62 @@ PlayerSettings:
       m_Height: 81
       m_Kind: 2
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: d5f10c0e8aca1461ea39b0ffb38a9db2, type: 3}
+    - m_Textures: []
       m_Width: 192
       m_Height: 192
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: e44abe67828a34f5888bdf9075967b6a, type: 3}
+    - m_Textures: []
       m_Width: 144
       m_Height: 144
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: 73abe0f0d475f4ae587dd4643fd1e2f3, type: 3}
+    - m_Textures: []
       m_Width: 96
       m_Height: 96
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: 0e8b00d1534394dd8bf29a8a97d7530f, type: 3}
+    - m_Textures: []
       m_Width: 72
       m_Height: 72
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: d4537058515744268a41a75db88a8b5f, type: 3}
+    - m_Textures: []
       m_Width: 48
       m_Height: 48
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: ea66b07812c9743bc9c96626742d64d1, type: 3}
+    - m_Textures: []
       m_Width: 36
       m_Height: 36
       m_Kind: 1
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: d5f10c0e8aca1461ea39b0ffb38a9db2, type: 3}
+    - m_Textures: []
       m_Width: 192
       m_Height: 192
       m_Kind: 0
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: e44abe67828a34f5888bdf9075967b6a, type: 3}
+    - m_Textures: []
       m_Width: 144
       m_Height: 144
       m_Kind: 0
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: 73abe0f0d475f4ae587dd4643fd1e2f3, type: 3}
+    - m_Textures: []
       m_Width: 96
       m_Height: 96
       m_Kind: 0
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: 0e8b00d1534394dd8bf29a8a97d7530f, type: 3}
+    - m_Textures: []
       m_Width: 72
       m_Height: 72
       m_Kind: 0
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: d4537058515744268a41a75db88a8b5f, type: 3}
+    - m_Textures: []
       m_Width: 48
       m_Height: 48
       m_Kind: 0
       m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: ea66b07812c9743bc9c96626742d64d1, type: 3}
+    - m_Textures: []
       m_Width: 36
       m_Height: 36
       m_Kind: 0
@@ -741,7 +729,13 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: Standalone
     m_EncodingQuality: 1
-  m_BuildTargetGroupHDRCubemapEncodingQuality: []
+  m_BuildTargetGroupHDRCubemapEncodingQuality:
+  - m_BuildTarget: iPhone
+    m_EncodingQuality: 1
+  - m_BuildTarget: Android
+    m_EncodingQuality: 1
+  - m_BuildTarget: Standalone
+    m_EncodingQuality: 2
   m_BuildTargetGroupLightmapSettings:
   - m_BuildTarget: iPhone
     m_TextureStreamingEnabled: 1
@@ -952,7 +946,7 @@ PlayerSettings:
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
   playerPrefsMaxSize: 32768
-  ps4Passcode: plEho5d0rP0fh7L1CaGRQODD1LWAMZSC
+  ps4Passcode: F4z0xZGGVjpnO2YmNO50dLnQRk7QXQNv
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -1041,10 +1035,7 @@ PlayerSettings:
   il2cppCompilerConfiguration:
     Android: 1
     Standalone: 1
-  il2cppCodeGeneration:
-    Android: 0
-    Standalone: 0
-    iPhone: 0
+  il2cppCodeGeneration: {}
   managedStrippingLevel:
     Android: 2
     Standalone: 2
@@ -1120,8 +1111,7 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled:
-    Unity Ads: 0
+  cloudServicesEnabled: {}
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -1135,11 +1125,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 2611fdd1-7994-4b52-8463-7dafb286f16a
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 0300010101.Sample_Unity
-  organizationId: 3f25693a-f86a-4754-9f11-7c3e0149e671
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
