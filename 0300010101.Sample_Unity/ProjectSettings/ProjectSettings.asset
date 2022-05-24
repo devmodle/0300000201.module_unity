@@ -3,8 +3,8 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 24
-  productGUID: 613239243ed99495a937b716c7682eb8
+  serializedVersion: 23
+  productGUID: 979cbb581c4c64771aa587dfe7ea321e
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -17,8 +17,8 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  m_ShowUnitySplashScreen: 1
-  m_ShowUnitySplashLogo: 1
+  m_ShowUnitySplashScreen: 0
+  m_ShowUnitySplashLogo: 0
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 0
   m_SplashScreenLogoStyle: 1
@@ -48,7 +48,6 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
-  m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 1
   numberOfMipsStripped: 0
@@ -56,6 +55,7 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: 0
   androidShowActivityIndicatorOnLoading: 1
   iosUseCustomAppBackgroundBehavior: 1
+  iosAllowHTTPDownload: 1
   allowedAutorotateToPortrait: 0
   allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
@@ -119,11 +119,8 @@ PlayerSettings:
   switchNVNShaderPoolsGranularity: 33554432
   switchNVNDefaultPoolsGranularity: 16777216
   switchNVNOtherPoolsGranularity: 16777216
-  switchGpuScratchPoolGranularity: 2097152
-  switchAllowGpuScratchShrinking: 0
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
-  switchNVNGraphicsFirmwareMemory: 32
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -137,50 +134,30 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.0.1
+  bundleVersion: 1.0
   preloadedAssets:
   - {fileID: 102900000, guid: 3528c91b2244145cf867e4a44b4bd5ed, type: 3}
   - {fileID: 102900000, guid: 9690e1aa6aaeb4d5382d560d937aa273, type: 3}
   - {fileID: 102900000, guid: c2add5027f40445af8a7eb811f2f20bf, type: 3}
-  - {fileID: 8537524439678216222, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
   - {fileID: 102900000, guid: 191a48f8d1fa14d57b8e10fa1afa532c, type: 3}
-  - {fileID: 7762512756308963800, guid: 6f36c6c4ace0941a89088c932fae5984, type: 3}
   - {fileID: 102900000, guid: 7b16cbffd386f4a81b04fc9ea3dc89b1, type: 3}
-  - {fileID: 6300991103357124924, guid: 675f6e4fe5a19439881db6b6026174fe, type: 3}
   - {fileID: 102900000, guid: a047dca527ebf4ce5a0cb94b474512be, type: 3}
-  - {fileID: 5141395458535585771, guid: ead86a5979cb5454b87cf4bc26731661, type: 3}
   - {fileID: 102900000, guid: a2a295da526034a9e83ee3197807317d, type: 3}
-  - {fileID: 8994013707841783438, guid: 69a5e94b3c3ba4b059d836b97569e3fa, type: 3}
   - {fileID: 102900000, guid: 4d0537b82dd2e492aaaa0329f1c07794, type: 3}
-  - {fileID: 681665131302262360, guid: ab8b6d22c8abb42709d212b668a77943, type: 3}
   - {fileID: 102900000, guid: edd993a1bf63e4305b9e5201131558bb, type: 3}
-  - {fileID: 7262698236054153602, guid: 5a3069a103b16457dae32cfcb9b0aba3, type: 3}
   - {fileID: 102900000, guid: fb972a87a8dd3474fa0a7469afa79b4f, type: 3}
-  - {fileID: 5310284231775842090, guid: 97617ee22a995435bbc56ac390ce64b2, type: 3}
   - {fileID: 102900000, guid: 350376b27980e497d90b936fde2147ae, type: 3}
-  - {fileID: 2641408642318892844, guid: ccdc4321e87a54637874ae5eed1bf41e, type: 3}
   - {fileID: 102900000, guid: 0079aa89c4d2c48279823484fa316243, type: 3}
-  - {fileID: 7363948716483475235, guid: d57a7289739e541b98198b0750397957, type: 3}
   - {fileID: 102900000, guid: 8fc166c448a4840e1bc6382c7cfb4350, type: 3}
-  - {fileID: 8901657558114767722, guid: 752ec324423aa4fcb92f85f0a6dbe9fc, type: 3}
   - {fileID: 102900000, guid: c23aa1ac508a642b8aa4f6894c63eddb, type: 3}
-  - {fileID: 2064838461031304041, guid: 6cd4a741d041d415ea62ee645ffcb1e0, type: 3}
   - {fileID: 102900000, guid: 6d39f6c60e5cb457b9adb5acc661a0a4, type: 3}
-  - {fileID: 6850325395601607845, guid: c641b67d03bdf4809867dabe008b6bd7, type: 3}
   - {fileID: 102900000, guid: d86d2980500964ba3b8ab4409fd5b72f, type: 3}
-  - {fileID: 8659873337623793882, guid: f14f379e8c2fe4aceb6781b59a807742, type: 3}
   - {fileID: 102900000, guid: 91c6b2585b0de495cbde5cff2c6cb48f, type: 3}
-  - {fileID: 3420471156928086412, guid: b3d7e315afae54f5ca3cdb95ec679cc5, type: 3}
   - {fileID: 102900000, guid: c5a97ab72ca9744dc869a66709e7e1a7, type: 3}
-  - {fileID: 4638271464035621071, guid: f43f73009d2774e0bab31543c3f8fd6a, type: 3}
   - {fileID: 102900000, guid: 58c41115de86441f1a1503b5b9f9c2b3, type: 3}
-  - {fileID: 3714963104445780595, guid: 5618dfbebf67b428bbd41dd3285583ed, type: 3}
   - {fileID: 102900000, guid: 371def1315ade42799da95168cb27f76, type: 3}
-  - {fileID: 5954374000042173377, guid: b211cfbf72b07474f9ede2eb36adc167, type: 3}
   - {fileID: 102900000, guid: ff7f7e595a9474d3e93ced4931f2308a, type: 3}
-  - {fileID: 4941976700271306587, guid: 82ed040dd1366419aa2e27a3430a5e64, type: 3}
   - {fileID: 102900000, guid: db5ef5d499593486b9613e67f18e3f6f, type: 3}
-  - {fileID: 7569976863786079231, guid: a6abdd6d1d02148f6a5aca562bc3075a, type: 3}
   - {fileID: 8019310881375038877, guid: 7976adfaec4ba4e0f85c2045a3896ee9, type: 3}
   - {fileID: 8019310881375038877, guid: 1903df61e01f14089af9f99e561c5ff9, type: 3}
   - {fileID: 4343727234628468602, guid: 0ca617d620ca34616ab6f23398a072ce, type: 2}
@@ -192,11 +169,8 @@ PlayerSettings:
   - {fileID: 4343727234628468602, guid: 2efaab1589b1f4165a37687b191a8be2, type: 2}
   - {fileID: 4343727234628468602, guid: ca2ab83a8f438495b8b634d9130b0319, type: 2}
   - {fileID: 4343727234628468602, guid: 58c4def46c2364c41a23d053da5e7c22, type: 2}
-  - {fileID: 8470900545920771084, guid: 5ec51d6ef43864983a1f7bbc61297988, type: 3}
   - {fileID: 6884252962769875886, guid: ba654f2fed3db49689f7a53120344d3d, type: 3}
-  - {fileID: 2183824002408205911, guid: e04a15437e15f46b997f8d392bea62b3, type: 3}
   - {fileID: 2163081430555252783, guid: c284d911e4afb40808165fabfcfdb825, type: 3}
-  - {fileID: 11400000, guid: a1cda009664cf48fe99013e9944bddd8, type: 2}
   - {fileID: 11400000, guid: f85266c389769450f8731ed6b160468b, type: 2}
   - {fileID: 8334246944251894886, guid: 773b85ebb9f4c4bf59ad2180fee0181a, type: 3}
   - {fileID: 8019310881375038877, guid: f35e0dd4852b0467eb6c078346674ec2, type: 3}
@@ -209,38 +183,23 @@ PlayerSettings:
   - {fileID: 4164878208595072810, guid: a899641b8211740909ac5e8756ac217b, type: 3}
   - {fileID: 6884252962769875886, guid: 069258abc5c02412ca2b583f622082b1, type: 3}
   - {fileID: 6884252962769875886, guid: a8ee24c9f3b384b0daac1c8c6063bd62, type: 3}
-  - {fileID: 11400000, guid: 1ba9e5314791548adb5fdb50da12acd6, type: 2}
-  - {fileID: 11400000, guid: fec2cdc6bd946452a8fbb318ef5549ab, type: 2}
   - {fileID: 8019310881375038877, guid: 0167610f70b234c23b140856ec3da34d, type: 3}
   - {fileID: 8019310881375038877, guid: 4b959ee42ab894c9dbdf9abd6242d830, type: 3}
-  - {fileID: 11400000, guid: 7a5d5b5c00dc84459ae77e3fae2fab80, type: 2}
   - {fileID: 2163081430555252783, guid: baeea2f9231f0447b83043230504a647, type: 3}
   - {fileID: 4890085278179872738, guid: 957064690829d451db6c35d42cf83b88, type: 2}
-  - {fileID: 11400000, guid: d3daf7a5def1b4bd9bd6f39fcd96d1b1, type: 2}
   - {fileID: 7854453751169407068, guid: be6560bc7900b489098654fa9f5609cd, type: 3}
-  - {fileID: 7282889018440753118, guid: d9dfc6dc1b4e14979bee9784de3ba44d, type: 3}
-  - {fileID: 11400000, guid: 6dd55f0cd75d544e9b492b575d525110, type: 2}
-  - {fileID: 11400000, guid: 361b9c2f8ad7b4e419805be0f41b7a93, type: 2}
-  - {fileID: 11400000, guid: 5d4bd960b187d495b9eec0bd43aad8b0, type: 2}
   - {fileID: 8334246944251894886, guid: 48fb809daa89a48598650ffdfe5c15da, type: 3}
   - {fileID: 11400000, guid: cccbdf89d497242d19a1d08e200c0f9e, type: 2}
-  - {fileID: 11400000, guid: d6b4329acbc8b477b8a7b5d5c7dd5fc8, type: 2}
   - {fileID: 4890085278179872738, guid: 77ae0a0385f334edaae4b42a96c049d5, type: 2}
-  - {fileID: 11400000, guid: 96f0928320595477fbbb633f395c2a60, type: 2}
   - {fileID: 11400000, guid: 1552b80ad6a3c41998399ec3041056dc, type: 2}
   - {fileID: 8019310881375038877, guid: 3775f42a88b3d4d2bab8e9c9ee6bfa41, type: 3}
-  - {fileID: 11400000, guid: 285e18db08c7641359fd9007f5b9f33b, type: 2}
-  - {fileID: 11400000, guid: 66788a5c5a9cb49be88f78f04041b2e7, type: 2}
   - {fileID: 8019310881375038877, guid: 2af61a18cedc74e939e9a256b9ec805a, type: 3}
   - {fileID: 11400000, guid: 40b7481db7b2a45b3b22e3253279ce83, type: 2}
-  - {fileID: 11400000, guid: 163fb2330f51d46d4813a6f18cf64795, type: 2}
   - {fileID: 8019310881375038877, guid: d1253b54dca144da3bd1bb7951c7accb, type: 3}
   - {fileID: 8019310881375038877, guid: 2cb3e725b3a554d20904bc2b9726faca, type: 3}
   - {fileID: 8019310881375038877, guid: 3910bcdef6cc84cf8b777670e319eb7d, type: 3}
-  - {fileID: 11400000, guid: 3fac1681f15874bbe97b1649a379cfba, type: 2}
   - {fileID: 7854453751169407068, guid: b2637273e817843f195dc1151dd7c371, type: 3}
   - {fileID: 8019310881375038877, guid: af9a738edfef54e0d8c77cb12b7813b2, type: 3}
-  - {fileID: 11400000, guid: 63dc6c42213a542dbbdbe6242106acd8, type: 2}
   - {fileID: 4343727234628468602, guid: 5bb71aab51b294a9ca72339bc54ba4f4, type: 2}
   - {fileID: 4343727234628468602, guid: 3d7b40a3f741b429c8ae7bae5408b925, type: 2}
   - {fileID: 4343727234628468602, guid: 2fa8a560e427e4342acadcea0d670edc, type: 2}
@@ -254,20 +213,11 @@ PlayerSettings:
   - {fileID: 8019310881375038877, guid: 9b2575e46dea94a299ce8b1ed736d79f, type: 3}
   - {fileID: 8019310881375038877, guid: d140adbbda60d4c779ef0aad480712fa, type: 3}
   - {fileID: 7854453751169407068, guid: be34db332eaa443a0b8e225119ce7472, type: 3}
-  - {fileID: 11400000, guid: 2f88ba1fc7009406fbe26ebfbccab16a, type: 2}
   - {fileID: 8019310881375038877, guid: ed0c5e82cb8b649048c14114e6232049, type: 3}
   - {fileID: 4890085278179872738, guid: 7da0dbfff6c8b4caf9c15747cc90ea65, type: 2}
-  - {fileID: 11400000, guid: 321ffbf4060af42e299f1826c1526b66, type: 2}
-  - {fileID: 8113187388039015871, guid: da92b7170575c46c8a7eaf4afa14073c, type: 3}
-  - {fileID: 2429724377936249959, guid: 8d93d9d989bd74c4c828ffda97d318cc, type: 3}
-  - {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   - {fileID: 7947261922413523823, guid: e0b217bc7e9d2486b82bd5dab9b78aaf, type: 3}
   - {fileID: 2263259457666090574, guid: b6184a96ebe394b4ba07633de5f9e51b, type: 3}
   - {fileID: 4956034379125523778, guid: 000eb9c16e3494614b90308cf9c9c4b3, type: 3}
-  - {fileID: 2429724377936249959, guid: c30148b79fb434d219397a243def3f80, type: 3}
-  - {fileID: 2429724377936249959, guid: 01c69b87205e64feb99a7a458a90fcfd, type: 3}
-  - {fileID: 2429724377936249959, guid: cc104030c159545d0b759d004286d880, type: 3}
-  - {fileID: 2429724377936249959, guid: f25fc0d4ffc7d4350b9f6ccda3c98d7b, type: 3}
   - {fileID: 8639127690170192487, guid: 3d1d7826978c84e80a6f6cfb4aca0049, type: 3}
   - {fileID: 1971558561948930709, guid: bceb893763d824f8e90f102f85883a68, type: 3}
   - {fileID: 9210985311794052919, guid: ba7657531f8a742698d9ee1572a64916, type: 3}
@@ -291,15 +241,6 @@ PlayerSettings:
   - {fileID: 1684748006710989416, guid: 0aefeb2a6021d414b82439ece531e7e4, type: 3}
   - {fileID: 1515028129432522447, guid: 2b6b9164da24f41b999c19515d1958f9, type: 3}
   - {fileID: 151844525167847963, guid: 9d77e1685a0ba4834b5d5f34b3ec9bde, type: 3}
-  - {fileID: 4343727234628468602, guid: ac9327439fdef4212b356ddd254145e2, type: 2}
-  - {fileID: 4343727234628468602, guid: 513b3ae36f05347a1bade433e3d5db13, type: 2}
-  - {fileID: 4343727234628468602, guid: ad19c260d586a466ea8c86d8d003d11d, type: 2}
-  - {fileID: 4343727234628468602, guid: af637a95fab4d43d5b75afad3f6a0465, type: 2}
-  - {fileID: 4343727234628468602, guid: 6c5fb025afd1845cebd5b6f43bb11821, type: 2}
-  - {fileID: 4343727234628468602, guid: 00fb048938bd0486b95824910809af06, type: 2}
-  - {fileID: 4343727234628468602, guid: 75932c8bce6df4a2ba17a3314cd138db, type: 2}
-  - {fileID: 4343727234628468602, guid: 37e4f0e35e32d486a96febd8fb0da4b9, type: 2}
-  - {fileID: 4343727234628468602, guid: 0b64f847148ad444698de2edc210a314, type: 2}
   - {fileID: 2454151896034854386, guid: 58457aa0ad6ca4371a25dcd025d54ae8, type: 3}
   - {fileID: 9122242653978104542, guid: b4dddf995356d4db99674bbd02a82043, type: 3}
   - {fileID: 8644315326884589452, guid: 59bae1227347746aebb5812e689cc3dd, type: 3}
@@ -325,11 +266,13 @@ PlayerSettings:
     enable360StereoCapture: 1
   isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 1
+  enableOpenGLProfilerGPURecorders: 1
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
   targetPixelDensity: 30
   resolutionScalingMode: 0
+  resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
@@ -355,13 +298,12 @@ PlayerSettings:
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
-  strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 12.0
+  iOSTargetOSVersionString: 11.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
-  tvOSTargetOSVersionString: 12.0
+  tvOSTargetOSVersionString: 11.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -697,22 +639,7 @@ PlayerSettings:
   - m_BuildTarget: MacStandaloneSupport
     m_GraphicsJobs: 0
   m_BuildTargetGraphicsJobMode: []
-  m_BuildTargetGraphicsAPIs:
-  - m_BuildTarget: iOSSupport
-    m_APIs: 10000000
-    m_Automatic: 1
-  - m_BuildTarget: AndroidPlayer
-    m_APIs: 150000000b000000
-    m_Automatic: 1
-  - m_BuildTarget: MacStandaloneSupport
-    m_APIs: 1000000011000000
-    m_Automatic: 1
-  - m_BuildTarget: WindowsStandaloneSupport
-    m_APIs: 0200000011000000
-    m_Automatic: 1
-  - m_BuildTarget: LinuxStandaloneSupport
-    m_APIs: 1500000011000000
-    m_Automatic: 1
+  m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -729,13 +656,6 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: Standalone
     m_EncodingQuality: 1
-  m_BuildTargetGroupHDRCubemapEncodingQuality:
-  - m_BuildTarget: iPhone
-    m_EncodingQuality: 1
-  - m_BuildTarget: Android
-    m_EncodingQuality: 1
-  - m_BuildTarget: Standalone
-    m_EncodingQuality: 2
   m_BuildTargetGroupLightmapSettings:
   - m_BuildTarget: iPhone
     m_TextureStreamingEnabled: 1
@@ -762,7 +682,6 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
-  macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -774,7 +693,6 @@ PlayerSettings:
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
   switchNSODependencies: 
-  switchCompilerFlags: 
   switchTitleNames_0: 
   switchTitleNames_1: 
   switchTitleNames_2: 
@@ -946,7 +864,7 @@ PlayerSettings:
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
   playerPrefsMaxSize: 32768
-  ps4Passcode: F4z0xZGGVjpnO2YmNO50dLnQRk7QXQNv
+  ps4Passcode: lPzzl6RplimkDwm3JWc5L64VffTsCQa9
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -976,7 +894,6 @@ PlayerSettings:
   ps4videoRecordingFeaturesUsed: 0
   ps4contentSearchFeaturesUsed: 0
   ps4CompatibilityPS5: 0
-  ps4AllowPS5Detection: 0
   ps4GPU800MHz: 1
   ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
@@ -1001,30 +918,10 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  webGLInitialMemorySize: 32
-  webGLMaximumMemorySize: 2048
-  webGLMemoryGrowthMode: 2
-  webGLMemoryLinearGrowthStep: 16
-  webGLMemoryGeometricGrowthStep: 0.2
-  webGLMemoryGeometricGrowthCap: 96
   scriptingDefineSymbols:
-    Android: MSG_PACK_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;ENGINE_TEMPLATES_MODULE_ENABLE;RUNTIME_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;FACEBOOK_MODULE_ENABLE;FIREBASE_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;BACKEND_MODULE_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;LIGHT_ENABLE;ML_AGENTS_MODULE_ENABLE;CINEMACHINE_MODULE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;POST_PROCESSING_MODULE_ENABLE;SKELETON_ANI_2D_MODULE_ENABLE;NOTI_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;DOTWEEN_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;AB_TEST_ENABLE;UNITY_POST_PROCESSING_STACK_V2;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
-    CloudRendering: UNITY_POST_PROCESSING_STACK_V2
-    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
-    GameCoreScarlett: UNITY_POST_PROCESSING_STACK_V2
-    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
-    Lumin: UNITY_POST_PROCESSING_STACK_V2
-    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
-    PS4: UNITY_POST_PROCESSING_STACK_V2
-    PS5: UNITY_POST_PROCESSING_STACK_V2
-    QNX: UNITY_POST_PROCESSING_STACK_V2
-    Stadia: UNITY_POST_PROCESSING_STACK_V2
-    Standalone: MSG_PACK_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;ENGINE_TEMPLATES_MODULE_ENABLE;RUNTIME_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;FACEBOOK_MODULE_ENABLE;FIREBASE_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;BACKEND_MODULE_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;GOOGLE_SHEET_ENABLE;LIGHT_ENABLE;ML_AGENTS_MODULE_ENABLE;CINEMACHINE_MODULE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;POST_PROCESSING_MODULE_ENABLE;SKELETON_ANI_2D_MODULE_ENABLE;NOTI_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;DOTWEEN_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;AB_TEST_ENABLE;UNITY_POST_PROCESSING_STACK_V2;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
-    WebGL: UNITY_POST_PROCESSING_STACK_V2
-    Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2
-    XboxOne: UNITY_POST_PROCESSING_STACK_V2
-    iPhone: MSG_PACK_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;ENGINE_TEMPLATES_MODULE_ENABLE;RUNTIME_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;FACEBOOK_MODULE_ENABLE;FIREBASE_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;BACKEND_MODULE_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;LIGHT_ENABLE;ML_AGENTS_MODULE_ENABLE;CINEMACHINE_MODULE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;POST_PROCESSING_MODULE_ENABLE;SKELETON_ANI_2D_MODULE_ENABLE;NOTI_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;DOTWEEN_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;AB_TEST_ENABLE;UNITY_POST_PROCESSING_STACK_V2;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
-    tvOS: UNITY_POST_PROCESSING_STACK_V2
+    Android: MSG_PACK_ENABLE;ADDRESSABLES_ENABLE;BURST_COMPILER_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_ENABLE;EDITOR_SCENE_TEMPLATES_ENABLE;PREFAB_TEMPLATES_ENABLE;ENGINE_TEMPLATES_ENABLE;RUNTIME_TEMPLATES_ENABLE;STUDY_ENABLE;FACEBOOK_ENABLE;FIREBASE_ENABLE;PURCHASE_ENABLE;BACKEND_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;LIGHT_ENABLE;NOTI_ENABLE;EXTRA_SCRIPT_ENABLE;DOTWEEN_ENABLE;NEWTON_SOFT_JSON_ENABLE;AB_TEST_ENABLE;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
+    Standalone: MSG_PACK_ENABLE;ADDRESSABLES_ENABLE;BURST_COMPILER_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_ENABLE;EDITOR_SCENE_TEMPLATES_ENABLE;PREFAB_TEMPLATES_ENABLE;ENGINE_TEMPLATES_ENABLE;RUNTIME_TEMPLATES_ENABLE;STUDY_ENABLE;FACEBOOK_ENABLE;FIREBASE_ENABLE;PURCHASE_ENABLE;BACKEND_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;GOOGLE_SHEET_ENABLE;LIGHT_ENABLE;NOTI_ENABLE;EXTRA_SCRIPT_ENABLE;DOTWEEN_ENABLE;NEWTON_SOFT_JSON_ENABLE;AB_TEST_ENABLE;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
+    iPhone: MSG_PACK_ENABLE;ADDRESSABLES_ENABLE;BURST_COMPILER_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_ENABLE;EDITOR_SCENE_TEMPLATES_ENABLE;PREFAB_TEMPLATES_ENABLE;ENGINE_TEMPLATES_ENABLE;RUNTIME_TEMPLATES_ENABLE;STUDY_ENABLE;FACEBOOK_ENABLE;FIREBASE_ENABLE;PURCHASE_ENABLE;BACKEND_ENABLE;SAMPLE_PROJ;FIREBASE_AUTH_ENABLE;FIREBASE_ANALYTICS_ENABLE;FIREBASE_CRASHLYTICS_ENABLE;FIREBASE_DB_ENABLE;FIREBASE_CLOUD_MSG_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;LIGHT_ENABLE;NOTI_ENABLE;EXTRA_SCRIPT_ENABLE;DOTWEEN_ENABLE;NEWTON_SOFT_JSON_ENABLE;AB_TEST_ENABLE;ENABLE_IL2CPP;ODIN_INSPECTOR;ODIN_INSPECTOR_3;RECEIPT_CHECK_ENABLE;EDITOR_COROUTINE_ENABLE
   additionalCompilerArguments: {}
   platformArchitecture:
     iPhone: 1
@@ -1035,7 +932,6 @@ PlayerSettings:
   il2cppCompilerConfiguration:
     Android: 1
     Standalone: 1
-  il2cppCodeGeneration: {}
   managedStrippingLevel:
     Android: 2
     Standalone: 2
@@ -1124,7 +1020,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 2
+  activeInputHandler: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
@@ -1135,4 +1031,3 @@ PlayerSettings:
   playerDataPath: 
   forceSRGBBlit: 1
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 2
