@@ -410,7 +410,7 @@ namespace LevelEditorScene {
 #if STUDY_MODULE_ENABLE
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MENU);
 #else
-				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_TITLE);
+				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 #endif			// #if STUDY_MODULE_ENABLE
 			}
 		}
