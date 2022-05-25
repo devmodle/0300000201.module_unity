@@ -79,9 +79,9 @@ namespace Google {
 					CFacebookManager.Inst.Login(KCDefine.U_PERMISSION_LIST_FACEBOOK, (a_oSender, a_bIsSuccess) => {
 						// 로그인 되었을 경우
 						if(a_bIsSuccess) {
-							CFirebaseManager.Inst.LoginWithFacebook(CFacebookManager.Inst.AccessToken, (a_oBackendSender, a_bIsBackendSuccess) => {
+							CFirebaseManager.Inst.LoginWithFacebook(CFacebookManager.Inst.AccessToken, (a_oFirebaseSender, a_bIsFirebaseSuccess) => {
 								CIndicatorManager.Inst.Close();
-								Func.ShowAlertPopup($"{a_bIsBackendSuccess}", null, false);
+								Func.ShowAlertPopup($"{a_bIsFirebaseSuccess}", null, false);
 							});
 						} else {
 							CIndicatorManager.Inst.Close();

@@ -46,7 +46,7 @@ public static partial class KDefine {
 	public const string G_SCENE_N_E_ETC = "01.EEtcScene";
 	public const string G_SCENE_N_E_SHADER = "02.EShaderScene";
 	public const string G_SCENE_N_E_PARTICLE = "03.EParticleScene";
-	public const string G_SCENE_N_E_BACKEND = "04.EBackendScene";
+	public const string G_SCENE_N_E_PLAYFAB = "04.EPlayfabScene";
 	public const string G_SCENE_N_E_FACEBOOK = "05.EFacebookScene";
 
 	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";

@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Etc {
-	/** 백엔드 씬 관리자 */
-	public class CEBackendSceneManager : StudyScene.CStudySceneManager {
+	/** 플레이 팹 씬 관리자 */
+	public class CEPlayfabSceneManager : StudyScene.CStudySceneManager {
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_E_BACKEND;
+		public override string SceneName => KDefine.G_SCENE_N_E_PLAYFAB;
 		#endregion			// 프로퍼티
 
 		#region 함수
@@ -18,11 +18,11 @@ namespace Etc {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-#if BACKEND_MODULE_ENABLE
+#if PLAYFAB_MODULE_ENABLE
 				this.UIs.ExFindComponent<Button>("LoginBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
 
-					CBackendManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, (a_oSender, a_bIsSuccess) => {
+					CPlayfabManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, (a_oSender, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
 						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
@@ -30,7 +30,7 @@ namespace Etc {
 
 				this.UIs.ExFindComponent<Button>("LogoutBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
-					CBackendManager.Inst.Logout((a_oSender) => CIndicatorManager.Inst.Close());
+					CPlayfabManager.Inst.Logout((a_oSender) => CIndicatorManager.Inst.Close());
 				});
 
 #if APPLE_LOGIN_ENABLE
@@ -40,9 +40,9 @@ namespace Etc {
 					CServicesManager.Inst.LoginWithApple((a_oSender, a_bIsSuccess) => {
 						// 로그인 되었을 경우
 						if(a_bIsSuccess) {
-							CBackendManager.Inst.LoginWithApple(CServicesManager.Inst.AppleUserID, CServicesManager.Inst.AppleIDToken, (a_oBackendSender, a_bIsBackendSuccess) => {
+							CPlayfabManager.Inst.LoginWithApple(CServicesManager.Inst.AppleUserID, CServicesManager.Inst.AppleIDToken, (a_oPlayfabSender, a_bIsPlayfabSuccess) => {
 								CIndicatorManager.Inst.Close();
-								Func.ShowAlertPopup($"{a_bIsBackendSuccess}", null, false);
+								Func.ShowAlertPopup($"{a_bIsPlayfabSuccess}", null, false);
 							});
 						} else {
 							CIndicatorManager.Inst.Close();
@@ -50,7 +50,7 @@ namespace Etc {
 						}
 					});
 
-					Func.BackendLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup($"{a_bIsSuccess}", null, false));
+					Func.PlayfabLogin((a_oSender, a_bIsSuccess) => Func.ShowAlertPopup($"{a_bIsSuccess}", null, false));
 				});
 #endif			// #if APPLE_LOGIN_ENABLE
 
@@ -61,9 +61,9 @@ namespace Etc {
 					CFacebookManager.Inst.Login(KCDefine.U_PERMISSION_LIST_FACEBOOK, (a_oSender, a_bIsSuccess) => {
 						// 로그인 되었을 경우
 						if(a_bIsSuccess) {
-							CBackendManager.Inst.LoginWithFacebook(CFacebookManager.Inst.AccessToken, (a_oBackendSender, a_bIsBackendSuccess) => {
+							CPlayfabManager.Inst.LoginWithFacebook(CFacebookManager.Inst.AccessToken, (a_oPlayfabSender, a_bIsPlayfabSuccess) => {
 								CIndicatorManager.Inst.Close();
-								Func.ShowAlertPopup($"{a_bIsBackendSuccess}", null, false);
+								Func.ShowAlertPopup($"{a_bIsPlayfabSuccess}", null, false);
 							});
 						} else {
 							CIndicatorManager.Inst.Close();
@@ -72,7 +72,7 @@ namespace Etc {
 					});
 				});
 #endif			// #if FACEBOOK_MODULE_ENABLE
-#endif			// #if BACKEND_MODULE_ENABLE
+#endif			// #if PLAYFAB_MODULE_ENABLE
 			}
 		}
 		#endregion			// 함수
