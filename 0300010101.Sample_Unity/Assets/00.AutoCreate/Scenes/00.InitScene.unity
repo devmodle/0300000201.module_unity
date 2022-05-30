@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 846633049}
   - component: {fileID: 846633048}
   - component: {fileID: 846633052}
+  - component: {fileID: 846633053}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -493,6 +494,23 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &846633053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846633046}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 96f0928320595477fbbb633f395c2a60, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &846901626
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,18 +605,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8537524440207743042, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8537524440207743042, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8537524440677354301, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 412.59656
-      objectReference: {fileID: 0}
     - target: {fileID: 8537524441001027415, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -607,24 +613,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8537524441019893243, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -412.59656
-      objectReference: {fileID: 0}
     - target: {fileID: 8537524441058700957, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 846633049}
-    - target: {fileID: 8537524441170583205, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8537524441170583205, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8537524440864041877, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a79f481e6eb34c178ef25576cb85919, type: 3}
 --- !u!1 &1063533549
 GameObject:

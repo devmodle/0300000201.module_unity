@@ -4,9 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
+using PlayFab.ClientModels;
+
 namespace Etc {
 	/** 플레이 팹 씬 관리자 */
 	public class CEPlayfabSceneManager : StudyScene.CStudySceneManager {
+		#region 변수
+		private int m_nNumItems = 0;
+		private string m_oCharacterID = string.Empty;
+		#endregion			// 변수
+
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_E_PLAYFAB;
 		#endregion			// 프로퍼티
@@ -32,6 +39,71 @@ namespace Etc {
 					CIndicatorManager.Inst.Show();
 					CPlayfabManager.Inst.Logout((a_oSender) => CIndicatorManager.Inst.Close());
 				});
+
+				this.UIs.ExFindComponent<Button>("SendLogBtn").onClick.AddListener(() => {
+					CPlayfabManager.Inst.SendLog("SampleLog", LogFunc.MakeDefDatas());
+				});
+
+				this.UIs.ExFindComponent<Button>("SendAppLogBtn").onClick.AddListener(() => {
+					CPlayfabManager.Inst.SendAppLog("SampleAppLog", LogFunc.MakeDefDatas());
+				});
+
+				this.UIs.ExFindComponent<Button>("SendCharacterLogBtn").onClick.AddListener(() => {
+					CPlayfabManager.Inst.SendCharacterLog("SampleCharacterLog", m_oCharacterID, LogFunc.MakeDefDatas());
+				});
+
+				// this.UIs.ExFindComponent<Button>("LoadCharactersBtn").onClick.AddListener(() => {
+				// 	CIndicatorManager.Inst.Show();
+
+				// 	CPlayfabManager.Inst.LoadCharacters((a_oSender, a_oResult, a_bIsSuccess) => {
+				// 		CIndicatorManager.Inst.Close();
+				// 		m_oCharacterID = (a_oResult as ListUsersCharactersResult).Characters[0].CharacterId;
+
+				// 		Func.ShowAlertPopup($"{a_bIsSuccess}, {m_oCharacterID}", null, false);
+				// 	});
+				// });
+				
+				// this.UIs.ExFindComponent<Button>("AddNumItemsBtn").onClick.AddListener(() => {
+				// 	CIndicatorManager.Inst.Show();
+				// 	m_nNumItems += 1;
+
+				// 	CPlayfabManager.Inst.AddNumItems(m_oCharacterID, "Sample", m_nNumItems, (a_oSender, a_oResult, a_bIsSuccess) => {
+				// 		CIndicatorManager.Inst.Close();
+				// 		Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+				// 	});
+				// });
+
+				// this.UIs.ExFindComponent<Button>("BuyItemBtn").onClick.AddListener(() => {
+				// 	CIndicatorManager.Inst.Show();
+
+				// 	CPlayfabManager.Inst.BuyItem("GOODS_COINS", string.Empty, "0.0.1", 0, (a_oSender, a_oResult, a_bIsSuccess) => {
+				// 		CIndicatorManager.Inst.Close();
+				// 		Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+				// 	});
+				// });
+
+				// this.UIs.ExFindComponent<Button>("BuyCharacterBtn").onClick.AddListener(() => {
+				// 	CIndicatorManager.Inst.Show();
+
+				// 	CPlayfabManager.Inst.BuyCharacter("PlayfabMCharacter", "0.0.1", 0, (a_oSender, a_oResult, a_bIsSuccess) => {
+				// 		CIndicatorManager.Inst.Close();
+				// 		Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+				// 	});
+
+				// 	// CPlayfabManager.Inst.MakeCharacter("Sample", "Warrior", (a_oSender, a_oResult, a_bIsSuccess) => {
+				// 	// 	CIndicatorManager.Inst.Close();
+				// 	// 	Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+				// 	// });
+				// });
+
+				// this.UIs.ExFindComponent<Button>("RemoveCharacterBtn").onClick.AddListener(() => {
+				// 	CIndicatorManager.Inst.Show();
+
+				// 	// CPlayfabManager.Inst.RemoveCharacter(m_oCharacterID, (a_oSender, a_oResult, a_bIsSuccess) => {
+				// 	// 	CIndicatorManager.Inst.Close();
+				// 	// 	Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+				// 	// });
+				// });
 
 #if APPLE_LOGIN_ENABLE
 				this.UIs.ExFindComponent<Button>("LoginWithAppleBtn").onClick.AddListener(() => {
