@@ -31,7 +31,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, (a_oSender, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.Login: {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -40,7 +40,6 @@ namespace Etc {
 
 					CPlayfabManager.Inst.Logout((a_oSender) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.Logout");
 					});
 				});
 
@@ -61,7 +60,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadDatas(new List<string>() { "Sample" }, (a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadDatas: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -70,7 +69,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadNotices((a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadNotices: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -79,7 +78,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadLeaderboard("LogTime", (a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadLeaderboard: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -88,7 +87,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadServerTime((a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadServerTime: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -97,7 +96,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadUserDatas(new List<string>() { "Sample" }, (a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadUserDatas: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -106,7 +105,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadUserItems((a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadUserItems: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -121,7 +120,7 @@ namespace Etc {
 							m_oCharacterID = (a_oResult as ListUsersCharactersResult).Characters[KCDefine.B_VAL_0_INT].CharacterId;
 						}
 
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadUserCharacters: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -130,7 +129,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadUserSegments((a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadUserSegments: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -145,7 +144,7 @@ namespace Etc {
 							m_oCharacterID = (a_oResult as GrantCharacterToUserResult).CharacterId;
 						}
 
-						CFunc.ShowLog($"CEPlayfabSceneManager.BuyUserCharacter: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
@@ -154,7 +153,7 @@ namespace Etc {
 
 					CPlayfabManager.Inst.LoadCharacterDatas(m_oCharacterID, new List<string>() { "Sample" }, (a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
-						CFunc.ShowLog($"CEPlayfabSceneManager.LoadUserDatas: {a_oResult?.ToJson()}, {a_bIsSuccess}");
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
 
