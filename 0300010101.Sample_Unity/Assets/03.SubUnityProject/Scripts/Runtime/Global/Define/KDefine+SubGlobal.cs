@@ -48,6 +48,7 @@ public static partial class KDefine {
 	public const string G_SCENE_N_E_PARTICLE = "03.EParticleScene";
 	public const string G_SCENE_N_E_PLAYFAB = "04.EPlayfabScene";
 	public const string G_SCENE_N_E_FACEBOOK = "05.EFacebookScene";
+	public const string G_SCENE_N_E_GAME_CENTER = "06.EGameCenterScene";
 
 	public const string G_SCENE_N_G_FIREBASE = "01.GFirebaseScene";
 	// 씬 이름 }

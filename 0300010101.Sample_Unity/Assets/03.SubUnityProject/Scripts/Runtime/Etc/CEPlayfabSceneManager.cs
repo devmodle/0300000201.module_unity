@@ -64,33 +64,6 @@ namespace Etc {
 					});
 				});
 
-				this.UIs.ExFindComponent<Button>("LoadNoticesBtn").onClick.AddListener(() => {
-					CIndicatorManager.Inst.Show();
-
-					CPlayfabManager.Inst.LoadNotices((a_oSender, a_oResult, a_bIsSuccess) => {
-						CIndicatorManager.Inst.Close();
-						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
-					});
-				});
-
-				this.UIs.ExFindComponent<Button>("LoadLeaderboardBtn").onClick.AddListener(() => {
-					CIndicatorManager.Inst.Show();
-
-					CPlayfabManager.Inst.LoadLeaderboard("LogTime", (a_oSender, a_oResult, a_bIsSuccess) => {
-						CIndicatorManager.Inst.Close();
-						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
-					});
-				});
-
-				this.UIs.ExFindComponent<Button>("LoadServerTimeBtn").onClick.AddListener(() => {
-					CIndicatorManager.Inst.Show();
-
-					CPlayfabManager.Inst.LoadServerTime((a_oSender, a_oResult, a_bIsSuccess) => {
-						CIndicatorManager.Inst.Close();
-						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
-					});
-				});
-
 				this.UIs.ExFindComponent<Button>("LoadUserDatasBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
 
@@ -123,16 +96,7 @@ namespace Etc {
 						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
 				});
-
-				this.UIs.ExFindComponent<Button>("LoadUserSegmentsBtn").onClick.AddListener(() => {
-					CIndicatorManager.Inst.Show();
-
-					CPlayfabManager.Inst.LoadUserSegments((a_oSender, a_oResult, a_bIsSuccess) => {
-						CIndicatorManager.Inst.Close();
-						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
-					});
-				});
-
+				
 				this.UIs.ExFindComponent<Button>("BuyUserCharacterBtn").onClick.AddListener(() => {
 					CIndicatorManager.Inst.Show();
 
@@ -152,6 +116,42 @@ namespace Etc {
 					CIndicatorManager.Inst.Show();
 
 					CPlayfabManager.Inst.LoadCharacterDatas(m_oCharacterID, new List<string>() { "Sample" }, (a_oSender, a_oResult, a_bIsSuccess) => {
+						CIndicatorManager.Inst.Close();
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+					});
+				});
+
+				this.UIs.ExFindComponent<Button>("LoadCharacterItemsBtn").onClick.AddListener(() => {
+					CIndicatorManager.Inst.Show();
+
+					CPlayfabManager.Inst.LoadCharacterItems(m_oCharacterID, (a_oSender, a_oResult, a_bIsSuccess) => {
+						CIndicatorManager.Inst.Close();
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+					});
+				});
+
+				this.UIs.ExFindComponent<Button>("LoadNoticesBtn").onClick.AddListener(() => {
+					CIndicatorManager.Inst.Show();
+
+					CPlayfabManager.Inst.LoadNotices((a_oSender, a_oResult, a_bIsSuccess) => {
+						CIndicatorManager.Inst.Close();
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+					});
+				});
+
+				this.UIs.ExFindComponent<Button>("LoadLeaderboardBtn").onClick.AddListener(() => {
+					CIndicatorManager.Inst.Show();
+
+					CPlayfabManager.Inst.LoadLeaderboard("LogTime", (a_oSender, a_oResult, a_bIsSuccess) => {
+						CIndicatorManager.Inst.Close();
+						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
+					});
+				});
+
+				this.UIs.ExFindComponent<Button>("LoadServerTimeBtn").onClick.AddListener(() => {
+					CIndicatorManager.Inst.Show();
+
+					CPlayfabManager.Inst.LoadServerTime((a_oSender, a_oResult, a_bIsSuccess) => {
 						CIndicatorManager.Inst.Close();
 						Func.ShowAlertPopup($"{a_bIsSuccess}", null, false);
 					});
