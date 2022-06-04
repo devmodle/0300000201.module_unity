@@ -17,7 +17,7 @@ namespace StartScene {
 			STR_BUILDER_02,
 			LOADING_TEXT,
 			SCENE_INFO_TEXT,
-			GAUGE_HANDLER,
+			LOADING_GAUGE_HANDLER,
 			[HideInInspector] MAX_VAL
 		}
 
@@ -25,7 +25,7 @@ namespace StartScene {
 		private Vector3 m_stLoadingTextPos = new Vector3(0.0f, 35.0f, 0.0f);
 		private Vector3 m_stLoadingGaugePos = new Vector3(0.0f, -35.0f, 0.0f);
 
-		private Sequence m_oGaugeAni = null;
+		private Sequence m_oLoadingGaugeAni = null;
 		private Stopwatch m_oStopwatch = new Stopwatch();
 
 		private Dictionary<EKey, System.Text.StringBuilder> m_oStrBuilderDict = new Dictionary<EKey, System.Text.StringBuilder>() {
@@ -40,7 +40,7 @@ namespace StartScene {
 		};
 
 		private Dictionary<EKey, CGaugeHandler> m_oGaugeHandlerDict = new Dictionary<EKey, CGaugeHandler>() {
-			[EKey.GAUGE_HANDLER] = null
+			[EKey.LOADING_GAUGE_HANDLER] = null
 		};
 		#endregion			// 변수
 		
@@ -62,7 +62,7 @@ namespace StartScene {
 			try {
 				// 앱이 실행 중 일 경우
 				if(CSceneManager.IsAppRunning) {
-					m_oGaugeAni?.Kill();
+					m_oLoadingGaugeAni?.Kill();
 				}
 			} catch(System.Exception oException) {
 				CFunc.ShowLogWarning($"CSubStartSceneManager.OnDestroy Exception: {oException.Message}");
@@ -90,7 +90,7 @@ namespace StartScene {
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 			float fPercent = Mathf.Clamp01((int)(a_eEvent + KCDefine.B_VAL_1_INT) / (float)EStartSceneEvent.MAX_VAL);
-			CAccess.AssignVal(ref m_oGaugeAni, m_oGaugeHandlerDict[EKey.GAUGE_HANDLER].ExStartGaugeAni((a_fVal) => this.UpdateUIsState(), null, m_oGaugeHandlerDict[EKey.GAUGE_HANDLER].Percent, fPercent, KCDefine.U_DURATION_ANI));
+			CAccess.AssignVal(ref m_oLoadingGaugeAni, m_oGaugeHandlerDict[EKey.LOADING_GAUGE_HANDLER].ExStartGaugeAni((a_fVal) => this.UpdateUIsState(), null, m_oGaugeHandlerDict[EKey.LOADING_GAUGE_HANDLER].Percent, fPercent, KCDefine.U_DURATION_ANI));
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 		}
 
@@ -104,8 +104,8 @@ namespace StartScene {
 			var oLoadingGauge = this.UIsBase.ExFindChild(KCDefine.SS_OBJ_N_LOADING_GAUGE);
 			oLoadingGauge = oLoadingGauge ?? CFactory.CreateCloneObj(KCDefine.SS_OBJ_N_LOADING_GAUGE, CResManager.Inst.GetRes<GameObject>(KCDefine.SS_OBJ_P_LOADING_GAUGE), this.UIs, m_stLoadingGaugePos);
 
-			m_oGaugeHandlerDict[EKey.GAUGE_HANDLER] = oLoadingGauge.GetComponentInChildren<CGaugeHandler>();
-			m_oGaugeHandlerDict[EKey.GAUGE_HANDLER].Percent = KCDefine.B_VAL_0_FLT;
+			m_oGaugeHandlerDict[EKey.LOADING_GAUGE_HANDLER] = oLoadingGauge.GetComponentInChildren<CGaugeHandler>();
+			m_oGaugeHandlerDict[EKey.LOADING_GAUGE_HANDLER].Percent = KCDefine.B_VAL_0_FLT;
 			// 게이지 처리자를 설정한다 }
 
 #if DEBUG || DEVELOPMENT
@@ -126,7 +126,7 @@ namespace StartScene {
 			m_oStrBuilderDict[EKey.STR_BUILDER_01].Clear();
 			m_oStrBuilderDict[EKey.STR_BUILDER_01].Append(CStrTable.Inst.GetStr(KCDefine.ST_KEY_START_SM_LOADING_TEXT));
 
-			string oPercentStr = string.Format(KCDefine.B_TEXT_FMT_1_DIGITS, m_oGaugeHandlerDict[EKey.GAUGE_HANDLER].Percent * KCDefine.B_UNIT_NORM_VAL_TO_PERCENT);
+			string oPercentStr = string.Format(KCDefine.B_TEXT_FMT_1_DIGITS, m_oGaugeHandlerDict[EKey.LOADING_GAUGE_HANDLER].Percent * KCDefine.B_UNIT_NORM_VAL_TO_PERCENT);
 			oPercentStr = string.Format(KCDefine.B_TEXT_FMT_BRACKET, string.Format(KCDefine.B_TEXT_FMT_PERCENT, oPercentStr));
 
 			CLocalizeInfoTable.Inst.TryGetFontSetInfo(string.Empty, SystemLanguage.English, EFontSet._1, out STFontSetInfo stFontSetInfo);
