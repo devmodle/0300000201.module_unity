@@ -52,8 +52,8 @@ namespace MessagePack.Resolvers
         {
             lookup = new global::System.Collections.Generic.Dictionary<Type, int>(47)
             {
-                { typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 0 },
-                { typeof(global::System.Collections.Generic.Dictionary<global::EItemKinds, long>), 1 },
+                { typeof(global::System.Collections.Generic.Dictionary<global::EItemKinds, long>), 0 },
+                { typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 1 },
                 { typeof(global::System.Collections.Generic.Dictionary<int, float>), 2 },
                 { typeof(global::System.Collections.Generic.Dictionary<int, global::CCellInfo>), 3 },
                 { typeof(global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>), 4 },
@@ -71,16 +71,16 @@ namespace MessagePack.Resolvers
                 { typeof(global::System.Collections.Generic.Dictionary<string, int>), 16 },
                 { typeof(global::System.Collections.Generic.Dictionary<string, string>), 17 },
                 { typeof(global::System.Collections.Generic.List<float>), 18 },
-                { typeof(global::System.Collections.Generic.List<global::EObjKinds>), 19 },
-                { typeof(global::System.Collections.Generic.List<global::EMissionKinds>), 20 },
+                { typeof(global::System.Collections.Generic.List<global::EMissionKinds>), 19 },
+                { typeof(global::System.Collections.Generic.List<global::EObjKinds>), 20 },
                 { typeof(global::System.Collections.Generic.List<global::ETutorialKinds>), 21 },
                 { typeof(global::System.Collections.Generic.List<int>), 22 },
                 { typeof(global::System.Collections.Generic.List<long>), 23 },
                 { typeof(global::System.Collections.Generic.List<string>), 24 },
-                { typeof(global::EObjKinds), 25 },
-                { typeof(global::EObjType), 26 },
-                { typeof(global::EItemKinds), 27 },
-                { typeof(global::EMissionKinds), 28 },
+                { typeof(global::EItemKinds), 25 },
+                { typeof(global::EMissionKinds), 26 },
+                { typeof(global::EObjKinds), 27 },
+                { typeof(global::EObjType), 28 },
                 { typeof(global::ETutorialKinds), 29 },
                 { typeof(global::CBaseInfo), 30 },
                 { typeof(global::CCommonBaseInfo), 31 },
@@ -112,8 +112,8 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new global::MessagePack.Formatters.DictionaryFormatter<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>();
-                case 1: return new global::MessagePack.Formatters.DictionaryFormatter<global::EItemKinds, long>();
+                case 0: return new global::MessagePack.Formatters.DictionaryFormatter<global::EItemKinds, long>();
+                case 1: return new global::MessagePack.Formatters.DictionaryFormatter<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>();
                 case 2: return new global::MessagePack.Formatters.DictionaryFormatter<int, float>();
                 case 3: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CCellInfo>();
                 case 4: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CLevelInfo>();
@@ -131,16 +131,16 @@ namespace MessagePack.Resolvers
                 case 16: return new global::MessagePack.Formatters.DictionaryFormatter<string, int>();
                 case 17: return new global::MessagePack.Formatters.DictionaryFormatter<string, string>();
                 case 18: return new global::MessagePack.Formatters.ListFormatter<float>();
-                case 19: return new global::MessagePack.Formatters.ListFormatter<global::EObjKinds>();
-                case 20: return new global::MessagePack.Formatters.ListFormatter<global::EMissionKinds>();
+                case 19: return new global::MessagePack.Formatters.ListFormatter<global::EMissionKinds>();
+                case 20: return new global::MessagePack.Formatters.ListFormatter<global::EObjKinds>();
                 case 21: return new global::MessagePack.Formatters.ListFormatter<global::ETutorialKinds>();
                 case 22: return new global::MessagePack.Formatters.ListFormatter<int>();
                 case 23: return new global::MessagePack.Formatters.ListFormatter<long>();
                 case 24: return new global::MessagePack.Formatters.ListFormatter<string>();
-                case 25: return new MessagePack.Formatters.EObjKindsFormatter();
-                case 26: return new MessagePack.Formatters.EObjTypeFormatter();
-                case 27: return new MessagePack.Formatters.EItemKindsFormatter();
-                case 28: return new MessagePack.Formatters.EMissionKindsFormatter();
+                case 25: return new MessagePack.Formatters.EItemKindsFormatter();
+                case 26: return new MessagePack.Formatters.EMissionKindsFormatter();
+                case 27: return new MessagePack.Formatters.EObjKindsFormatter();
+                case 28: return new MessagePack.Formatters.EObjTypeFormatter();
                 case 29: return new MessagePack.Formatters.ETutorialKindsFormatter();
                 case 30: return new MessagePack.Formatters.CBaseInfoFormatter();
                 case 31: return new MessagePack.Formatters.CCommonBaseInfoFormatter();
@@ -194,32 +194,6 @@ namespace MessagePack.Formatters
     using System.Buffers;
     using MessagePack;
 
-    public sealed class EObjKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjKinds>
-    {
-        public void Serialize(ref MessagePackWriter writer, global::EObjKinds value, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            writer.Write((Int32)value);
-        }
-
-        public global::EObjKinds Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            return (global::EObjKinds)reader.ReadInt32();
-        }
-    }
-
-    public sealed class EObjTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjType>
-    {
-        public void Serialize(ref MessagePackWriter writer, global::EObjType value, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            writer.Write((Int32)value);
-        }
-
-        public global::EObjType Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            return (global::EObjType)reader.ReadInt32();
-        }
-    }
-
     public sealed class EItemKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EItemKinds>
     {
         public void Serialize(ref MessagePackWriter writer, global::EItemKinds value, global::MessagePack.MessagePackSerializerOptions options)
@@ -243,6 +217,32 @@ namespace MessagePack.Formatters
         public global::EMissionKinds Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             return (global::EMissionKinds)reader.ReadInt32();
+        }
+    }
+
+    public sealed class EObjKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjKinds>
+    {
+        public void Serialize(ref MessagePackWriter writer, global::EObjKinds value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            writer.Write((Int32)value);
+        }
+
+        public global::EObjKinds Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            return (global::EObjKinds)reader.ReadInt32();
+        }
+    }
+
+    public sealed class EObjTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjType>
+    {
+        public void Serialize(ref MessagePackWriter writer, global::EObjType value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            writer.Write((Int32)value);
+        }
+
+        public global::EObjType Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            return (global::EObjType)reader.ReadInt32();
         }
     }
 

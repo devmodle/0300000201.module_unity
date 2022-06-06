@@ -32,8 +32,8 @@ namespace Etc {
 					CIndicatorManager.Inst.Show();
 					CFacebookManager.Inst.Logout((a_oSender) => CIndicatorManager.Inst.Close());
 				});
-			}
 #endif			// #if FACEBOOK_MODULE_ENABLE
+			}
 		}
 		#endregion			// 함수
 	}
