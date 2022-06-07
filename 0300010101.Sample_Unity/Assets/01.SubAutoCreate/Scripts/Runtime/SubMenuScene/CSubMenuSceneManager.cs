@@ -7,10 +7,6 @@ using UnityEngine.UI;
 namespace MenuScene {
 	/** 서브 메뉴 씬 관리자 */
 	public partial class CSubMenuSceneManager : CMenuSceneManager {
-		#region 프로퍼티
-		public override bool IsIgnoreOverlayScene => false;
-		#endregion			// 프로퍼티
-
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
