@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using MessagePack;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+using MessagePack;
 using Newtonsoft.Json;
 
 /** 클리어 정보 */
@@ -37,10 +37,6 @@ public partial class CClearInfo : CBaseInfo {
 		get { return m_oStrDict.GetValueOrDefault(KEY_BEST_RECORD, KCDefine.B_STR_0_INT); }
 		set { m_oStrDict.ExReplaceVal(KEY_BEST_RECORD, value); }
 	}
-
-	[JsonIgnore][IgnoreMember] public long UniqueLevelID => CFactory.MakeUniqueLevelID(m_stIDInfo.m_nID, m_stIDInfo.m_nStageID, m_stIDInfo.m_nChapterID);
-	[JsonIgnore][IgnoreMember] public long UniqueStageID => CFactory.MakeUniqueStageID(m_stIDInfo.m_nStageID, m_stIDInfo.m_nChapterID);
-	[JsonIgnore][IgnoreMember] public long UniqueChapterID => CFactory.MakeUniqueChapterID(m_stIDInfo.m_nChapterID);
 
 	[JsonIgnore][IgnoreMember] public long IntRecord => long.TryParse(this.Record, out long nRecord) ? nRecord : KCDefine.B_VAL_0_INT;
 	[JsonIgnore][IgnoreMember] public long BestIntRecord => long.TryParse(this.BestRecord, out long nBestRecord) ? nBestRecord : KCDefine.B_VAL_0_INT;
@@ -413,7 +409,7 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 
 	/** 레벨 클리어 정보를 추가한다 */
 	public void AddLevelClearInfo(CClearInfo a_oClearInfo) {
-		this.GameInfo.m_oLevelClearInfoDict.TryAdd(a_oClearInfo.UniqueLevelID, a_oClearInfo);
+		this.GameInfo.m_oLevelClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueLevelID, a_oClearInfo);
 	}
 
 	/** 잠금 해제 레벨을 추가한다 */
