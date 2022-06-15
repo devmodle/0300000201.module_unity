@@ -1868,9 +1868,9 @@ namespace MessagePack.Formatters
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIDInfo value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.WriteArrayHeader(3);
-            writer.Write(value.m_nID);
-            writer.Write(value.m_nStageID);
-            writer.Write(value.m_nChapterID);
+            writer.Write(value.m_nID01);
+            writer.Write(value.m_nID02);
+            writer.Write(value.m_nID03);
         }
 
         public global::STIDInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -1889,13 +1889,13 @@ namespace MessagePack.Formatters
                 switch (i)
                 {
                     case 0:
-                        ____result.m_nID = reader.ReadInt32();
+                        ____result.m_nID01 = reader.ReadInt32();
                         break;
                     case 1:
-                        ____result.m_nStageID = reader.ReadInt32();
+                        ____result.m_nID02 = reader.ReadInt32();
                         break;
                     case 2:
-                        ____result.m_nChapterID = reader.ReadInt32();
+                        ____result.m_nID03 = reader.ReadInt32();
                         break;
                     default:
                         reader.Skip();
