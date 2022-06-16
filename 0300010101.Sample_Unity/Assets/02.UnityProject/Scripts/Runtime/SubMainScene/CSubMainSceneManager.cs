@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using EnhancedUI.EnhancedScroller;
 using TMPro;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+using EnhancedUI.EnhancedScroller;
+
 namespace MainScene {
 	/** 서브 메인 씬 관리자 */
 	public partial class CSubMainSceneManager : CMainSceneManager, IEnhancedScrollerDelegate {

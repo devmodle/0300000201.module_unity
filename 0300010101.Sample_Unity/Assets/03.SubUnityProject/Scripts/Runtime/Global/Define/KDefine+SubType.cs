@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using MessagePack;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
+using MessagePack;
+
 #region 기본
 /** 서브 타입 랩퍼 */
 [MessagePackObject]
