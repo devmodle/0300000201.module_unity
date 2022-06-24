@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 #if SCENE_TEMPLATES_MODULE_ENABLE
 /** 약관 동의 씬 상수 */

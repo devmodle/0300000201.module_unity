@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 #if GAME_CENTER_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 /** 게임 센터 상수 */
