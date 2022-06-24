@@ -1409,7 +1409,7 @@ namespace BuildReportTool
 			// search for it
 
 #if BRT_SHOW_MINOR_WARNINGS
-		Debug.LogWarning(BuildReportTool.Options.BUILD_REPORT_PACKAGE_MOVED_MSG);
+			Debug.LogWarning(BuildReportTool.Options.BUILD_REPORT_PACKAGE_MOVED_MSG);
 #endif
 
 			string folderPath = BuildReportTool.Util.FindAssetFolder(Application.dataPath,
@@ -1427,9 +1427,11 @@ namespace BuildReportTool
 
 			// could not find it
 			// giving up
+#if BRT_SHOW_MINOR_WARNINGS
 			Debug.LogError(BuildReportTool.Options.BUILD_REPORT_PACKAGE_MISSING_MSG);
+#endif
 
-			return "";
+			return null;
 		}
 
 

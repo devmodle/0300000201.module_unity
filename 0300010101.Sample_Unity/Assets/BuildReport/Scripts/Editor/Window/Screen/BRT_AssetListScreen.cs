@@ -202,7 +202,11 @@ namespace BuildReportTool.Window.Screen
 
 				columnOptionsBg.x = UnityEngine.Screen.width - columnOptionsBg.width - 19;
 
-				var bgStyle = GUI.skin.GetStyle(isOverlay ? "PopupPanel" : "HiddenScrollbar");
+				var bgStyle = GUI.skin.FindStyle(isOverlay ? "PopupPanel" : "HiddenScrollbar");
+				if (bgStyle == null)
+				{
+					bgStyle = GUI.skin.box;
+				}
 				GUI.Box(columnOptionsBg, GUIContent.none, bgStyle);
 
 				_mouseIsOnOverlayControl = columnOptionsBg.Contains(Event.current.mousePosition);
@@ -232,7 +236,11 @@ namespace BuildReportTool.Window.Screen
 				float textureDataColumn1Width = 0;
 				float textureDataColumn2Width = 0;
 
-				var toggleHeaderStyle = GUI.skin.GetStyle("Header3");
+				var toggleHeaderStyle = GUI.skin.FindStyle("Header3");
+				if (toggleHeaderStyle == null)
+				{
+					toggleHeaderStyle = GUI.skin.label;
+				}
 
 				_columnLabel.text = "Columns:";
 				rect.size = toggleHeaderStyle.CalcSize(_columnLabel);
@@ -793,7 +801,11 @@ namespace BuildReportTool.Window.Screen
 					_overridenTextureDataTooltipText = null;
 				}
 
-				var bgStyle = GUI.skin.GetStyle(isOverlay ? "PopupPanel" : "HiddenScrollbar");
+				var bgStyle = GUI.skin.FindStyle(isOverlay ? "PopupPanel" : "HiddenScrollbar");
+				if (bgStyle == null)
+				{
+					bgStyle = GUI.skin.box;
+				}
 				GUI.Box(searchOptionsBg, GUIContent.none, bgStyle);
 
 
@@ -803,10 +815,27 @@ namespace BuildReportTool.Window.Screen
 
 				float startX = rect.x;
 
-				var toggleHeaderStyle = GUI.skin.GetStyle("Header3");
-				var radioLeftStyle = GUI.skin.GetStyle("RadioLeft");
-				var radioMidStyle = GUI.skin.GetStyle("RadioMiddle");
-				var radioRightStyle = GUI.skin.GetStyle("RadioRight");
+				var toggleHeaderStyle = GUI.skin.FindStyle("Header3");
+				var radioLeftStyle = GUI.skin.FindStyle("RadioLeft");
+				var radioMidStyle = GUI.skin.FindStyle("RadioMiddle");
+				var radioRightStyle = GUI.skin.FindStyle("RadioRight");
+
+				if (toggleHeaderStyle == null)
+				{
+					toggleHeaderStyle = GUI.skin.label;
+				}
+				if (radioLeftStyle == null)
+				{
+					radioLeftStyle = GUI.skin.toggle;
+				}
+				if (radioMidStyle == null)
+				{
+					radioMidStyle = GUI.skin.toggle;
+				}
+				if (radioRightStyle == null)
+				{
+					radioRightStyle = GUI.skin.toggle;
+				}
 
 				float searchTypeHeight = 0;
 
@@ -1093,6 +1122,18 @@ namespace BuildReportTool.Window.Screen
 			// --------------------------
 			// actual contents of Bottom Bar
 
+			var statusBarBgStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.STATUS_BAR_BG_STYLE_NAME);
+			if (statusBarBgStyle == null)
+			{
+				statusBarBgStyle = GUI.skin.box;
+			}
+
+			var statusBarLabelStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.STATUS_BAR_LABEL_STYLE_NAME);
+			if (statusBarLabelStyle == null)
+			{
+				statusBarLabelStyle = GUI.skin.label;
+			}
+
 			string selectedInfoLabel = string.Format(
 				"{0}{1}. {2}{3} ({4}%)",
 				Labels.SELECTED_QTY_LABEL,
@@ -1102,9 +1143,9 @@ namespace BuildReportTool.Window.Screen
 
 			GUILayout.BeginArea(bottomBarRect);
 
-			GUILayout.BeginHorizontal(BuildReportTool.Window.Settings.STATUS_BAR_BG_STYLE_NAME,
+			GUILayout.BeginHorizontal(statusBarBgStyle,
 				BRT_BuildReportWindow.LayoutNone);
-			GUILayout.Label(selectedInfoLabel, BuildReportTool.Window.Settings.STATUS_BAR_LABEL_STYLE_NAME,
+			GUILayout.Label(selectedInfoLabel, statusBarLabelStyle,
 				BRT_BuildReportWindow.LayoutNone);
 			GUILayout.FlexibleSpace();
 
@@ -1112,14 +1153,14 @@ namespace BuildReportTool.Window.Screen
 			{
 				GUILayout.Label(
 					"Hold Ctrl to zoom-in on the thumbnail. Press Alt to show/hide alpha transparency.",
-					BuildReportTool.Window.Settings.STATUS_BAR_LABEL_STYLE_NAME,
+					statusBarLabelStyle,
 					BRT_BuildReportWindow.LayoutNone);
 			}
 			else
 			{
 				GUILayout.Label(
 					"Click on an asset's name to include it in size calculations or batch deletions. Shift-click to select many. Ctrl-click to toggle selection.",
-					BuildReportTool.Window.Settings.STATUS_BAR_LABEL_STYLE_NAME,
+					statusBarLabelStyle,
 					BRT_BuildReportWindow.LayoutNone);
 			}
 
@@ -1155,7 +1196,11 @@ namespace BuildReportTool.Window.Screen
 				if (!string.IsNullOrEmpty(_overridenTextureDataTooltipText))
 				{
 					_textureDataTooltipLabel.text = _overridenTextureDataTooltipText;
-					var tooltipTextStyle = GUI.skin.GetStyle("TooltipText");
+					var tooltipTextStyle = GUI.skin.FindStyle("TooltipText");
+					if (tooltipTextStyle == null)
+					{
+						tooltipTextStyle = GUI.skin.box;
+					}
 
 					const int MAX_TOOLTIP_WIDTH = 240;
 					var tooltipSize = tooltipTextStyle.CalcSize(_textureDataTooltipLabel);
@@ -1198,7 +1243,11 @@ namespace BuildReportTool.Window.Screen
 
 					if (!string.IsNullOrEmpty(_textureDataTooltipLabel.text))
 					{
-						var tooltipTextStyle = GUI.skin.GetStyle("TooltipText");
+						var tooltipTextStyle = GUI.skin.FindStyle("TooltipText");
+						if (tooltipTextStyle == null)
+						{
+							tooltipTextStyle = GUI.skin.box;
+						}
 
 						const int MAX_TOOLTIP_WIDTH = 400;
 						var tooltipSize = tooltipTextStyle.CalcSize(_textureDataTooltipLabel);
@@ -1224,7 +1273,11 @@ namespace BuildReportTool.Window.Screen
 		if (_showDebugText)
 		{
 			_debugLabel.text = _debugText.ToString();
-			var debugStyle = GUI.skin.GetStyle("DebugOverlay");
+			var debugStyle = GUI.skin.FindStyle("DebugOverlay");
+			if (debugStyle == null)
+			{
+				debugStyle = GUI.skin.box;
+			}
 			var debugLabelSize = debugStyle.CalcSize(_debugLabel);
 
 			GUI.Label(new Rect(position.width - debugLabelSize.x, 0, debugLabelSize.x, debugLabelSize.y), _debugLabel, debugStyle);
@@ -1423,15 +1476,73 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
+			Texture2D prevArrow;
+			var prevArrowStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.BIG_LEFT_ARROW_ICON_STYLE_NAME);
+			if (prevArrowStyle != null)
+			{
+				prevArrow = prevArrowStyle.normal.background;
+			}
+			else
+			{
+				prevArrow = null;
+			}
 
-			Texture2D prevArrow = GUI.skin.GetStyle(BuildReportTool.Window.Settings.BIG_LEFT_ARROW_ICON_STYLE_NAME).normal.background;
-			Texture2D nextArrow = GUI.skin.GetStyle(BuildReportTool.Window.Settings.BIG_RIGHT_ARROW_ICON_STYLE_NAME).normal.background;
-			Texture2D column = GUI.skin.GetStyle(BuildReportTool.Window.Settings.COLUMN_ICON_STYLE_NAME).normal.background;
-			_showColumnLabel.image = column;
+			Texture2D nextArrow;
+			var  nextArrowStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.BIG_RIGHT_ARROW_ICON_STYLE_NAME);
+			if (nextArrowStyle != null)
+			{
+				nextArrow = nextArrowStyle.normal.background;
+			}
+			else
+			{
+				nextArrow = null;
+			}
 
-			GUILayout.BeginHorizontal(GUILayout.Height(11));
+			var columnStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.COLUMN_ICON_STYLE_NAME);
+			if (columnStyle != null)
+			{
+				_showColumnLabel.image = columnStyle.normal.background;
+			}
 
-			GUILayout.Label(" ", BuildReportTool.Window.Settings.TOP_BAR_BG_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+			var topBarBgStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_BG_STYLE_NAME);
+			if (topBarBgStyle == null)
+			{
+				topBarBgStyle = GUI.skin.label;
+			}
+
+			var topBarButtonStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME);
+			if (topBarButtonStyle == null)
+			{
+				topBarButtonStyle = GUI.skin.button;
+			}
+
+			var topBarLabelStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			if (topBarLabelStyle == null)
+			{
+				topBarLabelStyle = GUI.skin.label;
+			}
+
+			var searchDropdownStyle = GUI.skin.FindStyle("TextField-Search-DropDown");
+			if (searchDropdownStyle == null)
+			{
+				searchDropdownStyle = GUI.skin.label;
+			}
+
+			var searchTextStyle = GUI.skin.FindStyle("TextField-Search-Text");
+			if (searchTextStyle == null)
+			{
+				searchTextStyle = GUI.skin.textField;
+			}
+
+			var searchClearStyle = GUI.skin.FindStyle("TextField-Search-ClearButton");
+			if (searchClearStyle == null)
+			{
+				searchClearStyle = GUI.skin.button;
+			}
+
+			GUILayout.BeginHorizontal(BRT_BuildReportWindow.LayoutHeight11);
+
+			GUILayout.Label(" ", topBarBgStyle, BRT_BuildReportWindow.LayoutNone);
 
 			// ------------------------------------------------------------------------------------------------------
 			// File Filters
@@ -1455,19 +1566,22 @@ namespace BuildReportTool.Window.Screen
 			{
 				int batchNumber = buildReportToDisplay.UnusedAssetsBatchNum + 1;
 
-				if (GUILayout.Button(prevArrow, BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME,
-					    BRT_BuildReportWindow.LayoutNone) && (batchNumber - 1 >= 1))
+				bool prevButton = prevArrow != null
+					? GUILayout.Button(prevArrow, topBarButtonStyle)
+					: GUILayout.Button("Previous", topBarButtonStyle);
+				if (prevButton && (batchNumber - 1 >= 1))
 				{
 					// move to previous batch
 					BuildReportTool.ReportGenerator.MoveUnusedAssetsBatchToPrev(buildReportToDisplay, fileFilterGroupToUse);
 				}
 
 				string batchLabel = string.Format("Batch {0}", batchNumber.ToString());
-				GUILayout.Label(batchLabel, BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME,
-					BRT_BuildReportWindow.LayoutNone);
+				GUILayout.Label(batchLabel, topBarLabelStyle);
 
-				if (GUILayout.Button(nextArrow, BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME,
-					BRT_BuildReportWindow.LayoutNone))
+				bool nextButton = nextArrow != null
+					? GUILayout.Button(nextArrow, topBarButtonStyle)
+					: GUILayout.Button("Next", topBarButtonStyle);
+				if (nextButton)
 				{
 					// move to next batch
 					// (possible to have no new batch anymore. if so, it will just fail silently)
@@ -1500,7 +1614,7 @@ namespace BuildReportTool.Window.Screen
 				                 ? _searchViewOffset
 				                 : assetListUsed.GetViewOffsetForDisplayedList(fileFilterGroupToUse);
 
-			if (GUILayout.Button(prevArrow, BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME,
+			if (GUILayout.Button(prevArrow, topBarButtonStyle,
 				    BRT_BuildReportWindow.LayoutNone) &&
 			    (viewOffset - BuildReportTool.Options.AssetListPaginationLength >= 0))
 			{
@@ -1550,13 +1664,13 @@ namespace BuildReportTool.Window.Screen
 					assetListLength.ToString(assetCountDigitNumFormat));
 			}
 
-			if (GUILayout.Button(paginateLabel, BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME,
+			if (GUILayout.Button(paginateLabel, topBarLabelStyle,
 				BRT_BuildReportWindow.LayoutNone))
 			{
 				_showPageNumbers = !_showPageNumbers;
 			}
 
-			if (GUILayout.Button(nextArrow, BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME,
+			if (GUILayout.Button(nextArrow, topBarButtonStyle,
 				    BRT_BuildReportWindow.LayoutNone) &&
 			    (viewOffset + BuildReportTool.Options.AssetListPaginationLength < assetListLength))
 			{
@@ -1575,11 +1689,10 @@ namespace BuildReportTool.Window.Screen
 
 			// ------------------------------------------------------------------------------------------------------
 
-
 			GUILayout.FlexibleSpace();
 
 			var newShowColumnOptions = GUILayout.Toggle(_showColumnOptions, _showColumnLabel,
-				BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+				topBarButtonStyle, BRT_BuildReportWindow.LayoutNone);
 			if (newShowColumnOptions != _showColumnOptions)
 			{
 				_showColumnOptions = newShowColumnOptions;
@@ -1593,7 +1706,7 @@ namespace BuildReportTool.Window.Screen
 				_showColumnOptionButtonRect = GUILayoutUtility.GetLastRect();
 			}
 
-			var newSearchOptions = GUILayout.Toggle(_showSearchOptions, GUIContent.none, "TextField-Search-DropDown",
+			var newSearchOptions = GUILayout.Toggle(_showSearchOptions, GUIContent.none, searchDropdownStyle,
 				BRT_BuildReportWindow.LayoutNone);
 			if (newSearchOptions != _showSearchOptions)
 			{
@@ -1607,9 +1720,9 @@ namespace BuildReportTool.Window.Screen
 			{
 				_searchTextfieldRect = GUILayoutUtility.GetLastRect();
 			}
-			_searchTextInput = GUILayout.TextField(_searchTextInput, "TextField-Search-Text",
+			_searchTextInput = GUILayout.TextField(_searchTextInput, searchTextStyle,
 				BRT_BuildReportWindow.LayoutMinWidth200);
-			if (GUILayout.Button(string.Empty, "TextField-Search-ClearButton", BRT_BuildReportWindow.LayoutNone))
+			if (GUILayout.Button(GUIContent.none, searchClearStyle, BRT_BuildReportWindow.LayoutNone))
 			{
 				ClearSearch();
 			}
@@ -1624,7 +1737,7 @@ namespace BuildReportTool.Window.Screen
 
 			if ((_currentListDisplayed != ListToDisplay.UsedAssets) &&
 			    GUILayout.Button(Labels.RECALC_IMPORTED_SIZES,
-				    BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+				    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 			{
 				assetListUsed.PopulateImportedSizes();
 			}
@@ -1633,7 +1746,7 @@ namespace BuildReportTool.Window.Screen
 			    BuildReportTool.Options.GetSizeBeforeBuildForUsedAssets &&
 			    (_currentListDisplayed == ListToDisplay.UsedAssets) &&
 			    GUILayout.Button(Labels.RECALC_SIZE_BEFORE_BUILD,
-				    BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+				    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 			{
 				assetListUsed.PopulateSizeInAssetsFolder();
 			}
@@ -1645,13 +1758,13 @@ namespace BuildReportTool.Window.Screen
 			// Selection buttons
 
 			if (GUILayout.Button(Labels.SELECT_ALL_LABEL,
-				BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+				    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 			{
 				assetListUsed.AddAllDisplayedToSumSelection(fileFilterGroupToUse);
 			}
 
 			if (GUILayout.Button(Labels.SELECT_NONE_LABEL,
-				BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+				    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 			{
 				assetListUsed.ClearSelection();
 				_assetListEntryLastClickedIdx = -1;
@@ -1669,14 +1782,14 @@ namespace BuildReportTool.Window.Screen
 				GUI.backgroundColor = Color.red;
 				const string DEL_SELECTED_LABEL = "Delete selected";
 				if (GUILayout.Button(DEL_SELECTED_LABEL,
-					BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+					    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 				{
 					InitiateDeleteSelectedUsed(buildReportToDisplay);
 				}
 
 				const string DELETE_ALL_LABEL = "Delete all";
 				if (GUILayout.Button(DELETE_ALL_LABEL,
-					BuildReportTool.Window.Settings.TOP_BAR_BTN_STYLE_NAME, BRT_BuildReportWindow.LayoutNone))
+					    topBarButtonStyle, BRT_BuildReportWindow.LayoutNone))
 				{
 					InitiateDeleteAllUnused(buildReportToDisplay);
 				}
@@ -1693,7 +1806,7 @@ namespace BuildReportTool.Window.Screen
 		}
 
 
-		string GetColumnHeaderStyle(BuildReportTool.AssetList.SortType sortTypeNeeded)
+		GUIStyle GetColumnHeaderStyle(BuildReportTool.AssetList.SortType sortTypeNeeded)
 		{
 			string styleResult = BuildReportTool.Window.Settings.LIST_COLUMN_HEADER_STYLE_NAME;
 
@@ -1709,7 +1822,13 @@ namespace BuildReportTool.Window.Screen
 				}
 			}
 
-			return styleResult;
+			var style = GUI.skin.FindStyle(styleResult);
+			if (style == null)
+			{
+				style = GUI.skin.label;
+			}
+
+			return style;
 		}
 
 		void DrawAssetList(Rect position,
@@ -1726,6 +1845,24 @@ namespace BuildReportTool.Window.Screen
 			{
 				DrawCentralMessage(position, "No search results");
 				return;
+			}
+
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
 			}
 
 			BuildReportTool.SizePart[] assetListToUse;
@@ -1746,15 +1883,45 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
+			var messageStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME);
+			if (messageStyle == null)
+			{
+				messageStyle = GUI.skin.label;
+			}
+
 			if (assetListToUse.Length == 0)
 			{
 				GUILayout.BeginHorizontal(BRT_BuildReportWindow.LayoutNone);
 				GUILayout.Space(10);
 				GUILayout.Label(Labels.NO_FILES_FOR_THIS_CATEGORY_LABEL,
-					BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+					messageStyle, BRT_BuildReportWindow.LayoutNone);
 				GUILayout.EndHorizontal();
 
 				return;
+			}
+
+			var hiddenHorizontalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenHorizontalScrollbarStyle == null)
+			{
+				hiddenHorizontalScrollbarStyle = GUI.skin.horizontalScrollbar;
+			}
+
+			var hiddenVerticalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenVerticalScrollbarStyle == null)
+			{
+				hiddenVerticalScrollbarStyle = GUI.skin.verticalScrollbar;
+			}
+
+			var textureStyle = GUI.skin.FindStyle("DrawTexture");
+			if (textureStyle == null)
+			{
+				textureStyle = GUI.skin.label;
+			}
+
+			var listButtonStyle = GUI.skin.FindStyle("ListButton");
+			if (listButtonStyle == null)
+			{
+				listButtonStyle = GUI.skin.button;
 			}
 
 			EditorGUIUtility.SetIconSize(BRT_BuildReportWindow.IconSize);
@@ -1804,7 +1971,7 @@ namespace BuildReportTool.Window.Screen
 
 			BuildReportTool.Options.ShowColumnAssetPath = GUI.Toggle(assetPathCheckboxRect, BuildReportTool.Options.ShowColumnAssetPath, _assetPathCheckboxLabel);
 
-			string sortTypeAssetFullPathStyleName = GetColumnHeaderStyle(BuildReportTool.AssetList.SortType.AssetFullPath);
+			var sortTypeAssetFullPathStyleName = GetColumnHeaderStyle(BuildReportTool.AssetList.SortType.AssetFullPath);
 			if (GUILayout.Button("     Asset Path", sortTypeAssetFullPathStyleName,
 				BRT_BuildReportWindow.LayoutListHeight))
 			{
@@ -1824,7 +1991,7 @@ namespace BuildReportTool.Window.Screen
 
 			// -----------------------------------------------------------------
 
-			string sortTypeAssetFilenameStyleName = GetColumnHeaderStyle(BuildReportTool.AssetList.SortType.AssetFilename);
+			var sortTypeAssetFilenameStyleName = GetColumnHeaderStyle(BuildReportTool.AssetList.SortType.AssetFilename);
 			if (GUILayout.Button("Asset Filename", sortTypeAssetFilenameStyleName, BRT_BuildReportWindow.LayoutListHeight))
 			{
 				ToggleSort(list, BuildReportTool.AssetList.SortType.AssetFilename, filter);
@@ -1838,8 +2005,8 @@ namespace BuildReportTool.Window.Screen
 			var newEntryHoveredIdx = -1;
 
 			_assetListScrollPos = GUILayout.BeginScrollView(_assetListScrollPos,
-				BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-				BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+				hiddenHorizontalScrollbarStyle,
+				hiddenVerticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 
 			var mousePos = Event.current.mousePosition;
 
@@ -1847,13 +2014,13 @@ namespace BuildReportTool.Window.Screen
 			{
 				BuildReportTool.SizePart b = assetListToUse[n];
 
-				string styleToUse = useAlt
-					                    ? BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME
-					                    : BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME;
+				var styleToUse = useAlt
+					                    ? listAltEntryStyle
+					                    : listEntryStyle;
 				bool inSumSelect = list.InSumSelection(b);
 				if (inSumSelect)
 				{
-					styleToUse = BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME;
+					styleToUse = listSelectedEntryStyle;
 				}
 
 				#region Entry Bg
@@ -1865,7 +2032,7 @@ namespace BuildReportTool.Window.Screen
 					// only asset entries inside the top-level Assets or Packages folder can be pinged
 					if (b.Name.IsInAssetsFolder() || b.Name.IsInPackagesFolder())
 					{
-						if (GUILayout.Button("Ping", "ListButton", BRT_BuildReportWindow.LayoutPingButton))
+						if (GUILayout.Button("Ping", listButtonStyle, BRT_BuildReportWindow.LayoutPingButton))
 						{
 							if (list.GetSelectedCount() > 1 && list.InSumSelection(b) && Event.current.alt)
 							{
@@ -1895,7 +2062,7 @@ namespace BuildReportTool.Window.Screen
 				if (!hasIcon)
 				{
 					// entry has no icon, just add space so it aligns with the other entries
-					GUILayout.Label(string.Empty, "DrawTexture", BRT_BuildReportWindow.LayoutIconWidth);
+					GUILayout.Label(string.Empty, textureStyle, BRT_BuildReportWindow.LayoutIconWidth);
 
 					if (Event.current.type == EventType.Repaint)
 					{
@@ -1909,20 +2076,19 @@ namespace BuildReportTool.Window.Screen
 
 				_assetListEntry.text = GetPrettyAssetPath(b.Name, n, BuildReportTool.Options.ShowColumnAssetPath, inSumSelect);
 
-				GUIStyle styleObjToUse = GUI.skin.GetStyle(styleToUse);
-				Color temp = styleObjToUse.normal.textColor;
-				int origLeft = styleObjToUse.padding.left;
-				int origRight = styleObjToUse.padding.right;
+				Color temp = styleToUse.normal.textColor;
+				int origLeft = styleToUse.padding.left;
+				int origRight = styleToUse.padding.right;
 
-				styleObjToUse.normal.textColor = styleObjToUse.onNormal.textColor;
-				styleObjToUse.padding.right = 0;
+				styleToUse.normal.textColor = styleToUse.onNormal.textColor;
+				styleToUse.padding.right = 0;
 
-				styleObjToUse.normal.textColor = temp;
-				styleObjToUse.padding.left = 2;
+				styleToUse.normal.textColor = temp;
+				styleToUse.padding.left = 2;
 
 				// the asset icon and name
 
-				if (GUILayout.Button(_assetListEntry, styleObjToUse, BRT_BuildReportWindow.LayoutListHeight))
+				if (GUILayout.Button(_assetListEntry, styleToUse, BRT_BuildReportWindow.LayoutListHeight))
 				{
 					if (Event.current.control)
 					{
@@ -2034,8 +2200,8 @@ namespace BuildReportTool.Window.Screen
 					}
 				}
 
-				styleObjToUse.padding.right = origRight;
-				styleObjToUse.padding.left = origLeft;
+				styleToUse.padding.right = origRight;
+				styleToUse.padding.left = origLeft;
 
 
 #if BRT_ASSET_LIST_SCREEN_DEBUG
@@ -2095,7 +2261,13 @@ namespace BuildReportTool.Window.Screen
 						iconHoveredRect.y += 2;
 						iconHoveredRect.width = 17;
 						iconHoveredRect.height = 16;
-						GUI.Box(iconHoveredRect, _assetListEntry.image, "IconHovered");
+
+						var iconHoveredStyle = GUI.skin.FindStyle("IconHovered");
+						if (iconHoveredStyle == null)
+						{
+							iconHoveredStyle = GUI.skin.label;
+						}
+						GUI.Box(iconHoveredRect, _assetListEntry.image, iconHoveredStyle);
 
 						// ----------------
 						// if mouse is hovering over the correct area, we signify that
@@ -2615,8 +2787,42 @@ namespace BuildReportTool.Window.Screen
 			ColumnDisplayDelegate dataToDisplay, ref Vector2 scrollbarPos)
 		{
 			bool buttonPressed = false;
-			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
 
+			var hiddenHorizontalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenHorizontalScrollbarStyle == null)
+			{
+				hiddenHorizontalScrollbarStyle = GUI.skin.horizontalScrollbar;
+			}
+
+			var hiddenVerticalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenVerticalScrollbarStyle == null)
+			{
+				hiddenVerticalScrollbarStyle = GUI.skin.verticalScrollbar;
+			}
+
+			var verticalScrollbarStyle = GUI.skin.verticalScrollbar;
+
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
+
+			// ----------------------------------------------------------
+
+			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
 
 			// ----------------------------------------------------------
 			// column header
@@ -2632,8 +2838,13 @@ namespace BuildReportTool.Window.Screen
 					sortTypeStyleName = BuildReportTool.Window.Settings.LIST_COLUMN_HEADER_ASC_STYLE_NAME;
 				}
 			}
+			var sortTypeStyle = GUI.skin.FindStyle(sortTypeStyleName);
+			if (sortTypeStyle == null)
+			{
+				sortTypeStyle = GUI.skin.label;
+			}
 
-			if (GUILayout.Button(columnName, sortTypeStyleName, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
+			if (GUILayout.Button(columnName, sortTypeStyle, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
 			{
 				buttonPressed = true;
 			}
@@ -2644,14 +2855,14 @@ namespace BuildReportTool.Window.Screen
 			if (showScrollbar)
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					"verticalscrollbar", BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					verticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 			else
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					hiddenVerticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 
 
@@ -2663,12 +2874,10 @@ namespace BuildReportTool.Window.Screen
 			{
 				var b = assetList[n];
 
-				string styleToUse = useAlt
-					                    ? BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME
-					                    : BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME;
+				var styleToUse = useAlt ? listAltEntryStyle : listEntryStyle;
 				if (assetListCollection.InSumSelection(b))
 				{
-					styleToUse = BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME;
+					styleToUse = listSelectedEntryStyle;
 				}
 
 				GUILayout.Label(dataToDisplay(b), styleToUse, BRT_BuildReportWindow.LayoutListHeightMinWidth90);
@@ -2689,8 +2898,41 @@ namespace BuildReportTool.Window.Screen
 			bool allowSort, bool showScrollbar, BuildReportTool.AssetList assetListCollection, TextureData textureData,
 			SizePart[] assetList, ref Vector2 scrollbarPos)
 		{
-			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
+			var hiddenHorizontalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenHorizontalScrollbarStyle == null)
+			{
+				hiddenHorizontalScrollbarStyle = GUI.skin.horizontalScrollbar;
+			}
 
+			var hiddenVerticalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenVerticalScrollbarStyle == null)
+			{
+				hiddenVerticalScrollbarStyle = GUI.skin.verticalScrollbar;
+			}
+
+			var verticalScrollbarStyle = GUI.skin.verticalScrollbar;
+
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
+
+			// ----------------------------------------------------------
+
+			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
 
 			// ----------------------------------------------------------
 			// column header
@@ -2706,8 +2948,13 @@ namespace BuildReportTool.Window.Screen
 					sortTypeStyleName = BuildReportTool.Window.Settings.LIST_COLUMN_HEADER_ASC_STYLE_NAME;
 				}
 			}
+			var sortTypeStyle = GUI.skin.FindStyle(sortTypeStyleName);
+			if (sortTypeStyle == null)
+			{
+				sortTypeStyle = GUI.skin.label;
+			}
 
-			if (GUILayout.Button(columnName, sortTypeStyleName, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
+			if (GUILayout.Button(columnName, sortTypeStyle, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
 			{
 				_clickedTextureDataId = textureDataId;
 			}
@@ -2726,14 +2973,14 @@ namespace BuildReportTool.Window.Screen
 			if (showScrollbar)
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					"verticalscrollbar", BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					verticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 			else
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					hiddenVerticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 
 			// ----------------------------------------------------------
@@ -2745,12 +2992,10 @@ namespace BuildReportTool.Window.Screen
 			{
 				var b = assetList[n];
 
-				string styleToUse = useAlt
-					                    ? BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME
-					                    : BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME;
+				var styleToUse = useAlt ? listAltEntryStyle : listEntryStyle;
 				if (assetListCollection.InSumSelection(b))
 				{
-					styleToUse = BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME;
+					styleToUse = listSelectedEntryStyle;
 				}
 
 				var dataToDisplay = string.Empty;
@@ -2784,8 +3029,41 @@ namespace BuildReportTool.Window.Screen
 			bool allowSort, bool showScrollbar, BuildReportTool.AssetList assetListCollection, MeshData meshData,
 			SizePart[] assetList, ref Vector2 scrollbarPos)
 		{
-			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
+			var hiddenHorizontalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenHorizontalScrollbarStyle == null)
+			{
+				hiddenHorizontalScrollbarStyle = GUI.skin.horizontalScrollbar;
+			}
 
+			var hiddenVerticalScrollbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME);
+			if (hiddenVerticalScrollbarStyle == null)
+			{
+				hiddenVerticalScrollbarStyle = GUI.skin.verticalScrollbar;
+			}
+
+			var verticalScrollbarStyle = GUI.skin.verticalScrollbar;
+
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
+
+			// ----------------------------------------------------------
+
+			GUILayout.BeginVertical(BRT_BuildReportWindow.LayoutNone);
 
 			// ----------------------------------------------------------
 			// column header
@@ -2801,8 +3079,13 @@ namespace BuildReportTool.Window.Screen
 					sortTypeStyleName = BuildReportTool.Window.Settings.LIST_COLUMN_HEADER_ASC_STYLE_NAME;
 				}
 			}
+			var sortTypeStyle = GUI.skin.FindStyle(sortTypeStyleName);
+			if (sortTypeStyle == null)
+			{
+				sortTypeStyle = GUI.skin.label;
+			}
 
-			if (GUILayout.Button(columnName, sortTypeStyleName, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
+			if (GUILayout.Button(columnName, sortTypeStyle, BRT_BuildReportWindow.LayoutListHeight) && allowSort)
 			{
 				_clickedMeshDataId = meshDataId;
 			}
@@ -2821,14 +3104,14 @@ namespace BuildReportTool.Window.Screen
 			if (showScrollbar)
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					"verticalscrollbar", BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					verticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 			else
 			{
 				scrollbarPos = GUILayout.BeginScrollView(scrollbarPos,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME,
-					BuildReportTool.Window.Settings.HIDDEN_SCROLLBAR_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+					hiddenHorizontalScrollbarStyle,
+					hiddenVerticalScrollbarStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 
 			// ----------------------------------------------------------
@@ -2840,12 +3123,12 @@ namespace BuildReportTool.Window.Screen
 			{
 				var b = assetList[n];
 
-				string styleToUse = useAlt
-					                    ? BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME
-					                    : BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME;
+				var styleToUse = useAlt
+					                    ? listAltEntryStyle
+					                    : listEntryStyle;
 				if (assetListCollection.InSumSelection(b))
 				{
-					styleToUse = BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME;
+					styleToUse = listSelectedEntryStyle;
 				}
 
 				var dataToDisplay = string.Empty;

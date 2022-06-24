@@ -367,7 +367,11 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			var assetStyle = GUI.skin.GetStyle("Asset");
+			var assetStyle = GUI.skin.FindStyle("Asset");
+			if (assetStyle == null)
+			{
+				assetStyle = GUI.skin.label;
+			}
 
 #if BRT_ASSET_LIST_SCREEN_DEBUG
 			_debugText.AppendFormat("listToDisplay.GetSelectedCount(): {0}\n",
@@ -442,18 +446,37 @@ namespace BuildReportTool.Window.Screen
 				selectedHasNoAssetDependencies.ToString(), _selectedIsAResourcesAsset.ToString());
 #endif
 
-			var assetInfoPanelNoListStyle = GUI.skin.GetStyle("AssetInfoPanelNoList");
-			var assetInfoPanelStyle = GUI.skin.GetStyle("AssetInfoPanel");
+			var assetInfoPanelNoListStyle = GUI.skin.FindStyle("AssetInfoPanelNoList");
+			if (assetInfoPanelNoListStyle == null)
+			{
+				assetInfoPanelNoListStyle = GUI.skin.box;
+			}
+
+			GUIStyle assetInfoPanelStyle;
 			if (_showAssetUsagesList)
 			{
 				if (_selectedAssetUsageDisplayIdx == ASSET_USAGE_DISPLAY_ALL)
 				{
-					assetInfoPanelStyle = GUI.skin.GetStyle("AssetInfoPanelToolbarTopAllList");
+					assetInfoPanelStyle = GUI.skin.FindStyle("AssetInfoPanelToolbarTopAllList");
 				}
 				else
 				{
-					assetInfoPanelStyle = GUI.skin.GetStyle("AssetInfoPanelToolbarTop");
+					assetInfoPanelStyle = GUI.skin.FindStyle("AssetInfoPanelToolbarTop");
 				}
+			}
+			else
+			{
+				assetInfoPanelStyle = GUI.skin.FindStyle("AssetInfoPanel");
+			}
+			if (assetInfoPanelStyle == null)
+			{
+				assetInfoPanelStyle = GUI.skin.box;
+			}
+
+			var labelSingleLineStyle = GUI.skin.FindStyle("LabelSingleLine");
+			if (labelSingleLineStyle == null)
+			{
+				labelSingleLineStyle = GUI.skin.label;
 			}
 
 			if (selectedHasNoAssetDependencies)
@@ -525,7 +548,7 @@ namespace BuildReportTool.Window.Screen
 						}
 					}
 
-					GUILayout.Label(AssetUsageIsAResourcesAssetLabel, "LabelSingleLine", BRT_BuildReportWindow.LayoutNone);
+					GUILayout.Label(AssetUsageIsAResourcesAssetLabel, labelSingleLineStyle, BRT_BuildReportWindow.LayoutNone);
 
 					GUILayout.EndHorizontal();
 					GUILayout.EndVertical();
@@ -551,7 +574,11 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			var expandButtonStyle = GUI.skin.GetStyle("ExpandButton");
+			var expandButtonStyle = GUI.skin.FindStyle("ExpandButton");
+			if (expandButtonStyle == null)
+			{
+				expandButtonStyle = GUI.skin.button;
+			}
 
 			var availableWidth = position.width - 10;
 
@@ -1001,9 +1028,22 @@ namespace BuildReportTool.Window.Screen
 			const int INSPECT_BUTTON_WIDTH = 50;
 			const int INSPECT_BUTTON_HEIGHT = 18;
 
-			var listEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
-			var listAltEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
-			var listSelectedEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
 
 			EditorGUIUtility.SetIconSize(BRT_BuildReportWindow.IconSize);
 
@@ -1013,9 +1053,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				var useAlt = (directUserN % 2) == 0;
 
-				var styleToUse = useAlt
-					                 ? listAltEntryStyle
-					                 : listEntryStyle;
+				var styleToUse = useAlt ? listAltEntryStyle : listEntryStyle;
 				if (_selectedAssetUserIdx == directUserN)
 				{
 					styleToUse = listSelectedEntryStyle;
@@ -1260,9 +1298,22 @@ namespace BuildReportTool.Window.Screen
 			const int PING_BUTTON_WIDTH = 37;
 			const int PING_BUTTON_HEIGHT = 18;
 
-			var listEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
-			var listAltEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
-			var listSelectedEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
 
 			EditorGUIUtility.SetIconSize(BRT_BuildReportWindow.IconSize);
 
@@ -1271,9 +1322,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				var useAlt = (endUserN % 2) == 0;
 
-				var styleToUse = useAlt
-					                 ? listAltEntryStyle
-					                 : listEntryStyle;
+				var styleToUse = useAlt ? listAltEntryStyle : listEntryStyle;
 				if (_selectedAssetUserIdx == endUserN)
 				{
 					styleToUse = listSelectedEntryStyle;
@@ -1479,9 +1528,22 @@ namespace BuildReportTool.Window.Screen
 			const int PING_BUTTON_WIDTH = 37;
 			const int PING_BUTTON_HEIGHT = 18;
 
-			var listEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
-			var listAltEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
-			var listSelectedEntryStyle = GUI.skin.GetStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+			var listEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_STYLE_NAME);
+			var listAltEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_ALT_STYLE_NAME);
+			var listSelectedEntryStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.LIST_SMALL_SELECTED_NAME);
+
+			if (listEntryStyle == null)
+			{
+				listEntryStyle = GUI.skin.label;
+			}
+			if (listAltEntryStyle == null)
+			{
+				listAltEntryStyle = GUI.skin.label;
+			}
+			if (listSelectedEntryStyle == null)
+			{
+				listSelectedEntryStyle = GUI.skin.label;
+			}
 
 			EditorGUIUtility.SetIconSize(BRT_BuildReportWindow.IconSize);
 
@@ -1489,9 +1551,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				var useAlt = ((usersFlattened[userFlattenedN].IndentLevel % 2) == 0);
 
-				var styleToUse = useAlt
-					                 ? listAltEntryStyle
-					                 : listEntryStyle;
+				var styleToUse = useAlt ? listAltEntryStyle : listEntryStyle;
 				if (_selectedAssetUserIdx == userFlattenedN)
 				{
 					styleToUse = listSelectedEntryStyle;
@@ -1609,7 +1669,11 @@ namespace BuildReportTool.Window.Screen
 
 				if (_indentLine == null)
 				{
-					_indentLine = GUI.skin.GetStyle("IndentStyle1").normal.background;
+					var indentStyle = GUI.skin.FindStyle("IndentStyle1");
+					if (indentStyle != null)
+					{
+						_indentLine = indentStyle.normal.background;
+					}
 				}
 
 				var prevColor = GUI.color;
@@ -1867,11 +1931,33 @@ namespace BuildReportTool.Window.Screen
 		void DrawAssetUsageAncestry(Rect position, float availableWidth, BuildInfo buildReportToDisplay,
 			AssetDependencies assetDependencies)
 		{
-			var assetStyle = GUI.skin.GetStyle("Asset");
-			var assetHoveredStyle = GUI.skin.GetStyle("AssetHovered");
-			var assetLabelInBetweenStyle = GUI.skin.GetStyle("LabelSingleLine");
-			var assetUsageArrowStyle = GUI.skin.GetStyle("AssetUsageArrow");
-			var assetUsageArrow = assetUsageArrowStyle.normal.background;
+			var assetStyle = GUI.skin.FindStyle("Asset");
+			var assetHoveredStyle = GUI.skin.FindStyle("AssetHovered");
+			var assetLabelInBetweenStyle = GUI.skin.FindStyle("LabelSingleLine");
+			var assetUsageArrowStyle = GUI.skin.FindStyle("AssetUsageArrow");
+
+			if (assetStyle == null)
+			{
+				assetStyle = GUI.skin.label;
+			}
+			if (assetHoveredStyle == null)
+			{
+				assetHoveredStyle = GUI.skin.label;
+			}
+			if (assetLabelInBetweenStyle == null)
+			{
+				assetLabelInBetweenStyle = GUI.skin.label;
+			}
+			Texture2D assetUsageArrow;
+			if (assetUsageArrowStyle != null)
+			{
+				assetUsageArrow = assetUsageArrowStyle.normal.background;
+			}
+			else
+			{
+				assetUsageArrow = null;
+				assetUsageArrowStyle = GUI.skin.label;
+			}
 
 			// draw usage ancestry
 			// for selected user
@@ -2209,10 +2295,28 @@ namespace BuildReportTool.Window.Screen
 
 		int GetNumberOfAssetUsageAncestryRows(List<AssetUsageAncestry> list, float availableWidth)
 		{
-			var assetStyle = GUI.skin.GetStyle("Asset");
-			var assetLabelInBetweenStyle = GUI.skin.GetStyle("LabelSingleLine");
-			var assetUsageArrowStyle = GUI.skin.GetStyle("AssetUsageArrow");
-			var assetUsageArrow = assetUsageArrowStyle.normal.background;
+			var assetStyle = GUI.skin.FindStyle("Asset");
+			var assetLabelInBetweenStyle = GUI.skin.FindStyle("LabelSingleLine");
+			var assetUsageArrowStyle = GUI.skin.FindStyle("AssetUsageArrow");
+
+			if (assetStyle == null)
+			{
+				assetStyle = GUI.skin.label;
+			}
+			if (assetLabelInBetweenStyle == null)
+			{
+				assetLabelInBetweenStyle = GUI.skin.label;
+			}
+			Texture2D assetUsageArrow;
+			if (assetUsageArrowStyle != null)
+			{
+				assetUsageArrow = assetUsageArrowStyle.normal.background;
+			}
+			else
+			{
+				assetUsageArrow = null;
+				assetUsageArrowStyle = GUI.skin.label;
+			}
 
 			var numberOfRowsInAssetUsageAncestry = 1;
 

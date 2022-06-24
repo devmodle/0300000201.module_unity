@@ -83,6 +83,12 @@ public partial class CSkillInfoTable : CScriptableObj<CSkillInfoTable> {
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
+		this.ResetSkillInfos();
+	}
+
+	/** 스킬 정보를 리셋한다 */
+	public void ResetSkillInfos() {
+		this.SkillInfoDict.Clear();
 
 		var oSkillInfoList = new List<STSkillInfo>(m_oActiveSkillInfoList);
 		oSkillInfoList.ExAddVals(m_oPassiveSkillInfoList);
@@ -90,6 +96,12 @@ public partial class CSkillInfoTable : CScriptableObj<CSkillInfoTable> {
 		for(int i = 0; i < oSkillInfoList.Count; ++i) {
 			this.SkillInfoDict.TryAdd(oSkillInfoList[i].m_eSkillKinds, oSkillInfoList[i]);
 		}
+	}
+
+	/** 스킬 정보를 리셋한다 */
+	public void ResetSkillInfos(string a_oJSONStr) {
+		this.ResetSkillInfos();
+		this.DoLoadSkillInfos(a_oJSONStr);
 	}
 
 	/** 스킬 정보를 반환한다 */
@@ -108,6 +120,7 @@ public partial class CSkillInfoTable : CScriptableObj<CSkillInfoTable> {
 
 	/** 스킬 정보를 로드한다 */
 	public Dictionary<ESkillKinds, STSkillInfo> LoadSkillInfos() {
+		this.ResetSkillInfos();
 		return this.LoadSkillInfos(this.SkillInfoTablePath);
 	}
 

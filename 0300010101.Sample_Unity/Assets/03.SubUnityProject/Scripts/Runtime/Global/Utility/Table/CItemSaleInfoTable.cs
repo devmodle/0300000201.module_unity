@@ -88,6 +88,12 @@ public partial class CItemSaleInfoTable : CScriptableObj<CItemSaleInfoTable> {
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
+		this.ResetItemSaleInfos();
+	}
+
+	/** 아이템 판매 정보를 리셋한다 */
+	public void ResetItemSaleInfos() {
+		this.ItemSaleInfoDict.Clear();
 
 		var oItemSaleInfoList = new List<STItemSaleInfo>(m_oGoodsItemSaleInfoList);
 		oItemSaleInfoList.ExAddVals(m_oConsumableItemSaleInfoList);
@@ -100,6 +106,12 @@ public partial class CItemSaleInfoTable : CScriptableObj<CItemSaleInfoTable> {
 		for(int i = 0; i < oItemSaleInfoList.Count; ++i) {
 			this.ItemSaleInfoDict.TryAdd(oItemSaleInfoList[i].m_eItemSaleKinds, oItemSaleInfoList[i]);
 		}
+	}
+
+	/** 아이템 판매 정보를 리셋한다 */
+	public void ResetItemSaleInfos(string a_oJSONStr) {
+		this.ResetItemSaleInfos();
+		this.DoLoadItemSaleInfos(a_oJSONStr);
 	}
 
 	/** 아이템 판매 정보를 반환한다 */
@@ -156,6 +168,7 @@ public partial class CItemSaleInfoTable : CScriptableObj<CItemSaleInfoTable> {
 
 	/** 아이템 판매 정보를 로드한다 */
 	public Dictionary<EItemSaleKinds, STItemSaleInfo> LoadItemSaleInfos() {
+		this.ResetItemSaleInfos();
 		return this.LoadItemSaleInfos(this.ItemSaleInfoTablePath);
 	}
 

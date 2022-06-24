@@ -28,9 +28,12 @@ public class BRT_BuildReportWindow : EditorWindow
 
 	public static readonly GUILayoutOption[] LayoutNoExpandWidth =
 		{GUILayout.ExpandWidth(false)};
+	public static readonly GUILayoutOption[] LayoutExpandWidth =
+		{GUILayout.ExpandWidth(true)};
 
 	public static readonly GUILayoutOption[] LayoutMinHeight30 =
 		{GUILayout.MinHeight(30), GUILayout.ExpandHeight(true)};
+	public static readonly GUILayoutOption[] LayoutHeight11 = {GUILayout.Height(11)};
 	public static readonly GUILayoutOption[] LayoutHeight18 = {GUILayout.Height(18)};
 	public static readonly GUILayoutOption[] LayoutHeight21 = {GUILayout.Height(21)};
 	public static readonly GUILayoutOption[] LayoutHeight25 = {GUILayout.Height(25)};
@@ -39,6 +42,13 @@ public class BRT_BuildReportWindow : EditorWindow
 	public static readonly GUILayoutOption[] LayoutIconWidth = {GUILayout.Width(ICON_WIDTH)};
 	public static readonly GUILayoutOption[] Layout20x16 = {GUILayout.Width(20), GUILayout.Height(16)};
 	public static readonly GUILayoutOption[] Layout20x25 = {GUILayout.Width(20), GUILayout.Height(25)};
+	public static readonly GUILayoutOption[] Layout20x30 = {GUILayout.Width(20), GUILayout.Height(30)};
+	public static readonly GUILayoutOption[] Layout28x30 = {GUILayout.Width(28), GUILayout.Height(30)};
+	public static readonly GUILayoutOption[] Layout100To400x30 = {GUILayout.MinWidth(100), GUILayout.MaxWidth(400), GUILayout.Height(30)};
+	public static readonly GUILayoutOption[] LayoutTo100x30 = {GUILayout.MaxWidth(100), GUILayout.Height(30)};
+
+	public static readonly GUILayoutOption[] Layout100x30 = {GUILayout.MinWidth(100), GUILayout.Height(30), GUILayout.ExpandWidth(true)};
+	public static readonly GUILayoutOption[] LayoutMaxWidth500 = {GUILayout.MaxWidth(500)};
 
 	public const string STYLE_BREADCRUMB_LEFT = "GUIEditor.BreadcrumbLeft";
 	public const string STYLE_BREADCRUMB_MID = "GUIEditor.BreadcrumbMid";
@@ -107,7 +117,6 @@ public class BRT_BuildReportWindow : EditorWindow
 			}
 		}
 
-		// lol wtf have I done
 		_usedAssetsScreen.SetListToDisplay(BuildReportTool.Window.Screen.AssetList.ListToDisplay.UsedAssets);
 		_unusedAssetsScreen.SetListToDisplay(BuildReportTool.Window.Screen.AssetList.ListToDisplay.UnusedAssets);
 
@@ -974,6 +983,14 @@ public class BRT_BuildReportWindow : EditorWindow
 			_toolbarLabelOptions = new GUIContent(Labels.OPTIONS_CATEGORY_LABEL, _toolbarIconOptions);
 			_toolbarLabelHelp = new GUIContent(Labels.HELP_CATEGORY_LABEL, _toolbarIconHelp);
 		}
+		else
+		{
+			_toolbarLabelLog = new GUIContent(Labels.REFRESH_LABEL);
+			_toolbarLabelOpen = new GUIContent(Labels.OPEN_LABEL);
+			_toolbarLabelSave = new GUIContent(Labels.SAVE_LABEL);
+			_toolbarLabelOptions = new GUIContent(Labels.OPTIONS_CATEGORY_LABEL);
+			_toolbarLabelHelp = new GUIContent(Labels.HELP_CATEGORY_LABEL);
+		}
 	}
 
 
@@ -1304,7 +1321,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		var msgRect = new Rect(x, y, w, h);
 		GUI.Label(msgRect, msg);
 
-		var warning = GUI.skin.GetStyle("Icon-Warning");
+		var warning = GUI.skin.FindStyle("Icon-Warning");
 		if (warning != null)
 		{
 			var warningIcon = warning.normal.background;
@@ -1321,20 +1338,33 @@ public class BRT_BuildReportWindow : EditorWindow
 	{
 		int toolbarX = 10;
 
-		if (GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOOLBAR_LEFT_STYLE_NAME) == null)
+		var leftToolbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOOLBAR_LEFT_STYLE_NAME);
+		if (leftToolbarStyle == null)
 		{
-			return;
+			leftToolbarStyle = GUI.skin.button;
 		}
 
-		if (GUI.Button(new Rect(toolbarX, 5, 50, 40), _toolbarLabelLog,
-			    BuildReportTool.Window.Settings.TOOLBAR_LEFT_STYLE_NAME) && !LoadingValuesFromThread)
+		var midToolbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOOLBAR_MIDDLE_STYLE_NAME);
+		if (midToolbarStyle == null)
+		{
+			midToolbarStyle = GUI.skin.button;
+		}
+
+		var rightToolbarStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOOLBAR_RIGHT_STYLE_NAME);
+		if (rightToolbarStyle == null)
+		{
+			rightToolbarStyle = GUI.skin.button;
+		}
+
+		if (GUI.Button(new Rect(toolbarX, 5, 50, 40), _toolbarLabelLog, leftToolbarStyle) &&
+		    !LoadingValuesFromThread)
 		{
 			Refresh(false);
 		}
 
 		toolbarX += 50;
-		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelOpen,
-			    BuildReportTool.Window.Settings.TOOLBAR_MIDDLE_STYLE_NAME) && !LoadingValuesFromThread)
+		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelOpen, midToolbarStyle) &&
+		    !LoadingValuesFromThread)
 		{
 			string filepath = EditorUtility.OpenFilePanel(
 				Labels.OPEN_SERIALIZED_BUILD_INFO_TITLE,
@@ -1346,13 +1376,7 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		toolbarX += 40;
 
-		if (GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOOLBAR_RIGHT_STYLE_NAME) == null)
-		{
-			return;
-		}
-
-		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelSave,
-			    BuildReportTool.Window.Settings.TOOLBAR_RIGHT_STYLE_NAME) &&
+		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelSave, rightToolbarStyle) &&
 		    BuildReportTool.Util.BuildInfoHasContents(_buildInfo))
 		{
 			string filepath = EditorUtility.SaveFilePanel(
@@ -1396,21 +1420,17 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		toolbarX += 20;
 
-		//if (!BuildReportTool.Util.BuildInfoHasContents(_buildInfo))
+		if (GUI.Button(new Rect(toolbarX, 5, 55, 40), _toolbarLabelOptions, leftToolbarStyle))
 		{
-			if (GUI.Button(new Rect(toolbarX, 5, 55, 40), _toolbarLabelOptions,
-				BuildReportTool.Window.Settings.TOOLBAR_LEFT_STYLE_NAME))
-			{
-				_selectedCategoryIdx = OPTIONS_IDX;
-				BuildReportTool.Options.UpdatePreviousSearchType();
-			}
+			_selectedCategoryIdx = OPTIONS_IDX;
+			BuildReportTool.Options.UpdatePreviousSearchType();
+		}
 
-			toolbarX += 55;
-			if (GUI.Button(new Rect(toolbarX, 5, 70, 40), _toolbarLabelHelp,
-				BuildReportTool.Window.Settings.TOOLBAR_RIGHT_STYLE_NAME))
-			{
-				_selectedCategoryIdx = HELP_IDX;
-			}
+		toolbarX += 55;
+		if (GUI.Button(new Rect(toolbarX, 5, 70, 40), _toolbarLabelHelp, rightToolbarStyle))
+		{
+			_selectedCategoryIdx = HELP_IDX;
+			_helpScreen.RefreshData(_buildInfo, _assetDependencies, _textureData, _meshData, _unityBuildReport);
 		}
 	}
 
@@ -1426,23 +1446,28 @@ public class BRT_BuildReportWindow : EditorWindow
 		}
 
 		//GUI.Label(new Rect(5, 100, 800, 20), "BuildReportTool.Util.ShouldReload: " + BuildReportTool.Util.ShouldReload + " EditorApplication.isCompiling: " + EditorApplication.isCompiling);
-		if (_noGuiSkinFound)
+		if (!_noGuiSkinFound)
 		{
-			GUI.Label(new Rect(20, 20, 500, 100), BuildReportTool.Options.BUILD_REPORT_PACKAGE_MISSING_MSG);
-			return;
+			GUI.skin = _usedSkin;
+			//GUI.Label(new Rect(20, 20, 500, 100), BuildReportTool.Options.BUILD_REPORT_PACKAGE_MISSING_MSG);
+			//return;
 		}
-
-		GUI.skin = _usedSkin;
+		else
+		{
+			GUI.Label(new Rect(300, -25, 500, 100), BuildReportTool.Options.BUILD_REPORT_GUI_SKIN_MISSING_MSG);
+		}
 
 		DrawTopRowButtons();
 
-		if (GUI.skin.FindStyle(BuildReportTool.Window.Settings.VERSION_STYLE_NAME) == null)
+		if (GUI.skin.FindStyle(BuildReportTool.Window.Settings.VERSION_STYLE_NAME) != null)
 		{
-			return;
+			GUI.Label(new Rect(0, 0, position.width, 20), BuildReportTool.Info.ReadableVersion,
+				BuildReportTool.Window.Settings.VERSION_STYLE_NAME);
 		}
-
-		GUI.Label(new Rect(0, 0, position.width, 20), BuildReportTool.Info.ReadableVersion,
-			BuildReportTool.Window.Settings.VERSION_STYLE_NAME);
+		else
+		{
+			GUI.Label(new Rect(position.width - 160, 0, position.width, 20), BuildReportTool.Info.ReadableVersion);
+		}
 
 
 		// loading message
@@ -1501,33 +1526,46 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		int oldSelectedCategoryIdx = _selectedCategoryIdx;
 
+		var leftTabStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TAB_LEFT_STYLE_NAME);
+		if (leftTabStyle == null)
+		{
+			leftTabStyle = GUI.skin.button;
+		}
+
+		var midTabStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TAB_MIDDLE_STYLE_NAME);
+		if (midTabStyle == null)
+		{
+			midTabStyle = GUI.skin.button;
+		}
+
+		var rightTabStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TAB_RIGHT_STYLE_NAME);
+		if (rightTabStyle == null)
+		{
+			rightTabStyle = GUI.skin.button;
+		}
+
 		GUILayout.BeginHorizontal();
-		if (GUILayout.Toggle(IsInOverviewCategory, "Overview", BuildReportTool.Window.Settings.TAB_LEFT_STYLE_NAME,
-			GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInOverviewCategory, "Overview", leftTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = OVERVIEW_IDX;
 		}
 
-		if (GUILayout.Toggle(IsInBuildSettingsCategory, "Project Settings",
-			BuildReportTool.Window.Settings.TAB_MIDDLE_STYLE_NAME, GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInBuildSettingsCategory, "Project Settings", midTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = BUILD_SETTINGS_IDX;
 		}
 
-		if (_unityBuildReport != null && GUILayout.Toggle(IsInBuildStepsCategory, "Build Process",
-			BuildReportTool.Window.Settings.TAB_MIDDLE_STYLE_NAME, GUILayout.ExpandWidth(true)))
+		if (_unityBuildReport != null && GUILayout.Toggle(IsInBuildStepsCategory, "Build Process", midTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = BUILD_STEPS_IDX;
 		}
 
-		if (GUILayout.Toggle(IsInSizeStatsCategory, "Size Stats", BuildReportTool.Window.Settings.TAB_MIDDLE_STYLE_NAME,
-			GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInSizeStatsCategory, "Size Stats", midTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = SIZE_STATS_IDX;
 		}
 
-		if (GUILayout.Toggle(IsInUsedAssetsCategory, "Used Assets", BuildReportTool.Window.Settings.TAB_MIDDLE_STYLE_NAME,
-			GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInUsedAssetsCategory, "Used Assets", midTabStyle, LayoutExpandWidth))
 		{
 			if (_selectedCategoryIdx != USED_ASSETS_IDX && BuildReportTool.Options.HasSearchTypeChanged)
 			{
@@ -1537,8 +1575,7 @@ public class BRT_BuildReportWindow : EditorWindow
 			_selectedCategoryIdx = USED_ASSETS_IDX;
 		}
 
-		if (GUILayout.Toggle(IsInUnusedAssetsCategory, "Unused Assets",
-			BuildReportTool.Window.Settings.TAB_RIGHT_STYLE_NAME, GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInUnusedAssetsCategory, "Unused Assets", rightTabStyle, LayoutExpandWidth))
 		{
 			if (_selectedCategoryIdx != UNUSED_ASSETS_IDX && BuildReportTool.Options.HasSearchTypeChanged)
 			{
@@ -1550,11 +1587,11 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		/*GUILayout.Space(20);
 
-		if (GUILayout.Toggle(IsInOptionsCategory, _toolbarLabelOptions, BuildReportTool.Window.Settings.TAB_LEFT_STYLE_NAME, GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInOptionsCategory, _toolbarLabelOptions, leftTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = OPTIONS_IDX;
 		}
-		if (GUILayout.Toggle(IsInHelpCategory, _toolbarLabelHelp, BuildReportTool.Window.Settings.TAB_RIGHT_STYLE_NAME, GUILayout.ExpandWidth(true)))
+		if (GUILayout.Toggle(IsInHelpCategory, _toolbarLabelHelp, rightTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = HELP_IDX;
 		}*/
@@ -1700,7 +1737,11 @@ public class BRT_BuildReportWindow : EditorWindow
 
 	public static Rect DrawTooltip(Rect position, float desiredWidth, float desiredHeight, float additionalPadding = 0)
 	{
-		var tooltipStyle = GUI.skin.GetStyle("Tooltip");
+		var tooltipStyle = GUI.skin.FindStyle("Tooltip");
+		if (tooltipStyle == null)
+		{
+			tooltipStyle = GUI.skin.box;
+		}
 		var tooltipRect = new Rect();
 
 		// --------------------------------------------------
@@ -1796,8 +1837,16 @@ public class BRT_BuildReportWindow : EditorWindow
 
 	public static Vector2 GetEndUsersListSize(GUIContent label, List<GUIContent> endUsers)
 	{
-		var assetStyle = GUI.skin.GetStyle("Asset");
-		var labelStyle = GUI.skin.GetStyle("TooltipText");
+		var assetStyle = GUI.skin.FindStyle("Asset");
+		if (assetStyle == null)
+		{
+			assetStyle = GUI.skin.label;
+		}
+		var labelStyle = GUI.skin.FindStyle("TooltipText");
+		if (labelStyle == null)
+		{
+			labelStyle = GUI.skin.box;
+		}
 
 		Vector2 endUsersSize = Vector2.zero;
 
@@ -1823,8 +1872,16 @@ public class BRT_BuildReportWindow : EditorWindow
 
 	public static void DrawEndUsersList(Vector2 pos, GUIContent label, List<GUIContent> endUsers)
 	{
-		var assetStyle = GUI.skin.GetStyle("Asset");
-		var labelStyle = GUI.skin.GetStyle("TooltipText");
+		var assetStyle = GUI.skin.FindStyle("Asset");
+		if (assetStyle == null)
+		{
+			assetStyle = GUI.skin.label;
+		}
+		var labelStyle = GUI.skin.FindStyle("TooltipText");
+		if (labelStyle == null)
+		{
+			labelStyle = GUI.skin.box;
+		}
 
 		Rect endUserRect = new Rect(pos.x, pos.y, 0, 0);
 
@@ -1895,7 +1952,11 @@ public class BRT_BuildReportWindow : EditorWindow
 					data[assetPath].ToDisplayedValue(TextureData.DataId.ImportedWidthAndHeight));
 			}
 
-			var labelStyle = GUI.skin.GetStyle("TooltipText");
+			var labelStyle = GUI.skin.FindStyle("TooltipText");
+			if (labelStyle == null)
+			{
+				labelStyle = GUI.skin.box;
+			}
 			labelSize = labelStyle.CalcSize(TextureDataTooltipLabel);
 
 			return true;
@@ -1932,7 +1993,12 @@ public class BRT_BuildReportWindow : EditorWindow
 
 			if (showTextureData)
 			{
-				var labelStyle = GUI.skin.GetStyle("TooltipText");
+				var labelStyle = GUI.skin.FindStyle("TooltipText");
+				if (labelStyle == null)
+				{
+					labelStyle = GUI.skin.box;
+				}
+
 				GUI.Label(new Rect(
 						tooltipRect.x, tooltipRect.y + thumbnailSize.y, textureDataLabelSize.x, textureDataLabelSize.y),
 					TextureDataTooltipLabel, labelStyle);
@@ -2000,7 +2066,11 @@ public class BRT_BuildReportWindow : EditorWindow
 
 			if (showTextureData)
 			{
-				var labelStyle = GUI.skin.GetStyle("TooltipText");
+				var labelStyle = GUI.skin.FindStyle("TooltipText");
+				if (labelStyle == null)
+				{
+					labelStyle = GUI.skin.box;
+				}
 				GUI.Label(new Rect(
 						tooltipRect.x, tooltipRect.y + thumbnailSize.y, textureDataLabelSize.x, textureDataLabelSize.y),
 					TextureDataTooltipLabel, labelStyle);

@@ -122,10 +122,28 @@ namespace BuildReportTool.Window
 				return;
 			}
 
+			var labelStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME);
+			if (labelStyle == null)
+			{
+				labelStyle = GUI.skin.label;
+			}
+
+			var descStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TINY_HELP_STYLE_NAME);
+			if (descStyle == null)
+			{
+				descStyle = GUI.skin.label;
+			}
+
+			var valueStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.BIG_NUMBER_STYLE_NAME);
+			if (valueStyle == null)
+			{
+				valueStyle = GUI.skin.label;
+			}
+
 			GUILayout.BeginVertical();
-			GUILayout.Label(label, BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME);
-			GUILayout.Label(desc, BuildReportTool.Window.Settings.TINY_HELP_STYLE_NAME);
-			GUILayout.Label(value, BuildReportTool.Window.Settings.BIG_NUMBER_STYLE_NAME);
+			GUILayout.Label(label, labelStyle);
+			GUILayout.Label(desc, descStyle);
+			GUILayout.Label(value, valueStyle);
 			GUILayout.EndVertical();
 		}
 	}

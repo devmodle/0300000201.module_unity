@@ -47,12 +47,30 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
-			GUILayout.Label(name, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+			var nameStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+			if (nameStyle == null)
+			{
+				nameStyle = GUI.skin.label;
+			}
+
+			var valueStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME);
+			if (valueStyle == null)
+			{
+				valueStyle = GUI.skin.label;
+			}
+
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginHorizontal(GUIContent.none, groupStyle, NoExpandWidth);
+			GUILayout.Label(name, nameStyle, BRT_BuildReportWindow.LayoutNone);
 			GUILayout.Space(2);
 			if (!string.IsNullOrEmpty(val))
 			{
-				GUILayout.TextField(val, BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+				GUILayout.TextField(val, valueStyle, BRT_BuildReportWindow.LayoutNone);
 			}
 
 			GUILayout.EndHorizontal();
@@ -66,17 +84,35 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", BRT_BuildReportWindow.LayoutNone);
-			GUILayout.Label(name, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+			var nameStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+			if (nameStyle == null)
+			{
+				nameStyle = GUI.skin.label;
+			}
+
+			var valueStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME);
+			if (valueStyle == null)
+			{
+				valueStyle = GUI.skin.label;
+			}
+
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginHorizontal(GUIContent.none, groupStyle, BRT_BuildReportWindow.LayoutNone);
+			GUILayout.Label(name, nameStyle, BRT_BuildReportWindow.LayoutNone);
 			GUILayout.Space(2);
 
 
 			if (val != null)
 			{
-				GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", BRT_BuildReportWindow.LayoutNone);
+				GUILayout.BeginVertical(GUIContent.none, groupStyle, BRT_BuildReportWindow.LayoutNone);
 				for (int n = 0, len = val.Length; n < len; ++n)
 				{
-					GUILayout.TextField(val[n], BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+					GUILayout.TextField(val[n], valueStyle, BRT_BuildReportWindow.LayoutNone);
 				}
 
 				GUILayout.EndVertical();
@@ -93,12 +129,30 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			GUILayout.Label(name, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+			var nameStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+			if (nameStyle == null)
+			{
+				nameStyle = GUI.skin.label;
+			}
+
+			var valueStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME);
+			if (valueStyle == null)
+			{
+				valueStyle = GUI.skin.label;
+			}
+
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.Label(name, nameStyle, BRT_BuildReportWindow.LayoutNone);
 			if (!string.IsNullOrEmpty(val))
 			{
-				GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+				GUILayout.BeginHorizontal(GUIContent.none, groupStyle, NoExpandWidth);
 				GUILayout.Space(10);
-				GUILayout.TextField(val, BuildReportTool.Window.Settings.SETTING_VALUE_NO_WRAP_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+				GUILayout.TextField(val, valueStyle, BRT_BuildReportWindow.LayoutNone);
 				GUILayout.EndHorizontal();
 			}
 
@@ -107,7 +161,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawSettingsGroupTitle(string name)
 		{
-			GUILayout.Label(name, BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME, BRT_BuildReportWindow.LayoutNone);
+			var titleStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.INFO_TITLE_STYLE_NAME);
+			if (titleStyle == null)
+			{
+				titleStyle = GUI.skin.label;
+			}
+
+			GUILayout.Label(name, titleStyle, BRT_BuildReportWindow.LayoutNone);
 			GUILayout.Space(SETTINGS_GROUP_TITLE_SPACING);
 		}
 
@@ -243,7 +303,12 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawProjectSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Project");
 
 			DrawSetting("Product name:", settings.ProductName);
@@ -305,7 +370,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawBuildSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings, UnityBuildReport unityBuildReport)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Build Settings");
 
 			// --------------------------------------------------
@@ -607,7 +678,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawRuntimeSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Runtime Settings");
 
 			if (IsShowingiOSSettings)
@@ -708,7 +785,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawDebugSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings, UnityBuildReport unityBuildReport)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Debug Settings");
 
 			DrawSetting("Is development build:", settings.EnableDevelopmentBuild);
@@ -802,7 +885,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawCodeSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Code Settings");
 
 			DrawSetting("Script Compilation Defines:", settings.CompileDefines);
@@ -830,7 +919,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawGraphicsSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings, UnityBuildReport unityBuildReport)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Graphics Settings");
 
 			DrawSetting("Use 32-bit display buffer:", settings.Use32BitDisplayBuffer);
@@ -996,7 +1091,25 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var nameStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+			if (nameStyle == null)
+			{
+				nameStyle = GUI.skin.label;
+			}
+
+			var valueStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+			if (valueStyle == null)
+			{
+				valueStyle = GUI.skin.label;
+			}
+
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 
 			if (!packageListIsEmpty)
 			{
@@ -1008,33 +1121,33 @@ namespace BuildReportTool.Window.Screen
 						if (!string.IsNullOrEmpty(packageList[n].Location) && packageList[n].Location.EndsWith(".git") && packageList[n].VersionUsed.Length > 7)
 						{
 							// show commit hash as short
-							GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
-							GUILayout.Label(packageList[n].DisplayName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+							GUILayout.BeginHorizontal(GUIContent.none, groupStyle, NoExpandWidth);
+							GUILayout.Label(packageList[n].DisplayName, nameStyle);
 							GUILayout.Space(4);
-							GUILayout.TextField(packageList[n].VersionUsed.Substring(0, DEFAULT_SHORT_COMMIT_HASH_LENGTH_DISPLAYED), BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].VersionUsed.Substring(0, DEFAULT_SHORT_COMMIT_HASH_LENGTH_DISPLAYED), valueStyle);
 							GUILayout.Space(4);
 							DrawPackagePingButton(packageList[n]);
 							GUILayout.EndHorizontal();
-							GUILayout.TextField(packageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].PackageName, valueStyle);
 						}
 						else if (packageList[n].VersionUsed.Length <= 10)
 						{
 							// version is short enough, put it in the same line as the Package Name
-							GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
-							GUILayout.Label(packageList[n].DisplayName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+							GUILayout.BeginHorizontal(GUIContent.none, groupStyle, NoExpandWidth);
+							GUILayout.Label(packageList[n].DisplayName, nameStyle);
 							GUILayout.Space(4);
-							GUILayout.TextField(packageList[n].VersionUsed, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].VersionUsed, valueStyle);
 							GUILayout.Space(4);
 							DrawPackagePingButton(packageList[n]);
 							GUILayout.EndHorizontal();
-							GUILayout.TextField(packageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].PackageName, valueStyle);
 						}
 						else
 						{
 							// version is too long, put it as a 2nd line after the Display Name
-							GUILayout.Label(packageList[n].DisplayName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
-							GUILayout.TextField(packageList[n].VersionUsed, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
-							GUILayout.TextField(packageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.Label(packageList[n].DisplayName, nameStyle);
+							GUILayout.TextField(packageList[n].VersionUsed, valueStyle);
+							GUILayout.TextField(packageList[n].PackageName, valueStyle);
 							DrawPackagePingButton(packageList[n]);
 						}
 					}
@@ -1044,10 +1157,10 @@ namespace BuildReportTool.Window.Screen
 						if (packageList[n].VersionUsed.Length <= 10)
 						{
 							// version is short enough, put it in the same line as the Package Name
-							GUILayout.BeginHorizontal(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
-							GUILayout.TextField(packageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+							GUILayout.BeginHorizontal(GUIContent.none, groupStyle, NoExpandWidth);
+							GUILayout.TextField(packageList[n].PackageName, nameStyle);
 							GUILayout.Space(4);
-							GUILayout.TextField(packageList[n].VersionUsed, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].VersionUsed, valueStyle);
 							GUILayout.Space(4);
 							DrawPackagePingButton(packageList[n]);
 							GUILayout.EndHorizontal();
@@ -1055,15 +1168,15 @@ namespace BuildReportTool.Window.Screen
 						else
 						{
 							// version is too long, put it as a 2nd line after the Package Name
-							GUILayout.TextField(packageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
-							GUILayout.TextField(packageList[n].VersionUsed, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+							GUILayout.TextField(packageList[n].PackageName, nameStyle);
+							GUILayout.TextField(packageList[n].VersionUsed, valueStyle);
 							DrawPackagePingButton(packageList[n]);
 						}
 					}
 
 					if (!string.IsNullOrEmpty(packageList[n].Location) && packageList[n].Location != BuildReportTool.UnityBuildSettingsUtility.DEFAULT_REGISTRY_URL)
 					{
-						GUILayout.TextField(packageList[n].Location, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+						GUILayout.TextField(packageList[n].Location, valueStyle);
 					}
 
 					GUILayout.Space(10);
@@ -1082,13 +1195,13 @@ namespace BuildReportTool.Window.Screen
 				{
 					if (!string.IsNullOrEmpty(builtInPackageList[n].DisplayName))
 					{
-						GUILayout.Label(builtInPackageList[n].DisplayName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
-						GUILayout.TextField(builtInPackageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_VALUE_STYLE_NAME);
+						GUILayout.Label(builtInPackageList[n].DisplayName, nameStyle);
+						GUILayout.TextField(builtInPackageList[n].PackageName, valueStyle);
 					}
 					else
 					{
 						// no display name
-						GUILayout.Label(builtInPackageList[n].PackageName, BuildReportTool.Window.Settings.SETTING_NAME_STYLE_NAME);
+						GUILayout.Label(builtInPackageList[n].PackageName, nameStyle);
 					}
 
 					GUILayout.Space(5);
@@ -1119,7 +1232,13 @@ namespace BuildReportTool.Window.Screen
 
 		void DrawPathSettings(BuildInfo buildReportToDisplay, UnityBuildSettings settings)
 		{
-			GUILayout.BeginVertical(GUIContent.none, "ProjectSettingsGroup", NoExpandWidth);
+			var groupStyle = GUI.skin.FindStyle("ProjectSettingsGroup");
+			if (groupStyle == null)
+			{
+				groupStyle = GUI.skin.label;
+			}
+
+			GUILayout.BeginVertical(GUIContent.none, groupStyle, NoExpandWidth);
 			DrawSettingsGroupTitle("Paths");
 
 			DrawSetting2Lines("Unity path:", buildReportToDisplay.EditorAppContentsPath);
@@ -1157,24 +1276,41 @@ namespace BuildReportTool.Window.Screen
 				return;
 			}
 
+			var topBarBgStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_BG_STYLE_NAME);
+			if (topBarBgStyle == null)
+			{
+				topBarBgStyle = GUI.skin.box;
+			}
+
+			var topBarLabelStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			if (topBarLabelStyle == null)
+			{
+				topBarLabelStyle = GUI.skin.label;
+			}
+
+			var fileFilterPopupStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.FILE_FILTER_POPUP_STYLE_NAME);
+			if (fileFilterPopupStyle == null)
+			{
+				fileFilterPopupStyle = GUI.skin.label;
+			}
+
 			// ----------------------------------------------------------
 			// top bar
 
 			GUILayout.Space(1);
 			GUILayout.BeginHorizontal();
 
-			GUILayout.Label(" ", BuildReportTool.Window.Settings.TOP_BAR_BG_STYLE_NAME);
+			GUILayout.Label(" ", topBarBgStyle);
 
 			GUILayout.Space(8);
-			GUILayout.Label("Build Target: ", BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			GUILayout.Label("Build Target: ", topBarLabelStyle);
 
 			InitializeDropdownBoxLabelsIfNeeded();
 			_selectedSettingsIdxFromDropdownBox = EditorGUILayout.Popup(_selectedSettingsIdxFromDropdownBox,
-				_settingDropdownBoxLabels, BuildReportTool.Window.Settings.FILE_FILTER_POPUP_STYLE_NAME);
+				_settingDropdownBoxLabels, fileFilterPopupStyle);
 			GUILayout.Space(15);
 
-			GUILayout.Label("Note: Project was built in " + _buildTargetOfReport + " target",
-				BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			GUILayout.Label($"Note: Project was built in {_buildTargetOfReport} target", topBarLabelStyle);
 			GUILayout.FlexibleSpace();
 
 			BuildReportTool.Options.ShowProjectSettingsInMultipleColumns = GUILayout.Toggle(BuildReportTool.Options.ShowProjectSettingsInMultipleColumns, "Multiple Columns");

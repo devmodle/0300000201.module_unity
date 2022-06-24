@@ -73,6 +73,12 @@ public partial class CMissionInfoTable : CScriptableObj<CMissionInfoTable> {
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
+		this.ResetMissionInfos();
+	}
+
+	/** 미션 정보를 리셋한다 */
+	public void ResetMissionInfos() {
+		this.MissionInfoDict.Clear();
 
 		var oMissionInfoList = new List<STMissionInfo>(m_oFreeMissionInfoList);
 		oMissionInfoList.AddRange(m_oDailyMissionInfoList);
@@ -81,6 +87,12 @@ public partial class CMissionInfoTable : CScriptableObj<CMissionInfoTable> {
 		for(int i = 0; i < oMissionInfoList.Count; ++i) {
 			this.MissionInfoDict.TryAdd(oMissionInfoList[i].m_eMissionKinds, oMissionInfoList[i]);
 		}
+	}
+
+	/** 미션 정보를 리셋한다 */
+	public void ResetMissionInfos(string a_oJSONStr) {
+		this.ResetMissionInfos();
+		this.DoLoadMissionInfos(a_oJSONStr);
 	}
 
 	/** 미션 정보를 반환한다 */
@@ -99,6 +111,7 @@ public partial class CMissionInfoTable : CScriptableObj<CMissionInfoTable> {
 
 	/** 미션 정보를 로드한다 */
 	public Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos() {
+		this.ResetMissionInfos();
 		return this.LoadMissionInfos(this.MissionInfoTablePath);
 	}
 

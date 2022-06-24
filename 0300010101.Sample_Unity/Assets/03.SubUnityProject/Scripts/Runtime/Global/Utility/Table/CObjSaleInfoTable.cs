@@ -83,6 +83,12 @@ public partial class CObjSaleInfoTable : CScriptableObj<CObjSaleInfoTable> {
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
+		this.ResetObjSaleInfos();
+	}
+
+	/** 객체 판매 정보를 리셋한다 */
+	public void ResetObjSaleInfos() {
+		this.ObjSaleInfoDict.Clear();
 
 		var oObjSaleInfoList = new List<STObjSaleInfo>(m_oBGObjSaleInfoList);
 		oObjSaleInfoList.ExAddVals(m_oNormObjSaleInfoList);
@@ -93,6 +99,12 @@ public partial class CObjSaleInfoTable : CScriptableObj<CObjSaleInfoTable> {
 		for(int i = 0; i < oObjSaleInfoList.Count; ++i) {
 			this.ObjSaleInfoDict.TryAdd(oObjSaleInfoList[i].m_eObjSaleKinds, oObjSaleInfoList[i]);
 		}
+	}
+
+	/** 객체 판매 정보를 리셋한다 */
+	public void ResetObjSaleInfos(string a_oJSONStr) {
+		this.ResetObjSaleInfos();
+		this.DoLoadObjSaleInfos(a_oJSONStr);
 	}
 
 	/** 객체 판매 정보를 반환한다 */
@@ -130,6 +142,7 @@ public partial class CObjSaleInfoTable : CScriptableObj<CObjSaleInfoTable> {
 
 	/** 객체 판매 정보를 로드한다 */
 	public Dictionary<EObjSaleKinds, STObjSaleInfo> LoadObjSaleInfos() {
+		this.ResetObjSaleInfos();
 		return this.LoadObjSaleInfos(this.ObjSaleInfoTablePath);
 	}
 

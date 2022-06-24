@@ -319,14 +319,26 @@ namespace BuildReportTool
 
 		bool DrawFiltersAsDropDown(AssetList assetList, float width)
 		{
+			var topBarLabelStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			if (topBarLabelStyle == null)
+			{
+				topBarLabelStyle = GUI.skin.label;
+			}
+
+			var topBarPopupStyle = GUI.skin.FindStyle(BuildReportTool.Window.Settings.FILE_FILTER_POPUP_STYLE_NAME);
+			if (topBarPopupStyle == null)
+			{
+				topBarPopupStyle = GUI.skin.label;
+			}
+
 			var changed = false;
 			GUILayout.BeginHorizontal();
 			GUILayout.Space(3);
-			GUILayout.Label("Filter: ", BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
+			GUILayout.Label("Filter: ", topBarLabelStyle);
 			if (assetList != null && assetList.Labels != null && assetList.Labels.Length > 0)
 			{
 				var newSelectedFilterIdx = EditorGUILayout.Popup(_selectedFilterIdx, assetList.Labels,
-					BuildReportTool.Window.Settings.FILE_FILTER_POPUP_STYLE_NAME);
+					topBarPopupStyle);
 
 				if (newSelectedFilterIdx != _selectedFilterIdx)
 				{
@@ -350,7 +362,7 @@ namespace BuildReportTool
 
 
 			var styleToUse = GetStyleToUse(assetList.All.Length, _selectedFilterIdx, 0);
-			var label = "All (" + assetList.All.Length.ToString() + ")";
+			var label = $"All ({assetList.All.Length.ToString()})";
 
 			var widthToAdd = GUI.skin.GetStyle(styleToUse).CalcSize(new GUIContent(label)).x;
 

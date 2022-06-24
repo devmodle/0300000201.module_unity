@@ -176,7 +176,9 @@ Side note: Size readings in the Build Report window that have fractional parts a
 
 === Licenses ===
 
-Build Report Tool uses FuzzyString (https://fuzzystring.codeplex.com/). FuzzyString is in the Eclipse Public License (EPL).
+Build Report Tool uses FuzzyString (https://github.com/kdjones/fuzzystring), an approximate string comparision library. FuzzyString is in the Eclipse Public License (EPL). A copy of the license can be found in BuildReport/Scripts/Editor/FuzzyString/FuzzyStringLicense.txt
+
+Build Report Tool uses MiniJSON (https://github.com/AnomalousUnderdog/MiniJSON.cs), a small JSON parser. Copyright (c) 2013 Calvin Rien. MiniJSON is licensed under the MIT License. A copy of the license can be found in BuildReport/Scripts/Editor/MiniJSON/MiniJSON.cs
 
 
 
@@ -187,12 +189,10 @@ Don't worry, the assets that the Build Report Tool itself uses won't be included
 
 
 
-Copyright © 2013-2019 by Anomalous Underdog
+Copyright © 2013-2022 by Anomalous Underdog
 
 For support, you can either:
 
 * send me a tweet at http://twitter.com/AnomalusUndrdog
 * send me a private message in the Unity forums (http://forum.unity3d.com/members/8479-AnomalusUndrdog)
 * send me an email at anomalous_underdog@yahoo.com
-
-
