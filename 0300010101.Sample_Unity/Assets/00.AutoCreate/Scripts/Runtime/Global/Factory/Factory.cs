@@ -22,8 +22,8 @@ public static partial class Factory {
 	#endregion			// 클래스 함수
 
 	#region 제네릭 클래스 함수
-	/** 기본 키 정보를 생성한다 */
-	public static List<(T, GameObject)> MakeDefKeyInfos<T>(List<(T, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
+	/** 키 정보를 생성한다 */
+	public static List<(T, GameObject)> MakeKeyInfos<T>(List<(T, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, GameObject)>();
 
@@ -34,8 +34,8 @@ public static partial class Factory {
 		return oKeyInfoList;
 	}
 
-	/** 기본 키 정보를 생성한다 */
-	public static List<(T, string, GameObject)> MakeDefKeyInfos<T>(List<(T, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
+	/** 키 정보를 생성한다 */
+	public static List<(T, string, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, string, GameObject)>();
 
@@ -46,8 +46,8 @@ public static partial class Factory {
 		return oKeyInfoList;
 	}
 
-	/** 기본 키 정보를 생성한다 */
-	public static List<(T, string, GameObject, GameObject)> MakeDefKeyInfos<T>(List<(T, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
+	/** 키 정보를 생성한다 */
+	public static List<(T, string, GameObject, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, string, GameObject, GameObject)>();
 
