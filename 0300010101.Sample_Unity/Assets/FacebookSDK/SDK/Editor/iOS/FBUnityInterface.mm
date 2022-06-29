@@ -16,15 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#include "FBUnityInterface.h"
-
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
-#import <FacebookGamingServices/FacebookGamingServices-Swift.h>
-#import <FBSDKGamingServicesKit/FBSDKGamingServicesKit-Swift.h>
+#import <FBSDKLoginKit/FBSDKLoginKit-Swift.h>
 #import <Foundation/NSJSONSerialization.h>
 
+#include "FBUnityInterface.h"
 #include "FBUnitySDKDelegate.h"
 #include "FBUnityUtility.h"
 #include "FBSDK+Internal.h"
@@ -227,10 +222,8 @@ isPublishPermLogin:(BOOL)isPublishPermLogin
 
   FBUnitySDKDelegate *delegate = [FBUnitySDKDelegate instanceWithRequestID:requestId];
   NSError *error;
-  FBSDKGameRequestDialog *dialog = [[FBSDKGameRequestDialog alloc] init];
-  dialog.content = content;
-  dialog.delegate = delegate;
-  dialog.frictionlessRequestsEnabled = self.useFrictionlessRequests;
+  FBSDKGameRequestDialog *dialog = [[FBSDKGameRequestDialog alloc] initWithContent:content delegate:delegate];
+  dialog.isFrictionlessRequestsEnabled = self.useFrictionlessRequests;
 
   if (![dialog validateWithError:&error]) {
     [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnAppRequestsComplete error:error requestId:requestId];
@@ -406,8 +399,8 @@ extern "C" {
     [[FBUnityInterface sharedInstance] configureAppId:_appId
                                  frictionlessRequests:_frictionlessRequests
                                             urlSuffix:_urlSuffix];
-    [FBSDKAppEvents setIsUnityInit:true];
-    [FBSDKAppEvents sendEventBindingsToUnity];
+    [[FBSDKAppEvents shared] setIsUnityInitialized:true];
+    [[FBSDKAppEvents shared] sendEventBindingsToUnity];
   }
 
   void IOSFBEnableProfileUpdatesOnAccessTokenChange(bool enable)
@@ -536,7 +529,7 @@ extern "C" {
 
   void IOSFBSetPushNotificationsDeviceTokenString(const char *token)
   {
-    [FBSDKAppEvents setPushNotificationsDeviceTokenString:[FBUnityUtility stringFromCString:token]];
+    [[FBSDKAppEvents shared] setPushNotificationsDeviceTokenString:[FBUnityUtility stringFromCString:token]];
   }
 
   void IOSFBSetShareDialogMode(int mode)
@@ -622,7 +615,7 @@ extern "C" {
                               const char **paramVals)
   {
     NSDictionary *params =  [FBUnityUtility dictionaryFromKeys:paramKeys values:paramVals length:numParams];
-    [FBSDKAppEvents logEvent:[FBUnityUtility stringFromCString:eventName] valueToSum:valueToSum parameters:params];
+    [[FBSDKAppEvents shared] logEvent:[FBUnityUtility stringFromCString:eventName] valueToSum:valueToSum parameters:params];
   }
 
   void IOSFBAppEventsLogPurchase(double amount,
@@ -632,7 +625,7 @@ extern "C" {
                                  const char **paramVals)
   {
     NSDictionary *params =  [FBUnityUtility dictionaryFromKeys:paramKeys values:paramVals length:numParams];
-    [FBSDKAppEvents logPurchase:amount currency:[FBUnityUtility stringFromCString:currency] parameters:params];
+    [[FBSDKAppEvents shared] logPurchase:amount currency:[FBUnityUtility stringFromCString:currency] parameters:params];
   }
 
   void IOSFBAppEventsSetLimitEventUsage(BOOL limitEventUsage)
@@ -666,7 +659,7 @@ extern "C" {
 
   void IOSFBSetUserID(const char *userID)
   {
-    [FBSDKAppEvents setUserID:[FBUnityUtility stringFromCString:userID]];
+    [[FBSDKAppEvents shared] setUserID:[FBUnityUtility stringFromCString:userID]];
   }
 
   void IOSFBOpenGamingServicesFriendFinder(int requestId)
@@ -762,10 +755,85 @@ extern "C" {
     [FBSDKSettings.sharedSettings setDataProcessingOptions:array country:country state:state];
   }
 
-  void IOSFBUploadImageToMediaLibrary(int requestId,
-                                      const char *caption,
-                                      const char *imageUri,
-                                      bool shouldLaunchMediaDialog)
+  void IOSFBGetTournaments(int requestID)
+  {
+    FBSDKTournamentFetcher *fetcher = [[FBSDKTournamentFetcher alloc] init];
+    [fetcher fetchTournamentsWithCompletionHandler:^(NSArray<FBSDKTournament *> * tournaments, NSError * error) {
+      if (error) {
+        [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnGetTournamentsComplete error:error requestId:requestID];
+      }
+
+      NSMutableDictionary *userData = [NSMutableDictionary new];
+      for (FBSDKTournament *tournament in tournaments) {
+        userData[tournament.identifier] = [tournament toDictionary];
+      }
+
+      [FBUnityUtility sendMessageToUnity:FBUnityMessageName_OnGetTournamentsComplete
+                                userData:userData
+                               requestId:requestID];
+    }];
+  }
+
+  void IOSFBUpdateTournament(const char *tournamentID, int score, int requestID)
+  {
+    FBSDKTournamentUpdater *updater = [[FBSDKTournamentUpdater alloc] init];
+    [updater updateWithTournamentID:[NSString stringWithUTF8String:tournamentID]
+                              score:score
+                  completionHandler:^(BOOL success, NSError * _Nullable error) {
+      if (!success || error) {
+        [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnUpdateTournamentComplete error:error requestId:requestID];
+      } else {
+        [FBUnityUtility sendMessageToUnity:FBUnityMessageName_OnUpdateTournamentComplete
+                                  userData:NULL
+                                 requestId:requestID];
+      }
+    }];
+  }
+
+  void IOSFBUpdateAndShareTournament(const char *tournamentID, int score, int requestID)
+  {
+    NSError *error;
+    FBUnitySDKDelegate *delegate = [FBUnitySDKDelegate instanceWithRequestID:requestID];
+    FBSDKShareTournamentDialog *dialog = [[FBSDKShareTournamentDialog alloc] initWithDelegate: delegate];
+    [dialog showWithScore:score tournamentID:[NSString stringWithUTF8String:tournamentID] error:&error];
+      if (error) {
+        [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnGetTournamentsComplete error:error requestId:requestID];
+      }
+  }
+
+  void IOSFBCreateAndShareTournament(
+    int initialScore,
+    const char *title,
+    int sortOrder,
+    int scoreFormat,
+    long endTime,
+    const char *payload,
+    int requestID)
+  {
+    NSError *error;
+    FBUnitySDKDelegate *delegate = [FBUnitySDKDelegate instanceWithRequestID:requestID];
+    FBSDKShareTournamentDialog *dialog = [[FBSDKShareTournamentDialog alloc] initWithDelegate: delegate];
+    NSString *payloadString;
+    if (payload) {
+      payloadString = [NSString stringWithUTF8String:payload];
+    }
+    [dialog showWithInitialScore:initialScore
+                         title:[NSString stringWithUTF8String:title]
+                       endTime:[NSDate dateWithTimeIntervalSince1970: endTime]
+                     scoreType:scoreFormat
+                     sortOrder:sortOrder
+                       payload:payloadString
+                           error: &error];
+      if (error) {
+        [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnGetTournamentsComplete error:error requestId:requestID];
+      }
+  }
+
+  void IOSFBUploadImageToMediaLibrary(
+    int requestId,
+    const char *caption,
+    const char *imageUri,
+    bool shouldLaunchMediaDialog)
   {
     NSString *captionString = [FBUnityUtility stringFromCString:caption];
     NSString *imageUriString = [FBUnityUtility stringFromCString:imageUri];
@@ -824,7 +892,7 @@ extern "C" {
 
   char* IOSFBGetUserID()
   {
-    NSString *userID = [FBSDKAppEvents userID];
+    NSString *userID = [[FBSDKAppEvents shared] userID];
     if (!userID) {
       return NULL;
     }

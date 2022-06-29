@@ -16,6 +16,7 @@ namespace OverlayScene {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
+			PURCHASE_PRODUCT_ID,
 			NUM_COINS_TEXT,
 			STORE_BTN,
 			[HideInInspector] MAX_VAL
@@ -29,7 +30,9 @@ namespace OverlayScene {
 		}
 
 		#region 변수
-		private string m_oPurchaseProductID = string.Empty;
+		private Dictionary<EKey, string> m_oStrDict = new Dictionary<EKey, string>() {
+			[EKey.PURCHASE_PRODUCT_ID] = string.Empty
+		};
 		
 		/** =====> UI <===== */
 		private Dictionary<EKey, TMP_Text> m_oTextDict = new Dictionary<EKey, TMP_Text>() {
@@ -182,7 +185,7 @@ namespace OverlayScene {
 			// 결제 되었을 경우
 			if(a_bIsSuccess) {
 				Func.AcquireProduct(a_oProductID);
-				m_oPurchaseProductID = a_oProductID;
+				m_oStrDict[EKey.PURCHASE_PRODUCT_ID] = a_oProductID;
 
 #if FIREBASE_MODULE_ENABLE
 				this.ExLateCallFunc((a_oCallFuncSender) => Func.SaveUserInfo(this.OnSaveUserInfo));
@@ -200,7 +203,7 @@ namespace OverlayScene {
 #if FIREBASE_MODULE_ENABLE
 		/** 유저 정보를 저장했을 경우 */
 		private void OnSaveUserInfo(CFirebaseManager a_oSender, bool a_bIsSuccess) {
-			Func.OnPurchaseProduct(CPurchaseManager.Inst, m_oPurchaseProductID, true, null);
+			Func.OnPurchaseProduct(CPurchaseManager.Inst, m_oStrDict[EKey.PURCHASE_PRODUCT_ID], true, null);
 		}
 #endif			// #if FIREBASE_MODULE_ENABLE
 #endif			// #if PURCHASE_MODULE_ENABLE

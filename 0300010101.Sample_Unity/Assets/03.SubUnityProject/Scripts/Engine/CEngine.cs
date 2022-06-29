@@ -9,6 +9,17 @@ using UnityEngine.EventSystems;
 namespace SampleEngineName {
 	/** 엔진 */
 	public partial class CEngine : CComponent {
+		/** 식별자 */
+		private enum EKey {
+			NONE = -1,
+			INT_RECORD,
+			REAL_RECORD,
+			GRID_INFO,
+			STATE,
+			ENGINE_STATE,
+			[HideInInspector] MAX_VAL
+		}
+
 		/** 상태 */
 		public enum EState {
 			NONE = -1,
@@ -47,19 +58,50 @@ namespace SampleEngineName {
 
 		#region 변수
 		private STParams m_stParams;
-		private EEngineState m_eEngineState = EEngineState.NONE;
 		private List<LineRenderer> m_oGridLineList = new List<LineRenderer>();
+
+		private Dictionary<EKey, long> m_oIntDict = new Dictionary<EKey, long>() {
+			[EKey.INT_RECORD] = 0
+		};
+
+		private Dictionary<EKey, double> m_oRealDict = new Dictionary<EKey, double>() {
+			[EKey.REAL_RECORD] = 0.0
+		};
+
+		private Dictionary<EKey, EState> m_oStateDict = new Dictionary<EKey, EState>() {
+			[EKey.STATE] = EState.NONE
+		};
+
+		private Dictionary<EKey, EEngineState> m_oEngineStateDict = new Dictionary<EKey, EEngineState>() {
+			[EKey.ENGINE_STATE] = EEngineState.NONE
+		};
+
+		private Dictionary<EKey, STGridInfo> m_oGridInfoDict = new Dictionary<EKey, STGridInfo>() {
+			[EKey.GRID_INFO] = default(STGridInfo)
+		};
 
 		/** =====> 객체 <===== */
 		private Dictionary<EObjType, List<(EObjKinds, CEObj)>>[,] m_oObjInfoDictContainers = null;
 		#endregion			// 변수
 
 		#region 프로퍼티
-		public long IntRecord { get; private set; } = 0;
-		public double RealRecord { get; private set; } = 0.0;
-		public EState State { get; private set; } = EState.NONE;
-		public STGridInfo GridInfo { get; private set; }
-		
+		public EState State {
+			get {
+				return m_oStateDict[EKey.STATE];
+			} set {
+				m_oStateDict[EKey.STATE] = value;
+
+				switch(value) {
+					case EState.RUN: this.HandleRunState(); break;
+					case EState.STOP: this.HandleStopState(); break;
+				}
+			}
+		}
+
+		public long IntRecord => m_oIntDict[EKey.INT_RECORD];
+		public double RealRecord => m_oRealDict[EKey.REAL_RECORD];
+		public STGridInfo GridInfo => m_oGridInfoDict[EKey.GRID_INFO];
+
 		public GameObject ObjRoot => m_stParams.m_oObjRoot;
 		public GameObject FXObjRoot => m_stParams.m_oFXObjRoot;
 		public GameObject SkillObjRoot => m_stParams.m_oSkillObjRoot;
@@ -120,17 +162,7 @@ namespace SampleEngineName {
 		public void OnTouchEnd(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			this.HandleTouchState(a_oSender, a_oEventData, ETouch.END);
 		}
-
-		/** 상태를 변경한다 */
-		public void SetState(EState a_eState) {
-			this.State = a_eState;
-
-			switch(a_eState) {
-				case EState.RUN: this.HandleRunState(); break;
-				case EState.STOP: this.HandleStopState(); break;
-			}
-		}
-
+		
 		/** 구동 상태를 처리한다 */
 		private void HandleRunState() {
 			// Do Something
@@ -148,8 +180,8 @@ namespace SampleEngineName {
 					var stTouchPos = a_oEventData.ExGetLocalPos(m_stParams.m_oObjRoot);
 
 					// 그리드 영역 일 경우
-					if(this.GridInfo.m_stBounds.Contains(stTouchPos)) {
-						var stIdx = stTouchPos.ExToIdx(this.GridInfo.m_stPivotPos, KDefine.E_SIZE_CELL);
+					if(m_oGridInfoDict[EKey.GRID_INFO].m_stBounds.Contains(stTouchPos)) {
+						var stIdx = stTouchPos.ExToIdx(m_oGridInfoDict[EKey.GRID_INFO].m_stPivotPos, KDefine.E_SIZE_CELL);
 						CAccess.Assert(m_oObjInfoDictContainers.ExIsValidIdx(stIdx));
 					}
 				} break;

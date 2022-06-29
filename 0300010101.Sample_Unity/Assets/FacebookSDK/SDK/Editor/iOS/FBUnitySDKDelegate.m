@@ -16,8 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "FBUnitySDKDelegate.h"
-
 #import "FBUnityUtility.h"
 
 NSString *const FBUnityMessageName_OnAppRequestsComplete = @"OnAppRequestsComplete";
@@ -37,6 +37,11 @@ NSString *const FBUnityMessageName_OnCreateGamingContextComplete = @"OnCreateGam
 NSString *const FBUnityMessageName_OnSwitchGamingContextComplete = @"OnSwitchGamingContextComplete";
 NSString *const FBUnityMessageName_OnChooseGamingContextComplete = @"OnChooseGamingContextComplete";
 NSString *const FBUnityMessageName_OnGetCurrentGamingContextComplete = @"OnGetCurrentGamingContextComplete";
+NSString *const FBUnityMessageName_OnGetTournamentsComplete = @"OnGetTournamentsComplete";
+NSString *const FBUnityMessageName_OnUpdateTournamentComplete = @"OnUpdateTournamentComplete";
+NSString *const FBUnityMessageName_OnTournamentDialogSuccess = @"OnTournamentDialogSuccess";
+NSString *const FBUnityMessageName_OnTournamentDialogCancel = @"OnTournamentDialogCancel";
+NSString *const FBUnityMessageName_OnTournamentDialogError = @"OnTournamentDialogError";
 
 static NSMutableArray *g_instances;
 
@@ -113,7 +118,7 @@ static NSMutableArray *g_instances;
 
 #pragma mark - FBSDKContextDialogDelegate
 
-- (void)contextDialogDidComplete:(id<FBSDKContextDialogDelegate>)contextDialog;
+- (void)contextDialogDidComplete:(NSObject<FBSDKContextDialogDelegate>*)contextDialog;
 {
   if ([contextDialog isKindOfClass:[FBSDKChooseContextDialog class]]) {
     [FBUnityUtility sendMessageToUnity: FBUnityMessageName_OnChooseGamingContextComplete userData: NULL requestId:_requestID];
@@ -125,7 +130,7 @@ static NSMutableArray *g_instances;
   [self complete];
 }
 
-- (void)contextDialog:(id<FBSDKContextDialogDelegate>)contextDialog didFailWithError:(NSError *)error
+- (void)contextDialog:(NSObject<FBSDKContextDialogDelegate>*)contextDialog didFailWithError:(NSError *)error
 {
   if ([contextDialog isKindOfClass:[FBSDKChooseContextDialog class]]) {
     [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnChooseGamingContextComplete error:error requestId:_requestID];
@@ -137,7 +142,7 @@ static NSMutableArray *g_instances;
   [self complete];
 }
 
-- (void)contextDialogDidCancel:(id<FBSDKContextDialogDelegate>)contextDialog
+- (void)contextDialogDidCancel:(NSObject<FBSDKContextDialogDelegate>*)contextDialog
 {
   if ([contextDialog isKindOfClass:[FBSDKChooseContextDialog class]]) {
     [FBUnityUtility sendCancelToUnity:FBUnityMessageName_OnChooseGamingContextComplete requestId:_requestID];
@@ -150,5 +155,18 @@ static NSMutableArray *g_instances;
   [self complete];
 }
 
+#pragma mark - FBSDKShareTournamentDialogDelegate
+
+- (void)didCancelWithDialog:(FBSDKShareTournamentDialog * _Nonnull)dialog {
+    [FBUnityUtility sendCancelToUnity:FBUnityMessageName_OnTournamentDialogCancel requestId:_requestID];
+}
+
+- (void)didCompleteWithDialog:(FBSDKShareTournamentDialog * _Nonnull)dialog tournament:(FBSDKTournament * _Nonnull)tournament {
+    [FBUnityUtility sendMessageToUnity: FBUnityMessageName_OnTournamentDialogSuccess userData: [tournament toDictionary] requestId:_requestID];
+}
+
+- (void)didFailWithError:(NSError * _Nonnull)error dialog:(FBSDKShareTournamentDialog * _Nonnull)dialog {
+    [FBUnityUtility sendErrorToUnity:FBUnityMessageName_OnTournamentDialogError error:error requestId:_requestID];
+}
 
 @end
