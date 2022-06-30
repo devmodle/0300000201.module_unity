@@ -50,55 +50,59 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(47)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(51)
             {
-                { typeof(global::System.Collections.Generic.Dictionary<global::EItemKinds, long>), 0 },
-                { typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 1 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, float>), 2 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::CCellInfo>), 3 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>), 4 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CCellInfo>>), 5 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>), 6 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>>), 7 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, int>>), 8 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, int>), 9 },
-                { typeof(global::System.Collections.Generic.Dictionary<int, string>), 10 },
-                { typeof(global::System.Collections.Generic.Dictionary<long, float>), 11 },
-                { typeof(global::System.Collections.Generic.Dictionary<long, global::CClearInfo>), 12 },
-                { typeof(global::System.Collections.Generic.Dictionary<long, int>), 13 },
-                { typeof(global::System.Collections.Generic.Dictionary<long, string>), 14 },
-                { typeof(global::System.Collections.Generic.Dictionary<string, float>), 15 },
-                { typeof(global::System.Collections.Generic.Dictionary<string, int>), 16 },
-                { typeof(global::System.Collections.Generic.Dictionary<string, string>), 17 },
-                { typeof(global::System.Collections.Generic.List<float>), 18 },
-                { typeof(global::System.Collections.Generic.List<global::EMissionKinds>), 19 },
-                { typeof(global::System.Collections.Generic.List<global::EObjKinds>), 20 },
-                { typeof(global::System.Collections.Generic.List<global::ETutorialKinds>), 21 },
-                { typeof(global::System.Collections.Generic.List<int>), 22 },
-                { typeof(global::System.Collections.Generic.List<long>), 23 },
-                { typeof(global::System.Collections.Generic.List<string>), 24 },
-                { typeof(global::EItemKinds), 25 },
-                { typeof(global::EMissionKinds), 26 },
-                { typeof(global::EObjKinds), 27 },
-                { typeof(global::EObjType), 28 },
-                { typeof(global::ETutorialKinds), 29 },
-                { typeof(global::CBaseInfo), 30 },
-                { typeof(global::CCommonBaseInfo), 31 },
-                { typeof(global::CAppInfo), 32 },
-                { typeof(global::CCellInfo), 33 },
-                { typeof(global::CClearInfo), 34 },
-                { typeof(global::CCommonAppInfo), 35 },
-                { typeof(global::CCommonGameInfo), 36 },
-                { typeof(global::CCommonUserInfo), 37 },
-                { typeof(global::CGameInfo), 38 },
-                { typeof(global::CLevelInfo), 39 },
-                { typeof(global::CUserInfo), 40 },
-                { typeof(global::SampleEngineName.STEngineTypeWrapper), 41 },
-                { typeof(global::STCommonTypeWrapper), 42 },
-                { typeof(global::STIDInfo), 43 },
-                { typeof(global::STIdxInfo), 44 },
-                { typeof(global::STSubTypeWrapper), 45 },
-                { typeof(global::STTypeWrapper), 46 },
+                { typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 0 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, float>), 1 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::CCellInfo>), 2 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>), 3 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CCellInfo>>), 4 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>), 5 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>>), 6 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, int>>), 7 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, int>), 8 },
+                { typeof(global::System.Collections.Generic.Dictionary<int, string>), 9 },
+                { typeof(global::System.Collections.Generic.Dictionary<long, float>), 10 },
+                { typeof(global::System.Collections.Generic.Dictionary<long, global::CClearInfo>), 11 },
+                { typeof(global::System.Collections.Generic.Dictionary<long, int>), 12 },
+                { typeof(global::System.Collections.Generic.Dictionary<long, string>), 13 },
+                { typeof(global::System.Collections.Generic.Dictionary<string, float>), 14 },
+                { typeof(global::System.Collections.Generic.Dictionary<string, int>), 15 },
+                { typeof(global::System.Collections.Generic.Dictionary<string, string>), 16 },
+                { typeof(global::System.Collections.Generic.List<float>), 17 },
+                { typeof(global::System.Collections.Generic.List<global::CUserItemInfo>), 18 },
+                { typeof(global::System.Collections.Generic.List<global::CUserObjInfo>), 19 },
+                { typeof(global::System.Collections.Generic.List<global::CUserSkillInfo>), 20 },
+                { typeof(global::System.Collections.Generic.List<global::EMissionKinds>), 21 },
+                { typeof(global::System.Collections.Generic.List<global::EObjKinds>), 22 },
+                { typeof(global::System.Collections.Generic.List<global::ETutorialKinds>), 23 },
+                { typeof(global::System.Collections.Generic.List<int>), 24 },
+                { typeof(global::System.Collections.Generic.List<long>), 25 },
+                { typeof(global::System.Collections.Generic.List<string>), 26 },
+                { typeof(global::EMissionKinds), 27 },
+                { typeof(global::EObjKinds), 28 },
+                { typeof(global::EObjType), 29 },
+                { typeof(global::ETutorialKinds), 30 },
+                { typeof(global::CBaseInfo), 31 },
+                { typeof(global::CCommonBaseInfo), 32 },
+                { typeof(global::CAppInfo), 33 },
+                { typeof(global::CCellInfo), 34 },
+                { typeof(global::CClearInfo), 35 },
+                { typeof(global::CCommonAppInfo), 36 },
+                { typeof(global::CCommonGameInfo), 37 },
+                { typeof(global::CCommonUserInfo), 38 },
+                { typeof(global::CGameInfo), 39 },
+                { typeof(global::CLevelInfo), 40 },
+                { typeof(global::CUserInfo), 41 },
+                { typeof(global::CUserItemInfo), 42 },
+                { typeof(global::CUserObjInfo), 43 },
+                { typeof(global::CUserSkillInfo), 44 },
+                { typeof(global::SampleEngineName.STEngineTypeWrapper), 45 },
+                { typeof(global::STCommonTypeWrapper), 46 },
+                { typeof(global::STIDInfo), 47 },
+                { typeof(global::STIdxInfo), 48 },
+                { typeof(global::STSubTypeWrapper), 49 },
+                { typeof(global::STTypeWrapper), 50 },
             };
         }
 
@@ -112,53 +116,57 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new global::MessagePack.Formatters.DictionaryFormatter<global::EItemKinds, long>();
-                case 1: return new global::MessagePack.Formatters.DictionaryFormatter<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>();
-                case 2: return new global::MessagePack.Formatters.DictionaryFormatter<int, float>();
-                case 3: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CCellInfo>();
-                case 4: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CLevelInfo>();
-                case 5: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::CCellInfo>>();
-                case 6: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>();
-                case 7: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>>();
-                case 8: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, int>>();
-                case 9: return new global::MessagePack.Formatters.DictionaryFormatter<int, int>();
-                case 10: return new global::MessagePack.Formatters.DictionaryFormatter<int, string>();
-                case 11: return new global::MessagePack.Formatters.DictionaryFormatter<long, float>();
-                case 12: return new global::MessagePack.Formatters.DictionaryFormatter<long, global::CClearInfo>();
-                case 13: return new global::MessagePack.Formatters.DictionaryFormatter<long, int>();
-                case 14: return new global::MessagePack.Formatters.DictionaryFormatter<long, string>();
-                case 15: return new global::MessagePack.Formatters.DictionaryFormatter<string, float>();
-                case 16: return new global::MessagePack.Formatters.DictionaryFormatter<string, int>();
-                case 17: return new global::MessagePack.Formatters.DictionaryFormatter<string, string>();
-                case 18: return new global::MessagePack.Formatters.ListFormatter<float>();
-                case 19: return new global::MessagePack.Formatters.ListFormatter<global::EMissionKinds>();
-                case 20: return new global::MessagePack.Formatters.ListFormatter<global::EObjKinds>();
-                case 21: return new global::MessagePack.Formatters.ListFormatter<global::ETutorialKinds>();
-                case 22: return new global::MessagePack.Formatters.ListFormatter<int>();
-                case 23: return new global::MessagePack.Formatters.ListFormatter<long>();
-                case 24: return new global::MessagePack.Formatters.ListFormatter<string>();
-                case 25: return new MessagePack.Formatters.EItemKindsFormatter();
-                case 26: return new MessagePack.Formatters.EMissionKindsFormatter();
-                case 27: return new MessagePack.Formatters.EObjKindsFormatter();
-                case 28: return new MessagePack.Formatters.EObjTypeFormatter();
-                case 29: return new MessagePack.Formatters.ETutorialKindsFormatter();
-                case 30: return new MessagePack.Formatters.CBaseInfoFormatter();
-                case 31: return new MessagePack.Formatters.CCommonBaseInfoFormatter();
-                case 32: return new MessagePack.Formatters.CAppInfoFormatter();
-                case 33: return new MessagePack.Formatters.CCellInfoFormatter();
-                case 34: return new MessagePack.Formatters.CClearInfoFormatter();
-                case 35: return new MessagePack.Formatters.CCommonAppInfoFormatter();
-                case 36: return new MessagePack.Formatters.CCommonGameInfoFormatter();
-                case 37: return new MessagePack.Formatters.CCommonUserInfoFormatter();
-                case 38: return new MessagePack.Formatters.CGameInfoFormatter();
-                case 39: return new MessagePack.Formatters.CLevelInfoFormatter();
-                case 40: return new MessagePack.Formatters.CUserInfoFormatter();
-                case 41: return new MessagePack.Formatters.SampleEngineName.STEngineTypeWrapperFormatter();
-                case 42: return new MessagePack.Formatters.STCommonTypeWrapperFormatter();
-                case 43: return new MessagePack.Formatters.STIDInfoFormatter();
-                case 44: return new MessagePack.Formatters.STIdxInfoFormatter();
-                case 45: return new MessagePack.Formatters.STSubTypeWrapperFormatter();
-                case 46: return new MessagePack.Formatters.STTypeWrapperFormatter();
+                case 0: return new global::MessagePack.Formatters.DictionaryFormatter<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>();
+                case 1: return new global::MessagePack.Formatters.DictionaryFormatter<int, float>();
+                case 2: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CCellInfo>();
+                case 3: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CLevelInfo>();
+                case 4: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::CCellInfo>>();
+                case 5: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>();
+                case 6: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>>();
+                case 7: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::System.Collections.Generic.Dictionary<int, int>>();
+                case 8: return new global::MessagePack.Formatters.DictionaryFormatter<int, int>();
+                case 9: return new global::MessagePack.Formatters.DictionaryFormatter<int, string>();
+                case 10: return new global::MessagePack.Formatters.DictionaryFormatter<long, float>();
+                case 11: return new global::MessagePack.Formatters.DictionaryFormatter<long, global::CClearInfo>();
+                case 12: return new global::MessagePack.Formatters.DictionaryFormatter<long, int>();
+                case 13: return new global::MessagePack.Formatters.DictionaryFormatter<long, string>();
+                case 14: return new global::MessagePack.Formatters.DictionaryFormatter<string, float>();
+                case 15: return new global::MessagePack.Formatters.DictionaryFormatter<string, int>();
+                case 16: return new global::MessagePack.Formatters.DictionaryFormatter<string, string>();
+                case 17: return new global::MessagePack.Formatters.ListFormatter<float>();
+                case 18: return new global::MessagePack.Formatters.ListFormatter<global::CUserItemInfo>();
+                case 19: return new global::MessagePack.Formatters.ListFormatter<global::CUserObjInfo>();
+                case 20: return new global::MessagePack.Formatters.ListFormatter<global::CUserSkillInfo>();
+                case 21: return new global::MessagePack.Formatters.ListFormatter<global::EMissionKinds>();
+                case 22: return new global::MessagePack.Formatters.ListFormatter<global::EObjKinds>();
+                case 23: return new global::MessagePack.Formatters.ListFormatter<global::ETutorialKinds>();
+                case 24: return new global::MessagePack.Formatters.ListFormatter<int>();
+                case 25: return new global::MessagePack.Formatters.ListFormatter<long>();
+                case 26: return new global::MessagePack.Formatters.ListFormatter<string>();
+                case 27: return new MessagePack.Formatters.EMissionKindsFormatter();
+                case 28: return new MessagePack.Formatters.EObjKindsFormatter();
+                case 29: return new MessagePack.Formatters.EObjTypeFormatter();
+                case 30: return new MessagePack.Formatters.ETutorialKindsFormatter();
+                case 31: return new MessagePack.Formatters.CBaseInfoFormatter();
+                case 32: return new MessagePack.Formatters.CCommonBaseInfoFormatter();
+                case 33: return new MessagePack.Formatters.CAppInfoFormatter();
+                case 34: return new MessagePack.Formatters.CCellInfoFormatter();
+                case 35: return new MessagePack.Formatters.CClearInfoFormatter();
+                case 36: return new MessagePack.Formatters.CCommonAppInfoFormatter();
+                case 37: return new MessagePack.Formatters.CCommonGameInfoFormatter();
+                case 38: return new MessagePack.Formatters.CCommonUserInfoFormatter();
+                case 39: return new MessagePack.Formatters.CGameInfoFormatter();
+                case 40: return new MessagePack.Formatters.CLevelInfoFormatter();
+                case 41: return new MessagePack.Formatters.CUserInfoFormatter();
+                case 42: return new MessagePack.Formatters.CUserItemInfoFormatter();
+                case 43: return new MessagePack.Formatters.CUserObjInfoFormatter();
+                case 44: return new MessagePack.Formatters.CUserSkillInfoFormatter();
+                case 45: return new MessagePack.Formatters.SampleEngineName.STEngineTypeWrapperFormatter();
+                case 46: return new MessagePack.Formatters.STCommonTypeWrapperFormatter();
+                case 47: return new MessagePack.Formatters.STIDInfoFormatter();
+                case 48: return new MessagePack.Formatters.STIdxInfoFormatter();
+                case 49: return new MessagePack.Formatters.STSubTypeWrapperFormatter();
+                case 50: return new MessagePack.Formatters.STTypeWrapperFormatter();
                 default: return null;
             }
         }
@@ -193,19 +201,6 @@ namespace MessagePack.Formatters
     using System;
     using System.Buffers;
     using MessagePack;
-
-    public sealed class EItemKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EItemKinds>
-    {
-        public void Serialize(ref MessagePackWriter writer, global::EItemKinds value, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            writer.Write((Int32)value);
-        }
-
-        public global::EItemKinds Deserialize(ref MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-        {
-            return (global::EItemKinds)reader.ReadInt32();
-        }
-    }
 
     public sealed class EMissionKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EMissionKinds>
     {
@@ -297,7 +292,7 @@ namespace MessagePack.Formatters
 
         public CBaseInfoFormatter()
         {
-            this.typeToKeyAndJumpMap = new Dictionary<RuntimeTypeHandle, KeyValuePair<int, int>>(6, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
+            this.typeToKeyAndJumpMap = new Dictionary<RuntimeTypeHandle, KeyValuePair<int, int>>(9, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
             {
                 { typeof(global::CAppInfo).TypeHandle, new KeyValuePair<int, int>(0, 0) },
                 { typeof(global::CUserInfo).TypeHandle, new KeyValuePair<int, int>(1, 1) },
@@ -305,8 +300,11 @@ namespace MessagePack.Formatters
                 { typeof(global::CCellInfo).TypeHandle, new KeyValuePair<int, int>(3, 3) },
                 { typeof(global::CClearInfo).TypeHandle, new KeyValuePair<int, int>(4, 4) },
                 { typeof(global::CLevelInfo).TypeHandle, new KeyValuePair<int, int>(5, 5) },
+                { typeof(global::CUserItemInfo).TypeHandle, new KeyValuePair<int, int>(6, 6) },
+                { typeof(global::CUserSkillInfo).TypeHandle, new KeyValuePair<int, int>(7, 7) },
+                { typeof(global::CUserObjInfo).TypeHandle, new KeyValuePair<int, int>(8, 8) },
             };
-            this.keyToJumpMap = new Dictionary<int, int>(6)
+            this.keyToJumpMap = new Dictionary<int, int>(9)
             {
                 { 0, 0 },
                 { 1, 1 },
@@ -314,6 +312,9 @@ namespace MessagePack.Formatters
                 { 3, 3 },
                 { 4, 4 },
                 { 5, 5 },
+                { 6, 6 },
+                { 7, 7 },
+                { 8, 8 },
             };
         }
 
@@ -343,6 +344,15 @@ namespace MessagePack.Formatters
                         break;
                     case 5:
                         options.Resolver.GetFormatterWithVerify<global::CLevelInfo>().Serialize(ref writer, (global::CLevelInfo)value, options);
+                        break;
+                    case 6:
+                        options.Resolver.GetFormatterWithVerify<global::CUserItemInfo>().Serialize(ref writer, (global::CUserItemInfo)value, options);
+                        break;
+                    case 7:
+                        options.Resolver.GetFormatterWithVerify<global::CUserSkillInfo>().Serialize(ref writer, (global::CUserSkillInfo)value, options);
+                        break;
+                    case 8:
+                        options.Resolver.GetFormatterWithVerify<global::CUserObjInfo>().Serialize(ref writer, (global::CUserObjInfo)value, options);
                         break;
                     default:
                         break;
@@ -394,6 +404,15 @@ namespace MessagePack.Formatters
                     break;
                 case 5:
                     result = (global::CBaseInfo)options.Resolver.GetFormatterWithVerify<global::CLevelInfo>().Deserialize(ref reader, options);
+                    break;
+                case 6:
+                    result = (global::CBaseInfo)options.Resolver.GetFormatterWithVerify<global::CUserItemInfo>().Deserialize(ref reader, options);
+                    break;
+                case 7:
+                    result = (global::CBaseInfo)options.Resolver.GetFormatterWithVerify<global::CUserSkillInfo>().Deserialize(ref reader, options);
+                    break;
+                case 8:
+                    result = (global::CBaseInfo)options.Resolver.GetFormatterWithVerify<global::CUserObjInfo>().Deserialize(ref reader, options);
                     break;
                 default:
                     reader.Skip();
@@ -1608,7 +1627,7 @@ namespace MessagePack.Formatters
 
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             value.OnBeforeSerialize();
-            writer.WriteArrayHeader(112);
+            writer.WriteArrayHeader(94);
             formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
             writer.WriteNil();
             writer.WriteNil();
@@ -1700,27 +1719,9 @@ namespace MessagePack.Formatters
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<global::EItemKinds, long>>().Serialize(ref writer, value.m_oNumItemsDict, options);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserItemInfo>>().Serialize(ref writer, value.m_oUserItemInfoList, options);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserSkillInfo>>().Serialize(ref writer, value.m_oUserSkillInfoList, options);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserObjInfo>>().Serialize(ref writer, value.m_oUserObjInfoList, options);
         }
 
         public global::CUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -1742,8 +1743,158 @@ namespace MessagePack.Formatters
                     case 0:
                         ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
                         break;
-                    case 111:
-                        ____result.m_oNumItemsDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<global::EItemKinds, long>>().Deserialize(ref reader, options);
+                    case 91:
+                        ____result.m_oUserItemInfoList = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserItemInfo>>().Deserialize(ref reader, options);
+                        break;
+                    case 92:
+                        ____result.m_oUserSkillInfoList = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserSkillInfo>>().Deserialize(ref reader, options);
+                        break;
+                    case 93:
+                        ____result.m_oUserObjInfoList = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.List<global::CUserObjInfo>>().Deserialize(ref reader, options);
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            ____result.OnAfterDeserialize();
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
+    public sealed class CUserItemInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CUserItemInfo>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CUserItemInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value == null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            value.OnBeforeSerialize();
+            writer.WriteArrayHeader(1);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
+        }
+
+        public global::CUserItemInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            var length = reader.ReadArrayHeader();
+            var ____result = new global::CUserItemInfo();
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            ____result.OnAfterDeserialize();
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
+    public sealed class CUserObjInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CUserObjInfo>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CUserObjInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value == null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            value.OnBeforeSerialize();
+            writer.WriteArrayHeader(1);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
+        }
+
+        public global::CUserObjInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            var length = reader.ReadArrayHeader();
+            var ____result = new global::CUserObjInfo();
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            ____result.OnAfterDeserialize();
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
+    public sealed class CUserSkillInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CUserSkillInfo>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CUserSkillInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value == null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            value.OnBeforeSerialize();
+            writer.WriteArrayHeader(1);
+            formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
+        }
+
+        public global::CUserSkillInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            var length = reader.ReadArrayHeader();
+            var ____result = new global::CUserSkillInfo();
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();

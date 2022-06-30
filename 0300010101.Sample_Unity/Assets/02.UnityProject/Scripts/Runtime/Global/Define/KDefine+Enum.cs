@@ -22,6 +22,16 @@ public enum EPriceType {
 	PURCHASE,
 	ITEM,
 	SKILL,
+	OBJ,
+	[HideInInspector] MAX_VAL
+}
+
+/** 소유자 타입 */
+public enum EOwnerType {
+	NONE = -1,
+	ITEM,
+	SKILL,
+	OBJ,
 	[HideInInspector] MAX_VAL
 }
 
@@ -30,6 +40,15 @@ public enum ETargetType {
 	NONE = -1,
 	MARKS,
 	RECORD,
+	[HideInInspector] MAX_VAL
+}
+
+/** 획득 타입 */
+public enum EAcquireType {
+	NONE = -1,
+	ITEM,
+	SKILL,
+	OBJ,
 	[HideInInspector] MAX_VAL
 }
 #endregion			// 기본
