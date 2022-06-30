@@ -31,7 +31,7 @@ public static partial class Func {
 #endif			// #if NEWTON_SOFT_JSON_MODULE_ENABLE
 	}
 
-	/** 아이템을 획득한다 */
+	/** 아이템을 구입한다 */
 	public static void AcquireItem(STItemSaleInfo a_stItemSaleInfo, List<long> a_oNumExtraItemsList = null, long a_nExtraPrice = KCDefine.B_VAL_0_INT) {
 		// 아이템 획득이 가능 할 경우
 		if(Access.IsEnableAcquire(a_stItemSaleInfo.m_oPriceInfoList)) {
@@ -48,12 +48,12 @@ public static partial class Func {
 		}
 	}
 
-	/** 스킬을 획득한다 */
+	/** 스킬을 구입한다 */
 	public static void AcquireSkill(STSkillSaleInfo a_stSkillSaleInfo, long a_nExtraPrice = KCDefine.B_VAL_0_INT) {
 		// 스킬 획득이 가능 할 경우
 		if(Access.IsEnableAcquire(a_stSkillSaleInfo.m_oPriceInfoList)) {
 			for(int i = 0; i < a_stSkillSaleInfo.m_oSkillKindsList.Count; ++i) {
-
+				
 			}
 		}
 	}
