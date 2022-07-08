@@ -490,6 +490,7 @@ public enum EProductSaleKinds {
 /** 타겟 타입 */
 public enum ETargetType {
 	NONE = -1,
+
 	ITEM,
 	SKILL,
 	OBJ,

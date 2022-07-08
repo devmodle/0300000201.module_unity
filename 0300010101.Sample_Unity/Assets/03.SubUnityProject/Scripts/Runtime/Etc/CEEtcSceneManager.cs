@@ -10,7 +10,7 @@ namespace Etc {
 	public class CEEtcSceneManager : StudyScene.CStudySceneManager {
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_E_ETC;
-		#endregion			// 프로퍼티
-	}
+        #endregion         // 프로퍼티
+    }
 }
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE
