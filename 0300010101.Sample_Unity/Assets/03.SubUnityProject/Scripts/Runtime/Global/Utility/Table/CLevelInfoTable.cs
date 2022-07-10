@@ -680,7 +680,7 @@ public partial class CLevelInfoTable : CSingleton<CLevelInfoTable> {
 			m_eEpisodeKinds = stLevelEpisodeInfo.m_eEpisodeKinds,
 			m_eTutorialKinds = stLevelEpisodeInfo.m_eTutorialKinds,
 
-			m_oRecordList = new List<long>(),
+			m_oRecordList = new List<string>(),
 			m_oRewardKindsList = new List<ERewardKinds>(),
 			m_oClearTargetInfoList = new List<STTargetInfo>(),
 			m_oUnlockTargetInfoList = new List<STTargetInfo>()
