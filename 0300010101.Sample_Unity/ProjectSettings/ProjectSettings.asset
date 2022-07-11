@@ -3,8 +3,8 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 24
-  productGUID: 0a2c9d14c8941436cacc05f14a987213
+  serializedVersion: 23
+  productGUID: 8fbf94a705f694d06b360af954a08dbc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -48,7 +48,6 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
-  m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 1
   numberOfMipsStripped: 0
@@ -56,6 +55,7 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: 0
   androidShowActivityIndicatorOnLoading: 1
   iosUseCustomAppBackgroundBehavior: 1
+  iosAllowHTTPDownload: 1
   allowedAutorotateToPortrait: 0
   allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
@@ -119,11 +119,8 @@ PlayerSettings:
   switchNVNShaderPoolsGranularity: 33554432
   switchNVNDefaultPoolsGranularity: 16777216
   switchNVNOtherPoolsGranularity: 16777216
-  switchGpuScratchPoolGranularity: 2097152
-  switchAllowGpuScratchShrinking: 0
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
-  switchNVNGraphicsFirmwareMemory: 32
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -181,6 +178,7 @@ PlayerSettings:
   - {fileID: 4343727234628468602, guid: fe7cb1e829e724699aff029df3e74cec, type: 2}
   - {fileID: 4343727234628468602, guid: ec1d556f1c53e4ff59bfb05687a89b01, type: 2}
   - {fileID: 4343727234628468602, guid: f1e3e484433604b6e80b0183a22e8335, type: 2}
+  - {fileID: 11400000, guid: ad575c64c666d4c2da867dff6868eca1, type: 2}
   - {fileID: 6884252962769875886, guid: 1043c576d851942e291440977d0d8106, type: 3}
   - {fileID: 2183824002408205911, guid: e04a15437e15f46b997f8d392bea62b3, type: 3}
   - {fileID: 2163081430555252783, guid: 7002c5678352144c5be0f4e95a0c3f33, type: 3}
@@ -197,29 +195,41 @@ PlayerSettings:
   - {fileID: 6884252962769875886, guid: 35de54f51923844a6a413b341cfc0847, type: 3}
   - {fileID: 6884252962769875886, guid: a401dc1465b1f4238b0e61d9f4a09000, type: 3}
   - {fileID: 11400000, guid: 1ba9e5314791548adb5fdb50da12acd6, type: 2}
+  - {fileID: 11400000, guid: 6135eb4ce90a943a28f32fc9d43f0488, type: 2}
   - {fileID: 8019310881375038877, guid: a543886a136f34f87b3b9d901dddefcb, type: 3}
   - {fileID: 8019310881375038877, guid: a3854805e75a74646bb256a6667aa831, type: 3}
+  - {fileID: 11400000, guid: bdfde9bd6c7784fc28b5e3f6f314ab9b, type: 2}
   - {fileID: 2163081430555252783, guid: 20651ae45faf9452a8f6f52dfedc792e, type: 3}
   - {fileID: 4890085278179872738, guid: 5e403572dcbaf4dfe849285a3a4a2d7e, type: 2}
   - {fileID: 11400000, guid: 5ea285d1756924cc0b27f4612fcdd1b4, type: 2}
   - {fileID: 7854453751169407068, guid: b833166be1c2045e3ac293fce0186c3c, type: 3}
   - {fileID: 7282889018440753118, guid: d9dfc6dc1b4e14979bee9784de3ba44d, type: 3}
+  - {fileID: 11400000, guid: c9c5d5c2481e946e1b45cce88dbb5fad, type: 2}
+  - {fileID: 11400000, guid: 9f3febbb0fc214364a6f892aa03c49da, type: 2}
   - {fileID: 11400000, guid: 5d4bd960b187d495b9eec0bd43aad8b0, type: 2}
   - {fileID: 8334246944251894886, guid: 21c6b487933bd41b89a45dd3f3ebfaf3, type: 3}
   - {fileID: 11400000, guid: 605926ab3296543f2808667a11b4af1b, type: 2}
+  - {fileID: 11400000, guid: 63c6c11c1c47d4466bfb794653243735, type: 2}
   - {fileID: 4890085278179872738, guid: ed4b0da052c08463894459596b3131e3, type: 2}
   - {fileID: 11400000, guid: 827ade89756e74c5c8f2ae4d0ee6dc6f, type: 2}
+  - {fileID: 11400000, guid: 6aaffb4798cb14bacbbcbd529afed9d2, type: 2}
+  - {fileID: 11400000, guid: fcb3f4a3371124242aa5d703aef1f65a, type: 2}
   - {fileID: 11400000, guid: 490ba322f3a554c7d9d4ed434763b8c8, type: 2}
   - {fileID: 8019310881375038877, guid: 66e135faf9e0140f7b5c191e5798d9c1, type: 3}
   - {fileID: 11400000, guid: 141a274a6b4b844d18d241eb587739b6, type: 2}
   - {fileID: 11400000, guid: bb11a8f624be749ce8206d5936e41364, type: 2}
+  - {fileID: 11400000, guid: 521af7f1c056f4582ae43a3075b26f93, type: 2}
   - {fileID: 8019310881375038877, guid: 6c46575ab8cb748638be284d5d959c26, type: 3}
   - {fileID: 11400000, guid: 6211f1237b4a140798517d6bb5a896ea, type: 2}
+  - {fileID: 11400000, guid: 13950831e9fcc4292a413dffca55def6, type: 2}
   - {fileID: 8019310881375038877, guid: f8d6b681f0db141c4977a6ea26a09bd4, type: 3}
   - {fileID: 8019310881375038877, guid: 0ebf8bad11db44f57b07384608498329, type: 3}
   - {fileID: 8019310881375038877, guid: 631768f21ddb64ce2a419442f54e28be, type: 3}
+  - {fileID: 11400000, guid: a9225dec6154c4f28b1f9779e3fe606f, type: 2}
   - {fileID: 7854453751169407068, guid: 734ea7dec7c87473bab4e36f2befad18, type: 3}
   - {fileID: 8019310881375038877, guid: 304f1d6a858a84be8a1e2a28cf4621c7, type: 3}
+  - {fileID: 11400000, guid: 9e8acb8d8d209440c8186369e3101cd8, type: 2}
+  - {fileID: 11400000, guid: 467028195dcf349549e0a8ca7c8ca743, type: 2}
   - {fileID: 4343727234628468602, guid: 3c0b8f54a01224c49a4de0a1093c4f79, type: 2}
   - {fileID: 4343727234628468602, guid: 5bd66261a18174af7958b9dba97c09d7, type: 2}
   - {fileID: 4343727234628468602, guid: 48d9a4de7f03c4dfc890d325af6f01b0, type: 2}
@@ -233,6 +243,7 @@ PlayerSettings:
   - {fileID: 8019310881375038877, guid: 9c4aec4f538ed42038164c15d403a52d, type: 3}
   - {fileID: 8019310881375038877, guid: 08d64ea560cb04c28a208b2ef8f5180e, type: 3}
   - {fileID: 7854453751169407068, guid: 1f44ea06595334c6ea0ce50e3cec21c2, type: 3}
+  - {fileID: 11400000, guid: 44dbc851f4dd54e66a86649c12afff40, type: 2}
   - {fileID: 8019310881375038877, guid: 54a5bf90dc29f4de08d7182666596d9a, type: 3}
   - {fileID: 4890085278179872738, guid: 2717db2c4c99043939b242882e4f583f, type: 2}
   - {fileID: 11400000, guid: 881da2b53898b43ed86ba15607db9996, type: 2}
@@ -303,6 +314,7 @@ PlayerSettings:
     enable360StereoCapture: 1
   isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 1
+  enableOpenGLProfilerGPURecorders: 1
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
@@ -334,13 +346,12 @@ PlayerSettings:
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
-  strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 12.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
-  tvOSTargetOSVersionString: 12.0
+  tvOSTargetOSVersionString: 11.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -388,7 +399,7 @@ PlayerSettings:
   appleDeveloperTeamID: A9997B8HR5
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
-  iOSManualSigningProvisioningProfileType: 1
+  iOSManualSigningProvisioningProfileType: 0
   tvOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 2
   iOSRequireARKit: 0
@@ -398,12 +409,12 @@ PlayerSettings:
   clonedFromGUID: 00000000000000000000000000000000
   templatePackageId: 
   templateDefaultScene: 
-  useCustomMainManifest: 1
+  useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 1
-  useCustomLauncherGradleManifest: 1
-  useCustomBaseGradleTemplate: 1
-  useCustomGradlePropertiesTemplate: 1
+  useCustomMainGradleTemplate: 0
+  useCustomLauncherGradleManifest: 0
+  useCustomBaseGradleTemplate: 0
+  useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 1
@@ -475,120 +486,101 @@ PlayerSettings:
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: iPhone
     m_Icons:
-    - m_Textures:
-      - {fileID: 2800000, guid: 5eb25c42ec6034d16bb5253effb63c1c, type: 3}
+    - m_Textures: []
       m_Width: 180
       m_Height: 180
       m_Kind: 0
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 5c25f8129f96f46c48dc38c41d85b257, type: 3}
+    - m_Textures: []
       m_Width: 120
       m_Height: 120
       m_Kind: 0
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: b96bf9a0a7df24dd2959b9c49d16e98c, type: 3}
+    - m_Textures: []
       m_Width: 167
       m_Height: 167
       m_Kind: 0
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 3ca9ccac8b1f442c5acbe76e1f6764df, type: 3}
+    - m_Textures: []
       m_Width: 152
       m_Height: 152
       m_Kind: 0
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 978a4ec547b9345d9a3123f34a028666, type: 3}
+    - m_Textures: []
       m_Width: 76
       m_Height: 76
       m_Kind: 0
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 5eb25c42ec6034d16bb5253effb63c1c, type: 3}
-      m_Width: 87
-      m_Height: 87
-      m_Kind: 1
-      m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 5c25f8129f96f46c48dc38c41d85b257, type: 3}
-      m_Width: 58
-      m_Height: 58
-      m_Kind: 1
-      m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: b96bf9a0a7df24dd2959b9c49d16e98c, type: 3}
-      m_Width: 29
-      m_Height: 29
-      m_Kind: 1
-      m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 3ca9ccac8b1f442c5acbe76e1f6764df, type: 3}
-      m_Width: 58
-      m_Height: 58
-      m_Kind: 1
-      m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 978a4ec547b9345d9a3123f34a028666, type: 3}
-      m_Width: 29
-      m_Height: 29
-      m_Kind: 1
-      m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 5eb25c42ec6034d16bb5253effb63c1c, type: 3}
+    - m_Textures: []
       m_Width: 120
       m_Height: 120
       m_Kind: 3
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 5c25f8129f96f46c48dc38c41d85b257, type: 3}
+    - m_Textures: []
       m_Width: 80
       m_Height: 80
       m_Kind: 3
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: b96bf9a0a7df24dd2959b9c49d16e98c, type: 3}
+    - m_Textures: []
       m_Width: 80
       m_Height: 80
       m_Kind: 3
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 3ca9ccac8b1f442c5acbe76e1f6764df, type: 3}
+    - m_Textures: []
       m_Width: 40
       m_Height: 40
       m_Kind: 3
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 74e8ce1ce5ade4581a472ac05bfd4bbc, type: 3}
-      m_Width: 1024
-      m_Height: 1024
-      m_Kind: 4
-      m_SubKind: App Store
-    - m_Textures:
-      - {fileID: 2800000, guid: 49223216312f44c3c95da13697f62f06, type: 3}
+    - m_Textures: []
+      m_Width: 87
+      m_Height: 87
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures: []
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures: []
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures: []
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
+      m_SubKind: iPad
+    - m_Textures: []
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+      m_SubKind: iPad
+    - m_Textures: []
       m_Width: 60
       m_Height: 60
       m_Kind: 2
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 2d0f9568c4fa34112baa83cb89d32172, type: 3}
+    - m_Textures: []
       m_Width: 40
       m_Height: 40
       m_Kind: 2
       m_SubKind: iPhone
-    - m_Textures:
-      - {fileID: 2800000, guid: 2d0f9568c4fa34112baa83cb89d32172, type: 3}
+    - m_Textures: []
       m_Width: 40
       m_Height: 40
       m_Kind: 2
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 5a836a1885a29407ea59b64f275cd4de, type: 3}
+    - m_Textures: []
       m_Width: 20
       m_Height: 20
       m_Kind: 2
       m_SubKind: iPad
+    - m_Textures: []
+      m_Width: 1024
+      m_Height: 1024
+      m_Kind: 4
+      m_SubKind: App Store
   - m_BuildTarget: Android
     m_Icons:
     - m_Textures: []
@@ -706,8 +698,6 @@ PlayerSettings:
   m_BuildTargetGraphicsJobs:
   - m_BuildTarget: MacStandaloneSupport
     m_GraphicsJobs: 0
-  - m_BuildTarget: WindowsStandaloneSupport
-    m_GraphicsJobs: 0
   m_BuildTargetGraphicsJobMode: []
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: iOSSupport
@@ -741,13 +731,6 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: Standalone
     m_EncodingQuality: 1
-  m_BuildTargetGroupHDRCubemapEncodingQuality:
-  - m_BuildTarget: iPhone
-    m_EncodingQuality: 1
-  - m_BuildTarget: Android
-    m_EncodingQuality: 1
-  - m_BuildTarget: Standalone
-    m_EncodingQuality: 2
   m_BuildTargetGroupLightmapSettings:
   - m_BuildTarget: iPhone
     m_TextureStreamingEnabled: 1
@@ -774,7 +757,6 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
-  macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -786,7 +768,6 @@ PlayerSettings:
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
   switchNSODependencies: 
-  switchCompilerFlags: 
   switchTitleNames_0: 
   switchTitleNames_1: 
   switchTitleNames_2: 
@@ -958,7 +939,7 @@ PlayerSettings:
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
   playerPrefsMaxSize: 32768
-  ps4Passcode: 7XMJkApUYNMlrXgXdMYAXnZ11qHLS3c6
+  ps4Passcode: WAk4X1aESGKtM0Iwi5wQAXRGfOKb5Anr
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -1013,25 +994,17 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  webGLInitialMemorySize: 32
-  webGLMaximumMemorySize: 2048
-  webGLMemoryGrowthMode: 2
-  webGLMemoryLinearGrowthStep: 16
-  webGLMemoryGeometricGrowthStep: 0.2
-  webGLMemoryGeometricGrowthCap: 96
   scriptingDefineSymbols:
-    Android: UNITY_POST_PROCESSING_STACK_V2
+    Android: MSG_PACK_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;ENGINE_TEMPLATES_MODULE_ENABLE;RUNTIME_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;ADS_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;SAMPLE_PROJ;ADMOB_ADS_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;MODULE_VER_2_5_0_OR_NEWER;MODULE_VER_2_6_0_OR_NEWER;ENABLE_IL2CPP;ODIN_INSPECTOR;DOTWEEN_ENABLE;ODIN_INSPECTOR_3;EXTRA_SCRIPT_ENABLE;RECEIPT_CHECK_ENABLE;NEWTON_SOFT_JSON_ENABLE;EDITOR_COROUTINE_ENABLE;UNITY_POST_PROCESSING_STACK_V2;AB_TEST_ENABLE;DOTWEEN_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;ENABLE_INPUT_SYSTEM;LIGHT_ENABLE;CAMERA_STACKING_ENABLE;STUDY_ENABLE;ML_AGENTS_MODULE_ENABLE;ML_AGENTS_ENABLE;CINEMACHINE_MODULE_ENABLE;CINEMACHINE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;INPUT_SYSTEM_ENABLE;POST_PROCESSING_MODULE_ENABLE;POST_PROCESSING_ENABLE;SPINE_ANI_MODULE_ENABLE;SPINE_ANI_ENABLE;UNIVERSAL_RENDERING_PIPELINE_ENABLE;NOTI_MODULE_ENABLE;NOTI_ENABLE
     CloudRendering: UNITY_POST_PROCESSING_STACK_V2
     EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
-    GameCoreScarlett: UNITY_POST_PROCESSING_STACK_V2
     GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
     Lumin: UNITY_POST_PROCESSING_STACK_V2
     Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
     PS4: UNITY_POST_PROCESSING_STACK_V2
     PS5: UNITY_POST_PROCESSING_STACK_V2
-    QNX: UNITY_POST_PROCESSING_STACK_V2
     Stadia: UNITY_POST_PROCESSING_STACK_V2
-    Standalone: UNITY_POST_PROCESSING_STACK_V2
+    Standalone: MSG_PACK_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;ENGINE_TEMPLATES_MODULE_ENABLE;RUNTIME_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;ADS_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;SAMPLE_PROJ;ADMOB_ADS_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;MODULE_VER_2_5_0_OR_NEWER;MODULE_VER_2_6_0_OR_NEWER;ENABLE_IL2CPP;ODIN_INSPECTOR;DOTWEEN_ENABLE;ODIN_INSPECTOR_3;EXTRA_SCRIPT_ENABLE;RECEIPT_CHECK_ENABLE;NEWTON_SOFT_JSON_ENABLE;EDITOR_COROUTINE_ENABLE;UNITY_POST_PROCESSING_STACK_V2;AB_TEST_ENABLE;DOTWEEN_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;ENABLE_INPUT_SYSTEM;LIGHT_ENABLE;CAMERA_STACKING_ENABLE;STUDY_ENABLE;ML_AGENTS_MODULE_ENABLE;ML_AGENTS_ENABLE;CINEMACHINE_MODULE_ENABLE;CINEMACHINE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;INPUT_SYSTEM_ENABLE;POST_PROCESSING_MODULE_ENABLE;POST_PROCESSING_ENABLE;SPINE_ANI_MODULE_ENABLE;SPINE_ANI_ENABLE;UNIVERSAL_RENDERING_PIPELINE_ENABLE;NOTI_MODULE_ENABLE;NOTI_ENABLE
     WebGL: UNITY_POST_PROCESSING_STACK_V2
     Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2
     XboxOne: UNITY_POST_PROCESSING_STACK_V2
@@ -1047,7 +1020,6 @@ PlayerSettings:
   il2cppCompilerConfiguration:
     Android: 1
     Standalone: 1
-  il2cppCodeGeneration: {}
   managedStrippingLevel:
     Android: 2
     Standalone: 2
@@ -1124,8 +1096,10 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
     Collab: 0
-    Purchasing: 0
+    Legacy Analytics: 1
+    Purchasing: 1
     Unity Ads: 0
   luminIcon:
     m_Name: 
@@ -1150,4 +1124,3 @@ PlayerSettings:
   playerDataPath: 
   forceSRGBBlit: 1
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 2
