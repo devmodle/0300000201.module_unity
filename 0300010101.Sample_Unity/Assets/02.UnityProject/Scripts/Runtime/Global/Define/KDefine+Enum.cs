@@ -5,6 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+/** 열거형 값 */
+public static partial class KEnumVal {
+	#region 기본
+
+	#endregion			// 기본
+}
+
 #region 기본
 /** 플레이 모드 */
 public enum EPlayMode {

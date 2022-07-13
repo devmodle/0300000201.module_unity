@@ -8,11 +8,6 @@ using UnityEngine.Events;
 using MessagePack;
 
 #region 기본
-/** 서브 에디터 레벨 생성 정보 */
-public partial class CSubEditorLevelCreateInfo : CEditorLevelCreateInfo {
-
-}
-
 /** 에디터 타입 랩퍼 */
 [MessagePackObject]
 public partial struct STEditorTypeWrapper {
