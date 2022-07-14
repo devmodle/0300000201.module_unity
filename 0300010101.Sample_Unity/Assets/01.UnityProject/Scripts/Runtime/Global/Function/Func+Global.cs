@@ -208,10 +208,10 @@ public static partial class Func {
 		if(a_oUserTargetInfo != null && !a_stTargetInfo.Equals(STTargetInfo.INVALID)) {
 			switch(a_stTargetInfo.m_eTargetKinds) {
 				case ETargetKinds.ITEM_LV: {
-					a_oUserTargetInfo.LV = System.Math.Clamp(a_oUserTargetInfo.LV - a_stTargetInfo.IntTargets, KCDefine.B_VAL_1_INT, long.MaxValue);
+					a_oUserTargetInfo.LV = System.Math.Clamp(a_oUserTargetInfo.LV - a_stTargetInfo.IntTarget01, KCDefine.B_VAL_1_INT, long.MaxValue);
 				} break;
 				case ETargetKinds.ITEM_NUMS: {
-					a_oUserTargetInfo.Nums = System.Math.Clamp(a_oUserTargetInfo.Nums - a_stTargetInfo.IntTargets, KCDefine.B_VAL_0_INT, long.MaxValue);
+					a_oUserTargetInfo.Nums = System.Math.Clamp(a_oUserTargetInfo.Nums - a_stTargetInfo.IntTarget01, KCDefine.B_VAL_0_INT, long.MaxValue);
 				} break;
 			}
 		}
@@ -264,10 +264,10 @@ public static partial class Func {
 		if(a_oUserTargetInfo != null && !a_stTargetInfo.Equals(STTargetInfo.INVALID)) {
 			switch(a_stTargetInfo.m_eTargetKinds) {
 				case ETargetKinds.SKILL_LV: {
-					a_oUserTargetInfo.LV = System.Math.Clamp(a_oUserTargetInfo.LV + a_stTargetInfo.IntTargets, KCDefine.B_VAL_1_INT, long.MaxValue);
+					a_oUserTargetInfo.LV = System.Math.Clamp(a_oUserTargetInfo.LV + a_stTargetInfo.IntTarget01, KCDefine.B_VAL_1_INT, long.MaxValue);
 				} break;
 				case ETargetKinds.SKILL_NUMS: {
-					a_oUserTargetInfo.Nums = System.Math.Clamp(a_oUserTargetInfo.Nums + a_stTargetInfo.IntTargets, KCDefine.B_VAL_0_INT, long.MaxValue);
+					a_oUserTargetInfo.Nums = System.Math.Clamp(a_oUserTargetInfo.Nums + a_stTargetInfo.IntTarget01, KCDefine.B_VAL_0_INT, long.MaxValue);
 				} break;
 			}
 		}
