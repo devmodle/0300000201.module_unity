@@ -17,20 +17,17 @@ using Newtonsoft.Json;
 [MessagePackObject][System.Serializable]
 public abstract partial class CUserTargetInfo : CBaseInfo {
 	#region 변수
-	[Key(71)] public List<STAbilityValInfo> m_oAbilityValInfoList = new List<STAbilityValInfo>();
+	[Key(131)] public Dictionary<EAbilityKinds, STAbilityValInfo> m_oAbilityValInfoDict = new Dictionary<EAbilityKinds, STAbilityValInfo>();
 	#endregion			// 변수
 
 	#region 상수
-	private const string KEY_LV = "LV";
 	private const string KEY_NUMS = "Nums";
 	private const string KEY_OWNER_KINDS = "OwnerKinds";
 	private const string KEY_OWNER_TARGET_KINDS = "OwnerTargetKinds";
 	#endregion			// 상수
 
 	#region 프로퍼티
-	[JsonIgnore][IgnoreMember] public long LV { get { return long.Parse(m_oStrDict.GetValueOrDefault(KEY_LV, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_LV, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public long Nums { get { return long.Parse(m_oStrDict.GetValueOrDefault(KEY_NUMS, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_NUMS, $"{value}"); } }
-
 	[JsonIgnore][IgnoreMember] public int OwnerKinds { get { return int.Parse(m_oStrDict.GetValueOrDefault(KEY_OWNER_KINDS, $"{KCDefine.B_IDX_INVALID}")); } set { m_oStrDict.ExReplaceVal(KEY_OWNER_KINDS, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public ETargetKinds OwnerTargetKinds { get { return (ETargetKinds)int.Parse(m_oStrDict.GetValueOrDefault(KEY_OWNER_TARGET_KINDS, $"{(int)ETargetKinds.NONE}")); } set { m_oStrDict.ExReplaceVal(KEY_OWNER_TARGET_KINDS, $"{(int)value}"); } }
 	#endregion			// 프로퍼티
@@ -44,7 +41,7 @@ public abstract partial class CUserTargetInfo : CBaseInfo {
 	/** 역직렬화 되었을 경우 */
 	public override void OnAfterDeserialize() {
 		base.OnAfterDeserialize();
-		m_oAbilityValInfoList = m_oAbilityValInfoList ?? new List<STAbilityValInfo>();
+		m_oAbilityValInfoDict = m_oAbilityValInfoDict ?? new Dictionary<EAbilityKinds, STAbilityValInfo>();
 	}
 	#endregion			// IMessagePackSerializationCallbackReceiver
 
@@ -241,7 +238,7 @@ public partial class CUserInfo : CBaseInfo {
 
 	/** 유저 객체 정보를 설정한다 */
 	protected virtual void SetupUserObjInfo(CUserObjInfo a_oUserObjInfo) {
-		for(int i = 0; i < a_oUserObjInfo.m_oAbilityValInfoList.Count; ++i) {
+		for(int i = 0; i < a_oUserObjInfo.m_oAbilityValInfoDict.Keys.Count; ++i) {
 			// 버전이 다를 경우
 			if(this.AbilityValInfoVer.CompareTo(KDefine.G_VER_ABILITY_VER_INFO) < KCDefine.B_COMPARE_EQUALS) {
 				// Do Something	
@@ -297,12 +294,28 @@ public partial class CUserInfoStorage : CSingleton<CUserInfoStorage> {
 		return oUserItemInfo;
 	}
 
+	/** 유저 아이템 어빌리티 값 정보를 반환한다 */
+	public STAbilityValInfo GetUserItemAbilityValInfo(EItemKinds a_eItemKinds, EAbilityKinds a_eAbilityKinds) {
+		bool bIsValid = this.TryGetUserItemAbilityValInfo(a_eItemKinds, a_eAbilityKinds, out STAbilityValInfo stAbilityValInfo);
+		CAccess.Assert(bIsValid);
+
+		return stAbilityValInfo;
+	}
+
 	/** 유저 스킬 정보를 반환한다 */
 	public CUserSkillInfo GetUserSkillInfo(ESkillKinds a_eSkillKinds) {
 		bool bIsValid = this.TryGetUserSkillInfo(a_eSkillKinds, out CUserSkillInfo oUserSkillInfo);
 		CAccess.Assert(bIsValid);
 
 		return oUserSkillInfo;
+	}
+
+	/** 유저 스킬 어빌리티 값 정보를 반환한다 */
+	public STAbilityValInfo GetUserSkillAbilityValInfo(ESkillKinds a_eSkillKinds, EAbilityKinds a_eAbilityKinds) {
+		bool bIsValid = this.TryGetUserSkillAbilityValInfo(a_eSkillKinds, a_eAbilityKinds, out STAbilityValInfo stAbilityValInfo);
+		CAccess.Assert(bIsValid);
+
+		return stAbilityValInfo;
 	}
 
 	/** 유저 객체 정보를 반환한다 */
@@ -313,10 +326,24 @@ public partial class CUserInfoStorage : CSingleton<CUserInfoStorage> {
 		return oUserObjInfo;
 	}
 
+	/** 유저 객체 어빌리티 값 정보를 반환한다 */
+	public STAbilityValInfo GetUserObjAbilityValInfo(EObjKinds a_eObjKinds, EAbilityKinds a_eAbilityKinds) {
+		bool bIsValid = this.TryGetUserObjAbilityValInfo(a_eObjKinds, a_eAbilityKinds, out STAbilityValInfo stAbilityValInfo);
+		CAccess.Assert(bIsValid);
+
+		return stAbilityValInfo;
+	}
+
 	/** 유저 아이템 정보를 반환한다 */
 	public bool TryGetUserItemInfo(EItemKinds a_eItemKinds, out CUserItemInfo a_oOutUserItemInfo) {
 		a_oOutUserItemInfo = this.UserInfo.m_oUserItemInfoList.ExGetVal((a_oUserItemInfo) => a_oUserItemInfo.ItemKinds == a_eItemKinds, null);
 		return a_oOutUserItemInfo != null;
+	}
+
+	/** 유저 아이템 어빌리티 값 정보를 반환한다 */
+	public bool TryGetUserItemAbilityValInfo(EItemKinds a_eItemKinds, EAbilityKinds a_eAbilityKinds, out STAbilityValInfo a_stOutAbilityValInfo) {
+		a_stOutAbilityValInfo = this.TryGetUserItemInfo(a_eItemKinds, out CUserItemInfo oUserItemInfo) ? oUserItemInfo.m_oAbilityValInfoDict.GetValueOrDefault(a_eAbilityKinds, STAbilityValInfo.INVALID) : STAbilityValInfo.INVALID;
+		return !a_stOutAbilityValInfo.Equals(STAbilityValInfo.INVALID);
 	}
 
 	/** 유저 스킬 정보를 반환한다 */
@@ -325,10 +352,22 @@ public partial class CUserInfoStorage : CSingleton<CUserInfoStorage> {
 		return a_oOutUserSkillInfo != null;
 	}
 
+	/** 유저 스킬 어빌리티 값 정보를 반환한다 */
+	public bool TryGetUserSkillAbilityValInfo(ESkillKinds a_eSkillKinds, EAbilityKinds a_eAbilityKinds, out STAbilityValInfo a_stOutAbilityValInfo) {
+		a_stOutAbilityValInfo = this.TryGetUserSkillInfo(a_eSkillKinds, out CUserSkillInfo oUserSkillInfo) ? oUserSkillInfo.m_oAbilityValInfoDict.GetValueOrDefault(a_eAbilityKinds, STAbilityValInfo.INVALID) : STAbilityValInfo.INVALID;
+		return !a_stOutAbilityValInfo.Equals(STAbilityValInfo.INVALID);
+	}
+
 	/** 유저 객체 정보를 반환한다 */
 	public bool TryGetUserObjInfo(EObjKinds a_eObjKinds, out CUserObjInfo a_oOutUserObjInfo) {
 		a_oOutUserObjInfo = this.UserInfo.m_oUserObjInfoList.ExGetVal((a_oUserItemInfo) => a_oUserItemInfo.ObjKinds == a_eObjKinds, null);
 		return a_oOutUserObjInfo != null;
+	}
+
+	/** 유저 객체 어빌리티 값 정보를 반환한다 */
+	public bool TryGetUserObjAbilityValInfo(EObjKinds a_eObjKinds, EAbilityKinds a_eAbilityKinds, out STAbilityValInfo a_stOutAbilityValInfo) {
+		a_stOutAbilityValInfo = this.TryGetUserObjInfo(a_eObjKinds, out CUserObjInfo oUserObjInfo) ? oUserObjInfo.m_oAbilityValInfoDict.GetValueOrDefault(a_eAbilityKinds, STAbilityValInfo.INVALID) : STAbilityValInfo.INVALID;
+		return !a_stOutAbilityValInfo.Equals(STAbilityValInfo.INVALID);
 	}
 	
 	/** 유저 아이템 정보를 추가한다 */
