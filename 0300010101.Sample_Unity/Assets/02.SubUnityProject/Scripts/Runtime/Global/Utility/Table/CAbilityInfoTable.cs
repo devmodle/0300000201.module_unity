@@ -119,7 +119,7 @@ public partial class CAbilityInfoTable : CScriptableObj<CAbilityInfoTable> {
 
 	/** 어빌리티 정보를 반환한다 */
 	public bool TryGetAbilityInfo(EAbilityKinds a_EAbilityKinds, out STAbilityInfo a_stOutAbilityInfo) {
-		a_stOutAbilityInfo = this.AbilityInfoDict.GetValueOrDefault(a_EAbilityKinds, default(STAbilityInfo));
+		a_stOutAbilityInfo = this.AbilityInfoDict.GetValueOrDefault(a_EAbilityKinds, STAbilityInfo.INVALID);
 		return this.AbilityInfoDict.ContainsKey(a_EAbilityKinds);
 	}
 
