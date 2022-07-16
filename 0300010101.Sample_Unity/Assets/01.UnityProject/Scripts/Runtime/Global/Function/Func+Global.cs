@@ -432,7 +432,14 @@ public static partial class Func {
 	#endregion			// 조건부 클래스 함수
 }
 
-/** 초기화 씬 함수 */
+/** 스플래시 씬 함수 */
+public static partial class Func {
+	#region 클래스 함수
+	
+	#endregion			// 클래스 함수
+}
+
+/** 시작 씬 함수 */
 public static partial class Func {
 	#region 클래스 함수
 
@@ -457,20 +464,6 @@ public static partial class Func {
 public static partial class Func {
 	#region 클래스 함수
 
-	#endregion			// 클래스 함수
-}
-
-/** 시작 씬 함수 */
-public static partial class Func {
-	#region 클래스 함수
-
-	#endregion			// 클래스 함수
-}
-
-/** 스플래시 씬 함수 */
-public static partial class Func {
-	#region 클래스 함수
-	
 	#endregion			// 클래스 함수
 }
 

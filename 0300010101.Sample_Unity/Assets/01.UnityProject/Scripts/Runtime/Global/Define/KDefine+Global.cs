@@ -104,10 +104,17 @@ public static partial class KDefine {
 	#endregion			// 런타임 상수
 }
 
-/** 초기화 씬 상수 */
+/** 스플래시 씬 상수 */
 public static partial class KDefine {
 	#region 기본
+	
+	#endregion			// 기본
+}
 
+/** 시작 씬 상수 */
+public static partial class KDefine {
+	#region 기본
+	
 	#endregion			// 기본
 }
 
@@ -129,20 +136,6 @@ public static partial class KDefine {
 public static partial class KDefine {
 	#region 기본
 
-	#endregion			// 기본
-}
-
-/** 시작 씬 상수 */
-public static partial class KDefine {
-	#region 기본
-	
-	#endregion			// 기본
-}
-
-/** 스플래시 씬 상수 */
-public static partial class KDefine {
-	#region 기본
-	
 	#endregion			// 기본
 }
 
