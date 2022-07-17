@@ -21,13 +21,11 @@ public abstract partial class CUserTargetInfo : CBaseInfo {
 	#endregion			// 변수
 
 	#region 상수
-	private const string KEY_NUMS = "Nums";
 	private const string KEY_OWNER_KINDS = "OwnerKinds";
 	private const string KEY_OWNER_TARGET_KINDS = "OwnerTargetKinds";
 	#endregion			// 상수
 
 	#region 프로퍼티
-	[JsonIgnore][IgnoreMember] public long Nums { get { return long.Parse(m_oStrDict.GetValueOrDefault(KEY_NUMS, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_NUMS, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public int OwnerKinds { get { return int.Parse(m_oStrDict.GetValueOrDefault(KEY_OWNER_KINDS, $"{KCDefine.B_IDX_INVALID}")); } set { m_oStrDict.ExReplaceVal(KEY_OWNER_KINDS, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public ETargetKinds OwnerTargetKinds { get { return (ETargetKinds)int.Parse(m_oStrDict.GetValueOrDefault(KEY_OWNER_TARGET_KINDS, $"{(int)ETargetKinds.NONE}")); } set { m_oStrDict.ExReplaceVal(KEY_OWNER_TARGET_KINDS, $"{(int)value}"); } }
 	#endregion			// 프로퍼티
@@ -258,8 +256,8 @@ public partial class CUserInfoStorage : CSingleton<CUserInfoStorage> {
 	#region 프로퍼티
 	public CUserInfo UserInfo { get; private set; } = new CUserInfo();
 	public bool IsPurchaseRemoveAds => this.TryGetUserItemInfo(EItemKinds.NON_CONSUMABLE_REMOVE_ADS, out CUserItemInfo oUserItemInfo);
-	public long NumCoins => this.TryGetUserItemInfo(EItemKinds.GOODS_COINS, out CUserItemInfo oUserItemInfo) ? oUserItemInfo.Nums : KCDefine.B_VAL_0_INT;
-	public long NumCoinsBoxCoins => this.TryGetUserItemInfo(EItemKinds.GOODS_COINS_BOX_COINS, out CUserItemInfo oUserItemInfo) ? oUserItemInfo.Nums : KCDefine.B_VAL_0_INT;
+	public long NumCoins => this.TryGetUserItemInfo(EItemKinds.GOODS_COINS, out CUserItemInfo oUserItemInfo) ? oUserItemInfo.m_oAbilityValInfoDict.GetValueOrDefault(EAbilityKinds.STAT_NUMS, STAbilityValInfo.INVALID).m_nVal : KCDefine.B_VAL_0_INT;
+	public long NumCoinsBoxCoins => this.TryGetUserItemInfo(EItemKinds.GOODS_COINS_BOX_COINS, out CUserItemInfo oUserItemInfo) ? oUserItemInfo.m_oAbilityValInfoDict.GetValueOrDefault(EAbilityKinds.STAT_NUMS, STAbilityValInfo.INVALID).m_nVal : KCDefine.B_VAL_0_INT;
 	#endregion            // 프로퍼티
 
 	#region 함수
@@ -273,17 +271,17 @@ public partial class CUserInfoStorage : CSingleton<CUserInfoStorage> {
 
 	/** 유저 아이템 개수를 반환한다 */
 	public long GetNumUserItems(EItemKinds a_eItemKinds) {
-		return this.UserInfo.m_oUserItemInfoList.Sum((a_oUserItemInfo) => (a_oUserItemInfo.ItemKinds == a_eItemKinds) ? a_oUserItemInfo.Nums : KCDefine.B_VAL_0_INT);
+		return this.UserInfo.m_oUserItemInfoList.Sum((a_oUserItemInfo) => (a_oUserItemInfo.ItemKinds == a_eItemKinds) ? a_oUserItemInfo.m_oAbilityValInfoDict.GetValueOrDefault(EAbilityKinds.STAT_NUMS, STAbilityValInfo.INVALID).m_nVal : KCDefine.B_VAL_0_INT);
 	}
 
 	/** 유저 스킬 개수를 반환한다 */
 	public long GetNumUserSkills(ESkillKinds a_eSkillKinds) {
-		return this.UserInfo.m_oUserSkillInfoList.Sum((a_oUserSkillInfo) => (a_oUserSkillInfo.SkillKinds == a_eSkillKinds) ? a_oUserSkillInfo.Nums : KCDefine.B_VAL_0_INT);
+		return this.UserInfo.m_oUserSkillInfoList.Sum((a_oUserSkillInfo) => (a_oUserSkillInfo.SkillKinds == a_eSkillKinds) ? a_oUserSkillInfo.m_oAbilityValInfoDict.GetValueOrDefault(EAbilityKinds.STAT_NUMS, STAbilityValInfo.INVALID).m_nVal : KCDefine.B_VAL_0_INT);
 	}
 
 	/** 유저 객체 개수를 반환한다 */
 	public long GetNumUserObjs(EObjKinds a_eObjKinds) {
-		return this.UserInfo.m_oUserObjInfoList.Sum((a_oUserObjInfo) => (a_oUserObjInfo.ObjKinds == a_eObjKinds) ? a_oUserObjInfo.Nums : KCDefine.B_VAL_0_INT);
+		return this.UserInfo.m_oUserObjInfoList.Sum((a_oUserObjInfo) => (a_oUserObjInfo.ObjKinds == a_eObjKinds) ? a_oUserObjInfo.m_oAbilityValInfoDict.GetValueOrDefault(EAbilityKinds.STAT_NUMS, STAbilityValInfo.INVALID).m_nVal : KCDefine.B_VAL_0_INT);
 	}
 
 	/** 유저 아이템 정보를 반환한다 */
