@@ -77,6 +77,10 @@ namespace SampleEngineName {
 		/** 어빌리티 값을 설정한다 */
 		public override void SetupAbilityVals() {
 			base.SetupAbilityVals();
+
+			foreach(var stKeyVal in m_stParams.m_stObjInfo.m_oAbilityValInfoDict) {
+					
+			}
 		}
 		#endregion			// 추가 함수
 	}
