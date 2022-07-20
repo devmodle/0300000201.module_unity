@@ -78,8 +78,8 @@ namespace SampleEngineName {
 		public override void SetupAbilityVals() {
 			base.SetupAbilityVals();
 
-			foreach(var stKeyVal in m_stParams.m_stObjInfo.m_oAbilityValInfoDict) {
-					
+			foreach(var stKeyVal in m_stParams.m_stObjInfo.m_oAbilityTargetInfoDict) {
+				global::Func.SetupAbilityVals(stKeyVal.Value, this.IntAbilityValDict, this.RealAbilityValDict);
 			}
 		}
 		#endregion			// 추가 함수

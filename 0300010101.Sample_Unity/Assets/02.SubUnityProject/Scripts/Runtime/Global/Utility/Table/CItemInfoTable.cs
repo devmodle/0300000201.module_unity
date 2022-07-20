@@ -16,8 +16,7 @@ public partial struct STItemInfo {
 
 	public Dictionary<ulong, STTargetInfo> m_oAttachItemTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oSkillTargetInfoDict;
-
-	public Dictionary<EAbilityKinds, STAbilityValInfo> m_oAbilityValInfoDict;
+	public Dictionary<ulong, STTargetInfo> m_oAbilityTargetInfoDict;
 
 	#region 상수
 	public static STItemInfo INVALID = new STItemInfo() {
@@ -41,8 +40,7 @@ public partial struct STItemInfo {
 
 		m_oAttachItemTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 		m_oSkillTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
-		
-		m_oAbilityValInfoDict = new Dictionary<EAbilityKinds, STAbilityValInfo>();
+		m_oAbilityTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 
 		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
 			var stTargetInfo = new STTargetInfo(a_oItemInfo[string.Format(KCDefine.U_KEY_FMT_ATTACH_ITEM_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
@@ -54,9 +52,9 @@ public partial struct STItemInfo {
 			m_oSkillTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
 
-		for(int i = 0; i < KDefine.G_MAX_NUM_ABILITY_VAL_INFOS; ++i) {
-			var stAbilityValInfo = new STAbilityValInfo(a_oItemInfo[string.Format(KCDefine.U_KEY_FMT_ABILITY_VAL_INFO, i + KCDefine.B_VAL_1_INT)]);
-			m_oAbilityValInfoDict.TryAdd(stAbilityValInfo.m_eAbilityKinds, stAbilityValInfo);
+		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
+			var stTargetInfo = new STTargetInfo(a_oItemInfo[string.Format(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
+			m_oAbilityTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
 	}
 	#endregion			// 함수
@@ -102,7 +100,7 @@ public partial struct STItemSaleInfo {
 			m_oPayTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
 
-		for(int i = 0; i < KDefine.G_MAX_NUM_ABILITY_VAL_INFOS; ++i) {
+		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
 			var stTargetInfo = new STTargetInfo(a_oItemSaleInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
 			m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
@@ -150,7 +148,7 @@ public partial struct STItemEnhanceInfo {
 			m_oPayTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
 
-		for(int i = 0; i < KDefine.G_MAX_NUM_ABILITY_VAL_INFOS; ++i) {
+		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
 			var stTargetInfo = new STTargetInfo(a_oItemEnhanceInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
 			m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUniqueTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo);
 		}
