@@ -7,6 +7,12 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 /** 서브 팝업 */
 public abstract partial class CSubPopup : CPopup {
+	/** 서브 식별자 */
+	private enum ESubKey {
+		NONE = -1,
+		[HideInInspector] MAX_VAL
+	}
+	
 	#region 프로퍼티
 	public override float ShowTimeScale => KCDefine.B_VAL_0_REAL;
 	public override float CloseTimeScale => KCDefine.B_VAL_1_REAL;

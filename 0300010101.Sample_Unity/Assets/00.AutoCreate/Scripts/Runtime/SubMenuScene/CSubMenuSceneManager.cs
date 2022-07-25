@@ -15,7 +15,7 @@ namespace MenuScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.SetupAwake();
+				this.AwakeSetup();
 			}
 		}
 
@@ -32,7 +32,7 @@ namespace MenuScene {
 		}
 
 		/** 씬을 설정한다 */
-		private void SetupAwake() {
+		private void AwakeSetup() {
 			// Do Something
 		}
 

@@ -7,6 +7,12 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 /** 서브 경고 팝업 */
 public partial class CSubAlertPopup : CAlertPopup {
+	/** 서브 식별자 */
+	private enum ESubKey {
+		NONE = -1,
+		[HideInInspector] MAX_VAL
+	}
+
 	#region 프로퍼티
 	public override EAniType AniType => EAniType.DROPDOWN;
 	#endregion			// 프로퍼티

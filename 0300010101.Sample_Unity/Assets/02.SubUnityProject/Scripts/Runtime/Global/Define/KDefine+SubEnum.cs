@@ -9,10 +9,10 @@ using UnityEngine.Events;
 public static partial class KEnumVal {
 	#region 기본
 	// 타겟 종류
-	public const int LV_TARGET_SUB_KINDS_TYPE = 1;
-	public const int EXP_TARGET_SUB_KINDS_TYPE = 2;
-	public const int NUMS_TARGET_SUB_KINDS_TYPE = 3;
-	public const int ENHANCE_TARGET_SUB_KINDS_TYPE = 4;
+	public const int LV_TARGET_SUB_KINDS_TYPE_VAL = 1;
+	public const int EXP_TARGET_SUB_KINDS_TYPE_VAL = 2;
+	public const int NUMS_TARGET_SUB_KINDS_TYPE_VAL = 3;
+	public const int ENHANCE_TARGET_SUB_KINDS_TYPE_VAL = 4;
 	#endregion			// 기본
 }
 

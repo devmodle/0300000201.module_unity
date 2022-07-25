@@ -20,7 +20,7 @@ namespace AgreeScene {
 				CFunc.ShowLog($"Country Code: {CCommonAppInfoStorage.Inst.CountryCode}", KCDefine.B_LOG_COLOR_PLATFORM_INFO);
 #endif			// #if NEWTON_SOFT_JSON_MODULE_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 
-				this.SetupAwake();
+				this.AwakeSetup();
 			}
 		}
 
@@ -35,7 +35,7 @@ namespace AgreeScene {
 		}
 
 		/** 씬을 설정한다 */
-		private void SetupAwake() {
+		private void AwakeSetup() {
 #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
 			Func.SetupLocalizeStrs();
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE

@@ -48,7 +48,7 @@ namespace StartScene {
 		#endregion			// 변수
 
 		#region 상수
-		private static readonly Vector3 POS_LOADING_TEXT = new Vector3(0.0f, 35.0f, 0.0f);
+		private static readonly Vector3 POS_LOADING_TEXT = CSubStartSceneManager.POS_LOADING_GAUGE + new Vector3(0.0f, 70.0f, 0.0f);
 		private static readonly Vector3 POS_LOADING_GAUGE = new Vector3(0.0f, -35.0f, 0.0f);
 		#endregion			// 상수
 
@@ -59,7 +59,7 @@ namespace StartScene {
 
 			// 초기화 되었을 경우
 			if(CSceneManager.IsInit) {
-				this.SetupAwake();
+				this.AwakeSetup();
 			}
 		}
 
@@ -103,10 +103,10 @@ namespace StartScene {
 		}
 
 		/** 씬을 설정한다 */
-		private void SetupAwake() {
+		private void AwakeSetup() {
 			// 객체를 설정한다 {
 			CFunc.SetupObjs(new List<(EKey, string, GameObject, GameObject)>() {
-				(EKey.LOADING_GAUGE, KCDefine.SS_OBJ_N_LOADING_GAUGE, this.UIs, CResManager.Inst.GetRes<GameObject>(KCDefine.SS_OBJ_P_LOADING_GAUGE))
+				(EKey.LOADING_GAUGE, $"{EKey.LOADING_GAUGE}", this.UIs, CResManager.Inst.GetRes<GameObject>(KCDefine.SS_OBJ_P_LOADING_GAUGE))
 			}, m_oUIsDict, false);
 
 			m_oUIsDict[EKey.LOADING_GAUGE].transform.localPosition = CSubStartSceneManager.POS_LOADING_GAUGE;
