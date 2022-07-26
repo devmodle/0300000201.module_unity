@@ -217,11 +217,11 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		var oJSONNode = SimpleJSON.JSONNode.Parse(a_oJSONStr);
 
 		var oAbilityInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_STAT], oJSONNode[KCDefine.U_KEY_BUFF], oJSONNode[KCDefine.U_KEY_DEBUFF]
+			oJSONNode[KCDefine.U_KEY_STAT], oJSONNode[KCDefine.U_KEY_BUFF], oJSONNode[KCDefine.U_KEY_DEBUFF], oJSONNode[KCDefine.U_KEY_UPGRADE]
 		};
 
 		var oAbilityEnhanceInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_STAT_ENHANCE], oJSONNode[KCDefine.U_KEY_BUFF_ENHANCE], oJSONNode[KCDefine.U_KEY_DEBUFF_ENHANCE]
+			oJSONNode[KCDefine.U_KEY_STAT_ENHANCE], oJSONNode[KCDefine.U_KEY_BUFF_ENHANCE], oJSONNode[KCDefine.U_KEY_DEBUFF_ENHANCE], oJSONNode[KCDefine.U_KEY_UPGRADE_ENHANCE]
 		};
 
 		for(int i = 0; i < oAbilityInfosList.Count; ++i) {
