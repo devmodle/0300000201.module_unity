@@ -214,16 +214,19 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	/** 어빌리티 정보를 로드한다 */
 	private Dictionary<EAbilityKinds, STAbilityInfo> DoLoadAbilityInfos(string a_oJSONStr) {
 		CAccess.Assert(a_oJSONStr.ExIsValid());
+
 		var oJSONNode = SimpleJSON.JSONNode.Parse(a_oJSONStr);
+		var oAbilityInfosList = new List<SimpleJSON.JSONNode>();
+		var oAbilityEnhanceInfosList = new List<SimpleJSON.JSONNode>();
 
-		var oAbilityInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_STAT], oJSONNode[KCDefine.U_KEY_BUFF], oJSONNode[KCDefine.U_KEY_DEBUFF], oJSONNode[KCDefine.U_KEY_UPGRADE]
-		};
+		for(int i = 0; i < KDefine.G_KEY_ABILITY_IT_INFOS_LIST.Count; ++i) {
+			oAbilityInfosList.ExAddVal(oJSONNode[KDefine.G_KEY_ABILITY_IT_INFOS_LIST[i]]);
+		}
 
-		var oAbilityEnhanceInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_STAT_ENHANCE], oJSONNode[KCDefine.U_KEY_BUFF_ENHANCE], oJSONNode[KCDefine.U_KEY_DEBUFF_ENHANCE], oJSONNode[KCDefine.U_KEY_UPGRADE_ENHANCE]
-		};
-
+		for(int i = 0; i < KDefine.G_KEY_ABILITY_IT_ENHANCE_INFOS_LIST.Count; ++i) {
+			oAbilityEnhanceInfosList.ExAddVal(oJSONNode[KDefine.G_KEY_ABILITY_IT_ENHANCE_INFOS_LIST[i]]);
+		}
+		
 		for(int i = 0; i < oAbilityInfosList.Count; ++i) {
 			for(int j = 0; j < oAbilityInfosList[i].Count; ++j) {
 				var stAbilityInfo = new STAbilityInfo(oAbilityInfosList[i][j]);

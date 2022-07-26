@@ -139,11 +139,13 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	/** 효과 정보를 로드한다 */
 	private Dictionary<EFXKinds, STFXInfo> DoLoadFXInfos(string a_oJSONStr) {
 		CAccess.Assert(a_oJSONStr.ExIsValid());
-		var oJSONNode = SimpleJSON.JSONNode.Parse(a_oJSONStr);
 
-		var oFXInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_HIT_FX], oJSONNode[KCDefine.U_KEY_BUFF_FX], oJSONNode[KCDefine.U_KEY_DEBUFF_FX]
-		};
+		var oJSONNode = SimpleJSON.JSONNode.Parse(a_oJSONStr);
+		var oFXInfosList = new List<SimpleJSON.JSONNode>();
+
+		for(int i = 0; i < KDefine.G_KEY_FX_IT_INFOS_LIST.Count; ++i) {
+			oFXInfosList.ExAddVal(oJSONNode[KDefine.G_KEY_FX_IT_INFOS_LIST[i]]);
+		}
 
 		for(int i = 0; i < oFXInfosList.Count; ++i) {
 			for(int j = 0; j < oFXInfosList[i].Count; ++j) {
