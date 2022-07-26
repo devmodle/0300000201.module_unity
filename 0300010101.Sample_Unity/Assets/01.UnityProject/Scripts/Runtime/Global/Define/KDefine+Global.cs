@@ -78,6 +78,11 @@ public static partial class KDefine {
 		m_nOrder = KCDefine.U_SORTING_O_OVERLAY_UIS, m_oLayer = KCDefine.U_SORTING_L_DEF
 	};
 
+	// 상품 판매 정보 테이블
+	public static readonly List<string> G_KEY_PRODUCT_SIT_INFOS_LIST = new List<string>() {
+		KCDefine.U_KEY_PKGS_SALE, KCDefine.U_KEY_SINGLE_SALE
+	};
+
 	// 경로 {
 #if MSG_PACK_ENABLE
 	public static readonly string G_DATA_P_APP_INFO = $"{KCDefine.B_DIR_P_WRITABLE}AppInfo.bytes";
