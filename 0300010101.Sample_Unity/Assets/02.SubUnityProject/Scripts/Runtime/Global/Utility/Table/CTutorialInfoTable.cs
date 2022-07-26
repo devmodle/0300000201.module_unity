@@ -69,9 +69,9 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 	private string TutorialInfoTablePath {
 		get {
 #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return KCDefine.U_RUNTIME_TABLE_P_G_TUTORIAL_INFO;
+			return KCDefine.U_RUNTIME_TABLE_P_G_ETC_INFO;
 #else
-			return KCDefine.U_TABLE_P_G_TUTORIAL_INFO;
+			return KCDefine.U_TABLE_P_G_ETC_INFO;
 #endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
 		}
 	}
@@ -143,7 +143,7 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 		var oJSONNode = SimpleJSON.JSON.Parse(a_oJSONStr);
 
 		var oTutorialInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_PLAY], oJSONNode[KCDefine.U_KEY_HELP]
+			oJSONNode[KCDefine.U_KEY_PLAY_TUTORIAL], oJSONNode[KCDefine.U_KEY_HELP_TUTORIAL]
 		};
 
 		for(int i = 0; i < oTutorialInfosList.Count; ++i) {
