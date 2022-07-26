@@ -2567,7 +2567,7 @@ namespace MessagePack.Formatters
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
         {
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
-            writer.WriteArrayHeader(22);
+            writer.WriteArrayHeader(24);
             writer.WriteNil();
             writer.Write(value.m_nKinds);
             writer.WriteNil();
@@ -2589,7 +2589,9 @@ namespace MessagePack.Formatters
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
-            formatterResolver.GetFormatterWithVerify<global::STValInfo>().Serialize(ref writer, value.m_stValInfo, options);
+            formatterResolver.GetFormatterWithVerify<global::STValInfo>().Serialize(ref writer, value.m_stValInfo01, options);
+            formatterResolver.GetFormatterWithVerify<global::STValInfo>().Serialize(ref writer, value.m_stValInfo02, options);
+            formatterResolver.GetFormatterWithVerify<global::STValInfo>().Serialize(ref writer, value.m_stValInfo03, options);
         }
 
         public global::STTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -2618,7 +2620,13 @@ namespace MessagePack.Formatters
                         ____result.m_eKindsGroupType = formatterResolver.GetFormatterWithVerify<global::EKindsGroupType>().Deserialize(ref reader, options);
                         break;
                     case 21:
-                        ____result.m_stValInfo = formatterResolver.GetFormatterWithVerify<global::STValInfo>().Deserialize(ref reader, options);
+                        ____result.m_stValInfo01 = formatterResolver.GetFormatterWithVerify<global::STValInfo>().Deserialize(ref reader, options);
+                        break;
+                    case 22:
+                        ____result.m_stValInfo02 = formatterResolver.GetFormatterWithVerify<global::STValInfo>().Deserialize(ref reader, options);
+                        break;
+                    case 23:
+                        ____result.m_stValInfo03 = formatterResolver.GetFormatterWithVerify<global::STValInfo>().Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();
