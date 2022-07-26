@@ -67,9 +67,9 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	private string FXInfoTablePath {
 		get {
 #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return KCDefine.U_RUNTIME_TABLE_P_G_FX_INFO;
+			return KCDefine.U_RUNTIME_TABLE_P_G_ETC_INFO;
 #else
-			return KCDefine.U_TABLE_P_G_FX_INFO;
+			return KCDefine.U_TABLE_P_G_ETC_INFO;
 #endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
 		}
 	}
@@ -142,7 +142,7 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 		var oJSONNode = SimpleJSON.JSONNode.Parse(a_oJSONStr);
 
 		var oFXInfosList = new List<SimpleJSON.JSONNode>() {
-			oJSONNode[KCDefine.U_KEY_HIT], oJSONNode[KCDefine.U_KEY_BUFF], oJSONNode[KCDefine.U_KEY_DEBUFF]
+			oJSONNode[KCDefine.U_KEY_HIT_FX], oJSONNode[KCDefine.U_KEY_BUFF_FX], oJSONNode[KCDefine.U_KEY_DEBUFF_FX]
 		};
 
 		for(int i = 0; i < oFXInfosList.Count; ++i) {
