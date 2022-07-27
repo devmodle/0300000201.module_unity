@@ -22,6 +22,15 @@ public enum EPlayMode {
 	[HideInInspector] MAX_VAL
 }
 
+/** 로그인 타입 */
+public enum ELoginType {
+	NONE = -1,
+	GUEST,
+	APPLE,
+	FACEBOOK,
+	[HideInInspector] MAX_VAL
+}
+
 /** 결제 타입 */
 public enum EPurchaseType {
 	NONE = -1,
