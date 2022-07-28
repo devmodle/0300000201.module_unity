@@ -46,7 +46,7 @@ namespace SplashScene {
 			CObjInfoTable.Create();
 			CFXInfoTable.Create();
 			CAbilityInfoTable.Create();
-			CProductSaleInfoTable.Create();
+			CProductTradeInfoTable.Create();
 			// 테이블을 생성한다 }
 			
 			// 저장소를 생성한다
