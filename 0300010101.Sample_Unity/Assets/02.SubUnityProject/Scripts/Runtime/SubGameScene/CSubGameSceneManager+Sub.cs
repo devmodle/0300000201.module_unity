@@ -50,7 +50,7 @@ namespace GameScene {
 				this.StartSetup();
 				this.UpdateUIsState();
 
-				Func.PlayBGSnd(EResKinds.SND_BG_SCENE_GAME);
+				Func.PlayBGSnd(EResKinds.SND_BG_SCENE_GAME_01);
 			}
 		}
 
