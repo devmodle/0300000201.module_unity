@@ -24,7 +24,7 @@ namespace MainScene {
 
 		#region 변수
 		private Dictionary<EKey, STIDInfo> m_oIDInfoDict = new Dictionary<EKey, STIDInfo>() {
-			[EKey.SEL_ID_INFO] = default(STIDInfo)
+			[EKey.SEL_ID_INFO] = STIDInfo.INVALID
 		};
 
 		/** =====> UI <===== */
