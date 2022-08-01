@@ -93,7 +93,7 @@ namespace MessagePack.Resolvers
                 { typeof(global::CItemTargetInfo), 38 },
                 { typeof(global::CLevelInfo), 39 },
                 { typeof(global::CObjInfo), 40 },
-                { typeof(global::CSkillInfo), 41 },
+                { typeof(global::CSkillTargetInfo), 41 },
                 { typeof(global::CUserInfo), 42 },
                 { typeof(global::SampleEngineName.STEngineTypeWrapper), 43 },
                 { typeof(global::SampleEngineName.STSubEngineTypeWrapper), 44 },
@@ -549,7 +549,7 @@ namespace MessagePack.Formatters
             this.typeToKeyAndJumpMap = new Dictionary<RuntimeTypeHandle, KeyValuePair<int, int>>(3, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
             {
                 { typeof(global::CItemTargetInfo).TypeHandle, new KeyValuePair<int, int>(0, 0) },
-                { typeof(global::CSkillInfo).TypeHandle, new KeyValuePair<int, int>(1, 1) },
+                { typeof(global::CSkillTargetInfo).TypeHandle, new KeyValuePair<int, int>(1, 1) },
                 { typeof(global::CObjInfo).TypeHandle, new KeyValuePair<int, int>(2, 2) },
             };
             this.keyToJumpMap = new Dictionary<int, int>(3)
@@ -573,7 +573,7 @@ namespace MessagePack.Formatters
                         options.Resolver.GetFormatterWithVerify<global::CItemTargetInfo>().Serialize(ref writer, (global::CItemTargetInfo)value, options);
                         break;
                     case 1:
-                        options.Resolver.GetFormatterWithVerify<global::CSkillInfo>().Serialize(ref writer, (global::CSkillInfo)value, options);
+                        options.Resolver.GetFormatterWithVerify<global::CSkillTargetInfo>().Serialize(ref writer, (global::CSkillTargetInfo)value, options);
                         break;
                     case 2:
                         options.Resolver.GetFormatterWithVerify<global::CObjInfo>().Serialize(ref writer, (global::CObjInfo)value, options);
@@ -615,7 +615,7 @@ namespace MessagePack.Formatters
                     result = (global::CTargetInfo)options.Resolver.GetFormatterWithVerify<global::CItemTargetInfo>().Deserialize(ref reader, options);
                     break;
                 case 1:
-                    result = (global::CTargetInfo)options.Resolver.GetFormatterWithVerify<global::CSkillInfo>().Deserialize(ref reader, options);
+                    result = (global::CTargetInfo)options.Resolver.GetFormatterWithVerify<global::CSkillTargetInfo>().Deserialize(ref reader, options);
                     break;
                 case 2:
                     result = (global::CTargetInfo)options.Resolver.GetFormatterWithVerify<global::CObjInfo>().Deserialize(ref reader, options);
@@ -1953,10 +1953,10 @@ namespace MessagePack.Formatters
         }
     }
 
-    public sealed class CSkillInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CSkillInfo>
+    public sealed class CSkillInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CSkillTargetInfo>
     {
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CSkillInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CSkillTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value == null)
             {
@@ -2131,7 +2131,7 @@ namespace MessagePack.Formatters
             formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<global::ETargetType, global::System.Collections.Generic.List<global::CTargetInfo>>>().Serialize(ref writer, value.m_oTargetInfoDictContainer, options);
         }
 
-        public global::CSkillInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::CSkillTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -2141,7 +2141,7 @@ namespace MessagePack.Formatters
             options.Security.DepthStep(ref reader);
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             var length = reader.ReadArrayHeader();
-            var ____result = new global::CSkillInfo();
+            var ____result = new global::CSkillTargetInfo();
 
             for (int i = 0; i < length; i++)
             {
