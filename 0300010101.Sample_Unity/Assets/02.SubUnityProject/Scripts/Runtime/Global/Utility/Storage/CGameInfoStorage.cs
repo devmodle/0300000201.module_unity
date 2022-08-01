@@ -20,20 +20,16 @@ public partial class CClearInfo : CBaseInfo {
 
 	#region 상수
 	private const string KEY_NUM_MARKS = "NumMarks";
-
 	private const string KEY_INT_RECORD = "IntRecord";
 	private const string KEY_REAL_RECORD = "RealRecord";
-	
 	private const string KEY_INT_BEST_RECORD = "IntBestRecord";
 	private const string KEY_REAL_BEST_RECORD = "RealBestRecord";
 	#endregion			// 상수
 
 	#region 프로퍼티
 	[JsonIgnore][IgnoreMember] public int NumMarks { get { return int.Parse(m_oStrDict.GetValueOrDefault(KEY_NUM_MARKS, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_NUM_MARKS, $"{value}"); } }
-
 	[JsonIgnore][IgnoreMember] public long IntRecord { get { return long.Parse(m_oStrDict.GetValueOrDefault(KEY_INT_RECORD, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_INT_RECORD, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public long IntBestRecord { get { return long.Parse(m_oStrDict.GetValueOrDefault(KEY_INT_BEST_RECORD, KCDefine.B_STR_0_INT)); } set { m_oStrDict.ExReplaceVal(KEY_INT_BEST_RECORD, $"{value}"); } }
-
 	[JsonIgnore][IgnoreMember] public double RealRecord { get { return double.Parse(m_oStrDict.GetValueOrDefault(KEY_REAL_RECORD, KCDefine.B_STR_0_REAL)); } set { m_oStrDict.ExReplaceVal(KEY_REAL_RECORD, $"{value}"); } }
 	[JsonIgnore][IgnoreMember] public double RealBestRecord { get { return double.Parse(m_oStrDict.GetValueOrDefault(KEY_REAL_BEST_RECORD, KCDefine.B_STR_0_REAL)); } set { m_oStrDict.ExReplaceVal(KEY_REAL_BEST_RECORD, $"{value}"); } }
 
@@ -102,12 +98,12 @@ public partial class CGameInfo : CBaseInfo {
 	[JsonIgnore][IgnoreMember] public System.DateTime PrevFreeRewardTime { get { return this.PrevFreeRewardTimeStr.ExIsValid() ? this.CorrectPrevFreeRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_SLASH_YYYY_MM_DD_HH_MM_SS) : System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_INT); } set { m_oStrDict.ExReplaceVal(KEY_PREV_FREE_REWARD_TIME, value.ExToLongStr()); } }
 
 	[JsonIgnore][IgnoreMember] private string PrevDailyMissionTimeStr => m_oStrDict.GetValueOrDefault(KEY_PREV_DAILY_MISSION_TIME, string.Empty);
-	[JsonIgnore][IgnoreMember] private string PrevFreeRewardTimeStr => m_oStrDict.GetValueOrDefault(KEY_PREV_FREE_REWARD_TIME, string.Empty);
 	[JsonIgnore][IgnoreMember] private string PrevDailyRewardTimeStr => m_oStrDict.GetValueOrDefault(KEY_PREV_DAILY_REWARD_TIME, string.Empty);
+	[JsonIgnore][IgnoreMember] private string PrevFreeRewardTimeStr => m_oStrDict.GetValueOrDefault(KEY_PREV_FREE_REWARD_TIME, string.Empty);
 
 	[JsonIgnore][IgnoreMember] private string CorrectPrevDailyMissionTimeStr => this.PrevDailyMissionTimeStr.Contains(KCDefine.B_TOKEN_SPLASH) ? this.PrevDailyMissionTimeStr : this.PrevDailyMissionTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_YYYY_MM_DD_HH_MM_SS).ExToLongStr();
-	[JsonIgnore][IgnoreMember] private string CorrectPrevFreeRewardTimeStr => this.PrevFreeRewardTimeStr.Contains(KCDefine.B_TOKEN_SPLASH) ? this.PrevFreeRewardTimeStr : this.PrevFreeRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_YYYY_MM_DD_HH_MM_SS).ExToLongStr();
 	[JsonIgnore][IgnoreMember] private string CorrectPrevDailyRewardTimeStr => this.PrevDailyRewardTimeStr.Contains(KCDefine.B_TOKEN_SPLASH) ? this.PrevDailyRewardTimeStr : this.PrevDailyRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_YYYY_MM_DD_HH_MM_SS).ExToLongStr();
+	[JsonIgnore][IgnoreMember] private string CorrectPrevFreeRewardTimeStr => this.PrevFreeRewardTimeStr.Contains(KCDefine.B_TOKEN_SPLASH) ? this.PrevFreeRewardTimeStr : this.PrevFreeRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_YYYY_MM_DD_HH_MM_SS).ExToLongStr();
 	#endregion			// 프로퍼티
 
 	#region IMessagePackSerializationCallbackReceiver
@@ -152,9 +148,9 @@ public partial class CGameInfo : CBaseInfo {
 /** 게임 정보 저장소 */
 public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	#region 프로퍼티
+	public int PlayCharacterID { get; set; } = KDefine.G_ID_COMMON_CHARACTER;
 	public EPlayMode PlayMode { get; private set; } = EPlayMode.NONE;
 	public CLevelInfo PlayLevelInfo { get; private set; } = null;
-
 	public List<EItemKinds> SelItemKindsList { get; private set; } = new List<EItemKinds>();
 	public List<EItemKinds> FreeSelItemKindsList { get; private set; } = new List<EItemKinds>();
 
@@ -267,7 +263,7 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 
 	/** 스테이지 잠금 해제 여부를 검사한다 */
 	public bool IsUnlockStage(int a_nStageID, int a_nChapterID = KCDefine.B_VAL_0_INT) {
-		return this.GameInfo.m_oUnlockUniqueStageIDList.Contains(CFactory.MakeUniqueStageID(a_nStageID));
+		return this.GameInfo.m_oUnlockUniqueStageIDList.Contains(CFactory.MakeUniqueStageID(a_nStageID, a_nChapterID));
 	}
 
 	/** 챕터 잠금 해제 여부를 검사한다 */
