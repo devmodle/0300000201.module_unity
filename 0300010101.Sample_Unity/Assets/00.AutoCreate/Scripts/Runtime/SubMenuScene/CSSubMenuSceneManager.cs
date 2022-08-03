@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 #if STUDY_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
 namespace MenuScene {
-	/** 서브 메뉴 씬 관리자 */
-	public partial class CSubMenuSceneManager : CMenuSceneManager {
+	/** 스터디 서브 메뉴 씬 관리자 */
+	public partial class CSSubMenuSceneManager : CSMenuSceneManager {
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
