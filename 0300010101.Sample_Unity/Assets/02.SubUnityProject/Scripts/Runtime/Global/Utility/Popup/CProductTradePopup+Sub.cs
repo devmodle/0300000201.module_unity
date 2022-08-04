@@ -27,6 +27,10 @@ public partial class CProductTradePopup : CSubPopup {
 	public virtual void Init(STParams a_stParams) {
 		base.Init();
 		m_stParams = a_stParams;
+
+#region 추가
+		this.SubInit();
+#endregion			// 추가
 	}
 
 	/** UI 상태를 갱신한다 */
@@ -96,6 +100,11 @@ public partial class CProductTradePopup : CSubPopup {
 	#region 함수
 	/** 팝업을 설정한다 */
 	private void SubAwakeSetup() {
+		// Do Something
+	}
+
+	/** 초기화한다 */
+	private void SubInit() {
 		// Do Something
 	}
 
