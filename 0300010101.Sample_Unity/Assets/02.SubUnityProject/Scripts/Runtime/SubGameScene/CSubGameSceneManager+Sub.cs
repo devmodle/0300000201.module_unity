@@ -73,15 +73,19 @@ namespace GameScene {
 			this.ObjRoot.transform.localScale = (bIsValid01 && bIsValid02 && bIsValid03) ? m_oEngine.SelGridInfo.m_stScale : Vector3.one;
 			// 비율을 설정한다 }
 
-#if DEBUG || DEVELOPMENT_BUILD
-			this.SetupSubTestUIs();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#region 추가
+			this.SubAwakeSetup();
+#endregion			// 추가
 		}
 
 		/** 씬을 설정한다 */
 		private void StartSetup() {
 			this.ApplySelItems();
 			CGameInfoStorage.Inst.ResetSelItems();
+
+#region 추가
+			this.SubStartSetup();
+#endregion			// 추가
 		}
 
 		/** 엔진을 설정한다 */
@@ -116,9 +120,9 @@ namespace GameScene {
 		private void UpdateUIsState() {
 			this.UpdateRewardAdsUIsState();
 
-#if DEBUG || DEVELOPMENT_BUILD
-			this.UpdateSubTestUIsState();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#region 추가
+			this.SubUpdateUIsState();
+#endregion			// 추가
 		}
 
 		/** 보상 광고 UI 상태를 갱신한다 */
@@ -170,6 +174,25 @@ namespace GameScene {
 			} catch(System.Exception oException) {
 				CFunc.ShowLogWarning($"CSubGameSceneManager.OnDestroy Exception: {oException.Message}");
 			}
+		}
+
+		/** 씬을 설정한다 */
+		private void SubAwakeSetup() {
+#if DEBUG || DEVELOPMENT_BUILD
+			this.SetupSubTestUIs();
+#endif			// #if DEBUG || DEVELOPMENT_BUILD
+		}
+
+		/** 씬을 설정한다 */
+		private void SubStartSetup() {
+			// Do Something
+		}
+
+		/** UI 상태를 갱신한다 */
+		private void SubUpdateUIsState() {
+#if DEBUG || DEVELOPMENT_BUILD
+			this.UpdateSubTestUIsState();
+#endif			// #if DEBUG || DEVELOPMENT_BUILD
 		}
 		
 		/** 선택 아이템을 적용한다 */
