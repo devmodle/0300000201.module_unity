@@ -45,8 +45,6 @@ public partial class CStorePopup : CSubPopup {
 	}
 
 	#region 변수
-	private STParams m_stParams;
-
 	private Dictionary<EKey, string> m_oStrDict = new Dictionary<EKey, string>() {
 		[EKey.PURCHASE_PRODUCT_ID] = string.Empty
 	};
@@ -62,6 +60,10 @@ public partial class CStorePopup : CSubPopup {
 	/** =====> 객체 <===== */
 	[SerializeField] private List<GameObject> m_oProductBuyUIsList = new List<GameObject>();
 	#endregion			// 변수
+
+	#region 프로퍼티
+	public STParams Params { get; private set; }
+	#endregion			// 프로퍼티
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
@@ -109,7 +111,7 @@ public partial class CStorePopup : CSubPopup {
 		}
 
 		this.UpdateUIsState();
-		m_stParams.m_oAdsCallbackDict?.GetValueOrDefault(ECallback.ADS)?.Invoke(a_oSender, a_stAdsRewardInfo, a_bIsSuccess);
+		this.Params.m_oAdsCallbackDict?.GetValueOrDefault(ECallback.ADS)?.Invoke(a_oSender, a_stAdsRewardInfo, a_bIsSuccess);
 	}
 #endif			// #if ADS_MODULE_ENABLE
 
@@ -122,7 +124,7 @@ public partial class CStorePopup : CSubPopup {
 		}
 
 		this.UpdateUIsState();
-		m_stParams.m_oPurchaseCallbackDict01?.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oProductID, a_bIsSuccess);
+		this.Params.m_oPurchaseCallbackDict01?.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oProductID, a_bIsSuccess);
 	}
 
 	/** 상품이 복원 되었을 경우 */
@@ -140,7 +142,7 @@ public partial class CStorePopup : CSubPopup {
 #endif			// #if FIREBASE_MODULE_ENABLE
 
 		this.UpdateUIsState();
-		m_stParams.m_oPurchaseCallbackDict02?.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
+		this.Params.m_oPurchaseCallbackDict02?.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
 	}
 
 #if FIREBASE_MODULE_ENABLE

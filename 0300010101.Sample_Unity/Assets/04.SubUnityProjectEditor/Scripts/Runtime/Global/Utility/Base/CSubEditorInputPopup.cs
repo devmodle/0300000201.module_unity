@@ -13,9 +13,13 @@ public partial class CSubEditorInputPopup : CEditorInputPopup {
 	}
 
 	#region 변수
-	private STParams m_stParams;
+
 	#endregion			// 변수
 
+	#region 프로퍼티
+	public new STParams Params { get; private set; }
+	#endregion			// 프로퍼티
+	
 	#region 함수
 	/** 초기화 */
 	public override void Awake() {
@@ -25,7 +29,7 @@ public partial class CSubEditorInputPopup : CEditorInputPopup {
 	/** 초기화 */
 	public virtual void Init(STParams a_stParams) {
 		base.Init(a_stParams.m_stBaseParams);
-		m_stParams = a_stParams;
+		this.Params = a_stParams;
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
