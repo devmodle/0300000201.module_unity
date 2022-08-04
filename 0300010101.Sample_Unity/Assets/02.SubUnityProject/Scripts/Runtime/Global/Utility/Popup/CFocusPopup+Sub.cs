@@ -18,6 +18,10 @@ public partial class CFocusPopup : CSubPopup {
 		CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
 			(EKey.FOCUS_BLIND_IMG, $"{EKey.FOCUS_BLIND_IMG}", this.Contents)
 		}, m_oImgDict, false);
+
+#region 추가
+		this.SubAwakeSetup();
+#endregion			// 추가
 	}
 
 	/** 초기화 */
@@ -37,6 +41,10 @@ public partial class CFocusPopup : CSubPopup {
 		
 		// 이미지를 갱신한다
 		m_oImgDict[EKey.FOCUS_BLIND_IMG]?.ExSetColor<Image>(KCDefine.U_COLOR_POPUP_BLIND, false);
+
+#region 추가
+		this.SubUpdateUIsState();
+#endregion			// 추가
 	}
 	#endregion			// 함수
 }
@@ -58,7 +66,15 @@ public partial class CFocusPopup : CSubPopup {
 	#endregion			// 프로퍼티
 
 	#region 함수
+	/** 팝업을 설정한다 */
+	private void SubAwakeSetup() {
+		// Do Something
+	}
 
+	/** UI 상태를 갱신한다 */
+	private void SubUpdateUIsState() {
+		// Do Something
+	}
 	#endregion			// 함수
 }
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
