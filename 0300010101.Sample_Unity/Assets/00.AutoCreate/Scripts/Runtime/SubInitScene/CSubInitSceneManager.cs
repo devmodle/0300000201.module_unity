@@ -31,7 +31,7 @@ namespace InitScene {
 		protected override void Setup() {
 			base.Setup();
 			
-#if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			// 테이블을 생성한다 {
 			CLevelInfoTable.Create();
 
@@ -54,7 +54,7 @@ namespace InitScene {
 			CAppInfoStorage.Create();
 			CUserInfoStorage.Create();
 			CGameInfoStorage.Create();
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			
 			// 이미지를 설정한다 {
 			CFunc.SetupComponents(new List<(EKey, string, GameObject, GameObject)>() {

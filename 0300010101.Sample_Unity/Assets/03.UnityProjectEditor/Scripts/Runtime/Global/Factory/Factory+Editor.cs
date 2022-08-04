@@ -12,7 +12,7 @@ public static partial class Factory {
 	#endregion			// 클래스 함수
 
 	#region 조건부 클래스 함수
-#if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 	/** 셀 정보를 생성한다 */
 	public static STCellInfo MakeCellInfo(Vector3Int a_stIdx) {
 		var stCellInfo = new STCellInfo() {
@@ -32,7 +32,7 @@ public static partial class Factory {
 		stLevelInfo.OnAfterDeserialize();
 		return stLevelInfo;
 	}
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && RUNTIME_TEMPLATES_MODULE_ENABLE
+#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 	#endregion			// 조건부 클래스 함수
 }
 
