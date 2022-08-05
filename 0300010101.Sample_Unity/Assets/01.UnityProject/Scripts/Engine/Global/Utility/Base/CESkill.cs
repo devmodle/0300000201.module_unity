@@ -21,7 +21,6 @@ namespace SampleEngineName {
 
 		#region 프로퍼티
 		public new STParams Params { get; private set; }
-		public override EComponentType ComponentType => EComponentType.SKILL;
 		#endregion			// 프로퍼티
 
 		#region 함수
