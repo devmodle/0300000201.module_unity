@@ -12,9 +12,9 @@ public partial class CDailyMissionPopup : CMissionPopup {
 	public override void Awake() {
 		base.Awake();
 
-#region 추가
+		#region 추가
 		this.SubAwakeSetup();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 
 	/** 초기화 */
@@ -22,18 +22,18 @@ public partial class CDailyMissionPopup : CMissionPopup {
 		base.Init(a_stParams.m_stBaseParams);
 		this.Params = a_stParams;
 
-#region 추가
+		#region 추가
 		this.SubInit();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 
 	/** UI 상태를 갱신한다 */
 	private new void UpdateUIsState() {
 		base.UpdateUIsState();
 
-#region 추가
+		#region 추가
 		this.SubUpdateUIsState();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 	#endregion			// 함수
 }

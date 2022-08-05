@@ -25,9 +25,9 @@ public partial class CContinuePopup : CSubPopup {
 			(KCDefine.U_OBJ_N_LEAVE_BTN, this.Contents, this.OnTouchLeaveBtn)
 		}, false);
 
-#region 추가
+		#region 추가
 		this.SubAwakeSetup();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 
 	/** 초기화 */
@@ -35,9 +35,9 @@ public partial class CContinuePopup : CSubPopup {
 		base.Init();
 		this.Params = a_stParams;
 
-#region 추가
+		#region 추가
 		this.SubInit();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 
 	/** UI 상태를 갱신한다 */
@@ -55,9 +55,9 @@ public partial class CContinuePopup : CSubPopup {
 		}
 		// 텍스트를 갱신한다 }
 
-#region 추가
+		#region 추가
 		this.SubUpdateUIsState();
-#endregion			// 추가
+		#endregion			// 추가
 	}
 	#endregion			// 함수
 }

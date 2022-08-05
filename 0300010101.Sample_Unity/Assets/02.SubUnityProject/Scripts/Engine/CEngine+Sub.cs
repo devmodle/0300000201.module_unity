@@ -14,9 +14,9 @@ namespace SampleEngineName {
 		public override void Awake() {
 			base.Awake();
 
-#region 추가
+			#region 추가
 			this.SubAwakeSetup();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 
 		/** 초기화 */
@@ -27,9 +27,9 @@ namespace SampleEngineName {
 			this.SetupLevel();
 			this.SetupGridLine();
 			
-#region 추가
+			#region 추가
 			this.SubInit();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 
 		/** 상태를 리셋한다 */
@@ -37,9 +37,9 @@ namespace SampleEngineName {
 			base.Reset();
 			this.SetState(EState.STOP);
 
-#region 추가
+			#region 추가
 			this.SubReset();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 		#endregion			// 함수
 	}

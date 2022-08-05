@@ -85,9 +85,9 @@ namespace TitleScene {
 				(EKey.FACEBOOK_LOGIN_BTN, $"{EKey.FACEBOOK_LOGIN_BTN}", this.UIsBase, this.OnTouchFacebookLoginBtn)
 			}, m_oBtnDict, false);
 
-#region 추가
+			#region 추가
 			this.SubAwakeSetup();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 
 		/** 씬을 설정한다 */
@@ -100,9 +100,9 @@ namespace TitleScene {
 			}
 #endif			// #if NEWTON_SOFT_JSON_MODULE_ENABLE
 
-#region 추가
+			#region 추가
 			this.SubStartSetup();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 
 		/** UI 상태를 갱신한다 */
@@ -122,9 +122,9 @@ namespace TitleScene {
 			}
 			// 버튼을 갱신한다 }
 
-#region 추가
+			#region 추가
 			this.SubUpdateUIsState();
-#endregion			// 추가
+			#endregion			// 추가
 		}
 		#endregion			// 함수
 	}
