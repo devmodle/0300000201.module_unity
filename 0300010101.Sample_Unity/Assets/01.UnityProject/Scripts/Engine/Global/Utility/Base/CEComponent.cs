@@ -34,7 +34,7 @@ namespace SampleEngineName {
 
 		/** 어빌리티 값을 설정한다 */
 		public virtual void SetupAbilityVals() {
-			// Do Something
+			this.AbilityValDict.Clear();
 		}
 		#endregion			// 함수
 
@@ -44,7 +44,7 @@ namespace SampleEngineName {
 			return this.Params.m_oOwner as T;
 		}
 
-		/** 컨트롤러를 반환한다 */
+		/** 제어자를 반환한다 */
 		public T GetController<T>() where T : CEController {
 			return this.Params.m_oController as T;
 		}
