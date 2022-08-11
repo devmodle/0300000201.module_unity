@@ -16,7 +16,6 @@ public partial class CStorePopup : CSubPopup {
 	/** 식별자 */
 	private enum EKey {
 		NONE = -1,
-		PURCHASE_PRODUCT_ID,
 		SEL_PRODUCT_KINDS,
 		[HideInInspector] MAX_VAL
 	}
@@ -45,13 +44,7 @@ public partial class CStorePopup : CSubPopup {
 	}
 
 	#region 변수
-	private Dictionary<EKey, string> m_oStrDict = new Dictionary<EKey, string>() {
-		[EKey.PURCHASE_PRODUCT_ID] = string.Empty
-	};
-
-	private Dictionary<EKey, EProductKinds> m_oProductKindsDict = new Dictionary<EKey, EProductKinds>() {
-		[EKey.SEL_PRODUCT_KINDS] = EProductKinds.NONE
-	};
+	private Dictionary<EKey, EProductKinds> m_oProductKindsDict = new Dictionary<EKey, EProductKinds>();
 
 #if PURCHASE_MODULE_ENABLE
 	private List<Product> m_oRestoreProductList = new List<Product>();
@@ -77,7 +70,7 @@ public partial class CStorePopup : CSubPopup {
 		switch(a_stProductTradeInfo.m_ePurchaseType) {
 			case EPurchaseType.ADS: {
 #if ADS_MODULE_ENABLE
-				m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS] = a_stProductTradeInfo.m_eProductKinds;
+				m_oProductKindsDict.ExReplaceVal(EKey.SEL_PRODUCT_KINDS, a_stProductTradeInfo.m_eProductKinds);
 				Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif			// #if ADS_MODULE_ENABLE
 			} break;
@@ -107,7 +100,8 @@ public partial class CStorePopup : CSubPopup {
 	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
 		// 광고를 시청했을 경우
 		if(a_bIsSuccess) {
-			Func.Buy(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS]));
+			var eSelProductKinds = m_oProductKindsDict.GetValueOrDefault(EKey.SEL_PRODUCT_KINDS, EProductKinds.NONE);
+			Func.Buy(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(eSelProductKinds));
 		}
 
 		this.UpdateUIsState();
@@ -120,7 +114,7 @@ public partial class CStorePopup : CSubPopup {
 	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
 		// 결제 되었을 경우
 		if(a_bIsSuccess) {
-			m_oStrDict[EKey.PURCHASE_PRODUCT_ID] = a_oProductID;
+			// Do Something
 		}
 
 		this.UpdateUIsState();
