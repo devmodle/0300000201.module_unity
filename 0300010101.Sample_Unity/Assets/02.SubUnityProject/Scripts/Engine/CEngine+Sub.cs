@@ -92,13 +92,10 @@ namespace SampleEngineName {
 					case EEngineState.PAUSE: this.HandlePauseEngineState(a_fDeltaTime); break;
 				}
 
-				CEpisodeInfoTable.Inst.TryGetLevelEpisodeInfo(this.Params.m_oLevelInfo.m_stIDInfo.m_nID01, out STEpisodeInfo stLevelEpisodeInfo, this.Params.m_oLevelInfo.m_stIDInfo.m_nID02, this.Params.m_oLevelInfo.m_stIDInfo.m_nID03);
-
-				var stEpisodeSize = (stLevelEpisodeInfo.m_stSize * KCDefine.B_UNIT_SCALE) * CAccess.ResolutionScale;
-				stEpisodeSize.x = Mathf.Clamp(stEpisodeSize.x, KCDefine.B_VAL_0_REAL, stEpisodeSize.x - ((KCDefine.B_SCREEN_SIZE.x * KCDefine.B_UNIT_SCALE) * CAccess.ResolutionScale));
-				stEpisodeSize.y = Mathf.Clamp(stEpisodeSize.y, KCDefine.B_VAL_0_REAL, stEpisodeSize.y - ((KCDefine.B_SCREEN_SIZE.y * KCDefine.B_UNIT_SCALE) * CAccess.ResolutionScale));
-				
+				var stEpisodeInfo = global::Access.GetEpisodeInfo(this.Params.m_oLevelInfo.m_stIDInfo.m_nID01, this.Params.m_oLevelInfo.m_stIDInfo.m_nID02, this.Params.m_oLevelInfo.m_stIDInfo.m_nID03);
+				var stEpisodeSize = new Vector3(Mathf.Clamp(stEpisodeInfo.m_stSize.x, KCDefine.B_VAL_0_REAL, stEpisodeInfo.m_stSize.x - KCDefine.B_SCREEN_SIZE.x), Mathf.Clamp(stEpisodeInfo.m_stSize.y, KCDefine.B_VAL_0_REAL, stEpisodeInfo.m_stSize.y - KCDefine.B_SCREEN_SIZE.y), stEpisodeInfo.m_stSize.z) * (KCDefine.B_UNIT_SCALE * CAccess.ResolutionScale);
 				var stMainCameraPos = new Vector3(Mathf.Clamp(m_oPlayerObjDict.GetValueOrDefault(EKey.SEL_PLAYER_OBJ).transform.position.x, stEpisodeSize.x / -KCDefine.B_VAL_2_REAL, stEpisodeSize.x / KCDefine.B_VAL_2_REAL), Mathf.Clamp(m_oPlayerObjDict.GetValueOrDefault(EKey.SEL_PLAYER_OBJ).transform.position.y + KDefine.E_OFFSET_MAIN_CAMERA, stEpisodeSize.y / -KCDefine.B_VAL_2_REAL, stEpisodeSize.y / KCDefine.B_VAL_2_REAL), CSceneManager.ActiveSceneMainCamera.transform.position.z);
+				
 				CSceneManager.ActiveSceneMainCamera.transform.position = Vector3.Lerp(CSceneManager.ActiveSceneMainCamera.transform.position, stMainCameraPos, a_fDeltaTime * KCDefine.B_VAL_9_REAL);
 			}
 		}
@@ -157,6 +154,30 @@ namespace SampleEngineName {
 			CFunc.UpdateComponents(m_oFXList, a_fDeltaTime);
 			CFunc.UpdateComponents(m_oEnemyObjList, a_fDeltaTime);
 			CFunc.UpdateComponents(m_oPlayerObjDict, a_fDeltaTime);
+
+			/* FIXME: 임시 주석 처리
+			var stEpisodeInfo = global::Access.GetEpisodeInfo(this.Params.m_oLevelInfo.m_stIDInfo.m_nID01, this.Params.m_oLevelInfo.m_stIDInfo.m_nID02, this.Params.m_oLevelInfo.m_stIDInfo.m_nID03);
+			var oNumEnemyObjsDict = CCollectionManager.Inst.SpawnDict<EObjKinds, int>();
+
+			try {
+				for(int i = 0; i < m_oEnemyObjList.Count; ++i) {
+					int nNumEnemyObjs = oNumEnemyObjsDict.GetValueOrDefault(m_oEnemyObjList[i].Params.m_stObjInfo.m_eObjKinds);
+					oNumEnemyObjsDict.ExReplaceVal(m_oEnemyObjList[i].Params.m_stObjInfo.m_eObjKinds, nNumEnemyObjs + KCDefine.B_VAL_1_INT);
+				}
+
+				foreach(var stKeyVal in stEpisodeInfo.m_oEnemyObjTargetInfoDict) {
+					// 적 객체 생성이 가능 할 경우
+					if(oNumEnemyObjsDict.GetValueOrDefault((EObjKinds)stKeyVal.Value.m_nKinds) < stKeyVal.Value.m_stValInfo01.m_nVal && m_oEnemyObjList.Count < stEpisodeInfo.m_nMaxNumEnemyObjs) {
+						var oEnemyObj = this.CreateEnemyObj(CObjInfoTable.Inst.GetObjInfo((EObjKinds)stKeyVal.Value.m_nKinds), null);
+						oEnemyObj.transform.localPosition = new Vector3(Random.Range(stEpisodeInfo.m_stSize.x / -KCDefine.B_VAL_2_REAL, stEpisodeInfo.m_stSize.x / KCDefine.B_VAL_2_REAL), Random.Range(stEpisodeInfo.m_stSize.y / -KCDefine.B_VAL_2_REAL, stEpisodeInfo.m_stSize.y / KCDefine.B_VAL_2_REAL), KCDefine.B_VAL_0_REAL);
+
+						m_oEnemyObjList.ExAddVal(oEnemyObj);
+					}
+				}
+			} finally {
+				CCollectionManager.Inst.DespawnDict(oNumEnemyObjsDict);
+			}
+			*/
 		}
 
 		/** 정지 엔진 상태를 처리한다 */

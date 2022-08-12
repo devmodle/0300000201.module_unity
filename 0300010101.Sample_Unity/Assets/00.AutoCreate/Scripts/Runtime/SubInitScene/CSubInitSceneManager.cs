@@ -30,7 +30,7 @@ namespace InitScene {
 		/** 씬을 설정한다 */
 		protected override void Setup() {
 			base.Setup();
-
+			
 			// 이미지를 설정한다 {
 			CFunc.SetupComponents(new List<(EKey, string, GameObject, GameObject)>() {
 				(EKey.BG_IMG, $"{EKey.BG_IMG}", this.UIs, CResManager.Inst.GetRes<GameObject>(KCDefine.U_OBJ_P_IMG)),
