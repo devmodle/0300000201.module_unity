@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 스킬 정보 */
 [System.Serializable]
-public partial struct STSkillInfo {
+public struct STSkillInfo {
 	public STCommonInfo m_stCommonInfo;
 	public STDurationInfo m_stDurationInfo;
 
@@ -71,7 +71,7 @@ public partial struct STSkillInfo {
 
 /** 스킬 강화 정보 */
 [System.Serializable]
-public partial struct STSkillEnhanceInfo {
+public struct STSkillEnhanceInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public ESkillKinds m_eSkillKinds;
@@ -119,7 +119,7 @@ public partial struct STSkillEnhanceInfo {
 
 /** 구입 스킬 교환 정보 */
 [System.Serializable]
-public partial struct STSkillTradeInfo {
+public struct STSkillTradeInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public ESkillKinds m_eSkillKinds;

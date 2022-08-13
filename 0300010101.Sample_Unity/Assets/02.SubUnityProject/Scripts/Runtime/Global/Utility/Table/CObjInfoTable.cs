@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 객체 정보 */
 [System.Serializable]
-public partial struct STObjInfo {
+public struct STObjInfo {
 	public STCommonInfo m_stCommonInfo;
 	public Vector3 m_stSize;
 
@@ -85,7 +85,7 @@ public partial struct STObjInfo {
 
 /** 객체 강화 정보 */
 [System.Serializable]
-public partial struct STObjEnhanceInfo {
+public struct STObjEnhanceInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public EObjKinds m_eObjKinds;
@@ -133,7 +133,7 @@ public partial struct STObjEnhanceInfo {
 
 /** 객체 교환 정보 */
 [System.Serializable]
-public partial struct STObjTradeInfo {
+public struct STObjTradeInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public EObjKinds m_eObjKinds;

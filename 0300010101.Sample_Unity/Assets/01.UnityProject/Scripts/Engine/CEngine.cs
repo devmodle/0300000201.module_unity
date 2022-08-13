@@ -26,7 +26,7 @@ namespace SampleEngineName {
 		}
 
 		/** 매개 변수 */
-		public partial struct STParams {
+		public struct STParams {
 			public CLevelInfo m_oLevelInfo;
 			public CClearInfo m_oClearInfo;
 

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 아이템 정보 */
 [System.Serializable]
-public partial struct STItemInfo {
+public struct STItemInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public EItemKinds m_eItemKinds;
@@ -62,7 +62,7 @@ public partial struct STItemInfo {
 
 /** 아이템 강화 정보 */
 [System.Serializable]
-public partial struct STItemEnhanceInfo {
+public struct STItemEnhanceInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public EItemKinds m_eItemKinds;
@@ -110,7 +110,7 @@ public partial struct STItemEnhanceInfo {
 
 /** 아이템 교환 정보 */
 [System.Serializable]
-public partial struct STItemTradeInfo {
+public struct STItemTradeInfo {
 	public STCommonInfo m_stCommonInfo;
 
 	public EItemKinds m_eItemKinds;
