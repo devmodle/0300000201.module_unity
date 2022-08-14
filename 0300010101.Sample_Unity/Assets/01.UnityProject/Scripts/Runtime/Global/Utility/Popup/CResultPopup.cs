@@ -13,7 +13,6 @@ public partial class CResultPopup : CSubPopup {
 		NONE = -1,
 		RECORD_TEXT,
 		BEST_RECORD_TEXT,
-
 		CLEAR_UIS,
 		CLEAR_FAIL_UIS,
 		[HideInInspector] MAX_VAL
