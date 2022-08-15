@@ -14,17 +14,17 @@ using UnityEditor;
 
 /** 메세지 팩 등록자 */
 public static partial class CMsgPackRegister {
-	#region 클래스 변수
-	private static bool m_bIsRegister = false;
-	#endregion			// 클래스 변수
+	#region 클래스 프로퍼티
+	private static bool bIsRegister { get; set; } = false;
+	#endregion			// 클래스 프로퍼티
 
 	#region 클래스 함수
 	/** 메세지 팩을 등록한다 */
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	private static void RegisterMsgPack() {
 		// 등록 가능 할 경우
-		if(!CMsgPackRegister.m_bIsRegister) {
-			CMsgPackRegister.m_bIsRegister = true;
+		if(!CMsgPackRegister.bIsRegister) {
+			CMsgPackRegister.bIsRegister = true;
 
 			var oResolverList = new List<IFormatterResolver>() {
 				MessagePack.Resolvers.StandardResolver.Instance, MessagePack.Resolvers.GeneratedResolver.Instance
