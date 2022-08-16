@@ -50,7 +50,7 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(56)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(57)
             {
                 { typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 0 },
                 { typeof(global::System.Collections.Generic.Dictionary<global::ETargetType, global::System.Collections.Generic.List<global::CTargetInfo>>), 1 },
@@ -104,10 +104,11 @@ namespace MessagePack.Resolvers
                 { typeof(global::STCommonTypeWrapper), 49 },
                 { typeof(global::STIDInfo), 50 },
                 { typeof(global::STIdxInfo), 51 },
-                { typeof(global::STSubTypeWrapper), 52 },
-                { typeof(global::STTargetInfo), 53 },
-                { typeof(global::STTypeWrapper), 54 },
-                { typeof(global::STValInfo), 55 },
+                { typeof(global::STRecordInfo), 52 },
+                { typeof(global::STSubTypeWrapper), 53 },
+                { typeof(global::STTargetInfo), 54 },
+                { typeof(global::STTypeWrapper), 55 },
+                { typeof(global::STValInfo), 56 },
             };
         }
 
@@ -173,10 +174,11 @@ namespace MessagePack.Resolvers
                 case 49: return new MessagePack.Formatters.STCommonTypeWrapperFormatter();
                 case 50: return new MessagePack.Formatters.STIDInfoFormatter();
                 case 51: return new MessagePack.Formatters.STIdxInfoFormatter();
-                case 52: return new MessagePack.Formatters.STSubTypeWrapperFormatter();
-                case 53: return new MessagePack.Formatters.STTargetInfoFormatter();
-                case 54: return new MessagePack.Formatters.STTypeWrapperFormatter();
-                case 55: return new MessagePack.Formatters.STValInfoFormatter();
+                case 52: return new MessagePack.Formatters.STRecordInfoFormatter();
+                case 53: return new MessagePack.Formatters.STSubTypeWrapperFormatter();
+                case 54: return new MessagePack.Formatters.STTargetInfoFormatter();
+                case 55: return new MessagePack.Formatters.STTypeWrapperFormatter();
+                case 56: return new MessagePack.Formatters.STValInfoFormatter();
                 default: return null;
             }
         }
@@ -1177,8 +1179,10 @@ namespace MessagePack.Formatters
 
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             value.OnBeforeSerialize();
-            writer.WriteArrayHeader(1);
+            writer.WriteArrayHeader(3);
             formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Serialize(ref writer, value.m_oStrDict, options);
+            formatterResolver.GetFormatterWithVerify<global::STRecordInfo>().Serialize(ref writer, value.m_stRecordInfo, options);
+            formatterResolver.GetFormatterWithVerify<global::STRecordInfo>().Serialize(ref writer, value.m_stBestRecordInfo, options);
         }
 
         public global::CClearInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -1199,6 +1203,12 @@ namespace MessagePack.Formatters
                 {
                     case 0:
                         ____result.m_oStrDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>().Deserialize(ref reader, options);
+                        break;
+                    case 1:
+                        ____result.m_stRecordInfo = formatterResolver.GetFormatterWithVerify<global::STRecordInfo>().Deserialize(ref reader, options);
+                        break;
+                    case 2:
+                        ____result.m_stBestRecordInfo = formatterResolver.GetFormatterWithVerify<global::STRecordInfo>().Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();
@@ -3021,6 +3031,52 @@ namespace MessagePack.Formatters
         }
     }
 
+    public sealed class STRecordInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STRecordInfo>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STRecordInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            writer.WriteArrayHeader(3);
+            writer.Write(value.m_bIsSuccess);
+            writer.Write(value.m_nIntRecord);
+            writer.Write(value.m_dblRealRecord);
+        }
+
+        public global::STRecordInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                throw new global::System.InvalidOperationException("typecode is null, struct not supported");
+            }
+
+            options.Security.DepthStep(ref reader);
+            var length = reader.ReadArrayHeader();
+            var ____result = new global::STRecordInfo();
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        ____result.m_bIsSuccess = reader.ReadBoolean();
+                        break;
+                    case 1:
+                        ____result.m_nIntRecord = reader.ReadInt64();
+                        break;
+                    case 2:
+                        ____result.m_dblRealRecord = reader.ReadDouble();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
     public sealed class STSubTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STSubTypeWrapper>
     {
 
@@ -3335,8 +3391,8 @@ namespace MessagePack.Formatters
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
             writer.WriteArrayHeader(12);
             writer.WriteNil();
-            writer.Write(value.m_nVal);
-            writer.Write(value.m_dblVal);
+            formatterResolver.GetFormatterWithVerify<decimal>().Serialize(ref writer, value.m_dmVal, options);
+            writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
@@ -3365,10 +3421,7 @@ namespace MessagePack.Formatters
                 switch (i)
                 {
                     case 1:
-                        ____result.m_nVal = reader.ReadInt64();
-                        break;
-                    case 2:
-                        ____result.m_dblVal = reader.ReadDouble();
+                        ____result.m_dmVal = formatterResolver.GetFormatterWithVerify<decimal>().Deserialize(ref reader, options);
                         break;
                     case 11:
                         ____result.m_eValType = formatterResolver.GetFormatterWithVerify<global::EValType>().Deserialize(ref reader, options);
