@@ -43,7 +43,7 @@ namespace SampleEngineName {
 		public T GetOwner<T>() where T : CEComponent {
 			return this.Params.m_oOwner as T;
 		}
-
+		
 		/** 제어자를 반환한다 */
 		public T GetController<T>() where T : CEController {
 			return this.Params.m_oController as T;
