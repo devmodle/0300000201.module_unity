@@ -12,6 +12,7 @@ namespace SampleEngineName {
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
+			this.Vec3Dict.ExReplaceVal(EKey.MOVE_POS, KCDefine.B_POS_INVALID);
 
 			#region 추가
 			this.SubAwakeSetup();
@@ -111,7 +112,7 @@ namespace SampleEngineName {
 			this.SkillTargetInfoDict.ExReplaceVal(EKey.APPLY_SKILL_TARGET_INFO, a_oSkillTargetInfo);
 		}
 		
-		/** 효과를 설정한다 */
+		/** 제어자를 설정한다 */
 		private void SubAwakeSetup() {
 			// Do Something
 		}

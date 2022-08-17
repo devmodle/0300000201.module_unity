@@ -12,6 +12,7 @@ namespace SampleEngineName {
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
+			this.Vec3IntDict.ExReplaceVal(EKey.CELL_IDX, KCDefine.B_IDX_INVALID_3D);
 
 			// 스프라이트를 설정한다
 			CFunc.SetupSprites(new List<(EKey, string, GameObject)>() {
@@ -58,7 +59,7 @@ namespace SampleEngineName {
 		#endregion			// 프로퍼티
 
 		#region 함수
-		/** 엔진을 설정한다 */
+		/** 컴포넌트를 설정한다 */
 		private void SubAwakeSetup() {
 			// Do Something
 		}

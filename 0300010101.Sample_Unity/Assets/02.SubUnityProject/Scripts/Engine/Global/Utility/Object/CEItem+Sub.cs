@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 namespace SampleEngineName {
-	/** 효과 제어자 */
-	public partial class CEFXController : CEController {
+	/** 아이템 */
+	public partial class CEItem : CEObj {
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
@@ -30,8 +30,8 @@ namespace SampleEngineName {
 		#endregion			// 함수
 	}
 
-	/** 서브 효과 제어자 */
-	public partial class CEFXController : CEController {
+	/** 서브 아이템 */
+	public partial class CEItem : CEObj {
 		/** 서브 식별자 */
 		private enum ESubKey {
 			NONE = -1,
@@ -47,24 +47,14 @@ namespace SampleEngineName {
 		#endregion			// 프로퍼티
 
 		#region 함수
-		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
-			base.OnUpdate(a_fDeltaTime);
-
-			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
-				// Do Something
-			}
-		}
-		
-		/** 제어자를 설정한다 */
+		/** 컴포넌트를 설정한다 */
 		private void SubAwakeSetup() {
 			// Do Something
 		}
 
 		/** 초기화한다 */
 		private void SubInit() {
-			// Do Something
+			this.SetupAbilityVals();
 		}
 		#endregion			// 함수
 	}
