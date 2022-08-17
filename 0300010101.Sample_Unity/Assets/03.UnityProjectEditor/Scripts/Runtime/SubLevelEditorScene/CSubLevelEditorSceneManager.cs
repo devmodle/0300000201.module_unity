@@ -105,7 +105,7 @@ namespace LevelEditorScene {
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		private Dictionary<EObjType, List<(EObjKinds, SpriteRenderer)>>[,] m_oObjSpriteInfoDictContainers = null;
-		private Dictionary<EKey, SampleEngineName.STGridInfo> m_oGridInfoDict = new Dictionary<EKey, SampleEngineName.STGridInfo>();
+		private Dictionary<EKey, NSEngine.STGridInfo> m_oGridInfoDict = new Dictionary<EKey, NSEngine.STGridInfo>();
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -350,7 +350,7 @@ namespace LevelEditorScene {
 					CLevelInfoTable.Inst.AddLevelInfo(oLevelInfo);
 
 					Func.SetupEditorLevelInfo(oLevelInfo, new CSubEditorLevelCreateInfo() {
-						m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS
+						m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS
 					});
 				}
 				
@@ -461,7 +461,7 @@ namespace LevelEditorScene {
 			CLevelInfoTable.Inst.AddLevelInfo(m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO));
 
 			Func.SetupEditorLevelInfo(m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO), new CSubEditorLevelCreateInfo() {
-				m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS
+				m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS
 			});
 
 			this.UpdateUIsState();
@@ -490,7 +490,7 @@ namespace LevelEditorScene {
 				CLevelInfoTable.Inst.AddLevelInfo(m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO));
 
 				Func.SetupEditorLevelInfo(m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO), new CSubEditorLevelCreateInfo() {
-					m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = SampleEngineName.KDefine.E_MIN_NUM_CELLS
+					m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS
 				});
 			} else {
 				CLevelInfo oSelLevelInfo = null;
@@ -813,8 +813,8 @@ namespace LevelEditorScene {
 			bool bIsValid01 = int.TryParse(m_oInputDict.GetValueOrDefault(EKey.RE_UIS_PAGE_UIS_01_NUM_CELLS_X_INPUT)?.text, NumberStyles.Any, null, out int nNumCellsX);
 			bool bIsValid02 = int.TryParse(m_oInputDict.GetValueOrDefault(EKey.RE_UIS_PAGE_UIS_01_NUM_CELLS_Y_INPUT)?.text, NumberStyles.Any, null, out int nNumCellsY);
 
-			bool bIsValidNumCellsX = Mathf.Max(nNumCellsX, SampleEngineName.KDefine.E_MIN_NUM_CELLS.x) != m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).NumCells.x;
-			bool bIsValidNumCellsY = Mathf.Max(nNumCellsY, SampleEngineName.KDefine.E_MIN_NUM_CELLS.y) != m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).NumCells.y;
+			bool bIsValidNumCellsX = Mathf.Max(nNumCellsX, NSEngine.KDefine.E_MIN_NUM_CELLS.x) != m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).NumCells.x;
+			bool bIsValidNumCellsY = Mathf.Max(nNumCellsY, NSEngine.KDefine.E_MIN_NUM_CELLS.y) != m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).NumCells.y;
 
 			// 셀 개수가 유효 할 경우
 			if(bIsValid01 && bIsValid02 && (bIsValidNumCellsX || bIsValidNumCellsY)) {

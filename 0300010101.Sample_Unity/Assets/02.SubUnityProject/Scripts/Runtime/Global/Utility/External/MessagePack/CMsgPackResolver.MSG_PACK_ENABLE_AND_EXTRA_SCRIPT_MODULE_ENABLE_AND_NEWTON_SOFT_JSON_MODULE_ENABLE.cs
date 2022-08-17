@@ -98,8 +98,8 @@ namespace MessagePack.Resolvers
                 { typeof(global::CObjTargetInfo), 43 },
                 { typeof(global::CSkillTargetInfo), 44 },
                 { typeof(global::CUserInfo), 45 },
-                { typeof(global::SampleEngineName.STEngineTypeWrapper), 46 },
-                { typeof(global::SampleEngineName.STSubEngineTypeWrapper), 47 },
+                { typeof(global::NSEngine.STEngineTypeWrapper), 46 },
+                { typeof(global::NSEngine.STSubEngineTypeWrapper), 47 },
                 { typeof(global::STCellInfo), 48 },
                 { typeof(global::STCommonTypeWrapper), 49 },
                 { typeof(global::STIDInfo), 50 },
@@ -168,8 +168,8 @@ namespace MessagePack.Resolvers
                 case 43: return new MessagePack.Formatters.CObjTargetInfoFormatter();
                 case 44: return new MessagePack.Formatters.CSkillTargetInfoFormatter();
                 case 45: return new MessagePack.Formatters.CUserInfoFormatter();
-                case 46: return new MessagePack.Formatters.SampleEngineName.STEngineTypeWrapperFormatter();
-                case 47: return new MessagePack.Formatters.SampleEngineName.STSubEngineTypeWrapperFormatter();
+                case 46: return new MessagePack.Formatters.NSEngine.STEngineTypeWrapperFormatter();
+                case 47: return new MessagePack.Formatters.NSEngine.STSubEngineTypeWrapperFormatter();
                 case 48: return new MessagePack.Formatters.STCellInfoFormatter();
                 case 49: return new MessagePack.Formatters.STCommonTypeWrapperFormatter();
                 case 50: return new MessagePack.Formatters.STIDInfoFormatter();
@@ -3466,20 +3466,20 @@ namespace MessagePack.Formatters
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters.SampleEngineName
+namespace MessagePack.Formatters.NSEngine
 {
     using global::System.Buffers;
     using global::MessagePack;
 
-    public sealed class STEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::SampleEngineName.STEngineTypeWrapper>
+    public sealed class STEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STEngineTypeWrapper>
     {
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::SampleEngineName.STEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.WriteArrayHeader(0);
         }
 
-        public global::SampleEngineName.STEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::NSEngine.STEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -3487,19 +3487,19 @@ namespace MessagePack.Formatters.SampleEngineName
             }
 
             reader.Skip();
-            return new global::SampleEngineName.STEngineTypeWrapper();
+            return new global::NSEngine.STEngineTypeWrapper();
         }
     }
 
-    public sealed class STSubEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::SampleEngineName.STSubEngineTypeWrapper>
+    public sealed class STSubEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STSubEngineTypeWrapper>
     {
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::SampleEngineName.STSubEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STSubEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.WriteArrayHeader(0);
         }
 
-        public global::SampleEngineName.STSubEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::NSEngine.STSubEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -3507,7 +3507,7 @@ namespace MessagePack.Formatters.SampleEngineName
             }
 
             reader.Skip();
-            return new global::SampleEngineName.STSubEngineTypeWrapper();
+            return new global::NSEngine.STSubEngineTypeWrapper();
         }
     }
 }
