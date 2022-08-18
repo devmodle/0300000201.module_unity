@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 namespace NSEngine {
-	/** 스킬 */
-	public partial class CESkill : CEObjComponent {
+	/** 엔진 객체 컴포넌트 */
+	public partial class CEObjComponent : CEComponent {
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
@@ -30,8 +30,8 @@ namespace NSEngine {
 		#endregion			// 함수
 	}
 
-	/** 서브 스킬 */
-	public partial class CESkill : CEObjComponent {
+	/** 서브 엔진 객체 컴포넌트 */
+	public partial class CEObjComponent : CEComponent {
 		/** 서브 식별자 */
 		private enum ESubKey {
 			NONE = -1,
@@ -54,7 +54,7 @@ namespace NSEngine {
 
 		/** 초기화한다 */
 		private void SubInit() {
-			this.SetupAbilityVals();
+			// Do Something
 		}
 		#endregion			// 함수
 	}

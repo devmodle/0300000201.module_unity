@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 namespace NSEngine {
 	/** 제어자 */
-	public abstract partial class CEController : CComponent {
+	public abstract partial class CEController : CEComponent {
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
@@ -20,6 +20,7 @@ namespace NSEngine {
 
 		/** 초기화 */
 		public virtual void Init(STParams a_stParams) {
+			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
 
 			#region 추가
@@ -30,7 +31,7 @@ namespace NSEngine {
 	}
 
 	/** 서브 제어자 */
-	public abstract partial class CEController : CComponent {
+	public abstract partial class CEController : CEComponent {
 		/** 서브 식별자 */
 		private enum ESubKey {
 			NONE = -1,
@@ -150,7 +151,7 @@ namespace NSEngine {
 
 		/** 초기화한다 */
 		private void SubInit() {
-			this.TargetList.Clear();
+			this.TargetObjList.Clear();
 			this.SetState(EState.NONE);
 		}
 		#endregion			// 함수
