@@ -973,17 +973,17 @@ namespace MessagePack.Formatters
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
+            writer.WriteNil();
             formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Serialize(ref writer, value.m_stIDInfo, options);
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
-            writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
@@ -1148,7 +1148,7 @@ namespace MessagePack.Formatters
                     case 1:
                         ____result.m_stIdxInfo = formatterResolver.GetFormatterWithVerify<global::STIdxInfo>().Deserialize(ref reader, options);
                         break;
-                    case 11:
+                    case 21:
                         ____result.m_stIDInfo = formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Deserialize(ref reader, options);
                         break;
                     case 131:
