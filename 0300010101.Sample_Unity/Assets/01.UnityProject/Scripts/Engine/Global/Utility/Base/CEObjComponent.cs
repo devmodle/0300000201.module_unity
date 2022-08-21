@@ -55,7 +55,7 @@ namespace NSEngine {
 				}
 			}
 		}
-
+		
 		/** 어빌리티 값을 설정한다 */
 		protected virtual void DoSetupAbilityVals(bool a_bIsReset = true) {
 			// 리셋 모드 일 경우
