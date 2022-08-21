@@ -8,11 +8,20 @@ using UnityEngine.Events;
 namespace NSEngine {
 	/** 엔진 객체 컴포넌트 */
 	public abstract partial class CEObjComponent : CEComponent {
+		/** 콜백 */
+		public enum ECallback {
+			NONE = -1,
+			ENGINE_OBJ_EVENT,
+			[HideInInspector] MAX_VAL
+		}
+
 		/** 매개 변수 */
 		public new struct STParams {
 			public CEComponent.STParams m_stBaseParams;
 			public CEObjComponent m_oOwner;
 			public CEController m_oController;
+			
+			public Dictionary<ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>> m_oCallbackDict;
 		}
 
 		#region 변수
