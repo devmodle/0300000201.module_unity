@@ -27,7 +27,6 @@ public partial class CContinuePopup : CSubPopup {
 	/** 매개 변수 */
 	public struct STParams {
 		public int m_nContinueTimes;
-		public CLevelInfo m_oLevelInfo;
 		public Dictionary<ECallback, System.Action<CContinuePopup>> m_oCallbackDict;
 	}
 
