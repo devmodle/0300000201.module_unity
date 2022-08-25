@@ -191,6 +191,10 @@ namespace TitleScene {
 			// 터치 모드가 아닐 경우
 			if(!m_oBoolDict.GetValueOrDefault(EKey.IS_TOUCH) && CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
 				m_oBoolDict.ExReplaceVal(EKey.IS_TOUCH, true);
+
+#if GOOGLE_SHEET_ENABLE
+
+#endif			// #if GOOGLE_SHEET_ENABLE
 			}
 		}
 		#endregion			// 함수

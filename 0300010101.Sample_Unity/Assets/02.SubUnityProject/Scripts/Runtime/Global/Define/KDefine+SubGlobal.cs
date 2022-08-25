@@ -64,6 +64,45 @@ public static partial class KDefine {
 	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>() {
 		// Do Something
 	};
+
+	// 원격 테이블 정보
+	public static readonly Dictionary<string, (string, List<string>)> G_REMOTE_TABLE_INFOS_DICT = new Dictionary<string, (string, List<string>)>() {
+		[KCDefine.U_TABLE_P_G_ETC_INFO] = ("1g-mjTYHZ6nH1F5KRChgvX8nxoYh9qERdl4xEgEYmSm8", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_MISSION_INFO] = ("1hjD_76YkbNTWUXALjvH2g2P5X0m4fRq0giKCiDkfN6U", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_REWARD_INFO] = ("1ja3glbQdaNO7uL_xNbLIozu8KKxAjBZn59BfKLnKAWg", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_RES_INFO] = ("1HKak3yoptv5FcD-RwefGFnjKSGfUk7GO9htH22O_gPA", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_ITEM_INFO] = ("1WU4K0uEnqWYW5egbIf3JJnSkIKF7zqLsh2_WuCqzcJI", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_SKILL_INFO] = ("1mZQ-G92iBKJEo74RfJ-wx-nGGtOTJNAeNspKaQIZmgw", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_OBJ_INFO] = ("17SADyLxjV82T2PImZPTutdhvwLbkaYklboNQhOjIZPo", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_ABILITY_INFO] = ("15YV8CBGiRi5aUIJYk_pu_EA8nJt_7-3MmT2b-v3vRD4", new List<string>() {
+			
+		}),
+
+		[KCDefine.U_TABLE_P_G_PRODUCT_INFO] = ("18OBRLyR88iEFLYoZatnXr-zwsiEAUCSxoFOykjA5xiY", new List<string>() {
+			
+		}),
+	};
 	#endregion			// 런타임 상수
 }
 
