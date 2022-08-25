@@ -25,7 +25,7 @@ public static partial class KDefine {
 	public const string G_OBJ_N_PRODUCT_TRADE_POPUP = "PRODUCT_TRADE_POPUP";
 	public const string G_OBJ_N_FOCUS_POPUP = "FOCUS_POPUP";
 	public const string G_OBJ_N_TUTORIAL_POPUP = "TUTORIAL_POPUP";
-	
+
 	// 설정 팝업 {
 	public const string G_IMG_P_SETTINGS_P_SND_ON = "G_SndOn";
 	public const string G_IMG_P_SETTINGS_P_SND_OFF = "G_SndOff";
@@ -64,52 +64,29 @@ public static partial class KDefine {
 	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>() {
 		// Do Something
 	};
-
-	// 원격 테이블 정보
-	public static readonly Dictionary<string, (string, List<string>)> G_REMOTE_TABLE_INFOS_DICT = new Dictionary<string, (string, List<string>)>() {
-		[KCDefine.U_TABLE_P_G_ETC_INFO] = ("1g-mjTYHZ6nH1F5KRChgvX8nxoYh9qERdl4xEgEYmSm8", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_MISSION_INFO] = ("1hjD_76YkbNTWUXALjvH2g2P5X0m4fRq0giKCiDkfN6U", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_REWARD_INFO] = ("1ja3glbQdaNO7uL_xNbLIozu8KKxAjBZn59BfKLnKAWg", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_RES_INFO] = ("1HKak3yoptv5FcD-RwefGFnjKSGfUk7GO9htH22O_gPA", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_ITEM_INFO] = ("1WU4K0uEnqWYW5egbIf3JJnSkIKF7zqLsh2_WuCqzcJI", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_SKILL_INFO] = ("1mZQ-G92iBKJEo74RfJ-wx-nGGtOTJNAeNspKaQIZmgw", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_OBJ_INFO] = ("17SADyLxjV82T2PImZPTutdhvwLbkaYklboNQhOjIZPo", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_ABILITY_INFO] = ("15YV8CBGiRi5aUIJYk_pu_EA8nJt_7-3MmT2b-v3vRD4", new List<string>() {
-			
-		}),
-
-		[KCDefine.U_TABLE_P_G_PRODUCT_INFO] = ("18OBRLyR88iEFLYoZatnXr-zwsiEAUCSxoFOykjA5xiY", new List<string>() {
-			
-		}),
-	};
 	#endregion			// 런타임 상수
+
+	#region 조건부 상수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	// 식별자
+	public const string G_ID_ETC_INFO_GOOGLE_SHEET = "1g-mjTYHZ6nH1F5KRChgvX8nxoYh9qERdl4xEgEYmSm8";
+	public const string G_ID_MISSION_INFO_GOOGLE_SHEET = "1hjD_76YkbNTWUXALjvH2g2P5X0m4fRq0giKCiDkfN6U";
+	public const string G_ID_REWARD_INFO_GOOGLE_SHEET = "1ja3glbQdaNO7uL_xNbLIozu8KKxAjBZn59BfKLnKAWg";
+	public const string G_ID_RES_INFO_GOOGLE_SHEET = "1HKak3yoptv5FcD-RwefGFnjKSGfUk7GO9htH22O_gPA";
+	public const string G_ID_ITEM_INFO_GOOGLE_SHEET = "1WU4K0uEnqWYW5egbIf3JJnSkIKF7zqLsh2_WuCqzcJI";
+	public const string G_ID_SKILL_INFO_GOOGLE_SHEET = "1mZQ-G92iBKJEo74RfJ-wx-nGGtOTJNAeNspKaQIZmgw";
+	public const string G_ID_OBJ_INFO_GOOGLE_SHEET = "17SADyLxjV82T2PImZPTutdhvwLbkaYklboNQhOjIZPo";
+	public const string G_ID_ABILITY_INFO_GOOGLE_SHEET = "15YV8CBGiRi5aUIJYk_pu_EA8nJt_7-3MmT2b-v3vRD4";
+	public const string G_ID_PRODUCT_INFO_GOOGLE_SHEET = "18OBRLyR88iEFLYoZatnXr-zwsiEAUCSxoFOykjA5xiY";
+#endif			// #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	#endregion			// 조건부 상수
 }
 
 /** 서브 타이틀 씬 상수 */
 public static partial class KDefine {
 	#region 기본
-	
+	// 식별자
+	public const string G_ID_VER_INFO_GOOGLE_SHEET = "1iZ4BmPSlmeSSYuEgunzjFYZYXjco0TNZRvdzs9KhCR0";
 	#endregion			// 기본
 }
 
