@@ -173,16 +173,6 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	public Dictionary<ESkillKinds, STSkillEnhanceInfo> SkillEnhanceInfoDict { get; } = new Dictionary<ESkillKinds, STSkillEnhanceInfo>();
 	public Dictionary<ESkillKinds, STSkillTradeInfo> BuySkillTradeInfoDict { get; } = new Dictionary<ESkillKinds, STSkillTradeInfo>();
 	public Dictionary<ESkillKinds, STSkillTradeInfo> SaleSkillTradeInfoDict { get; } = new Dictionary<ESkillKinds, STSkillTradeInfo>();
-
-	private string SkillInfoTablePath {
-		get {
-#if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return KCDefine.U_RUNTIME_TABLE_P_G_SKILL_INFO;
-#else
-			return KCDefine.U_TABLE_P_G_SKILL_INFO;
-#endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-		}
-	}
 	#endregion			// 프로퍼티
 
 	#region 함수
@@ -265,7 +255,7 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	/** 스킬 정보를 로드한다 */
 	public (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillEnhanceInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos() {
 		this.ResetSkillInfos();
-		return this.LoadSkillInfos(this.SkillInfoTablePath);
+		return this.LoadSkillInfos(Access.SkillInfoTableLoadPath);
 	}
 
 	/** JSON 노드를 설정한다 */
@@ -275,7 +265,7 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 		a_oOutBuySkillTradeInfosList = new List<SimpleJSON.JSONNode>();
 		a_oOutSaleSkillTradeInfosList = new List<SimpleJSON.JSONNode>();
 
-		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(this.SkillInfoTablePath)];
+		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(Access.SkillInfoTableLoadPath)];
 
 		for(int i = 0; i < oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON].Count; ++i) {
 			a_oOutSkillInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON][i]]);

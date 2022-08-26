@@ -53,16 +53,6 @@ public struct STRewardInfo {
 public partial class CRewardInfoTable : CSingleton<CRewardInfoTable> {
 	#region 프로퍼티
 	public Dictionary<ERewardKinds, STRewardInfo> RewardInfoDict { get; } = new Dictionary<ERewardKinds, STRewardInfo>();
-
-	private string RewardInfoTablePath {
-		get {
-#if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return KCDefine.U_RUNTIME_TABLE_P_G_REWARD_INFO;
-#else
-			return KCDefine.U_TABLE_P_G_REWARD_INFO;
-#endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-		}
-	}
 	#endregion			// 프로퍼티
 
 	#region 함수
@@ -114,13 +104,13 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable> {
 	/** 보상 정보를 로드한다 */
 	public Dictionary<ERewardKinds, STRewardInfo> LoadRewardInfos() {
 		this.ResetRewardInfos();
-		return this.LoadRewardInfos(this.RewardInfoTablePath);
+		return this.LoadRewardInfos(Access.RewardInfoTableLoadPath);
 	}
 
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out List<SimpleJSON.JSONNode> a_oOutRewardInfosList) {
 		a_oOutRewardInfosList = new List<SimpleJSON.JSONNode>();
-		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(this.RewardInfoTablePath)];
+		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(Access.RewardInfoTableLoadPath)];
 
 		for(int i = 0; i < oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON].Count; ++i) {
 			a_oOutRewardInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON][i]]);

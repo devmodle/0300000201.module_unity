@@ -44,24 +44,6 @@ public struct STCalcInfo {
 public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 	#region 프로퍼티
 	public Dictionary<ECalcKinds, STCalcInfo> CalcInfoDict { get; } = new Dictionary<ECalcKinds, STCalcInfo>();
-
-	private string CalcInfoTablePath {
-		get {
-#if AB_TEST_ENABLE && NEWTON_SOFT_JSON_MODULE_ENABLE
-#if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return (CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.B) ? KCDefine.U_RUNTIME_TABLE_P_G_ETC_INFO_SET_B : KCDefine.U_RUNTIME_TABLE_P_G_ETC_INFO_SET_A;
-#else
-			return (CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.B) ? KCDefine.U_TABLE_P_G_ETC_INFO_SET_B : KCDefine.U_TABLE_P_G_ETC_INFO_SET_A;
-#endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-#else
-#if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-			return KCDefine.U_RUNTIME_TABLE_P_G_ETC_INFO;
-#else
-			return KCDefine.U_TABLE_P_G_ETC_INFO;
-#endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-#endif			// #if AB_TEST_ENABLE && NEWTON_SOFT_JSON_MODULE_ENABLE
-		}
-	}
 	#endregion			// 프로퍼티
 
 	#region 함수
@@ -99,13 +81,18 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 	/** 기타 정보를 로드한다 */
 	public Dictionary<ECalcKinds, STCalcInfo> LoadCalcInfos() {
 		this.ResetCalcInfos();
-		return this.LoadCalcInfos(this.CalcInfoTablePath);
+		return this.LoadCalcInfos(Access.CalcInfoTableLoadPath);
+	}
+
+	/** 수식 정보를 저장한다 */
+	public void SaveCalcInfos(string a_oJSONStr) {
+		CFunc.WriteStr(Access.CalcInfoTableSavePath, a_oJSONStr);
 	}
 
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out List<SimpleJSON.JSONNode> a_oOutCalcInfosList) {
 		a_oOutCalcInfosList = new List<SimpleJSON.JSONNode>();
-		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(this.CalcInfoTablePath)];
+		var oTableInfoDictContainer = KDefine.G_KEY_TABLE_DICT_CONTAINER[Path.GetFileNameWithoutExtension(Access.CalcInfoTableLoadPath)];
 
 		for(int i = 0; i < oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON].Count; ++i) {
 			a_oOutCalcInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON][i]]);
@@ -146,12 +133,5 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 		return this.CalcInfoDict;
 	}
 	#endregion			// 함수
-
-	#region 조건부 함수
-	/** 수식 정보를 저장한다 */
-	public void SaveCalcInfos(string a_oJSONStr) {
-		// Do Something
-	}
-	#endregion			// 조건부 함수
 }
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
