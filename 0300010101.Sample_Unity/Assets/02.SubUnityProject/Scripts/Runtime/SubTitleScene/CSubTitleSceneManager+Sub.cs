@@ -289,10 +289,7 @@ namespace TitleScene {
 		private void OnLoadEtcInfoGoogleSheet(CServicesManager a_oSender, GstuSpreadSheet a_oGoogleSheet, string a_oID, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
-				CCalcInfoTable.Inst.ResetCalcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString());
-				CEpisodeInfoTable.Inst.ResetEpisodeInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString());
-				CTutorialInfoTable.Inst.ResetTutorialInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString());
-				CFXInfoTable.Inst.ResetFXInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString());
+				CEtcInfoTable.Inst.ResetEtcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString());
 			}
 
 			m_oBoolDict.ExReplaceVal(EKey.IS_TOUCH, a_bIsSuccess);

@@ -191,7 +191,7 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 리셋한다 */
-	public void ResetItemInfos() {
+	public virtual void ResetItemInfos() {
 		this.ItemInfoDict.Clear();
 		this.ItemEnhanceInfoDict.Clear();
 		this.BuyItemTradeInfoDict.Clear();
@@ -199,7 +199,7 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 리셋한다 */
-	public void ResetItemInfos(string a_oJSONStr) {
+	public virtual void ResetItemInfos(string a_oJSONStr) {
 		this.ResetItemInfos();
 		this.DoLoadItemInfos(a_oJSONStr);
 	}

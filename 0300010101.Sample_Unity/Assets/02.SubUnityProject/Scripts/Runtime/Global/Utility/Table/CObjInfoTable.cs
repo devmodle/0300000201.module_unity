@@ -209,7 +209,7 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 	}
 
 	/** 객체 정보를 리셋한다 */
-	public void ResetObjInfos() {
+	public virtual void ResetObjInfos() {
 		this.ObjInfoDict.Clear();
 		this.ObjEnhanceInfoDict.Clear();
 		this.BuyObjTradeInfoDict.Clear();
@@ -217,7 +217,7 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 	}
 
 	/** 객체 정보를 리셋한다 */
-	public void ResetObjInfos(string a_oJSONStr) {
+	public virtual void ResetObjInfos(string a_oJSONStr) {
 		this.ResetObjInfos();
 		this.DoLoadObjInfos(a_oJSONStr);
 	}

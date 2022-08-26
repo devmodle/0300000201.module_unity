@@ -73,12 +73,12 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	}
 
 	/** 효과 정보를 리셋한다 */
-	public void ResetFXInfos() {
+	public virtual void ResetFXInfos() {
 		this.FXInfoDict.Clear();
 	}
 
 	/** 효과 정보를 리셋한다 */
-	public void ResetFXInfos(string a_oJSONStr) {
+	public virtual void ResetFXInfos(string a_oJSONStr) {
 		this.ResetFXInfos();
 		this.DoLoadFXInfos(a_oJSONStr);
 	}
@@ -147,5 +147,12 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 		return this.FXInfoDict;
 	}
 	#endregion			// 함수
+
+	#region 조건부 함수
+	/** 효과 정보를 저장한다 */
+	public void SaveFXInfos(string a_oJSONStr) {
+		// Do Something
+	}
+	#endregion			// 조건부 함수
 }
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

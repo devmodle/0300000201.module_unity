@@ -78,12 +78,12 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 	}
 
 	/** 튜토리얼 정보를 리셋한다 */
-	public void ResetTutorialInfos() {
+	public virtual void ResetTutorialInfos() {
 		this.TutorialInfoDict.Clear();
 	}
 
 	/** 튜토리얼 정보를 리셋한다 */
-	public void ResetTutorialInfos(string a_oJSONStr) {
+	public virtual void ResetTutorialInfos(string a_oJSONStr) {
 		this.ResetTutorialInfos();
 		this.DoLoadTutorialInfos(a_oJSONStr);
 	}
@@ -152,5 +152,12 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 		return this.TutorialInfoDict;
 	}
 	#endregion			// 함수
+
+	#region 조건부 함수
+	/** 튜토리얼 정보를 저장한다 */
+	public void SaveTutorialInfos(string a_oJSONStr) {
+		// Do Something
+	}
+	#endregion			// 조건부 함수
 }
 #endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
