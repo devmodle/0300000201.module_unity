@@ -107,6 +107,22 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable> {
 		return this.LoadRewardInfos(Access.RewardInfoTableLoadPath);
 	}
 
+	/** 보상 정보를 저장한다 */
+	public void SaveRewardInfos(string a_oJSONStr, bool a_bIsEnableAssert = true) {
+		CAccess.Assert(!a_bIsEnableAssert || a_oJSONStr != null);
+
+		// JSON 문자열이 존재 할 경우
+		if(a_oJSONStr != null) {
+			this.ResetRewardInfos(a_oJSONStr);
+			
+#if UNITY_EDITOR || (UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD))
+			CFunc.WriteStr(Access.RewardInfoTableSavePath, a_oJSONStr, false);
+#else
+			CFunc.WriteStr(Access.RewardInfoTableSavePath, a_oJSONStr, true);
+#endif			// #if UNITY_EDITOR || (UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD))
+		}
+	}
+
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out List<SimpleJSON.JSONNode> a_oOutRewardInfosList) {
 		a_oOutRewardInfosList = new List<SimpleJSON.JSONNode>();
@@ -121,15 +137,11 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable> {
 	private Dictionary<ERewardKinds, STRewardInfo> LoadRewardInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
 		
-#if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
-		return this.DoLoadRewardInfos(CFunc.ReadStr(a_oFilePath));
+#if UNITY_EDITOR || (UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD))
+		return this.DoLoadRewardInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
-		try {
-			return this.DoLoadRewardInfos(CResManager.Inst.GetRes<TextAsset>(a_oFilePath).text);
-		} finally {
-			CResManager.Inst.RemoveRes<TextAsset>(a_oFilePath, true);
-		}
-#endif			// #if UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD)
+		return this.DoLoadRewardInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, true));
+#endif			// #if UNITY_EDITOR || (UNITY_STANDALONE && (DEBUG || DEVELOPMENT_BUILD))
 	}
 
 	/** 보상 정보를 로드한다 */
