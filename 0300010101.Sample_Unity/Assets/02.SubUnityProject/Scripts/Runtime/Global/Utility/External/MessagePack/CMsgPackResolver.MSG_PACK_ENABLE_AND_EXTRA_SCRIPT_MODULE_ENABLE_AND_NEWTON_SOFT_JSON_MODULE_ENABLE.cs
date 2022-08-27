@@ -3099,9 +3099,9 @@ namespace MessagePack.Formatters
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIdxInfo value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.WriteArrayHeader(3);
-            writer.Write(value.m_nX);
-            writer.Write(value.m_nY);
-            writer.Write(value.m_nZ);
+            writer.Write(value.m_nIdx01);
+            writer.Write(value.m_nIdx02);
+            writer.Write(value.m_nIdx03);
         }
 
         public global::STIdxInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -3120,13 +3120,13 @@ namespace MessagePack.Formatters
                 switch (i)
                 {
                     case 0:
-                        ____result.m_nX = reader.ReadInt32();
+                        ____result.m_nIdx01 = reader.ReadInt32();
                         break;
                     case 1:
-                        ____result.m_nY = reader.ReadInt32();
+                        ____result.m_nIdx02 = reader.ReadInt32();
                         break;
                     case 2:
-                        ____result.m_nZ = reader.ReadInt32();
+                        ____result.m_nIdx03 = reader.ReadInt32();
                         break;
                     default:
                         reader.Skip();
