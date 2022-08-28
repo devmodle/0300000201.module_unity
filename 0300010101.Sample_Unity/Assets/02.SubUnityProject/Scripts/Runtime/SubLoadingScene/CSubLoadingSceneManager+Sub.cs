@@ -35,7 +35,7 @@ namespace LoadingScene {
 			// 객체를 설정한다 {
 			CFunc.SetupObjs(new List<(EKey, string, GameObject, GameObject)>() {
 				(EKey.LOADING_GAUGE, $"{EKey.LOADING_GAUGE}", this.UIs, CResManager.Inst.GetRes<GameObject>(KCDefine.SS_OBJ_P_LOADING_GAUGE))
-			}, m_oUIsDict, false);
+			}, m_oUIsDict);
 
 			m_oUIsDict.GetValueOrDefault(EKey.LOADING_GAUGE).transform.localPosition = KDefine.LS_POS_LOADING_GAUGE;
 			// 객체를 설정한다 }
@@ -43,7 +43,7 @@ namespace LoadingScene {
 			// 텍스트를 설정한다 {
 			CFunc.SetupComponents(new List<(EKey, string, GameObject, GameObject)>() {
 				(EKey.LOADING_TEXT, $"{EKey.LOADING_TEXT}", this.UIs, CResManager.Inst.GetRes<GameObject>(KCDefine.SS_OBJ_P_LOADING_TEXT))
-			}, m_oTextDict, false);
+			}, m_oTextDict);
 
 			m_oTextDict.GetValueOrDefault(EKey.LOADING_TEXT).transform.localPosition = KDefine.LS_POS_LOADING_TEXT;
 			// 텍스트를 설정한다 }
@@ -51,7 +51,7 @@ namespace LoadingScene {
 			// 게이지 처리자를 설정한다
 			CFunc.SetupComponents(new List<(EKey, GameObject)>() {
 				(EKey.LOADING_GAUGE_HANDLER, m_oUIsDict.GetValueOrDefault(EKey.LOADING_GAUGE))
-			}, m_oGaugeHandlerDict, false);
+			}, m_oGaugeHandlerDict);
 
 			#region 추가
 			this.SubAwakeSetup();
