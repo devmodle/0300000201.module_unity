@@ -1124,7 +1124,7 @@ namespace MessagePack.Formatters
             writer.WriteNil();
             writer.WriteNil();
             formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Serialize(ref writer, value.m_stIDInfo, options);
-            writer.WriteNil();
+            formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Serialize(ref writer, value.m_stPlayEpisodeIDInfo, options);
             writer.WriteNil();
             writer.WriteNil();
             writer.WriteNil();
@@ -1290,6 +1290,9 @@ namespace MessagePack.Formatters
                         break;
                     case 21:
                         ____result.m_stIDInfo = formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Deserialize(ref reader, options);
+                        break;
+                    case 22:
+                        ____result.m_stPlayEpisodeIDInfo = formatterResolver.GetFormatterWithVerify<global::STIDInfo>().Deserialize(ref reader, options);
                         break;
                     case 131:
                         ____result.m_oAbilityTargetInfoDict = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>().Deserialize(ref reader, options);
