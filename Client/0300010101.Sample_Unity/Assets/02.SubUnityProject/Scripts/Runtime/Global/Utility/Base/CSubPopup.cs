@@ -38,7 +38,7 @@ public abstract partial class CSubPopup : CPopup {
 	}
 
 	/** UI 상태를 갱신한다 */
-	protected void UpdateUIsState() {
+	private void UpdateUIsState() {
 		// Do Something
 	}
 	#endregion			// 함수
