@@ -6,10 +6,10 @@ oCommitMsg = sys.argv[2]
 oBranchName = sys.argv[3]
 
 os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git add .\"")
-os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git commit -m \'{oCommitMsg}\'\"")
+os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git commit -m \"{oCommitMsg}\"\"")
 
 # 브랜치 이름이 유효 할 경우
 if oBranchName:
-	os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git push origin -u \'{oBranchName}\'\"")
+	os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git push origin -u {oBranchName}\"")
 else:
 	os.system(f"python UnityModuleCmdExecuter.py \"{oProjName}\" \"git push\"")
