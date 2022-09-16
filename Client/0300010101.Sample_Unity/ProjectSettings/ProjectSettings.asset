@@ -3,7 +3,7 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 23
+  serializedVersion: 24
   productGUID: 8fbf94a705f694d06b360af954a08dbc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -17,8 +17,8 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  m_ShowUnitySplashScreen: 0
-  m_ShowUnitySplashLogo: 0
+  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 0
   m_SplashScreenLogoStyle: 1
@@ -48,6 +48,7 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
+  m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 1
   numberOfMipsStripped: 0
@@ -55,7 +56,6 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: 0
   androidShowActivityIndicatorOnLoading: 1
   iosUseCustomAppBackgroundBehavior: 1
-  iosAllowHTTPDownload: 1
   allowedAutorotateToPortrait: 0
   allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
@@ -119,8 +119,11 @@ PlayerSettings:
   switchNVNShaderPoolsGranularity: 33554432
   switchNVNDefaultPoolsGranularity: 16777216
   switchNVNOtherPoolsGranularity: 16777216
+  switchGpuScratchPoolGranularity: 2097152
+  switchAllowGpuScratchShrinking: 0
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
+  switchNVNGraphicsFirmwareMemory: 32
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -303,7 +306,6 @@ PlayerSettings:
     enable360StereoCapture: 1
   isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 1
-  enableOpenGLProfilerGPURecorders: 1
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
@@ -335,12 +337,13 @@ PlayerSettings:
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
+  strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 12.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
-  tvOSTargetOSVersionString: 11.0
+  tvOSTargetOSVersionString: 12.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -722,6 +725,13 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: Standalone
     m_EncodingQuality: 1
+  m_BuildTargetGroupHDRCubemapEncodingQuality:
+  - m_BuildTarget: iPhone
+    m_EncodingQuality: 1
+  - m_BuildTarget: Android
+    m_EncodingQuality: 1
+  - m_BuildTarget: Standalone
+    m_EncodingQuality: 2
   m_BuildTargetGroupLightmapSettings:
   - m_BuildTarget: iPhone
     m_TextureStreamingEnabled: 1
@@ -748,6 +758,7 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
+  macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -759,6 +770,7 @@ PlayerSettings:
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
   switchNSODependencies: 
+  switchCompilerFlags: 
   switchTitleNames_0: 
   switchTitleNames_1: 
   switchTitleNames_2: 
@@ -985,15 +997,24 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
+  webGLInitialMemorySize: 32
+  webGLMaximumMemorySize: 2048
+  webGLMemoryGrowthMode: 2
+  webGLMemoryLinearGrowthStep: 16
+  webGLMemoryGeometricGrowthStep: 0.2
+  webGLMemoryGeometricGrowthCap: 96
   scriptingDefineSymbols:
     Android: UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;ADS_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;SAMPLE_PROJ;ADMOB_ADS_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;MODULE_VER_2_5_0_OR_NEWER;MODULE_VER_2_6_0_OR_NEWER;MODULE_VER_2_7_0_OR_NEWER;MODULE_VER_2_8_0_OR_NEWER;ENABLE_IL2CPP;ODIN_INSPECTOR;DOTWEEN_ENABLE;MSG_PACK_ENABLE;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EXTRA_SCRIPT_ENABLE;INPUT_SYSTEM_ENABLE;RECEIPT_CHECK_ENABLE;NEWTON_SOFT_JSON_ENABLE;EDITOR_COROUTINE_ENABLE;UNITY_POST_PROCESSING_STACK_V2;AB_TEST_ENABLE;DOTWEEN_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;ENABLE_INPUT_SYSTEM;ML_AGENTS_MODULE_ENABLE;ML_AGENTS_ENABLE;CINEMACHINE_MODULE_ENABLE;CINEMACHINE_ENABLE;POST_PROCESSING_MODULE_ENABLE;POST_PROCESSING_ENABLE;SPINE_ANI_MODULE_ENABLE;SPINE_ANI_ENABLE;UNIVERSAL_RENDERING_PIPELINE_ENABLE;NOTI_MODULE_ENABLE;NOTI_ENABLE;LIGHT_ENABLE;CAMERA_STACKING_ENABLE
     CloudRendering: UNITY_POST_PROCESSING_STACK_V2
     EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
+    GameCoreScarlett: UNITY_POST_PROCESSING_STACK_V2
     GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
+    LinuxHeadlessSimulation: UNITY_POST_PROCESSING_STACK_V2
     Lumin: UNITY_POST_PROCESSING_STACK_V2
     Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
     PS4: UNITY_POST_PROCESSING_STACK_V2
     PS5: UNITY_POST_PROCESSING_STACK_V2
+    QNX: UNITY_POST_PROCESSING_STACK_V2
     Stadia: UNITY_POST_PROCESSING_STACK_V2
     Standalone: UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;TEXTURE_COMPRESS_ENABLE;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE;STUDY_MODULE_ENABLE;ADS_MODULE_ENABLE;PURCHASE_MODULE_ENABLE;SAMPLE_PROJ;ADMOB_ADS_ENABLE;MODULE_VER_2_0_0_OR_NEWER;MODULE_VER_2_1_0_OR_NEWER;MODULE_VER_2_2_0_OR_NEWER;MODULE_VER_2_3_0_OR_NEWER;MODULE_VER_2_4_0_OR_NEWER;MODULE_VER_2_5_0_OR_NEWER;MODULE_VER_2_6_0_OR_NEWER;MODULE_VER_2_7_0_OR_NEWER;MODULE_VER_2_8_0_OR_NEWER;GOOGLE_SHEET_ENABLE;ENABLE_IL2CPP;ODIN_INSPECTOR;DOTWEEN_ENABLE;MSG_PACK_ENABLE;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EXTRA_SCRIPT_ENABLE;INPUT_SYSTEM_ENABLE;RECEIPT_CHECK_ENABLE;NEWTON_SOFT_JSON_ENABLE;EDITOR_COROUTINE_ENABLE;UNITY_POST_PROCESSING_STACK_V2;AB_TEST_ENABLE;DOTWEEN_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;NEWTON_SOFT_JSON_MODULE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;ENABLE_INPUT_SYSTEM;ML_AGENTS_MODULE_ENABLE;ML_AGENTS_ENABLE;CINEMACHINE_MODULE_ENABLE;CINEMACHINE_ENABLE;POST_PROCESSING_MODULE_ENABLE;POST_PROCESSING_ENABLE;SPINE_ANI_MODULE_ENABLE;SPINE_ANI_ENABLE;UNIVERSAL_RENDERING_PIPELINE_ENABLE;NOTI_MODULE_ENABLE;NOTI_ENABLE;LIGHT_ENABLE;CAMERA_STACKING_ENABLE
     WebGL: UNITY_POST_PROCESSING_STACK_V2
@@ -1011,6 +1032,7 @@ PlayerSettings:
   il2cppCompilerConfiguration:
     Android: 1
     Standalone: 1
+  il2cppCodeGeneration: {}
   managedStrippingLevel:
     Android: 2
     Standalone: 2
@@ -1020,6 +1042,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
+  selectedPlatform: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
@@ -1105,13 +1128,14 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 2611fdd1-7994-4b52-8463-7dafb286f16a
+  cloudProjectId: 6af70a77-8675-4a0f-98cb-fdb4b4a906d8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 0300010101.Sample_Unity
-  organizationId: 3f25693a-f86a-4754-9f11-7c3e0149e671
+  organizationId: unity_a4dd49c272c35b729ec3
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
   forceSRGBBlit: 1
   virtualTexturingSupportEnabled: 0
+  insecureHttpOption: 2
