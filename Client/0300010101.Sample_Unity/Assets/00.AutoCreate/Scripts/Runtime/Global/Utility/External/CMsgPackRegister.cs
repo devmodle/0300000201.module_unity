@@ -1,10 +1,9 @@
+#if MSG_PACK_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
-#if EXTRA_SCRIPT_MODULE_ENABLE
 using MessagePack;
 using MessagePack.Resolvers;
 
@@ -46,4 +45,4 @@ public static partial class CMsgPackRegister {
 #endif			// #if UNITY_EDITOR
 	#endregion			// 조건부 클래스 함수
 }
-#endif			// ##if EXTRA_SCRIPT_MODULE_ENABLE
+#endif			// #if MSG_PACK_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE
