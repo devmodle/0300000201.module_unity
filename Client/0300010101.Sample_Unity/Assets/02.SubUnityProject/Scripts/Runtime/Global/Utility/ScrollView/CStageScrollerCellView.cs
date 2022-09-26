@@ -17,18 +17,18 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 
 	#region 변수
 
-	#endregion			// 변수
+	#endregion         // 변수               
 
 	#region 프로퍼티
 	public new STParams Params { get; private set; }
-	#endregion			// 프로퍼티
-	
+	#endregion          // 프로퍼티                 
+
 	#region 함수
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
 	}
-	
+
 	/** 초기화 */
 	public virtual void Init(STParams a_stParams) {
 		base.Init(a_stParams.m_stBaseParams);
@@ -52,9 +52,9 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 		oSelBtn?.ExSetInteractable(true, false);
 #else
 		oSelBtn?.ExSetInteractable(a_stIDInfo.m_nID02 <= Access.GetNumStageClearInfos(CGameInfoStorage.Inst.PlayCharacterID, a_stIDInfo.m_nID03), false);
-#endif			// #if PLAY_TEST_ENABLE
+#endif         // #if PLAY_TEST_ENABLE                                 
 		// 버튼을 갱신한다 }
-		
+
 		// 스테이지 정보가 존재 할 경우
 		if(a_stIDInfo.m_nID02 < Access.GetNumStageEpisodes(a_stIDInfo.m_nID03)) {
 			CEpisodeInfoTable.Inst.TryGetStageEpisodeInfo(a_stIDInfo.m_nID02, out STEpisodeInfo stStageEpisodeInfo, a_stIDInfo.m_nID03);
@@ -64,7 +64,7 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 			oStageText?.ExSetText($"{a_stIDInfo.m_nID02 + KCDefine.B_VAL_1_INT}", EFontSet._1, false);
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
@@ -73,6 +73,6 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 			m_stBaseParams = CScrollerCellView.MakeParams(a_nID, a_oScroller, a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CScrollerCellView, ulong>>())
 		};
 	}
-	#endregion			// 클래스 함수
+	#endregion         // 클래스 함수                   
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

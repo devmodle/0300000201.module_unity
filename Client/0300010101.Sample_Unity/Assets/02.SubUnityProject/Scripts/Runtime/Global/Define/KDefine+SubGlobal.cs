@@ -51,7 +51,7 @@ public static partial class KDefine {
 
 	// 씬 이름
 	public const string G_SCENE_N_E_ETC = "01.E_EtcScene";
-	#endregion			// 기본
+	#endregion            // 기본               
 
 	#region 런타임 상수
 	// 일일 보상
@@ -68,14 +68,14 @@ public static partial class KDefine {
 	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>() {
 		// Do Something
 	};
-	#endregion			// 런타임 상수
+	#endregion            // 런타임 상수                   
 }
 
 /** 서브 타이틀 씬 상수 */
 public static partial class KDefine {
 	#region 기본
 
-	#endregion			// 기본
+	#endregion         // 기본               
 }
 
 /** 서브 메인 씬 상수 */
@@ -85,7 +85,7 @@ public static partial class KDefine {
 	public const int MS_MAX_NUM_LEVELS_IN_ROW = 1;
 	public const int MS_MAX_NUM_STAGES_IN_ROW = 1;
 	public const int MS_MAX_NUM_CHAPTERS_IN_ROW = 1;
-	#endregion			// 기본
+	#endregion          // 기본               
 }
 
 /** 서브 게임 씬 상수 */
@@ -93,7 +93,7 @@ public static partial class KDefine {
 	#region 기본
 	// 단위
 	public const int GS_MIN_LEVEL_ENABLE_REWARD_ADS_WATCH = 0;
-	#endregion			// 기본
+	#endregion            // 기본               
 
 	#region 런타임 상수
 	// 경로
@@ -114,20 +114,20 @@ public static partial class KDefine {
 		m_nOrder = sbyte.MaxValue * 1, m_oLayer = KCDefine.U_SORTING_L_UNDERGROUND
 	};
 	// 정렬 순서 }
-	#endregion			// 런타임 상수
+	#endregion            // 런타임 상수                   
 }
 
 /** 서브 로딩 씬 상수 */
 public static partial class KDefine {
 	#region 기본
 
-	#endregion			// 기본
+	#endregion         // 기본               
 }
 
 /** 서브 중첩 씬 상수 */
 public static partial class KDefine {
 	#region 기본
-	
-	#endregion			// 기본
+
+	#endregion         // 기본               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE                                           

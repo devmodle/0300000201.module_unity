@@ -37,7 +37,7 @@ public struct STEpisodeInfo {
 	public static STEpisodeInfo INVALID = new STEpisodeInfo() {
 		m_stIDInfo = STIDInfo.INVALID, m_stPrevIDInfo = STIDInfo.INVALID, m_stNextIDInfo = STIDInfo.INVALID
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public ulong ULevelID => CFactory.MakeULevelID(m_stIDInfo.m_nID01, m_stIDInfo.m_nID02, m_stIDInfo.m_nID03);
@@ -56,8 +56,8 @@ public struct STEpisodeInfo {
 	public EEpisodeKinds BaseEpisodeKinds => (EEpisodeKinds)((int)m_eEpisodeKinds).ExKindsToSubKindsType();
 
 	public ETutorialType TutorialType => (ETutorialType)((int)m_eTutorialKinds).ExKindsToType();
-	public ETutorialKinds BaseTutorialKinds => (ETutorialKinds)((int)m_eTutorialKinds).ExKindsToSubKindsType(); 
-	#endregion			// 프로퍼티
+	public ETutorialKinds BaseTutorialKinds => (ETutorialKinds)((int)m_eTutorialKinds).ExKindsToSubKindsType();
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -67,7 +67,7 @@ public struct STEpisodeInfo {
 		m_nNumSubEpisodes = a_oEpisodeInfo[KCDefine.U_KEY_NUM_SUB_EPISODES].ExIsValid() ? a_oEpisodeInfo[KCDefine.U_KEY_NUM_SUB_EPISODES].AsInt : KCDefine.B_VAL_0_INT;
 		m_nMaxNumEnemyObjs = a_oEpisodeInfo[KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS].ExIsValid() ? a_oEpisodeInfo[KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS].AsInt : KCDefine.B_VAL_0_INT;
 		m_stSize = a_oEpisodeInfo[KCDefine.U_KEY_SIZE].ExIsValid() ? new Vector3(a_oEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_0_INT].AsFloat, a_oEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_1_INT].AsFloat, a_oEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_2_INT].AsFloat) : Vector3.zero;
-		
+
 		m_eDifficulty = a_oEpisodeInfo[KCDefine.U_KEY_DIFFICULTY].ExIsValid() ? (EDifficulty)a_oEpisodeInfo[KCDefine.U_KEY_DIFFICULTY].AsInt : EDifficulty.NONE;
 		m_eEpisodeKinds = a_oEpisodeInfo[KCDefine.U_KEY_EPISODE_KINDS].ExIsValid() ? (EEpisodeKinds)a_oEpisodeInfo[KCDefine.U_KEY_EPISODE_KINDS].AsInt : EEpisodeKinds.NONE;
 		m_eTutorialKinds = a_oEpisodeInfo[KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)a_oEpisodeInfo[KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
@@ -120,14 +120,14 @@ public struct STEpisodeInfo {
 		string oID01Key = string.Format(a_oIDFmt, KCDefine.B_VAL_1_INT);
 		string oID02Key = string.Format(a_oIDFmt, KCDefine.B_VAL_2_INT);
 		string oID03Key = string.Format(a_oIDFmt, KCDefine.B_VAL_3_INT);
-		
+
 		a_stOutIDInfo = new STIDInfo() {
 			m_nID01 = a_oEpisodeInfo[oID01Key].ExIsValid() ? a_oEpisodeInfo[oID01Key].AsInt : KCDefine.B_IDX_INVALID,
 			m_nID02 = a_oEpisodeInfo[oID02Key].ExIsValid() ? a_oEpisodeInfo[oID02Key].AsInt : KCDefine.B_IDX_INVALID,
 			m_nID03 = a_oEpisodeInfo[oID03Key].ExIsValid() ? a_oEpisodeInfo[oID03Key].AsInt : KCDefine.B_IDX_INVALID
 		};
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 에피소드 정보 테이블 */
@@ -136,7 +136,7 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 	public Dictionary<ulong, STEpisodeInfo> LevelEpisodeInfoDict { get; } = new Dictionary<ulong, STEpisodeInfo>();
 	public Dictionary<ulong, STEpisodeInfo> StageEpisodeInfoDict { get; } = new Dictionary<ulong, STEpisodeInfo>();
 	public Dictionary<ulong, STEpisodeInfo> ChapterEpisodeInfoDict { get; } = new Dictionary<ulong, STEpisodeInfo>();
-	#endregion			// 프로퍼티
+	#endregion         // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -157,7 +157,7 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 		this.ResetEpisodeInfos();
 		this.DoLoadEpisodeInfos(a_oJSONStr);
 	}
-	
+
 	/** 레벨 에피소드 정보를 반환한다 */
 	public STEpisodeInfo GetLevelEpisodeInfo(int a_nLevelID, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
 		bool bIsValid = this.TryGetLevelEpisodeInfo(a_nLevelID, out STEpisodeInfo stLevelEpisodeInfo, a_nStageID, a_nChapterID);
@@ -250,12 +250,12 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 	private List<object> LoadEpisodeInfos(string a_oFilePath) {
 		CFunc.ShowLog($"CEpisodeInfoTable.LoadEpisodeInfos: {a_oFilePath}");
 		CAccess.Assert(a_oFilePath.ExIsValid());
-		
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.DoLoadEpisodeInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
 		return this.DoLoadEpisodeInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
 	/** 에피소드 정보를 로드한다 */
@@ -300,6 +300,6 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 			this.LevelEpisodeInfoDict, this.StageEpisodeInfoDict, this.ChapterEpisodeInfoDict
 		};
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

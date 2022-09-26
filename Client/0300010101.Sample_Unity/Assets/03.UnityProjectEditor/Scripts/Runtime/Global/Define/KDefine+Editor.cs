@@ -8,8 +8,8 @@ using UnityEngine.Events;
 /** 에디터 상수 */
 public static partial class KDefine {
 	#region 기본
-	
-	#endregion			// 기본
+
+	#endregion         // 기본               
 }
 
 /** 레벨 에디터 씬 상수 */
@@ -17,7 +17,7 @@ public static partial class KDefine {
 	#region 기본
 	// 횟수
 	public const int LES_MAX_TRY_TIMES_SETUP_CELL_INFOS = byte.MaxValue;
-	
+
 	// 식별자
 	public const string LES_KEY_SPRITE_OBJS_POOL = "SpriteObjsPool";
 
@@ -28,6 +28,6 @@ public static partial class KDefine {
 	public const string LES_FUNC_N_FMT_SETUP_RE_UIS_PAGE_UIS = "SetupREUIsPageUIs{0:00}";
 	public const string LES_FUNC_N_FMT_UPDATE_RE_UIS_PAGE_UIS = "UpdateREUIsPageUIs{0:00}";
 	// 이름 }
-	#endregion			// 기본
+	#endregion           // 기본               
 }
-#endif			// #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif         // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           

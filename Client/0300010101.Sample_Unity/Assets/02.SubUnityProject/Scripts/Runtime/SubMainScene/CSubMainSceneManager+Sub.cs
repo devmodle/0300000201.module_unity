@@ -34,13 +34,13 @@ namespace MainScene {
 
 				Access.SetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS, KCDefine.B_UNIT_DIGITS_PER_HUNDRED_THOUSAND);
 				CGameInfoStorage.Inst.SaveGameInfo();
-#endif			// #if CREATIVE_DIST_BUILD
+#endif         // #if CREATIVE_DIST_BUILD                                    
 
 				this.AwakeSetup();
 				CGameInfoStorage.Inst.ResetSelItems();
 			}
 		}
-		
+
 		/** 초기화 */
 		public override void Start() {
 			base.Start();
@@ -76,11 +76,11 @@ namespace MainScene {
 
 #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)
 			this.SetupABTestUIs();
-#endif			// #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)
+#endif            // #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)                                                                                   
 
 			#region 추가
 			this.SubAwakeSetup();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
 
 		/** 씬을 설정한다 */
@@ -107,26 +107,26 @@ namespace MainScene {
 				CAppInfoStorage.Inst.SetIgnoreUpdate(true);
 				this.ExLateCallFunc((a_oSender) => Func.ShowUpdatePopup(this.OnReceiveUpdatePopupResult));
 			}
-			
+
 #if DAILY_REWARD_ENABLE
 			// 일일 보상 획득이 가능 할 경우
 			if(CGameInfoStorage.Inst.IsEnableGetDailyReward) {
 				Func.ShowDailyRewardPopup(this.PopupUIs, (a_oSender) => (a_oSender as CDailyRewardPopup).Init());
 			}
-#endif			// #if DAILY_REWARD_ENABLE
+#endif         // #if DAILY_REWARD_ENABLE                                    
 
 			#region 추가
 			this.SubStartSetup();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
 
 		/** UI 상태를 갱신한다 */
 		private void UpdateUIsState() {
 			#region 추가
 			this.SubUpdateUIsState();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 
 	/** 서브 메인 씬 관리자 - 서브 */
@@ -143,18 +143,18 @@ namespace MainScene {
 		private struct STSubTestUIs {
 			// Do Something
 		}
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 
 		#region 변수
 		/** =====> UI <===== */
 #if DEBUG || DEVELOPMENT_BUILD
 		[SerializeField] private STSubTestUIs m_stSubTestUIs;
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
-		#endregion			// 변수
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
+		#endregion         // 변수               
 
 		#region 프로퍼티
 
-		#endregion			// 프로퍼티
+		#endregion         // 프로퍼티                 
 
 		#region 함수
 		/** 제거 되었을 경우 */
@@ -175,7 +175,7 @@ namespace MainScene {
 		private void SubAwakeSetup() {
 #if DEBUG || DEVELOPMENT_BUILD
 			this.SetupSubTestUIs();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif           // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
 
 		/** 씬을 설정한다 */
@@ -187,9 +187,9 @@ namespace MainScene {
 		private void SubUpdateUIsState() {
 #if DEBUG || DEVELOPMENT_BUILD
 			this.UpdateSubTestUIsState();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 
 		#region 조건부 함수
 #if DEBUG || DEVELOPMENT_BUILD
@@ -202,8 +202,8 @@ namespace MainScene {
 		private void UpdateSubTestUIsState() {
 			// Do Something
 		}
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
-		#endregion			// 조건부 함수
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
+		#endregion         // 조건부 함수                   
 	}
 
 	/** 서브 메인 씬 관리자 - 스크롤러 셀 뷰 */
@@ -213,7 +213,7 @@ namespace MainScene {
 		private void OnReceiveSelCallback(CScrollerCellView a_oSender, ulong a_nID) {
 			// Do Something
 		}
-		#endregion			// 함수
-	}	
+		#endregion         // 함수               
+	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

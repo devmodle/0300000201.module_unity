@@ -14,7 +14,7 @@ namespace TestScene {
 		/** 터치 이벤트를 처리한다 */
 		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
 			base.HandleTouchEvent(a_oSender, a_oEventData, a_eTouchEvent);
-			
+
 			// 배경 터치 전달자 일 경우
 			if(this.BGTouchDispatcher == a_oSender) {
 				switch(a_eTouchEvent) {
@@ -24,7 +24,7 @@ namespace TestScene {
 				}
 			}
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

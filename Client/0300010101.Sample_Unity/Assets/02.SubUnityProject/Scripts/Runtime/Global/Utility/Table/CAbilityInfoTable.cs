@@ -12,7 +12,7 @@ using System.IO;
 public struct STAbilityInfo {
 	public STCommonInfo m_stCommonInfo;
 	public STValInfo m_stValInfo;
-	
+
 	public EAbilityKinds m_eAbilityKinds;
 	public EAbilityKinds m_ePrevAbilityKinds;
 	public EAbilityKinds m_eNextAbilityKinds;
@@ -24,12 +24,12 @@ public struct STAbilityInfo {
 	public static STAbilityInfo INVALID = new STAbilityInfo() {
 		m_eAbilityKinds = EAbilityKinds.NONE, m_ePrevAbilityKinds = EAbilityKinds.NONE, m_eNextAbilityKinds = EAbilityKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EAbilityType AbilityType => (EAbilityType)((int)m_eAbilityKinds).ExKindsToType();
 	public EAbilityKinds BaseAbilityKinds => (EAbilityKinds)((int)m_eAbilityKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -49,7 +49,7 @@ public struct STAbilityInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oExtraAbilityTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 어빌리티 강화 정보 */
@@ -60,7 +60,7 @@ public struct STAbilityEnhanceInfo {
 	public EAbilityKinds m_eAbilityKinds;
 	public EAbilityKinds m_ePrevAbilityKinds;
 	public EAbilityKinds m_eNextAbilityKinds;
-	
+
 	public Dictionary<ulong, STTargetInfo> m_oPayTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
@@ -68,12 +68,12 @@ public struct STAbilityEnhanceInfo {
 	public static STAbilityEnhanceInfo INVALID = new STAbilityEnhanceInfo() {
 		m_eAbilityKinds = EAbilityKinds.NONE, m_ePrevAbilityKinds = EAbilityKinds.NONE, m_eNextAbilityKinds = EAbilityKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EAbilityType AbilityType => (EAbilityType)((int)m_eAbilityKinds).ExKindsToType();
 	public EAbilityKinds BaseAbilityKinds => (EAbilityKinds)((int)m_eAbilityKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -97,7 +97,7 @@ public struct STAbilityEnhanceInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 어빌리티 정보 테이블 */
@@ -105,7 +105,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	#region 프로퍼티
 	public Dictionary<EAbilityKinds, STAbilityInfo> AbilityInfoDict { get; } = new Dictionary<EAbilityKinds, STAbilityInfo>();
 	public Dictionary<EAbilityKinds, STAbilityEnhanceInfo> AbilityEnhanceInfoDict { get; } = new Dictionary<EAbilityKinds, STAbilityEnhanceInfo>();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -168,11 +168,11 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		if(a_oJSONStr != null) {
 			this.ResetAbilityInfos(a_oJSONStr);
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 			CFunc.WriteStr(Access.AbilityInfoTableSavePath, a_oJSONStr, false);
 #else
 			CFunc.WriteStr(Access.AbilityInfoTableSavePath, a_oJSONStr, true);
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif           // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 		}
 	}
 
@@ -202,11 +202,11 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	private Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.DoLoadAbilityInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
 		return this.DoLoadAbilityInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
 	/** 어빌리티 정보를 로드한다 */
@@ -238,6 +238,6 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 		return this.AbilityInfoDict;
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

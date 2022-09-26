@@ -48,8 +48,8 @@ namespace GameScene {
 
 		/** =====> 객체 <===== */
 		[SerializeField] private List<GameObject> m_oRewardAdsUIsList = new List<GameObject>();
-		#endregion			// 변수
-		
+		#endregion           // 변수               
+
 		#region 함수
 		/** 앱이 정지 되었을 경우 */
 		public override void OnApplicationPause(bool a_bIsPause) {
@@ -62,7 +62,7 @@ namespace GameScene {
 				if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds && CAdsManager.Inst.IsLoadFullscreenAds(CPluginInfoTable.Inst.AdsPlatform)) {
 					Func.ShowFullscreenAds(null);
 				}
-#endif			// #if ADS_MODULE_ENABLE
+#endif           // #if ADS_MODULE_ENABLE                                  
 
 				Func.ShowResumePopup(this.PopupUIs, (a_oSender) => {
 					(a_oSender as CResumePopup).Init(CResumePopup.MakeParams(new Dictionary<CResumePopup.ECallback, System.Action<CResumePopup>>() {
@@ -135,7 +135,7 @@ namespace GameScene {
 		}
 
 		/** 클리어 콜백을 수신했을 경우 */
-		private void OnReceiveClearCallback(NSEngine.CEngine a_oSender) {			
+		private void OnReceiveClearCallback(NSEngine.CEngine a_oSender) {
 			var oLevelClearInfo = Access.GetLevelClearInfo(CGameInfoStorage.Inst.PlayCharacterID, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID01, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID02, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID03, true);
 			oLevelClearInfo.m_stRecordInfo.m_nIntRecord = a_oSender.RecordInfo.m_nIntRecord;
 			oLevelClearInfo.m_stRecordInfo.m_dblRealRecord = a_oSender.RecordInfo.m_dblRealRecord;
@@ -150,7 +150,7 @@ namespace GameScene {
 		private void OnReceiveClearFailCallback(NSEngine.CEngine a_oSender) {
 			this.ShowResultPopup(false);
 		}
-		
+
 		/** 정지 버튼을 눌렀을 경우 */
 		private void OnTouchPauseBtn() {
 			Func.ShowPausePopup(this.PopupUIs, (a_oSender) => {
@@ -173,7 +173,7 @@ namespace GameScene {
 
 #if ADS_MODULE_ENABLE
 			Func.ShowRewardAds(this.OnCloseRewardAds);
-#endif			// #if ADS_MODULE_ENABLE
+#endif           // #if ADS_MODULE_ENABLE                                  
 		}
 
 		/** 선택 아이템을 적용한다 */
@@ -198,22 +198,25 @@ namespace GameScene {
 					// 레벨 로드가 가능 할 경우
 					if(a_stEpisodeInfo.m_stIDInfo.m_nID01 > KCDefine.B_IDX_INVALID && a_stEpisodeInfo.m_stIDInfo.m_nID01 <= Access.GetNumLevelClearInfos(CGameInfoStorage.Inst.PlayCharacterID, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID02, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID03)) {
 						Func.SetupPlayEpisodeInfo(CGameInfoStorage.Inst.PlayCharacterID, a_stEpisodeInfo.m_stIDInfo.m_nID01, CGameInfoStorage.Inst.PlayMode, a_stEpisodeInfo.m_stIDInfo.m_nID02, a_stEpisodeInfo.m_stIDInfo.m_nID03);
-						
+
 #if ADS_MODULE_ENABLE
 						Func.ShowFullscreenAds((a_oSender, a_bIsSuccess) => CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_GAME));
 #else
 						CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_GAME);
-#endif			// #if ADS_MODULE_ENABLE
+#endif         // #if ADS_MODULE_ENABLE                                  
 					} else {
 						this.LeavePlayLevel(a_oPopup);
 					}
-				} break;
+				}
+				break;
 				case EPlayMode.TUTORIAL: {
 					// Do Something
-				} break;
+				}
+				break;
 				case EPlayMode.TEST: {
 					CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_LEVEL_EDITOR);
-				} break;
+				}
+				break;
 			}
 		}
 
@@ -233,7 +236,7 @@ namespace GameScene {
 			Func.ShowFullscreenAds((a_oSender, a_bIsSuccess) => CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_GAME));
 #else
 			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_GAME);
-#endif			// #if ADS_MODULE_ENABLE
+#endif         // #if ADS_MODULE_ENABLE                                  
 		}
 
 		/** 플레이 레벨을 제개한다 */
@@ -253,7 +256,7 @@ namespace GameScene {
 			Func.ShowFullscreenAds((a_oSender, a_bIsSuccess) => CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN));
 #else
 			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
-#endif			// #if ADS_MODULE_ENABLE
+#endif         // #if ADS_MODULE_ENABLE                                  
 		}
 
 		/** 이어하기 팝업을 출력한다 */
@@ -281,7 +284,7 @@ namespace GameScene {
 				}));
 			});
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

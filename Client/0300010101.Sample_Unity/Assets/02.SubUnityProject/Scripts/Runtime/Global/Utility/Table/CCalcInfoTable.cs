@@ -21,12 +21,12 @@ public struct STCalcInfo {
 	public static STCalcInfo INVALID = new STCalcInfo() {
 		m_eCalcKinds = ECalcKinds.NONE, m_ePrevCalcKinds = ECalcKinds.NONE, m_eNextCalcKinds = ECalcKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public ECalcType CalcType => (ECalcType)((int)m_eCalcKinds).ExKindsToType();
 	public ECalcKinds BaseCalcKinds => (ECalcKinds)((int)m_eCalcKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -38,14 +38,14 @@ public struct STCalcInfo {
 		m_ePrevCalcKinds = a_oCalcInfo[KCDefine.U_KEY_PREV_CALC_KINDS].ExIsValid() ? (ECalcKinds)a_oCalcInfo[KCDefine.U_KEY_PREV_CALC_KINDS].AsInt : ECalcKinds.NONE;
 		m_eNextCalcKinds = a_oCalcInfo[KCDefine.U_KEY_NEXT_CALC_KINDS].ExIsValid() ? (ECalcKinds)a_oCalcInfo[KCDefine.U_KEY_NEXT_CALC_KINDS].AsInt : ECalcKinds.NONE;
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 수식 정보 테이블 */
 public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 	#region 프로퍼티
 	public Dictionary<ECalcKinds, STCalcInfo> CalcInfoDict { get; } = new Dictionary<ECalcKinds, STCalcInfo>();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -111,12 +111,12 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 	/** 기타 정보를 로드한다 */
 	private Dictionary<ECalcKinds, STCalcInfo> LoadCalcInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
-		
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.DoLoadCalcInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
 		return this.DoLoadCalcInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif         // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
 	/** 기타 정보를 로드한다 */
@@ -137,6 +137,6 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 
 		return this.CalcInfoDict;
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

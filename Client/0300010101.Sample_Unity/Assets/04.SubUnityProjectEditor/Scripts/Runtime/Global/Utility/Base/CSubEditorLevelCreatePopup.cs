@@ -14,11 +14,11 @@ public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup {
 
 	#region 변수
 
-	#endregion			// 변수
+	#endregion         // 변수               
 
 	#region 프로퍼티
 	public new STParams Params { get; private set; }
-	#endregion			// 프로퍼티
+	#endregion          // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -51,6 +51,6 @@ public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup {
 			m_nNumLevels = oCreateInfo.m_nNumLevels, m_stMinNumCells = oCreateInfo.m_stMinNumCells, m_stMaxNumCells = oCreateInfo.m_stMaxNumCells
 		};
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif         // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           

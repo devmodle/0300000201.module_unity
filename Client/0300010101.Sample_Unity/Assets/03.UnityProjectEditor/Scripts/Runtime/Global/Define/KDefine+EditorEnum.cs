@@ -9,10 +9,10 @@ using UnityEngine.Events;
 public static partial class KEditorEnumVal {
 	#region 기본
 
-	#endregion			// 기본
+	#endregion          // 기본               
 }
 
 #region 기본
 
-#endregion			// 기본
-#endif			// #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endregion         // 기본               
+#endif         // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           

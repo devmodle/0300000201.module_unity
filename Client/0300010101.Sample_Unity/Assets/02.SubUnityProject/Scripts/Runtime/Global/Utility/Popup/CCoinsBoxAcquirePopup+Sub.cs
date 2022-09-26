@@ -21,7 +21,7 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 
 		#region 추가
 		this.SubAwakeSetup();
-		#endregion			// 추가
+		#endregion         // 추가               
 	}
 
 	/** 초기화 */
@@ -36,23 +36,23 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 
 		#region 추가
 		this.SubInit();
-		#endregion			// 추가
+		#endregion           // 추가               
 	}
-	
+
 	/** UI 상태를 변경한다 */
 	private void UpdateUIsState() {
 		// 객체를 갱신한다
 		m_oSaveUIs?.SetActive(m_oIntDict.GetValueOrDefault(EKey.PREV_NUM_COINS_BOX_COINS) < KDefine.G_MAX_NUM_COINS_BOX_COINS);
 		m_oFullUIs?.SetActive(m_oIntDict.GetValueOrDefault(EKey.PREV_NUM_COINS_BOX_COINS) >= KDefine.G_MAX_NUM_COINS_BOX_COINS);
-		
+
 		// 텍스트를 갱신한다
 		m_oTextDict.GetValueOrDefault(EKey.NUM_COINS_TEXT)?.ExSetText($"{m_oIntDict.GetValueOrDefault(EKey.PREV_NUM_COINS_BOX_COINS)}", EFontSet._1, false);
 
 		#region 추가
 		this.SubUpdateUIsState();
-		#endregion			// 추가
+		#endregion         // 추가               
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 서브 코인 상자 획득 팝업 */
@@ -65,11 +65,11 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 
 	#region 변수
 
-	#endregion			// 변수
+	#endregion         // 변수               
 
 	#region 프로퍼티
 
-	#endregion			// 프로퍼티
+	#endregion         // 프로퍼티                 
 
 	#region 함수
 	/** 팝업을 설정한다 */
@@ -86,6 +86,6 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 	private void SubUpdateUIsState() {
 		// Do Something
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

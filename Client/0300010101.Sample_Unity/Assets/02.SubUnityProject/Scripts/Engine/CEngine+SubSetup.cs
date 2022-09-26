@@ -25,9 +25,9 @@ namespace NSEngine {
 
 			#region 추가
 			this.SubSetupEngine();
-			#endregion			// 추가
+			#endregion            // 추가               
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 
 	/** 서브 엔진 - 설정 */
@@ -45,7 +45,7 @@ namespace NSEngine {
 			CSceneManager.ActiveSceneManager.AddObjsPool(KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL, CResManager.Inst.GetRes<GameObject>(KDefine.E_OBJ_P_PLAYER_OBJ), this.Params.m_oObjRoot, KCDefine.B_VAL_1_INT, false);
 			CSceneManager.ActiveSceneManager.AddObjsPool(KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL, CResManager.Inst.GetRes<GameObject>(KDefine.E_OBJ_P_ENEMY_OBJ), this.Params.m_oObjRoot, KCDefine.U_SIZE_OBJS_POOL_01, false);
 		}
-		
+
 		/** 셀을 설정한다 */
 		private void SetupCell(STCellInfo a_stCellInfo, STGridInfo a_stGridInfo) {
 			var oCellObjDictContainer = new Dictionary<EObjType, List<CEObj>>();
@@ -67,7 +67,7 @@ namespace NSEngine {
 		private void SetupGridLine() {
 			// Do Something
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

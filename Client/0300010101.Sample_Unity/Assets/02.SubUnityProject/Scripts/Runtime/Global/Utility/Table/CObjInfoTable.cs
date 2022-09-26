@@ -29,13 +29,13 @@ public struct STObjInfo {
 	public static STObjInfo INVALID = new STObjInfo() {
 		m_eObjKinds = EObjKinds.NONE, m_ePrevObjKinds = EObjKinds.NONE, m_eNextObjKinds = EObjKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EObjType ObjType => (EObjType)((int)m_eObjKinds).ExKindsToType();
 	public EObjKinds BaseObjKinds => (EObjKinds)((int)m_eObjKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
-	
+	#endregion           // 프로퍼티                 
+
 	#region 함수
 	/** 생성자 */
 	public STObjInfo(SimpleJSON.JSONNode a_oObjInfo) {
@@ -84,7 +84,7 @@ public struct STObjInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 객체 강화 정보 */
@@ -103,12 +103,12 @@ public struct STObjEnhanceInfo {
 	public static STObjEnhanceInfo INVALID = new STObjEnhanceInfo() {
 		m_eObjKinds = EObjKinds.NONE, m_ePrevObjKinds = EObjKinds.NONE, m_eNextObjKinds = EObjKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EObjType ObjType => (EObjType)((int)m_eObjKinds).ExKindsToType();
 	public EObjKinds BaseObjKinds => (EObjKinds)((int)m_eObjKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -132,7 +132,7 @@ public struct STObjEnhanceInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 객체 교환 정보 */
@@ -151,12 +151,12 @@ public struct STObjTradeInfo {
 	public static STObjTradeInfo INVALID = new STObjTradeInfo() {
 		m_eObjKinds = EObjKinds.NONE, m_ePrevObjKinds = EObjKinds.NONE, m_eNextObjKinds = EObjKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EObjType ObjType => (EObjType)((int)m_eObjKinds).ExKindsToType();
 	public EObjKinds BaseObjKinds => (EObjKinds)((int)m_eObjKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -180,7 +180,7 @@ public struct STObjTradeInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 객체 정보 테이블 */
@@ -190,7 +190,7 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 	public Dictionary<EObjKinds, STObjEnhanceInfo> ObjEnhanceInfoDict { get; } = new Dictionary<EObjKinds, STObjEnhanceInfo>();
 	public Dictionary<EObjKinds, STObjTradeInfo> BuyObjTradeInfoDict { get; } = new Dictionary<EObjKinds, STObjTradeInfo>();
 	public Dictionary<EObjKinds, STObjTradeInfo> SaleObjTradeInfoDict { get; } = new Dictionary<EObjKinds, STObjTradeInfo>();
-	#endregion			// 프로퍼티
+	#endregion         // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -282,12 +282,12 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 		// JSON 문자열이 존재 할 경우
 		if(a_oJSONStr != null) {
 			this.ResetObjInfos(a_oJSONStr);
-			
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 			CFunc.WriteStr(Access.ObjInfoTableSavePath, a_oJSONStr, false);
 #else
 			CFunc.WriteStr(Access.ObjInfoTableSavePath, a_oJSONStr, true);
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif           // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 		}
 	}
 
@@ -332,12 +332,12 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 	/** 객체 정보를 로드한다 */
 	private (Dictionary<EObjKinds, STObjInfo>, Dictionary<EObjKinds, STObjEnhanceInfo>, Dictionary<EObjKinds, STObjTradeInfo>, Dictionary<EObjKinds, STObjTradeInfo>) LoadObjInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
-		
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.DoLoadObjInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
 		return this.DoLoadObjInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
 	/** 객체 정보를 로드한다 */
@@ -391,6 +391,6 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 
 		return (this.ObjInfoDict, this.ObjEnhanceInfoDict, this.BuyObjTradeInfoDict, this.SaleObjTradeInfoDict);
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

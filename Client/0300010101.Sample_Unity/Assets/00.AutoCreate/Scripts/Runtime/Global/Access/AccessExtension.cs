@@ -58,6 +58,6 @@ public static partial class AccessExtension {
 			a_oSender.ExSetText(a_oStr, CLocalizeInfoTable.Inst.GetFontSetInfo(a_eFontSet), a_bIsEnableAssert);
 		}
 	}
-	#endregion			// 클래스 함수
+	#endregion         // 클래스 함수                   
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

@@ -15,14 +15,14 @@ public partial class CSubAlertPopup : CAlertPopup {
 
 	#region 프로퍼티
 	public override EAniType AniType => EAniType.DROPDOWN;
-	#endregion			// 프로퍼티
-	
+	#endregion            // 프로퍼티                 
+
 	#region 함수
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
 	}
-	
+
 	/** 초기화 */
 	public override void Init(STParams a_stParams) {
 		base.Init(a_stParams);
@@ -38,6 +38,6 @@ public partial class CSubAlertPopup : CAlertPopup {
 	private void UpdateUIsState() {
 		// Do Something
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

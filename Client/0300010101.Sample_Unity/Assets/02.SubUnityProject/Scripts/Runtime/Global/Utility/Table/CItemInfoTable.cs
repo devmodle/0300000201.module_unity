@@ -25,18 +25,18 @@ public struct STItemInfo {
 	public static STItemInfo INVALID = new STItemInfo() {
 		m_eItemKinds = EItemKinds.NONE, m_ePrevItemKinds = EItemKinds.NONE, m_eNextItemKinds = EItemKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EItemType ItemType => (EItemType)((int)m_eItemKinds).ExKindsToType();
 	public EItemKinds BaseItemKinds => (EItemKinds)((int)m_eItemKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
 	public STItemInfo(SimpleJSON.JSONNode a_oItemInfo) {
 		m_stCommonInfo = new STCommonInfo(a_oItemInfo);
-		
+
 		m_eItemKinds = a_oItemInfo[KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 		m_ePrevItemKinds = a_oItemInfo[KCDefine.U_KEY_PREV_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_PREV_ITEM_KINDS].AsInt : EItemKinds.NONE;
 		m_eNextItemKinds = a_oItemInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS].AsInt : EItemKinds.NONE;
@@ -66,7 +66,7 @@ public struct STItemInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 아이템 강화 정보 */
@@ -77,7 +77,7 @@ public struct STItemEnhanceInfo {
 	public EItemKinds m_eItemKinds;
 	public EItemKinds m_ePrevItemKinds;
 	public EItemKinds m_eNextItemKinds;
-	
+
 	public Dictionary<ulong, STTargetInfo> m_oPayTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
@@ -85,12 +85,12 @@ public struct STItemEnhanceInfo {
 	public static STItemEnhanceInfo INVALID = new STItemEnhanceInfo() {
 		m_eItemKinds = EItemKinds.NONE, m_ePrevItemKinds = EItemKinds.NONE, m_eNextItemKinds = EItemKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EItemType ItemType => (EItemType)((int)m_eItemKinds).ExKindsToType();
 	public EItemKinds BaseItemKinds => (EItemKinds)((int)m_eItemKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -114,7 +114,7 @@ public struct STItemEnhanceInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 아이템 교환 정보 */
@@ -125,7 +125,7 @@ public struct STItemTradeInfo {
 	public EItemKinds m_eItemKinds;
 	public EItemKinds m_ePrevItemKinds;
 	public EItemKinds m_eNextItemKinds;
-	
+
 	public Dictionary<ulong, STTargetInfo> m_oPayTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
@@ -133,12 +133,12 @@ public struct STItemTradeInfo {
 	public static STItemTradeInfo INVALID = new STItemTradeInfo() {
 		m_eItemKinds = EItemKinds.NONE, m_ePrevItemKinds = EItemKinds.NONE, m_eNextItemKinds = EItemKinds.NONE
 	};
-	#endregion			// 상수
+	#endregion            // 상수               
 
 	#region 프로퍼티
 	public EItemType ItemType => (EItemType)((int)m_eItemKinds).ExKindsToType();
 	public EItemKinds BaseItemKinds => (EItemKinds)((int)m_eItemKinds).ExKindsToSubKindsType();
-	#endregion			// 프로퍼티
+	#endregion           // 프로퍼티                 
 
 	#region 함수
 	/** 생성자 */
@@ -162,7 +162,7 @@ public struct STItemTradeInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
 
 /** 아이템 정보 테이블 */
@@ -172,7 +172,7 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	public Dictionary<EItemKinds, STItemEnhanceInfo> ItemEnhanceInfoDict { get; } = new Dictionary<EItemKinds, STItemEnhanceInfo>();
 	public Dictionary<EItemKinds, STItemTradeInfo> BuyItemTradeInfoDict { get; } = new Dictionary<EItemKinds, STItemTradeInfo>();
 	public Dictionary<EItemKinds, STItemTradeInfo> SaleItemTradeInfoDict { get; } = new Dictionary<EItemKinds, STItemTradeInfo>();
-	#endregion			// 프로퍼티
+	#endregion            // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
@@ -265,11 +265,11 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 		if(a_oJSONStr != null) {
 			this.ResetItemInfos(a_oJSONStr);
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 			CFunc.WriteStr(Access.ItemInfoTableSavePath, a_oJSONStr, false);
 #else
 			CFunc.WriteStr(Access.ItemInfoTableSavePath, a_oJSONStr, true);
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 		}
 	}
 
@@ -315,11 +315,11 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemEnhanceInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.DoLoadItemInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
 #else
 		return this.DoLoadItemInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
-#endif			// #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#endif         // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
 	/** 아이템 정보를 로드한다 */
@@ -373,6 +373,6 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 
 		return (this.ItemInfoDict, this.ItemEnhanceInfoDict, this.BuyItemTradeInfoDict, this.SaleItemTradeInfoDict);
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

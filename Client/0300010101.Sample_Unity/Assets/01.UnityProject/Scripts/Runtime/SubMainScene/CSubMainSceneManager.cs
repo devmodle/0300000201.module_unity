@@ -28,8 +28,8 @@ namespace MainScene {
 		/** =====> UI <===== */
 		private Dictionary<EKey, EnhancedScroller> m_oScrollerDict = new Dictionary<EKey, EnhancedScroller>();
 		private Dictionary<EKey, (EnhancedScroller, EnhancedScrollerCellView)> m_oScrollerInfoDict = new Dictionary<EKey, (EnhancedScroller, EnhancedScrollerCellView)>();
-		#endregion			// 변수
-		
+		#endregion            // 변수               
+
 		#region IEnhancedScrollerDelegate
 		/** 셀 개수를 반환한다 */
 		public int GetNumberOfCells(EnhancedScroller a_oSender) {
@@ -106,8 +106,8 @@ namespace MainScene {
 
 			return oScrollerCellView;
 		}
-		#endregion			// IEnhancedScrollerDelegate
-		
+		#endregion         // IEnhancedScrollerDelegate                                      
+
 		#region 함수
 		/** 앱이 정지 되었을 경우 */
 		public override void OnApplicationPause(bool a_bIsPause) {
@@ -120,7 +120,7 @@ namespace MainScene {
 				if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds && CAdsManager.Inst.IsLoadFullscreenAds(CPluginInfoTable.Inst.AdsPlatform)) {
 					Func.ShowFullscreenAds(null);
 				}
-#endif			// #if ADS_MODULE_ENABLE
+#endif           // #if ADS_MODULE_ENABLE                                  
 			}
 		}
 
@@ -172,7 +172,7 @@ namespace MainScene {
 				(a_oSender as CSettingsPopup).Init();
 			});
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 
 		#region 조건부 함수
 #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)
@@ -252,8 +252,8 @@ namespace MainScene {
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 			}
 		}
-#endif			// #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)
-		#endregion			// 조건부 함수
+#endif         // #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)                                                                                   
+		#endregion         // 조건부 함수                   
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

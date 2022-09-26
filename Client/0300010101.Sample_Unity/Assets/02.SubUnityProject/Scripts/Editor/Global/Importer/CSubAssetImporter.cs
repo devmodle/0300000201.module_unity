@@ -35,6 +35,6 @@ public partial class CSubAssetImporter : CAssetImporter {
 	protected override void SetupTexImporter(AssetImporter a_oImporter) {
 		// Do Something
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if UNITY_EDITOR
+#endif         // #if UNITY_EDITOR                             

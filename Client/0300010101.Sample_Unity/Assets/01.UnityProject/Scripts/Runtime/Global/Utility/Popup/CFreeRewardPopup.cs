@@ -17,7 +17,7 @@ public partial class CFreeRewardPopup : CSubPopup {
 	#region 변수
 	/** =====> UI <===== */
 	private Dictionary<EKey, Button> m_oBtnDict = new Dictionary<EKey, Button>();
-	#endregion			// 변수
+	#endregion         // 변수               
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
@@ -25,12 +25,12 @@ public partial class CFreeRewardPopup : CSubPopup {
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
-	
+
 	/** 광고 버튼을 눌렀을 경우 */
 	private void OnTouchAdsBtn() {
 #if ADS_MODULE_ENABLE
 		Func.ShowRewardAds(this.OnCloseRewardAds);
-#endif			// #if ADS_MODULE_ENABLE
+#endif            // #if ADS_MODULE_ENABLE                                  
 	}
 
 	/** 보상 획득 팝업이 닫혔을 경우 */
@@ -42,7 +42,7 @@ public partial class CFreeRewardPopup : CSubPopup {
 		if(oCharacterGameInfo.FreeRewardAcquireTimes >= KDefine.G_MAX_TIMES_ACQUIRE_FREE_REWARDS) {
 			oCharacterGameInfo.PrevFreeRewardTime = System.DateTime.Today;
 		}
-		
+
 		CGameInfoStorage.Inst.SaveGameInfo();
 	}
 
@@ -55,7 +55,7 @@ public partial class CFreeRewardPopup : CSubPopup {
 			(a_oSender as CRewardAcquirePopup).Init(CRewardAcquirePopup.MakeParams(stRewardInfo.m_eRewardQuality, ERewardAcquirePopupType.FREE, stRewardInfo.m_oAcquireTargetInfoDict));
 		}, null, this.OnCloseRewardAcquirePopup);
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 
 	#region 조건부 함수
 #if ADS_MODULE_ENABLE
@@ -66,7 +66,7 @@ public partial class CFreeRewardPopup : CSubPopup {
 			this.ShowRewardAcquirePopup();
 		}
 	}
-#endif			// #if ADS_MODULE_ENABLE
-	#endregion			// 조건부 함수
+#endif         // #if ADS_MODULE_ENABLE                                  
+	#endregion         // 조건부 함수                   
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

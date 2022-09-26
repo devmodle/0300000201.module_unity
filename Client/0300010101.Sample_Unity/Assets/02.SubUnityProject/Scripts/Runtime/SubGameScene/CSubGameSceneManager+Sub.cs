@@ -14,7 +14,7 @@ namespace GameScene {
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-			
+
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 #if DEBUG || DEVELOPMENT_BUILD
@@ -22,12 +22,12 @@ namespace GameScene {
 				if(CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID01 <= KCDefine.B_IDX_INVALID) {
 					Func.SetupPlayEpisodeInfo(CGameInfoStorage.Inst.PlayCharacterID, KCDefine.B_VAL_0_INT, EPlayMode.NORM);
 				}
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 
 				this.AwakeSetup();
 			}
 		}
-		
+
 		/** 초기화 */
 		public override void Start() {
 			base.Start();
@@ -95,7 +95,7 @@ namespace GameScene {
 
 			#region 추가
 			this.SubAwakeSetup();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
 
 		/** 씬을 설정한다 */
@@ -105,7 +105,7 @@ namespace GameScene {
 
 			#region 추가
 			this.SubStartSetup();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
 
 		/** 엔진을 설정한다 */
@@ -137,7 +137,7 @@ namespace GameScene {
 
 			#region 추가
 			this.SubUpdateUIsState();
-			#endregion			// 추가
+			#endregion         // 추가               
 		}
 
 		/** 보상 광고 UI 상태를 갱신한다 */
@@ -146,7 +146,7 @@ namespace GameScene {
 				m_oRewardAdsUIsList[i]?.SetActive(CGameInfoStorage.Inst.PlayEpisodeInfo.ULevelID + KCDefine.B_VAL_1_INT >= KDefine.GS_MIN_LEVEL_ENABLE_REWARD_ADS_WATCH);
 			}
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 	}
 
 	/** 서브 게임 씬 관리자 - 서브 */
@@ -163,18 +163,18 @@ namespace GameScene {
 		private struct STSubTestUIs {
 			// Do Something
 		}
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 
 		#region 변수
 		/** =====> UI <===== */
 #if DEBUG || DEVELOPMENT_BUILD
 		[SerializeField] private STSubTestUIs m_stSubTestUIs;
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
-		#endregion			// 변수
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
+		#endregion         // 변수               
 
 		#region 프로퍼티
 
-		#endregion			// 프로퍼티
+		#endregion         // 프로퍼티                 
 
 		#region 함수
 		/** 상태를 갱신한다 */
@@ -191,7 +191,7 @@ namespace GameScene {
 				}
 			}
 		}
-		
+
 		/** 제거 되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
@@ -210,7 +210,7 @@ namespace GameScene {
 		private void SubAwakeSetup() {
 #if DEBUG || DEVELOPMENT_BUILD
 			this.SetupSubTestUIs();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif           // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
 
 		/** 씬을 설정한다 */
@@ -222,14 +222,14 @@ namespace GameScene {
 		private void SubUpdateUIsState() {
 #if DEBUG || DEVELOPMENT_BUILD
 			this.UpdateSubTestUIsState();
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
 
 		/** 획득했을 경우 */
 		private void OnReceiveAcquireCallback(NSEngine.CEngine a_oSender, Dictionary<ulong, STTargetInfo> a_oAcquireTargetInfoDict) {
 			// Do Something
 		}
-		
+
 		/** 선택 아이템을 적용한다 */
 		private void ApplySelItem(EItemKinds a_eItemKinds) {
 			// Do Something
@@ -249,7 +249,7 @@ namespace GameScene {
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// Do Something
 		}
-		#endregion			// 함수
+		#endregion         // 함수               
 
 		#region 조건부 함수
 #if UNITY_EDITOR
@@ -262,7 +262,7 @@ namespace GameScene {
 				// Do Something
 			}
 		}
-#endif			// #if UNITY_EDITOR
+#endif         // #if UNITY_EDITOR                             
 
 #if DEBUG || DEVELOPMENT_BUILD
 		/** 서브 테스트 UI 를 설정한다 */
@@ -274,7 +274,7 @@ namespace GameScene {
 		private void UpdateSubTestUIsState() {
 			// Do Something
 		}
-#endif			// #if DEBUG || DEVELOPMENT_BUILD
+#endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 
 #if ADS_MODULE_ENABLE
 		/** 보상 광고가 닫혔을 경우 */
@@ -284,8 +284,8 @@ namespace GameScene {
 				// Do Something
 			}
 		}
-#endif			// #if ADS_MODULE_ENABLE
-		#endregion			// 조건부 함수
+#endif         // #if ADS_MODULE_ENABLE                                  
+		#endregion         // 조건부 함수                   
 	}
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

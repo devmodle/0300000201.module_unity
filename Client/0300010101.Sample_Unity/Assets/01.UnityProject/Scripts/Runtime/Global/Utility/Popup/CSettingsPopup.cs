@@ -20,7 +20,7 @@ public partial class CSettingsPopup : CSubPopup {
 	#region 변수
 	/** =====> UI <===== */
 	private Dictionary<EKey, Button> m_oBtnDict = new Dictionary<EKey, Button>();
-	#endregion			// 변수
+	#endregion         // 변수               
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
@@ -28,7 +28,7 @@ public partial class CSettingsPopup : CSubPopup {
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
-	
+
 	/** 배경음 버튼을 눌렀을 경우 */
 	private void OnTouchBGSndBtn() {
 		CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd = !CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd;
@@ -58,7 +58,7 @@ public partial class CSettingsPopup : CSubPopup {
 	private void OnTouchNotiBtn() {
 		CCommonGameInfoStorage.Inst.GameInfo.IsDisableNoti = !CCommonGameInfoStorage.Inst.GameInfo.IsDisableNoti;
 		CCommonGameInfoStorage.Inst.SaveGameInfo();
-		
+
 		this.UpdateUIsState();
 	}
 
@@ -71,6 +71,6 @@ public partial class CSettingsPopup : CSubPopup {
 	private void OnTouchSupportsBtn() {
 		CUnityMsgSender.Inst.SendMailMsg(CProjInfoTable.Inst.CompanyInfo.m_oSupportsMail, string.Empty, string.Empty);
 	}
-	#endregion			// 함수
+	#endregion         // 함수               
 }
-#endif			// #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
