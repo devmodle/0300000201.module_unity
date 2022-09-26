@@ -48,6 +48,9 @@ public static partial class KDefine {
 	public const string G_IMG_P_FMT_SKILL = "G_Skill_{0}";
 	public const string G_IMG_P_FMT_OBJ = "G_Obj_{0}";
 	public const string G_IMG_P_FMT_ABILITY = "G_Ability_{0}";
+
+	// 씬 이름
+	public const string G_SCENE_N_E_ETC = "01.E_EtcScene";
 	#endregion			// 기본
 
 	#region 런타임 상수
