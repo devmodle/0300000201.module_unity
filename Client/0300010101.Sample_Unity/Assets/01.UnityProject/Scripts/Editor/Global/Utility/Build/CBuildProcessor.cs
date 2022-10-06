@@ -30,6 +30,11 @@ public static partial class CBuildProcessor {
 	/** 빌드가 완료 되었을 경우 */
 	[PostProcessBuild]
 	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+		// 배치 모드가 아닐 경우
+		if(!Application.isBatchMode) {
+			EditorUtility.RevealInFinder(a_oPath);
+		}
+
 		CBuildProcessor.m_oPostProcessHandlerDict.GetValueOrDefault(a_eTarget)?.Invoke(a_eTarget, a_oPath);
 	}
 
