@@ -16,7 +16,7 @@ using UnityEditor.iOS.Xcode;
 /** 빌드 처리자 */
 [InitializeOnLoad]
 public static partial class CBuildProcessor {
-	#region 변수
+#region 변수
 	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oPostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>() {
 		[BuildTarget.iOS] = CBuildProcessor.HandleiOSPostProcessBuild,
 		[BuildTarget.Android] = CBuildProcessor.HandleAndroidPostProcessBuild,
@@ -24,9 +24,9 @@ public static partial class CBuildProcessor {
 		[BuildTarget.StandaloneWindows] = CBuildProcessor.HandleStandalonePostProcessBuild,
 		[BuildTarget.StandaloneWindows64] = CBuildProcessor.HandleStandalonePostProcessBuild
 	};
-	#endregion            // 변수               
+#endregion            // 변수               
 
-	#region 클래스 함수
+#region 클래스 함수
 	/** 빌드가 완료 되었을 경우 */
 	[PostProcessBuild]
 	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
@@ -123,8 +123,8 @@ public static partial class CBuildProcessor {
 			string oMainGUID = oPBXProj.GetUnityMainTargetGuid();
 			string oFrameworkGUID = oPBXProj.GetUnityFrameworkTargetGuid();
 
-			oPBXProj.SetBuildProperty(oMainGUID, KCEditorDefine.B_PROPERTY_N_IOS_ENABLE_BITCODE, KCEditorDefine.B_TEXT_IOS_FALSE);
-			oPBXProj.SetBuildProperty(oFrameworkGUID, KCEditorDefine.B_PROPERTY_N_IOS_ENABLE_BITCODE, KCEditorDefine.B_TEXT_IOS_FALSE);
+			oPBXProj.SetBuildProperty(oMainGUID, KCEditorDefine.B_PROPERTY_N_IOS_ENABLE_BITCODE, KCEditorDefine.B_TEXT_IOS_TRUE);
+			oPBXProj.SetBuildProperty(oFrameworkGUID, KCEditorDefine.B_PROPERTY_N_IOS_ENABLE_BITCODE, KCEditorDefine.B_TEXT_IOS_TRUE);
 
 			for(int i = 0; i < KEditorDefine.B_IOS_EXTRA_FRAMEWORK_LIST.Count; ++i) {
 				oPBXProj.AddFrameworkToProject(oMainGUID, KEditorDefine.B_IOS_EXTRA_FRAMEWORK_LIST[i], false);
@@ -196,6 +196,6 @@ public static partial class CBuildProcessor {
 		CFunc.CopyDir(KCDefine.B_ABS_DIR_P_EXTERNAL_DATAS, oDestPath);
 #endif            // #if UNITY_STANDALONE                                 
 	}
-	#endregion         // 클래스 함수                   
+#endregion         // 클래스 함수                   
 }
 #endif         // #if UNITY_EDITOR                             
