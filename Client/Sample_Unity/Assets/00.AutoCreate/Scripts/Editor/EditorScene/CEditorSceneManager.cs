@@ -12,7 +12,6 @@ using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 using UnityEditor.SceneManagement;
 using EnhancedHierarchy;
-using SimpleFolderIcon.Editor;
 
 #if EDITOR_COROUTINE_ENABLE
 using Unity.EditorCoroutines.Editor;
@@ -74,10 +73,6 @@ public static partial class CEditorSceneManager {
 				CEditorSceneManager.m_oListRequest = Client.List(true, true);
 
 				CEditorSceneManager.SetupCallbacks();
-				IconDictionaryCreator.BuildDictionary();
-
-				EditorApplication.update -= CEditorSceneManager.UpdateDependencyState;
-				EditorApplication.update += CEditorSceneManager.UpdateDependencyState;
 			}
 
 			// 갱신 주기가 지났을 경우
@@ -219,6 +214,9 @@ public static partial class CEditorSceneManager {
 
 		EditorApplication.update -= CEditorSceneManager.LateUpdate;
 		EditorApplication.update += CEditorSceneManager.LateUpdate;
+
+		EditorApplication.update -= CEditorSceneManager.UpdateDependencyState;
+		EditorApplication.update += CEditorSceneManager.UpdateDependencyState;
 	}
 
 	/** 종속 패키지를 설정한다 */
