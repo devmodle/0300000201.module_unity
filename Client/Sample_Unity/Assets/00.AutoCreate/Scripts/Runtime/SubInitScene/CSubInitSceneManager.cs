@@ -21,7 +21,9 @@ namespace InitScene {
 		#endregion           // 변수               
 
 		#region 프로퍼티
+#if EXTRA_SCRIPT_MODULE_ENABLE
 		public override Color ClearColor => KDefine.IS_COLOR_CLEAR;
+#endif           // #if EXTRA_SCRIPT_MODULE_ENABLE                                           
 		#endregion           // 프로퍼티                 
 
 		#region 함수
