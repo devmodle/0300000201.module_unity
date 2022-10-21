@@ -61,7 +61,7 @@ public static partial class CEditorSceneManager {
 	private static void Update() {
 		// 상태 갱신이 가능 할 경우
 		if(CEditorAccess.IsEnableUpdateState) {
-			CEditorSceneManager.m_fUpdateSkipTime += Mathf.Clamp01(Time.deltaTime);
+			CEditorSceneManager.m_fUpdateSkipTime += Mathf.Clamp01(Time.unscaledDeltaTime);
 
 			// 상태 갱신이 가능 할 경우
 			if(CEditorSceneManager.m_bIsEnableSetup) {
@@ -122,7 +122,7 @@ public static partial class CEditorSceneManager {
 	/** 상태를 갱신한다 */
 	private static void LateUpdate() {
 		bool bIsEnableUpdate = CEditorAccess.IsEnableUpdateState && !CEditorSceneManager.m_oAddRequestList.ExIsValid();
-		CEditorSceneManager.m_fDefineSymbolSkipTime = bIsEnableUpdate ? CEditorSceneManager.m_fDefineSymbolSkipTime + Time.deltaTime : KCDefine.B_VAL_0_REAL;
+		CEditorSceneManager.m_fDefineSymbolSkipTime = bIsEnableUpdate ? CEditorSceneManager.m_fDefineSymbolSkipTime + Time.unscaledDeltaTime : KCDefine.B_VAL_0_REAL;
 
 		for(int i = 0; i < CEditorSceneManager.m_oAddRequestList.Count; ++i) {
 			// 에러가 존재 할 경우
@@ -180,7 +180,7 @@ public static partial class CEditorSceneManager {
 		// 상태 갱신이 가능 할 경우
 		if(CEditorAccess.IsEnableUpdateState) {
 			bool bIsEnableSetup = CEditorSceneManager.m_bIsEnableSetupDependencies && (CEditorSceneManager.m_oListRequest != null && CEditorSceneManager.m_oListRequest.Result != null && CEditorSceneManager.m_oListRequest.IsCompleted);
-			CEditorSceneManager.m_fDependencySkipTime += Mathf.Clamp01(Time.deltaTime);
+			CEditorSceneManager.m_fDependencySkipTime += Mathf.Clamp01(Time.unscaledDeltaTime);
 
 			// 갱신 주기가 지났을 경우
 			if(bIsEnableSetup && CEditorSceneManager.m_fDependencySkipTime.ExIsGreateEquals(KCEditorDefine.B_DELTA_T_SCENE_M_SCRIPT_UPDATE)) {

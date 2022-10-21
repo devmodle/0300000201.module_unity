@@ -169,6 +169,7 @@ public static partial class KEditorDefine {
 		["com.unity.remote-config"] = "3.1.3",
 		["com.unity.render-pipelines.universal"] = "12.1.7",
 		["com.unity.visualeffectgraph"] = "12.1.7",
+		["com.unity.adaptiveperformance.samsung.android"] = "4.0.1",
 
 #if SAMPLE_PROJ || DEVELOPMENT_PROJ
 #if ML_AGENTS_ENABLE || ML_AGENTS_MODULE_ENABLE
