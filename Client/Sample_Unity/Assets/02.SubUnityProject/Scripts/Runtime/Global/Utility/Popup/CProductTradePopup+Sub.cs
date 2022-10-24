@@ -20,7 +20,7 @@ public partial class CProductTradePopup : CSubPopup {
 		base.Awake();
 
 		#region 추가
-		this.SubAwakeSetup();
+		this.SubSetupAwake();
 		#endregion         // 추가               
 	}
 
@@ -98,7 +98,7 @@ public partial class CProductTradePopup : CSubPopup {
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubAwakeSetup() {
+	private void SubSetupAwake() {
 		// Do Something
 	}
 

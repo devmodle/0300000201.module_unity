@@ -81,7 +81,7 @@ namespace InitScene {
 			m_oImgDict.GetValueOrDefault(EKey.SPLASH_IMG).SetNativeSize();
 			m_oImgDict.GetValueOrDefault(EKey.SPLASH_IMG).gameObject.SetActive(true);
 
-			this.ExLateCallFunc((a_oSender) => this.LoadNextScene(), KCDefine.IS_DELAY_NEXT_SCENE_LOAD);
+			this.ExLateCallFunc((a_oSender) => this.LoadNextScene(), KCDefine.B_VAL_2_REAL);
 		}
 		#endregion         // 함수               
 	}

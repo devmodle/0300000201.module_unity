@@ -15,7 +15,7 @@ namespace NSEngine {
 			m_oVec3Dict.ExReplaceVal(EKey.MOVE_POS, KCDefine.B_POS_INVALID);
 
 			#region 추가
-			this.SubAwakeSetup();
+			this.SubSetupAwake();
 			#endregion         // 추가               
 		}
 
@@ -170,7 +170,7 @@ namespace NSEngine {
 		}
 
 		/** 제어자를 설정한다 */
-		private void SubAwakeSetup() {
+		private void SubSetupAwake() {
 			// Do Something
 		}
 

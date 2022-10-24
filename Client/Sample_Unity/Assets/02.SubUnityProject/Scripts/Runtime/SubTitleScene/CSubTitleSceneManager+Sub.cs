@@ -19,7 +19,7 @@ namespace TitleScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.AwakeSetup();
+				this.SetupAwake();
 			}
 		}
 
@@ -29,7 +29,7 @@ namespace TitleScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.StartSetup();
+				this.SetupStart();
 				this.UpdateUIsState();
 
 				Func.PlayBGSnd(EResKinds.SND_BG_SCENE_TITLE_01);
@@ -68,7 +68,7 @@ namespace TitleScene {
 		}
 
 		/** 씬을 설정한다 */
-		private void AwakeSetup() {
+		private void SetupAwake() {
 			// 텍스트를 설정한다 {
 			CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
 				(EKey.TOUCH_TEXT, $"{EKey.TOUCH_TEXT}", this.UIsBase)
@@ -86,12 +86,12 @@ namespace TitleScene {
 			}, m_oBtnDict);
 
 			#region 추가
-			this.SubAwakeSetup();
+			this.SubSetupAwake();
 			#endregion         // 추가               
 		}
 
 		/** 씬을 설정한다 */
-		private void StartSetup() {
+		private void SetupStart() {
 			// 업데이트가 가능 할 경우
 			if(!CAppInfoStorage.Inst.IsIgnoreUpdate && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
 				CAppInfoStorage.Inst.SetIgnoreUpdate(true);
@@ -99,7 +99,7 @@ namespace TitleScene {
 			}
 
 			#region 추가
-			this.SubStartSetup();
+			this.SubSetupStart();
 			#endregion         // 추가               
 		}
 
@@ -168,21 +168,21 @@ namespace TitleScene {
 
 		#region 함수
 		/** 씬을 설정한다 */
-		private void SubAwakeSetup() {
+		private void SubSetupAwake() {
 #if DEBUG || DEVELOPMENT_BUILD
-			this.SetupSubTestUIs();
+			this.SubSetupTestUIs();
 #endif           // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
 
 		/** 씬을 설정한다 */
-		private void SubStartSetup() {
+		private void SubSetupStart() {
 			// Do Something
 		}
 
 		/** UI 상태를 갱신한다 */
 		private void SubUpdateUIsState() {
 #if DEBUG || DEVELOPMENT_BUILD
-			this.UpdateSubTestUIsState();
+			this.SubUpdateTestUIsState();
 #endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 		}
 
@@ -213,13 +213,13 @@ namespace TitleScene {
 
 		#region 조건부 함수
 #if DEBUG || DEVELOPMENT_BUILD
-		/** 서브 테스트 UI 를 설정한다 */
-		private void SetupSubTestUIs() {
+		/** 테스트 UI 를 설정한다 */
+		private void SubSetupTestUIs() {
 			// Do Something
 		}
 
-		/** 서브 테스트 UI 상태를 갱신한다 */
-		private void UpdateSubTestUIsState() {
+		/** 테스트 UI 상태를 갱신한다 */
+		private void SubUpdateTestUIsState() {
 			// Do Something
 		}
 
