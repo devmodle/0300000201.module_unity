@@ -51,6 +51,7 @@ public static partial class KDefine {
 
 	// 씬 이름
 	public const string G_SCENE_N_E_ETC = "01.E_EtcScene";
+	public const string G_SCENE_N_E_GOOGLE = "02.E_GoogleScene";
 	#endregion            // 기본               
 
 	#region 런타임 상수
