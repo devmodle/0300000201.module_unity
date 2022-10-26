@@ -176,7 +176,7 @@ public partial class CStorePopup : CSubPopup {
 
 		this.UpdateUIsState();
 	}
-	
+
 	/** 타겟 정보를 저장했을 경우 */
 	private void OnSaveTargetInfos(CFirebaseManager a_oSender, bool a_bIsSuccess) {
 		Func.OnRestoreProducts(CPurchaseManager.Inst, m_oRestoreProductList, m_oRestoreProductList.ExIsValid(), null);

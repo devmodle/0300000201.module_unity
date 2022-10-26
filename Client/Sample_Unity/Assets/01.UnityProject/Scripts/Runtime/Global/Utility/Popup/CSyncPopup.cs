@@ -114,7 +114,8 @@ public partial class CSyncPopup : CSubPopup {
 #if ADS_MODULE_ENABLE
 			// 광고 제거 상품을 결제했을 경우
 			if(CUserInfoStorage.Inst.IsPurchaseRemoveAds) {
-				CAdsManager.Inst.CloseBannerAds(CPluginInfoTable.Inst.AdsPlatform);
+				Func.CloseBannerAds(null);
+
 				CAdsManager.Inst.IsEnableBannerAds = false;
 				CAdsManager.Inst.IsEnableFullscreenAds = false;
 			}
@@ -122,7 +123,7 @@ public partial class CSyncPopup : CSubPopup {
 		}
 
 		m_oBoolDict.ExReplaceVal(EKey.IS_LOAD_USER_INFO, a_bIsSuccess && a_oJSONStr.ExIsValid());
-		
+
 		Func.OnLoadUserInfo(a_oSender, a_oJSONStr, m_oBoolDict.GetValueOrDefault(EKey.IS_LOAD_USER_INFO), this.OnReceiveLoadSuccessPopupResult);
 		CSceneManager.ScreenPopupUIs.ExEnumerateComponents<CAlertPopup>((a_oPopupSender) => { a_oPopupSender.SetIgnoreNavStackEvent(m_oBoolDict.GetValueOrDefault(EKey.IS_LOAD_USER_INFO)); return true; });
 	}
@@ -145,7 +146,7 @@ public partial class CSyncPopup : CSubPopup {
 			this.ExLateCallFunc((a_oSender) => {
 				CScheduleManager.Inst.Reset();
 				CNavStackManager.Inst.Reset();
-				
+
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_TITLE);
 			});
 		}

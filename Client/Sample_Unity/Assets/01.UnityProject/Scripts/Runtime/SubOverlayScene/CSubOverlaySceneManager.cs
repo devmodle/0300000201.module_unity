@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+using System.Linq;
 using TMPro;
 
 #if PURCHASE_MODULE_ENABLE
@@ -50,7 +51,7 @@ namespace OverlayScene {
 		/** 상점 팝업을 출력한다 */
 		public void ShowStorePopup() {
 			Func.ShowStorePopup(CSceneManager.ActiveScenePopupUIs, (a_oSender) => {
-				var stParams = CStorePopup.MakeParams(Factory.MakeProductTradeInfos(KDefine.G_PRODUCT_KINDS_STORE_LIST).ExToList());
+				var stParams = CStorePopup.MakeParams(Factory.MakeProductTradeInfos(KDefine.G_PRODUCT_KINDS_STORE_LIST).Values.ToList());
 
 #if ADS_MODULE_ENABLE
 				stParams.m_oAdsCallbackDict.TryAdd(CStorePopup.ECallback.ADS, (a_oAdsSender, a_stAdsRewardInfo, a_bIsSuccess) => this.UpdateUIsState());

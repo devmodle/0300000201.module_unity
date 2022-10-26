@@ -6,13 +6,14 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using System.IO;
+using System.Linq;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
 namespace TitleScene {
 	/** 서브 타이틀 씬 관리자 */
 	public partial class CSubTitleSceneManager : CTitleSceneManager {
-#region 함수
+		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
@@ -85,9 +86,9 @@ namespace TitleScene {
 				(EKey.FACEBOOK_LOGIN_BTN, $"{EKey.FACEBOOK_LOGIN_BTN}", this.UIsBase, this.OnTouchFacebookLoginBtn)
 			}, m_oBtnDict);
 
-#region 추가
+			#region 추가
 			this.SubSetupAwake();
-#endregion         // 추가               
+			#endregion         // 추가               
 		}
 
 		/** 씬을 설정한다 */
@@ -98,9 +99,9 @@ namespace TitleScene {
 				this.ExLateCallFunc((a_oSender) => Func.ShowUpdatePopup(this.OnReceiveUpdatePopupResult));
 			}
 
-#region 추가
+			#region 추가
 			this.SubSetupStart();
-#endregion         // 추가               
+			#endregion         // 추가               
 		}
 
 		/** UI 상태를 갱신한다 */
@@ -132,11 +133,11 @@ namespace TitleScene {
 			m_oGoogleSheetHandlerDict.TryAdd(Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_PRODUCT_INFO), this.OnLoadGoogleSheet);
 #endif         // #if GOOGLE_SHEET_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 
-#region 추가
+			#region 추가
 			this.SubUpdateUIsState();
-#endregion         // 추가               
+			#endregion         // 추가               
 		}
-#endregion         // 함수               
+		#endregion         // 함수               
 	}
 
 	/** 서브 타이틀 씬 관리자 - 서브 */
@@ -155,18 +156,18 @@ namespace TitleScene {
 		}
 #endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
 
-#region 변수
+		#region 변수
 		/** =====> UI <===== */
 #if DEBUG || DEVELOPMENT_BUILD
 		[SerializeField] private STSubTestUIs m_stSubTestUIs;
 #endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
-#endregion         // 변수               
+		#endregion         // 변수               
 
-#region 프로퍼티
+		#region 프로퍼티
 
-#endregion         // 프로퍼티                 
+		#endregion         // 프로퍼티                 
 
-#region 함수
+		#region 함수
 		/** 씬을 설정한다 */
 		private void SubSetupAwake() {
 #if DEBUG || DEVELOPMENT_BUILD
@@ -210,9 +211,9 @@ namespace TitleScene {
 #endif            // #if GOOGLE_SHEET_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 			}
 		}
-#endregion         // 함수               
+		#endregion         // 함수               
 
-#region 조건부 함수
+		#region 조건부 함수
 #if DEBUG || DEVELOPMENT_BUILD
 		/** 테스트 UI 를 설정한다 */
 		private void SubSetupTestUIs() {
@@ -265,7 +266,7 @@ namespace TitleScene {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
 				m_oVerInfos = a_oVerInfos;
-				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.ExToList(), this.OnLoadGoogleSheets);
+				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.Values.ToList(), this.OnLoadGoogleSheets);
 			} else {
 				Func.ShowOnTableLoadFailPopup(null);
 			}
@@ -274,7 +275,7 @@ namespace TitleScene {
 		}
 #endif         // #if GOOGLE_SHEET_ENABLE                                    
 #endif         // #if DEBUG || DEVELOPMENT_BUILD                                           
-#endregion         // 조건부 함수                   
+		#endregion         // 조건부 함수                   
 	}
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

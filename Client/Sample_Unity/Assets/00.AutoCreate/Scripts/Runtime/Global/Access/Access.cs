@@ -35,7 +35,7 @@ public static partial class Access {
 	public static Product GetProduct(int a_nProductIdx) {
 		bool bIsValid = CProductInfoTable.Inst.TryGetProductInfo(a_nProductIdx, out STProductInfo stProductInfo);
 		CAccess.Assert(bIsValid);
-		
+
 		return CPurchaseManager.Inst.GetProduct(stProductInfo.m_oID);
 	}
 #endif         // #if PURCHASE_MODULE_ENABLE                                       

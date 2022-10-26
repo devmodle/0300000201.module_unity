@@ -6,10 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 using System.IO;
+using System.Linq;
 
 namespace Etc {
 	/** 구글 씬 관리자 */
-	public class CEGoogleSceneManager : StudyScene.CSSceneManager {
+	public partial class CEGoogleSceneManager : StudyScene.CSSceneManager {
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_E_GOOGLE;
 		#endregion          // 프로퍼티                 
@@ -61,7 +62,7 @@ namespace Etc {
 		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STGoogleSheetInfo> a_oGoogleSheetInfoDict, bool a_bIsSuccess) {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
-				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.ExToList(), this.OnLoadGoogleSheets);
+				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.Values.ToList(), this.OnLoadGoogleSheets);
 			} else {
 				Func.ShowAlertPopup($"CEGoogleSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null);
 			}
