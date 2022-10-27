@@ -909,9 +909,9 @@ public static partial class Func {
 		Func.m_oGoogleSheetCallbackDict02.ExReplaceVal(ECallback.LOAD_VER_INFO_GOOGLE_SHEET, a_oCallback);
 
 		Func.LoadGoogleSheet(a_oID, new List<(string, int)>() {
-			($"{EUserType.A}", KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS),
-			($"{EUserType.B}", KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS),
-			(KCDefine.B_KEY_COMMON, KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS)
+			($"{EUserType.A}", KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS_AT_ONCE),
+			($"{EUserType.B}", KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS_AT_ONCE),
+			(KCDefine.B_KEY_COMMON, KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS_AT_ONCE)
 		}, Func.OnLoadVerInfoGoogleSheet);
 	}
 
@@ -932,7 +932,7 @@ public static partial class Func {
 	}
 
 	/** 구글 시트 정보를 설정한다 */
-	private static void SetupGoogleSheetInfos(string a_oID, string a_oName, Dictionary<string, List<string>> a_oGoogleSheetInfoDictContainer, Dictionary<string, STGoogleSheetInfo> a_oOutGoogleSheetInfoDict, int a_nMaxNumCells = KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS, bool a_bIsEnableAssert = true) {
+	private static void SetupGoogleSheetInfos(string a_oID, string a_oName, Dictionary<string, List<string>> a_oGoogleSheetInfoDictContainer, Dictionary<string, STGoogleSheetInfo> a_oOutGoogleSheetInfoDict, int a_nMaxNumCells = KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS_AT_ONCE, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || (a_oName.ExIsValid() && a_oGoogleSheetInfoDictContainer.ExIsValid()));
 
 		// 구글 시트 정보 설정이 가능 할 경우
@@ -984,7 +984,7 @@ public static partial class Func {
 				CServicesManager.Inst.LoadGoogleSheet(a_stGoogleSheetLoadInfo.m_oID, Func.m_oLoadGoogleSheetInfoList[KCDefine.B_VAL_0_INT].Item1, Func.OnLoadGoogleSheet, KCDefine.B_VAL_0_INT, Func.m_oLoadGoogleSheetInfoList[KCDefine.B_VAL_0_INT].Item2);
 			} else {
 				CIndicatorManager.Inst.Close();
-				var stResult = KDefine.G_ID_GOOGLE_SHEET_DICT.ExFindVal((a_oID) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_oID));
+				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_oID) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_oID));
 
 				Func.m_oGoogleSheetCallbackDict03.GetValueOrDefault(ECallback.LOAD_GOOGLE_SHEET)?.Invoke(a_oSender, new STGoogleSheetLoadInfo() {
 					m_nSrcIdx = KCDefine.B_VAL_0_INT, m_nNumCells = nOriginNumCells, m_oID = a_stGoogleSheetLoadInfo.m_oID, m_oName = stResult.Item1 ? stResult.Item2 : string.Empty, m_oGoogleSheet = a_stGoogleSheetLoadInfo.m_oGoogleSheet
@@ -1003,7 +1003,9 @@ public static partial class Func {
 			Func.m_oGoogleSheetCallbackDict01.GetValueOrDefault(ECallback.LOAD_GOOGLE_SHEETS)?.Invoke(a_oSender, a_bIsSuccess && !Func.m_oGoogleSheetInfoList.ExIsValid());
 		} else {
 			var oGoogleSheetInfoList = new List<STGoogleSheetInfo>(Func.m_oGoogleSheetInfoList);
-			Func.LoadGoogleSheets(oGoogleSheetInfoList, Func.m_oGoogleSheetHandlerDict, Func.m_oGoogleSheetCallbackDict01.GetValueOrDefault(ECallback.LOAD_GOOGLE_SHEETS));
+			var oGoogleSheetHandlerDict = new Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>>(Func.m_oGoogleSheetHandlerDict);
+
+			Func.LoadGoogleSheets(oGoogleSheetInfoList, oGoogleSheetHandlerDict, Func.m_oGoogleSheetCallbackDict01.GetValueOrDefault(ECallback.LOAD_GOOGLE_SHEETS));
 		}
 	}
 
@@ -1032,7 +1034,7 @@ public static partial class Func {
 					string oID = KDefine.G_TABLE_INFO_DICT_CONTAINER.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).Item1;
 
 					foreach(var stKeyVal in KDefine.G_TABLE_INFO_DICT_CONTAINER.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).Item2) {
-						Func.SetupGoogleSheetInfos(oID, oVerInfos[i][KCDefine.U_KEY_NAME], stKeyVal.Value, oGoogleSheetInfoDict);
+						Func.SetupGoogleSheetInfos(oID, oVerInfos[i][KCDefine.U_KEY_NAME], stKeyVal.Value, oGoogleSheetInfoDict, KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).Item2);
 					}
 				}
 			}

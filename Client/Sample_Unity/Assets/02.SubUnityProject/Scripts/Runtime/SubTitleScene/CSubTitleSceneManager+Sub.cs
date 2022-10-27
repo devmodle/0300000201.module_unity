@@ -205,7 +205,7 @@ namespace TitleScene {
 
 #if GOOGLE_SHEET_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 				string oKey = Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_VER_INFO);
-				Func.LoadVerInfoGoogleSheet(KDefine.G_ID_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey), this.OnLoadVerInfoGoogleSheet);
+				Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).Item1, this.OnLoadVerInfoGoogleSheet);
 #else
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 #endif            // #if GOOGLE_SHEET_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
