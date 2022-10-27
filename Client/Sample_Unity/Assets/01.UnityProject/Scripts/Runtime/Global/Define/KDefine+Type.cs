@@ -92,16 +92,15 @@ public struct STGoogleSheetInfo {
 	public string m_oID;
 	public string m_oName;
 	public List<(string, int)> m_oSheetInfoList;
-	public System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool> m_oCallback;
 
-#region 함수
+	#region 함수
 	/** 생성자 */
 	public STGoogleSheetInfo(string a_oID, string a_oName) : this() {
 		m_oID = a_oID;
 		m_oName = a_oName;
 		m_oSheetInfoList = new List<(string, int)>();
 	}
-#endregion         // 함수               
+	#endregion         // 함수               
 }
 #endif         // #if GOOGLE_SHEET_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 #endregion         // 조건부 타입                   

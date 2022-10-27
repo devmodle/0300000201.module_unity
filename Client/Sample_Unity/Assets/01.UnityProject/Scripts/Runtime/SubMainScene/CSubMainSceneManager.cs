@@ -206,9 +206,11 @@ namespace MainScene {
 
 				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_A_SET_BTN).fontSize = KCDefine.U_DEF_SIZE_FONT;
 				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_A_SET_BTN).ExSetText(CStrTable.Inst.GetStr(KCDefine.ST_KEY_MAIN_SM_A_SET_TEXT));
+				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_A_SET_BTN).ExSetColor<TMP_Text>((CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.A) ? Color.yellow : Color.white);
 
 				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_B_SET_BTN).fontSize = KCDefine.U_DEF_SIZE_FONT;
 				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_B_SET_BTN).ExSetText(CStrTable.Inst.GetStr(KCDefine.ST_KEY_MAIN_SM_B_SET_TEXT));
+				oTextDict.GetValueOrDefault(KCDefine.U_OBJ_N_B_SET_BTN).ExSetColor<TMP_Text>((CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.B) ? Color.yellow : Color.white);
 				// 텍스트를 설정한다 }
 
 				// 버튼을 설정한다
