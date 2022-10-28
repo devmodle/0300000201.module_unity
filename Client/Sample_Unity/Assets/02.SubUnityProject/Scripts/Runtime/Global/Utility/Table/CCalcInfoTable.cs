@@ -98,7 +98,7 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out List<SimpleJSON.JSONNode> a_oOutCalcInfosList) {
 		a_oOutCalcInfosList = new List<SimpleJSON.JSONNode>();
-		var oTableInfoDictContainer = KDefine.G_TABLE_INFO_DICT_CONTAINER.GetValueOrDefault(Path.GetFileNameWithoutExtension(Access.CalcInfoTableLoadPath));
+		var oTableInfoDictContainer = KDefine.G_TABLE_INFO_DICT_CONTAINER.GetValueOrDefault(Access.CalcInfoTableLoadPath.ExGetFileName(false));
 
 		// 공용 정보가 존재 할 경우
 		if(oTableInfoDictContainer.Item2[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON)) {
@@ -138,5 +138,14 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 		return this.CalcInfoDict;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 수식 정보 JSON 문자열을 생성한다 */
+	public string MakeCalcInfosJSONStr() {
+		return string.Empty;
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

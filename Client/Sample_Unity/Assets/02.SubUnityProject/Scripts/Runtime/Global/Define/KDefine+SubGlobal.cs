@@ -49,11 +49,19 @@ public static partial class KDefine {
 	public const string G_IMG_P_FMT_OBJ = "G_Obj_{0}";
 	public const string G_IMG_P_FMT_ABILITY = "G_Ability_{0}";
 
-	// 씬 이름
+	// 씬 이름 {
 	public const string G_SCENE_N_E_ETC = "01.E_EtcScene";
 	public const string G_SCENE_N_A_ADMOB = "01.A_AdmobScene";
 	public const string G_SCENE_N_A_IRON_SRC = "02.A_IronSrcScene";
 	public const string G_SCENE_N_G_GOOGLE_SHEET = "01.G_GoogleSheetScene";
+
+	public const string G_SCENE_N_F_AUTH = "01.F_AuthScene";
+	public const string G_SCENE_N_F_ANALYTICS = "02.F_AnalyticsScene";
+	public const string G_SCENE_N_F_DB = "03.F_DBScene";
+	public const string G_SCENE_N_F_MSG = "04.F_MsgScene";
+	public const string G_SCENE_N_F_CONFIG = "05.F_ConfigScene";
+	public const string G_SCENE_N_F_STORAGE = "06.F_StorageScene";
+	// 씬 이름 }
 	#endregion            // 기본               
 
 	#region 런타임 상수

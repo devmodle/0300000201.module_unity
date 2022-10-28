@@ -30,7 +30,7 @@ namespace Google {
 		/** 구글 시트 로드 버튼을 눌렀을 경우 */
 		private void OnTouchLoadGoogleSheetBtn() {
 #if GOOGLE_SHEET_ENABLE
-			string oKey = Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_VER_INFO);
+			string oKey = KCDefine.U_TABLE_P_G_VER_INFO.ExGetFileName(false);
 			Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).Item1, this.OnLoadVerInfoGoogleSheet);
 #endif            // #if GOOGLE_SHEET_ENABLE                                    
 		}
@@ -52,15 +52,15 @@ namespace Google {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
 				var oHandlerDict = new Dictionary<string, System.Action>() {
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ETC_INFO)] = () => CEtcInfoTable.Inst.SaveEtcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_MISSION_INFO)] = () => CMissionInfoTable.Inst.SaveMissionInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_REWARD_INFO)] = () => CRewardInfoTable.Inst.SaveRewardInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_RES_INFO)] = () => CResInfoTable.Inst.SaveResInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ITEM_INFO)] = () => CItemInfoTable.Inst.SaveItemInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_SKILL_INFO)] = () => CSkillInfoTable.Inst.SaveSkillInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_OBJ_INFO)] = () => CObjInfoTable.Inst.SaveObjInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ABILITY_INFO)] = () => CAbilityInfoTable.Inst.SaveAbilityInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_PRODUCT_INFO)] = () => CProductTradeInfoTable.Inst.SaveProductTradeInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString())
+					[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = () => CEtcInfoTable.Inst.SaveEtcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = () => CMissionInfoTable.Inst.SaveMissionInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = () => CRewardInfoTable.Inst.SaveRewardInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)] = () => CResInfoTable.Inst.SaveResInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)] = () => CItemInfoTable.Inst.SaveItemInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = () => CSkillInfoTable.Inst.SaveSkillInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = () => CObjInfoTable.Inst.SaveObjInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = () => CAbilityInfoTable.Inst.SaveAbilityInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
+					[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = () => CProductTradeInfoTable.Inst.SaveProductTradeInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString())
 				};
 
 				oHandlerDict.GetValueOrDefault(a_stGoogleSheetLoadInfo.m_oName)?.Invoke();
@@ -77,18 +77,18 @@ namespace Google {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
 				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.Values.ToList(), new Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>>() {
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ETC_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_MISSION_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_REWARD_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_RES_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ITEM_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_SKILL_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_OBJ_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_ABILITY_INFO)] = this.OnLoadGoogleSheet,
-					[Path.GetFileNameWithoutExtension(KCDefine.U_TABLE_P_G_PRODUCT_INFO)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
 				}, this.OnLoadGoogleSheets);
 			} else {
-				Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null);
+				Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null, false);
 			}
 		}
 #endif         // #if GOOGLE_SHEET_ENABLE                                    
