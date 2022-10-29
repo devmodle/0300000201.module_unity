@@ -74,18 +74,19 @@ public partial class CStorePopup : CSubPopup {
 				m_oProductKindsDict.ExReplaceVal(EKey.SEL_PRODUCT_KINDS, a_stProductTradeInfo.m_eProductKinds);
 				Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif         // #if ADS_MODULE_ENABLE                                  
+
+				break;
 			}
-			break;
 			case EPurchaseType.IN_APP_PURCHASE: {
 #if PURCHASE_MODULE_ENABLE
 				CSceneManager.GetSceneManager<OverlayScene.CSubOverlaySceneManager>(KCDefine.B_SCENE_N_OVERLAY)?.PurchaseProduct(a_stProductTradeInfo.m_eProductKinds, this.OnPurchaseProduct);
 #endif         // #if PURCHASE_MODULE_ENABLE                                       
+
+				break;
 			}
-			break;
 			case EPurchaseType.TARGET: {
-				// Do Something
+				break;
 			}
-			break;
 		}
 	}
 

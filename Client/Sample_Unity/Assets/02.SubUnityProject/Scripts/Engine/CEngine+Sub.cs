@@ -169,9 +169,8 @@ namespace NSEngine {
 				case EEngineObjEvent.AVOID:
 				case EEngineObjEvent.DAMAGE:
 				case EEngineObjEvent.CRITICAL_DAMAGE: {
-					// Do Something
+					break;
 				}
-				break;
 			}
 
 			// 체력이 없을 경우

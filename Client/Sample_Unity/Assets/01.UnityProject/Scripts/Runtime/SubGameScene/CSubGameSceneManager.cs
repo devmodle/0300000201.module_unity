@@ -207,16 +207,16 @@ namespace GameScene {
 					} else {
 						this.LeavePlayLevel(a_oPopup);
 					}
+
+					break;
 				}
-				break;
 				case EPlayMode.TUTORIAL: {
-					// Do Something
+					break;
 				}
-				break;
 				case EPlayMode.TEST: {
 					CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_LEVEL_EDITOR);
+					break;
 				}
-				break;
 			}
 		}
 
