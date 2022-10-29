@@ -292,9 +292,9 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 		}
 
 		// 강화 정보가 존재 할 경우
-		if(oTableInfoDictContainer.Item2[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE)) {
-			for(int i = 0; i < oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE].Count; ++i) {
-				a_oOutSkillEnhanceInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE][i]]);
+		if(oTableInfoDictContainer.Item2[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE)) {
+			for(int i = 0; i < oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE].Count; ++i) {
+				a_oOutSkillEnhanceInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE][i]]);
 			}
 		}
 
@@ -316,11 +316,17 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	/** 스킬 정보를 로드한다 */
 	private (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillEnhanceInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
+		return this.DoLoadSkillInfos(this.LoadSkillInfosJSONStr(a_oFilePath));
+	}
+
+	/** 아이템 정보 JSON 문자열을 로드한다 */
+	private string LoadSkillInfosJSONStr(string a_oFilePath) {
+		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return this.DoLoadSkillInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #else
-		return this.DoLoadSkillInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #endif            // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
@@ -376,5 +382,27 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 		return (this.SkillInfoDict, this.SkillEnhanceInfoDict, this.BuySkillTradeInfoDict, this.SaleSkillTradeInfoDict);
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 스킬 정보를 저장한다 */
+	public void SaveSkillInfos() {
+		var oSkillInfos = SimpleJSON.JSONNode.Parse(this.LoadSkillInfosJSONStr(Access.SkillInfoTableLoadPath));
+		var oCommonInfos = oSkillInfos[KCDefine.B_KEY_COMMON];
+		var oEnhanceInfos = oSkillInfos[KCDefine.B_KEY_ENHANCE_TRADE];
+		var oBuyTradeInfos = oSkillInfos[KCDefine.B_KEY_BUY_TRADE];
+		var oSaleTradeInfos = oSkillInfos[KCDefine.B_KEY_SALE_TRADE];
+
+		for(int i = 0; i < oCommonInfos.Count; ++i) {
+			var eSkillKinds = oCommonInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
+
+			// 스킬 정보가 존재 할 경우
+			if(this.SkillInfoDict.ContainsKey(eSkillKinds)) {
+				//this.SkillInfoDict[eSkillKinds].SetupSkillInfo(oCommonInfos[i]);
+			}
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

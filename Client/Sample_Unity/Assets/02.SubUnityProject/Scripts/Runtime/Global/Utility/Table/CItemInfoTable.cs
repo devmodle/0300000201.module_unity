@@ -67,6 +67,40 @@ public struct STItemInfo {
 		}
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 아이템 정보를 설정한다 */
+	public void SetupItemInfo(SimpleJSON.JSONNode a_oOutItemInfo) {
+		int nIdx01 = KCDefine.B_VAL_0_INT;
+		int nIdx02 = KCDefine.B_VAL_0_INT;
+		int nIdx03 = KCDefine.B_VAL_0_INT;
+		int nIdx04 = KCDefine.B_VAL_0_INT;
+
+		m_stCommonInfo.SetupCommonInfo(a_oOutItemInfo);
+
+		a_oOutItemInfo[KCDefine.U_KEY_ITEM_KINDS] = $"{(int)m_eItemKinds}";
+		a_oOutItemInfo[KCDefine.U_KEY_PREV_ITEM_KINDS] = $"{(int)m_ePrevItemKinds}";
+		a_oOutItemInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS] = $"{(int)m_eNextItemKinds}";
+
+		foreach(var stKeyVal in m_oAttachItemTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemInfo[string.Format(KCDefine.U_KEY_FMT_ATTACH_ITEM_TARGET_INFO, ++nIdx01)]);
+		}
+
+		foreach(var stKeyVal in m_oSkillTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemInfo[string.Format(KCDefine.U_KEY_FMT_SKILL_TARGET_INFO, ++nIdx02)]);
+		}
+
+		foreach(var stKeyVal in m_oAbilityTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemInfo[string.Format(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, ++nIdx03)]);
+		}
+
+		foreach(var stKeyVal in m_oAcquireTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, ++nIdx04)]);
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 아이템 강화 정보 */
@@ -115,6 +149,30 @@ public struct STItemEnhanceInfo {
 		}
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 아이템 강화 정보를 설정한다 */
+	public void SetupItemEnhanceInfo(SimpleJSON.JSONNode a_oOutItemEnhanceInfo) {
+		int nIdx01 = KCDefine.B_VAL_0_INT;
+		int nIdx02 = KCDefine.B_VAL_0_INT;
+
+		m_stCommonInfo.SetupCommonInfo(a_oOutItemEnhanceInfo);
+
+		a_oOutItemEnhanceInfo[KCDefine.U_KEY_ITEM_KINDS] = $"{(int)m_eItemKinds}";
+		a_oOutItemEnhanceInfo[KCDefine.U_KEY_PREV_ITEM_KINDS] = $"{(int)m_ePrevItemKinds}";
+		a_oOutItemEnhanceInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS] = $"{(int)m_eNextItemKinds}";
+
+		foreach(var stKeyVal in m_oPayTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemEnhanceInfo[string.Format(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, ++nIdx01)]);
+		}
+
+		foreach(var stKeyVal in m_oAcquireTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemEnhanceInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, ++nIdx02)]);
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 아이템 교환 정보 */
@@ -163,6 +221,30 @@ public struct STItemTradeInfo {
 		}
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 아이템 교환 정보를 설정한다 */
+	public void SetupItemTradeInfo(SimpleJSON.JSONNode a_oOutItemTradeInfo) {
+		int nIdx01 = KCDefine.B_VAL_0_INT;
+		int nIdx02 = KCDefine.B_VAL_0_INT;
+
+		m_stCommonInfo.SetupCommonInfo(a_oOutItemTradeInfo);
+
+		a_oOutItemTradeInfo[KCDefine.U_KEY_ITEM_KINDS] = $"{(int)m_eItemKinds}";
+		a_oOutItemTradeInfo[KCDefine.U_KEY_PREV_ITEM_KINDS] = $"{(int)m_ePrevItemKinds}";
+		a_oOutItemTradeInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS] = $"{(int)m_eNextItemKinds}";
+
+		foreach(var stKeyVal in m_oPayTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemTradeInfo[string.Format(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, ++nIdx01)]);
+		}
+
+		foreach(var stKeyVal in m_oAcquireTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutItemTradeInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, ++nIdx02)]);
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 아이템 정보 테이블 */
@@ -290,9 +372,9 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 		}
 
 		// 강화 정보가 존재 할 경우
-		if(oTableInfoDictContainer.Item2[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE)) {
-			for(int i = 0; i < oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE].Count; ++i) {
-				a_oOutItemEnhanceInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE][i]]);
+		if(oTableInfoDictContainer.Item2[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE)) {
+			for(int i = 0; i < oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE].Count; ++i) {
+				a_oOutItemEnhanceInfosList.ExAddVal(a_oJSONNode[oTableInfoDictContainer.Item2[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE][i]]);
 			}
 		}
 
@@ -314,11 +396,17 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	/** 아이템 정보를 로드한다 */
 	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemEnhanceInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
+		return this.DoLoadItemInfos(this.LoadItemInfosJSONStr(a_oFilePath));
+	}
+
+	/** 아이템 정보 JSON 문자열을 로드한다 */
+	private string LoadItemInfosJSONStr(string a_oFilePath) {
+		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return this.DoLoadItemInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #else
-		return this.DoLoadItemInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #endif         // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
@@ -374,5 +462,56 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 		return (this.ItemInfoDict, this.ItemEnhanceInfoDict, this.BuyItemTradeInfoDict, this.SaleItemTradeInfoDict);
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 아이템 정보를 저장한다 */
+	public void SaveItemInfos() {
+		var oItemInfos = SimpleJSON.JSONNode.Parse(this.LoadItemInfosJSONStr(Access.ItemInfoTableLoadPath));
+		var oCommonInfos = oItemInfos[KCDefine.B_KEY_COMMON];
+		var oEnhanceInfos = oItemInfos[KCDefine.B_KEY_ENHANCE_TRADE];
+		var oBuyTradeInfos = oItemInfos[KCDefine.B_KEY_BUY_TRADE];
+		var oSaleTradeInfos = oItemInfos[KCDefine.B_KEY_SALE_TRADE];
+
+		for(int i = 0; i < oCommonInfos.Count; ++i) {
+			var eItemKinds = oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
+
+			// 아이템 정보가 존재 할 경우
+			if(this.ItemInfoDict.ContainsKey(eItemKinds)) {
+				this.ItemInfoDict[eItemKinds].SetupItemInfo(oCommonInfos[i]);
+			}
+		}
+
+		for(int i = 0; i < oEnhanceInfos.Count; ++i) {
+			var eItemKinds = oEnhanceInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oEnhanceInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
+
+			// 아이템 강화 정보가 존재 할 경우
+			if(this.ItemEnhanceInfoDict.ContainsKey(eItemKinds)) {
+				this.ItemEnhanceInfoDict[eItemKinds].SetupItemEnhanceInfo(oEnhanceInfos[i]);
+			}
+		}
+
+		for(int i = 0; i < oBuyTradeInfos.Count; ++i) {
+			var eItemKinds = oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
+
+			// 구입 아이템 교환 정보가 존재 할 경우
+			if(this.BuyItemTradeInfoDict.ContainsKey(eItemKinds)) {
+				this.BuyItemTradeInfoDict[eItemKinds].SetupItemTradeInfo(oBuyTradeInfos[i]);
+			}
+		}
+
+		for(int i = 0; i < oSaleTradeInfos.Count; ++i) {
+			var eItemKinds = oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
+
+			// 판매 아이템 교환 정보가 존재 할 경우
+			if(this.SaleItemTradeInfoDict.ContainsKey(eItemKinds)) {
+				this.SaleItemTradeInfoDict[eItemKinds].SetupItemTradeInfo(oSaleTradeInfos[i]);
+			}
+		}
+
+		this.SaveItemInfos(oItemInfos.ToString());
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

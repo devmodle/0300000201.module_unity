@@ -48,6 +48,24 @@ public struct STFXInfo {
 		}
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 효과 정보를 설정한다 */
+	public void SetupFXInfo(SimpleJSON.JSONNode a_oOutFXInfo) {
+		m_stCommonInfo.SetupCommonInfo(a_oOutFXInfo);
+		m_stTimeInfo.SetupTimeInfo(a_oOutFXInfo);
+
+		a_oOutFXInfo[KCDefine.U_KEY_FX_KINDS] = $"{(int)m_eFXKinds}";
+		a_oOutFXInfo[KCDefine.U_KEY_PREV_FX_KINDS] = $"{(int)m_ePrevFXKinds}";
+		a_oOutFXInfo[KCDefine.U_KEY_NEXT_FX_KINDS] = $"{(int)m_eNextFXKinds}";
+
+		for(int i = 0; i < m_oResKindsList.Count; ++i) {
+			a_oOutFXInfo[string.Format(KCDefine.U_KEY_FMT_RES_KINDS, i + KCDefine.B_VAL_1_INT)] = $"{(int)m_oResKindsList[i]}";
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 효과 정보 테이블 */
@@ -147,5 +165,23 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 		return this.FXInfoDict;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 효과 정보를 설정한다 */
+	public void SetupFXInfos(SimpleJSON.JSONNode a_oOutFXInfos) {
+		var oFXInfos = a_oOutFXInfos[KCDefine.U_KEY_FX];
+
+		for(int i = 0; i < oFXInfos.Count; ++i) {
+			var eFXKinds = oFXInfos[i][KCDefine.U_KEY_FX_KINDS].ExIsValid() ? (EFXKinds)oFXInfos[i][KCDefine.U_KEY_FX_KINDS].AsInt : EFXKinds.NONE;
+
+			// 효과 정보가 존재 할 경우
+			if(this.FXInfoDict.ContainsKey(eFXKinds)) {
+				this.FXInfoDict[eFXKinds].SetupFXInfo(oFXInfos[i]);
+			}
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

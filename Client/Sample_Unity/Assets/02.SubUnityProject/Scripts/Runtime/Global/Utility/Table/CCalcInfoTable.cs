@@ -39,6 +39,20 @@ public struct STCalcInfo {
 		m_eNextCalcKinds = a_oCalcInfo[KCDefine.U_KEY_NEXT_CALC_KINDS].ExIsValid() ? (ECalcKinds)a_oCalcInfo[KCDefine.U_KEY_NEXT_CALC_KINDS].AsInt : ECalcKinds.NONE;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 수식 정보를 설정한다 */
+	public void SetupCalcInfo(SimpleJSON.JSONNode a_oOutCalcInfo) {
+		m_stCommonInfo.SetupCommonInfo(a_oOutCalcInfo);
+		a_oOutCalcInfo[KCDefine.U_KEY_CALC] = m_oCalc;
+
+		a_oOutCalcInfo[KCDefine.U_KEY_CALC_KINDS] = $"{(int)m_eCalcKinds}";
+		a_oOutCalcInfo[KCDefine.U_KEY_PREV_CALC_KINDS] = $"{(int)m_ePrevCalcKinds}";
+		a_oOutCalcInfo[KCDefine.U_KEY_NEXT_CALC_KINDS] = $"{(int)m_eNextCalcKinds}";
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 수식 정보 테이블 */
@@ -141,9 +155,18 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	/** 수식 정보 JSON 문자열을 생성한다 */
-	public string MakeCalcInfosJSONStr() {
-		return string.Empty;
+	/** 수식 정보를 설정한다 */
+	public void SetupCalcInfos(SimpleJSON.JSONNode a_oOutCalcInfos) {
+		var oCalcInfos = a_oOutCalcInfos[KCDefine.U_KEY_CALC];
+
+		for(int i = 0; i < oCalcInfos.Count; ++i) {
+			var eCalcKinds = oCalcInfos[i][KCDefine.U_KEY_CALC_KINDS].ExIsValid() ? (ECalcKinds)oCalcInfos[i][KCDefine.U_KEY_CALC_KINDS].AsInt : ECalcKinds.NONE;
+
+			// 수식 정보가 존재 할 경우
+			if(this.CalcInfoDict.ContainsKey(eCalcKinds)) {
+				this.CalcInfoDict[eCalcKinds].SetupCalcInfo(oCalcInfos[i]);
+			}
+		}
 	}
 #endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 	#endregion         // 조건부 함수                   

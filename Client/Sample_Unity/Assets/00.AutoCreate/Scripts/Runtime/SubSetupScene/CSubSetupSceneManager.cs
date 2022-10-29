@@ -27,17 +27,13 @@ namespace SetupScene {
 			CEtcInfoTable.Inst.LoadEtcInfos();
 			CLevelInfoTable.Inst.LoadLevelInfos();
 
-			CCalcInfoTable.Inst.LoadCalcInfos();
 			CMissionInfoTable.Inst.LoadMissionInfos();
 			CRewardInfoTable.Inst.LoadRewardInfos();
-			CEpisodeInfoTable.Inst.LoadEpisodeInfos();
-			CTutorialInfoTable.Inst.LoadTutorialInfos();
 			CResInfoTable.Inst.LoadResInfos();
 
 			CItemInfoTable.Inst.LoadItemInfos();
 			CSkillInfoTable.Inst.LoadSkillInfos();
 			CObjInfoTable.Inst.LoadObjInfos();
-			CFXInfoTable.Inst.LoadFXInfos();
 			CAbilityInfoTable.Inst.LoadAbilityInfos();
 			CProductTradeInfoTable.Inst.LoadProductTradeInfos();
 

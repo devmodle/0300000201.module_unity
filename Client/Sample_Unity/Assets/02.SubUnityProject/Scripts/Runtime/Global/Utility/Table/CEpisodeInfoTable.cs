@@ -72,6 +72,10 @@ public struct STEpisodeInfo {
 		m_eEpisodeKinds = a_oEpisodeInfo[KCDefine.U_KEY_EPISODE_KINDS].ExIsValid() ? (EEpisodeKinds)a_oEpisodeInfo[KCDefine.U_KEY_EPISODE_KINDS].AsInt : EEpisodeKinds.NONE;
 		m_eTutorialKinds = a_oEpisodeInfo[KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)a_oEpisodeInfo[KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
 
+		m_stIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_ID);
+		m_stPrevIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_PREV_ID);
+		m_stNextIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_NEXT_ID);
+
 		m_oRewardKindsList = new List<ERewardKinds>();
 		m_oRecordValInfoList = new List<STValInfo>();
 
@@ -79,10 +83,6 @@ public struct STEpisodeInfo {
 		m_oUnlockTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 		m_oDropItemTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 		m_oEnemyObjTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
-
-		STEpisodeInfo.SetupIDInfo(KCDefine.U_KEY_FMT_ID, a_oEpisodeInfo, out m_stIDInfo);
-		STEpisodeInfo.SetupIDInfo(KCDefine.U_KEY_FMT_PREV_ID, a_oEpisodeInfo, out m_stPrevIDInfo);
-		STEpisodeInfo.SetupIDInfo(KCDefine.U_KEY_FMT_NEXT_ID, a_oEpisodeInfo, out m_stNextIDInfo);
 
 		for(int i = 0; i < KDefine.G_MAX_NUM_REWARD_KINDS; ++i) {
 			string oKey = string.Format(KCDefine.U_KEY_FMT_REWARD_KINDS, i + KCDefine.B_VAL_1_INT);
@@ -114,20 +114,53 @@ public struct STEpisodeInfo {
 			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oEnemyObjTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
 		}
 	}
-
-	/** 식별자 정보를 설정한다 */
-	private static void SetupIDInfo(string a_oIDFmt, SimpleJSON.JSONNode a_oEpisodeInfo, out STIDInfo a_stOutIDInfo) {
-		string oID01Key = string.Format(a_oIDFmt, KCDefine.B_VAL_1_INT);
-		string oID02Key = string.Format(a_oIDFmt, KCDefine.B_VAL_2_INT);
-		string oID03Key = string.Format(a_oIDFmt, KCDefine.B_VAL_3_INT);
-
-		a_stOutIDInfo = new STIDInfo() {
-			m_nID01 = a_oEpisodeInfo[oID01Key].ExIsValid() ? a_oEpisodeInfo[oID01Key].AsInt : KCDefine.B_IDX_INVALID,
-			m_nID02 = a_oEpisodeInfo[oID02Key].ExIsValid() ? a_oEpisodeInfo[oID02Key].AsInt : KCDefine.B_IDX_INVALID,
-			m_nID03 = a_oEpisodeInfo[oID03Key].ExIsValid() ? a_oEpisodeInfo[oID03Key].AsInt : KCDefine.B_IDX_INVALID
-		};
-	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 에피소드 정보를 설정한다 */
+	public void SetupEpisodeInfo(SimpleJSON.JSONNode a_oOutEpisodeInfo) {
+		m_stCommonInfo.SetupCommonInfo(a_oOutEpisodeInfo);
+
+		a_oOutEpisodeInfo[KCDefine.U_KEY_NUM_SUB_EPISODES] = $"{m_nNumSubEpisodes}";
+		a_oOutEpisodeInfo[KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS] = $"{m_nMaxNumEnemyObjs}";
+
+		a_oOutEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_0_INT] = $"{m_stSize.x:0.0}";
+		a_oOutEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_1_INT] = $"{m_stSize.y:0.0}";
+		a_oOutEpisodeInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_2_INT] = $"{m_stSize.z:0.0}";
+
+		a_oOutEpisodeInfo[KCDefine.U_KEY_DIFFICULTY] = $"{(int)m_eDifficulty}";
+		a_oOutEpisodeInfo[KCDefine.U_KEY_EPISODE_KINDS] = $"{(int)m_eEpisodeKinds}";
+		a_oOutEpisodeInfo[KCDefine.U_KEY_TUTORIAL_KINDS] = $"{(int)m_eTutorialKinds}";
+
+		m_stIDInfo.SetupIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_ID);
+		m_stPrevIDInfo.SetupIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_PREV_ID);
+		m_stNextIDInfo.SetupIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_NEXT_ID);
+
+		this.SetupTargetInfos(m_oClearTargetInfoDict, KCDefine.U_KEY_FMT_CLEAR_TARGET_INFO, a_oOutEpisodeInfo);
+		this.SetupTargetInfos(m_oUnlockTargetInfoDict, KCDefine.U_KEY_FMT_UNLOCK_TARGET_INFO, a_oOutEpisodeInfo);
+		this.SetupTargetInfos(m_oDropItemTargetInfoDict, KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, a_oOutEpisodeInfo);
+		this.SetupTargetInfos(m_oEnemyObjTargetInfoDict, KCDefine.U_KEY_FMT_ENEMY_OBJ_TARGET_INFO, a_oOutEpisodeInfo);
+
+		for(int i = 0; i < m_oRewardKindsList.Count; ++i) {
+			a_oOutEpisodeInfo[string.Format(KCDefine.U_KEY_FMT_REWARD_KINDS, i + KCDefine.B_VAL_1_INT)] = $"{(int)m_oRewardKindsList[i]}";
+		}
+
+		for(int i = 0; i < m_oRecordValInfoList.Count; ++i) {
+			m_oRecordValInfoList[i].SetupValInfo(a_oOutEpisodeInfo[string.Format(KCDefine.U_KEY_FMT_RECORD_VAL_INFO, i + KCDefine.B_VAL_1_INT)]);
+		}
+	}
+
+	/** 타겟 정보를 설정한다 */
+	private void SetupTargetInfos(Dictionary<ulong, STTargetInfo> a_oTargetInfoDict, string a_oFmt, SimpleJSON.JSONNode a_oOutTargetInfo) {
+		int nIdx = KCDefine.B_VAL_0_INT;
+
+		foreach(var stKeyVal in a_oTargetInfoDict) {
+			stKeyVal.Value.SetupTargetInfo(a_oOutTargetInfo[string.Format(a_oFmt, ++nIdx)]);
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 에피소드 정보 테이블 */
@@ -301,5 +334,43 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 		};
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 에피소드 정보를 설정한다 */
+	public void SetupEpisodeInfos(SimpleJSON.JSONNode a_oOutEpisodeInfos) {
+		var oLevelEpisodeInfos = a_oOutEpisodeInfos[KCDefine.U_KEY_LEVEL_EPISODE];
+		var oStageEpisodeInfos = a_oOutEpisodeInfos[KCDefine.U_KEY_STAGE_EPISODE];
+		var oChapterEpisodeInfos = a_oOutEpisodeInfos[KCDefine.U_KEY_CHAPTER_EPISODE];
+
+		for(int i = 0; i < oLevelEpisodeInfos.Count; ++i) {
+			var stIDInfo = new STIDInfo(oLevelEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
+
+			// 레벨 에피소드 정보가 존재 할 경우
+			if(this.LevelEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID01)) {
+				this.LevelEpisodeInfoDict[stIDInfo.UniqueID01].SetupEpisodeInfo(oLevelEpisodeInfos[i]);
+			}
+		}
+
+		for(int i = 0; i < oStageEpisodeInfos.Count; ++i) {
+			var stIDInfo = new STIDInfo(oStageEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
+
+			// 스테이지 에피소드 정보가 존재 할 경우
+			if(this.StageEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID02)) {
+				this.StageEpisodeInfoDict[stIDInfo.UniqueID02].SetupEpisodeInfo(oStageEpisodeInfos[i]);
+			}
+		}
+
+		for(int i = 0; i < oChapterEpisodeInfos.Count; ++i) {
+			var stIDInfo = new STIDInfo(oChapterEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
+
+			// 챕터 에피소드 정보가 존재 할 경우
+			if(this.ChapterEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID03)) {
+				this.ChapterEpisodeInfoDict[stIDInfo.UniqueID03].SetupEpisodeInfo(oChapterEpisodeInfos[i]);
+			}
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

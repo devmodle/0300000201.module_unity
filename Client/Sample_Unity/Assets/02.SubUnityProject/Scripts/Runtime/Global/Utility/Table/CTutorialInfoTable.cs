@@ -53,6 +53,27 @@ public struct STTutorialInfo {
 		}
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 튜토리얼 정보를 설정한다 */
+	public void SetupTutorialInfo(SimpleJSON.JSONNode a_oOutTutorialInfo) {
+		m_stCommonInfo.SetupCommonInfo(a_oOutTutorialInfo);
+
+		a_oOutTutorialInfo[KCDefine.U_KEY_TUTORIAL_KINDS] = $"{(int)m_eTutorialKinds}";
+		a_oOutTutorialInfo[KCDefine.U_KEY_PREV_TUTORIAL_KINDS] = $"{(int)m_ePrevTutorialKinds}";
+		a_oOutTutorialInfo[KCDefine.U_KEY_NEXT_TUTORIAL_KINDS] = $"{(int)m_eNextTutorialKinds}";
+
+		for(int i = 0; i < m_oStrList.Count; ++i) {
+			a_oOutTutorialInfo[string.Format(KCDefine.U_KEY_FMT_STRS, i + KCDefine.B_VAL_1_INT)] = m_oStrList[i];
+		}
+
+		for(int i = 0; i < m_oRewardKindsList.Count; ++i) {
+			a_oOutTutorialInfo[string.Format(KCDefine.U_KEY_FMT_REWARD_KINDS, i + KCDefine.B_VAL_1_INT)] = $"{(int)m_oRewardKindsList[i]}";
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 튜토리얼 정보 테이블 */
@@ -152,5 +173,23 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 		return this.TutorialInfoDict;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 튜토리얼 정보를 설정한다 */
+	public void SetupTutorialInfos(SimpleJSON.JSONNode a_oOutTutorialInfos) {
+		var oTutorialInfos = a_oOutTutorialInfos[KCDefine.U_KEY_TUTORIAL];
+
+		for(int i = 0; i < oTutorialInfos.Count; ++i) {
+			var eTutorialKinds = oTutorialInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)oTutorialInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
+
+			// 튜토리얼 정보가 존재 할 경우
+			if(this.TutorialInfoDict.ContainsKey(eTutorialKinds)) {
+				this.TutorialInfoDict[eTutorialKinds].SetupTutorialInfo(oTutorialInfos[i]);
+			}
+		}
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

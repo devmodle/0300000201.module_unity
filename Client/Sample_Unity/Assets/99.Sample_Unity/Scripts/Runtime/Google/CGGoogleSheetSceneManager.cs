@@ -38,7 +38,7 @@ namespace Google {
 		/** 구글 시트 저장 버튼을 눌렀을 경우 */
 		private void OnTouchSaveGoogleSheetBtn() {
 #if GOOGLE_SHEET_ENABLE
-
+			CAbilityInfoTable.Inst.SaveAbilityInfos();
 #endif            // #if GOOGLE_SHEET_ENABLE                                    
 		}
 		#endregion         // 함수               
