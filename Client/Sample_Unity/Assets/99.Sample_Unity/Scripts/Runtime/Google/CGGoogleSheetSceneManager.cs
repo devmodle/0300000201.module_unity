@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
-using System.IO;
 using System.Linq;
 
 namespace Google {
