@@ -38,14 +38,24 @@ public struct STMissionInfo {
 		m_ePrevMissionKinds = a_oMissionInfo[KCDefine.U_KEY_PREV_MISSION_KINDS].ExIsValid() ? (EMissionKinds)a_oMissionInfo[KCDefine.U_KEY_PREV_MISSION_KINDS].AsInt : EMissionKinds.NONE;
 		m_eNextMissionKinds = a_oMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS].ExIsValid() ? (EMissionKinds)a_oMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS].AsInt : EMissionKinds.NONE;
 
-		m_oRewardKindsList = new List<ERewardKinds>();
-
-		for(int i = 0; i < KDefine.G_MAX_NUM_REWARD_KINDS; ++i) {
-			string oKey = string.Format(KCDefine.U_KEY_FMT_REWARD_KINDS, i + KCDefine.B_VAL_1_INT);
-			if(a_oMissionInfo[oKey].ExIsValid()) { m_oRewardKindsList.ExAddVal((ERewardKinds)a_oMissionInfo[oKey].AsInt); }
-		}
+		m_oRewardKindsList = Factory.MakeVals(a_oMissionInfo, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_oJSONNode) => (ERewardKinds)a_oJSONNode.AsInt);
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 미션 정보를 저장한다 */
+	public void SaveMissionInfo(SimpleJSON.JSONNode a_oOutMissionInfo) {
+		m_stCommonInfo.SaveCommonInfo(a_oOutMissionInfo);
+
+		a_oOutMissionInfo[KCDefine.U_KEY_MISSION_KINDS] = $"{(int)m_eMissionKinds}";
+		a_oOutMissionInfo[KCDefine.U_KEY_PREV_MISSION_KINDS] = $"{(int)m_ePrevMissionKinds}";
+		a_oOutMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS] = $"{(int)m_eNextMissionKinds}";
+
+		Func.SaveVals(m_oRewardKindsList, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_eRewardKinds) => $"{(int)a_eRewardKinds}", a_oOutMissionInfo);
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 미션 정보 테이블 */
@@ -105,6 +115,10 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 #else
 			CFunc.WriteStr(Access.MissionInfoTableSavePath, a_oJSONStr, true);
 #endif           // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
+
+#if UNITY_ANDROID && (DEBUG || DEVELOPMENT)
+			CUnityMsgSender.Inst.SendShowToastMsg($"CMissionInfoTable.SaveMissionInfos: {File.Exists(Access.MissionInfoTableSavePath)}");
+#endif         // #if UNITY_ANDROID && (DEBUG || DEVELOPMENT)                                                        
 		}
 	}
 
@@ -124,11 +138,17 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	/** 미션 정보를 로드한다 */
 	private Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
+		return this.DoLoadMissionInfos(this.LoadMissionInfosJSONStr(a_oFilePath));
+	}
+
+	/** 미션 정보 JSON 문자열을 로드한다 */
+	private string LoadMissionInfosJSONStr(string a_oFilePath) {
+		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return this.DoLoadMissionInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #else
-		return this.DoLoadMissionInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
@@ -151,5 +171,26 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 		return this.MissionInfoDict;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 미션 정보를 저장한다 */
+	public void SaveMissionInfos() {
+		var oMissionInfos = SimpleJSON.JSONNode.Parse(this.LoadMissionInfosJSONStr(Access.MissionInfoTableLoadPath));
+		var oCommonInfos = oMissionInfos[KCDefine.B_KEY_COMMON];
+
+		for(int i = 0; i < oCommonInfos.Count; ++i) {
+			var oMissionKinds = oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].ExIsValid() ? (EMissionKinds)oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].AsInt : EMissionKinds.NONE;
+
+			// 미션 정보가 존재 할 경우
+			if(this.MissionInfoDict.ContainsKey(oMissionKinds)) {
+				this.MissionInfoDict[oMissionKinds].SaveMissionInfo(oCommonInfos[i]);
+			}
+		}
+
+		this.SaveMissionInfos(oMissionInfos.ToString());
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

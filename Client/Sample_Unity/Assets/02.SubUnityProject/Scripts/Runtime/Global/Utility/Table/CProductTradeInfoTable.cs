@@ -7,10 +7,6 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using System.IO;
 
-#if PURCHASE_MODULE_ENABLE
-using UnityEngine.Purchasing;
-#endif          // #if PURCHASE_MODULE_ENABLE                                       
-
 /** 상품 교환 정보 */
 [System.Serializable]
 public struct STProductTradeInfo {
@@ -47,20 +43,28 @@ public struct STProductTradeInfo {
 		m_eNextProductKinds = a_oProductTradeInfo[KCDefine.U_KEY_NEXT_PRODUCT_KINDS].ExIsValid() ? (EProductKinds)a_oProductTradeInfo[KCDefine.U_KEY_NEXT_PRODUCT_KINDS].AsInt : EProductKinds.NONE;
 		m_ePurchaseType = a_oProductTradeInfo[KCDefine.U_KEY_PURCHASE_TYPE].ExIsValid() ? (EPurchaseType)a_oProductTradeInfo[KCDefine.U_KEY_PURCHASE_TYPE].AsInt : EPurchaseType.NONE;
 
-		m_oPayTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
-		m_oAcquireTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
-
-		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
-			var stTargetInfo = new STTargetInfo(a_oProductTradeInfo[string.Format(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
-			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oPayTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
-		}
-
-		for(int i = 0; i < KDefine.G_MAX_NUM_TARGET_INFOS; ++i) {
-			var stTargetInfo = new STTargetInfo(a_oProductTradeInfo[string.Format(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, i + KCDefine.B_VAL_1_INT)]);
-			if(stTargetInfo.m_eTargetKinds.ExIsValid() && stTargetInfo.m_nKinds > KCDefine.B_IDX_INVALID) { m_oAcquireTargetInfoDict.TryAdd(Factory.MakeUTargetInfoID(stTargetInfo.m_eTargetKinds, stTargetInfo.m_nKinds), stTargetInfo); }
-		}
+		m_oPayTargetInfoDict = Factory.MakeTargetInfos(a_oProductTradeInfo, KCDefine.U_KEY_FMT_PAY_TARGET_INFO);
+		m_oAcquireTargetInfoDict = Factory.MakeTargetInfos(a_oProductTradeInfo, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO);
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 객체 정보를 저장한다 */
+	public void SaveProductTradeInfo(SimpleJSON.JSONNode a_oOutProductTradeInfo) {
+		m_stCommonInfo.SaveCommonInfo(a_oOutProductTradeInfo);
+		a_oOutProductTradeInfo[KCDefine.U_KEY_PRODUCT_IDX] = $"{m_nProductIdx}";
+
+		a_oOutProductTradeInfo[KCDefine.U_KEY_PRODUCT_KINDS] = $"{(int)m_eProductKinds}";
+		a_oOutProductTradeInfo[KCDefine.U_KEY_PREV_PRODUCT_KINDS] = $"{(int)m_ePrevProductKinds}";
+		a_oOutProductTradeInfo[KCDefine.U_KEY_NEXT_PRODUCT_KINDS] = $"{(int)m_eNextProductKinds}";
+		a_oOutProductTradeInfo[KCDefine.U_KEY_PURCHASE_TYPE] = $"{(int)m_ePurchaseType}";
+
+		Func.SaveTargetInfos(m_oPayTargetInfoDict, KCDefine.U_KEY_FMT_PAY_TARGET_INFO, a_oOutProductTradeInfo);
+		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutProductTradeInfo);
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 
 /** 상품 교환 정보 테이블 */
@@ -138,6 +142,10 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 #else
 			CFunc.WriteStr(Access.ProductTradeInfoTableSavePath, a_oJSONStr, true);
 #endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
+
+#if UNITY_ANDROID && (DEBUG || DEVELOPMENT)
+			CUnityMsgSender.Inst.SendShowToastMsg($"CProductInfoTable.SaveProductInfos: {File.Exists(Access.ProductTradeInfoTableSavePath)}");
+#endif         // #if UNITY_ANDROID && (DEBUG || DEVELOPMENT)                                                        
 		}
 	}
 
@@ -157,11 +165,17 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	/** 상품 교환 정보를 로드한다 */
 	private Dictionary<EProductKinds, STProductTradeInfo> LoadProductTradeInfos(string a_oFilePath) {
 		CAccess.Assert(a_oFilePath.ExIsValid());
+		return this.DoLoadProductTradeInfos(this.LoadProductTradeInfosJSONStr(a_oFilePath));
+	}
+
+	/** 상품 교환 정보 JSON 문자열을 로드한다 */
+	private string LoadProductTradeInfosJSONStr(string a_oFilePath) {
+		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return this.DoLoadProductTradeInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #else
-		return this.DoLoadProductTradeInfos(File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false));
+		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #endif         // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
 
@@ -184,5 +198,26 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 		return this.BuyProductTradeInfoDict;
 	}
 	#endregion         // 함수               
+
+	#region 조건부 함수
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+	/** 상품 교환 정보를 저장한다 */
+	public void SaveProductTradeInfos() {
+		var oProductTradeInfos = SimpleJSON.JSONNode.Parse(this.LoadProductTradeInfosJSONStr(Access.ProductTradeInfoTableLoadPath));
+		var oBuyTradeInfos = oProductTradeInfos[KCDefine.B_KEY_BUY_TRADE];
+
+		for(int i = 0; i < oBuyTradeInfos.Count; ++i) {
+			var oProductTradeKinds = oBuyTradeInfos[i][KCDefine.U_KEY_PRODUCT_KINDS].ExIsValid() ? (EProductKinds)oBuyTradeInfos[i][KCDefine.U_KEY_PRODUCT_KINDS].AsInt : EProductKinds.NONE;
+
+			// 구입 상품 교환 정보가 존재 할 경우
+			if(this.BuyProductTradeInfoDict.ContainsKey(oProductTradeKinds)) {
+				this.BuyProductTradeInfoDict[oProductTradeKinds].SaveProductTradeInfo(oBuyTradeInfos[i]);
+			}
+		}
+
+		this.SaveProductTradeInfos(oProductTradeInfos.ToString());
+	}
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

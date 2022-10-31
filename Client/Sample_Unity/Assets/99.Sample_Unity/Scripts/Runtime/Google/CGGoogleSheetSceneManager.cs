@@ -37,7 +37,15 @@ namespace Google {
 		/** 구글 시트 저장 버튼을 눌렀을 경우 */
 		private void OnTouchSaveGoogleSheetBtn() {
 #if GOOGLE_SHEET_ENABLE
+			CEtcInfoTable.Inst.SaveEtcInfos();
+			CMissionInfoTable.Inst.SaveMissionInfos();
+			CRewardInfoTable.Inst.SaveRewardInfos();
+			CResInfoTable.Inst.SaveResInfos();
+			CItemInfoTable.Inst.SaveItemInfos();
+			CSkillInfoTable.Inst.SaveSkillInfos();
+			CObjInfoTable.Inst.SaveObjInfos();
 			CAbilityInfoTable.Inst.SaveAbilityInfos();
+			CProductTradeInfoTable.Inst.SaveProductTradeInfos();
 #endif            // #if GOOGLE_SHEET_ENABLE                                    
 		}
 		#endregion         // 함수               

@@ -1005,8 +1005,8 @@ namespace MessagePack.Formatters {
 			writer.WriteNil();
 			writer.WriteNil();
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Serialize(ref writer, value.m_oUnlockULevelIDList, options);
-			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Serialize(ref writer, value.m_oUnlockUniqueStageIDList, options);
-			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Serialize(ref writer, value.m_oUnlockUniqueChapterIDList, options);
+			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Serialize(ref writer, value.m_oUnlockUStageIDList, options);
+			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Serialize(ref writer, value.m_oUnlockUChapterIDList, options);
 			writer.WriteNil();
 			writer.WriteNil();
 			writer.WriteNil();
@@ -1128,10 +1128,10 @@ namespace MessagePack.Formatters {
 						____result.m_oUnlockULevelIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
 						break;
 					case 52:
-						____result.m_oUnlockUniqueStageIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
+						____result.m_oUnlockUStageIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
 						break;
 					case 53:
-						____result.m_oUnlockUniqueChapterIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
+						____result.m_oUnlockUChapterIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
 						break;
 					case 61:
 						____result.m_oCompleteMissionKindsList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::EMissionKinds>>(formatterResolver).Deserialize(ref reader, options);
