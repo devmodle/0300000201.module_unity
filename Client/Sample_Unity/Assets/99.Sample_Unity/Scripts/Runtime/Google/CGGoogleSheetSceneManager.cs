@@ -28,15 +28,15 @@ namespace Google {
 
 		/** 구글 시트 로드 버튼을 눌렀을 경우 */
 		private void OnTouchLoadGoogleSheetBtn() {
-#if GOOGLE_SHEET_ENABLE
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 			string oKey = KCDefine.U_TABLE_P_G_VER_INFO.ExGetFileName(false);
 			Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).Item1, this.OnLoadVerInfoGoogleSheet);
-#endif            // #if GOOGLE_SHEET_ENABLE                                    
+#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		}
 
 		/** 구글 시트 저장 버튼을 눌렀을 경우 */
 		private void OnTouchSaveGoogleSheetBtn() {
-#if GOOGLE_SHEET_ENABLE
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 			CEtcInfoTable.Inst.SaveEtcInfos();
 			CMissionInfoTable.Inst.SaveMissionInfos();
 			CRewardInfoTable.Inst.SaveRewardInfos();
@@ -46,12 +46,12 @@ namespace Google {
 			CObjInfoTable.Inst.SaveObjInfos();
 			CAbilityInfoTable.Inst.SaveAbilityInfos();
 			CProductTradeInfoTable.Inst.SaveProductTradeInfos();
-#endif            // #if GOOGLE_SHEET_ENABLE                                    
+#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		}
 		#endregion         // 함수               
 
 		#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		/** 구글 시트가 로드 되었을 경우 */
 		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
 			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetLoadInfo.m_oID}, {a_stGoogleSheetLoadInfo.m_oName}, {a_oJSONNodeInfoDict.ExToJSONNode()}");
@@ -98,7 +98,7 @@ namespace Google {
 				Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null, false);
 			}
 		}
-#endif         // #if GOOGLE_SHEET_ENABLE                                    
+#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		#endregion         // 조건부 함수                   
 	}
 }
