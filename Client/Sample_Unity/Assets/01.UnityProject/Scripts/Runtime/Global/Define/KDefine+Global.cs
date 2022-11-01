@@ -75,6 +75,96 @@ public static partial class KDefine {
 		[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = ("1uqeDN-ZaAs3_UxWp93Ub_nEX5r1z7MNDHfwXE-IKB_w", KCDefine.U_MAX_NUM_GOOGLE_SHEET_CELLS)
 	};
 
+	public static readonly Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, string>>)> G_TABLE_INFO_GOOGLE_SHEET_NAME_DICT_CONTAINER = new Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, string>>)>() {
+		[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CCalcInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_CALC
+			},
+
+			[typeof(CEpisodeInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.U_KEY_LEVEL_EPISODE] = KCDefine.U_KEY_LEVEL_EPISODE,
+				[KCDefine.U_KEY_STAGE_EPISODE] = KCDefine.U_KEY_STAGE_EPISODE,
+				[KCDefine.U_KEY_CHAPTER_EPISODE] = KCDefine.U_KEY_CHAPTER_EPISODE
+			},
+
+			[typeof(CTutorialInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_TUTORIAL
+			},
+
+			[typeof(CFXInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_FX
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CMissionInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CRewardInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CResInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CItemInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
+				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
+				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
+				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CSkillInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
+				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
+				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
+				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CObjInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
+				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
+				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
+				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CAbilityInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
+				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
+			}
+		}),
+
+		[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, string>>() {
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, string>() {
+				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_BUY_TRADE
+			}
+		})
+	};
+
+	public static readonly Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)> G_TABLE_INFO_EXTRA_GOOGLE_SHEET_NAME_DICT_CONTAINER = new Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)>() {
+		[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<string>>() {
+				[KCDefine.B_KEY_COMMON] = new List<string>() {
+					KCDefine.B_KEY_COMMON, KCDefine.B_PLATFORM_N_IOS_APPLE, KCDefine.B_PLATFORM_N_ANDROID_GOOGLE, KCDefine.B_PLATFORM_N_ANDROID_AMAZON
+				}
+			}
+		})
+	};
+
 	public static readonly Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)> G_TABLE_INFO_GOOGLE_SHEET_KEY_DICT_CONTAINER = new Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)>() {
 		[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
 			[typeof(CCalcInfoTable)] = new Dictionary<string, List<string>>() {
@@ -88,11 +178,11 @@ public static partial class KDefine {
 					string.Format(KCDefine.U_KEY_FMT_ID, KCDefine.B_VAL_1_INT),
 					string.Format(KCDefine.U_KEY_FMT_ID, KCDefine.B_VAL_2_INT),
 					string.Format(KCDefine.U_KEY_FMT_ID, KCDefine.B_VAL_3_INT),
-					
+
 					string.Format(KCDefine.U_KEY_FMT_PREV_ID, KCDefine.B_VAL_1_INT),
 					string.Format(KCDefine.U_KEY_FMT_PREV_ID, KCDefine.B_VAL_2_INT),
 					string.Format(KCDefine.U_KEY_FMT_PREV_ID, KCDefine.B_VAL_3_INT),
-					
+
 					string.Format(KCDefine.U_KEY_FMT_NEXT_ID, KCDefine.B_VAL_1_INT),
 					string.Format(KCDefine.U_KEY_FMT_NEXT_ID, KCDefine.B_VAL_2_INT),
 					string.Format(KCDefine.U_KEY_FMT_NEXT_ID, KCDefine.B_VAL_3_INT),
@@ -180,86 +270,6 @@ public static partial class KDefine {
 				[KCDefine.B_KEY_COMMON] = new List<string>() {
 					KCDefine.B_KEY_COMMON, KCDefine.B_PLATFORM_N_IOS_APPLE, KCDefine.B_PLATFORM_N_ANDROID_GOOGLE, KCDefine.B_PLATFORM_N_ANDROID_AMAZON, KCDefine.B_KEY_BUY_TRADE
 				}
-			}
-		})
-	};
-
-	public static readonly Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)> G_TABLE_INFO_GOOGLE_SHEET_NAME_DICT_CONTAINER = new Dictionary<string, (string, Dictionary<System.Type, Dictionary<string, List<string>>>)>() {
-		[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CCalcInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.U_KEY_CALC }
-			},
-
-			[typeof(CEpisodeInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.U_KEY_LEVEL_EPISODE] = new List<string>() { KCDefine.U_KEY_LEVEL_EPISODE },
-				[KCDefine.U_KEY_STAGE_EPISODE] = new List<string>() { KCDefine.U_KEY_STAGE_EPISODE },
-				[KCDefine.U_KEY_CHAPTER_EPISODE] = new List<string>() { KCDefine.U_KEY_CHAPTER_EPISODE }
-			},
-
-			[typeof(CTutorialInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.U_KEY_TUTORIAL }
-			},
-
-			[typeof(CFXInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.U_KEY_FX }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CMissionInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CRewardInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CResInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CItemInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON },
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() { KCDefine.B_KEY_BUY_TRADE },
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() { KCDefine.B_KEY_SALE_TRADE },
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() { KCDefine.B_KEY_ENHANCE_TRADE }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CSkillInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON },
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() { KCDefine.B_KEY_BUY_TRADE },
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() { KCDefine.B_KEY_SALE_TRADE },
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() { KCDefine.B_KEY_ENHANCE_TRADE }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CObjInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON },
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() { KCDefine.B_KEY_BUY_TRADE },
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() { KCDefine.B_KEY_SALE_TRADE },
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() { KCDefine.B_KEY_ENHANCE_TRADE }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CAbilityInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_COMMON },
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() { KCDefine.B_KEY_ENHANCE_TRADE }
-			}
-		}),
-
-		[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = (KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)].Item1, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() { KCDefine.B_KEY_BUY_TRADE }
 			}
 		})
 	};
