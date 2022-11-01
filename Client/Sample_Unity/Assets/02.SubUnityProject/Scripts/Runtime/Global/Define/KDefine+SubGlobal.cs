@@ -8,6 +8,46 @@ using UnityEngine.Events;
 /** 서브 전역 상수 */
 public static partial class KDefine {
 	#region 기본
+	// 개수
+	public const int G_MAX_NUM_COINS_BOX_COINS = 0;
+	public const int G_MAX_NUM_ADS_SKIP_CLEAR_INFOS = 0;
+
+	// 횟수
+	public const int G_MAX_TIMES_ADS_SKIP = 0;
+	public const int G_MAX_TIMES_ACQUIRE_FREE_REWARDS = 0;
+
+	// 시간 {
+	public const float G_DELAY_SCALE_01 = 1.0f;
+	public const float G_DELAY_SCALE_02 = 1.0f;
+	public const float G_DELAY_SCALE_03 = 1.0f;
+	public const float G_DELAY_SCALE_04 = 1.0f;
+	public const float G_DELAY_SCALE_05 = 1.0f;
+	public const float G_DELAY_SCALE_06 = 1.0f;
+	public const float G_DELAY_SCALE_07 = 1.0f;
+	public const float G_DELAY_SCALE_08 = 1.0f;
+	public const float G_DELAY_SCALE_09 = 1.0f;
+
+	public const float G_DELTA_T_SCALE_01 = 1.0f;
+	public const float G_DELTA_T_SCALE_02 = 1.0f;
+	public const float G_DELTA_T_SCALE_03 = 1.0f;
+	public const float G_DELTA_T_SCALE_04 = 1.0f;
+	public const float G_DELTA_T_SCALE_05 = 1.0f;
+	public const float G_DELTA_T_SCALE_06 = 1.0f;
+	public const float G_DELTA_T_SCALE_07 = 1.0f;
+	public const float G_DELTA_T_SCALE_08 = 1.0f;
+	public const float G_DELTA_T_SCALE_09 = 1.0f;
+
+	public const float G_DURATION_SCALE_01 = 1.0f;
+	public const float G_DURATION_SCALE_02 = 1.0f;
+	public const float G_DURATION_SCALE_03 = 1.0f;
+	public const float G_DURATION_SCALE_04 = 1.0f;
+	public const float G_DURATION_SCALE_05 = 1.0f;
+	public const float G_DURATION_SCALE_06 = 1.0f;
+	public const float G_DURATION_SCALE_07 = 1.0f;
+	public const float G_DURATION_SCALE_08 = 1.0f;
+	public const float G_DURATION_SCALE_09 = 1.0f;
+	// 시간 }
+
 	// 이름
 	public const string G_OBJ_N_STORE_POPUP = "STORE_POPUP";
 	public const string G_OBJ_N_SETTINGS_POPUP = "SETTINGS_POPUP";
