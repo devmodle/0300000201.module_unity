@@ -8,14 +8,14 @@ using UnityEngine.Events;
 namespace NSEngine {
 	/** 엔진 - 접근 */
 	public partial class CEngine : CComponent {
-		#region 함수
-
-		#endregion           // 함수               
+#region 함수
+		
+#endregion          // 함수               
 	}
 
 	/** 서브 엔진 - 접근 */
 	public partial class CEngine : CComponent {
-		#region 함수
+#region 함수
 		/** 상태를 변경한다 */
 		public void SetState(EState a_eState, bool a_bIsForce = false) {
 			// 강제 변경 모드 일 경우
@@ -41,7 +41,7 @@ namespace NSEngine {
 		/** 가까운 적 객체를 탐색한다 */
 		public List<CEObj> FindNearEnemyObjs(Vector3 a_stPos, float a_fDistance, List<CEObj> a_oOutEnemyObjList) {
 			a_oOutEnemyObjList = a_oOutEnemyObjList ?? new List<CEObj>();
-
+			
 			for(int i = 0; i < this.EnemyObjList.Count; ++i) {
 				float fDistance = (a_stPos - this.EnemyObjList[i].transform.localPosition).sqrMagnitude;
 
@@ -53,7 +53,7 @@ namespace NSEngine {
 
 			return a_oOutEnemyObjList;
 		}
-		#endregion         // 함수               
+#endregion          // 함수               
 	}
 }
-#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

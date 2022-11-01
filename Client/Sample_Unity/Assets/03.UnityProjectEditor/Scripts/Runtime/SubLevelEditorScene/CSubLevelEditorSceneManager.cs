@@ -95,7 +95,7 @@ namespace LevelEditorScene {
 			[HideInInspector] MAX_VAL
 		}
 
-		#region 변수
+#region 변수
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>();
 		private Dictionary<EKey, EUserType> m_oUserTypeDict = new Dictionary<EKey, EUserType>();
 		private Dictionary<EKey, ETableSrc> m_oTableSrcDict = new Dictionary<EKey, ETableSrc>();
@@ -124,15 +124,15 @@ namespace LevelEditorScene {
 
 		/** =====> 객체 <===== */
 		private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
-		#endregion         // 변수               
+#endregion         // 변수               
 
-		#region 프로퍼티
+#region 프로퍼티
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		public int SelGridInfoIdx => m_oIntDict.GetValueOrDefault(EKey.SEL_GRID_IDX);
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 프로퍼티                 
+#endregion         // 프로퍼티                 
 
-		#region IEnhancedScrollerDelegate
+#region IEnhancedScrollerDelegate
 		/** 셀 개수를 반환한다 */
 		public int GetNumberOfCells(EnhancedScroller a_oSender) {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -239,9 +239,9 @@ namespace LevelEditorScene {
 			return oScrollerCellView;
 		}
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // IEnhancedScrollerDelegate                                      
+#endregion         // IEnhancedScrollerDelegate                                      
 
-		#region 함수
+#region 함수
 		/** 상태를 갱신한다 */
 		public override void OnUpdate(float a_fDeltaTime) {
 			base.OnUpdate(a_fDeltaTime);
@@ -333,9 +333,9 @@ namespace LevelEditorScene {
 #endif         // #if STUDY_MODULE_ENABLE                                    
 			}
 		}
-		#endregion         // 함수               
+#endregion         // 함수               
 
-		#region 조건부 함수
+#region 조건부 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 터치 이벤트를 처리한다 */
 		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
@@ -740,12 +740,12 @@ namespace LevelEditorScene {
 		}
 #endif         // #if GOOGLE_SHEET_ENABLE                                    
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 조건부 함수                   
+#endregion         // 조건부 함수                   
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 중앙 에디터 UI */
 	public partial class CSubLevelEditorSceneManager : CLevelEditorSceneManager, IEnhancedScrollerDelegate {
-		#region 조건부 함수
+#region 조건부 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 중앙 에디터 UI 이전 레벨 버튼을 눌렀을 경우 */
 		private void OnTouchMEUIsPrevBtn() {
@@ -810,12 +810,12 @@ namespace LevelEditorScene {
 			Func.ShowEditorLevelRemovePopup(this.OnReceiveEditorRemovePopupResult);
 		}
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 조건부 함수                   
+#endregion         // 조건부 함수                   
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 왼쪽 에디터 UI */
 	public partial class CSubLevelEditorSceneManager : CLevelEditorSceneManager, IEnhancedScrollerDelegate {
-		#region 조건부 함수
+#region 조건부 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 왼쪽 에디터 UI 레벨 추가 버튼을 눌렀을 경우 */
 		private void OnTouchLEUIsAddLevelBtn() {
@@ -865,12 +865,12 @@ namespace LevelEditorScene {
 		}
 #endif         // #if AB_TEST_ENABLE                               
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 조건부 함수                   
+#endregion         // 조건부 함수                   
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 오른쪽 에디터 UI */
 	public partial class CSubLevelEditorSceneManager : CLevelEditorSceneManager, IEnhancedScrollerDelegate {
-		#region 조건부 함수
+#region 조건부 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 오른쪽 에디터 UI 적용 버튼을 눌렀을 경우 */
 		private void OnTouchREUIsApplyBtn() {
@@ -919,12 +919,12 @@ namespace LevelEditorScene {
 			Func.ShowEditorTableLoadPopup(this.OnReceiveEditorTableLoadPopupResult);
 		}
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 조건부 함수                   
+#endregion         // 조건부 함수                   
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 스크롤러 셀 뷰 */
 	public partial class CSubLevelEditorSceneManager : CLevelEditorSceneManager, IEnhancedScrollerDelegate {
-		#region 조건부 함수
+#region 조건부 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 선택 콜백을 수신했을 경우 */
 		private void OnReceiveSelCallback(CScrollerCellView a_oSender, ulong a_nID) {
@@ -979,7 +979,7 @@ namespace LevelEditorScene {
 			}
 		}
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
-		#endregion         // 조건부 함수                   
+#endregion         // 조건부 함수                   
 	}
 }
 #endif         // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           

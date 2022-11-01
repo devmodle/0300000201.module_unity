@@ -31,33 +31,13 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
-		[typeof(Ads.CAAdmobSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Ads.CAIronSrcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Google.CGGoogleSheetSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-
-		[typeof(Firebase.CFAuthSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFAnalyticsSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFCrashlyticsSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFDBSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFMsgSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFConfigSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Firebase.CFStorageSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
+		[typeof(Google.CGGoogleSheetSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
-		[KDefine.G_SCENE_N_A_ADMOB] = typeof(Ads.CAAdmobSceneManager),
-		[KDefine.G_SCENE_N_A_IRON_SRC] = typeof(Ads.CAIronSrcSceneManager),
-		[KDefine.G_SCENE_N_G_GOOGLE_SHEET] = typeof(Google.CGGoogleSheetSceneManager),
-
-		[KDefine.G_SCENE_N_F_AUTH] = typeof(Firebase.CFAuthSceneManager),
-		[KDefine.G_SCENE_N_F_ANALYTICS] = typeof(Firebase.CFAnalyticsSceneManager),
-		[KDefine.G_SCENE_N_F_CRASHLYTICS] = typeof(Firebase.CFCrashlyticsSceneManager),
-		[KDefine.G_SCENE_N_F_DB] = typeof(Firebase.CFDBSceneManager),
-		[KDefine.G_SCENE_N_F_MSG] = typeof(Firebase.CFMsgSceneManager),
-		[KDefine.G_SCENE_N_F_CONFIG] = typeof(Firebase.CFConfigSceneManager),
-		[KDefine.G_SCENE_N_F_STORAGE] = typeof(Firebase.CFStorageSceneManager)
+		[KDefine.G_SCENE_N_G_GOOGLE_SHEET] = typeof(Google.CGGoogleSheetSceneManager)
 	};
-	#endregion            // 런타임 상수                   
+	#endregion          // 런타임 상수                   
 }
-#endif         // #if UNITY_EDITOR && EXTRA_SCRIPT_MODULE_ENABLE                                                           
+#endif          // #if UNITY_EDITOR && EXTRA_SCRIPT_MODULE_ENABLE                                                           

@@ -9,7 +9,7 @@ using TMPro;
 
 /** 코인 상자 팝업 */
 public partial class CCoinsBoxPopup : CSubPopup {
-	#region 함수
+#region 함수
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
@@ -25,18 +25,18 @@ public partial class CCoinsBoxPopup : CSubPopup {
 			(KCDefine.U_OBJ_N_PURCHASE_BTN, this.Contents, this.OnTouchPurchaseBtn)
 		}, false);
 
-		#region 추가
+#region 추가
 		this.SubSetupAwake();
-		#endregion         // 추가               
+#endregion          // 추가               
 	}
 
 	/** 초기화 */
 	public override void Init() {
 		base.Init();
 
-		#region 추가
+#region 추가
 		this.SubInit();
-		#endregion           // 추가               
+#endregion          // 추가               
 	}
 
 	/** UI 상태를 변경한다 */
@@ -50,11 +50,11 @@ public partial class CCoinsBoxPopup : CSubPopup {
 		// 텍스트를 갱신한다
 		m_oTextDict.GetValueOrDefault(EKey.NUM_COINS_TEXT)?.ExSetText($"{nNumCoinsBoxCoins}", EFontSet._1, false);
 
-		#region 추가
+#region 추가
 		this.SubUpdateUIsState();
-		#endregion         // 추가               
+#endregion          // 추가               
 	}
-	#endregion         // 함수               
+#endregion          // 함수               
 }
 
 /** 서브 코인 상자 팝업 */
@@ -65,15 +65,15 @@ public partial class CCoinsBoxPopup : CSubPopup {
 		[HideInInspector] MAX_VAL
 	}
 
-	#region 변수
+#region 변수
 
-	#endregion         // 변수               
+#endregion          // 변수               
 
-	#region 프로퍼티
+#region 프로퍼티
 
-	#endregion         // 프로퍼티                 
+#endregion          // 프로퍼티                 
 
-	#region 함수
+#region 함수
 	/** 팝업을 설정한다 */
 	private void SubSetupAwake() {
 		// Do Something
@@ -88,6 +88,6 @@ public partial class CCoinsBoxPopup : CSubPopup {
 	private void SubUpdateUIsState() {
 		// Do Something
 	}
-	#endregion         // 함수               
+#endregion          // 함수               
 }
-#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

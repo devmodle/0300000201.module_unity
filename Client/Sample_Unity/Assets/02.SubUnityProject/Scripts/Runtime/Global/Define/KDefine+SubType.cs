@@ -13,5 +13,5 @@ using MessagePack;
 public struct STSubTypeWrapper {
 	// Do Something
 }
-#endregion         // 기본               
-#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE                                           
+#endregion          // 기본               
+#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE                                           

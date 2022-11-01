@@ -28,7 +28,7 @@ namespace MenuScene {
 			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN) {
 				Func.ShowQuitPopup(this.OnReceiveQuitPopupResult);
 			}
-#endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
 		}
 
 		/** 씬을 설정한다 */
@@ -44,7 +44,7 @@ namespace MenuScene {
 				this.ExLateCallFunc((a_oSender) => this.QuitApp());
 			}
 		}
-		#endregion         // 함수               
+		#endregion          // 함수               
 	}
 }
-#endif         // #if STUDY_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE                                                                     
+#endif          // #if STUDY_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE                                                                     
