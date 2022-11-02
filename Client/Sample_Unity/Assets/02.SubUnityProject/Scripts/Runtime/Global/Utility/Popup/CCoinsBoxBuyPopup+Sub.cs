@@ -7,8 +7,8 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using TMPro;
 
-/** 코인 상자 팝업 */
-public partial class CCoinsBoxPopup : CSubPopup {
+/** 코인 상자 구입 팝업 */
+public partial class CCoinsBoxBuyPopup : CSubPopup {
 #region 함수
 	/** 초기화 */
 	public override void Awake() {
@@ -57,8 +57,8 @@ public partial class CCoinsBoxPopup : CSubPopup {
 #endregion          // 함수               
 }
 
-/** 서브 코인 상자 팝업 */
-public partial class CCoinsBoxPopup : CSubPopup {
+/** 서브 코인 상자 구입 팝업 */
+public partial class CCoinsBoxBuyPopup : CSubPopup {
 	/** 서브 식별자 */
 	private enum ESubKey {
 		NONE = -1,

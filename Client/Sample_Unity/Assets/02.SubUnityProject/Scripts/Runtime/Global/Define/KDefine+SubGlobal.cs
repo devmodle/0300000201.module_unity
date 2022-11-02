@@ -62,7 +62,7 @@ public static partial class KDefine {
 	public const string G_OBJ_N_RESULT_POPUP = "RESULT_POPUP";
 	public const string G_OBJ_N_PAUSE_POPUP = "PAUSE_POPUP";
 	public const string G_OBJ_N_RESUME_POPUP = "RESUME_POPUP";
-	public const string G_OBJ_N_PRODUCT_TRADE_POPUP = "PRODUCT_TRADE_POPUP";
+	public const string G_OBJ_N_PRODUCT_BUY_POPUP = "PRODUCT_BUY_POPUP";
 	public const string G_OBJ_N_FOCUS_POPUP = "FOCUS_POPUP";
 	public const string G_OBJ_N_TUTORIAL_POPUP = "TUTORIAL_POPUP";
 
@@ -148,9 +148,9 @@ public static partial class KDefine {
 
 #region 런타임 상수
 	// 경로
-	public static readonly string GS_IMG_P_FMT_BG = $"{KCDefine.B_DIR_P_IMAGES}{KCDefine.B_DIR_P_GAME_SCENE}BG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
-	public static readonly string GS_IMG_P_FMT_TOP_BG = $"{KCDefine.B_DIR_P_IMAGES}{KCDefine.B_DIR_P_GAME_SCENE}TopBG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
-	public static readonly string GS_IMG_P_FMT_BOTTOM_BG = $"{KCDefine.B_DIR_P_IMAGES}{KCDefine.B_DIR_P_GAME_SCENE}BottomBG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
+	public static readonly string GS_TEX_P_FMT_BG = $"{KCDefine.B_DIR_P_TEXTURES}{KCDefine.B_DIR_P_GAME_SCENE}BG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
+	public static readonly string GS_TEX_P_FMT_TOP_BG = $"{KCDefine.B_DIR_P_TEXTURES}{KCDefine.B_DIR_P_GAME_SCENE}TopBG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
+	public static readonly string GS_TEX_P_FMT_BOTTOM_BG = $"{KCDefine.B_DIR_P_TEXTURES}{KCDefine.B_DIR_P_GAME_SCENE}BottomBG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
 
 	// 정렬 순서 {
 	public static readonly STSortingOrderInfo GS_SORTING_OI_BG = new STSortingOrderInfo() {
