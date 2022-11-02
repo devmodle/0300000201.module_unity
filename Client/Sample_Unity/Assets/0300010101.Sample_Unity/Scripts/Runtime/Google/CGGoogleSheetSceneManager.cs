@@ -80,10 +80,10 @@ namespace Google {
 		}
 
 		/** 버전 정보 구글 시트를 로드했을 경우 */
-		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STGoogleSheetInfo> a_oGoogleSheetInfoDict, bool a_bIsSuccess) {
+		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoDict, bool a_bIsSuccess) {
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
-				Func.LoadGoogleSheets(a_oGoogleSheetInfoDict.Values.ToList(), new Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>>() {
+				Func.LoadGoogleSheets(a_oLoadGoogleSheetInfoDict.Values.ToList(), new Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>>() {
 					[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
 					[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
 					[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
