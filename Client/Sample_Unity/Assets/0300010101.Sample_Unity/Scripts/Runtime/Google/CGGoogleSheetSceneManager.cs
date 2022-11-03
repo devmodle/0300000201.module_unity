@@ -21,38 +21,35 @@ namespace Google {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.UIs.ExFindComponent<Button>("LOAD_GOOGLE_SHEET_BTN")?.onClick.AddListener(this.OnTouchLoadGoogleSheetBtn);
-				this.UIs.ExFindComponent<Button>("SAVE_GOOGLE_SHEET_BTN")?.onClick.AddListener(this.OnTouchSaveGoogleSheetBtn);
+				this.UIs.ExFindComponent<Button>("LOAD_GOOGLE_SHEET_BTN")?.onClick.AddListener(() => {
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+					string oKey = KCDefine.U_TABLE_P_G_VER_INFO.ExGetFileName(false);
+					Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).Item1, this.OnLoadVerInfoGoogleSheet);
+#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+				});
+
+				this.UIs.ExFindComponent<Button>("SAVE_GOOGLE_SHEET_BTN")?.onClick.AddListener(() => {
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+					Func.SaveGoogleSheets(new Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>>() {
+						[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+					}, this.OnSaveGoogleSheets);
+#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+				});
 			}
-		}
-
-		/** 구글 시트 로드 버튼을 눌렀을 경우 */
-		private void OnTouchLoadGoogleSheetBtn() {
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-			string oKey = KCDefine.U_TABLE_P_G_VER_INFO.ExGetFileName(false);
-			Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).Item1, this.OnLoadVerInfoGoogleSheet);
-#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-		}
-
-		/** 구글 시트 저장 버튼을 눌렀을 경우 */
-		private void OnTouchSaveGoogleSheetBtn() {
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-			CEtcInfoTable.Inst.SaveEtcInfos();
-			CMissionInfoTable.Inst.SaveMissionInfos();
-			CRewardInfoTable.Inst.SaveRewardInfos();
-			CResInfoTable.Inst.SaveResInfos();
-			CItemInfoTable.Inst.SaveItemInfos();
-			CSkillInfoTable.Inst.SaveSkillInfos();
-			CObjInfoTable.Inst.SaveObjInfos();
-			CAbilityInfoTable.Inst.SaveAbilityInfos();
-			CProductTradeInfoTable.Inst.SaveProductTradeInfos();
-#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		}
 		#endregion         // 함수               
 
 		#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-		/** 구글 시트가 로드 되었을 경우 */
+		/** 구글 시트를 로드했을 경우 */
 		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
 			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetLoadInfo.m_oID}, {a_stGoogleSheetLoadInfo.m_oName}, {a_oJSONNodeInfoDict.ExToJSONNode()}");
 
@@ -74,7 +71,7 @@ namespace Google {
 			}
 		}
 
-		/** 구글 시트가 로드 되었을 경우 */
+		/** 구글 시트를 로드했을 경우 */
 		private void OnLoadGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
 			Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadGoogleSheets: {a_bIsSuccess}", null, false);
 		}
@@ -97,6 +94,16 @@ namespace Google {
 			} else {
 				Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null, false);
 			}
+		}
+
+		/** 구글 시트를 저장했을 경우 */
+		private void OnSaveGoogleSheet(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
+			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetSaveInfo.m_oID}, {a_stGoogleSheetSaveInfo.m_oName}");
+		}
+
+		/** 구글 시트를 저장했을 경우 */
+		private void OnSaveGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
+			Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnSaveGoogleSheets: {a_bIsSuccess}", null, false);
 		}
 #endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		#endregion         // 조건부 함수                   
