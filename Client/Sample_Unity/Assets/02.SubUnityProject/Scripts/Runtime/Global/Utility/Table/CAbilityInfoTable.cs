@@ -276,6 +276,11 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 		this.SaveAbilityInfos(oAbilityInfos.ToString());
 	}
+	
+	/** 어빌리티 정보 값을 생성한다 */
+	public void MakeAbilityInfoVals(List<(string, List<List<string>>)> a_oAbilityInfoVal) {
+
+	}
 #endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
 	#endregion         // 조건부 함수                   
 }

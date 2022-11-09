@@ -1169,6 +1169,18 @@ public static partial class Func {
 		}
 	}
 
+	/** 저장 구글 시트 정보를 설정한다 */
+	private static void DoSetupSaveGoogleSheetInfos(string a_oID, string a_oTableName, Dictionary<string, string> a_oGoogleSheetNameDict, Dictionary<string, List<string>> a_oExtraGoogleSheetNameDictContainer, Dictionary<string, STSaveGoogleSheetInfo> a_oOutSaveGoogleSheetInfoDict, bool a_bIsEnableAssert = true) {
+		CAccess.Assert(!a_bIsEnableAssert || (a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()));
+
+		// 구글 시트 정보 설정이 가능 할 경우
+		if(a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()) {
+			var stSaveGoogleSheetInfo = a_oOutSaveGoogleSheetInfoDict.ContainsKey(a_oTableName) ? a_oOutSaveGoogleSheetInfoDict[a_oTableName] : new STSaveGoogleSheetInfo(a_oID, a_oTableName);
+
+			// TODO: 구글 시트 정보 설정 구문 작성 필요
+		}
+	}
+
 	/** JSON 배열을 생성한다 */
 	private static SimpleJSON.JSONNode MakeJSONArray(string a_oJSONStr) {
 		var oTokens = Regex.Replace(a_oJSONStr, KCDefine.B_PATTERN_SPACE, string.Empty).Split(KCDefine.B_TOKEN_COMMA);
