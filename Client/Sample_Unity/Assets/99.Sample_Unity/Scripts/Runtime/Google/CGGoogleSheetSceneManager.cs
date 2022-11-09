@@ -51,7 +51,7 @@ namespace Google {
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		/** 구글 시트를 로드했을 경우 */
 		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
-			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetLoadInfo.m_oID}, {a_stGoogleSheetLoadInfo.m_oName}, {a_oJSONNodeInfoDict.ExToJSONNode()}");
+			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetLoadInfo.m_oID}, {a_stGoogleSheetLoadInfo.m_oSheetName}, {a_oJSONNodeInfoDict.ExToJSONNode()}");
 
 			// 로드 되었을 경우
 			if(a_bIsSuccess) {
@@ -67,7 +67,7 @@ namespace Google {
 					[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = () => CProductTradeInfoTable.Inst.SaveProductTradeInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString())
 				};
 
-				oHandlerDict.GetValueOrDefault(a_stGoogleSheetLoadInfo.m_oName)?.Invoke();
+				oHandlerDict.GetValueOrDefault(a_stGoogleSheetLoadInfo.m_oSheetName)?.Invoke();
 			}
 		}
 
@@ -98,7 +98,7 @@ namespace Google {
 
 		/** 구글 시트를 저장했을 경우 */
 		private void OnSaveGoogleSheet(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
-			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetSaveInfo.m_oID}, {a_stGoogleSheetSaveInfo.m_oName}");
+			CFunc.ShowLog($"CGGoogleSheetSceneManager.OnLoadGoogleSheet: {a_stGoogleSheetSaveInfo.m_oID}, {a_stGoogleSheetSaveInfo.m_oSheetName}");
 		}
 
 		/** 구글 시트를 저장했을 경우 */
