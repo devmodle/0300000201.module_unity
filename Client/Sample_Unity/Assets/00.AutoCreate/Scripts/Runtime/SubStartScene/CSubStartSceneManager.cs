@@ -9,11 +9,14 @@ using System.Diagnostics;
 using TMPro;
 using DG.Tweening;
 
-namespace StartScene {
+namespace StartScene
+{
 	/** 서브 시작 씬 관리자 */
-	public partial class CSubStartSceneManager : CStartSceneManager {
+	public partial class CSubStartSceneManager : CStartSceneManager
+	{
 		/** 식별자 */
-		private enum EKey {
+		private enum EKey
+		{
 			NONE = -1,
 			LOADING_GAUGE_ANI,
 
@@ -28,8 +31,9 @@ namespace StartScene {
 			[HideInInspector] MAX_VAL
 		}
 
-#region 변수
-		private Dictionary<EKey, System.Text.StringBuilder> m_oStrBuilderDict = new Dictionary<EKey, System.Text.StringBuilder>() {
+		#region 변수
+		private Dictionary<EKey, System.Text.StringBuilder> m_oStrBuilderDict = new Dictionary<EKey, System.Text.StringBuilder>()
+		{
 			[EKey.STR_BUILDER_01] = new System.Text.StringBuilder(),
 			[EKey.STR_BUILDER_02] = new System.Text.StringBuilder()
 		};
@@ -43,48 +47,60 @@ namespace StartScene {
 
 		/** =====> 객체 <===== */
 		private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
-#endregion          // 변수               
+		#endregion          // 변수               
 
-#region 함수
+		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 
 			// 초기화 되었을 경우
-			if(CSceneManager.IsInit) {
+			if(CSceneManager.IsInit)
+			{
 				this.SetupAwake();
 			}
 		}
 
 		/** 제거 되었을 경우 */
-		public override void OnDestroy() {
+		public override void OnDestroy()
+		{
 			base.OnDestroy();
 
-			try {
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					m_oAniDict.GetValueOrDefault(EKey.LOADING_GAUGE_ANI)?.Kill();
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CSubStartSceneManager.OnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 씬을 설정한다 */
-		protected override void Setup() {
+		protected override void Setup()
+		{
 			base.Setup();
 			this.UpdateUIsState();
 		}
 
 		/** 시작 씬 이벤트를 수신했을 경우 */
-		protected override void OnReceiveStartSceneEvent(EStartSceneEvent a_eEvent) {
+		protected override void OnReceiveStartSceneEvent(EStartSceneEvent a_eEvent)
+		{
 #if DEBUG || DEVELOPMENT
 			CLocalizeInfoTable.Inst.TryGetFontSetInfo(string.Empty, SystemLanguage.English, EFontSet._1, out STFontSetInfo stFontSetInfo);
 
-			try {
+			try
+			{
 				m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_02).AppendLine($"{a_eEvent}: {m_oStopwatch.ElapsedMilliseconds} ms");
 				m_oTextDict.GetValueOrDefault(EKey.SCENE_INFO_TEXT).ExSetText(m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_02).ToString(), stFontSetInfo);
-			} finally {
+			}
+			finally
+			{
 				m_oStopwatch.Restart();
 			}
 #endif          // #if DEBUG || DEVELOPMENT                                     
@@ -96,7 +112,8 @@ namespace StartScene {
 		}
 
 		/** 씬을 설정한다 */
-		private void SetupAwake() {
+		private void SetupAwake()
+		{
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			// 객체를 설정한다 {
 			CFunc.SetupObjs(new List<(EKey, string, GameObject, GameObject)>() {
@@ -138,7 +155,8 @@ namespace StartScene {
 		}
 
 		/** 텍스트 상태를 갱신한다 */
-		private void UpdateUIsState() {
+		private void UpdateUIsState()
+		{
 			m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_01).Clear();
 			m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_01).Append(CStrTable.Inst.GetStr(KCDefine.ST_KEY_START_SM_LOADING_TEXT));
 
@@ -148,7 +166,7 @@ namespace StartScene {
 			CLocalizeInfoTable.Inst.TryGetFontSetInfo(string.Empty, SystemLanguage.English, EFontSet._1, out STFontSetInfo stFontSetInfo);
 			m_oTextDict.GetValueOrDefault(EKey.LOADING_TEXT).ExSetText(string.Format(KCDefine.B_TEXT_FMT_2_SPACE_COMBINE, m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_01).ToString(), oPercentStr), stFontSetInfo);
 		}
-#endregion          // 함수               
+		#endregion          // 함수               
 	}
 }
 #endif          // #if SCENE_TEMPLATES_MODULE_ENABLE                                              

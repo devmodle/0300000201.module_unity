@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 동기화 팝업 */
-public partial class CSyncPopup : CSubPopup {
+public partial class CSyncPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		IS_LOAD_USER_INFO,
 		LOGIN_UIS,
@@ -16,37 +18,42 @@ public partial class CSyncPopup : CSubPopup {
 		[HideInInspector] MAX_VAL
 	}
 
-#region 변수
+	#region 변수
 	private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>();
 
 	/** =====> 객체 <===== */
 	private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
-#endregion         // 변수               
+	#endregion         // 변수               
 
-#region 함수
+	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** 로그인 버튼을 눌렀을 경우 */
-	private void OnTouchLoginBtn() {
+	private void OnTouchLoginBtn()
+	{
 #if FIREBASE_MODULE_ENABLE
 		Func.FirebaseLogin(this.OnLogin);
 #endif          // #if FIREBASE_MODULE_ENABLE                                       
 	}
 
 	/** 로그아웃 버튼을 눌렀을 경우 */
-	private void OnTouchLogoutBtn() {
+	private void OnTouchLogoutBtn()
+	{
 #if FIREBASE_MODULE_ENABLE
 		Func.FirebaseLogout(this.OnLogout);
 #endif         // #if FIREBASE_MODULE_ENABLE                                       
 	}
 
 	/** 로드 버튼을 눌렀을 경우 */
-	private void OnTouchLoadBtn() {
-		Func.ShowLoadPopup((a_oSender, a_bIsOK) => {
+	private void OnTouchLoadBtn()
+	{
+		Func.ShowLoadPopup((a_oSender, a_bIsOK) =>
+		{
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
@@ -58,8 +65,10 @@ public partial class CSyncPopup : CSubPopup {
 	}
 
 	/** 저장 버튼을 눌렀을 경우 */
-	private void OnTouchSaveBtn() {
-		Func.ShowSavePopup((a_oSender, a_bIsOK) => {
+	private void OnTouchSaveBtn()
+	{
+		Func.ShowSavePopup((a_oSender, a_bIsOK) =>
+		{
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
@@ -69,9 +78,9 @@ public partial class CSyncPopup : CSubPopup {
 #endif          // #if FIREBASE_MODULE_ENABLE                                       
 		});
 	}
-#endregion         // 함수               
+	#endregion         // 함수               
 
-#region 조건부 함수
+	#region 조건부 함수
 #if FIREBASE_MODULE_ENABLE
 	/** 로그인 되었을 경우 */
 	private void OnLogin(CFirebaseManager a_oSender, bool a_bIsSuccess) {
@@ -152,6 +161,6 @@ public partial class CSyncPopup : CSubPopup {
 		}
 	}
 #endif         // #if FIREBASE_MODULE_ENABLE                                       
-#endregion         // 조건부 함수                   
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

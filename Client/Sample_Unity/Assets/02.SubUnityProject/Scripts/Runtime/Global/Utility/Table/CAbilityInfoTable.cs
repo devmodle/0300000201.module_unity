@@ -9,7 +9,8 @@ using System.IO;
 
 /** 어빌리티 정보 */
 [System.Serializable]
-public struct STAbilityInfo {
+public struct STAbilityInfo
+{
 	public STCommonInfo m_stCommonInfo;
 	public STValInfo m_stValInfo;
 
@@ -21,8 +22,11 @@ public struct STAbilityInfo {
 	public Dictionary<ulong, STTargetInfo> m_oExtraAbilityTargetInfoDict;
 
 	#region 상수
-	public static STAbilityInfo INVALID = new STAbilityInfo() {
-		m_eAbilityKinds = EAbilityKinds.NONE, m_ePrevAbilityKinds = EAbilityKinds.NONE, m_eNextAbilityKinds = EAbilityKinds.NONE
+	public static STAbilityInfo INVALID = new STAbilityInfo()
+	{
+		m_eAbilityKinds = EAbilityKinds.NONE,
+		m_ePrevAbilityKinds = EAbilityKinds.NONE,
+		m_eNextAbilityKinds = EAbilityKinds.NONE
 	};
 	#endregion            // 상수               
 
@@ -33,7 +37,8 @@ public struct STAbilityInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STAbilityInfo(SimpleJSON.JSONNode a_oAbilityInfo) {
+	public STAbilityInfo(SimpleJSON.JSONNode a_oAbilityInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oAbilityInfo);
 		m_stValInfo = new STValInfo(a_oAbilityInfo[KCDefine.U_KEY_VAL_INFO]);
 
@@ -49,7 +54,8 @@ public struct STAbilityInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 어빌리티 정보를 설정한다 */
-	public void SetupAbilityInfo(SimpleJSON.JSONNode a_oOutAbilityInfo) {
+	public void SetupAbilityInfo(SimpleJSON.JSONNode a_oOutAbilityInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutAbilityInfo);
 		m_stValInfo.SaveValInfo(a_oOutAbilityInfo[KCDefine.U_KEY_VAL_INFO]);
 
@@ -66,7 +72,8 @@ public struct STAbilityInfo {
 
 /** 어빌리티 교환 정보 */
 [System.Serializable]
-public struct STAbilityTradeInfo {
+public struct STAbilityTradeInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public EAbilityKinds m_eAbilityKinds;
@@ -77,8 +84,11 @@ public struct STAbilityTradeInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
 	#region 상수
-	public static STAbilityTradeInfo INVALID = new STAbilityTradeInfo() {
-		m_eAbilityKinds = EAbilityKinds.NONE, m_ePrevAbilityKinds = EAbilityKinds.NONE, m_eNextAbilityKinds = EAbilityKinds.NONE
+	public static STAbilityTradeInfo INVALID = new STAbilityTradeInfo()
+	{
+		m_eAbilityKinds = EAbilityKinds.NONE,
+		m_ePrevAbilityKinds = EAbilityKinds.NONE,
+		m_eNextAbilityKinds = EAbilityKinds.NONE
 	};
 	#endregion            // 상수               
 
@@ -89,7 +99,8 @@ public struct STAbilityTradeInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STAbilityTradeInfo(SimpleJSON.JSONNode a_oAbilityInfo) {
+	public STAbilityTradeInfo(SimpleJSON.JSONNode a_oAbilityInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oAbilityInfo);
 
 		m_eAbilityKinds = a_oAbilityInfo[KCDefine.U_KEY_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)a_oAbilityInfo[KCDefine.U_KEY_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
@@ -104,7 +115,8 @@ public struct STAbilityTradeInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 어빌리티 교환 정보를 설정한다 */
-	public void SetupAbilityTradeInfo(SimpleJSON.JSONNode a_oOutAbilityTradeInfo) {
+	public void SetupAbilityTradeInfo(SimpleJSON.JSONNode a_oOutAbilityTradeInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutAbilityTradeInfo);
 
 		a_oOutAbilityTradeInfo[KCDefine.U_KEY_ABILITY_KINDS] = $"{(int)m_eAbilityKinds}";
@@ -119,7 +131,8 @@ public struct STAbilityTradeInfo {
 }
 
 /** 어빌리티 정보 테이블 */
-public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
+public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<EAbilityKinds, STAbilityInfo> AbilityInfoDict { get; } = new Dictionary<EAbilityKinds, STAbilityInfo>();
 	public Dictionary<EAbilityKinds, STAbilityTradeInfo> EnhanceAbilityTradeInfoDict { get; } = new Dictionary<EAbilityKinds, STAbilityTradeInfo>();
@@ -127,25 +140,29 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetAbilityInfos();
 	}
 
 	/** 어빌리티 정보를 리셋한다 */
-	public virtual void ResetAbilityInfos() {
+	public virtual void ResetAbilityInfos()
+	{
 		this.AbilityInfoDict.Clear();
 		this.EnhanceAbilityTradeInfoDict.Clear();
 	}
 
 	/** 어빌리티 정보를 리셋한다 */
-	public virtual void ResetAbilityInfos(string a_oJSONStr) {
+	public virtual void ResetAbilityInfos(string a_oJSONStr)
+	{
 		this.ResetAbilityInfos();
 		this.DoLoadAbilityInfos(a_oJSONStr);
 	}
 
 	/** 어빌리티 정보를 반환한다 */
-	public STAbilityInfo GetAbilityInfo(EAbilityKinds a_eAbilityKinds) {
+	public STAbilityInfo GetAbilityInfo(EAbilityKinds a_eAbilityKinds)
+	{
 		bool bIsValid = this.TryGetAbilityInfo(a_eAbilityKinds, out STAbilityInfo stAbilityInfo);
 		CAccess.Assert(bIsValid);
 
@@ -153,7 +170,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	}
 
 	/** 강화 어빌리티 교환 정보를 반환한다 */
-	public STAbilityTradeInfo GetEnhanceAbilityTradeInfo(EAbilityKinds a_eAbilityKinds) {
+	public STAbilityTradeInfo GetEnhanceAbilityTradeInfo(EAbilityKinds a_eAbilityKinds)
+	{
 		bool bIsValid = this.TryGetEnhanceAbilityTradeInfo(a_eAbilityKinds, out STAbilityTradeInfo stAbilityTradeInfo);
 		CAccess.Assert(bIsValid);
 
@@ -161,29 +179,34 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	}
 
 	/** 어빌리티 정보를 반환한다 */
-	public bool TryGetAbilityInfo(EAbilityKinds a_eAbilityKinds, out STAbilityInfo a_stOutAbilityInfo) {
+	public bool TryGetAbilityInfo(EAbilityKinds a_eAbilityKinds, out STAbilityInfo a_stOutAbilityInfo)
+	{
 		a_stOutAbilityInfo = this.AbilityInfoDict.GetValueOrDefault(a_eAbilityKinds, STAbilityInfo.INVALID);
 		return this.AbilityInfoDict.ContainsKey(a_eAbilityKinds);
 	}
 
 	/** 강화 어빌리티 교환 정보를 반환한다 */
-	public bool TryGetEnhanceAbilityTradeInfo(EAbilityKinds a_eAbilityKinds, out STAbilityTradeInfo a_stOuttAbilityTradeInfo) {
+	public bool TryGetEnhanceAbilityTradeInfo(EAbilityKinds a_eAbilityKinds, out STAbilityTradeInfo a_stOuttAbilityTradeInfo)
+	{
 		a_stOuttAbilityTradeInfo = this.EnhanceAbilityTradeInfoDict.GetValueOrDefault(a_eAbilityKinds, STAbilityTradeInfo.INVALID);
 		return this.EnhanceAbilityTradeInfoDict.ContainsKey(a_eAbilityKinds);
 	}
 
 	/** 어빌리티 정보를 로드한다 */
-	public Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos() {
+	public Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos()
+	{
 		this.ResetAbilityInfos();
 		return this.LoadAbilityInfos(Access.AbilityInfoTableLoadPath);
 	}
 
 	/** 어빌리티 정보를 저장한다 */
-	public void SaveAbilityInfos(string a_oJSONStr, bool a_bIsEnableAssert = true) {
+	public void SaveAbilityInfos(string a_oJSONStr, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetAbilityInfos(a_oJSONStr);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -199,20 +222,23 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos)
+	{
 		var oTableInfoDictContainer = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
 		a_oOutCommonInfos = oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : null;
 		a_oOutEnhanceTradeInfos = oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE) ? a_oJSONNode[oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE]] : null;
 	}
 
 	/** 어빌리티 정보를 로드한다 */
-	private Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos(string a_oFilePath) {
+	private Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos(string a_oFilePath)
+	{
 		CAccess.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadAbilityInfos(this.LoadAbilityInfosJSONStr(a_oFilePath));
 	}
 
 	/** 어빌리티 정보 JSON 문자열을 로드한다 */
-	private string LoadAbilityInfosJSONStr(string a_oFilePath) {
+	private string LoadAbilityInfosJSONStr(string a_oFilePath)
+	{
 		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -223,24 +249,29 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	}
 
 	/** 어빌리티 정보를 로드한다 */
-	private Dictionary<EAbilityKinds, STAbilityInfo> DoLoadAbilityInfos(string a_oJSONStr) {
+	private Dictionary<EAbilityKinds, STAbilityInfo> DoLoadAbilityInfos(string a_oJSONStr)
+	{
 		CAccess.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stAbilityInfo = new STAbilityInfo(oCommonInfos[i]);
 
 			// 어빌리티 정보 추가 가능 할 경우
-			if(stAbilityInfo.m_eAbilityKinds.ExIsValid() && (!this.AbilityInfoDict.ContainsKey(stAbilityInfo.m_eAbilityKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stAbilityInfo.m_eAbilityKinds.ExIsValid() && (!this.AbilityInfoDict.ContainsKey(stAbilityInfo.m_eAbilityKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.AbilityInfoDict.ExReplaceVal(stAbilityInfo.m_eAbilityKinds, stAbilityInfo);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i)
+		{
 			var stAbilityTradeInfo = new STAbilityTradeInfo(oEnhanceTradeInfos[i]);
 
 			// 강화 어빌리티 교환 정보 추가 가능 할 경우
-			if(stAbilityTradeInfo.m_eAbilityKinds.ExIsValid() && (!this.EnhanceAbilityTradeInfoDict.ContainsKey(stAbilityTradeInfo.m_eAbilityKinds) || oEnhanceTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stAbilityTradeInfo.m_eAbilityKinds.ExIsValid() && (!this.EnhanceAbilityTradeInfoDict.ContainsKey(stAbilityTradeInfo.m_eAbilityKinds) || oEnhanceTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.EnhanceAbilityTradeInfoDict.ExReplaceVal(stAbilityTradeInfo.m_eAbilityKinds, stAbilityTradeInfo);
 			}
 		}
@@ -252,33 +283,39 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 어빌리티 정보를 저장한다 */
-	public void SaveAbilityInfos() {
+	public void SaveAbilityInfos()
+	{
 		var oAbilityInfos = SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableLoadPath));
 		this.SetupJSONNodes(oAbilityInfos, out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var eAbilityKinds = oCommonInfos[i][KCDefine.U_KEY_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)oCommonInfos[i][KCDefine.U_KEY_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
 
 			// 어빌리티 정보가 존재 할 경우
-			if(this.AbilityInfoDict.ContainsKey(eAbilityKinds)) {
+			if(this.AbilityInfoDict.ContainsKey(eAbilityKinds))
+			{
 				this.AbilityInfoDict[eAbilityKinds].SetupAbilityInfo(oCommonInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i)
+		{
 			var eAbilityKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
 
 			// 강화 어빌리티 교환 정보가 존재 할 경우
-			if(this.EnhanceAbilityTradeInfoDict.ContainsKey(eAbilityKinds)) {
+			if(this.EnhanceAbilityTradeInfoDict.ContainsKey(eAbilityKinds))
+			{
 				this.EnhanceAbilityTradeInfoDict[eAbilityKinds].SetupAbilityTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
 
 		this.SaveAbilityInfos(oAbilityInfos.ToString());
 	}
-	
+
 	/** 어빌리티 정보 값을 생성한다 */
-	public void MakeAbilityInfoVals(List<(string, List<List<string>>)> a_oAbilityInfoVal) {
+	public void MakeAbilityInfoVals(List<(string, List<List<string>>)> a_oAbilityInfoVal)
+	{
 
 	}
 #endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    

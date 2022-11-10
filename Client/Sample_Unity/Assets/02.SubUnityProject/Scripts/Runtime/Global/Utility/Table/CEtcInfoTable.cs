@@ -8,10 +8,12 @@ using UnityEngine.Events;
 using System.IO;
 
 /** 기타 정보 테이블 */
-public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
-#region 함수
+public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
+{
+	#region 함수
 	/** 기타 정보를 리셋한다 */
-	public virtual void ResetEtcInfos() {
+	public virtual void ResetEtcInfos()
+	{
 		CCalcInfoTable.Inst.ResetCalcInfos();
 		CEpisodeInfoTable.Inst.ResetEpisodeInfos();
 		CTutorialInfoTable.Inst.ResetTutorialInfos();
@@ -19,7 +21,8 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 	}
 
 	/** 기타 정보를 리셋한다 */
-	public virtual void ResetEtcInfos(string a_oJSONStr) {
+	public virtual void ResetEtcInfos(string a_oJSONStr)
+	{
 		this.ResetEtcInfos();
 
 		CCalcInfoTable.Inst.ResetCalcInfos(a_oJSONStr);
@@ -29,7 +32,8 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 	}
 
 	/** 기타 정보를 로드한다 */
-	public void LoadEtcInfos() {
+	public void LoadEtcInfos()
+	{
 		CCalcInfoTable.Inst.LoadCalcInfos();
 		CEpisodeInfoTable.Inst.LoadEpisodeInfos();
 		CTutorialInfoTable.Inst.LoadTutorialInfos();
@@ -37,14 +41,16 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 	}
 
 	/** 기타 정보를 저장한다 */
-	public void SaveEtcInfos(string a_oJSONStr, bool a_bIsEnableAssert = true) {
+	public void SaveEtcInfos(string a_oJSONStr, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetEtcInfos(a_oJSONStr);
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oJSONStr, false);
 #else
 			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oJSONStr, true);
@@ -57,21 +63,23 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 	}
 
 	/** 기타 정보 JSON 문자열을 로드한다 */
-	private string LoadEtcInfosJSONStr(string a_oFilePath) {
+	private string LoadEtcInfosJSONStr(string a_oFilePath)
+	{
 		CAccess.Assert(a_oFilePath.ExIsValid());
 
-#if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+#if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #else
 		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
 #endif          // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                   
 	}
-#endregion         // 함수               
+	#endregion         // 함수               
 
-#region 조건부 함수
+	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 기타 정보를 저장한다 */
-	public void SaveEtcInfos() {
+	public void SaveEtcInfos()
+	{
 		var oEtcInfos = SimpleJSON.JSONNode.Parse(this.LoadEtcInfosJSONStr(Access.EtcInfoTableLoadPath));
 		CCalcInfoTable.Inst.SaveCalcInfos(oEtcInfos);
 		CEpisodeInfoTable.Inst.SaveEpisodeInfos(oEtcInfos);
@@ -81,6 +89,6 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 		this.SaveEtcInfos(oEtcInfos.ToString());
 	}
 #endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                    
-#endregion         // 조건부 함수                   
+	#endregion         // 조건부 함수                   
 }
 #endif         // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

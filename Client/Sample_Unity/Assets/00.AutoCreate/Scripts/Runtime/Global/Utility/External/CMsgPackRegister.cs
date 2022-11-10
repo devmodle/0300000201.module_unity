@@ -12,17 +12,20 @@ using UnityEditor;
 #endif          // #if UNITY_EDITOR                             
 
 /** 메세지 팩 등록자 */
-public static partial class CMsgPackRegister {
-#region 클래스 변수
+public static partial class CMsgPackRegister
+{
+	#region 클래스 변수
 	private static bool m_bIsRegister = false;
-#endregion          // 클래스 변수                   
+	#endregion          // 클래스 변수                   
 
-#region 클래스 함수
+	#region 클래스 함수
 	/** 메세지 팩을 등록한다 */
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-	private static void RegisterMsgPack() {
+	private static void RegisterMsgPack()
+	{
 		// 등록 가능 할 경우
-		if(!CMsgPackRegister.m_bIsRegister) {
+		if(!CMsgPackRegister.m_bIsRegister)
+		{
 			CMsgPackRegister.m_bIsRegister = true;
 
 			var oResolverList = new List<IFormatterResolver>() {
@@ -33,16 +36,17 @@ public static partial class CMsgPackRegister {
 			MessagePackSerializer.DefaultOptions = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
 		}
 	}
-#endregion          // 클래스 함수                   
+	#endregion          // 클래스 함수                   
 
-#region 조건부 클래스 함수
+	#region 조건부 클래스 함수
 #if UNITY_EDITOR
 	/** 초기화 */
 	[InitializeOnLoadMethod]
-	public static void EditorInitialize() {
+	public static void EditorInitialize()
+	{
 		CMsgPackRegister.RegisterMsgPack();
 	}
 #endif          // #if UNITY_EDITOR                             
-#endregion          // 조건부 클래스 함수                       
+	#endregion          // 조건부 클래스 함수                       
 }
 #endif          // #if MSG_PACK_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE                                                              

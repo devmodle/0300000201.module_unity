@@ -6,10 +6,12 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 설정 팝업 */
-public partial class CSettingsPopup : CSubPopup {
-#region 함수
+public partial class CSettingsPopup : CSubPopup
+{
+	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 버튼을 설정한다 {
@@ -26,25 +28,28 @@ public partial class CSettingsPopup : CSubPopup {
 		}, false);
 		// 버튼을 설정한다 }
 
-#region 추가
+		#region 추가
 		this.SubSetupAwake();
-#endregion          // 추가               
+		#endregion          // 추가               
 	}
-	
+
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 
-#region 추가
+		#region 추가
 		this.SubInit();
-#endregion          // 추가               
+		#endregion          // 추가               
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		var oBtnKeyInfoList = CCollectionManager.Inst.SpawnList<(EKey, string, string, string, bool)>();
 
-		try {
+		try
+		{
 			CSndManager.Inst.SetIsMuteBGSnd(CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd);
 			CSndManager.Inst.SetIsMuteFXSnds(CCommonGameInfoStorage.Inst.GameInfo.IsMuteFXSnds);
 
@@ -54,53 +59,61 @@ public partial class CSettingsPopup : CSubPopup {
 			oBtnKeyInfoList.ExAddVal((EKey.VIBRATE_BTN, KCDefine.U_OBJ_N_ICON_IMG, KDefine.G_IMG_P_SETTINGS_P_VIBRATE_ON, KDefine.G_IMG_P_SETTINGS_P_VIBRATE_OFF, !CCommonGameInfoStorage.Inst.GameInfo.IsDisableVibrate));
 			oBtnKeyInfoList.ExAddVal((EKey.NOTI_BTN, KCDefine.U_OBJ_N_ICON_IMG, KDefine.G_IMG_P_SETTINGS_P_NOTI_ON, KDefine.G_IMG_P_SETTINGS_P_NOTI_OFF, !CCommonGameInfoStorage.Inst.GameInfo.IsDisableNoti));
 
-			for(int i = 0; i < oBtnKeyInfoList.Count; ++i) {
+			for(int i = 0; i < oBtnKeyInfoList.Count; ++i)
+			{
 				string oImgPath = oBtnKeyInfoList[i].Item5 ? oBtnKeyInfoList[i].Item3 : oBtnKeyInfoList[i].Item4;
 				m_oBtnDict.GetValueOrDefault(oBtnKeyInfoList[i].Item1)?.gameObject.ExFindComponent<Image>(oBtnKeyInfoList[i].Item2)?.ExSetSprite<Image>(CResManager.Inst.GetRes<Sprite>(oImgPath));
 			}
 			// 버튼을 갱신한다 }
-		} finally {
+		}
+		finally
+		{
 			CCollectionManager.Inst.DespawnList(oBtnKeyInfoList);
 		}
 
-#region 추가
+		#region 추가
 		this.SubUpdateUIsState();
-#endregion          // 추가               
+		#endregion          // 추가               
 	}
-#endregion          // 함수               
+	#endregion          // 함수               
 }
 
 /** 서브 설정 팝업 */
-public partial class CSettingsPopup : CSubPopup {
+public partial class CSettingsPopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
 
-#region 변수
+	#region 변수
 
-#endregion          // 변수               
+	#endregion          // 변수               
 
-#region 프로퍼티
+	#region 프로퍼티
 
-#endregion          // 프로퍼티                 
+	#endregion          // 프로퍼티                 
 
-#region 함수
+	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake() {
+	private void SubSetupAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
-#endregion          // 함수               
+	#endregion          // 함수               
 }
 #endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

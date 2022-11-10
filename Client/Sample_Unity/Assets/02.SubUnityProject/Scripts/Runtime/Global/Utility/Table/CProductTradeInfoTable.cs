@@ -9,7 +9,8 @@ using System.IO;
 
 /** 상품 교환 정보 */
 [System.Serializable]
-public struct STProductTradeInfo {
+public struct STProductTradeInfo
+{
 	public STCommonInfo m_stCommonInfo;
 	public int m_nProductIdx;
 
@@ -22,8 +23,12 @@ public struct STProductTradeInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
 	#region 상수
-	public static STProductTradeInfo INVALID = new STProductTradeInfo() {
-		m_eProductKinds = EProductKinds.NONE, m_ePrevProductKinds = EProductKinds.NONE, m_eNextProductKinds = EProductKinds.NONE, m_ePurchaseType = EPurchaseType.NONE
+	public static STProductTradeInfo INVALID = new STProductTradeInfo()
+	{
+		m_eProductKinds = EProductKinds.NONE,
+		m_ePrevProductKinds = EProductKinds.NONE,
+		m_eNextProductKinds = EProductKinds.NONE,
+		m_ePurchaseType = EPurchaseType.NONE
 	};
 	#endregion            // 상수               
 
@@ -34,7 +39,8 @@ public struct STProductTradeInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STProductTradeInfo(SimpleJSON.JSONNode a_oProductTradeInfo) {
+	public STProductTradeInfo(SimpleJSON.JSONNode a_oProductTradeInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oProductTradeInfo);
 		m_nProductIdx = a_oProductTradeInfo[KCDefine.U_KEY_PRODUCT_IDX].AsInt;
 
@@ -51,7 +57,8 @@ public struct STProductTradeInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 객체 정보를 저장한다 */
-	public void SaveProductTradeInfo(SimpleJSON.JSONNode a_oOutProductTradeInfo) {
+	public void SaveProductTradeInfo(SimpleJSON.JSONNode a_oOutProductTradeInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutProductTradeInfo);
 		a_oOutProductTradeInfo[KCDefine.U_KEY_PRODUCT_IDX] = $"{m_nProductIdx}";
 
@@ -68,31 +75,36 @@ public struct STProductTradeInfo {
 }
 
 /** 상품 교환 정보 테이블 */
-public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable> {
+public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<EProductKinds, STProductTradeInfo> BuyProductTradeInfoDict { get; } = new Dictionary<EProductKinds, STProductTradeInfo>();
 	#endregion          // 프로퍼티                 
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetProductTradeInfos();
 	}
 
 	/** 상품 교환 정보를 리셋한다 */
-	public virtual void ResetProductTradeInfos() {
+	public virtual void ResetProductTradeInfos()
+	{
 		this.BuyProductTradeInfoDict.Clear();
 	}
 
 	/** 상품 교환 정보를 리셋한다 */
-	public virtual void ResetProductTradeInfos(string a_oJSONStr) {
+	public virtual void ResetProductTradeInfos(string a_oJSONStr)
+	{
 		this.ResetProductTradeInfos();
 		this.DoLoadProductTradeInfos(a_oJSONStr);
 	}
 
 	/** 구입 상품 교환 정보를 반환한다 */
-	public STProductTradeInfo GetBuyProductTradeTradeInfo(int a_nProductIdx) {
+	public STProductTradeInfo GetBuyProductTradeTradeInfo(int a_nProductIdx)
+	{
 		bool bIsValid = this.TryGetBuyProductTradeInfo(a_nProductIdx, out STProductTradeInfo stProductTradeInfo);
 		CAccess.Assert(bIsValid);
 
@@ -100,7 +112,8 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	}
 
 	/** 구입 상품 교환 정보를 반환한다 */
-	public STProductTradeInfo GetBuyProductTradeTradeInfo(EProductKinds a_eProductKinds) {
+	public STProductTradeInfo GetBuyProductTradeTradeInfo(EProductKinds a_eProductKinds)
+	{
 		bool bIsValid = this.TryGetBuyProductTradeInfo(a_eProductKinds, out STProductTradeInfo stProductTradeInfo);
 		CAccess.Assert(bIsValid);
 
@@ -108,29 +121,34 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	}
 
 	/** 구입 상품 교환 정보를 반환한다 */
-	public bool TryGetBuyProductTradeInfo(int a_nProductIdx, out STProductTradeInfo a_stOutProductTradeInfo) {
+	public bool TryGetBuyProductTradeInfo(int a_nProductIdx, out STProductTradeInfo a_stOutProductTradeInfo)
+	{
 		a_stOutProductTradeInfo = this.BuyProductTradeInfoDict.ExGetVal((a_stProductTradeInfo) => a_stProductTradeInfo.m_nProductIdx == a_nProductIdx, STProductTradeInfo.INVALID);
 		return a_stOutProductTradeInfo.m_eProductKinds != EProductKinds.NONE;
 	}
 
 	/** 구입 상품 교환 정보를 반환한다 */
-	public bool TryGetBuyProductTradeInfo(EProductKinds a_eProductKinds, out STProductTradeInfo a_stOutProductTradeInfo) {
+	public bool TryGetBuyProductTradeInfo(EProductKinds a_eProductKinds, out STProductTradeInfo a_stOutProductTradeInfo)
+	{
 		a_stOutProductTradeInfo = this.BuyProductTradeInfoDict.GetValueOrDefault(a_eProductKinds, STProductTradeInfo.INVALID);
 		return this.BuyProductTradeInfoDict.ContainsKey(a_eProductKinds);
 	}
 
 	/** 상품 교환 정보를 로드한다 */
-	public Dictionary<EProductKinds, STProductTradeInfo> LoadProductTradeInfos() {
+	public Dictionary<EProductKinds, STProductTradeInfo> LoadProductTradeInfos()
+	{
 		this.ResetProductTradeInfos();
 		return this.LoadProductTradeInfos(Access.ProductTradeInfoTableLoadPath);
 	}
 
 	/** 상품 교환 정보를 저장한다 */
-	public void SaveProductTradeInfos(string a_oJSONStr, bool a_bIsEnableAssert = true) {
+	public void SaveProductTradeInfos(string a_oJSONStr, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetProductTradeInfos(a_oJSONStr);
 
 #if PURCHASE_MODULE_ENABLE
@@ -150,19 +168,22 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos)
+	{
 		var oTableInfoDictContainer = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.ProductTradeInfoTableLoadPath.ExGetFileName(false));
 		a_oOutCommonInfos = oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 상품 교환 정보를 로드한다 */
-	private Dictionary<EProductKinds, STProductTradeInfo> LoadProductTradeInfos(string a_oFilePath) {
+	private Dictionary<EProductKinds, STProductTradeInfo> LoadProductTradeInfos(string a_oFilePath)
+	{
 		CAccess.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadProductTradeInfos(this.LoadProductTradeInfosJSONStr(a_oFilePath));
 	}
 
 	/** 상품 교환 정보 JSON 문자열을 로드한다 */
-	private string LoadProductTradeInfosJSONStr(string a_oFilePath) {
+	private string LoadProductTradeInfosJSONStr(string a_oFilePath)
+	{
 		CAccess.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -173,15 +194,18 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	}
 
 	/** 상품 교환 정보를 로드한다 */
-	private Dictionary<EProductKinds, STProductTradeInfo> DoLoadProductTradeInfos(string a_oJSONStr) {
+	private Dictionary<EProductKinds, STProductTradeInfo> DoLoadProductTradeInfos(string a_oJSONStr)
+	{
 		CAccess.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stProductTradeInfo = new STProductTradeInfo(oCommonInfos[i]);
 
 			// 구입 상품 교환 정보 추가 가능 할 경우
-			if(stProductTradeInfo.m_eProductKinds.ExIsValid() && (!this.BuyProductTradeInfoDict.ContainsKey(stProductTradeInfo.m_eProductKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stProductTradeInfo.m_eProductKinds.ExIsValid() && (!this.BuyProductTradeInfoDict.ContainsKey(stProductTradeInfo.m_eProductKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.BuyProductTradeInfoDict.ExReplaceVal(stProductTradeInfo.m_eProductKinds, stProductTradeInfo);
 			}
 		}
@@ -193,15 +217,18 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 상품 교환 정보를 저장한다 */
-	public void SaveProductTradeInfos() {
+	public void SaveProductTradeInfos()
+	{
 		var oProductTradeInfos = SimpleJSON.JSONNode.Parse(this.LoadProductTradeInfosJSONStr(Access.ProductTradeInfoTableLoadPath));
 		this.SetupJSONNodes(oProductTradeInfos, out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var oProductTradeKinds = oCommonInfos[i][KCDefine.U_KEY_PRODUCT_KINDS].ExIsValid() ? (EProductKinds)oCommonInfos[i][KCDefine.U_KEY_PRODUCT_KINDS].AsInt : EProductKinds.NONE;
 
 			// 구입 상품 교환 정보가 존재 할 경우
-			if(this.BuyProductTradeInfoDict.ContainsKey(oProductTradeKinds)) {
+			if(this.BuyProductTradeInfoDict.ContainsKey(oProductTradeKinds))
+			{
 				this.BuyProductTradeInfoDict[oProductTradeKinds].SaveProductTradeInfo(oCommonInfos[i]);
 			}
 		}
