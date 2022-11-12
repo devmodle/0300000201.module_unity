@@ -120,12 +120,8 @@ namespace NSEngine {
 
 			try {
 				switch(a_stSkillInfo.SkillApplyType) {
-					case ESkillApplyType.MULTI:
-						this.SetupMultiSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, oTargetObjList);
-						break;
-					case ESkillApplyType.SINGLE:
-						this.SetupSingleSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, oTargetObjList);
-						break;
+					case ESkillApplyType.MULTI: this.SetupMultiSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, oTargetObjList); break;
+					case ESkillApplyType.SINGLE: this.SetupSingleSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, oTargetObjList); break;
 				}
 
 				var oSkill = base.Params.m_stBaseParams.m_stBaseParams.m_oEngine.CreateSkill(a_stSkillInfo, a_oSkillTargetInfo, this.GetOwner<CEObj>());

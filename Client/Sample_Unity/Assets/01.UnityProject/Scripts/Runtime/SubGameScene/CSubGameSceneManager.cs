@@ -100,15 +100,9 @@ namespace GameScene {
 			// 배경 터치 전달자 일 경우
 			if(this.BGTouchDispatcher == a_oSender) {
 				switch(a_eTouchEvent) {
-					case ETouchEvent.BEGIN:
-						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.MOVE:
-						this.HandleTouchMoveEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.END:
-						this.HandleTouchEndEvent(a_oSender, a_oEventData);
-						break;
+					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
 				}
 
 				m_oEngine.HandleTouchEvent(a_oSender, a_oEventData, a_eTouchEvent);
@@ -132,21 +126,11 @@ namespace GameScene {
 			}
 
 			switch(a_eResult) {
-				case EPopupResult.NEXT:
-					this.LoadNextLevel(a_oSender);
-					break;
-				case EPopupResult.RETRY:
-					this.RetryPlayLevel(a_oSender);
-					break;
-				case EPopupResult.RESUME:
-					this.ResumePlayLevel(a_oSender);
-					break;
-				case EPopupResult.CONTINUE:
-					this.ContinuePlayLevel(a_oSender);
-					break;
-				case EPopupResult.LEAVE:
-					this.LeavePlayLevel(a_oSender);
-					break;
+				case EPopupResult.NEXT: this.LoadNextLevel(a_oSender); break;
+				case EPopupResult.RETRY: this.RetryPlayLevel(a_oSender); break;
+				case EPopupResult.RESUME: this.ResumePlayLevel(a_oSender); break;
+				case EPopupResult.CONTINUE: this.ContinuePlayLevel(a_oSender); break;
+				case EPopupResult.LEAVE: this.LeavePlayLevel(a_oSender); break;
 			}
 		}
 

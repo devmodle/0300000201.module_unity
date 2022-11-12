@@ -78,15 +78,9 @@ namespace NSEngine {
 			// 그리드 영역 일 경우
 			if(m_oGridInfoList[this.SelGridInfoIdx].m_stBounds.Contains(stTouchPos)) {
 				switch(a_eTouchEvent) {
-					case ETouchEvent.BEGIN:
-						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.MOVE:
-						this.HandleTouchMoveEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.END:
-						this.HandleTouchEndEvent(a_oSender, a_oEventData);
-						break;
+					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
 				}
 			}
 		}

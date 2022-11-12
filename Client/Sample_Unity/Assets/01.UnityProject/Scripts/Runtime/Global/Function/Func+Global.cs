@@ -114,18 +114,10 @@ public static partial class Func {
 	/** 지불한다 */
 	public static void Pay(int a_nCharacterID, STTargetInfo a_stTargetInfo, bool a_bIsEnableAssert = true) {
 		switch(a_stTargetInfo.TargetType) {
-			case ETargetType.ITEM:
-				Func.PayItemTarget(a_nCharacterID, a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert);
-				break;
-			case ETargetType.SKILL:
-				Func.PaySkillTarget(a_nCharacterID, a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert);
-				break;
-			case ETargetType.OBJ:
-				Func.PayObjTarget(a_nCharacterID, a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert);
-				break;
-			case ETargetType.ABILITY:
-				Func.PayAbilityTarget(a_nCharacterID, a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert);
-				break;
+			case ETargetType.ITEM: Func.PayItemTarget(a_nCharacterID, a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert); break;
+			case ETargetType.SKILL: Func.PaySkillTarget(a_nCharacterID, a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert); break;
+			case ETargetType.OBJ: Func.PayObjTarget(a_nCharacterID, a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert); break;
+			case ETargetType.ABILITY: Func.PayAbilityTarget(a_nCharacterID, a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds), a_bIsEnableAssert); break;
 		}
 	}
 
@@ -172,18 +164,10 @@ public static partial class Func {
 	/** 획득한다 */
 	public static void Acquire(int a_nCharacterID, STTargetInfo a_stTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsEnableAssert = true) {
 		switch(a_stTargetInfo.TargetType) {
-			case ETargetType.ITEM:
-				Func.AcquireItemTarget(a_nCharacterID, a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert);
-				break;
-			case ETargetType.SKILL:
-				Func.AcquireSkillTarget(a_nCharacterID, a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert);
-				break;
-			case ETargetType.OBJ:
-				Func.AcquireObjTarget(a_nCharacterID, a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert);
-				break;
-			case ETargetType.ABILITY:
-				Func.AcquireAbilityTarget(a_nCharacterID, a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert);
-				break;
+			case ETargetType.ITEM: Func.AcquireItemTarget(a_nCharacterID, a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert); break;
+			case ETargetType.SKILL: Func.AcquireSkillTarget(a_nCharacterID, a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert); break;
+			case ETargetType.OBJ: Func.AcquireObjTarget(a_nCharacterID, a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert); break;
+			case ETargetType.ABILITY: Func.AcquireAbilityTarget(a_nCharacterID, a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds, a_bIsAutoCreate), a_bIsEnableAssert); break;
 		}
 	}
 
@@ -458,18 +442,10 @@ public static partial class Func {
 		// 타겟 정보가 존재 할 경우
 		if(a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null) {
 			switch(((int)a_stTargetInfo.m_eTargetKinds).ExKindsToSubKindsTypeVal()) {
-				case KEnumVal.TK_LV_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_LV, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_EXP_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_EXP, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_NUMS_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_ENHANCE_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_ENHANCE, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
+				case KEnumVal.TK_LV_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_LV, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_EXP_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_EXP, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_NUMS_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_ENHANCE_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_ENHANCE, -a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
 			}
 		}
 	}
@@ -481,18 +457,10 @@ public static partial class Func {
 		// 타겟 정보가 존재 할 경우
 		if(a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null) {
 			switch(((int)a_stTargetInfo.m_eTargetKinds).ExKindsToSubKindsTypeVal()) {
-				case KEnumVal.TK_LV_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_LV, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_EXP_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_EXP, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_NUMS_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
-				case KEnumVal.TK_ENHANCE_SUB_KINDS_TYPE_VAL:
-					a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_ENHANCE, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert);
-					break;
+				case KEnumVal.TK_LV_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_LV, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_EXP_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_EXP, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_NUMS_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
+				case KEnumVal.TK_ENHANCE_SUB_KINDS_TYPE_VAL: a_oTargetInfo.m_oAbilityTargetInfoDict.ExIncrTargetVal(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_ENHANCE, a_stTargetInfo.m_stValInfo01.m_dmVal, a_bIsEnableAssert); break;
 			}
 
 			a_oTargetInfo.m_oAbilityTargetInfoDict.ExTryGetTargetInfo(ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_LV, out STTargetInfo stLVAbilityTargetInfo);

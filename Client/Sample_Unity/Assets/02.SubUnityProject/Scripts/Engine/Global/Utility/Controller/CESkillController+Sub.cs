@@ -57,9 +57,7 @@ namespace NSEngine {
 			// 앱이 실행 중 일 경우
 			if(this.SubState != ESubState.NONE && CSceneManager.IsAppRunning) {
 				switch(this.SubState) {
-					case ESubState.APPLY:
-						this.HandleApplySubState(a_fDeltaTime);
-						break;
+					case ESubState.APPLY: this.HandleApplySubState(a_fDeltaTime); break;
 				}
 			}
 		}
@@ -107,12 +105,8 @@ namespace NSEngine {
 			// 적용 간격이 지났을 경우
 			if(nApplyTimes < this.GetOwner<CESkill>().Params.m_stSkillInfo.m_nMaxApplyTimes && m_oRealDict.GetValueOrDefault(ESubKey.UPDATE_SKIP_TIME).ExIsGreateEquals(this.GetOwner<CESkill>().Params.m_stSkillInfo.m_stTimeInfo.m_fDeltaTime * (nApplyTimes - KCDefine.B_VAL_1_INT))) {
 				switch((ESkillApplyType)((int)this.GetOwner<CESkill>().Params.m_stSkillInfo.m_eSkillApplyKinds).ExKindsToType()) {
-					case ESkillApplyType.MULTI:
-						this.ApplyMultiSkill();
-						break;
-					case ESkillApplyType.SINGLE:
-						this.ApplySingleSkill();
-						break;
+					case ESkillApplyType.MULTI: this.ApplyMultiSkill(); break;
+					case ESkillApplyType.SINGLE: this.ApplySingleSkill(); break;
 				}
 
 				m_oIntDict.ExReplaceVal(ESubKey.APPLY_TIMES, nApplyTimes + KCDefine.B_VAL_1_INT);

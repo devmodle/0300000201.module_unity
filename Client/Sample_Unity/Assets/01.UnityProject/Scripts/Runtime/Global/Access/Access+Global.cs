@@ -172,14 +172,10 @@ public static partial class Access {
 	/** 교환 가능 여부를 검사한다 */
 	public static bool IsEnableTrade(int a_nCharacterID, STTargetInfo a_stTargetInfo) {
 		switch(a_stTargetInfo.TargetType) {
-			case ETargetType.ITEM:
-				return Access.IsEnableItemTargetTrade(a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds));
-			case ETargetType.SKILL:
-				return Access.IsEnableSkillTargetTrade(a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds));
-			case ETargetType.OBJ:
-				return Access.IsEnableObjTargetTrade(a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds));
-			case ETargetType.ABILITY:
-				return Access.IsEnableAbilityTargetTrade(a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds));
+			case ETargetType.ITEM: return Access.IsEnableItemTargetTrade(a_stTargetInfo, Access.GetItemTargetInfo(a_nCharacterID, (EItemKinds)a_stTargetInfo.Kinds));
+			case ETargetType.SKILL: return Access.IsEnableSkillTargetTrade(a_stTargetInfo, Access.GetSkillTargetInfo(a_nCharacterID, (ESkillKinds)a_stTargetInfo.Kinds));
+			case ETargetType.OBJ: return Access.IsEnableObjTargetTrade(a_stTargetInfo, Access.GetObjTargetInfo(a_nCharacterID, (EObjKinds)a_stTargetInfo.Kinds));
+			case ETargetType.ABILITY: return Access.IsEnableAbilityTargetTrade(a_stTargetInfo, Access.GetAbilityTargetInfo(a_nCharacterID, (EAbilityKinds)a_stTargetInfo.Kinds));
 		}
 
 		return false;

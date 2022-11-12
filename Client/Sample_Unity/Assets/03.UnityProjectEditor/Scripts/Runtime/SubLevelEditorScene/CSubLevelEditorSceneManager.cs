@@ -345,15 +345,9 @@ namespace LevelEditorScene {
 			// 배경 터치 전달자 일 경우
 			if(this.BGTouchDispatcher == a_oSender && m_oGridInfoList[this.SelGridInfoIdx].m_stBounds.Contains(stTouchPos)) {
 				switch(a_eTouchEvent) {
-					case ETouchEvent.BEGIN:
-						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.MOVE:
-						this.HandleTouchMoveEvent(a_oSender, a_oEventData);
-						break;
-					case ETouchEvent.END:
-						this.HandleTouchEndEvent(a_oSender, a_oEventData);
-						break;
+					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
+					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
 				}
 			}
 		}
@@ -438,12 +432,8 @@ namespace LevelEditorScene {
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
 				switch(m_oInputPopupDict.GetValueOrDefault(EKey.SEL_INPUT_POPUP, EInputPopup.NONE)) {
-					case EInputPopup.MOVE_LEVEL:
-						this.HandleMoveLevelInputPopupResult(a_oStr);
-						break;
-					case EInputPopup.REMOVE_LEVEL:
-						this.HandleRemoveLevelInputPopupResult(a_oStr);
-						break;
+					case EInputPopup.MOVE_LEVEL: this.HandleMoveLevelInputPopupResult(a_oStr); break;
+					case EInputPopup.REMOVE_LEVEL: this.HandleRemoveLevelInputPopupResult(a_oStr); break;
 				}
 			}
 

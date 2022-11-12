@@ -87,12 +87,8 @@ namespace NSEngine {
 				// 실행 중 일 경우
 				if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
 					switch(this.State) {
-						case EState.PLAY:
-							this.HandlePlayState(a_fDeltaTime);
-							break;
-						case EState.PAUSE:
-							this.HandlePauseState(a_fDeltaTime);
-							break;
+						case EState.PLAY: this.HandlePlayState(a_fDeltaTime); break;
+						case EState.PAUSE: this.HandlePauseState(a_fDeltaTime); break;
 					}
 
 					// 플레이어 객체가 존재 할 경우
