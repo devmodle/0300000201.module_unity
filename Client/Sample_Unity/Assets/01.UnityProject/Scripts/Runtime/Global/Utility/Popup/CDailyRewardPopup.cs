@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 일일 보상 팝업 */
-public partial class CDailyRewardPopup : CSubPopup {
+public partial class CDailyRewardPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		ADS_BTN,
 		ACQUIRE_BTN,
@@ -25,39 +27,46 @@ public partial class CDailyRewardPopup : CSubPopup {
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */
-	private void OnTouchAdsBtn() {
+	private void OnTouchAdsBtn()
+	{
 #if ADS_MODULE_ENABLE
 		Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif          // #if ADS_MODULE_ENABLE                                  
 	}
 
 	/** 획득 버튼을 눌렀을 경우 */
-	private void OnTouchAcquireBtn() {
+	private void OnTouchAcquireBtn()
+	{
 		this.ShowRewardAcquirePopup(false);
 	}
 
 	/** 보상 획득 팝업이 닫혔을 경우 */
-	private void OnCloseRewardAcquirePopup(CPopup a_oSender) {
+	private void OnCloseRewardAcquirePopup(CPopup a_oSender)
+	{
 		Func.SetupNextDailyRewardID(CGameInfoStorage.Inst.PlayCharacterID);
 		CGameInfoStorage.Inst.SaveGameInfo();
 	}
 
 	/** 보상 획득 팝업을 출력한다 */
-	private void ShowRewardAcquirePopup(bool a_bIsWatchRewardAds) {
+	private void ShowRewardAcquirePopup(bool a_bIsWatchRewardAds)
+	{
 		var eRewardKinds = Access.GetDailyRewardKinds(CGameInfoStorage.Inst.PlayCharacterID);
 		var stRewardInfo = CRewardInfoTable.Inst.GetRewardInfo(eRewardKinds);
 
 		// 보상 광고 시청 모드 일 경우
-		if(a_bIsWatchRewardAds) {
+		if(a_bIsWatchRewardAds)
+		{
 			var oTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 
-			foreach(var stKeyVal in stRewardInfo.m_oAcquireTargetInfoDict) {
+			foreach(var stKeyVal in stRewardInfo.m_oAcquireTargetInfoDict)
+			{
 				var stValInfo = new STValInfo(stKeyVal.Value.m_stValInfo01.m_dmVal * KCDefine.B_VAL_2_INT, stKeyVal.Value.m_stValInfo01.m_eValType);
 				oTargetInfoDict.TryAdd(stKeyVal.Key, new STTargetInfo(stKeyVal.Value.m_eTargetKinds, stKeyVal.Value.m_nKinds, stValInfo));
 			}
@@ -65,7 +74,8 @@ public partial class CDailyRewardPopup : CSubPopup {
 			stRewardInfo.m_oAcquireTargetInfoDict = oTargetInfoDict;
 		}
 
-		Func.ShowRewardAcquirePopup(this.transform.parent.gameObject, (a_oSender) => {
+		Func.ShowRewardAcquirePopup(this.transform.parent.gameObject, (a_oSender) =>
+		{
 			(a_oSender as CRewardAcquirePopup).Init(CRewardAcquirePopup.MakeParams(stRewardInfo.m_eRewardQuality, ERewardAcquirePopupType.DAILY, stRewardInfo.m_oAcquireTargetInfoDict));
 		}, null, this.OnCloseRewardAcquirePopup);
 	}
@@ -74,9 +84,11 @@ public partial class CDailyRewardPopup : CSubPopup {
 	#region 조건부 함수
 #if ADS_MODULE_ENABLE
 	/** 보상 광고가 닫혔을 경우 */
-	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
+	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess)
+	{
 		// 광고를 시청했을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			this.ShowRewardAcquirePopup(true);
 		}
 	}

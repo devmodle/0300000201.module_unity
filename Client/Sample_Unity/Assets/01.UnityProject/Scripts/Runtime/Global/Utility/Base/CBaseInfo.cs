@@ -16,7 +16,8 @@ using MessagePack;
 [Union(4, typeof(CTargetInfo))]
 [MessagePackObject]
 [System.Serializable]
-public abstract partial class CBaseInfo : IMessagePackSerializationCallbackReceiver {
+public abstract partial class CBaseInfo : IMessagePackSerializationCallbackReceiver
+{
 	#region 변수
 	[Key(0)] public Dictionary<string, string> m_oStrDict = new Dictionary<string, string>();
 	#endregion          // 변수               
@@ -39,41 +40,50 @@ public abstract partial class CBaseInfo : IMessagePackSerializationCallbackRecei
 
 	#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
-	public virtual void OnBeforeSerialize() {
+	public virtual void OnBeforeSerialize()
+	{
 		// 버전 무시 모드 일 경우
-		if(this.IsIgnoreVer) {
+		if(this.IsIgnoreVer)
+		{
 			m_oStrDict.ExRemoveVal(KEY_VER);
 		}
 
 		// 저장 시간 무시 모드가 아닐 경우
-		if(!this.IsIgnoreSaveTime) {
+		if(!this.IsIgnoreSaveTime)
+		{
 			this.SaveTime = System.DateTime.Now;
-		} else {
+		}
+		else
+		{
 			m_oStrDict.ExRemoveVal(KEY_SAVE_TIME);
 		}
 	}
 
 	/** 역직렬화 되었을 경우 */
-	public virtual void OnAfterDeserialize() {
+	public virtual void OnAfterDeserialize()
+	{
 		m_oStrDict = m_oStrDict ?? new Dictionary<string, string>();
 	}
 	#endregion          // IMessagePackSerializationCallbackReceiver                                                      
 
 	#region 함수
 	/** 생성자 */
-	public CBaseInfo(System.Version a_stVer) {
+	public CBaseInfo(System.Version a_stVer)
+	{
 		this.Ver = a_stVer;
 	}
 
 	/** 직렬화 될 경우 */
 	[OnSerializing]
-	private void OnSerializingMethod(StreamingContext a_oContext) {
+	private void OnSerializingMethod(StreamingContext a_oContext)
+	{
 		this.OnBeforeSerialize();
 	}
 
 	/** 역직렬화 되었을 경우 */
 	[OnDeserialized]
-	private void OnDeserializedMethod(StreamingContext a_oContext) {
+	private void OnDeserializedMethod(StreamingContext a_oContext)
+	{
 		this.OnAfterDeserialize();
 	}
 	#endregion          // 함수               

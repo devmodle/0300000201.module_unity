@@ -22,9 +22,11 @@ using GoogleSheetsToUnity;
 #endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 
 /** 기본 함수 */
-public static partial class Func {
+public static partial class Func
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 
 #if ADS_MODULE_ENABLE
@@ -36,7 +38,8 @@ public static partial class Func {
 	}
 
 	/** 콜백 */
-	private enum ECallback {
+	private enum ECallback
+	{
 		NONE = -1,
 
 #if ADS_MODULE_ENABLE
@@ -159,27 +162,33 @@ public static partial class Func {
 
 	#region 클래스 함수
 	/** 문자열 테이블을 설정한다 */
-	public static void SetupStrTable() {
+	public static void SetupStrTable()
+	{
 		Func.SetupStrTable(CCommonAppInfoStorage.Inst.CountryCode, CCommonAppInfoStorage.Inst.SystemLanguage);
 	}
 
 	/** 문자열 테이블을 설정한다 */
-	public static void SetupStrTable(string a_oCountryCode, SystemLanguage a_eSystemLanguage, bool a_bIsEnableAssert = true) {
+	public static void SetupStrTable(string a_oCountryCode, SystemLanguage a_eSystemLanguage, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oCountryCode.ExIsValid());
 
 		// 국가 코드가 존재 할 경우
-		if(a_oCountryCode.ExIsValid()) {
+		if(a_oCountryCode.ExIsValid())
+		{
 			CStrTable.Inst.LoadStrsFromRes(CFactory.MakeLocalizePath(KCDefine.U_BASE_TABLE_P_G_LOCALIZE_COMMON_STR, KCDefine.U_TABLE_P_G_ENGLISH_COMMON_STR, a_oCountryCode, a_eSystemLanguage.ToString()));
 		}
 	}
 
 	/** 터치 전달자를 설정한다 */
-	public static void SetupTouchDispatchers(List<(GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
+	public static void SetupTouchDispatchers(List<(GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
 		// 키 정보가 존재 할 경우
-		if(a_oKeyInfoList.ExIsValid()) {
-			for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
+		if(a_oKeyInfoList.ExIsValid())
+		{
+			for(int i = 0; i < a_oKeyInfoList.Count; ++i)
+			{
 				a_oKeyInfoList[i].Item1?.GetComponentInChildren<CTouchDispatcher>()?.SetBeginCallback(a_oKeyInfoList[i].Item2);
 				a_oKeyInfoList[i].Item1?.GetComponentInChildren<CTouchDispatcher>()?.SetMoveCallback(a_oKeyInfoList[i].Item3);
 				a_oKeyInfoList[i].Item1?.GetComponentInChildren<CTouchDispatcher>()?.SetEndCallback(a_oKeyInfoList[i].Item4);
@@ -188,12 +197,15 @@ public static partial class Func {
 	}
 
 	/** 터치 전달자를 설정한다 */
-	public static void SetupTouchDispatchers(List<(string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
+	public static void SetupTouchDispatchers(List<(string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
 		// 키 정보가 존재 할 경우
-		if(a_oKeyInfoList.ExIsValid()) {
-			for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
+		if(a_oKeyInfoList.ExIsValid())
+		{
+			for(int i = 0; i < a_oKeyInfoList.Count; ++i)
+			{
 				a_oKeyInfoList[i].Item2?.ExFindComponent<CTouchDispatcher>(a_oKeyInfoList[i].Item1)?.SetBeginCallback(a_oKeyInfoList[i].Item3);
 				a_oKeyInfoList[i].Item2?.ExFindComponent<CTouchDispatcher>(a_oKeyInfoList[i].Item1)?.SetMoveCallback(a_oKeyInfoList[i].Item4);
 				a_oKeyInfoList[i].Item2?.ExFindComponent<CTouchDispatcher>(a_oKeyInfoList[i].Item1)?.SetEndCallback(a_oKeyInfoList[i].Item5);
@@ -202,12 +214,16 @@ public static partial class Func {
 	}
 
 	/** 배경음을 재생한다 */
-	public static CSnd PlayBGSnd(EResKinds a_eResKinds, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsEnableAssert = true) {
+	public static CSnd PlayBGSnd(EResKinds a_eResKinds, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_eResKinds.ExIsValid());
 
-		try {
+		try
+		{
 			return Func.PlayBGSnd(a_eResKinds, CSceneManager.ActiveSceneMainCamera.transform.position, a_fVolume, a_bIsLoop, a_bIsEnableAssert);
-		} catch(System.Exception oException) {
+		}
+		catch(System.Exception oException)
+		{
 			CFunc.ShowLog($"Func.PlayBGSnd Exception: {oException.Message}");
 		}
 
@@ -215,18 +231,23 @@ public static partial class Func {
 	}
 
 	/** 배경음을 재생한다 */
-	public static CSnd PlayBGSnd(EResKinds a_eResKinds, Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsEnableAssert = true) {
+	public static CSnd PlayBGSnd(EResKinds a_eResKinds, Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_eResKinds.ExIsValid());
 		return CResInfoTable.Inst.TryGetResInfo(a_eResKinds, out STResInfo stResInfo) ? CSndManager.Inst.PlayBGSnd(stResInfo.m_oResPath, a_stPos, a_fVolume, a_bIsLoop, a_bIsEnableAssert) : null;
 	}
 
 	/** 효과음을 재생한다 */
-	public static CSnd PlayFXSnds(EResKinds a_eResKinds, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsEnableAssert = true) {
+	public static CSnd PlayFXSnds(EResKinds a_eResKinds, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_eResKinds.ExIsValid());
 
-		try {
+		try
+		{
 			return Func.PlayFXSnds(a_eResKinds, CSceneManager.ActiveSceneMainCamera.transform.position, a_fVolume, a_bIsLoop, a_bIsEnableAssert);
-		} catch(System.Exception oException) {
+		}
+		catch(System.Exception oException)
+		{
 			CFunc.ShowLog($"Func.PlayFXSnds Exception: {oException.Message}");
 		}
 
@@ -234,7 +255,8 @@ public static partial class Func {
 	}
 
 	/** 효과음을 재생한다 */
-	public static CSnd PlayFXSnds(EResKinds a_eResKinds, Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsEnableAssert = true) {
+	public static CSnd PlayFXSnds(EResKinds a_eResKinds, Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_eResKinds.ExIsValid());
 		return CResInfoTable.Inst.TryGetResInfo(a_eResKinds, out STResInfo stResInfo) ? CSndManager.Inst.PlayFXSnds(stResInfo.m_oResPath, a_stPos, a_fVolume, a_bIsLoop, a_bIsEnableAssert) : null;
 	}
@@ -242,14 +264,17 @@ public static partial class Func {
 
 	#region 제네릭 클래스 함수
 	/** 터치 전달자를 설정한다 */
-	public static void SetupTouchDispatchers<K>(List<(K, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true) {
+	public static void SetupTouchDispatchers<K>(List<(K, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || (a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null));
 
 		// 키 정보가 존재 할 경우
-		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null) {
+		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null)
+		{
 			CFunc.SetupComponents(Factory.MakeKeyInfos(a_oKeyInfoList), a_oOutTouchDispatcherDict, a_bIsEnableAssert);
 
-			for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
+			for(int i = 0; i < a_oKeyInfoList.Count; ++i)
+			{
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetBeginCallback(a_oKeyInfoList[i].Item3);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetMoveCallback(a_oKeyInfoList[i].Item4);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetEndCallback(a_oKeyInfoList[i].Item5);
@@ -258,14 +283,17 @@ public static partial class Func {
 	}
 
 	/** 터치 전달자를 설정한다 */
-	public static void SetupTouchDispatchers<K>(List<(K, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true) {
+	public static void SetupTouchDispatchers<K>(List<(K, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || (a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null));
 
 		// 키 정보가 존재 할 경우
-		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null) {
+		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null)
+		{
 			CFunc.SetupComponents(Factory.MakeKeyInfos(a_oKeyInfoList), a_oOutTouchDispatcherDict, a_bIsEnableAssert);
 
-			for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
+			for(int i = 0; i < a_oKeyInfoList.Count; ++i)
+			{
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetBeginCallback(a_oKeyInfoList[i].Item4);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetMoveCallback(a_oKeyInfoList[i].Item5);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetEndCallback(a_oKeyInfoList[i].Item6);
@@ -274,14 +302,17 @@ public static partial class Func {
 	}
 
 	/** 터치 전달자를 설정한다 */
-	public static void SetupTouchDispatchers<K>(List<(K, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true) {
+	public static void SetupTouchDispatchers<K>(List<(K, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList, Dictionary<K, CTouchDispatcher> a_oOutTouchDispatcherDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || (a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null));
 
 		// 키 정보가 존재 할 경우
-		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null) {
+		if(a_oKeyInfoList.ExIsValid() && a_oOutTouchDispatcherDict != null)
+		{
 			CFunc.SetupComponents(Factory.MakeKeyInfos(a_oKeyInfoList), a_oOutTouchDispatcherDict, a_bIsEnableAssert);
 
-			for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
+			for(int i = 0; i < a_oKeyInfoList.Count; ++i)
+			{
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetBeginCallback(a_oKeyInfoList[i].Item5);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetMoveCallback(a_oKeyInfoList[i].Item6);
 				a_oOutTouchDispatcherDict.GetValueOrDefault(a_oKeyInfoList[i].Item1)?.SetEndCallback(a_oKeyInfoList[i].Item7);
@@ -293,91 +324,115 @@ public static partial class Func {
 	#region 조건부 클래스 함수
 #if ADS_MODULE_ENABLE
 	/** 배너 광고를 출력한다 */
-	public static void ShowBannerAds(System.Action<CAdsManager, bool> a_oCallback) {
+	public static void ShowBannerAds(System.Action<CAdsManager, bool> a_oCallback)
+	{
 		Func.ShowBannerAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
 	}
 
 	/** 배너 광고를 출력한다 */
-	public static void ShowBannerAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback) {
+	public static void ShowBannerAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback)
+	{
 		// 배너 광고 출력이 가능 할 경우
-		if(CAdsManager.Inst.IsLoadBannerAds(a_eAdsPlatform)) {
+		if(CAdsManager.Inst.IsLoadBannerAds(a_eAdsPlatform))
+		{
 			Func.m_oAdsCallbackDict01.ExReplaceVal(ECallback.SHOW_BANNER_ADS, a_oCallback);
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => CAdsManager.Inst.ShowBannerAds(a_eAdsPlatform, Func.OnShowBannerAds));
-		} else {
+		}
+		else
+		{
 			CFunc.Invoke(ref a_oCallback, CAdsManager.Inst, false);
 		}
 	}
 
 	/** 배너 광고를 닫는다 */
-	public static void CloseBannerAds(System.Action<CAdsManager, bool> a_oCallback) {
+	public static void CloseBannerAds(System.Action<CAdsManager, bool> a_oCallback)
+	{
 		Func.CloseBannerAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
 	}
 
 	/** 배너 광고를 닫는다 */
-	public static void CloseBannerAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback) {
+	public static void CloseBannerAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback)
+	{
 		CAdsManager.Inst.CloseBannerAds(a_eAdsPlatform, a_oCallback);
 	}
 
 	/** 보상 광고를 출력한다 */
-	public static void ShowRewardAds(System.Action<CAdsManager, STAdsRewardInfo, bool> a_oCallback) {
+	public static void ShowRewardAds(System.Action<CAdsManager, STAdsRewardInfo, bool> a_oCallback)
+	{
 		Func.ShowRewardAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
 	}
 
 	/** 보상 광고를 출력한다 */
-	public static void ShowRewardAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, STAdsRewardInfo, bool> a_oCallback) {
+	public static void ShowRewardAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, STAdsRewardInfo, bool> a_oCallback)
+	{
 		// 보상 광고 출력이 가능 할 경우
-		if(CAdsManager.Inst.IsLoadRewardAds(a_eAdsPlatform)) {
+		if(CAdsManager.Inst.IsLoadRewardAds(a_eAdsPlatform))
+		{
 			CIndicatorManager.Inst.Show();
 
-			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => {
+			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) =>
+			{
 				Func.m_stAdsRewardInfo = STAdsRewardInfo.INVALID;
 				Func.m_oBoolDict.ExReplaceVal(EKey.IS_WATCH_REWARD_ADS, false);
 				Func.m_oAdsCallbackDict02.ExReplaceVal(ECallback.SHOW_REWARD_ADS, a_oCallback);
 
 				CAdsManager.Inst.ShowRewardAds(a_eAdsPlatform, Func.OnReceiveAdsReward, null, Func.OnCloseRewardAds);
 			});
-		} else {
+		}
+		else
+		{
 			CFunc.Invoke(ref a_oCallback, CAdsManager.Inst, STAdsRewardInfo.INVALID, false);
 		}
 	}
 
 	/** 전면 광고를 출력한다 */
-	public static void ShowFullscreenAds(System.Action<CAdsManager, bool> a_oCallback) {
+	public static void ShowFullscreenAds(System.Action<CAdsManager, bool> a_oCallback)
+	{
 		Func.ShowFullscreenAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
 	}
 
 	/** 전면 광고를 출력한다 */
-	public static void ShowFullscreenAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback) {
+	public static void ShowFullscreenAds(EAdsPlatform a_eAdsPlatform, System.Action<CAdsManager, bool> a_oCallback)
+	{
 		// 전면 광고 출력이 가능 할 경우
-		if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds && CAdsManager.Inst.IsLoadFullscreenAds(a_eAdsPlatform)) {
+		if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds && CAdsManager.Inst.IsLoadFullscreenAds(a_eAdsPlatform))
+		{
 			CIndicatorManager.Inst.Show();
 
-			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => {
+			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) =>
+			{
 				CIndicatorManager.Inst.Close();
 
 				// 전면 광고 출력이 가능 할 경우
-				if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds) {
+				if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds)
+				{
 					Func.m_oBoolDict.ExReplaceVal(EKey.IS_WATCH_FULLSCREEN_ADS, true);
 					Func.m_oAdsCallbackDict01.ExReplaceVal(ECallback.SHOW_FULLSCREEN_ADS, a_oCallback);
 
 					CAdsManager.Inst.ShowFullscreenAds(a_eAdsPlatform, null, Func.OnCloseFullscreenAds);
-				} else {
+				}
+				else
+				{
 					CFunc.Invoke(ref a_oCallback, CAdsManager.Inst, false);
 				}
 			}, KCDefine.B_VAL_2_REAL, true);
-		} else {
+		}
+		else
+		{
 			Func.IncrAdsSkipTimes(KCDefine.B_VAL_1_INT);
 			CFunc.Invoke(ref a_oCallback, CAdsManager.Inst, false);
 		}
 	}
 
 	/** 배너 광고가 출력 되었을 경우 */
-	private static void OnShowBannerAds(CAdsManager a_oSender, bool a_bIsSuccess) {
+	private static void OnShowBannerAds(CAdsManager a_oSender, bool a_bIsSuccess)
+	{
 		Func.m_oAdsCallbackDict01.GetValueOrDefault(ECallback.SHOW_BANNER_ADS)?.Invoke(a_oSender, a_bIsSuccess);
 	}
 
 	/** 보상 광고가 닫혔을 경우 */
-	private static void OnCloseRewardAds(CAdsManager a_oSender) {
+	private static void OnCloseRewardAds(CAdsManager a_oSender)
+	{
 		CIndicatorManager.Inst.Close();
 		CAppInfoStorage.Inst.SetPrevRewardAdsTime(System.DateTime.Now);
 
@@ -388,13 +443,15 @@ public static partial class Func {
 	}
 
 	/** 광고 보상을 수신했을 경우 */
-	private static void OnReceiveAdsReward(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
+	private static void OnReceiveAdsReward(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess)
+	{
 		Func.m_stAdsRewardInfo = a_stAdsRewardInfo;
 		Func.m_oBoolDict.ExReplaceVal(EKey.IS_WATCH_REWARD_ADS, a_bIsSuccess);
 	}
 
 	/** 전면 광고가 닫혔을 경우 */
-	private static void OnCloseFullscreenAds(CAdsManager a_oSender) {
+	private static void OnCloseFullscreenAds(CAdsManager a_oSender)
+	{
 		CAppInfoStorage.Inst.SetAdsSkipTimes(KCDefine.B_VAL_0_INT);
 		CAppInfoStorage.Inst.SetPrevFullscreenAdsTime(System.DateTime.Now);
 
@@ -745,27 +802,32 @@ public static partial class Func {
 
 #if PURCHASE_MODULE_ENABLE
 	/** 상품을 결제한다 */
-	public static void PurchaseProduct(int a_nProductIdx, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true) {
+	public static void PurchaseProduct(int a_nProductIdx, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true)
+	{
 		Func.PurchaseProduct(CProductInfoTable.Inst.GetProductInfo(a_nProductIdx).m_oID, a_oCallback, a_bIsEnableAssert);
 	}
 
 	/** 상품을 결제한다 */
-	public static void PurchaseProduct(EProductKinds a_eProductKinds, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true) {
+	public static void PurchaseProduct(EProductKinds a_eProductKinds, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true)
+	{
 		bool bIsValid = CProductTradeInfoTable.Inst.TryGetBuyProductTradeInfo(a_eProductKinds, out STProductTradeInfo stProductTradeInfo);
 		CAccess.Assert(!a_bIsEnableAssert || bIsValid);
 
 		// 상품이 존재 할 경우
-		if(bIsValid) {
+		if(bIsValid)
+		{
 			Func.PurchaseProduct(stProductTradeInfo.m_nProductIdx, a_oCallback, a_bIsEnableAssert);
 		}
 	}
 
 	/** 상품을 결제한다 */
-	public static void PurchaseProduct(string a_oID, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true) {
+	public static void PurchaseProduct(string a_oID, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oID.ExIsValid());
 
 		// 식별자가 유효 할 경우
-		if(a_oID.ExIsValid()) {
+		if(a_oID.ExIsValid())
+		{
 			CIndicatorManager.Inst.Show();
 			Func.m_oPurchaseCallbackDict01.ExReplaceVal(ECallback.PURCHASE, a_oCallback);
 
@@ -774,7 +836,8 @@ public static partial class Func {
 	}
 
 	/** 상품을 복원한다 */
-	public static void RestoreProducts(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback) {
+	public static void RestoreProducts(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback)
+	{
 		CIndicatorManager.Inst.Show();
 		Func.m_oPurchaseCallbackDict02.ExReplaceVal(ECallback.RESTORE, a_oCallback);
 
@@ -782,15 +845,18 @@ public static partial class Func {
 	}
 
 	/** 상품이 결제 되었을 경우 */
-	private static void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
-		CPurchaseManager.Inst.ConfirmPurchase(a_oProductID, (a_oSender, a_oConfirmProductID, a_bIsConfirmSuccess) => {
+	private static void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	{
+		CPurchaseManager.Inst.ConfirmPurchase(a_oProductID, (a_oSender, a_oConfirmProductID, a_bIsConfirmSuccess) =>
+		{
 			CIndicatorManager.Inst.Close();
 			Func.m_oPurchaseCallbackDict01.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oConfirmProductID, a_bIsConfirmSuccess);
 		});
 	}
 
 	/** 상품이 복원 되었을 경우 */
-	private static void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess) {
+	private static void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess)
+	{
 		CIndicatorManager.Inst.Close();
 		Func.m_oPurchaseCallbackDict02.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
 	}
@@ -880,13 +946,17 @@ public static partial class Func {
 
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 로드 구글 시트 정보를 설정한다 */
-	public static void SetupLoadGoogleSheetInfos(Dictionary<string, STLoadGoogleSheetInfo> a_oOutLoadGoogleSheetInfoDict, bool a_bIsEnableAssert = true) {
+	public static void SetupLoadGoogleSheetInfos(Dictionary<string, STLoadGoogleSheetInfo> a_oOutLoadGoogleSheetInfoDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oOutLoadGoogleSheetInfoDict != null);
 
 		// 로드 구글 시트 정보 설정이 가능 할 경우
-		if(a_oOutLoadGoogleSheetInfoDict != null) {
-			foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT) {
-				foreach(var stTableInfoKeyVal in stKeyVal.Value.m_oTableInfoDictContainer) {
+		if(a_oOutLoadGoogleSheetInfoDict != null)
+		{
+			foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT)
+			{
+				foreach(var stTableInfoKeyVal in stKeyVal.Value.m_oTableInfoDictContainer)
+				{
 					var oExtraGoogleSheetNameDictContainer = KDefine.G_TABLE_INFO_EXTRA_GOOGLE_SHEET_NAME_DICT_CONTAINER.GetValueOrDefault(stKeyVal.Key);
 					Func.DoSetupLoadGoogleSheetInfos(stKeyVal.Value.m_oID, stKeyVal.Value.m_oTableName, stTableInfoKeyVal.Value, oExtraGoogleSheetNameDictContainer?.GetValueOrDefault(stTableInfoKeyVal.Key), a_oOutLoadGoogleSheetInfoDict, KDefine.G_TABLE_INFO_NUM_ROWS_DICT.GetValueOrDefault(stKeyVal.Key), a_bIsEnableAssert);
 				}
@@ -895,13 +965,17 @@ public static partial class Func {
 	}
 
 	/** 저장 구글 시트 정보를 설정한다 */
-	public static void SetupSaveGoogleSheetInfos(Dictionary<string, STSaveGoogleSheetInfo> a_oOutSaveGoogleSheetInfoDict, bool a_bIsEnableAssert = true) {
+	public static void SetupSaveGoogleSheetInfos(Dictionary<string, STSaveGoogleSheetInfo> a_oOutSaveGoogleSheetInfoDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || a_oOutSaveGoogleSheetInfoDict != null);
 
 		// 저장 구글 시트 정보 설정이 가능 할 경우
-		if(a_oOutSaveGoogleSheetInfoDict != null) {
-			foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT) {
-				foreach(var stTableInfoKeyVal in stKeyVal.Value.m_oTableInfoDictContainer) {
+		if(a_oOutSaveGoogleSheetInfoDict != null)
+		{
+			foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT)
+			{
+				foreach(var stTableInfoKeyVal in stKeyVal.Value.m_oTableInfoDictContainer)
+				{
 					// Do Something
 				}
 			}
@@ -909,7 +983,8 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 로드한다 */
-	public static void LoadGoogleSheet(string a_oID, List<(string, int)> a_oInfoList, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool> a_oCallback) {
+	public static void LoadGoogleSheet(string a_oID, List<(string, int)> a_oInfoList, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool> a_oCallback)
+	{
 		CIndicatorManager.Inst.Show();
 		a_oInfoList.ExCopyTo(Func.m_oGoogleSheetLoadInfoList, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2, a_stInfo.Item2));
 
@@ -917,15 +992,19 @@ public static partial class Func {
 		Func.m_oGoogleSheetCallbackDict03.ExReplaceVal(ECallback.LOAD_GOOGLE_SHEET, a_oCallback);
 
 		// 정보가 존재 할 경우
-		if(a_oInfoList.ExIsValid()) {
+		if(a_oInfoList.ExIsValid())
+		{
 			CServicesManager.Inst.LoadGoogleSheet(a_oID, a_oInfoList[KCDefine.B_VAL_0_INT].Item1, Func.OnLoadGoogleSheet, KCDefine.B_VAL_0_INT, a_oInfoList[KCDefine.B_VAL_0_INT].Item2);
-		} else {
+		}
+		else
+		{
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, STGoogleSheetLoadInfo.INVALID, null, false));
 		}
 	}
 
 	/** 구글 시트를 로드한다 */
-	public static void LoadGoogleSheets(Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback) {
+	public static void LoadGoogleSheets(Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback)
+	{
 		var oLoadGoogleSheetInfoDict = new Dictionary<string, STLoadGoogleSheetInfo>();
 
 		Func.SetupLoadGoogleSheetInfos(oLoadGoogleSheetInfoDict);
@@ -933,22 +1012,27 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 로드한다 */
-	public static void LoadGoogleSheets(List<STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoList, Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback) {
+	public static void LoadGoogleSheets(List<STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoList, Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback)
+	{
 		a_oHandlerDict.ExCopyTo(Func.m_oGoogleSheetLoadHandlerDict, (a_oHandler) => a_oHandler);
 		a_oLoadGoogleSheetInfoList.ExCopyTo(Func.m_oLoadGoogleSheetInfoList, (a_stLoadGoogleSheetInfo) => a_stLoadGoogleSheetInfo);
 
 		Func.m_oGoogleSheetCallbackDict01.ExReplaceVal(ECallback.LOAD_GOOGLE_SHEETS, a_oCallback);
 
 		// 로드 구글 시트 정보가 존재 할 경우
-		if(a_oLoadGoogleSheetInfoList.ExIsValid()) {
+		if(a_oLoadGoogleSheetInfoList.ExIsValid())
+		{
 			Func.LoadGoogleSheet(a_oLoadGoogleSheetInfoList[KCDefine.B_VAL_0_INT].m_oID, a_oLoadGoogleSheetInfoList[KCDefine.B_VAL_0_INT].m_oSheetInfoList, Func.OnLoadGoogleSheets);
-		} else {
+		}
+		else
+		{
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, true));
 		}
 	}
 
 	/** 버전 정보 구글 시트를 로드한다 */
-	public static void LoadVerInfoGoogleSheet(string a_oID, System.Action<CServicesManager, SimpleJSON.JSONNode, Dictionary<string, STLoadGoogleSheetInfo>, bool> a_oCallback) {
+	public static void LoadVerInfoGoogleSheet(string a_oID, System.Action<CServicesManager, SimpleJSON.JSONNode, Dictionary<string, STLoadGoogleSheetInfo>, bool> a_oCallback)
+	{
 		CAccess.Assert(a_oID.ExIsValid());
 		Func.m_oGoogleSheetCallbackDict02.ExReplaceVal(ECallback.LOAD_VER_INFO_GOOGLE_SHEET, a_oCallback);
 
@@ -958,22 +1042,27 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 저장한다 */
-	public static void SaveGoogleSheet(string a_oID, List<(string, List<List<string>>)> a_oInfoListContainer, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool> a_oCallback) {
+	public static void SaveGoogleSheet(string a_oID, List<(string, List<List<string>>)> a_oInfoListContainer, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool> a_oCallback)
+	{
 		CIndicatorManager.Inst.Show();
 		a_oInfoListContainer.ExCopyTo(Func.m_oGoogleSheetSaveInfoListContainer, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2.Count, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetCallbackDict04.ExReplaceVal(ECallback.SAVE_GOOGLE_SHEET, a_oCallback);
 
 		// 정보가 존재 할 경우
-		if(a_oInfoListContainer.ExIsValid()) {
+		if(a_oInfoListContainer.ExIsValid())
+		{
 			CServicesManager.Inst.SaveGoogleSheet(a_oID, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item1, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item2, Func.OnSaveGoogleSheet, KCDefine.B_VAL_0_INT, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item2.Count);
-		} else {
+		}
+		else
+		{
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, STGoogleSheetSaveInfo.INVALID, false));
 		}
 	}
 
 	/** 구글 시트를 저장한다 */
-	public static void SaveGoogleSheets(Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback) {
+	public static void SaveGoogleSheets(Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback)
+	{
 		var oSaveGoogleSheetInfoDict = new Dictionary<string, STSaveGoogleSheetInfo>();
 
 		Func.SetupSaveGoogleSheetInfos(oSaveGoogleSheetInfoDict);
@@ -981,29 +1070,38 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 저장한다 */
-	public static void SaveGoogleSheets(List<STSaveGoogleSheetInfo> a_oSaveGoogleSheetInfoList, Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback) {
+	public static void SaveGoogleSheets(List<STSaveGoogleSheetInfo> a_oSaveGoogleSheetInfoList, Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>> a_oHandlerDict, System.Action<CServicesManager, bool> a_oCallback)
+	{
 		a_oHandlerDict.ExCopyTo(Func.m_oGoogleSheetSaveHandlerDict, (a_oHandler) => a_oHandler);
 		a_oSaveGoogleSheetInfoList.ExCopyTo(Func.m_oSaveGoogleSheetInfoList, (a_stLoadGoogleSheetInfo) => a_stLoadGoogleSheetInfo);
 
 		Func.m_oGoogleSheetCallbackDict01.ExReplaceVal(ECallback.SAVE_GOOGLE_SHEETS, a_oCallback);
 
 		// 저장 구글 시트 정보가 존재 할 경우
-		if(a_oSaveGoogleSheetInfoList.ExIsValid()) {
+		if(a_oSaveGoogleSheetInfoList.ExIsValid())
+		{
 			Func.SaveGoogleSheet(a_oSaveGoogleSheetInfoList[KCDefine.B_VAL_0_INT].m_oID, a_oSaveGoogleSheetInfoList[KCDefine.B_VAL_0_INT].m_oSheetInfoListContainer, Func.OnSaveGoogleSheets);
-		} else {
+		}
+		else
+		{
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, true));
 		}
 	}
 
 	/** JSON 노드를 설정한다 */
-	private static void SetupJSONNode(KeyValuePair<int, List<GSTU_Cell>> a_stKeyVal, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, SimpleJSON.JSONNode a_oOutJSONNode) {
+	private static void SetupJSONNode(KeyValuePair<int, List<GSTU_Cell>> a_stKeyVal, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, SimpleJSON.JSONNode a_oOutJSONNode)
+	{
 		SimpleJSON.JSONNode oJSONNode = (a_stKeyVal.Key <= KCDefine.B_VAL_1_INT) ? new SimpleJSON.JSONArray() : new SimpleJSON.JSONClass();
 
-		for(int i = 0; i < a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key].Count; ++i) {
+		for(int i = 0; i < a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key].Count; ++i)
+		{
 			// 키 데이터 일 경우
-			if(a_stKeyVal.Key <= KCDefine.B_VAL_1_INT) {
+			if(a_stKeyVal.Key <= KCDefine.B_VAL_1_INT)
+			{
 				oJSONNode.Add(a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value);
-			} else {
+			}
+			else
+			{
 				oJSONNode.Add(a_oOutJSONNode[KCDefine.B_VAL_0_INT][i], a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value.Contains(KCDefine.B_TOKEN_COMMA) ? Func.MakeJSONArray(a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value) : a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value);
 			}
 		}
@@ -1012,7 +1110,8 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 로드했을 경우 */
-	private static void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, bool a_bIsSuccess) {
+	private static void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, bool a_bIsSuccess)
+	{
 		int nIdx = Func.m_oGoogleSheetLoadInfoList.FindIndex((a_oLoadGoogleSheetInfo) => a_oLoadGoogleSheetInfo.Item1.Equals(a_stGoogleSheetLoadInfo.m_oSheetName));
 		CAccess.Assert(Func.m_oGoogleSheetLoadInfoList.ExIsValidIdx(nIdx));
 
@@ -1020,8 +1119,10 @@ public static partial class Func {
 		Func.m_oGoogleSheetLoadInfoList[nIdx] = (Func.m_oGoogleSheetLoadInfoList[nIdx].Item1, Func.m_oGoogleSheetLoadInfoList[nIdx].Item2, Func.m_oGoogleSheetLoadInfoList[nIdx].Item3 - a_stGoogleSheetLoadInfo.m_nNumRows);
 
 		// 데이터를 로드했을 경우
-		if(a_bIsSuccess && !SpreadsheetManager.IsError && a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows.primaryDictionary.Count > KCDefine.B_VAL_0_INT) {
-			foreach(var stKeyVal in a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows.primaryDictionary) {
+		if(a_bIsSuccess && !SpreadsheetManager.IsError && a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows.primaryDictionary.Count > KCDefine.B_VAL_0_INT)
+		{
+			foreach(var stKeyVal in a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows.primaryDictionary)
+			{
 				Func.SetupJSONNode(stKeyVal, a_stGoogleSheetLoadInfo, oJSONNode);
 			}
 		}
@@ -1030,16 +1131,22 @@ public static partial class Func {
 		Func.m_oGoogleSheetJSONNodeDict.ExReplaceVal(a_stGoogleSheetLoadInfo.m_oSheetName, oJSONNode);
 
 		// 로드 할 데이터가 존재 할 경우
-		if(a_bIsSuccess && !SpreadsheetManager.IsError && Func.m_oGoogleSheetLoadInfoList[nIdx].Item3 > KCDefine.B_VAL_0_INT) {
+		if(a_bIsSuccess && !SpreadsheetManager.IsError && Func.m_oGoogleSheetLoadInfoList[nIdx].Item3 > KCDefine.B_VAL_0_INT)
+		{
 			CServicesManager.Inst.LoadGoogleSheet(a_stGoogleSheetLoadInfo.m_oID, Func.m_oGoogleSheetLoadInfoList[nIdx].Item1, Func.OnLoadGoogleSheet, Func.m_oGoogleSheetLoadInfoList[nIdx].Item2 - Func.m_oGoogleSheetLoadInfoList[nIdx].Item3, Func.m_oGoogleSheetLoadInfoList[nIdx].Item3);
-		} else {
+		}
+		else
+		{
 			Func.m_oGoogleSheetLoadInfoList.ExRemoveValAt(nIdx);
 			Func.m_oGoogleSheetJSONNodeDict.GetValueOrDefault(a_stGoogleSheetLoadInfo.m_oSheetName).Remove(KCDefine.B_VAL_0_INT);
 
 			// 구글 시트 로드 정보가 존재 할 경우
-			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetLoadInfoList.ExIsValid()) {
+			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetLoadInfoList.ExIsValid())
+			{
 				CServicesManager.Inst.LoadGoogleSheet(a_stGoogleSheetLoadInfo.m_oID, Func.m_oGoogleSheetLoadInfoList[KCDefine.B_VAL_0_INT].Item1, Func.OnLoadGoogleSheet, KCDefine.B_VAL_0_INT, Func.m_oGoogleSheetLoadInfoList[KCDefine.B_VAL_0_INT].Item2);
-			} else {
+			}
+			else
+			{
 				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_stTableInfo.m_oID));
 				var stGoogleSheetLoadInfo = new STGoogleSheetLoadInfo(a_stGoogleSheetLoadInfo.m_oID, stResult.Item1 ? stResult.Item2 : string.Empty, KCDefine.B_VAL_0_INT, nOriginNumRows, a_stGoogleSheetLoadInfo.m_oGoogleSheet);
 
@@ -1050,16 +1157,20 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 로드했을 경우 */
-	private static void OnLoadGoogleSheets(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
+	private static void OnLoadGoogleSheets(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess)
+	{
 		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_stTableInfo.m_oID));
 
 		Func.m_oLoadGoogleSheetInfoList.ExRemoveValAt(KCDefine.B_VAL_0_INT);
 		Func.m_oGoogleSheetLoadHandlerDict.GetValueOrDefault(stResult.Item2)?.Invoke(a_oSender, a_stGoogleSheetLoadInfo, a_oJSONNodeInfoDict, a_bIsSuccess);
 
 		// 구글 시트 로드가 완료 되었을 경우 */
-		if(!a_bIsSuccess || !Func.m_oLoadGoogleSheetInfoList.ExIsValid()) {
+		if(!a_bIsSuccess || !Func.m_oLoadGoogleSheetInfoList.ExIsValid())
+		{
 			Func.m_oGoogleSheetCallbackDict01.GetValueOrDefault(ECallback.LOAD_GOOGLE_SHEETS)?.Invoke(a_oSender, a_bIsSuccess && !Func.m_oLoadGoogleSheetInfoList.ExIsValid());
-		} else {
+		}
+		else
+		{
 			var oLoadGoogleSheetInfoList = new List<STLoadGoogleSheetInfo>(Func.m_oLoadGoogleSheetInfoList);
 			var oGoogleSheetLoadHandlerDict = new Dictionary<string, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool>>(Func.m_oGoogleSheetLoadHandlerDict);
 
@@ -1068,19 +1179,22 @@ public static partial class Func {
 	}
 
 	/** 버전 정보 구글 시트를 로드했을 경우 */
-	private static void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
+	private static void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess)
+	{
 		var oLoadGoogleSheetInfoDict = new Dictionary<string, STLoadGoogleSheetInfo>();
 		SimpleJSON.JSONNode oVerInfos = null;
 
 		// 로드 되었을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 #if AB_TEST_ENABLE
 			oVerInfos = a_oJSONNodeInfoDict.ExToJSONNode()[(CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.B) ? $"{EUserType.B}" : $"{EUserType.A}"];
 #else
 			oVerInfos = a_oJSONNodeInfoDict.ExToJSONNode()[KCDefine.B_KEY_COMMON];
 #endif         // #if AB_TEST_ENABLE                               
 
-			for(int i = 0; i < oVerInfos.Count; ++i) {
+			for(int i = 0; i < oVerInfos.Count; ++i)
+			{
 				var oVer = CAppInfoStorage.Inst.AppInfo.m_oTableSysVerDict.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME], KCDefine.U_VER_DEF);
 
 				string oFlags01Key = string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_1_INT);
@@ -1088,10 +1202,12 @@ public static partial class Func {
 				string oFlags03Key = string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_3_INT);
 
 				// 구글 시트 로드가 가능 할 경우
-				if(oVerInfos[i][oFlags01Key].AsInt != KCDefine.B_VAL_0_INT || oVer.CompareTo(System.Version.Parse(oVerInfos[i][KCDefine.U_KEY_VER])) < KCDefine.B_COMPARE_EQUALS) {
+				if(oVerInfos[i][oFlags01Key].AsInt != KCDefine.B_VAL_0_INT || oVer.CompareTo(System.Version.Parse(oVerInfos[i][KCDefine.U_KEY_VER])) < KCDefine.B_COMPARE_EQUALS)
+				{
 					var oExtraGoogleSheetNameDictContainer = KDefine.G_TABLE_INFO_EXTRA_GOOGLE_SHEET_NAME_DICT_CONTAINER.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]);
 
-					foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).m_oTableInfoDictContainer) {
+					foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).m_oTableInfoDictContainer)
+					{
 						Func.DoSetupLoadGoogleSheetInfos(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]).m_oID, oVerInfos[i][KCDefine.U_KEY_NAME], stKeyVal.Value, oExtraGoogleSheetNameDictContainer?.GetValueOrDefault(stKeyVal.Key), oLoadGoogleSheetInfoDict, KDefine.G_TABLE_INFO_NUM_ROWS_DICT.GetValueOrDefault(oVerInfos[i][KCDefine.U_KEY_NAME]));
 					}
 				}
@@ -1102,7 +1218,8 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 저장했을 경우 */
-	private static void OnSaveGoogleSheet(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
+	private static void OnSaveGoogleSheet(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess)
+	{
 		int nIdx = Func.m_oGoogleSheetSaveInfoListContainer.FindIndex((a_oLoadGoogleSheetInfo) => a_oLoadGoogleSheetInfo.Item1.Equals(a_stGoogleSheetSaveInfo.m_oSheetName));
 		CAccess.Assert(Func.m_oGoogleSheetSaveInfoListContainer.ExIsValidIdx(nIdx));
 
@@ -1110,15 +1227,21 @@ public static partial class Func {
 		Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3.RemoveRange(KCDefine.B_VAL_0_INT, a_stGoogleSheetSaveInfo.m_nNumRows);
 
 		// 저장 할 데이터가 존재 할 경우
-		if(a_bIsSuccess && !SpreadsheetManager.IsError && Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3.Count > KCDefine.B_VAL_0_INT) {
+		if(a_bIsSuccess && !SpreadsheetManager.IsError && Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3.Count > KCDefine.B_VAL_0_INT)
+		{
 			CServicesManager.Inst.SaveGoogleSheet(a_stGoogleSheetSaveInfo.m_oID, Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item1, Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3, Func.OnSaveGoogleSheet, Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item2 - Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3.Count, Func.m_oGoogleSheetSaveInfoListContainer[nIdx].Item3.Count);
-		} else {
+		}
+		else
+		{
 			Func.m_oGoogleSheetSaveInfoListContainer.ExRemoveValAt(nIdx);
 
 			// 구글 시트 저장 정보가 존재 할 경우
-			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetSaveInfoListContainer.ExIsValid()) {
+			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetSaveInfoListContainer.ExIsValid())
+			{
 				CServicesManager.Inst.SaveGoogleSheet(a_stGoogleSheetSaveInfo.m_oID, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item1, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item3, Func.OnSaveGoogleSheet, KCDefine.B_VAL_0_INT, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item3.Count);
-			} else {
+			}
+			else
+			{
 				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetSaveInfo.m_oID.Equals(a_stTableInfo.m_oID));
 				var stGoogleSheetSaveInfo = new STGoogleSheetSaveInfo(a_stGoogleSheetSaveInfo.m_oID, stResult.Item1 ? stResult.Item2 : string.Empty, KCDefine.B_VAL_0_INT, nOriginNumRows);
 
@@ -1129,16 +1252,20 @@ public static partial class Func {
 	}
 
 	/** 구글 시트를 저장했을 경우 */
-	private static void OnSaveGoogleSheets(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
+	private static void OnSaveGoogleSheets(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess)
+	{
 		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetSaveInfo.m_oID.Equals(a_stTableInfo.m_oID));
 
 		Func.m_oSaveGoogleSheetInfoList.ExRemoveValAt(KCDefine.B_VAL_0_INT);
 		Func.m_oGoogleSheetSaveHandlerDict.GetValueOrDefault(stResult.Item2)?.Invoke(a_oSender, a_stGoogleSheetSaveInfo, a_bIsSuccess);
 
 		// 구글 시트 저장이 완료 되었을 경우 */
-		if(!a_bIsSuccess || !Func.m_oSaveGoogleSheetInfoList.ExIsValid()) {
+		if(!a_bIsSuccess || !Func.m_oSaveGoogleSheetInfoList.ExIsValid())
+		{
 			Func.m_oGoogleSheetCallbackDict01.GetValueOrDefault(ECallback.SAVE_GOOGLE_SHEETS)?.Invoke(a_oSender, a_bIsSuccess && !Func.m_oSaveGoogleSheetInfoList.ExIsValid());
-		} else {
+		}
+		else
+		{
 			var oSaveGoogleSheetInfoList = new List<STSaveGoogleSheetInfo>(Func.m_oSaveGoogleSheetInfoList);
 			var oGoogleSheetSaveHandlerDict = new Dictionary<string, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool>>(Func.m_oGoogleSheetSaveHandlerDict);
 
@@ -1147,19 +1274,24 @@ public static partial class Func {
 	}
 
 	/** 로드 구글 시트 정보를 설정한다 */
-	private static void DoSetupLoadGoogleSheetInfos(string a_oID, string a_oTableName, Dictionary<string, string> a_oGoogleSheetNameDict, Dictionary<string, List<string>> a_oExtraGoogleSheetNameDictContainer, Dictionary<string, STLoadGoogleSheetInfo> a_oOutLoadGoogleSheetInfoDict, int a_nMaxNumRows = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS, bool a_bIsEnableAssert = true) {
+	private static void DoSetupLoadGoogleSheetInfos(string a_oID, string a_oTableName, Dictionary<string, string> a_oGoogleSheetNameDict, Dictionary<string, List<string>> a_oExtraGoogleSheetNameDictContainer, Dictionary<string, STLoadGoogleSheetInfo> a_oOutLoadGoogleSheetInfoDict, int a_nMaxNumRows = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || (a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()));
 
 		// 구글 시트 정보 설정이 가능 할 경우
-		if(a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()) {
+		if(a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid())
+		{
 			var stLoadGoogleSheetInfo = a_oOutLoadGoogleSheetInfoDict.ContainsKey(a_oTableName) ? a_oOutLoadGoogleSheetInfoDict[a_oTableName] : new STLoadGoogleSheetInfo(a_oID, a_oTableName);
 
-			foreach(var stKeyVal in a_oGoogleSheetNameDict) {
+			foreach(var stKeyVal in a_oGoogleSheetNameDict)
+			{
 				stLoadGoogleSheetInfo.m_oSheetInfoList.ExAddVal((stKeyVal.Value, a_nMaxNumRows));
 
 				// 추가 구글 시트 정보가 존재 할 경우
-				if(a_oExtraGoogleSheetNameDictContainer != null && a_oExtraGoogleSheetNameDictContainer.ContainsKey(stKeyVal.Key)) {
-					for(int i = 0; i < a_oExtraGoogleSheetNameDictContainer[stKeyVal.Key].Count; ++i) {
+				if(a_oExtraGoogleSheetNameDictContainer != null && a_oExtraGoogleSheetNameDictContainer.ContainsKey(stKeyVal.Key))
+				{
+					for(int i = 0; i < a_oExtraGoogleSheetNameDictContainer[stKeyVal.Key].Count; ++i)
+					{
 						stLoadGoogleSheetInfo.m_oSheetInfoList.ExAddVal((a_oExtraGoogleSheetNameDictContainer[stKeyVal.Key][i], a_nMaxNumRows));
 					}
 				}
@@ -1170,11 +1302,13 @@ public static partial class Func {
 	}
 
 	/** 저장 구글 시트 정보를 설정한다 */
-	private static void DoSetupSaveGoogleSheetInfos(string a_oID, string a_oTableName, Dictionary<string, string> a_oGoogleSheetNameDict, Dictionary<string, List<string>> a_oExtraGoogleSheetNameDictContainer, Dictionary<string, STSaveGoogleSheetInfo> a_oOutSaveGoogleSheetInfoDict, bool a_bIsEnableAssert = true) {
+	private static void DoSetupSaveGoogleSheetInfos(string a_oID, string a_oTableName, Dictionary<string, string> a_oGoogleSheetNameDict, Dictionary<string, List<string>> a_oExtraGoogleSheetNameDictContainer, Dictionary<string, STSaveGoogleSheetInfo> a_oOutSaveGoogleSheetInfoDict, bool a_bIsEnableAssert = true)
+	{
 		CAccess.Assert(!a_bIsEnableAssert || (a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()));
 
 		// 구글 시트 정보 설정이 가능 할 경우
-		if(a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid()) {
+		if(a_oTableName.ExIsValid() && a_oGoogleSheetNameDict.ExIsValid())
+		{
 			var stSaveGoogleSheetInfo = a_oOutSaveGoogleSheetInfoDict.ContainsKey(a_oTableName) ? a_oOutSaveGoogleSheetInfoDict[a_oTableName] : new STSaveGoogleSheetInfo(a_oID, a_oTableName);
 
 			// TODO: 구글 시트 정보 설정 구문 작성 필요
@@ -1182,11 +1316,13 @@ public static partial class Func {
 	}
 
 	/** JSON 배열을 생성한다 */
-	private static SimpleJSON.JSONNode MakeJSONArray(string a_oJSONStr) {
+	private static SimpleJSON.JSONNode MakeJSONArray(string a_oJSONStr)
+	{
 		var oTokens = Regex.Replace(a_oJSONStr, KCDefine.B_PATTERN_SPACE, string.Empty).Split(KCDefine.B_TOKEN_COMMA);
 		var oJSONArray = new SimpleJSON.JSONArray();
 
-		for(int i = 0; i < oTokens.Length; ++i) {
+		for(int i = 0; i < oTokens.Length; ++i)
+		{
 			oJSONArray.Add(oTokens[i]);
 		}
 

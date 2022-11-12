@@ -7,17 +7,20 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using MessagePack;
 
-namespace NSEngine {
+namespace NSEngine
+{
 	#region 기본
 	/** 그리드 정보 */
-	public struct STGridInfo {
+	public struct STGridInfo
+	{
 		public Bounds m_stBounds;
 		public Vector3 m_stSize;
 		public Vector3 m_stScale;
 		public Vector3 m_stPivotPos;
 
 		#region 상수
-		public static STGridInfo INVALID = new STGridInfo() {
+		public static STGridInfo INVALID = new STGridInfo()
+		{
 			m_stScale = Vector3.one
 		};
 		#endregion          // 상수               
@@ -25,7 +28,8 @@ namespace NSEngine {
 
 	/** 엔진 타입 랩퍼 */
 	[MessagePackObject]
-	public struct STEngineTypeWrapper {
+	public struct STEngineTypeWrapper
+	{
 		// Do Something
 	}
 	#endregion          // 기본               

@@ -13,16 +13,19 @@ using UnityEngine.Purchasing;
 #endif          // #if PURCHASE_MODULE_ENABLE                                       
 
 /** 상점 팝업 */
-public partial class CStorePopup : CSubPopup {
+public partial class CStorePopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		SEL_PRODUCT_KINDS,
 		[HideInInspector] MAX_VAL
 	}
 
 	/** 콜백 */
-	public enum ECallback {
+	public enum ECallback
+	{
 		NONE = -1,
 		ADS,
 		PURCHASE,
@@ -31,7 +34,8 @@ public partial class CStorePopup : CSubPopup {
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public List<STProductTradeInfo> m_oProductTradeInfoList;
 
 #if ADS_MODULE_ENABLE
@@ -61,15 +65,19 @@ public partial class CStorePopup : CSubPopup {
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** 결제 버튼을 눌렀을 경우 */
-	private void OnTouchPurchaseBtn(STProductTradeInfo a_stProductTradeInfo) {
-		switch(a_stProductTradeInfo.m_ePurchaseType) {
-			case EPurchaseType.ADS: {
+	private void OnTouchPurchaseBtn(STProductTradeInfo a_stProductTradeInfo)
+	{
+		switch(a_stProductTradeInfo.m_ePurchaseType)
+		{
+			case EPurchaseType.ADS:
+			{
 #if ADS_MODULE_ENABLE
 				m_oProductKindsDict.ExReplaceVal(EKey.SEL_PRODUCT_KINDS, a_stProductTradeInfo.m_eProductKinds);
 				Func.ShowRewardAds(this.OnCloseRewardAds);
@@ -77,21 +85,24 @@ public partial class CStorePopup : CSubPopup {
 
 				break;
 			}
-			case EPurchaseType.IN_APP_PURCHASE: {
+			case EPurchaseType.IN_APP_PURCHASE:
+			{
 #if PURCHASE_MODULE_ENABLE
 				CSceneManager.GetSceneManager<OverlayScene.CSubOverlaySceneManager>(KCDefine.B_SCENE_N_OVERLAY)?.PurchaseProduct(a_stProductTradeInfo.m_eProductKinds, this.OnPurchaseProduct);
 #endif         // #if PURCHASE_MODULE_ENABLE                                       
 
 				break;
 			}
-			case EPurchaseType.TARGET: {
+			case EPurchaseType.TARGET:
+			{
 				break;
 			}
 		}
 	}
 
 	/** 복원 버튼을 눌렀을 경우 */
-	private void OnTouchRestoreBtn() {
+	private void OnTouchRestoreBtn()
+	{
 #if PURCHASE_MODULE_ENABLE
 		m_oRestoreProductList.Clear();
 		Func.RestoreProducts(this.OnRestoreProducts);
@@ -101,8 +112,10 @@ public partial class CStorePopup : CSubPopup {
 
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(List<STProductTradeInfo> a_oProductTradeInfoList) {
-		return new STParams() {
+	public static STParams MakeParams(List<STProductTradeInfo> a_oProductTradeInfoList)
+	{
+		return new STParams()
+		{
 			m_oProductTradeInfoList = a_oProductTradeInfoList,
 
 #if ADS_MODULE_ENABLE
@@ -120,9 +133,11 @@ public partial class CStorePopup : CSubPopup {
 	#region 조건부 함수
 #if ADS_MODULE_ENABLE
 	/** 보상 광고가 닫혔을 경우 */
-	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
+	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess)
+	{
 		// 광고를 시청했을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			var eSelProductKinds = m_oProductKindsDict.GetValueOrDefault(EKey.SEL_PRODUCT_KINDS, EProductKinds.NONE);
 			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(eSelProductKinds));
 		}
@@ -134,9 +149,11 @@ public partial class CStorePopup : CSubPopup {
 
 #if PURCHASE_MODULE_ENABLE
 	/** 상품이 결제 되었을 경우 */
-	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
+	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	{
 		// 결제 되었을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			// Do Something
 		}
 
@@ -145,9 +162,11 @@ public partial class CStorePopup : CSubPopup {
 	}
 
 	/** 상품이 복원 되었을 경우 */
-	public void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess) {
+	public void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess)
+	{
 		// 복원 되었을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			m_oRestoreProductList = a_oProductList;
 			Func.AcquireRestoreProducts(a_oProductList);
 		}

@@ -8,10 +8,12 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 코인 상자 획득 팝업 */
-public partial class CCoinsBoxAcquirePopup : CSubPopup {
+public partial class CCoinsBoxAcquirePopup : CSubPopup
+{
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 텍스트를 설정한다
@@ -25,7 +27,8 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init();
 		this.Params = a_stParams;
 
@@ -40,7 +43,8 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 	}
 
 	/** UI 상태를 변경한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		// 객체를 갱신한다
 		m_oSaveUIs?.SetActive(m_oIntDict.GetValueOrDefault(EKey.PREV_NUM_COINS_BOX_COINS) < KDefine.G_MAX_NUM_COINS_BOX_COINS);
 		m_oFullUIs?.SetActive(m_oIntDict.GetValueOrDefault(EKey.PREV_NUM_COINS_BOX_COINS) >= KDefine.G_MAX_NUM_COINS_BOX_COINS);
@@ -56,9 +60,11 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 }
 
 /** 서브 코인 상자 획득 팝업 */
-public partial class CCoinsBoxAcquirePopup : CSubPopup {
+public partial class CCoinsBoxAcquirePopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -73,17 +79,20 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup {
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake() {
+	private void SubSetupAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화한다 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 	#endregion          // 함수               

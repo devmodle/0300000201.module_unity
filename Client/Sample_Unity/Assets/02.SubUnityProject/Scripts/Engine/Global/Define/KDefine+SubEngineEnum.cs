@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 서브 엔진 열거형 값 */
-	public static partial class KEngineEnumVal {
+	public static partial class KEngineEnumVal
+	{
 		#region 기본
 
 		#endregion          // 기본               
@@ -15,13 +17,15 @@ namespace NSEngine {
 
 	#region 기본
 	/** 엔진 이벤트 */
-	public enum EEngineEvent {
+	public enum EEngineEvent
+	{
 		NONE,
 		[HideInInspector] MAX_VAL
 	}
 
 	/** 엔진 객체 이벤트 */
-	public enum EEngineObjEvent {
+	public enum EEngineObjEvent
+	{
 		NONE,
 		AVOID,
 		DAMAGE,

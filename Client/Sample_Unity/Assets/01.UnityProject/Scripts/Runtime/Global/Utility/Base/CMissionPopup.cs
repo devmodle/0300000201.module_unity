@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 미션 팝업 */
-public abstract partial class CMissionPopup : CSubPopup {
+public abstract partial class CMissionPopup : CSubPopup
+{
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public List<STMissionInfo> m_oMissionInfoList;
 	}
 
@@ -23,7 +25,8 @@ public abstract partial class CMissionPopup : CSubPopup {
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}

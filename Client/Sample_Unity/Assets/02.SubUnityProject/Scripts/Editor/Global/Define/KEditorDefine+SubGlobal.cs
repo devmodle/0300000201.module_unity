@@ -9,7 +9,8 @@ using System.IO;
 using UnityEditor;
 
 /** 에디터 서브 전역 상수 */
-public static partial class KEditorDefine {
+public static partial class KEditorDefine
+{
 	#region 런타임 상수
 	// 경로 {
 	public static List<string> G_EXTRA_DIR_P_PRELOAD_ASSET_LIST = new List<string>() {
@@ -30,12 +31,14 @@ public static partial class KEditorDefine {
 	// 경로 }
 
 	// 스크립트 순서
-	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
+	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>()
+	{
 		[typeof(Google.CGGoogleSheetSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
 
 	// 클래스 타입
-	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
+	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>()
+	{
 		[KDefine.G_SCENE_N_G_GOOGLE_SHEET] = typeof(Google.CGGoogleSheetSceneManager)
 	};
 	#endregion          // 런타임 상수                   

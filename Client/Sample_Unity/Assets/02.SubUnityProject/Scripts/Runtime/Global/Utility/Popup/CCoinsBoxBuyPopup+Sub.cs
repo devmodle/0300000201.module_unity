@@ -8,10 +8,12 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 코인 상자 구입 팝업 */
-public partial class CCoinsBoxBuyPopup : CSubPopup {
+public partial class CCoinsBoxBuyPopup : CSubPopup
+{
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 텍스트를 설정한다
@@ -31,7 +33,8 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 
 		#region 추가
@@ -40,7 +43,8 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	}
 
 	/** UI 상태를 변경한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		long nNumCoinsBoxCoins = (long)Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_COINS_BOX_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS);
 
 		// 객체를 갱신한다
@@ -58,9 +62,11 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 }
 
 /** 서브 코인 상자 구입 팝업 */
-public partial class CCoinsBoxBuyPopup : CSubPopup {
+public partial class CCoinsBoxBuyPopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -75,17 +81,20 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake() {
+	private void SubSetupAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 	#endregion          // 함수               

@@ -13,7 +13,8 @@ using Newtonsoft.Json;
 /** 타겟 정보 */
 [MessagePackObject]
 [System.Serializable]
-public struct STTargetInfo : System.IEquatable<STTargetInfo> {
+public struct STTargetInfo : System.IEquatable<STTargetInfo>
+{
 	[Key(1)] public int m_nKinds;
 	[Key(11)] public ETargetKinds m_eTargetKinds;
 	[Key(12)] public EKindsGroupType m_eKindsGroupType;
@@ -23,7 +24,8 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo> {
 	[Key(23)] public STValInfo m_stValInfo03;
 
 	#region 상수
-	public static readonly STTargetInfo INVALID = new STTargetInfo() {
+	public static readonly STTargetInfo INVALID = new STTargetInfo()
+	{
 		m_nKinds = KCDefine.B_IDX_INVALID,
 		m_eTargetKinds = ETargetKinds.NONE,
 		m_eKindsGroupType = EKindsGroupType.NONE,
@@ -43,14 +45,16 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo> {
 
 	#region IEquatable
 	/** 동일 여부를 검사한다 */
-	public bool Equals(STTargetInfo a_stTargetInfo) {
+	public bool Equals(STTargetInfo a_stTargetInfo)
+	{
 		return m_nKinds == a_stTargetInfo.m_nKinds && m_eTargetKinds == a_stTargetInfo.m_eTargetKinds && m_eKindsGroupType == a_stTargetInfo.m_eKindsGroupType && m_stValInfo01.Equals(a_stTargetInfo.m_stValInfo01) && m_stValInfo02.Equals(a_stTargetInfo.m_stValInfo02) && m_stValInfo03.Equals(a_stTargetInfo.m_stValInfo03);
 	}
 	#endregion         // IEquatable                       
 
 	#region 함수
 	/** 생성자 */
-	public STTargetInfo(SimpleJSON.JSONNode a_oTargetInfo, int a_nSrcIdx = KCDefine.B_VAL_0_INT) {
+	public STTargetInfo(SimpleJSON.JSONNode a_oTargetInfo, int a_nSrcIdx = KCDefine.B_VAL_0_INT)
+	{
 		m_nKinds = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].ExIsValid() ? a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].AsInt : KCDefine.B_IDX_INVALID;
 		m_eTargetKinds = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_0_INT].ExIsValid() ? (ETargetKinds)a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_0_INT].AsInt : ETargetKinds.NONE;
 		m_eKindsGroupType = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_1_INT].ExIsValid() ? (EKindsGroupType)a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_1_INT].AsInt : EKindsGroupType.NONE;
@@ -61,16 +65,19 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo> {
 	}
 
 	/** 생성자 */
-	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE) : this(a_eTargetKinds, a_nKinds, a_stValInfo, STValInfo.INVALID, a_eKindsGroupType) {
+	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE) : this(a_eTargetKinds, a_nKinds, a_stValInfo, STValInfo.INVALID, a_eKindsGroupType)
+	{
 		// Do Something
 	}
 
-	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo01, STValInfo a_stValInfo02, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE) : this(a_eTargetKinds, a_nKinds, a_stValInfo01, a_stValInfo02, STValInfo.INVALID, a_eKindsGroupType) {
+	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo01, STValInfo a_stValInfo02, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE) : this(a_eTargetKinds, a_nKinds, a_stValInfo01, a_stValInfo02, STValInfo.INVALID, a_eKindsGroupType)
+	{
 		// Do Something
 	}
 
 	/** 생성자 */
-	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo01, STValInfo a_stValInfo02, STValInfo a_stValInfo03, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE) {
+	public STTargetInfo(ETargetKinds a_eTargetKinds, int a_nKinds, STValInfo a_stValInfo01, STValInfo a_stValInfo02, STValInfo a_stValInfo03, EKindsGroupType a_eKindsGroupType = EKindsGroupType.NONE)
+	{
 		m_nKinds = a_nKinds;
 		m_eTargetKinds = a_eTargetKinds;
 		m_eKindsGroupType = a_eKindsGroupType;
@@ -84,7 +91,8 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 타겟 정보를 저장한다 */
-	public void SaveTargetInfo(SimpleJSON.JSONNode a_oOutTargetInfo, int a_nSrcIdx = KCDefine.B_VAL_0_INT) {
+	public void SaveTargetInfo(SimpleJSON.JSONNode a_oOutTargetInfo, int a_nSrcIdx = KCDefine.B_VAL_0_INT)
+	{
 		a_oOutTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT] = $"{(int)m_nKinds}";
 		a_oOutTargetInfo[a_nSrcIdx + KCDefine.B_VAL_0_INT] = $"{(int)m_eTargetKinds}";
 		a_oOutTargetInfo[a_nSrcIdx + KCDefine.B_VAL_1_INT] = $"{(int)m_eKindsGroupType}";
@@ -99,7 +107,8 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo> {
 
 /** 타입 랩퍼 */
 [MessagePackObject]
-public struct STTypeWrapper {
+public struct STTypeWrapper
+{
 	[Key(51)] public List<ulong> m_oULevelIDList;
 	[Key(161)] public Dictionary<int, Dictionary<int, Dictionary<int, CLevelInfo>>> m_oLevelInfoDictContainer;
 }

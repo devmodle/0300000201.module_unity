@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 /** 서브 에디터 스크롤러 셀 뷰 */
-public partial class CSubEditorScrollerCellView : CEditorScrollerCellView {
+public partial class CSubEditorScrollerCellView : CEditorScrollerCellView
+{
 	/** 매개 변수 */
-	public new struct STParams {
+	public new struct STParams
+	{
 		public CEditorScrollerCellView.STParams m_stBaseParams;
 	}
 
@@ -22,12 +24,14 @@ public partial class CSubEditorScrollerCellView : CEditorScrollerCellView {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init(a_stParams.m_stBaseParams);
 		this.Params = a_stParams;
 
@@ -35,7 +39,8 @@ public partial class CSubEditorScrollerCellView : CEditorScrollerCellView {
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		// Do Something
 	}
 	#endregion          // 함수               

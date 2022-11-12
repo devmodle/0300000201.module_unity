@@ -7,11 +7,14 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using TMPro;
 
-namespace LoadingScene {
+namespace LoadingScene
+{
 	/** 서브 로딩 씬 관리자 */
-	public partial class CSubLoadingSceneManager : CLoadingSceneManager {
+	public partial class CSubLoadingSceneManager : CLoadingSceneManager
+	{
 		/** 식별자 */
-		private enum EKey {
+		private enum EKey
+		{
 			NONE = -1,
 			LOADING_TEXT,
 			LOADING_GAUGE_HANDLER,

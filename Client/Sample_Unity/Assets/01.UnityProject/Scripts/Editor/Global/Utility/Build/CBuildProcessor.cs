@@ -15,9 +15,11 @@ using UnityEditor.iOS.Xcode;
 
 /** 빌드 처리자 */
 [InitializeOnLoad]
-public static partial class CBuildProcessor {
+public static partial class CBuildProcessor
+{
 	#region 변수
-	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oPostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>() {
+	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oPostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>()
+	{
 		[BuildTarget.iOS] = CBuildProcessor.HandleiOSPostProcessBuild,
 		[BuildTarget.Android] = CBuildProcessor.HandleAndroidPostProcessBuild,
 		[BuildTarget.StandaloneOSX] = CBuildProcessor.HandleStandalonePostProcessBuild,
@@ -29,9 +31,11 @@ public static partial class CBuildProcessor {
 	#region 클래스 함수
 	/** 빌드가 완료 되었을 경우 */
 	[PostProcessBuild]
-	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 		// 배치 모드가 아닐 경우
-		if(!Application.isBatchMode) {
+		if(!Application.isBatchMode)
+		{
 			EditorUtility.RevealInFinder(a_oPath);
 		}
 
@@ -40,7 +44,8 @@ public static partial class CBuildProcessor {
 
 	/** 빌드가 완료 되었을 경우 */
 	[PostProcessBuild(int.MaxValue)]
-	public static void OnLatePostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	public static void OnLatePostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_IOS
 		string oPodsPath = string.Format(KCEditorDefine.B_DATA_P_FMT_COCOA_PODS, a_oPath);
 		string oPlistPath = string.Format(KCEditorDefine.B_PLIST_P_FMT_IOS, a_oPath);
@@ -86,7 +91,8 @@ public static partial class CBuildProcessor {
 	}
 
 	/** iOS 빌드 완료를 처리한다 */
-	private static void HandleiOSPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleiOSPostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_IOS
 		string oPlistPath = string.Format(KCEditorDefine.B_PLIST_P_FMT_IOS, a_oPath);
 		string oPBXProjPath = PBXProject.GetPBXProjectPath(a_oPath);
@@ -185,14 +191,16 @@ public static partial class CBuildProcessor {
 	}
 
 	/** 안드로이드 빌드 완료를 처리한다 */
-	private static void HandleAndroidPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleAndroidPostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_ANDROID
 		// Do Something
 #endif            // #if UNITY_ANDROID                              
 	}
 
 	/** 독립 플랫폼 빌드 완료를 처리한다 */
-	private static void HandleStandalonePostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleStandalonePostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_STANDALONE
 		string oPath = Path.GetDirectoryName(a_oPath).Replace(KCDefine.B_TOKEN_REV_SLASH, KCDefine.B_TOKEN_SLASH);
 		string oDestPath = string.Format(KCEditorDefine.B_DIR_P_FMT_EXTERNAL_DATAS_STANDALONE, oPath);

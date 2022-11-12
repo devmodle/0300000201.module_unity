@@ -6,10 +6,12 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 일일 보상 팝업 */
-public partial class CDailyRewardPopup : CSubPopup {
+public partial class CDailyRewardPopup : CSubPopup
+{
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 버튼을 설정한다
@@ -24,7 +26,8 @@ public partial class CDailyRewardPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 
 		#region 추가
@@ -33,13 +36,15 @@ public partial class CDailyRewardPopup : CSubPopup {
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		// 버튼을 갱신한다
 		m_oBtnDict.GetValueOrDefault(EKey.ADS_BTN)?.ExSetInteractable(Access.IsEnableGetDailyReward(CGameInfoStorage.Inst.PlayCharacterID));
 		m_oBtnDict.GetValueOrDefault(EKey.ACQUIRE_BTN)?.ExSetInteractable(Access.IsEnableGetDailyReward(CGameInfoStorage.Inst.PlayCharacterID));
 
 		// 보상 UI 상태를 갱신한다
-		for(int i = 0; i < m_oRewardUIsList.Count; ++i) {
+		for(int i = 0; i < m_oRewardUIsList.Count; ++i)
+		{
 			var oRewardUIs = m_oRewardUIsList[i];
 			var stDailyRewardInfo = CRewardInfoTable.Inst.GetRewardInfo(ERewardKinds.DAILY_REWARD_SAMPLE + (i + KCDefine.B_VAL_1_INT));
 
@@ -54,9 +59,11 @@ public partial class CDailyRewardPopup : CSubPopup {
 }
 
 /** 서브 일일 보상 팝업 */
-public partial class CDailyRewardPopup : CSubPopup {
+public partial class CDailyRewardPopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -71,22 +78,26 @@ public partial class CDailyRewardPopup : CSubPopup {
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake() {
+	private void SubSetupAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 
 	/** 보상 UI 상태를 갱신한다 */
-	private void UpdateRewardUIsState(GameObject a_oRewardUIs, STRewardInfo a_stRewardInfo) {
+	private void UpdateRewardUIsState(GameObject a_oRewardUIs, STRewardInfo a_stRewardInfo)
+	{
 		// Do Something
 	}
 	#endregion          // 함수               

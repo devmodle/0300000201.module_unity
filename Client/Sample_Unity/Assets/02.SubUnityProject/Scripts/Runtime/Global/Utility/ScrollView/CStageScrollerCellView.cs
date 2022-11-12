@@ -9,9 +9,11 @@ using TMPro;
 using EnhancedUI.EnhancedScroller;
 
 /** 스테이지 스크롤러 셀 뷰 */
-public partial class CStageScrollerCellView : CScrollerCellView {
+public partial class CStageScrollerCellView : CScrollerCellView
+{
 	/** 매개 변수 */
-	public new struct STParams {
+	public new struct STParams
+	{
 		public CScrollerCellView.STParams m_stBaseParams;
 	}
 
@@ -25,16 +27,19 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init(a_stParams.m_stBaseParams);
 		this.Params = a_stParams;
 
-		for(int i = 0; i < this.ScrollerCellList.Count; ++i) {
+		for(int i = 0; i < this.ScrollerCellList.Count; ++i)
+		{
 			var stIDInfo = new STIDInfo(KCDefine.B_VAL_0_INT, i + base.Params.m_nID.ExULevelIDToStageID(), base.Params.m_nID.ExULevelIDToChapterID());
 
 			this.UpdateScrollerCellState(this.ScrollerCellList[i], stIDInfo);
@@ -43,7 +48,8 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 	}
 
 	/** 스크롤러 셀 상태를 갱신한다 */
-	private void UpdateScrollerCellState(GameObject a_oScrollerCell, STIDInfo a_stIDInfo) {
+	private void UpdateScrollerCellState(GameObject a_oScrollerCell, STIDInfo a_stIDInfo)
+	{
 		// 버튼을 갱신한다 {
 		var oSelBtn = a_oScrollerCell.GetComponentInChildren<Button>();
 		oSelBtn?.ExAddListener(() => base.Params.m_oCallbackDict.GetValueOrDefault(ECallback.SEL)?.Invoke(this, CFactory.MakeULevelID(a_stIDInfo.m_nID01, a_stIDInfo.m_nID02, a_stIDInfo.m_nID03)), true, false);
@@ -56,7 +62,8 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 		// 버튼을 갱신한다 }
 
 		// 스테이지 정보가 존재 할 경우
-		if(a_stIDInfo.m_nID02 < Access.GetNumStageEpisodes(a_stIDInfo.m_nID03)) {
+		if(a_stIDInfo.m_nID02 < Access.GetNumStageEpisodes(a_stIDInfo.m_nID03))
+		{
 			CEpisodeInfoTable.Inst.TryGetStageEpisodeInfo(a_stIDInfo.m_nID02, out STEpisodeInfo stStageEpisodeInfo, a_stIDInfo.m_nID03);
 
 			// 텍스트를 갱신한다
@@ -68,8 +75,10 @@ public partial class CStageScrollerCellView : CScrollerCellView {
 
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public new static STParams MakeParams(ulong a_nID, EnhancedScroller a_oScroller, Dictionary<ECallback, System.Action<CScrollerCellView, ulong>> a_oCallbackDict = null) {
-		return new STParams() {
+	public new static STParams MakeParams(ulong a_nID, EnhancedScroller a_oScroller, Dictionary<ECallback, System.Action<CScrollerCellView, ulong>> a_oCallbackDict = null)
+	{
+		return new STParams()
+		{
 			m_stBaseParams = CScrollerCellView.MakeParams(a_nID, a_oScroller, a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CScrollerCellView, ulong>>())
 		};
 	}

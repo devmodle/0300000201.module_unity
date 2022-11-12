@@ -10,16 +10,19 @@ using UnityEngine.Purchasing;
 #endif          // #if PURCHASE_MODULE_ENABLE                                       
 
 /** 기본 로그 함수 */
-public static partial class LogFunc {
+public static partial class LogFunc
+{
 	#region 클래스 변수
 	private static Dictionary<string, string> m_oLogTimeDict = new Dictionary<string, string>();
 	#endregion          // 클래스 변수                   
 
 	#region 클래스 함수
 	/** 로그를 전송한다 */
-	public static void SendLog(string a_oName, Dictionary<string, object> a_oDataDict) {
+	public static void SendLog(string a_oName, Dictionary<string, object> a_oDataDict)
+	{
 		// 로그 전송이 가능 할 경우
-		if(LogFunc.IsEnableSendLog(a_oName)) {
+		if(LogFunc.IsEnableSendLog(a_oName))
+		{
 #if ANALYTICS_TEST_ENABLE
 			var oDataDict = LogFunc.MakeLogDatas(a_oDataDict);
 			CCommonAppInfoStorage.Inst.AppInfo.m_oSendLogList.ExAddVal(a_oName);
@@ -51,13 +54,15 @@ public static partial class LogFunc {
 	}
 
 	/** 로그 전송 가능 여부를 검사한다 */
-	private static bool IsEnableSendLog(string a_oName) {
+	private static bool IsEnableSendLog(string a_oName)
+	{
 		string oLogTime = System.DateTime.Now.ExToPSTTime().ExToLongStr();
 		return LogFunc.m_oLogTimeDict.ContainsKey(a_oName) ? !LogFunc.m_oLogTimeDict[a_oName].Equals(oLogTime) : true;
 	}
 
 	/** 로그 데이터를 생성한다 */
-	private static Dictionary<string, object> MakeLogDatas(Dictionary<string, object> a_oDataDict) {
+	private static Dictionary<string, object> MakeLogDatas(Dictionary<string, object> a_oDataDict)
+	{
 		var oDataDict = a_oDataDict ?? new Dictionary<string, object>();
 		oDataDict.TryAdd(KCDefine.L_LOG_KEY_PLATFORM, CCommonAppInfoStorage.Inst.Platform);
 		oDataDict.TryAdd(KCDefine.L_LOG_KEY_DEVICE_ID, CCommonAppInfoStorage.Inst.AppInfo.DeviceID);
@@ -75,9 +80,11 @@ public static partial class LogFunc {
 	}
 
 	/** 일회성 로그를 전송한다 */
-	public static void SendOnceLog(string a_oName, Dictionary<string, object> a_oDataDict) {
+	public static void SendOnceLog(string a_oName, Dictionary<string, object> a_oDataDict)
+	{
 		// 전송 된 로그가 없을 경우
-		if(!CCommonAppInfoStorage.Inst.AppInfo.m_oSendLogList.Contains(a_oName)) {
+		if(!CCommonAppInfoStorage.Inst.AppInfo.m_oSendLogList.Contains(a_oName))
+		{
 			LogFunc.SendLog(a_oName, a_oDataDict);
 		}
 	}
@@ -86,9 +93,11 @@ public static partial class LogFunc {
 	#region 조건부 클래스 함수
 #if PURCHASE_MODULE_ENABLE
 	/** 결제 로그를 전송한다 */
-	public static void SendPurchaseLog(Product a_oProduct, int a_nNumProducts = KCDefine.B_VAL_1_INT) {
+	public static void SendPurchaseLog(Product a_oProduct, int a_nNumProducts = KCDefine.B_VAL_1_INT)
+	{
 		// 로그 전송이 가능 할 경우
-		if(LogFunc.IsEnableSendLog(KDefine.L_LOG_N_PURCHASE)) {
+		if(LogFunc.IsEnableSendLog(KDefine.L_LOG_N_PURCHASE))
+		{
 #if ANALYTICS_TEST_ENABLE
 			var oDataDict = LogFunc.MakeLogDatas(null);
 

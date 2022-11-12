@@ -8,16 +8,19 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 /** 포커스 팝업 */
-public partial class CFocusPopup : CSubPopup {
+public partial class CFocusPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		FOCUS_BLIND_IMG,
 		[HideInInspector] MAX_VAL
 	}
 
 	/** 콜백 */
-	public enum ECallback {
+	public enum ECallback
+	{
 		NONE = -1,
 		BEGIN,
 		MOVE,
@@ -26,7 +29,8 @@ public partial class CFocusPopup : CSubPopup {
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public List<GameObject> m_oContentsUIsList;
 		public Dictionary<ECallback, System.Action<CFocusPopup, PointerEventData>> m_oCallbackDict;
 	}
@@ -45,12 +49,15 @@ public partial class CFocusPopup : CSubPopup {
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 
 		// 포커스 UI 가 존재 할 경우
-		if(this.Params.m_oContentsUIsList.ExIsValid()) {
-			for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i) {
+		if(this.Params.m_oContentsUIsList.ExIsValid())
+		{
+			for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i)
+			{
 				this.Params.m_oContentsUIsList[i].SetActive(true);
 				this.Params.m_oContentsUIsList[i].ExSetParent(this.ContentsUIs);
 			}

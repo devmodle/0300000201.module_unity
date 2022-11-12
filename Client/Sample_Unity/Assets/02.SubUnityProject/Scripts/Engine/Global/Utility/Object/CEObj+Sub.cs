@@ -5,12 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 객체 */
-	public partial class CEObj : CEObjComponent {
+	public partial class CEObj : CEObjComponent
+	{
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 			m_oVec3IntDict.ExReplaceVal(EKey.CELL_IDX, KCDefine.B_IDX_INVALID_3D);
 
@@ -25,12 +28,14 @@ namespace NSEngine {
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
 
 			// 객체 스프라이트가 존재 할 경우
-			if(m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE) != null) {
+			if(m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE) != null)
+			{
 				m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE).sprite = Access.GetObjSprite(a_stParams.m_stObjInfo.m_eObjKinds);
 				m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE).ExSetSortingOrder(Access.GetSortingOrderInfo(a_stParams.m_stObjInfo.m_eObjKinds));
 			}
@@ -43,9 +48,11 @@ namespace NSEngine {
 	}
 
 	/** 서브 객체 */
-	public partial class CEObj : CEObjComponent {
+	public partial class CEObj : CEObjComponent
+	{
 		/** 서브 식별자 */
-		private enum ESubKey {
+		private enum ESubKey
+		{
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
@@ -60,12 +67,14 @@ namespace NSEngine {
 
 		#region 함수
 		/** 컴포넌트를 설정한다 */
-		private void SubSetupAwake() {
+		private void SubSetupAwake()
+		{
 			// Do Something
 		}
 
 		/** 초기화한다 */
-		private void SubInit() {
+		private void SubInit()
+		{
 			this.SetupAbilityVals();
 		}
 		#endregion          // 함수               
