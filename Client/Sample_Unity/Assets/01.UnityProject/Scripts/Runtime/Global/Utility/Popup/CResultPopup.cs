@@ -8,11 +8,9 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 결과 팝업 */
-public partial class CResultPopup : CSubPopup
-{
+public partial class CResultPopup : CSubPopup {
 	/** 식별자 */
-	private enum EKey
-	{
+	private enum EKey {
 		NONE = -1,
 		RECORD_TEXT,
 		BEST_RECORD_TEXT,
@@ -22,8 +20,7 @@ public partial class CResultPopup : CSubPopup
 	}
 
 	/** 콜백 */
-	public enum ECallback
-	{
+	public enum ECallback {
 		NONE = -1,
 		NEXT,
 		RETRY,
@@ -32,8 +29,7 @@ public partial class CResultPopup : CSubPopup
 	}
 
 	/** 매개 변수 */
-	public struct STParams
-	{
+	public struct STParams {
 		public STRecordInfo m_stRecordInfo;
 		public Dictionary<ECallback, System.Action<CResultPopup>> m_oCallbackDict;
 	}
@@ -53,44 +49,37 @@ public partial class CResultPopup : CSubPopup
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents()
-	{
+	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** 닫기 버튼을 눌렀을 경우 */
-	protected override void OnTouchCloseBtn()
-	{
+	protected override void OnTouchCloseBtn() {
 		base.OnTouchCloseBtn();
 		this.OnTouchLeaveBtn();
 	}
 
 	/** 다음 버튼을 눌렀을 경우 */
-	private void OnTouchNextBtn()
-	{
+	private void OnTouchNextBtn() {
 		this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.NEXT)?.Invoke(this);
 	}
 
 	/** 재시도 버튼을 눌렀을 경우 */
-	private void OnTouchRetryBtn()
-	{
+	private void OnTouchRetryBtn() {
 		this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.RETRY)?.Invoke(this);
 	}
 
 	/** 나가기 버튼을 눌렀을 경우 */
-	private void OnTouchLeaveBtn()
-	{
+	private void OnTouchLeaveBtn() {
 		this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.LEAVE)?.Invoke(this);
 	}
 	#endregion          // 함수               
 
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(STRecordInfo a_stRecordInfo, Dictionary<ECallback, System.Action<CResultPopup>> a_oCallbackDict = null)
-	{
-		return new STParams()
-		{
+	public static STParams MakeParams(STRecordInfo a_stRecordInfo, Dictionary<ECallback, System.Action<CResultPopup>> a_oCallbackDict = null) {
+		return new STParams() {
 			m_stRecordInfo = a_stRecordInfo,
 			m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CResultPopup>>()
 		};

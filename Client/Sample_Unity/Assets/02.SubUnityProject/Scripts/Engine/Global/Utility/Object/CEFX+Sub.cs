@@ -5,15 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine
-{
+namespace NSEngine {
 	/** 효과 */
-	public partial class CEFX : CEObjComponent
-	{
+	public partial class CEFX : CEObjComponent {
 		#region 함수
 		/** 초기화 */
-		public override void Awake()
-		{
+		public override void Awake() {
 			base.Awake();
 
 			// 파티클을 설정한다
@@ -27,8 +24,7 @@ namespace NSEngine
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams)
-		{
+		public virtual void Init(STParams a_stParams) {
 			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
 
@@ -40,11 +36,9 @@ namespace NSEngine
 	}
 
 	/** 서브 효과 */
-	public partial class CEFX : CEObjComponent
-	{
+	public partial class CEFX : CEObjComponent {
 		/** 서브 식별자 */
-		private enum ESubKey
-		{
+		private enum ESubKey {
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
@@ -59,14 +53,12 @@ namespace NSEngine
 
 		#region 함수
 		/** 컴포넌트를 설정한다 */
-		private void SubSetupAwake()
-		{
+		private void SubSetupAwake() {
 			// Do Something
 		}
 
 		/** 초기화한다 */
-		private void SubInit()
-		{
+		private void SubInit() {
 			// Do Something
 		}
 		#endregion          // 함수               

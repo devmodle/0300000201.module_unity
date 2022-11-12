@@ -5,14 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine
-{
+namespace NSEngine {
 	/** 적 객체 제어자 */
-	public partial class CEEnemyObjController : CEObjController
-	{
+	public partial class CEEnemyObjController : CEObjController {
 		/** 매개 변수 */
-		public new struct STParams
-		{
+		public new struct STParams {
 			public CEObjController.STParams m_stBaseParams;
 		}
 
@@ -30,10 +27,8 @@ namespace NSEngine
 
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public new static STParams MakeParams(CEngine a_oEngine)
-		{
-			return new STParams()
-			{
+		public new static STParams MakeParams(CEngine a_oEngine) {
+			return new STParams() {
 				m_stBaseParams = CEObjController.MakeParams(a_oEngine)
 			};
 		}

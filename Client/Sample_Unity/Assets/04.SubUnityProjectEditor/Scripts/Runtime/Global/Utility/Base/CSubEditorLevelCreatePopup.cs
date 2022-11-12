@@ -6,11 +6,9 @@ using UnityEngine.Events;
 
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 /** 서브 에디터 레벨 생성 팝업 */
-public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup
-{
+public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup {
 	/** 매개 변수 */
-	public new struct STParams
-	{
+	public new struct STParams {
 		public CEditorLevelCreatePopup.STParams m_stBaseParams;
 	}
 
@@ -24,38 +22,32 @@ public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake()
-	{
+	public override void Awake() {
 		base.Awake();
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams)
-	{
+	public virtual void Init(STParams a_stParams) {
 		base.Init(a_stParams.m_stBaseParams);
 		this.Params = a_stParams;
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents()
-	{
+	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState()
-	{
+	private void UpdateUIsState() {
 		// Do Something
 	}
 
 	/** 에디터 레벨 생성 정보를 생성한다 */
-	protected override CEditorLevelCreateInfo CreateEditorLevelCreateInfo()
-	{
+	protected override CEditorLevelCreateInfo CreateEditorLevelCreateInfo() {
 		var oCreateInfo = base.CreateEditorLevelCreateInfo();
 
-		return new CSubEditorLevelCreateInfo()
-		{
+		return new CSubEditorLevelCreateInfo() {
 			m_nNumLevels = oCreateInfo.m_nNumLevels,
 			m_stMinNumCells = oCreateInfo.m_stMinNumCells,
 			m_stMaxNumCells = oCreateInfo.m_stMaxNumCells

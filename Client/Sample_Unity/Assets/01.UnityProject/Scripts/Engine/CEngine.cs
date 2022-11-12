@@ -7,14 +7,11 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using UnityEngine.EventSystems;
 
-namespace NSEngine
-{
+namespace NSEngine {
 	/** 엔진 */
-	public partial class CEngine : CComponent
-	{
+	public partial class CEngine : CComponent {
 		/** 식별자 */
-		private enum EKey
-		{
+		private enum EKey {
 			NONE = -1,
 			IS_RUNNING,
 			IS_SAVE_USER_INFO,
@@ -23,8 +20,7 @@ namespace NSEngine
 		}
 
 		/** 콜백 */
-		public enum ECallback
-		{
+		public enum ECallback {
 			NONE = -1,
 			CLEAR,
 			CLEAR_FAIL,
@@ -33,8 +29,7 @@ namespace NSEngine
 		}
 
 		/** 매개 변수 */
-		public struct STParams
-		{
+		public struct STParams {
 			public GameObject m_oItemRoot;
 			public GameObject m_oSkillRoot;
 			public GameObject m_oObjRoot;
@@ -72,21 +67,17 @@ namespace NSEngine
 
 		#region 함수
 		/** 구동 여부를 변경한다 */
-		public void SetEnableRunning(bool a_bIsRunning)
-		{
+		public void SetEnableRunning(bool a_bIsRunning) {
 			m_oBoolDict.ExReplaceVal(EKey.IS_RUNNING, a_bIsRunning);
 		}
 
 		/** 터치 이벤트를 처리한다 */
-		public void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent)
-		{
+		public void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
 			var stTouchPos = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot);
 
 			// 그리드 영역 일 경우
-			if(m_oGridInfoList[this.SelGridInfoIdx].m_stBounds.Contains(stTouchPos))
-			{
-				switch(a_eTouchEvent)
-				{
+			if(m_oGridInfoList[this.SelGridInfoIdx].m_stBounds.Contains(stTouchPos)) {
+				switch(a_eTouchEvent) {
 					case ETouchEvent.BEGIN:
 						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
 						break;
@@ -103,10 +94,8 @@ namespace NSEngine
 
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(GameObject a_oItemRoot, GameObject a_oSkillRoot, GameObject a_oObjRoot, GameObject a_oFXRoot, Dictionary<ECallback, System.Action<CEngine>> a_oCallbackDict01 = null, Dictionary<ECallback, System.Action<CEngine, Dictionary<ulong, STTargetInfo>>> a_oCallbackDict02 = null)
-		{
-			return new STParams()
-			{
+		public static STParams MakeParams(GameObject a_oItemRoot, GameObject a_oSkillRoot, GameObject a_oObjRoot, GameObject a_oFXRoot, Dictionary<ECallback, System.Action<CEngine>> a_oCallbackDict01 = null, Dictionary<ECallback, System.Action<CEngine, Dictionary<ulong, STTargetInfo>>> a_oCallbackDict02 = null) {
+			return new STParams() {
 				m_oItemRoot = a_oItemRoot,
 				m_oSkillRoot = a_oSkillRoot,
 				m_oObjRoot = a_oObjRoot,

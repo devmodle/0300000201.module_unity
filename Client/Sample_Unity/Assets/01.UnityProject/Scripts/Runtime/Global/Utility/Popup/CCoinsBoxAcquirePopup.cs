@@ -8,11 +8,9 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 코인 상자 획득 팝업 */
-public partial class CCoinsBoxAcquirePopup : CSubPopup
-{
+public partial class CCoinsBoxAcquirePopup : CSubPopup {
 	/** 식별자 */
-	private enum EKey
-	{
+	private enum EKey {
 		NONE = -1,
 		PREV_NUM_COINS_BOX_COINS,
 		NUM_COINS_TEXT,
@@ -20,8 +18,7 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup
 	}
 
 	/** 매개 변수 */
-	public struct STParams
-	{
+	public struct STParams {
 		public long m_nNumCoinsBoxCoins;
 	}
 
@@ -42,8 +39,7 @@ public partial class CCoinsBoxAcquirePopup : CSubPopup
 
 	#region 함수
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents()
-	{
+	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
 	}

@@ -10,8 +10,7 @@ using MessagePack;
 #region 기본
 /** 에디터 타입 랩퍼 */
 [MessagePackObject]
-public struct STEditorTypeWrapper
-{
+public struct STEditorTypeWrapper {
 	// Do Something
 }
 #endregion          // 기본               

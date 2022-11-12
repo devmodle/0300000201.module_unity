@@ -12,14 +12,11 @@ using TMPro;
 using UnityEngine.Purchasing;
 #endif          // #if PURCHASE_MODULE_ENABLE                                       
 
-namespace OverlayScene
-{
+namespace OverlayScene {
 	/** 서브 중첩 씬 관리자 */
-	public partial class CSubOverlaySceneManager : COverlaySceneManager
-	{
+	public partial class CSubOverlaySceneManager : COverlaySceneManager {
 		/** 식별자 */
-		private enum EKey
-		{
+		private enum EKey {
 			NONE = -1,
 			PURCHASE_PRODUCT_ID,
 			NUM_COINS_TEXT,
@@ -28,8 +25,7 @@ namespace OverlayScene
 		}
 
 		/** 콜백 */
-		private enum ECallback
-		{
+		private enum ECallback {
 			NONE = -1,
 			PURCHASE,
 			[HideInInspector] MAX_VAL
@@ -53,10 +49,8 @@ namespace OverlayScene
 
 		#region 함수
 		/** 상점 팝업을 출력한다 */
-		public void ShowStorePopup()
-		{
-			Func.ShowStorePopup(CSceneManager.ActiveScenePopupUIs, (a_oSender) =>
-			{
+		public void ShowStorePopup() {
+			Func.ShowStorePopup(CSceneManager.ActiveScenePopupUIs, (a_oSender) => {
 				var stParams = CStorePopup.MakeParams(Factory.MakeProductTradeInfos(KDefine.G_PRODUCT_KINDS_STORE_LIST).Values.ToList());
 
 #if ADS_MODULE_ENABLE
@@ -73,8 +67,7 @@ namespace OverlayScene
 		}
 
 		/** 상점 버튼을 눌렀을 경우 */
-		private void OnTouchStoreBtn()
-		{
+		private void OnTouchStoreBtn() {
 			this.ShowStorePopup();
 		}
 		#endregion         // 함수               
@@ -82,24 +75,20 @@ namespace OverlayScene
 		#region 조건부 함수
 #if PURCHASE_MODULE_ENABLE
 		/** 상품을 결제한다 */
-		public void PurchaseProduct(int a_nProductIdx, System.Action<CPurchaseManager, string, bool> a_oCallback)
-		{
+		public void PurchaseProduct(int a_nProductIdx, System.Action<CPurchaseManager, string, bool> a_oCallback) {
 			Func.PurchaseProduct(CProductInfoTable.Inst.GetProductInfo(a_nProductIdx).m_oID, a_oCallback);
 		}
 
 		/** 상품을 결제한다 */
-		public void PurchaseProduct(EProductKinds a_eProductKinds, System.Action<CPurchaseManager, string, bool> a_oCallback)
-		{
+		public void PurchaseProduct(EProductKinds a_eProductKinds, System.Action<CPurchaseManager, string, bool> a_oCallback) {
 			m_oCallbackDict.ExReplaceVal(ECallback.PURCHASE, a_oCallback);
 			Func.PurchaseProduct(a_eProductKinds, this.OnPurchaseProduct);
 		}
 
 		/** 상품이 결제 되었을 경우 */
-		private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
-		{
+		private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
 			// 결제 되었을 경우
-			if(a_bIsSuccess)
-			{
+			if(a_bIsSuccess) {
 				Func.AcquireProduct(a_oProductID);
 				m_oStrDict.ExReplaceVal(EKey.PURCHASE_PRODUCT_ID, a_oProductID);
 
@@ -108,9 +97,7 @@ namespace OverlayScene
 #else
 				Func.OnPurchaseProduct(a_oSender, a_oProductID, a_bIsSuccess, null);
 #endif         // #if FIREBASE_MODULE_ENABLE                                       
-			}
-			else
-			{
+			} else {
 				Func.OnPurchaseProduct(a_oSender, a_oProductID, a_bIsSuccess, null);
 			}
 

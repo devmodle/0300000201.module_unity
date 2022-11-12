@@ -8,21 +8,18 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 /** 기본 팩토리 */
-public static partial class Factory
-{
+public static partial class Factory {
 	#region 클래스 함수
 
 	#endregion          // 클래스 함수                   
 
 	#region 제네릭 클래스 함수
 	/** 키 정보를 생성한다 */
-	public static List<(T, GameObject)> MakeKeyInfos<T>(List<(T, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList)
-	{
+	public static List<(T, GameObject)> MakeKeyInfos<T>(List<(T, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, GameObject)>();
 
-		for(int i = 0; i < a_oKeyInfoList.Count; ++i)
-		{
+		for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
 			oKeyInfoList.Add((a_oKeyInfoList[i].Item1, a_oKeyInfoList[i].Item2));
 		}
 
@@ -30,13 +27,11 @@ public static partial class Factory
 	}
 
 	/** 키 정보를 생성한다 */
-	public static List<(T, string, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList)
-	{
+	public static List<(T, string, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, string, GameObject)>();
 
-		for(int i = 0; i < a_oKeyInfoList.Count; ++i)
-		{
+		for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
 			oKeyInfoList.Add((a_oKeyInfoList[i].Item1, a_oKeyInfoList[i].Item2, a_oKeyInfoList[i].Item3));
 		}
 
@@ -44,13 +39,11 @@ public static partial class Factory
 	}
 
 	/** 키 정보를 생성한다 */
-	public static List<(T, string, GameObject, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList)
-	{
+	public static List<(T, string, GameObject, GameObject)> MakeKeyInfos<T>(List<(T, string, GameObject, GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)> a_oKeyInfoList) {
 		CAccess.Assert(a_oKeyInfoList != null);
 		var oKeyInfoList = new List<(T, string, GameObject, GameObject)>();
 
-		for(int i = 0; i < a_oKeyInfoList.Count; ++i)
-		{
+		for(int i = 0; i < a_oKeyInfoList.Count; ++i) {
 			oKeyInfoList.Add((a_oKeyInfoList[i].Item1, a_oKeyInfoList[i].Item2, a_oKeyInfoList[i].Item3, a_oKeyInfoList[i].Item4));
 		}
 

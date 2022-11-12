@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 /** 서브 전역 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 	// 개수
 	public const int G_MAX_NUM_COINS_BOX_COINS = 0;
@@ -107,36 +106,31 @@ public static partial class KDefine
 
 	#region 런타임 상수
 	// 일일 보상
-	public static readonly List<ERewardKinds> G_REWARDS_KINDS_DAILY_REWARD_LIST = new List<ERewardKinds>()
-	{
+	public static readonly List<ERewardKinds> G_REWARDS_KINDS_DAILY_REWARD_LIST = new List<ERewardKinds>() {
 		// Do Something
 	};
 
 	// 상점 상품 종류
-	public static readonly List<EProductKinds> G_PRODUCT_KINDS_STORE_LIST = new List<EProductKinds>()
-	{
+	public static readonly List<EProductKinds> G_PRODUCT_KINDS_STORE_LIST = new List<EProductKinds>() {
 		// Do Something
 	};
 
 	// 특수 패키지 상품 종류
-	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>()
-	{
+	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>() {
 		// Do Something
 	};
 	#endregion            // 런타임 상수                   
 }
 
 /** 서브 타이틀 씬 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 
 	#endregion         // 기본               
 }
 
 /** 서브 메인 씬 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 	// 개수
 	public const int MS_MAX_NUM_LEVELS_IN_ROW = 1;
@@ -146,8 +140,7 @@ public static partial class KDefine
 }
 
 /** 서브 게임 씬 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 	// 단위
 	public const int GS_MIN_LEVEL_ENABLE_REWARD_ADS_WATCH = 0;
@@ -160,20 +153,17 @@ public static partial class KDefine
 	public static readonly string GS_TEX_P_FMT_BOTTOM_BG = $"{KCDefine.B_DIR_P_TEXTURES}{KCDefine.B_DIR_P_GAME_SCENE}BottomBG_{"{0:00}"}_{"{0:000}"}_{"{0:0000}"}";
 
 	// 정렬 순서 {
-	public static readonly STSortingOrderInfo GS_SORTING_OI_BG = new STSortingOrderInfo()
-	{
+	public static readonly STSortingOrderInfo GS_SORTING_OI_BG = new STSortingOrderInfo() {
 		m_nOrder = sbyte.MaxValue * 0,
 		m_oLayer = KCDefine.U_SORTING_L_UNDERGROUND
 	};
 
-	public static readonly STSortingOrderInfo GS_SORTING_OI_TOP_BG = new STSortingOrderInfo()
-	{
+	public static readonly STSortingOrderInfo GS_SORTING_OI_TOP_BG = new STSortingOrderInfo() {
 		m_nOrder = sbyte.MaxValue * 1,
 		m_oLayer = KCDefine.U_SORTING_L_UNDERGROUND
 	};
 
-	public static readonly STSortingOrderInfo GS_SORTING_OI_BOTTOM_BG = new STSortingOrderInfo()
-	{
+	public static readonly STSortingOrderInfo GS_SORTING_OI_BOTTOM_BG = new STSortingOrderInfo() {
 		m_nOrder = sbyte.MaxValue * 1,
 		m_oLayer = KCDefine.U_SORTING_L_UNDERGROUND
 	};
@@ -182,16 +172,14 @@ public static partial class KDefine
 }
 
 /** 서브 로딩 씬 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 
 	#endregion         // 기본               
 }
 
 /** 서브 중첩 씬 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 
 	#endregion         // 기본               
