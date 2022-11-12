@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 로그 상수 */
-public static partial class KDefine
-{
+public static partial class KDefine {
 	#region 기본
 	// 이름
 	public const string L_LOG_N_AGREE = "Agree";

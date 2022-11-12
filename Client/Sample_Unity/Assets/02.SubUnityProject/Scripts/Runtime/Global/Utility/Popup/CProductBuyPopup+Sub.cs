@@ -13,12 +13,10 @@ using UnityEngine.Purchasing;
 #endif          // #if PURCHASE_MODULE_ENABLE                                       
 
 /** 상품 구입 팝업 */
-public partial class CProductBuyPopup : CSubPopup
-{
+public partial class CProductBuyPopup : CSubPopup {
 	#region 함수
 	/** 초기화 */
-	public override void Awake()
-	{
+	public override void Awake() {
 		base.Awake();
 
 		#region 추가
@@ -27,8 +25,7 @@ public partial class CProductBuyPopup : CSubPopup
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams)
-	{
+	public virtual void Init(STParams a_stParams) {
 		base.Init();
 		this.Params = a_stParams;
 
@@ -38,11 +35,9 @@ public partial class CProductBuyPopup : CSubPopup
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState()
-	{
+	private void UpdateUIsState() {
 		// 상품 구입 UI 상태를 갱신한다
-		for(int i = 0; i < m_oProductBuyUIsList.Count; ++i)
-		{
+		for(int i = 0; i < m_oProductBuyUIsList.Count; ++i) {
 			this.UpdateProductBuyUIsState(m_oProductBuyUIsList[i], CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(KDefine.G_PRODUCT_KINDS_SPECIAL_PKGS_LIST[i]));
 		}
 
@@ -52,8 +47,7 @@ public partial class CProductBuyPopup : CSubPopup
 	}
 
 	/** 상품 구입 UI 상태를 갱신한다 */
-	private void UpdateProductBuyUIsState(GameObject a_oSpecialPkgsUIs, STProductTradeInfo a_stProductTradeInfo)
-	{
+	private void UpdateProductBuyUIsState(GameObject a_oSpecialPkgsUIs, STProductTradeInfo a_stProductTradeInfo) {
 		// 텍스트를 설정한다 {
 		var oPriceText = a_oSpecialPkgsUIs.ExFindComponent<TMP_Text>(KCDefine.U_OBJ_N_PRICE_TEXT);
 		oPriceText?.ExSetText(string.Format(KCDefine.B_TEXT_FMT_USD_PRICE, a_stProductTradeInfo.m_oPayTargetInfoDict.FirstOrDefault().Value.m_stValInfo01.m_dmVal), EFontSet._1, false);
@@ -77,8 +71,7 @@ public partial class CProductBuyPopup : CSubPopup
 		var stProductInfo = CProductInfoTable.Inst.GetProductInfo(a_stProductTradeInfo.m_nProductIdx);
 
 		// 비소모 상품 일 경우
-		if(stProductInfo.m_eProductType == ProductType.NonConsumable)
-		{
+		if(stProductInfo.m_eProductType == ProductType.NonConsumable) {
 			oPurchaseBtn?.ExSetInteractable(!CPurchaseManager.Inst.IsPurchaseNonConsumableProduct(stProductInfo.m_oID));
 		}
 #endif          // #if PURCHASE_MODULE_ENABLE                                       
@@ -88,11 +81,9 @@ public partial class CProductBuyPopup : CSubPopup
 }
 
 /** 서브 상품 구입 팝업 */
-public partial class CProductBuyPopup : CSubPopup
-{
+public partial class CProductBuyPopup : CSubPopup {
 	/** 서브 식별자 */
-	private enum ESubKey
-	{
+	private enum ESubKey {
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -107,20 +98,17 @@ public partial class CProductBuyPopup : CSubPopup
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake()
-	{
+	private void SubSetupAwake() {
 		// Do Something
 	}
 
 	/** 초기화한다 */
-	private void SubInit()
-	{
+	private void SubInit() {
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState()
-	{
+	private void SubUpdateUIsState() {
 		// Do Something
 	}
 	#endregion          // 함수               
@@ -128,11 +116,9 @@ public partial class CProductBuyPopup : CSubPopup
 	#region 조건부 함수
 #if PURCHASE_MODULE_ENABLE
 	/** 상품이 결제 되었을 경우 */
-	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
-	{
+	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
 		// 결제 되었을 경우
-		if(a_bIsSuccess)
-		{
+		if(a_bIsSuccess) {
 			// Do Something
 		}
 

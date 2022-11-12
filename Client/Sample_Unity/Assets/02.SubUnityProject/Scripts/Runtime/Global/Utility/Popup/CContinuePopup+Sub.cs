@@ -8,12 +8,10 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 이어하기 팝업 */
-public partial class CContinuePopup : CSubPopup
-{
+public partial class CContinuePopup : CSubPopup {
 	#region 함수
 	/** 초기화 */
-	public override void Awake()
-	{
+	public override void Awake() {
 		base.Awake();
 
 		// 텍스트를 설정한다
@@ -34,8 +32,7 @@ public partial class CContinuePopup : CSubPopup
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams)
-	{
+	public virtual void Init(STParams a_stParams) {
 		base.Init();
 		this.Params = a_stParams;
 
@@ -45,8 +42,7 @@ public partial class CContinuePopup : CSubPopup
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState()
-	{
+	private void UpdateUIsState() {
 		var stItemTradeInfo = CItemInfoTable.Inst.GetBuyItemTradeInfo(EItemKinds.CONSUMABLE_GAME_ITEM_CONTINUE);
 
 		// 텍스트를 갱신한다 {
@@ -54,8 +50,7 @@ public partial class CContinuePopup : CSubPopup
 			(EKey.PRICE_TEXT, ETargetKinds.ITEM_NUMS, EItemKinds.GOODS_NORM_COINS)
 		};
 
-		for(int i = 0; i < oTextKeyInfoList.Count; ++i)
-		{
+		for(int i = 0; i < oTextKeyInfoList.Count; ++i) {
 			m_oTextDict.GetValueOrDefault(oTextKeyInfoList[i].Item1)?.ExSetText($"{stItemTradeInfo.m_oPayTargetInfoDict.ExGetTargetVal(oTextKeyInfoList[i].Item2, (int)oTextKeyInfoList[i].Item3)}", EFontSet._1, false);
 		}
 		// 텍스트를 갱신한다 }
@@ -68,11 +63,9 @@ public partial class CContinuePopup : CSubPopup
 }
 
 /** 서브 이어하기 팝업 */
-public partial class CContinuePopup : CSubPopup
-{
+public partial class CContinuePopup : CSubPopup {
 	/** 서브 식별자 */
-	private enum ESubKey
-	{
+	private enum ESubKey {
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -87,20 +80,17 @@ public partial class CContinuePopup : CSubPopup
 
 	#region 함수
 	/** 팝업을 설정한다 */
-	private void SubSetupAwake()
-	{
+	private void SubSetupAwake() {
 		// Do Something
 	}
 
 	/** 초기화한다 */
-	private void SubInit()
-	{
+	private void SubInit() {
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState()
-	{
+	private void SubUpdateUIsState() {
 		// Do Something
 	}
 	#endregion          // 함수               

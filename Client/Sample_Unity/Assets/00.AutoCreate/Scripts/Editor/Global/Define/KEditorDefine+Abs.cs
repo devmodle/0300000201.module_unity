@@ -12,8 +12,7 @@ using UnityEditor.iOS.Xcode;
 #endif            // #if UNITY_IOS                          
 
 /** 에디터 상수 */
-public static partial class KEditorDefine
-{
+public static partial class KEditorDefine {
 	#region 기본
 	// 유니티 패키지
 	public const string B_UNITY_PKGS_ID_FMT = "{0}@{1}";
@@ -21,8 +20,7 @@ public static partial class KEditorDefine
 
 	#region 런타임 상수
 	// 스크립트 순서
-	public static readonly Dictionary<System.Type, int> B_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>()
-	{
+	public static readonly Dictionary<System.Type, int> B_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
 		[typeof(CValTable)] = KCDefine.U_SCRIPT_O_SINGLETON,
 		[typeof(CStrTable)] = KCDefine.U_SCRIPT_O_SINGLETON,
 
@@ -128,8 +126,7 @@ public static partial class KEditorDefine
 	};
 
 	// 클래스 타입
-	public static readonly Dictionary<string, System.Type> B_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>()
-	{
+	public static readonly Dictionary<string, System.Type> B_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
 #if SCENE_TEMPLATES_MODULE_ENABLE
 		[KCDefine.B_SCENE_N_INIT] = typeof(InitScene.CSubInitSceneManager),
 		[KCDefine.B_SCENE_N_START] = typeof(StartScene.CSubStartSceneManager),
@@ -157,8 +154,7 @@ public static partial class KEditorDefine
 	};
 
 	// 유니티 패키지 {
-	public static readonly Dictionary<string, string> B_UNITY_PKGS_DEPENDENCY_DICT = new Dictionary<string, string>()
-	{
+	public static readonly Dictionary<string, string> B_UNITY_PKGS_DEPENDENCY_DICT = new Dictionary<string, string>() {
 		// 기본 {
 		["com.unity.feature.2d"] = "1.0.0",
 		["com.unity.feature.characters-animation"] = "1.0.0",

@@ -12,42 +12,33 @@
 #pragma warning disable SA1312 // Variable names should begin with lower-case letter
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Resolvers
-{
-	public class GeneratedResolver : global::MessagePack.IFormatterResolver
-	{
+namespace MessagePack.Resolvers {
+	public class GeneratedResolver : global::MessagePack.IFormatterResolver {
 		public static readonly global::MessagePack.IFormatterResolver Instance = new GeneratedResolver();
 
-		private GeneratedResolver()
-		{
+		private GeneratedResolver() {
 		}
 
-		public global::MessagePack.Formatters.IMessagePackFormatter<T> GetFormatter<T>()
-		{
+		public global::MessagePack.Formatters.IMessagePackFormatter<T> GetFormatter<T>() {
 			return FormatterCache<T>.Formatter;
 		}
 
-		private static class FormatterCache<T>
-		{
+		private static class FormatterCache<T> {
 			internal static readonly global::MessagePack.Formatters.IMessagePackFormatter<T> Formatter;
 
-			static FormatterCache()
-			{
+			static FormatterCache() {
 				var f = GeneratedResolverGetFormatterHelper.GetFormatter(typeof(T));
-				if(f != null)
-				{
+				if(f != null) {
 					Formatter = (global::MessagePack.Formatters.IMessagePackFormatter<T>)f;
 				}
 			}
 		}
 	}
 
-	internal static class GeneratedResolverGetFormatterHelper
-	{
+	internal static class GeneratedResolverGetFormatterHelper {
 		private static readonly global::System.Collections.Generic.Dictionary<global::System.Type, int> lookup;
 
-		static GeneratedResolverGetFormatterHelper()
-		{
+		static GeneratedResolverGetFormatterHelper() {
 			lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(54)
 			{
 				{ typeof(global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>), 0 },
@@ -107,16 +98,13 @@ namespace MessagePack.Resolvers
 			};
 		}
 
-		internal static object GetFormatter(global::System.Type t)
-		{
+		internal static object GetFormatter(global::System.Type t) {
 			int key;
-			if(!lookup.TryGetValue(t, out key))
-			{
+			if(!lookup.TryGetValue(t, out key)) {
 				return null;
 			}
 
-			switch(key)
-			{
+			switch(key) {
 				case 0: return new global::MessagePack.Formatters.DictionaryFormatter<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>();
 				case 1: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CCharacterGameInfo>();
 				case 2: return new global::MessagePack.Formatters.DictionaryFormatter<int, global::CCharacterUserInfo>();
@@ -199,96 +187,74 @@ namespace MessagePack.Resolvers
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters
-{
+namespace MessagePack.Formatters {
 
-	public sealed class EKindsGroupTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EKindsGroupType>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EKindsGroupType value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class EKindsGroupTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EKindsGroupType> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EKindsGroupType value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::EKindsGroupType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::EKindsGroupType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::EKindsGroupType)reader.ReadInt32();
 		}
 	}
 
-	public sealed class EMissionKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EMissionKinds>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EMissionKinds value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class EMissionKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EMissionKinds> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EMissionKinds value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::EMissionKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::EMissionKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::EMissionKinds)reader.ReadInt32();
 		}
 	}
 
-	public sealed class EObjKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjKinds>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EObjKinds value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class EObjKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjKinds> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EObjKinds value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::EObjKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::EObjKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::EObjKinds)reader.ReadInt32();
 		}
 	}
 
-	public sealed class EObjTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjType>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EObjType value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class EObjTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EObjType> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EObjType value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::EObjType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::EObjType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::EObjType)reader.ReadInt32();
 		}
 	}
 
-	public sealed class ETargetKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ETargetKinds>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ETargetKinds value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class ETargetKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ETargetKinds> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ETargetKinds value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::ETargetKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::ETargetKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::ETargetKinds)reader.ReadInt32();
 		}
 	}
 
-	public sealed class ETutorialKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ETutorialKinds>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ETutorialKinds value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class ETutorialKindsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::ETutorialKinds> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ETutorialKinds value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::ETutorialKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::ETutorialKinds Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::ETutorialKinds)reader.ReadInt32();
 		}
 	}
 
-	public sealed class EValTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EValType>
-	{
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EValType value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+	public sealed class EValTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::EValType> {
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::EValType value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.Write((global::System.Int32)value);
 		}
 
-		public global::EValType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public global::EValType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
 			return (global::EValType)reader.ReadInt32();
 		}
 	}
@@ -316,15 +282,12 @@ namespace MessagePack.Formatters
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters
-{
-	public sealed class CBaseInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CBaseInfo>
-	{
+namespace MessagePack.Formatters {
+	public sealed class CBaseInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CBaseInfo> {
 		private readonly global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>> typeToKeyAndJumpMap;
 		private readonly global::System.Collections.Generic.Dictionary<int, int> keyToJumpMap;
 
-		public CBaseInfoFormatter()
-		{
+		public CBaseInfoFormatter() {
 			this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(5, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
 			{
 				{ typeof(global::CAppInfo).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
@@ -343,15 +306,12 @@ namespace MessagePack.Formatters
 			};
 		}
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CBaseInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CBaseInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::System.Collections.Generic.KeyValuePair<int, int> keyValuePair;
-			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair))
-			{
+			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair)) {
 				writer.WriteArrayHeader(2);
 				writer.WriteInt32(keyValuePair.Key);
-				switch(keyValuePair.Value)
-				{
+				switch(keyValuePair.Value) {
 					case 0:
 						options.Resolver.GetFormatterWithVerify<global::CAppInfo>().Serialize(ref writer, (global::CAppInfo)value, options);
 						break;
@@ -377,29 +337,24 @@ namespace MessagePack.Formatters
 			writer.WriteNil();
 		}
 
-		public global::CBaseInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CBaseInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
-			if(reader.ReadArrayHeader() != 2)
-			{
+			if(reader.ReadArrayHeader() != 2) {
 				throw new global::System.InvalidOperationException("Invalid Union data was detected. Type:global::CBaseInfo");
 			}
 
 			options.Security.DepthStep(ref reader);
 			var key = reader.ReadInt32();
 
-			if(!this.keyToJumpMap.TryGetValue(key, out key))
-			{
+			if(!this.keyToJumpMap.TryGetValue(key, out key)) {
 				key = -1;
 			}
 
 			global::CBaseInfo result = null;
-			switch(key)
-			{
+			switch(key) {
 				case 0:
 					result = (global::CBaseInfo)options.Resolver.GetFormatterWithVerify<global::CAppInfo>().Deserialize(ref reader, options);
 					break;
@@ -425,13 +380,11 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCommonBaseInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonBaseInfo>
-	{
+	public sealed class CCommonBaseInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonBaseInfo> {
 		private readonly global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>> typeToKeyAndJumpMap;
 		private readonly global::System.Collections.Generic.Dictionary<int, int> keyToJumpMap;
 
-		public CCommonBaseInfoFormatter()
-		{
+		public CCommonBaseInfoFormatter() {
 			this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(3, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
 			{
 				{ typeof(global::CCommonAppInfo).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
@@ -446,15 +399,12 @@ namespace MessagePack.Formatters
 			};
 		}
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonBaseInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonBaseInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::System.Collections.Generic.KeyValuePair<int, int> keyValuePair;
-			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair))
-			{
+			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair)) {
 				writer.WriteArrayHeader(2);
 				writer.WriteInt32(keyValuePair.Key);
-				switch(keyValuePair.Value)
-				{
+				switch(keyValuePair.Value) {
 					case 0:
 						options.Resolver.GetFormatterWithVerify<global::CCommonAppInfo>().Serialize(ref writer, (global::CCommonAppInfo)value, options);
 						break;
@@ -474,29 +424,24 @@ namespace MessagePack.Formatters
 			writer.WriteNil();
 		}
 
-		public global::CCommonBaseInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCommonBaseInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
-			if(reader.ReadArrayHeader() != 2)
-			{
+			if(reader.ReadArrayHeader() != 2) {
 				throw new global::System.InvalidOperationException("Invalid Union data was detected. Type:global::CCommonBaseInfo");
 			}
 
 			options.Security.DepthStep(ref reader);
 			var key = reader.ReadInt32();
 
-			if(!this.keyToJumpMap.TryGetValue(key, out key))
-			{
+			if(!this.keyToJumpMap.TryGetValue(key, out key)) {
 				key = -1;
 			}
 
 			global::CCommonBaseInfo result = null;
-			switch(key)
-			{
+			switch(key) {
 				case 0:
 					result = (global::CCommonBaseInfo)options.Resolver.GetFormatterWithVerify<global::CCommonAppInfo>().Deserialize(ref reader, options);
 					break;
@@ -516,13 +461,11 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CTargetInfo>
-	{
+	public sealed class CTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CTargetInfo> {
 		private readonly global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>> typeToKeyAndJumpMap;
 		private readonly global::System.Collections.Generic.Dictionary<int, int> keyToJumpMap;
 
-		public CTargetInfoFormatter()
-		{
+		public CTargetInfoFormatter() {
 			this.typeToKeyAndJumpMap = new global::System.Collections.Generic.Dictionary<global::System.RuntimeTypeHandle, global::System.Collections.Generic.KeyValuePair<int, int>>(4, global::MessagePack.Internal.RuntimeTypeHandleEqualityComparer.Default)
 			{
 				{ typeof(global::CItemTargetInfo).TypeHandle, new global::System.Collections.Generic.KeyValuePair<int, int>(0, 0) },
@@ -539,15 +482,12 @@ namespace MessagePack.Formatters
 			};
 		}
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::System.Collections.Generic.KeyValuePair<int, int> keyValuePair;
-			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair))
-			{
+			if(value != null && this.typeToKeyAndJumpMap.TryGetValue(value.GetType().TypeHandle, out keyValuePair)) {
 				writer.WriteArrayHeader(2);
 				writer.WriteInt32(keyValuePair.Key);
-				switch(keyValuePair.Value)
-				{
+				switch(keyValuePair.Value) {
 					case 0:
 						options.Resolver.GetFormatterWithVerify<global::CItemTargetInfo>().Serialize(ref writer, (global::CItemTargetInfo)value, options);
 						break;
@@ -570,29 +510,24 @@ namespace MessagePack.Formatters
 			writer.WriteNil();
 		}
 
-		public global::CTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
-			if(reader.ReadArrayHeader() != 2)
-			{
+			if(reader.ReadArrayHeader() != 2) {
 				throw new global::System.InvalidOperationException("Invalid Union data was detected. Type:global::CTargetInfo");
 			}
 
 			options.Security.DepthStep(ref reader);
 			var key = reader.ReadInt32();
 
-			if(!this.keyToJumpMap.TryGetValue(key, out key))
-			{
+			if(!this.keyToJumpMap.TryGetValue(key, out key)) {
 				key = -1;
 			}
 
 			global::CTargetInfo result = null;
-			switch(key)
-			{
+			switch(key) {
 				case 0:
 					result = (global::CTargetInfo)options.Resolver.GetFormatterWithVerify<global::CItemTargetInfo>().Deserialize(ref reader, options);
 					break;
@@ -643,15 +578,11 @@ namespace MessagePack.Formatters
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters
-{
-	public sealed class CAbilityTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CAbilityTargetInfo>
-	{
+namespace MessagePack.Formatters {
+	public sealed class CAbilityTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CAbilityTargetInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CAbilityTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CAbilityTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -793,10 +724,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>(formatterResolver).Serialize(ref writer, value.m_oAbilityTargetInfoDict, options);
 		}
 
-		public global::CAbilityTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CAbilityTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -805,10 +734,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CAbilityTargetInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -830,13 +757,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CAppInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CAppInfo>
-	{
+	public sealed class CAppInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CAppInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CAppInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CAppInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -988,10 +912,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Serialize(ref writer, value.m_oTableVerDict, options);
 		}
 
-		public global::CAppInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CAppInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1000,10 +922,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CAppInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1022,13 +942,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCharacterGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCharacterGameInfo>
-	{
+	public sealed class CCharacterGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCharacterGameInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCharacterGameInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCharacterGameInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1192,10 +1109,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::CClearInfo>>(formatterResolver).Serialize(ref writer, value.m_oChapterClearInfoDict, options);
 		}
 
-		public global::CCharacterGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCharacterGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1204,10 +1119,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CCharacterGameInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1250,13 +1163,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCharacterUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCharacterUserInfo>
-	{
+	public sealed class CCharacterUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCharacterUserInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCharacterUserInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCharacterUserInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1398,10 +1308,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>(formatterResolver).Serialize(ref writer, value.m_oAbilityTargetInfoDict, options);
 		}
 
-		public global::CCharacterUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCharacterUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1410,10 +1318,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CCharacterUserInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1444,13 +1350,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CClearInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CClearInfo>
-	{
+	public sealed class CClearInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CClearInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CClearInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CClearInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1463,10 +1366,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::STRecordInfo>(formatterResolver).Serialize(ref writer, value.m_stBestRecordInfo, options);
 		}
 
-		public global::CClearInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CClearInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1475,10 +1376,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CClearInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1500,13 +1399,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCommonAppInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonAppInfo>
-	{
+	public sealed class CCommonAppInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonAppInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonAppInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonAppInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1598,10 +1494,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>(formatterResolver).Serialize(ref writer, value.m_oSendLogList, options);
 		}
 
-		public global::CCommonAppInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCommonAppInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1610,10 +1504,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CCommonAppInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1632,13 +1524,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCommonGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonGameInfo>
-	{
+	public sealed class CCommonGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonGameInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonGameInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonGameInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1649,10 +1538,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Serialize(ref writer, value.m_oStrDict, options);
 		}
 
-		public global::CCommonGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCommonGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1661,10 +1548,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CCommonGameInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1680,13 +1565,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CCommonUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonUserInfo>
-	{
+	public sealed class CCommonUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CCommonUserInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonUserInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CCommonUserInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1778,10 +1660,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>(formatterResolver).Serialize(ref writer, value.m_oRestoreProductIDList, options);
 		}
 
-		public global::CCommonUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CCommonUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1790,10 +1670,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CCommonUserInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1812,13 +1690,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CGameInfo>
-	{
+	public sealed class CGameInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CGameInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CGameInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CGameInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -1920,10 +1795,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<int, global::CCharacterGameInfo>>(formatterResolver).Serialize(ref writer, value.m_oCharacterGameInfoDict, options);
 		}
 
-		public global::CGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CGameInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -1932,10 +1805,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CGameInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -1954,13 +1825,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CItemTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CItemTargetInfo>
-	{
+	public sealed class CItemTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CItemTargetInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CItemTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CItemTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -2102,10 +1970,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>(formatterResolver).Serialize(ref writer, value.m_oAbilityTargetInfoDict, options);
 		}
 
-		public global::CItemTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CItemTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -2114,10 +1980,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CItemTargetInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -2139,13 +2003,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CLevelInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CLevelInfo>
-	{
+	public sealed class CLevelInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CLevelInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CLevelInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CLevelInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -2321,10 +2182,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::STCellInfo>>>(formatterResolver).Serialize(ref writer, value.m_oCellInfoDictContainer, options);
 		}
 
-		public global::CLevelInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CLevelInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -2333,10 +2192,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CLevelInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -2355,13 +2212,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CObjTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CObjTargetInfo>
-	{
+	public sealed class CObjTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CObjTargetInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CObjTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CObjTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -2503,10 +2357,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>(formatterResolver).Serialize(ref writer, value.m_oAbilityTargetInfoDict, options);
 		}
 
-		public global::CObjTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CObjTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -2515,10 +2367,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CObjTargetInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -2540,13 +2390,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CSkillTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CSkillTargetInfo>
-	{
+	public sealed class CSkillTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CSkillTargetInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CSkillTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CSkillTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -2688,10 +2535,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<ulong, global::STTargetInfo>>(formatterResolver).Serialize(ref writer, value.m_oAbilityTargetInfoDict, options);
 		}
 
-		public global::CSkillTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CSkillTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -2700,10 +2545,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CSkillTargetInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -2725,13 +2568,10 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class CUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CUserInfo>
-	{
+	public sealed class CUserInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::CUserInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CUserInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(value == null)
-			{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::CUserInfo value, global::MessagePack.MessagePackSerializerOptions options) {
+			if(value == null) {
 				writer.WriteNil();
 				return;
 			}
@@ -2893,10 +2733,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<int, global::CCharacterUserInfo>>(formatterResolver).Serialize(ref writer, value.m_oCharacterUserInfoDict, options);
 		}
 
-		public global::CUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::CUserInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				return null;
 			}
 
@@ -2905,10 +2743,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::CUserInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oStrDict = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<string, string>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -2927,11 +2763,9 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STCellInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STCellInfo>
-	{
+	public sealed class STCellInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STCellInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STCellInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STCellInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
 			value.OnBeforeSerialize();
 			writer.WriteArrayHeader(162);
@@ -3099,10 +2933,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>>(formatterResolver).Serialize(ref writer, value.m_oObjKindsDictContainer, options);
 		}
 
-		public global::STCellInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STCellInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3111,10 +2943,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STCellInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 161:
 						____result.m_oObjKindsDictContainer = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<global::EObjType, global::System.Collections.Generic.List<global::EObjKinds>>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -3130,11 +2960,9 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STCommonTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STCommonTypeWrapper>
-	{
+	public sealed class STCommonTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STCommonTypeWrapper> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STCommonTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STCommonTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
 			writer.WriteArrayHeader(3);
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<int>>(formatterResolver).Serialize(ref writer, value.m_oIntList, options);
@@ -3142,10 +2970,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<string>>(formatterResolver).Serialize(ref writer, value.m_oStrList, options);
 		}
 
-		public global::STCommonTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STCommonTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3154,10 +2980,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STCommonTypeWrapper();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_oIntList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<int>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -3178,21 +3002,17 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STIDInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STIDInfo>
-	{
+	public sealed class STIDInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STIDInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIDInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIDInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(3);
 			writer.Write(value.m_nID01);
 			writer.Write(value.m_nID02);
 			writer.Write(value.m_nID03);
 		}
 
-		public global::STIDInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STIDInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3202,10 +3022,8 @@ namespace MessagePack.Formatters
 			var __m_nID02__ = default(int);
 			var __m_nID03__ = default(int);
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						__m_nID01__ = reader.ReadInt32();
 						break;
@@ -3227,21 +3045,17 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STIdxInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STIdxInfo>
-	{
+	public sealed class STIdxInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STIdxInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIdxInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIdxInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(3);
 			writer.Write(value.m_nIdx01);
 			writer.Write(value.m_nIdx02);
 			writer.Write(value.m_nIdx03);
 		}
 
-		public global::STIdxInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STIdxInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3251,10 +3065,8 @@ namespace MessagePack.Formatters
 			var __m_nIdx02__ = default(int);
 			var __m_nIdx03__ = default(int);
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						__m_nIdx01__ = reader.ReadInt32();
 						break;
@@ -3276,21 +3088,17 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STRecordInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STRecordInfo>
-	{
+	public sealed class STRecordInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STRecordInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STRecordInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STRecordInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(3);
 			writer.Write(value.m_bIsSuccess);
 			writer.Write(value.m_nIntRecord);
 			writer.Write(value.m_dblRealRecord);
 		}
 
-		public global::STRecordInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STRecordInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3298,10 +3106,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STRecordInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 0:
 						____result.m_bIsSuccess = reader.ReadBoolean();
 						break;
@@ -3322,18 +3128,14 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STSubTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STSubTypeWrapper>
-	{
+	public sealed class STSubTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STSubTypeWrapper> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STSubTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STSubTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(0);
 		}
 
-		public global::STSubTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STSubTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3342,11 +3144,9 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STTargetInfo>
-	{
+	public sealed class STTargetInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STTargetInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STTargetInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STTargetInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
 			writer.WriteArrayHeader(24);
 			writer.WriteNil();
@@ -3375,10 +3175,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::STValInfo>(formatterResolver).Serialize(ref writer, value.m_stValInfo03, options);
 		}
 
-		public global::STTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STTargetInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3387,10 +3185,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STTargetInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 1:
 						____result.m_nKinds = reader.ReadInt32();
 						break;
@@ -3420,11 +3216,9 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STTypeWrapper>
-	{
+	public sealed class STTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STTypeWrapper> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
 			writer.WriteArrayHeader(162);
 			writer.WriteNil();
@@ -3591,10 +3385,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::System.Collections.Generic.Dictionary<int, global::CLevelInfo>>>>(formatterResolver).Serialize(ref writer, value.m_oLevelInfoDictContainer, options);
 		}
 
-		public global::STTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3603,10 +3395,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STTypeWrapper();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 51:
 						____result.m_oULevelIDList = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<ulong>>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -3624,11 +3414,9 @@ namespace MessagePack.Formatters
 		}
 	}
 
-	public sealed class STValInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STValInfo>
-	{
+	public sealed class STValInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::STValInfo> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STValInfo value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STValInfo value, global::MessagePack.MessagePackSerializerOptions options) {
 			global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
 			writer.WriteArrayHeader(12);
 			writer.WriteNil();
@@ -3645,10 +3433,8 @@ namespace MessagePack.Formatters
 			global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::EValType>(formatterResolver).Serialize(ref writer, value.m_eValType, options);
 		}
 
-		public global::STValInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::STValInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3657,10 +3443,8 @@ namespace MessagePack.Formatters
 			var length = reader.ReadArrayHeader();
 			var ____result = new global::STValInfo();
 
-			for(int i = 0; i < length; i++)
-			{
-				switch(i)
-				{
+			for(int i = 0; i < length; i++) {
+				switch(i) {
 					case 1:
 						____result.m_dmVal = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<decimal>(formatterResolver).Deserialize(ref reader, options);
 						break;
@@ -3707,20 +3491,15 @@ namespace MessagePack.Formatters
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters.NSEngine
-{
-	public sealed class STEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STEngineTypeWrapper>
-	{
+namespace MessagePack.Formatters.NSEngine {
+	public sealed class STEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STEngineTypeWrapper> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(0);
 		}
 
-		public global::NSEngine.STEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::NSEngine.STEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 
@@ -3729,18 +3508,14 @@ namespace MessagePack.Formatters.NSEngine
 		}
 	}
 
-	public sealed class STSubEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STSubEngineTypeWrapper>
-	{
+	public sealed class STSubEngineTypeWrapperFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::NSEngine.STSubEngineTypeWrapper> {
 
-		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STSubEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options)
-		{
+		public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::NSEngine.STSubEngineTypeWrapper value, global::MessagePack.MessagePackSerializerOptions options) {
 			writer.WriteArrayHeader(0);
 		}
 
-		public global::NSEngine.STSubEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
-		{
-			if(reader.TryReadNil())
-			{
+		public global::NSEngine.STSubEngineTypeWrapper Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options) {
+			if(reader.TryReadNil()) {
 				throw new global::System.InvalidOperationException("typecode is null, struct not supported");
 			}
 

@@ -13,14 +13,11 @@ using DG.Tweening;
 using GoogleSheetsToUnity;
 #endif          // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)                                                                                                          
 
-namespace TitleScene
-{
+namespace TitleScene {
 	/** 서브 타이틀 씬 관리자 */
-	public partial class CSubTitleSceneManager : CTitleSceneManager
-	{
+	public partial class CSubTitleSceneManager : CTitleSceneManager {
 		/** 식별자 */
-		private enum EKey
-		{
+		private enum EKey {
 			NONE = -1,
 			IS_TOUCH,
 			TOUCH_ANI,
@@ -52,28 +49,23 @@ namespace TitleScene
 
 		#region 함수
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
-		{
+		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent) {
 			base.OnReceiveNavStackEvent(a_eEvent);
 
 			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
-			{
+			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN) {
 				Func.ShowQuitPopup(this.OnReceiveQuitPopupResult);
 			}
 		}
 
 		/** 터치 이벤트를 처리한다 */
-		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent)
-		{
+		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
 			base.HandleTouchEvent(a_oSender, a_oEventData, a_eTouchEvent);
 			double dblDeltaTime = System.DateTime.Now.ExGetDeltaTime(CSceneManager.ActiveSceneAwakeTime);
 
 			// 배경 터치 전달자 일 경우
-			if(this.BGTouchDispatcher == a_oSender && dblDeltaTime.ExIsGreate(KCDefine.B_VAL_1_REAL))
-			{
-				switch(a_eTouchEvent)
-				{
+			if(this.BGTouchDispatcher == a_oSender && dblDeltaTime.ExIsGreate(KCDefine.B_VAL_1_REAL)) {
+				switch(a_eTouchEvent) {
 					case ETouchEvent.BEGIN:
 						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
 						break;
@@ -88,8 +80,7 @@ namespace TitleScene
 		}
 
 		/** 최초 시작 상태를 갱신한다 */
-		private void UpdateFirstStartState()
-		{
+		private void UpdateFirstStartState() {
 			LogFunc.SendLaunchLog();
 			LogFunc.SendSplashLog();
 
@@ -101,73 +92,61 @@ namespace TitleScene
 		}
 
 		/** 최초 플레이 상태를 갱신한다 */
-		private void UpdateFirstPlayState()
-		{
+		private void UpdateFirstPlayState() {
 			CCommonAppInfoStorage.Inst.AppInfo.IsFirstPlay = false;
 			CCommonAppInfoStorage.Inst.SaveAppInfo();
 
 			// 약관 동의 팝업이 닫혔을 경우
-			if(CAppInfoStorage.Inst.IsCloseAgreePopup)
-			{
+			if(CAppInfoStorage.Inst.IsCloseAgreePopup) {
 				LogFunc.SendAgreeLog();
 			}
 		}
 
 		/** 종료 팝업 결과를 수신했을 경우 */
-		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK)
-		{
+		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
 			// 확인 버튼을 눌렀을 경우
-			if(a_bIsOK)
-			{
+			if(a_bIsOK) {
 				a_oSender.SetIgnoreAni(true);
 				this.ExLateCallFunc((a_oSender) => this.QuitApp());
 			}
 		}
 
 		/** 업데이트 팝업 결과를 수신했을 경우 */
-		private void OnReceiveUpdatePopupResult(CAlertPopup a_oSender, bool a_bIsOK)
-		{
+		private void OnReceiveUpdatePopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
 			// 확인 버튼을 눌렀을 경우
-			if(a_bIsOK)
-			{
+			if(a_bIsOK) {
 				Application.OpenURL(Access.StoreURL);
 			}
 		}
 
 		/** 플레이 버튼을 눌렀을 경우 */
-		private void OnTouchPlayBtn()
-		{
+		private void OnTouchPlayBtn() {
 			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 		}
 
 		/** 게스트 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchGuestLoginBtn()
-		{
+		private void OnTouchGuestLoginBtn() {
 			this.OnLogin(ELoginType.GUEST, true);
 		}
 
 		/** 애플 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchAppleLoginBtn()
-		{
+		private void OnTouchAppleLoginBtn() {
 #if UNITY_IOS && APPLE_LOGIN_ENABLE
 			Func.AppleLogin((a_oSender, a_bIsSuccess) => this.OnLogin(ELoginType.APPLE, a_bIsSuccess));
 #endif          // #if UNITY_IOS && APPLE_LOGIN_ENABLE                                                
 		}
 
 		/** 페이스 북 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchFacebookLoginBtn()
-		{
+		private void OnTouchFacebookLoginBtn() {
 #if FACEBOOK_MODULE_ENABLE
 			Func.FacebookLogin((a_oSender, a_bIsSuccess) => this.OnLogin(ELoginType.FACEBOOK, a_bIsSuccess));
 #endif          // #if FACEBOOK_MODULE_ENABLE                                       
 		}
 
 		/** 로그인 되었을 경우 */
-		private void OnLogin(ELoginType a_eLoginType, bool a_bIsSuccess)
-		{
+		private void OnLogin(ELoginType a_eLoginType, bool a_bIsSuccess) {
 			// 로그인 되었을 경우
-			if(a_bIsSuccess)
-			{
+			if(a_bIsSuccess) {
 				CUserInfoStorage.Inst.UserInfo.LoginType = a_eLoginType;
 				CUserInfoStorage.Inst.SaveUserInfo();
 

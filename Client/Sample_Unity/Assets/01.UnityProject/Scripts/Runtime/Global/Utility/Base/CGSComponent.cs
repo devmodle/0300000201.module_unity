@@ -5,14 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace GameScene
-{
+namespace GameScene {
 	/** 게임 씬 컴포넌트 */
-	public partial class CGSComponent : CComponent
-	{
+	public partial class CGSComponent : CComponent {
 		/** 매개 변수 */
-		public struct STParams
-		{
+		public struct STParams {
 			public NSEngine.CEngine m_oEngine;
 		}
 
@@ -30,10 +27,8 @@ namespace GameScene
 
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(NSEngine.CEngine a_oEngine)
-		{
-			return new STParams()
-			{
+		public static STParams MakeParams(NSEngine.CEngine a_oEngine) {
+			return new STParams() {
 				m_oEngine = a_oEngine
 			};
 		}
