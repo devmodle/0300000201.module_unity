@@ -12,7 +12,7 @@ namespace Google {
 	public partial class CGGoogleSheetSceneManager : StudyScene.CSSceneManager {
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_G_GOOGLE_SHEET;
-		#endregion          // 프로퍼티                 
+		#endregion // 프로퍼티                 
 
 		#region 함수
 		/** 초기화 */
@@ -25,7 +25,7 @@ namespace Google {
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 					string oKey = KCDefine.U_TABLE_P_G_VER_INFO.ExGetFileName(false);
 					Func.LoadVerInfoGoogleSheet(KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(oKey).m_oID, this.OnLoadVerInfoGoogleSheet);
-#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 				});
 
 				this.UIs.ExFindComponent<Button>("SAVE_GOOGLE_SHEET_BTN")?.onClick.AddListener(() => {
@@ -41,11 +41,11 @@ namespace Google {
 						[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
 						[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
 					}, this.OnSaveGoogleSheets);
-#endif            // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 				});
 			}
 		}
-		#endregion         // 함수               
+		#endregion // 함수               
 
 		#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
@@ -105,8 +105,8 @@ namespace Google {
 		private void OnSaveGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
 			Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnSaveGoogleSheets: {a_bIsSuccess}", null, false);
 		}
-#endif         // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-		#endregion         // 조건부 함수                   
+#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+		#endregion // 조건부 함수                   
 	}
 }
-#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE

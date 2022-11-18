@@ -9,13 +9,13 @@ using UnityEngine.Events;
 public static partial class KDefine {
 	#region 기본
 
-	#endregion          // 기본               
+	#endregion // 기본               
 }
 
 /** 서브 레벨 에디터 씬 상수 */
 public static partial class KDefine {
 	#region 기본
 
-	#endregion          // 기본               
+	#endregion // 기본               
 }
-#endif          // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           
+#endif // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)                                                                                                                           

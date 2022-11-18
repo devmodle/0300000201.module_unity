@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public static partial class KEnumVal {
 	#region 기본
 
-	#endregion          // 기본               
+	#endregion // 기본               
 }
 
 #region 기본
@@ -39,5 +39,5 @@ public enum EPurchaseType {
 	TARGET,
 	[HideInInspector] MAX_VAL
 }
-#endregion          // 기본               
-#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endregion // 기본               
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

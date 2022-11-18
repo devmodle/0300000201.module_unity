@@ -25,12 +25,12 @@ namespace NSEngine {
 
 		#region 변수
 
-		#endregion          // 변수               
+		#endregion // 변수               
 
 		#region 프로퍼티
 		public new STParams Params { get; private set; }
 		public CDictWrapper<EAbilityKinds, decimal> AbilityValDictWrapper { get; } = new CDictWrapper<EAbilityKinds, decimal>();
-		#endregion          // 프로퍼티                 
+		#endregion // 프로퍼티                 
 
 		#region 함수
 		/** 상태를 갱신한다 */
@@ -64,14 +64,14 @@ namespace NSEngine {
 
 			this.AbilityValDictWrapper.m_oDict02.Clear();
 		}
-		#endregion          // 함수               
+		#endregion // 함수               
 
 		#region 제네릭 접근자 함수
 		/** 제어자를 반환한다 */
 		public T GetController<T>() where T : CEController {
 			return this.Params.m_oController as T;
 		}
-		#endregion          // 제네릭 접근자 함수                       
+		#endregion // 제네릭 접근자 함수                       
 
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
@@ -82,7 +82,7 @@ namespace NSEngine {
 				m_oCallbackDict = a_oCallbackDict ?? new Dictionary<CEObjComponent.ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>>()
 			};
 		}
-		#endregion          // 클래스 함수                   
+		#endregion // 클래스 함수                   
 	}
 }
-#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

@@ -20,7 +20,7 @@ namespace NSEngine {
 		public static STGridInfo INVALID = new STGridInfo() {
 			m_stScale = Vector3.one
 		};
-		#endregion          // 상수               
+		#endregion // 상수               
 	}
 
 	/** 엔진 타입 랩퍼 */
@@ -28,6 +28,6 @@ namespace NSEngine {
 	public struct STEngineTypeWrapper {
 		// Do Something
 	}
-	#endregion          // 기본               
+	#endregion // 기본               
 }
-#endif          // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
