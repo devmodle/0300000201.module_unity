@@ -910,7 +910,7 @@ public static partial class Func {
 
 	/** 구글 시트를 로드한다 */
 	public static void LoadGoogleSheet(string a_oID, List<(string, int)> a_oInfoList, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool> a_oCallback) {
-		CIndicatorManager.Inst.Show();
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stTableInfo.m_oID.Equals(a_oID));
 		a_oInfoList.ExCopyTo(Func.m_oGoogleSheetLoadInfoList, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetJSONNodeDict.Clear();
@@ -918,6 +918,9 @@ public static partial class Func {
 
 		// 정보가 존재 할 경우
 		if(a_oInfoList.ExIsValid()) {
+			CIndicatorManager.Inst.Show();
+			CIndicatorManager.Inst.SetInfoText(stResult.Item1 ? stResult.Item2 : string.Empty);
+
 			CServicesManager.Inst.LoadGoogleSheet(a_oID, a_oInfoList[KCDefine.B_VAL_0_INT].Item1, Func.OnLoadGoogleSheet, KCDefine.B_VAL_0_INT, a_oInfoList[KCDefine.B_VAL_0_INT].Item2);
 		} else {
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, STGoogleSheetLoadInfo.INVALID, null, false));
@@ -959,13 +962,16 @@ public static partial class Func {
 
 	/** 구글 시트를 저장한다 */
 	public static void SaveGoogleSheet(string a_oID, List<(string, List<List<string>>)> a_oInfoListContainer, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool> a_oCallback) {
-		CIndicatorManager.Inst.Show();
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stTableInfo.m_oID.Equals(a_oID)); ;
 		a_oInfoListContainer.ExCopyTo(Func.m_oGoogleSheetSaveInfoListContainer, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2.Count, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetCallbackDict04.ExReplaceVal(ECallback.SAVE_GOOGLE_SHEET, a_oCallback);
 
 		// 정보가 존재 할 경우
 		if(a_oInfoListContainer.ExIsValid()) {
+			CIndicatorManager.Inst.Show();
+			CIndicatorManager.Inst.SetInfoText(stResult.Item1 ? stResult.Item2 : string.Empty);
+
 			CServicesManager.Inst.SaveGoogleSheet(a_oID, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item1, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item2, Func.OnSaveGoogleSheet, KCDefine.B_VAL_0_INT, a_oInfoListContainer[KCDefine.B_VAL_0_INT].Item2.Count);
 		} else {
 			CSceneManager.ActiveSceneManager.ExLateCallFunc((a_oSender) => a_oCallback?.Invoke(CServicesManager.Inst, STGoogleSheetSaveInfo.INVALID, false));

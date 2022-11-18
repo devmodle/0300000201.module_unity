@@ -39,7 +39,7 @@ namespace Google {
 						[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
 						[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
 						[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
-						[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet,
+						[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnSaveGoogleSheet
 					}, this.OnSaveGoogleSheets);
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 				});
@@ -89,7 +89,7 @@ namespace Google {
 					[KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
 					[KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
 					[KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
-					[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet,
+					[KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false)] = this.OnLoadGoogleSheet
 				}, this.OnLoadGoogleSheets);
 			} else {
 				Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnLoadVerInfoGoogleSheet: {a_bIsSuccess}", null, false);
