@@ -11,11 +11,11 @@ using UnityEngine.Purchasing;
 
 /** 기본 로그 함수 */
 public static partial class LogFunc {
-	#region 클래스 변수
+#region 클래스 변수
 	private static Dictionary<string, string> m_oLogTimeDict = new Dictionary<string, string>();
-	#endregion // 클래스 변수                   
+#endregion // 클래스 변수                   
 
-	#region 클래스 함수
+#region 클래스 함수
 	/** 로그를 전송한다 */
 	public static void SendLog(string a_oName, Dictionary<string, object> a_oDataDict) {
 		// 로그 전송이 가능 할 경우
@@ -81,9 +81,9 @@ public static partial class LogFunc {
 			LogFunc.SendLog(a_oName, a_oDataDict);
 		}
 	}
-	#endregion // 클래스 함수                   
+#endregion // 클래스 함수                   
 
-	#region 조건부 클래스 함수
+#region 조건부 클래스 함수
 #if PURCHASE_MODULE_ENABLE
 	/** 결제 로그를 전송한다 */
 	public static void SendPurchaseLog(Product a_oProduct, int a_nNumProducts = KCDefine.B_VAL_1_INT) {
@@ -118,6 +118,6 @@ public static partial class LogFunc {
 		}
 	}
 #endif // #if PURCHASE_MODULE_ENABLE                                       
-	#endregion // 조건부 클래스 함수                       
+#endregion // 조건부 클래스 함수                       
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

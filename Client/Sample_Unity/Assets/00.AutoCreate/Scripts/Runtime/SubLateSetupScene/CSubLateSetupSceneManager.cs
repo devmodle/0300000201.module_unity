@@ -13,19 +13,19 @@ using UnityEngine.Android;
 namespace LateSetupScene {
 	/** 서브 지연 설정 씬 관리자 */
 	public partial class CSubLateSetupSceneManager : CLateSetupSceneManager {
-		#region 변수
+#region 변수
 		[SerializeField] private EUserType m_eUserType = EUserType.NONE;
-		#endregion // 변수               
+#endregion // 변수               
 
-		#region 프로퍼티
+#region 프로퍼티
 		public override bool IsAutoInitManager => true;
-		#endregion // 프로퍼티                 
+#endregion // 프로퍼티                 
 
-		#region 함수
+#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-
+			
 			// 초기화 되었을 경우
 			if(CSceneManager.IsInit) {
 				this.SetupAwake();
@@ -51,11 +51,11 @@ namespace LateSetupScene {
 			// 추적 설명 팝업 출력이 가능 할 경우
 			if(CCommonAppInfoStorage.Inst.AppInfo.IsEnableShowTrackingDescPopup) {
 				var oTrackingDescPopup = CPopup.Create<CTrackingDescPopup>(KCDefine.LSS_OBJ_N_TRACKING_DESC_POPUP, KCDefine.LSS_OBJ_P_TRACKING_DESC_POPUP, this.PopupUIs);
-
+				
 				oTrackingDescPopup.Init(CTrackingDescPopup.MakeParams(new Dictionary<CTrackingDescPopup.ECallback, System.Action<CTrackingDescPopup>>() {
 					[CTrackingDescPopup.ECallback.NEXT] = this.OnReceiveTrackingDescPopupResult
 				}));
-
+				
 				oTrackingDescPopup.Show(null, null);
 			} else {
 				this.OnReceiveTrackingDescPopupResult(null);
@@ -100,16 +100,16 @@ namespace LateSetupScene {
 			a_oSender?.Close();
 			this.ExLateCallFunc((a_oSender) => this.ShowTrackingConsentView(), KCDefine.U_DELAY_INIT);
 		}
-		#endregion // 함수               
+#endregion // 함수               
 
-		#region 조건부 함수
+#region 조건부 함수
 #if UNITY_ANDROID
 		/** 유저 권한을 요청한다 */
 		protected override void RequestUserPermission(string a_oPermission, System.Action<string, bool> a_oCallback) {
 			this.ExRequestUserPermission(a_oPermission, a_oCallback, true);
 		}
 #endif // #if UNITY_ANDROID                              
-		#endregion // 조건부 함수                   
+#endregion // 조건부 함수                   
 	}
 }
 #endif // #if SCENE_TEMPLATES_MODULE_ENABLE                                              

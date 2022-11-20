@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 동기화 팝업 */
 public partial class CSyncPopup : CSubPopup {
-	#region 함수
+#region 함수
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
@@ -26,18 +26,18 @@ public partial class CSyncPopup : CSubPopup {
 			(KCDefine.U_OBJ_N_SAVE_BTN, this.Contents, this.OnTouchSaveBtn)
 		}, false);
 
-		#region 추가
+#region 추가
 		this.SubSetupAwake();
-		#endregion // 추가               
+#endregion // 추가               
 	}
 
 	/** 초기화 */
 	public override void Init() {
 		base.Init();
 
-		#region 추가
+#region 추가
 		this.SubInit();
-		#endregion // 추가               
+#endregion // 추가               
 	}
 
 	/** UI 상태를 갱신한다 */
@@ -49,11 +49,11 @@ public partial class CSyncPopup : CSubPopup {
 #endif // #if FIREBASE_MODULE_ENABLE                                       
 		// 객체를 갱신한다 }
 
-		#region 추가
+#region 추가
 		this.SubUpdateUIsState();
-		#endregion // 추가               
+#endregion // 추가               
 	}
-	#endregion // 함수               
+#endregion // 함수               
 }
 
 /** 서브 동기화 팝업 */
@@ -63,16 +63,16 @@ public partial class CSyncPopup : CSubPopup {
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
+	
+#region 변수
+	
+#endregion // 변수               
 
-	#region 변수
+#region 프로퍼티
+	
+#endregion // 프로퍼티                 
 
-	#endregion // 변수               
-
-	#region 프로퍼티
-
-	#endregion // 프로퍼티                 
-
-	#region 함수
+#region 함수
 	/** 팝업을 설정한다 */
 	private void SubSetupAwake() {
 		// Do Something
@@ -87,6 +87,6 @@ public partial class CSyncPopup : CSubPopup {
 	private void SubUpdateUIsState() {
 		// Do Something
 	}
-	#endregion // 함수               
+#endregion // 함수               
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

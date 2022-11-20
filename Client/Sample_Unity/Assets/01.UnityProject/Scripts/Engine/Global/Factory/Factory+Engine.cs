@@ -8,7 +8,7 @@ using UnityEngine.Events;
 namespace NSEngine {
 	/** 엔진 팩토리 */
 	public static partial class Factory {
-		#region 클래스 함수
+#region 클래스 함수
 		/** 그리드 정보를 생성한다 */
 		public static STGridInfo MakeGridInfo(CLevelInfo a_oLevelInfo, Vector3 a_stPos) {
 			var stGridInfo = new STGridInfo() {
@@ -27,7 +27,7 @@ namespace NSEngine {
 
 			return stGridInfo;
 		}
-		#endregion // 클래스 함수                   
+#endregion // 클래스 함수                   
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     

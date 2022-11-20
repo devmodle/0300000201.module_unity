@@ -8,11 +8,11 @@ using UnityEngine.Events;
 namespace LoadingScene {
 	/** 서브 로딩 씬 관리자 */
 	public partial class CSubLoadingSceneManager : CLoadingSceneManager {
-		#region 함수
+#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-
+			
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 				this.SetupAwake();
@@ -53,30 +53,30 @@ namespace LoadingScene {
 				(EKey.LOADING_GAUGE_HANDLER, m_oUIsDict.GetValueOrDefault(EKey.LOADING_GAUGE))
 			}, m_oGaugeHandlerDict);
 
-			#region 추가
+#region 추가
 			this.SubSetupAwake();
-			#endregion // 추가               
+#endregion // 추가               
 		}
 
 		/** 씬을 설정한다 */
 		private void SetupStart() {
-			#region 추가
+#region 추가
 			this.SubSetupStart();
-			#endregion // 추가               
+#endregion // 추가               
 		}
 
 		/** UI 상태를 갱신한다 */
 		private void UpdateUIsState() {
-			#region 추가
+#region 추가
 			this.SubUpdateUIsState();
-			#endregion // 추가               
+#endregion // 추가               
 		}
 
 		/** 비동기 씬 로딩 상태가 갱신 되었을 경우 */
 		protected override void OnUpdateAsyncSceneLoadingState(AsyncOperation a_oAsyncOperation, bool a_bIsComplete) {
 			m_oGaugeHandlerDict.GetValueOrDefault(EKey.LOADING_GAUGE_HANDLER).SetPercent(a_oAsyncOperation.progress);
 		}
-		#endregion // 함수               
+#endregion // 함수               
 	}
 
 	/** 서브 로딩 씬 관리자 - 서브 */
@@ -87,15 +87,15 @@ namespace LoadingScene {
 			[HideInInspector] MAX_VAL
 		}
 
-		#region 변수
+#region 변수
 
-		#endregion // 변수               
+#endregion // 변수               
 
-		#region 프로퍼티
+#region 프로퍼티
 
-		#endregion // 프로퍼티                 
+#endregion // 프로퍼티                 
 
-		#region 함수
+#region 함수
 		/** 씬을 설정한다 */
 		private void SubSetupAwake() {
 			// Do Something
@@ -110,7 +110,7 @@ namespace LoadingScene {
 		private void SubUpdateUIsState() {
 			// Do Something
 		}
-		#endregion // 함수               
+#endregion // 함수               
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
