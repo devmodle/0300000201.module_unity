@@ -106,8 +106,10 @@ namespace BuildReportTool
 	[System.Serializable]
 #if UNITY_2018_1_OR_NEWER
 	public partial class ReportGenerator : UnityEditor.Build.IPreprocessBuildWithReport, UnityEditor.Build.IPostprocessBuildWithReport
-#else
+#elif UNITY_5_6_OR_NEWER
 	public partial class ReportGenerator : UnityEditor.Build.IPreprocessBuild, UnityEditor.Build.IPostprocessBuild
+#else
+	public partial class ReportGenerator
 #endif
 	{
 		public int callbackOrder { get { return 99999; } }
@@ -346,8 +348,11 @@ namespace BuildReportTool
 
 #if UNITY_2018_1_OR_NEWER
 		public void OnPostprocessBuild(UnityEditor.Build.Reporting.BuildReport report)
-#else
+#elif UNITY_5_6_OR_NEWER
 		public void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
+#else
+		[UnityEditor.Callbacks.PostProcessBuildAttribute(1)]
+		public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
 #endif
 		{
 			if (!Application.isEditor || Application.isPlaying)

@@ -642,20 +642,30 @@ namespace BuildReportTool.Window.Screen
 
 			if (unityBuildReport != null)
 			{
+#if UNITY_5_6_OR_NEWER
 				if (unityBuildReport.HasBuildOption(BuildOptions.CompressWithLz4))
 				{
 					DrawSetting("Compression Method:", "LZ4");
 				}
+#endif
+#if UNITY_2017_2_OR_NEWER
 				else if (unityBuildReport.HasBuildOption(BuildOptions.CompressWithLz4HC))
 				{
 					DrawSetting("Compression Method:", "LZ4HC");
 				}
+#endif
+#if UNITY_5_6_OR_NEWER
 				else
+#endif
 				{
 					DrawSetting("Compression Method:", "Default");
 				}
+#if UNITY_2018_1_OR_NEWER
 				DrawSetting("Test Assemblies included in build:", unityBuildReport.HasBuildOption(BuildOptions.IncludeTestAssemblies));
+#endif
+#if UNITY_5_6_OR_NEWER
 				DrawSetting("No Unique Identifier (force build GUID to all zeros):", unityBuildReport.HasBuildOption(BuildOptions.NoUniqueIdentifier));
+#endif
 #if UNITY_2020_1_OR_NEWER
 				DrawSetting("Detailed Build Report:", unityBuildReport.HasBuildOption(BuildOptions.DetailedBuildReport));
 #endif
@@ -869,7 +879,9 @@ namespace BuildReportTool.Window.Screen
 #if UNITY_2019_3_OR_NEWER
 				DrawSetting("Deep Profiling Support:", unityBuildReport.HasBuildOption(BuildOptions.EnableDeepProfilingSupport));
 #endif
+#if UNITY_5_2 || UNITY_5_3_OR_NEWER
 				DrawSetting("Force enable assertions in release build:", unityBuildReport.HasBuildOption(BuildOptions.ForceEnableAssertions));
+#endif
 			}
 			DrawSetting("Allow script Debugger:", settings.EnableSourceDebugging);
 			DrawSetting("Wait for Managed Debugger before executing scripts:", settings.WaitForManagedDebugger);
@@ -1221,7 +1233,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				if (GUILayout.Button("Ping", "MiniButton"))
 				{
-					Utility.PingAssetInProject($"Packages/{packageEntry.PackageName}/package.json");
+					Utility.PingAssetInProject(string.Format("Packages/{0}/package.json", packageEntry.PackageName));
 				}
 				if (GUILayout.Button("Explore", "MiniButton"))
 				{
@@ -1310,7 +1322,7 @@ namespace BuildReportTool.Window.Screen
 				_settingDropdownBoxLabels, fileFilterPopupStyle);
 			GUILayout.Space(15);
 
-			GUILayout.Label($"Note: Project was built in {_buildTargetOfReport} target", topBarLabelStyle);
+			GUILayout.Label(string.Format("Note: Project was built in {0} target", _buildTargetOfReport), topBarLabelStyle);
 			GUILayout.FlexibleSpace();
 
 			BuildReportTool.Options.ShowProjectSettingsInMultipleColumns = GUILayout.Toggle(BuildReportTool.Options.ShowProjectSettingsInMultipleColumns, "Multiple Columns");

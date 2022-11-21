@@ -21,12 +21,12 @@ namespace BuildReportTool.Window.Screen
 			const string CHANGELOG_FILENAME = "VERSION.txt";
 			string changelogContents = BuildReportTool.Util.GetPackageFileContents(CHANGELOG_FILENAME);
 
-			if (!string.IsNullOrWhiteSpace(readmeContents) && readmeContents.Length > LABEL_LENGTH)
+			if (!string.IsNullOrEmpty(readmeContents) && readmeContents.Length > LABEL_LENGTH)
 			{
 				readmeContents = readmeContents.Substring(0, LABEL_LENGTH);
 			}
 
-			if (!string.IsNullOrWhiteSpace(changelogContents) && changelogContents.Length > LABEL_LENGTH)
+			if (!string.IsNullOrEmpty(changelogContents) && changelogContents.Length > LABEL_LENGTH)
 			{
 				changelogContents = changelogContents.Substring(0, LABEL_LENGTH);
 			}
@@ -35,7 +35,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				_readmeGuiContent = new GUIContent();
 			}
-			if (!string.IsNullOrWhiteSpace(readmeContents))
+			if (!string.IsNullOrEmpty(readmeContents))
 			{
 				_readmeGuiContent.text = readmeContents;
 			}
@@ -49,7 +49,7 @@ namespace BuildReportTool.Window.Screen
 			{
 				_changelogGuiContent = new GUIContent();
 			}
-			if (!string.IsNullOrWhiteSpace(changelogContents))
+			if (!string.IsNullOrEmpty(changelogContents))
 			{
 				_changelogGuiContent.text = changelogContents;
 			}

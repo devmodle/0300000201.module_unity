@@ -514,6 +514,7 @@ public class BRT_BuildReportWindow : EditorWindow
 			ownStyle.onHover.background = nativeStyle.onHover.background;
 			ownStyle.onActive.background = nativeStyle.onActive.background;
 
+#if UNITY_5_6_OR_NEWER
 			if (nativeStyle.normal.scaledBackgrounds != null && nativeStyle.normal.scaledBackgrounds.Length > 0)
 			{
 				ownStyle.normal.scaledBackgrounds = new Texture2D[nativeStyle.normal.scaledBackgrounds.Length];
@@ -609,6 +610,7 @@ public class BRT_BuildReportWindow : EditorWindow
 					ownStyle.onActive.scaledBackgrounds = null;
 				}
 			}
+#endif
 
 			ownStyle.normal.textColor = nativeStyle.normal.textColor;
 			ownStyle.hover.textColor = nativeStyle.hover.textColor;
@@ -803,17 +805,17 @@ public class BRT_BuildReportWindow : EditorWindow
 			}
 
 
-			if (nativeLogIcon.normal.background != null)
+			if (nativeLogIcon != null && nativeLogIcon.normal.background != null)
 			{
 				logMessageIcons.normal.background = nativeLogIcon.normal.background;
 			}
 
-			if (nativeWarningIcon.normal.background != null)
+			if (nativeWarningIcon != null && nativeWarningIcon.normal.background != null)
 			{
 				logMessageIcons.hover.background = nativeWarningIcon.normal.background;
 			}
 
-			if (nativeErrorIcon.normal.background != null)
+			if (nativeErrorIcon != null && nativeErrorIcon.normal.background != null)
 			{
 				logMessageIcons.active.background = nativeErrorIcon.normal.background;
 			}
@@ -1201,11 +1203,24 @@ public class BRT_BuildReportWindow : EditorWindow
 		var unityBuildReportFilePath = BuildReportTool.Util.GetUnityBuildReportFilenameFromBuildInfo(filepath);
 		if (System.IO.File.Exists(unityBuildReportFilePath))
 		{
-			var loadedUnityBuildReport = BuildReportTool.Util.OpenSerialized<BuildReportTool.UnityBuildReport>(unityBuildReportFilePath);
-			if (loadedUnityBuildReport != null)
+			try
 			{
-				_unityBuildReport = loadedUnityBuildReport;
-				//Debug.Log(string.Format("UnityBuildReport displayed is now: {0}", _unityBuildReport.SavedPath));
+				var loadedUnityBuildReport =
+					BuildReportTool.Util.OpenSerialized<BuildReportTool.UnityBuildReport>(unityBuildReportFilePath);
+				if (loadedUnityBuildReport != null)
+				{
+					_unityBuildReport = loadedUnityBuildReport;
+					//Debug.Log(string.Format("UnityBuildReport displayed is now: {0}", _unityBuildReport.SavedPath));
+				}
+				else
+				{
+					_unityBuildReport = null;
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.LogWarning(string.Format("Can't open additional build info data due to Unity version incompatibility.\n\n{0}", e));
+				_unityBuildReport = null;
 			}
 		}
 		else
@@ -1706,11 +1721,19 @@ public class BRT_BuildReportWindow : EditorWindow
 		Texture thumbnailImage = null;
 		if (assetName.IsTextureFile())
 		{
+#if UNITY_5_6_OR_NEWER
 			thumbnailImage = AssetDatabase.LoadAssetAtPath<Texture>(assetName);
+#else
+			thumbnailImage = (Texture)AssetDatabase.LoadAssetAtPath(assetName, typeof(Texture));
+#endif
 		}
 		else //if (_assetListEntryHovered.Name.EndsWith(".prefab") || BuildReportTool.Util.IsFileAUnityMesh(_assetListEntryHovered.Name))
 		{
+#if UNITY_5_6_OR_NEWER
 			var loadedObj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetName);
+#else
+			var loadedObj = (UnityEngine.Object)AssetDatabase.LoadAssetAtPath(assetName, typeof(UnityEngine.Object));
+#endif
 
 			if (loadedObj != null)
 			{

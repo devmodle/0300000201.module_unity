@@ -2227,20 +2227,13 @@ namespace BuildReportTool
 
 			var x = new System.Xml.Serialization.XmlSerializer(typeof(T));
 
-			try
+			// no corrections in the xml file
+			// proceed to open the file normally
+			using (var fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
 			{
-				// no corrections in the xml file
-				// proceed to open the file normally
-				using (var fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
-				{
-					System.Xml.XmlReader reader = new System.Xml.XmlTextReader(fs);
-					ret = (T) x.Deserialize(reader);
-					fs.Close();
-				}
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e);
+				System.Xml.XmlReader reader = new System.Xml.XmlTextReader(fs);
+				ret = (T) x.Deserialize(reader);
+				fs.Close();
 			}
 
 			if (ret != null)

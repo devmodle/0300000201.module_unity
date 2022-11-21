@@ -277,8 +277,16 @@ namespace BuildReportTool
 			settings.EnableExplicitNullChecks = EditorUserBuildSettings.explicitNullChecks;
 
 #if UNITY_EDITOR_WIN
+#if UNITY_5_6_OR_NEWER
 			settings.WinIncludeNativePdbFilesInBuild = UnityEditor.WindowsStandalone.UserBuildSettings.copyPDBFiles;
+#else
+			settings.WinIncludeNativePdbFilesInBuild = false;
+#endif
+#if UNITY_2017_1_OR_NEWER
 			settings.WinCreateVisualStudioSolution = UnityEditor.WindowsStandalone.UserBuildSettings.createSolution;
+#else
+			settings.WinCreateVisualStudioSolution = false;
+#endif
 #endif
 
 #if !UNITY_5_3_AND_LESSER
