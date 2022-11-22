@@ -12,7 +12,7 @@ namespace Google {
 	public partial class CGGoogleSheetSceneManager : StudyScene.CSSceneManager {
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_G_GOOGLE_SHEET;
-		#endregion // 프로퍼티                 
+		#endregion // 프로퍼티
 
 		#region 함수
 		/** 초기화 */
@@ -45,7 +45,7 @@ namespace Google {
 				});
 			}
 		}
-		#endregion // 함수               
+		#endregion // 함수
 
 		#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
@@ -106,7 +106,7 @@ namespace Google {
 			Func.ShowAlertPopup($"CGGoogleSheetSceneManager.OnSaveGoogleSheets: {a_bIsSuccess}", null, false);
 		}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-		#endregion // 조건부 함수                   
+		#endregion // 조건부 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE

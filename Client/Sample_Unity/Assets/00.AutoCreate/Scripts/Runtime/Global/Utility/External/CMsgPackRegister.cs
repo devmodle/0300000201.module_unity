@@ -9,13 +9,13 @@ using MessagePack.Resolvers;
 
 #if UNITY_EDITOR
 using UnityEditor;
-#endif // #if UNITY_EDITOR                             
+#endif // #if UNITY_EDITOR
 
 /** 메세지 팩 등록자 */
 public static partial class CMsgPackRegister {
 	#region 클래스 변수
 	private static bool m_bIsRegister = false;
-	#endregion // 클래스 변수                   
+	#endregion // 클래스 변수
 
 	#region 클래스 함수
 	/** 메세지 팩을 등록한다 */
@@ -33,7 +33,7 @@ public static partial class CMsgPackRegister {
 			MessagePackSerializer.DefaultOptions = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
 		}
 	}
-	#endregion // 클래스 함수                   
+	#endregion // 클래스 함수
 
 	#region 조건부 클래스 함수
 #if UNITY_EDITOR
@@ -42,7 +42,7 @@ public static partial class CMsgPackRegister {
 	public static void EditorInitialize() {
 		CMsgPackRegister.RegisterMsgPack();
 	}
-#endif // #if UNITY_EDITOR                             
-	#endregion // 조건부 클래스 함수                       
+#endif // #if UNITY_EDITOR
+	#endregion // 조건부 클래스 함수
 }
-#endif // #if MSG_PACK_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE                                                              
+#endif // #if MSG_PACK_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE

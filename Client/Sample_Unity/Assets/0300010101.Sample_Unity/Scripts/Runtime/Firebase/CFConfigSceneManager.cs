@@ -10,7 +10,7 @@ namespace Firebase {
 	public partial class CFConfigSceneManager : StudyScene.CSSceneManager {
 		#region 프로퍼티
 		public override string SceneName => KDefine.G_SCENE_N_F_CONFIG;
-		#endregion // 프로퍼티                 
+		#endregion // 프로퍼티
 	}
 }
-#endif // #if EXTRA_SCRIPT_MODULE_ENABLE                                           
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE

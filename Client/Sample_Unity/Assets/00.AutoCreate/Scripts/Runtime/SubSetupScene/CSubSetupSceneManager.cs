@@ -10,7 +10,7 @@ namespace SetupScene {
 	public partial class CSubSetupSceneManager : CSetupSceneManager {
 		#region 변수
 		[SerializeField] private SystemLanguage m_eSystemLanguage = SystemLanguage.Unknown;
-		#endregion // 변수               
+		#endregion // 변수
 
 		#region 함수
 		/** 씬을 설정한다 */
@@ -53,11 +53,11 @@ namespace SetupScene {
 			CCommonAppInfoStorage.Inst.SetSystemLanguage(m_eSystemLanguage);
 #else
 			CCommonAppInfoStorage.Inst.SetSystemLanguage(Application.systemLanguage);
-#endif // #if LOCALIZE_TEST_ENABLE                                     
+#endif // #if LOCALIZE_TEST_ENABLE
 			// 공용 앱 정보를 설정한다 }
-#endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE                                                                                     
+#endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		}
-		#endregion // 함수               
+		#endregion // 함수
 	}
 }
-#endif // #if SCENE_TEMPLATES_MODULE_ENABLE                                              
+#endif // #if SCENE_TEMPLATES_MODULE_ENABLE
