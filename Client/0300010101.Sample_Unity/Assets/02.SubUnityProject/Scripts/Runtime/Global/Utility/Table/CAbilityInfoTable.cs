@@ -200,9 +200,9 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
-		var oTableInfoDictContainer = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
-		a_oOutCommonInfos = oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : null;
-		a_oOutEnhanceTradeInfos = oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE) ? a_oJSONNode[oTableInfoDictContainer.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE]] : null;
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
+		a_oOutCommonInfos = stTableInfo.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[stTableInfo.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : null;
+		a_oOutEnhanceTradeInfos = stTableInfo.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE) ? a_oJSONNode[stTableInfo.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE]] : null;
 	}
 
 	/** 어빌리티 정보를 로드한다 */
@@ -275,6 +275,18 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		}
 
 		this.SaveAbilityInfos(oAbilityInfos.ToString());
+	}
+
+	/** 어빌리티 정보 값을 생성한다 */
+	public Dictionary<string, List<List<string>>> MakeAbilityInfoVals() {
+		var oAbilityInfos = SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath));
+		var oAbilityInfoValDictContainer = new Dictionary<string, List<List<string>>>();
+
+		for(int i = 0; i < KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.Count; ++i) {
+			
+		}
+
+		return oAbilityInfoValDictContainer;
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
