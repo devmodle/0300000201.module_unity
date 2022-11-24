@@ -252,7 +252,7 @@ namespace MainScene {
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 			}
 		}
-#endif // #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)                                                                                   
+#endif // #if AB_TEST_ENABLE && (DEBUG || DEVELOPMENT_BUILD || PLAY_TEST_ENABLE)
 		#endregion // 조건부 함수
 	}
 }

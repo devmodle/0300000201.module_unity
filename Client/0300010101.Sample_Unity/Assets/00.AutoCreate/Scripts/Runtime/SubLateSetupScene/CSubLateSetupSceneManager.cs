@@ -32,7 +32,7 @@ namespace LateSetupScene {
 
 #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)
 				CLateSetupSceneManager.SetPurchaseRemoveAds(CUserInfoStorage.Inst.IsPurchaseRemoveAds);
-#endif // #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)                                                                                                            
+#endif // #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)
 			}
 		}
 
@@ -43,7 +43,7 @@ namespace LateSetupScene {
 #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)
 			CAdsManager.Inst.IsEnableBannerAds = !CUserInfoStorage.Inst.IsPurchaseRemoveAds;
 			CAdsManager.Inst.IsEnableFullscreenAds = !CUserInfoStorage.Inst.IsPurchaseRemoveAds;
-#endif // #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)                                                                                                            
+#endif // #if ADS_MODULE_ENABLE && (EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE)
 		}
 
 		/** 추적 설명 팝업을 출력한다 */
@@ -92,7 +92,7 @@ namespace LateSetupScene {
 			CLateSetupSceneManager.SetAutoLoadBannerAds(true);
 			CLateSetupSceneManager.SetAutoLoadRewardAds(true);
 			CLateSetupSceneManager.SetAutoLoadFullscreenAds(true);
-#endif // #if ADS_MODULE_ENABLE && (!SAMPLE_PROJ && !EDITOR_DIST_BUILD && !CREATIVE_DIST_BUILD && !STUDY_MODULE_ENABLE)                                                                                                                          
+#endif // #if ADS_MODULE_ENABLE && (!SAMPLE_PROJ && !EDITOR_DIST_BUILD && !CREATIVE_DIST_BUILD && !STUDY_MODULE_ENABLE)
 		}
 
 		/** 추적 설명 팝업 결과를 수신했을 경우 */
