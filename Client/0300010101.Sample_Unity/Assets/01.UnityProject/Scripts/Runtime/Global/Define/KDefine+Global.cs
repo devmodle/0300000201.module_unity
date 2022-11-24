@@ -70,8 +70,16 @@ public static partial class KDefine {
 	// 분석 }
 
 	// 테이블 정보 {
-	public static readonly List<string> G_TABLE_INFO_COMMON_KEY_LIST = new List<string>() {
-		"NOEX_T", "NOEX_ST", "NOEX_KT", "NOEX_SKT", "NOEX_DSKT", KCDefine.U_KEY_REPLACE, string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_1_INT), string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_2_INT), string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_2_INT), KCDefine.U_KEY_NAME, KCDefine.U_KEY_DESC
+	public static readonly List<STKeyInfo> G_KEY_INFO_GOOGLE_SHEET_LIST = new List<STKeyInfo>() {
+		new STKeyInfo("NOEX_T", EKeyType.SINGLE),
+		new STKeyInfo("NOEX_ST", EKeyType.SINGLE),
+		new STKeyInfo("NOEX_KT", EKeyType.SINGLE),
+		new STKeyInfo("NOEX_SKT", EKeyType.SINGLE),
+		new STKeyInfo("NOEX_DSKT", EKeyType.SINGLE),
+		new STKeyInfo(KCDefine.U_KEY_REPLACE, EKeyType.SINGLE),
+		new STKeyInfo(KCDefine.U_KEY_FMT_FLAGS, EKeyType.MULTI),
+		new STKeyInfo(KCDefine.U_KEY_NAME, EKeyType.SINGLE),
+		new STKeyInfo(KCDefine.U_KEY_DESC, EKeyType.SINGLE)
 	};
 
 	public static readonly Dictionary<string, int> G_TABLE_INFO_NUM_ROWS_DICT = new Dictionary<string, int>() {
@@ -171,145 +179,289 @@ public static partial class KDefine {
 		})
 	};
 
-	public static readonly Dictionary<string, Dictionary<System.Type, Dictionary<string, List<string>>>> G_TABLE_INFO_GOOGLE_SHEET_KEY_DICT_CONTAINER = new Dictionary<string, Dictionary<System.Type, Dictionary<string, List<string>>>>() {
-		[KDefine.G_TABLE_N_VER_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+	public static readonly Dictionary<string, Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>> G_TABLE_INFO_GOOGLE_SHEET_KEY_DICT_CONTAINER = new Dictionary<string, Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>>() {
+		[KDefine.G_TABLE_N_VER_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
 			// Do Something
 		},
 
-		[KDefine.G_TABLE_N_ETC_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CCalcInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_ETC_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CCalcInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_CALC_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_CALC_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_CALC_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_CALC, EKeyType.SINGLE)
 				}
 			},
 
-			[typeof(CEpisodeInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.U_KEY_LEVEL_EPISODE] = new List<string>() {
-					// Do Something
+			[typeof(CEpisodeInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.U_KEY_LEVEL_EPISODE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_FMT_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PREV_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_NEXT_ID, EKeyType.MULTI),
+
+					new STKeyInfo(KCDefine.U_KEY_DIFFICULTY, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_EPISODE_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NUM_SUB_EPISODES, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS, EKeyType.SINGLE),
+
+					new STKeyInfo(KCDefine.U_KEY_SIZE, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_RECORD_VAL_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_CLEAR_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_UNLOCK_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ENEMY_OBJ_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.U_KEY_STAGE_EPISODE] = new List<string>() {
-					// Do Something
+				[KCDefine.U_KEY_STAGE_EPISODE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_FMT_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PREV_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_NEXT_ID, EKeyType.MULTI),
+
+					new STKeyInfo(KCDefine.U_KEY_DIFFICULTY, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_EPISODE_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NUM_SUB_EPISODES, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS, EKeyType.SINGLE),
+
+					new STKeyInfo(KCDefine.U_KEY_SIZE, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_RECORD_VAL_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_CLEAR_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_UNLOCK_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ENEMY_OBJ_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.U_KEY_CHAPTER_EPISODE] = new List<string>() {
-					// Do Something
+				[KCDefine.U_KEY_CHAPTER_EPISODE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_FMT_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PREV_ID, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_NEXT_ID, EKeyType.MULTI),
+
+					new STKeyInfo(KCDefine.U_KEY_DIFFICULTY, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_EPISODE_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NUM_SUB_EPISODES, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_MAX_NUM_ENEMY_OBJS, EKeyType.SINGLE),
+
+					new STKeyInfo(KCDefine.U_KEY_SIZE, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_RECORD_VAL_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_CLEAR_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_UNLOCK_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ENEMY_OBJ_TARGET_INFO, EKeyType.MULTI)
 				},
 			},
 
-			[typeof(CTutorialInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+			[typeof(CTutorialInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_TUTORIAL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_STRS, EKeyType.MULTI)
 				}
 			},
 
-			[typeof(CFXInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+			[typeof(CFXInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_FX_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_FX_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_FX_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_TIME_INFO, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_MISSION_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CMissionInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_MISSION_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CMissionInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_MISSION_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_MISSION_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_MISSION_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_REWARD_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CRewardInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_REWARD_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CRewardInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_REWARD_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_REWARD_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_REWARD_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_REWARD_QUALITY, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_RES_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CResInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_RES_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CResInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_RES_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_RES_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_RES_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_RATE, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_RES_PATH, EKeyType.SINGLE)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_ITEM_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CItemInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_ITEM_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CItemInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ATTACH_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_SKILL_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_BUY_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_SALE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_SKILL_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CSkillInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_SKILL_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CSkillInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_SKILL_APPLY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_MAX_APPLY_TIMES, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_TIME_INFO, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_FX_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_BUY_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_SALE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_OBJ_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CObjInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_OBJ_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CObjInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_ACTION_SKILL_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_SIZE, EKeyType.SINGLE),
+
+					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EQUIP_ITEM_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_SKILL_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_BUY_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_BUY_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_SALE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_SALE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_OBJ_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_ABILITY_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CAbilityInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_ABILITY_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CAbilityInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_ABILITY_VAL_TYPE, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_VAL_INFO, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_ABILITY_TARGET_INFO, EKeyType.MULTI)
 				},
 
-				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<string>() {
-					// Do Something
+				[KCDefine.B_KEY_ENHANCE_TRADE] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_ABILITY_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		},
 
-		[KDefine.G_TABLE_N_PRODUCT_INFO] = new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<string>>() {
-				[KCDefine.B_KEY_COMMON] = new List<string>() {
-					// Do Something
+		[KDefine.G_TABLE_N_PRODUCT_INFO] = new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
+					new STKeyInfo(KCDefine.U_KEY_PRODUCT_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PREV_PRODUCT_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_NEXT_PRODUCT_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_PRODUCT_IDX, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_PAY_TARGET_INFO, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, EKeyType.MULTI)
 				}
 			}
 		}
