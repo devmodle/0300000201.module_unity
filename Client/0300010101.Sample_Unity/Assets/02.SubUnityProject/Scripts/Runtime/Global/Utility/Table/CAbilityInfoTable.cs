@@ -198,11 +198,20 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		}
 	}
 
+	/** 키를 설정한다 */
+	private void SetupKeys(out string a_oOutCommonKey, out string a_oOutEnhanceTradeKey) {
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
+
+		a_oOutCommonKey = stTableInfo.m_oSheetNameDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON, string.Empty);
+		a_oOutEnhanceTradeKey = stTableInfo.m_oSheetNameDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE, string.Empty);
+	}
+
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
-		a_oOutCommonInfos = stTableInfo.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[stTableInfo.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : null;
-		a_oOutEnhanceTradeInfos = stTableInfo.m_oTableInfoDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_ENHANCE_TRADE) ? a_oJSONNode[stTableInfo.m_oTableInfoDictContainer[this.GetType()][KCDefine.B_KEY_ENHANCE_TRADE]] : null;
+		this.SetupKeys(out string oCommonKey, out string oEnhanceTradeKey);
+
+		a_oOutCommonInfos = oCommonKey.Equals(string.Empty) ? null : a_oJSONNode[oCommonKey];
+		a_oOutEnhanceTradeInfos = oEnhanceTradeKey.Equals(string.Empty) ? null : a_oJSONNode[oEnhanceTradeKey];
 	}
 
 	/** 어빌리티 정보를 로드한다 */
@@ -279,14 +288,44 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	/** 어빌리티 정보 값을 생성한다 */
 	public Dictionary<string, List<List<string>>> MakeAbilityInfoVals() {
-		var oAbilityInfos = SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath));
+		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oEnhanceTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
 		var oAbilityInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
-		for(int i = 0; i < KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.Count; ++i) {
-			
+		var oAbilityInfos = SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath));
+		this.SetupJSONNodes(oAbilityInfos, out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
+
+		try {
+			this.SetupKeyInfos(oCommonKeyInfoList, oEnhanceTradeKeyInfoList);
+		} finally {
+			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
+			CCollectionManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
+		}
+
+		for(int i = 0; i < oCommonInfos.Count; ++i) {
+			var oValList = new List<string>();
+
+			for(int j = 0; j < KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.Count; ++j) {
+				var stKeyInfo = KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST[j];
+
+				// 다중 타입 일 경우
+				if(stKeyInfo.m_eKeyType == EKeyType.MULTI) {
+
+				} else {
+					oValList.Add(oCommonInfos[i][stKeyInfo.m_oKey].ExIsValid() ? oCommonInfos[i][stKeyInfo.m_oKey] : string.Empty);
+				}
+			}
 		}
 
 		return oAbilityInfoValDictContainer;
+	}
+
+	/** 키 정보를 설정한다 */
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList) {
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+
+		// KDefine.G_KEY_INFO_GOOGLE_SHEET__DICT_CONTAINER.GetValueOrDefault(Access.AbilityInfoTableSavePath.ExGetFileName(false));
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
