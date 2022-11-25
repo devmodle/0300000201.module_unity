@@ -367,6 +367,40 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 
 		this.SaveObjInfos(oObjInfos.ToString());
 	}
+
+	/** 객체 정보 값을 생성한다 */
+	public Dictionary<string, List<List<string>>> MakeObjInfoVals() {
+		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oBuyTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oSaleTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oEnhanceTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+
+		var oObjInfoValDictContainer = new Dictionary<string, List<List<string>>>();
+
+		try {
+			this.SetupKeyInfos(oCommonKeyInfoList, oBuyTradeKeyInfoList, oSaleTradeKeyInfoList, oEnhanceTradeKeyInfoList);
+			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadObjInfosJSONStr(Access.ObjInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
+		} finally {
+			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
+			CCollectionManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
+		}
+
+		return oObjInfoValDictContainer;
+	}
+
+	/** 키 정보를 설정한다 */
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutBuyTradeKeyInfoList, List<STKeyInfo> a_oOutSaleTradeKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList) {
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutBuyTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutSaleTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.ObjInfoTableSavePath.ExGetFileName(false));
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_BUY_TRADE)?.ExCopyTo(a_oOutBuyTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_SALE_TRADE)?.ExCopyTo(a_oOutSaleTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }

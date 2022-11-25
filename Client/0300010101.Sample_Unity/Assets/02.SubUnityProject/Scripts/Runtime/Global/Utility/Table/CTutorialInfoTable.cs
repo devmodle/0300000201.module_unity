@@ -171,6 +171,26 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 			}
 		}
 	}
+
+	/** 튜토리얼 정보 값을 생성한다 */
+	public void MakeTutorialInfoVals(SimpleJSON.JSONNode a_oTutorialInfos, Dictionary<string, List<List<string>>> a_oOutTutorialInfoValDictContainer) {
+		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+
+		try {
+			this.SetupKeyInfos(oCommonKeyInfoList);
+			this.SetupJSONNodes(a_oTutorialInfos, out SimpleJSON.JSONNode oCommonInfos);
+		} finally {
+			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
+		}
+	}
+
+	/** 키 정보를 설정한다 */
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList) {
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.TutorialInfoTableSavePath.ExGetFileName(false));
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }

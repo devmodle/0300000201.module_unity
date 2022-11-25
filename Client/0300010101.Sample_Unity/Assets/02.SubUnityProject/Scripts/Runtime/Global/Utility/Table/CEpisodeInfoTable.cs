@@ -298,6 +298,34 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 			}
 		}
 	}
+
+	/** 에피소드 정보 값을 설정한다 */
+	public void MakeEpisodeInfoVals(SimpleJSON.JSONNode a_oEpisodeInfos, Dictionary<string, List<List<string>>> a_oOutCalcInfoValDictContainer) {
+		var oLevelEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oStageEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oChapterEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+
+		try {
+			this.SetupKeyInfos(oLevelEpisodeKeyInfoList, oStageEpisodeKeyInfoList, oChapterEpisodeKeyInfoList);
+			this.SetupJSONNodes(a_oEpisodeInfos, out SimpleJSON.JSONNode oLevelEpisodeInfos, out SimpleJSON.JSONNode oStageEpisodeInfos, out SimpleJSON.JSONNode oChapterEpisodeInfos);
+		} finally {
+			CCollectionManager.Inst.DespawnList(oLevelEpisodeKeyInfoList);
+			CCollectionManager.Inst.DespawnList(oStageEpisodeKeyInfoList);
+			CCollectionManager.Inst.DespawnList(oChapterEpisodeKeyInfoList);
+		}
+	}
+
+	/** 키 정보를 설정한다 */
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutLevelEpisodeInfoList, List<STKeyInfo> a_oOutStageEpisodeInfoList, List<STKeyInfo> a_oOutChapterEpisodeInfoList) {
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutLevelEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
+		
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.EpisodeInfoTableSavePath.ExGetFileName(false));
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_LEVEL_EPISODE)?.ExCopyTo(a_oOutLevelEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_STAGE_EPISODE)?.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_CHAPTER_EPISODE)?.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }

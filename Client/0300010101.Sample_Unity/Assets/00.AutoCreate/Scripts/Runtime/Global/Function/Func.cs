@@ -901,7 +901,7 @@ public static partial class Func {
 		if(a_oOutSaveGoogleSheetInfoDict != null) {
 			foreach(var stKeyVal in KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT) {
 				foreach(var stSheetNameKeyVal in stKeyVal.Value.m_oSheetNameDictContainer) {
-					// Do Something
+					Func.DoSetupSaveGoogleSheetInfos(stKeyVal.Value.m_oID, stKeyVal.Value.m_oTableName, stSheetNameKeyVal.Value, stKeyVal.Value.m_oExtraSheetNameDictContainer.GetValueOrDefault(stSheetNameKeyVal.Key), a_oOutSaveGoogleSheetInfoDict, a_bIsEnableAssert);
 				}
 			}
 		}
@@ -1188,7 +1188,7 @@ public static partial class Func {
 	private static SimpleJSON.JSONNode MakeJSONArray(string a_oJSONStr) {
 		var oTokens = Regex.Replace(a_oJSONStr, KCDefine.B_PATTERN_SPACE, string.Empty).Split(KCDefine.B_TOKEN_COMMA);
 		var oJSONArray = new SimpleJSON.JSONArray();
-
+		
 		for(int i = 0; i < oTokens.Length; ++i) {
 			oJSONArray.Add(oTokens[i]);
 		}

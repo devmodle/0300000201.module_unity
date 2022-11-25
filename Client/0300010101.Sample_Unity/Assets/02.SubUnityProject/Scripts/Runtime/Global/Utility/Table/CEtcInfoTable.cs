@@ -80,6 +80,19 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable> {
 
 		this.SaveEtcInfos(oEtcInfos.ToString());
 	}
+
+	/** 기타 정보 값을 생성한다 */
+	public Dictionary<string, List<List<string>>> MakeEtcInfoVals() {
+		var oEtcInfos = SimpleJSON.JSONNode.Parse(this.LoadEtcInfosJSONStr(Access.EtcInfoTableSavePath));
+		var oEtcInfoValDictContainer = new Dictionary<string, List<List<string>>>();
+
+		CCalcInfoTable.Inst.MakeCalcInfoVals(oEtcInfos, oEtcInfoValDictContainer);
+		CEpisodeInfoTable.Inst.MakeEpisodeInfoVals(oEtcInfos, oEtcInfoValDictContainer);
+		CTutorialInfoTable.Inst.MakeTutorialInfoVals(oEtcInfos, oEtcInfoValDictContainer);
+		CFXInfoTable.Inst.MakeFXInfoVals(oEtcInfos, oEtcInfoValDictContainer);
+
+		return oEtcInfoValDictContainer;
+	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }

@@ -290,31 +290,15 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	public Dictionary<string, List<List<string>>> MakeAbilityInfoVals() {
 		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
 		var oEnhanceTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		
 		var oAbilityInfoValDictContainer = new Dictionary<string, List<List<string>>>();
-
-		var oAbilityInfos = SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath));
-		this.SetupJSONNodes(oAbilityInfos, out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
 		try {
 			this.SetupKeyInfos(oCommonKeyInfoList, oEnhanceTradeKeyInfoList);
+			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 		} finally {
 			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
 			CCollectionManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
-		}
-
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
-			var oValList = new List<string>();
-
-			for(int j = 0; j < KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.Count; ++j) {
-				var stKeyInfo = KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST[j];
-
-				// 다중 타입 일 경우
-				if(stKeyInfo.m_eKeyType == EKeyType.MULTI) {
-
-				} else {
-					oValList.Add(oCommonInfos[i][stKeyInfo.m_oKey].ExIsValid() ? oCommonInfos[i][stKeyInfo.m_oKey] : string.Empty);
-				}
-			}
 		}
 
 		return oAbilityInfoValDictContainer;
@@ -325,7 +309,9 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 
-		// KDefine.G_KEY_INFO_GOOGLE_SHEET__DICT_CONTAINER.GetValueOrDefault(Access.AbilityInfoTableSavePath.ExGetFileName(false));
+		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableSavePath.ExGetFileName(false));
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
