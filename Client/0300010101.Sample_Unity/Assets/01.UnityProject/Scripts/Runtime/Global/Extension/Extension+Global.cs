@@ -120,6 +120,27 @@ public static partial class Extension {
 
 		return oJSONNode;
 	}
+
+	/** JSON 배열 => 정보 값으로 변환한다 */
+	public static List<List<string>> ExToInfoVals(this SimpleJSON.JSONArray a_oSender, List<STKeyInfo> a_oKeyInfoList) {
+		CAccess.Assert(a_oSender != null);
+		var oInfoValListContainer = new List<List<string>>();
+
+		for(int i = 0; i < a_oSender.Count; ++i) {
+			for(int j = 0; j < a_oKeyInfoList.Count; ++j) {
+				switch(a_oKeyInfoList[j].m_eKeyType) {
+					case EKeyType.MULTI: {
+						break;
+					}
+					case EKeyType.SINGLE: {
+						break;
+					}
+				}
+			}
+		}
+
+		return oInfoValListContainer;
+	}
 	#endregion // 클래스 함수
 }
 

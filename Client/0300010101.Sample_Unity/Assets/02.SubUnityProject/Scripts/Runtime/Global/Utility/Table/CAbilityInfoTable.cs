@@ -296,6 +296,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		try {
 			this.SetupKeyInfos(oCommonKeyInfoList, oEnhanceTradeKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
+
+			Factory.MakeGoogleSheetInfoVals(
 		} finally {
 			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
 			CCollectionManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
