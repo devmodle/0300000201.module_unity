@@ -198,20 +198,11 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		}
 	}
 
-	/** 키를 설정한다 */
-	private void SetupKeys(out string a_oOutCommonKey, out string a_oOutEnhanceTradeKey) {
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableLoadPath.ExGetFileName(false));
-
-		a_oOutCommonKey = stTableInfo.m_oSheetNameDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON, string.Empty);
-		a_oOutEnhanceTradeKey = stTableInfo.m_oSheetNameDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE, string.Empty);
-	}
-
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
-		this.SetupKeys(out string oCommonKey, out string oEnhanceTradeKey);
-
-		a_oOutCommonInfos = oCommonKey.Equals(string.Empty) ? null : a_oJSONNode[oCommonKey];
-		a_oOutEnhanceTradeInfos = oEnhanceTradeKey.Equals(string.Empty) ? null : a_oJSONNode[oEnhanceTradeKey];
+		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo);
+		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
+		a_oOutEnhanceTradeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_ENHANCE_TRADE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_ENHANCE_TRADE]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 어빌리티 정보를 로드한다 */
@@ -290,14 +281,15 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	public Dictionary<string, List<List<string>>> MakeAbilityInfoVals() {
 		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
 		var oEnhanceTradeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
-		
+
 		var oAbilityInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
 		try {
 			this.SetupKeyInfos(oCommonKeyInfoList, oEnhanceTradeKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-			Factory.MakeGoogleSheetInfoVals(
+			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
+			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_ENHANCE_TRADE], oEnhanceTradeInfos.AsArray.ExToInfoVals(oEnhanceTradeKeyInfoList));
 		} finally {
 			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
 			CCollectionManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
@@ -311,9 +303,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.AbilityInfoTableSavePath.ExGetFileName(false));
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		Access.AbilityTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		Access.AbilityTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수

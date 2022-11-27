@@ -124,8 +124,8 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos) {
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.MissionInfoTableLoadPath.ExGetFileName(false));
-		a_oOutCommonInfos = stTableInfo.m_oSheetNameDictContainer[this.GetType()].ContainsKey(KCDefine.B_KEY_COMMON) ? a_oJSONNode[stTableInfo.m_oSheetNameDictContainer[this.GetType()][KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
+		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.MissionTableInfo);
+		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 미션 정보를 로드한다 */
@@ -190,6 +190,8 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 		try {
 			this.SetupKeyInfos(oCommonKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadMissionInfosJSONStr(Access.MissionInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos);
+
+			oMissionInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.MissionTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
 		} finally {
 			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
 		}
@@ -200,9 +202,7 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	/** 키 정보를 설정한다 */
 	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList) {
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
-
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.ItemInfoTableSavePath.ExGetFileName(false));
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		Access.MissionTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수

@@ -15,7 +15,7 @@ using MessagePack;
 public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackReceiver {
 	#region 변수
 	[Key(161)] public Dictionary<EObjType, List<EObjKinds>> m_oObjKindsDictContainer;
-	[IgnoreMember] [System.NonSerialized] public Vector3Int m_stIdx;
+	[IgnoreMember][System.NonSerialized] public Vector3Int m_stIdx;
 	#endregion // 변수
 
 	#region 상수
@@ -70,7 +70,7 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 	#endregion // 상수
 
 	#region 변수
-	[IgnoreMember] [System.NonSerialized] public STIDInfo m_stIDInfo;
+	[IgnoreMember][System.NonSerialized] public STIDInfo m_stIDInfo;
 	[Key(165)] public Dictionary<int, Dictionary<int, STCellInfo>> m_oCellInfoDictContainer = new Dictionary<int, Dictionary<int, STCellInfo>>();
 	#endregion // 변수
 

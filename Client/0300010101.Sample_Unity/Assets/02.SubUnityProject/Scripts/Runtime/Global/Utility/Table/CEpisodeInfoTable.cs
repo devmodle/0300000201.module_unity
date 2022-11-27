@@ -206,10 +206,10 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 
 	/** JSON 노드를 설정한다 */
 	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutLevelEpisodeInfos, out SimpleJSON.JSONNode a_oOutStageEpisodeInfos, out SimpleJSON.JSONNode a_oOutChapterEpisodeInfos) {
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.EpisodeInfoTableLoadPath.ExGetFileName(false));
-		a_oOutLevelEpisodeInfos = stTableInfo.m_oSheetNameDictContainer[this.GetType()].ContainsKey(KCDefine.U_KEY_LEVEL_EPISODE) ? a_oJSONNode[stTableInfo.m_oSheetNameDictContainer[this.GetType()][KCDefine.U_KEY_LEVEL_EPISODE]] : null;
-		a_oOutStageEpisodeInfos = stTableInfo.m_oSheetNameDictContainer[this.GetType()].ContainsKey(KCDefine.U_KEY_STAGE_EPISODE) ? a_oJSONNode[stTableInfo.m_oSheetNameDictContainer[this.GetType()][KCDefine.U_KEY_STAGE_EPISODE]] : null;
-		a_oOutChapterEpisodeInfos = stTableInfo.m_oSheetNameDictContainer[this.GetType()].ContainsKey(KCDefine.U_KEY_CHAPTER_EPISODE) ? a_oJSONNode[stTableInfo.m_oSheetNameDictContainer[this.GetType()][KCDefine.U_KEY_CHAPTER_EPISODE]] : null;
+		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.EpisodeTableInfo);
+		a_oOutLevelEpisodeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_LEVEL_EPISODE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_LEVEL_EPISODE]] : KCDefine.B_EMPTY_JSON_ARRAY;
+		a_oOutStageEpisodeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_STAGE_EPISODE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_STAGE_EPISODE]] : KCDefine.B_EMPTY_JSON_ARRAY;
+		a_oOutChapterEpisodeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_CHAPTER_EPISODE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.U_KEY_CHAPTER_EPISODE]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 에피소드 정보를 로드한다 */
@@ -300,7 +300,7 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 	}
 
 	/** 에피소드 정보 값을 설정한다 */
-	public void MakeEpisodeInfoVals(SimpleJSON.JSONNode a_oEpisodeInfos, Dictionary<string, List<List<string>>> a_oOutCalcInfoValDictContainer) {
+	public void MakeEpisodeInfoVals(SimpleJSON.JSONNode a_oEpisodeInfos, Dictionary<string, List<List<string>>> a_oOutEpisodeInfoValDictContainer) {
 		var oLevelEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
 		var oStageEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
 		var oChapterEpisodeKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
@@ -308,6 +308,10 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 		try {
 			this.SetupKeyInfos(oLevelEpisodeKeyInfoList, oStageEpisodeKeyInfoList, oChapterEpisodeKeyInfoList);
 			this.SetupJSONNodes(a_oEpisodeInfos, out SimpleJSON.JSONNode oLevelEpisodeInfos, out SimpleJSON.JSONNode oStageEpisodeInfos, out SimpleJSON.JSONNode oChapterEpisodeInfos);
+
+			a_oOutEpisodeInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.EpisodeTableInfo)[KCDefine.U_KEY_LEVEL_EPISODE], oLevelEpisodeInfos.AsArray.ExToInfoVals(oLevelEpisodeKeyInfoList));
+			a_oOutEpisodeInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.EpisodeTableInfo)[KCDefine.U_KEY_STAGE_EPISODE], oStageEpisodeInfos.AsArray.ExToInfoVals(oStageEpisodeKeyInfoList));
+			a_oOutEpisodeInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.EpisodeTableInfo)[KCDefine.U_KEY_CHAPTER_EPISODE], oChapterEpisodeInfos.AsArray.ExToInfoVals(oChapterEpisodeKeyInfoList));
 		} finally {
 			CCollectionManager.Inst.DespawnList(oLevelEpisodeKeyInfoList);
 			CCollectionManager.Inst.DespawnList(oStageEpisodeKeyInfoList);
@@ -320,11 +324,10 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutLevelEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo);
-		
-		var stTableInfo = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.GetValueOrDefault(Access.EpisodeInfoTableSavePath.ExGetFileName(false));
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_LEVEL_EPISODE)?.ExCopyTo(a_oOutLevelEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_STAGE_EPISODE)?.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
-		stTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_CHAPTER_EPISODE)?.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+
+		Access.EpisodeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_LEVEL_EPISODE)?.ExCopyTo(a_oOutLevelEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		Access.EpisodeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_STAGE_EPISODE)?.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
+		Access.EpisodeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_CHAPTER_EPISODE)?.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
