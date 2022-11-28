@@ -184,6 +184,7 @@ public static partial class KEditorDefine {
 
 #if PURCHASE_ENABLE || PURCHASE_MODULE_ENABLE
 		["com.unity.purchasing"] = "4.5.1",
+		["com.unity.purchasing.udp"] = "2.2.5",
 #endif // #if PURCHASE_ENABLE || PURCHASE_MODULE_ENABLE
 
 #if DEVELOPMENT_PROJ
