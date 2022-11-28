@@ -31,12 +31,18 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
-		// Do Something
+		[typeof(Ads.CAAdmobSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Ads.CAIronSrcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+
+		[typeof(Google.CGGoogleSheetSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
-		// Do Something
+		[KDefine.G_SCENE_N_A_ADMOB] = typeof(Ads.CAAdmobSceneManager),
+		[KDefine.G_SCENE_N_A_IRON_SRC] = typeof(Ads.CAAdmobSceneManager),
+
+		[KDefine.G_SCENE_N_G_GOOGLE_SHEET] = typeof(Google.CGGoogleSheetSceneManager)
 	};
 	#endregion // 런타임 상수
 }
