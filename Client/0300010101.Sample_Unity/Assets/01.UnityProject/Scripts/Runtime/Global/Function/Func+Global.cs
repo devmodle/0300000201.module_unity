@@ -77,13 +77,11 @@ public static partial class Func {
 		CUserInfoStorage.Inst.GetCharacterUserInfo(a_nCharacterID).m_stPlayEpisodeIDInfo = Access.GetEpisodeInfo(a_nLevelID, a_nStageID, a_nChapterID).m_stIDInfo;
 		CUserInfoStorage.Inst.SaveUserInfo();
 
-#if NEVER_USE_THIS
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		CGameInfoStorage.Inst.SetPlayLevelInfo(CLevelInfoTable.Inst.GetLevelInfo(a_nLevelID, a_nStageID, a_nChapterID));
 #else
 		CGameInfoStorage.Inst.SetPlayLevelInfo(CLevelInfoTable.Inst.LoadLevelInfo(a_nLevelID, a_nStageID, a_nChapterID));
 #endif // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-#endif // #if NEVER_USE_THIS
 	}
 
 	/** 다음 일일 보상 식별자를 설정한다 */
