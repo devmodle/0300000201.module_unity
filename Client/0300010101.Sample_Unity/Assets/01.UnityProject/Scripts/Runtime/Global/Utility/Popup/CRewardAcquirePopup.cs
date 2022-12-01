@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using System.Linq;
-using TMPro;
 
 /** 보상 획득 팝업 */
 public partial class CRewardAcquirePopup : CSubPopup {
@@ -40,10 +39,52 @@ public partial class CRewardAcquirePopup : CSubPopup {
 	#endregion // 프로퍼티
 
 	#region 함수
+	/** 초기화 */
+	public override void Awake() {
+		base.Awake();
+
+		this.SetIgnoreAni(true);
+		this.SetIgnoreNavStackEvent(true);
+
+		// 버튼을 설정한다
+		CFunc.SetupButtons(new List<(EKey, string, GameObject, UnityAction)>() {
+			(EKey.ADS_BTN, $"{EKey.ADS_BTN}", this.Contents, this.OnTouchAdsBtn),
+			(EKey.ACQUIRE_BTN, $"{EKey.ACQUIRE_BTN}", this.Contents, this.OnTouchAcquireBtn)
+		}, m_oBtnDict);
+
+		this.SubSetupAwake();
+	}
+
+	/** 초기화 */
+	public virtual void Init(STParams a_stParams) {
+		base.Init();
+		this.Params = a_stParams;
+
+		this.SubInit();
+	}
+
 	/** 팝업 컨텐츠를 설정한다 */
 	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
+	}
+
+	/** UI 상태를 갱신한다 */
+	private void UpdateUIsState() {
+		var oRewardTargetInfoKeyList = this.Params.m_oRewardTargetInfoDict.Keys.ToList();
+
+		// 보상 아이템 UI 상태를 갱신한다
+		for(int i = 0; i < m_oItemUIsList.Count; ++i) {
+			m_oItemUIsList[i].SetActive(i < oRewardTargetInfoKeyList.Count);
+
+			// 보상 정보가 존재 할 경우
+			if(i < oRewardTargetInfoKeyList.Count) {
+				ulong nUniqueTargetInfoID = oRewardTargetInfoKeyList[i];
+				this.UpdateItemUIsState(m_oItemUIsList[i], this.Params.m_oRewardTargetInfoDict.GetValueOrDefault(nUniqueTargetInfoID));
+			}
+		}
+
+		this.SubUpdateUIsState();
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */

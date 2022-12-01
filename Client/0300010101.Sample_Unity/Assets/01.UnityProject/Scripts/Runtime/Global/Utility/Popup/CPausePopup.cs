@@ -28,10 +28,29 @@ public partial class CPausePopup : CSubPopup {
 	#endregion // 프로퍼티
 
 	#region 함수
+	/** 초기화 */
+	public override void Awake() {
+		base.Awake();
+		this.SubSetupAwake();
+	}
+
+	/** 초기화 */
+	public virtual void Init(STParams a_stParams) {
+		base.Init();
+		this.Params = a_stParams;
+
+		this.SubInit();
+	}
+
 	/** 팝업 컨텐츠를 설정한다 */
 	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
+	}
+
+	/** UI 상태를 갱신한다 */
+	private void UpdateUIsState() {
+		this.SubUpdateUIsState();
 	}
 
 	/** 나가기 버튼을 눌렀을 경우 */

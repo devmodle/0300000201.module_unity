@@ -8,10 +8,6 @@ using UnityEngine.Events;
 using System.Linq;
 using TMPro;
 
-#if PURCHASE_MODULE_ENABLE
-using UnityEngine.Purchasing;
-#endif // #if PURCHASE_MODULE_ENABLE
-
 namespace OverlayScene {
 	/** 서브 중첩 씬 관리자 */
 	public partial class CSubOverlaySceneManager : COverlaySceneManager {
@@ -19,7 +15,7 @@ namespace OverlayScene {
 		private enum EKey {
 			NONE = -1,
 			PURCHASE_PRODUCT_ID,
-			NUM_COINS_TEXT,
+			NUM_NORM_COINS_TEXT,
 			STORE_BTN,
 			[HideInInspector] MAX_VAL
 		}
@@ -48,6 +44,27 @@ namespace OverlayScene {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+
+			// 앱이 초기화 되었을 경우
+			if(CSceneManager.IsAppInit) {
+				this.SetupAwake();
+			}
+		}
+
+		/** 초기화 */
+		public override void Start() {
+			base.Start();
+
+			// 앱이 초기화 되었을 경우
+			if(CSceneManager.IsAppInit) {
+				this.SetupStart();
+				this.UpdateUIsState();
+			}
+		}
+
 		/** 상점 팝업을 출력한다 */
 		public void ShowStorePopup() {
 			Func.ShowStorePopup(CSceneManager.ActiveScenePopupUIs, (a_oSender) => {
@@ -64,6 +81,39 @@ namespace OverlayScene {
 
 				(a_oSender as CStorePopup).Init(stParams);
 			});
+		}
+
+		/** 씬을 설정한다 */
+		private void SetupAwake() {
+			// 텍스트를 설정한다
+			CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
+				(EKey.NUM_NORM_COINS_TEXT, $"{EKey.NUM_NORM_COINS_TEXT}", this.UIsBase)
+			}, m_oTextDict);
+
+			// 버튼을 설정한다
+			CFunc.SetupButtons(new List<(EKey, string, GameObject, UnityAction)>() {
+				(EKey.STORE_BTN, $"{EKey.STORE_BTN}", this.UIsBase, this.OnTouchStoreBtn)
+			}, m_oBtnDict);
+
+			this.SubSetupAwake();
+		}
+
+		/** 씬을 설정한다 */
+		private void SetupStart() {
+			this.SubSetupStart();
+		}
+
+		/** UI 상태를 갱신한다 */
+		private void UpdateUIsState() {
+			// UI 상태를 갱신한다
+			CSceneManager.GetSceneManager<MainScene.CSubMainSceneManager>(KCDefine.B_SCENE_N_MAIN)?.gameObject.ExSendMsg(string.Empty, KCDefine.U_FUNC_N_UPDATE_UIS_STATE, null, false);
+			CSceneManager.GetSceneManager<GameScene.CSubGameSceneManager>(KCDefine.B_SCENE_N_GAME)?.gameObject.ExSendMsg(string.Empty, KCDefine.U_FUNC_N_UPDATE_UIS_STATE, null, false);
+			CSceneManager.GetSceneManager<TitleScene.CSubTitleSceneManager>(KCDefine.B_SCENE_N_TITLE)?.gameObject.ExSendMsg(string.Empty, KCDefine.U_FUNC_N_UPDATE_UIS_STATE, null, false);
+
+			// 텍스트를 갱신한다
+			m_oTextDict.GetValueOrDefault(EKey.NUM_NORM_COINS_TEXT)?.ExSetText($"{Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_NORM_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS)}", EFontSet._1, false);
+
+			this.SubUpdateUIsState();
 		}
 
 		/** 상점 버튼을 눌렀을 경우 */

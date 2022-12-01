@@ -11,26 +11,7 @@ namespace TestScene {
 	/** 서브 테스트 씬 관리자 */
 	public partial class CSubTestSceneManager : CTestSceneManager {
 		#region 함수
-		/** 초기화 */
-		public override void Awake() {
-			base.Awake();
-
-			// 앱이 초기화 되었을 경우
-			if(CSceneManager.IsAppInit) {
-				this.SetupAwake();
-			}
-		}
-
-		/** 초기화 */
-		public override void Start() {
-			base.Start();
-
-			// 앱이 초기화 되었을 경우
-			if(CSceneManager.IsAppInit) {
-				this.SetupStart();
-				this.UpdateUIsState();
-			}
-		}
+		
 		#endregion // 함수
 	}
 

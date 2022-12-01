@@ -9,10 +9,6 @@ using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
 
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-using GoogleSheetsToUnity;
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-
 namespace TitleScene {
 	/** 서브 타이틀 씬 관리자 */
 	public partial class CSubTitleSceneManager : CTitleSceneManager {
@@ -48,6 +44,60 @@ namespace TitleScene {
 		#endregion // 변수
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+
+			// 앱이 초기화 되었을 경우
+			if(CSceneManager.IsAppInit) {
+				this.SetupAwake();
+			}
+		}
+
+		/** 초기화 */
+		public override void Start() {
+			base.Start();
+
+			// 앱이 초기화 되었을 경우
+			if(CSceneManager.IsAppInit) {
+				this.SetupStart();
+				this.UpdateUIsState();
+
+				Func.PlayBGSnd(EResKinds.SND_BG_SCENE_TITLE_01);
+
+				// 최초 시작 일 경우
+				if(CCommonAppInfoStorage.Inst.IsFirstStart) {
+					this.UpdateFirstStartState();
+				}
+
+				// 최초 플레이 일 경우
+				if(CCommonAppInfoStorage.Inst.AppInfo.IsFirstPlay) {
+					this.UpdateFirstPlayState();
+				}
+
+				// 로그인 되었을 경우
+				if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+					this.OnLogin(CUserInfoStorage.Inst.UserInfo.LoginType, true);
+				}
+			}
+		}
+
+		/** 제거 되었을 경우 */
+		public override void OnDestroy() {
+			base.OnDestroy();
+
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					foreach(var stKeyVal in m_oAniDict) {
+						stKeyVal.Value?.Kill();
+					}
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CSubGameSceneManager.OnDestroy Exception: {oException.Message}");
+			}
+		}
+
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
 		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent) {
 			base.OnReceiveNavStackEvent(a_eEvent);
@@ -71,6 +121,70 @@ namespace TitleScene {
 					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
 				}
 			}
+		}
+
+		/** 씬을 설정한다 */
+		private void SetupAwake() {
+			// 텍스트를 설정한다 {
+			CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
+				(EKey.TOUCH_TEXT, $"{EKey.TOUCH_TEXT}", this.UIsBase)
+			}, m_oTextDict);
+
+			m_oTextDict.GetValueOrDefault(EKey.TOUCH_TEXT)?.gameObject.SetActive(false);
+			// 텍스트를 설정한다 }
+
+			// 버튼을 설정한다
+			CFunc.SetupButtons(new List<(EKey, string, GameObject, UnityAction)>() {
+				(EKey.PLAY_BTN, $"{EKey.PLAY_BTN}", this.UIsBase, this.OnTouchPlayBtn),
+				(EKey.GUEST_LOGIN_BTN, $"{EKey.GUEST_LOGIN_BTN}", this.UIsBase, this.OnTouchGuestLoginBtn),
+				(EKey.APPLE_LOGIN_BTN, $"{EKey.APPLE_LOGIN_BTN}", this.UIsBase, this.OnTouchAppleLoginBtn),
+				(EKey.FACEBOOK_LOGIN_BTN, $"{EKey.FACEBOOK_LOGIN_BTN}", this.UIsBase, this.OnTouchFacebookLoginBtn)
+			}, m_oBtnDict);
+
+			this.SubSetupAwake();
+		}
+
+		/** 씬을 설정한다 */
+		private void SetupStart() {
+			// 업데이트가 가능 할 경우
+			if(!CAppInfoStorage.Inst.IsIgnoreUpdate && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
+				CAppInfoStorage.Inst.SetIgnoreUpdate(true);
+				this.ExLateCallFunc((a_oSender) => Func.ShowUpdatePopup(this.OnReceiveUpdatePopupResult));
+			}
+
+			this.SubSetupStart();
+		}
+
+		/** UI 상태를 갱신한다 */
+		private void UpdateUIsState() {
+			// 버튼을 갱신한다 {
+#if UNITY_IOS && APPLE_LOGIN_ENABLE
+			m_oBtnDict.GetValueOrDefault(EKey.APPLE_LOGIN_BTN)?.gameObject.SetActive(true);
+#else
+			m_oBtnDict.GetValueOrDefault(EKey.APPLE_LOGIN_BTN)?.gameObject.SetActive(false);
+#endif // #if UNITY_IOS && APPLE_LOGIN_ENABLE
+
+			for(int i = 0; i < m_oLoginBtnKeyList.Count; ++i) {
+				// 로그인 되었을 경우
+				if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+					m_oBtnDict.GetValueOrDefault(m_oLoginBtnKeyList[i])?.gameObject.SetActive(false);
+				}
+			}
+			// 버튼을 갱신한다 }
+
+#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_RES_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_ITEM_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_SKILL_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_OBJ_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+			m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
+#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+
+			this.SubUpdateUIsState();
 		}
 
 		/** 최초 시작 상태를 갱신한다 */

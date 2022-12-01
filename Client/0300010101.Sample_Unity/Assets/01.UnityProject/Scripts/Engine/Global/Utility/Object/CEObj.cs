@@ -34,6 +34,33 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			m_oVec3IntDict.ExReplaceVal(EKey.CELL_IDX, KCDefine.B_IDX_INVALID_3D);
+
+			// 스프라이트를 설정한다
+			CFunc.SetupSprites(new List<(EKey, string, GameObject)>() {
+				(EKey.OBJ_SPRITE, $"{EKey.OBJ_SPRITE}", this.gameObject)
+			}, m_oSpriteDict);
+
+			this.SubSetupAwake();
+		}
+
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			base.Init(a_stParams.m_stBaseParams);
+			this.Params = a_stParams;
+
+			// 객체 스프라이트가 존재 할 경우
+			if(m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE) != null) {
+				m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE).sprite = Access.GetObjSprite(a_stParams.m_stObjInfo.m_eObjKinds);
+				m_oSpriteDict.GetValueOrDefault(EKey.OBJ_SPRITE).ExSetSortingOrder(Access.GetSortingOrderInfo(a_stParams.m_stObjInfo.m_eObjKinds));
+			}
+
+			this.SubInit();
+		}
+
 		/** 어빌리티 값을 설정한다 */
 		protected override void DoSetupAbilityVals(bool a_bIsReset = true) {
 			base.DoSetupAbilityVals(a_bIsReset);

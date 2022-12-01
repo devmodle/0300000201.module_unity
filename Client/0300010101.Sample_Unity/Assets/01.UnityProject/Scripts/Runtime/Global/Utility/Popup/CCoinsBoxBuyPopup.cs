@@ -26,10 +26,48 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	#endregion // 변수
 
 	#region 함수
+	/** 초기화 */
+	public override void Awake() {
+		base.Awake();
+
+		// 텍스트를 설정한다
+		CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
+			(EKey.NUM_COINS_TEXT, $"{EKey.NUM_COINS_TEXT}", this.Contents)
+		}, m_oTextDict);
+
+		// 버튼을 설정한다
+		CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
+			(KCDefine.U_OBJ_N_OK_BTN, this.Contents, this.OnTouchOKBtn),
+			(KCDefine.U_OBJ_N_PURCHASE_BTN, this.Contents, this.OnTouchPurchaseBtn)
+		}, false);
+
+		this.SubSetupAwake();
+	}
+
+	/** 초기화 */
+	public override void Init() {
+		base.Init();
+		this.SubInit();
+	}
+
 	/** 팝업 컨텐츠를 설정한다 */
 	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
+	}
+
+	/** UI 상태를 변경한다 */
+	private void UpdateUIsState() {
+		long nNumCoinsBoxCoins = (long)Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_COINS_BOX_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS);
+
+		// 객체를 갱신한다
+		m_oSaveUIs?.SetActive(nNumCoinsBoxCoins < KDefine.G_MAX_NUM_COINS_BOX_COINS);
+		m_oFullUIs?.SetActive(nNumCoinsBoxCoins >= KDefine.G_MAX_NUM_COINS_BOX_COINS);
+
+		// 텍스트를 갱신한다
+		m_oTextDict.GetValueOrDefault(EKey.NUM_COINS_TEXT)?.ExSetText($"{nNumCoinsBoxCoins}", EFontSet._1, false);
+
+		this.SubUpdateUIsState();
 	}
 
 	/** 확인 버튼을 눌렀을 경우 */

@@ -48,6 +48,41 @@ public partial class CResultPopup : CSubPopup {
 	#endregion // 프로퍼티
 
 	#region 함수
+	/** 초기화 */
+	public override void Awake() {
+		base.Awake();
+		this.SetIgnoreNavStackEvent(true);
+
+		// 객체를 설정한다
+		CFunc.SetupObjs(new List<(EKey, string, GameObject)>() {
+			(EKey.CLEAR_UIS, $"{EKey.CLEAR_UIS}", this.Contents),
+			(EKey.CLEAR_FAIL_UIS, $"{EKey.CLEAR_FAIL_UIS}", this.Contents)
+		}, m_oUIsDict);
+
+		// 텍스트를 설정한다
+		CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
+			(EKey.RECORD_TEXT, $"{EKey.RECORD_TEXT}", this.Contents),
+			(EKey.BEST_RECORD_TEXT, $"{EKey.BEST_RECORD_TEXT}", this.Contents)
+		}, m_oTextDict);
+
+		// 버튼을 설정한다
+		CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
+			(KCDefine.U_OBJ_N_NEXT_BTN, this.Contents, this.OnTouchNextBtn),
+			(KCDefine.U_OBJ_N_RETRY_BTN, this.Contents, this.OnTouchRetryBtn),
+			(KCDefine.U_OBJ_N_LEAVE_BTN, this.Contents, this.OnTouchLeaveBtn)
+		}, false);
+
+		this.SubSetupAwake();
+	}
+
+	/** 초기화 */
+	public virtual void Init(STParams a_stParams) {
+		base.Init();
+		this.Params = a_stParams;
+
+		this.SubInit();
+	}
+
 	/** 팝업 컨텐츠를 설정한다 */
 	protected override void SetupContents() {
 		base.SetupContents();
@@ -58,6 +93,21 @@ public partial class CResultPopup : CSubPopup {
 	protected override void OnTouchCloseBtn() {
 		base.OnTouchCloseBtn();
 		this.OnTouchLeaveBtn();
+	}
+
+	/** UI 상태를 갱신한다 */
+	private void UpdateUIsState() {
+		var oClearLevelInfo = Access.GetLevelClearInfo(CGameInfoStorage.Inst.PlayCharacterID, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID01, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID02, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID03, false);
+
+		// 객체를 갱신한다
+		m_oUIsDict.GetValueOrDefault(EKey.CLEAR_UIS)?.SetActive(this.Params.m_stRecordInfo.m_bIsSuccess);
+		m_oUIsDict.GetValueOrDefault(EKey.CLEAR_FAIL_UIS)?.SetActive(!this.Params.m_stRecordInfo.m_bIsSuccess);
+
+		// 텍스트를 갱신한다
+		m_oTextDict.GetValueOrDefault(EKey.RECORD_TEXT)?.ExSetText($"{this.Params.m_stRecordInfo.m_nIntRecord}", EFontSet._1, false);
+		m_oTextDict.GetValueOrDefault(EKey.BEST_RECORD_TEXT)?.ExSetText((oClearLevelInfo != null) ? $"{oClearLevelInfo.m_stBestRecordInfo.m_nIntRecord}" : string.Empty, EFontSet._1, false);
+
+		this.SubUpdateUIsState();
 	}
 
 	/** 다음 버튼을 눌렀을 경우 */

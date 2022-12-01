@@ -20,10 +20,36 @@ public partial class CFreeRewardPopup : CSubPopup {
 	#endregion // 변수
 
 	#region 함수
+	/** 초기화 */
+	public override void Awake() {
+		base.Awake();
+
+		// 버튼을 설정한다
+		CFunc.SetupButtons(new List<(EKey, string, GameObject, UnityAction)>() {
+			(EKey.ADS_BTN, $"{EKey.ADS_BTN}", this.Contents, this.OnTouchAdsBtn)
+		}, m_oBtnDict);
+
+		this.SubSetupAwake();
+	}
+
+	/** 초기화 */
+	public override void Init() {
+		base.Init();
+		this.SubInit();
+	}
+
 	/** 팝업 컨텐츠를 설정한다 */
 	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
+	}
+
+	/** UI 상태를 갱신한다 */
+	private void UpdateUIsState() {
+		// 버튼을 갱신한다
+		m_oBtnDict.GetValueOrDefault(EKey.ADS_BTN)?.ExSetInteractable(Access.IsEnableGetFreeReward(CGameInfoStorage.Inst.PlayCharacterID));
+
+		this.SubUpdateUIsState();
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */

@@ -8,36 +8,7 @@ using UnityEngine.Events;
 /** 미션 팝업 */
 public abstract partial class CMissionPopup : CSubPopup {
 	#region 함수
-	/** 초기화 */
-	public override void Awake() {
-		base.Awake();
-
-		#region 추가
-		this.SubSetupAwake();
-		#endregion // 추가
-	}
-
-	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
-		base.Init();
-		this.Params = a_stParams;
-
-		#region 추가
-		this.SubInit();
-		#endregion // 추가
-	}
-
-	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
-		// 미션 UI 상태를 갱신한다
-		for(int i = 0; i < m_oMissionUIsList.Count; ++i) {
-			this.UpdateMissionUIsState(m_oMissionUIsList[i], this.Params.m_oMissionInfoList[i]);
-		}
-
-		#region 추가
-		this.SubUpdateUIsState();
-		#endregion // 추가
-	}
+	
 	#endregion // 함수
 }
 

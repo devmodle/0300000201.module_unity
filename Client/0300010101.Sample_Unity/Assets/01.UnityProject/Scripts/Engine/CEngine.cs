@@ -66,6 +66,31 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			this.SubSetupAwake();
+		}
+
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			this.Params = a_stParams;
+
+			this.SetupEngine();
+			this.SetupLevel();
+			this.SetupGridLine();
+
+			this.SubInit();
+		}
+
+		/** 상태를 리셋한다 */
+		public override void Reset() {
+			base.Reset();
+			m_oBoolDict.ExReplaceVal(EKey.IS_RUNNING, false);
+
+			this.SubReset();
+		}
+
 		/** 구동 여부를 변경한다 */
 		public void SetEnableRunning(bool a_bIsRunning) {
 			m_oBoolDict.ExReplaceVal(EKey.IS_RUNNING, a_bIsRunning);

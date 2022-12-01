@@ -12,37 +12,7 @@ namespace NSEngine {
 	/** 엔진 */
 	public partial class CEngine : CComponent {
 		#region 함수
-		/** 초기화 */
-		public override void Awake() {
-			base.Awake();
-
-			#region 추가
-			this.SubSetupAwake();
-			#endregion // 추가
-		}
-
-		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
-			this.Params = a_stParams;
-
-			this.SetupEngine();
-			this.SetupLevel();
-			this.SetupGridLine();
-
-			#region 추가
-			this.SubInit();
-			#endregion // 추가
-		}
-
-		/** 상태를 리셋한다 */
-		public override void Reset() {
-			base.Reset();
-			m_oBoolDict.ExReplaceVal(EKey.IS_RUNNING, false);
-
-			#region 추가
-			this.SubReset();
-			#endregion // 추가
-		}
+		
 		#endregion // 함수
 	}
 

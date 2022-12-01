@@ -9,23 +9,7 @@ namespace NSEngine {
 	/** 엔진 컴포넌트 */
 	public partial class CEComponent : CComponent {
 		#region 함수
-		/** 초기화 */
-		public override void Awake() {
-			base.Awake();
-
-			#region 추가
-			this.SubSetupAwake();
-			#endregion // 추가
-		}
-
-		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
-			this.Params = a_stParams;
-
-			#region 추가
-			this.SubInit();
-			#endregion // 추가
-		}
+		
 		#endregion // 함수
 	}
 

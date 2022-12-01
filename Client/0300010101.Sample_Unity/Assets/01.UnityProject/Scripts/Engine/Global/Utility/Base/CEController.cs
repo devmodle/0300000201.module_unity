@@ -29,7 +29,19 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			this.SubSetupAwake();
+		}
 
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			base.Init(a_stParams.m_stBaseParams);
+			this.Params = a_stParams;
+
+			this.SubInit();
+		}
 		#endregion // 함수
 
 		#region 제네릭 접근자 함수

@@ -24,6 +24,20 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			this.SubSetupAwake();
+		}
+
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			base.Init(a_stParams.m_stBaseParams);
+			this.Params = a_stParams;
+
+			this.SubInit();
+		}
+
 		/** 어빌리티 값을 설정한다 */
 		protected override void DoSetupAbilityVals(bool a_bIsReset = true) {
 			base.DoSetupAbilityVals(a_bIsReset);

@@ -9,29 +9,7 @@ namespace NSEngine {
 	/** 효과 */
 	public partial class CEFX : CEObjComponent {
 		#region 함수
-		/** 초기화 */
-		public override void Awake() {
-			base.Awake();
-
-			// 파티클을 설정한다
-			CFunc.SetupParticles(new List<(EKey, string, GameObject)>() {
-				(EKey.FX_PARTICLE, $"{EKey.FX_PARTICLE}", this.gameObject)
-			}, m_oParticleDict);
-
-			#region 추가
-			this.SubSetupAwake();
-			#endregion // 추가
-		}
-
-		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
-			base.Init(a_stParams.m_stBaseParams);
-			this.Params = a_stParams;
-
-			#region 추가
-			this.SubInit();
-			#endregion // 추가
-		}
+		
 		#endregion // 함수
 	}
 

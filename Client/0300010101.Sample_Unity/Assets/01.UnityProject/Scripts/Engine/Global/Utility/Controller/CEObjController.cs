@@ -45,6 +45,22 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			m_oVec3Dict.ExReplaceVal(EKey.MOVE_POS, KCDefine.B_POS_INVALID);
+
+			this.SubSetupAwake();
+		}
+
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			base.Init(a_stParams.m_stBaseParams);
+			this.Params = a_stParams;
+
+			this.SubInit();
+		}
+
 		/** 적용 스킬 정보를 리셋한다 */
 		public virtual void ResetApplySkillInfo() {
 			m_oSkillInfoDict.ExReplaceVal(EKey.APPLY_SKILL_INFO, STSkillInfo.INVALID);

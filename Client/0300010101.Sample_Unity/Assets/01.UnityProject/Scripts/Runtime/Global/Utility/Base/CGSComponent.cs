@@ -22,7 +22,17 @@ namespace GameScene {
 		#endregion // 프로퍼티
 
 		#region 함수
+		/** 초기화 */
+		public override void Awake() {
+			base.Awake();
+			this.SubSetupAwake();
+		}
 
+		/** 초기화 */
+		public virtual void Init(STParams a_stParams) {
+			this.Params = a_stParams;
+			this.SubInit();
+		}
 		#endregion // 함수
 
 		#region 클래스 함수
