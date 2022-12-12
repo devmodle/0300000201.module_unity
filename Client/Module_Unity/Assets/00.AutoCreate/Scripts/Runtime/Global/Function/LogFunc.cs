@@ -22,6 +22,8 @@ public static partial class LogFunc {
 		if(LogFunc.IsEnableSendLog(a_oName)) {
 #if ANALYTICS_TEST_ENABLE || STORE_DIST_BUILD
 			var oDataDict = LogFunc.MakeLogDatas(a_oDataDict);
+			oDataDict.TryAdd(KCDefine.L_LOG_KEY_LOG_NAME, a_oName);
+
 			CCommonAppInfoStorage.Inst.AppInfo.m_oSendLogList.ExAddVal(a_oName);
 
 #if FLURRY_MODULE_ENABLE
@@ -48,7 +50,7 @@ public static partial class LogFunc {
 #if PLAYFAB_MODULE_ENABLE
 			// 플레이 팹 분석이 가능 할 경우
 			if(KDefine.G_ANALYTICS_LOG_ENABLE_LIST.Contains(EAnalytics.PLAYFAB)) {
-				CPlayfabManager.Inst.SendLog(a_oName, a_oDataDict);
+				CPlayfabManager.Inst.SendLog(a_oName, oDataDict);
 			}
 #endif // #if PLAYFAB_MODULE_ENABLE
 #endif // #if ANALYTICS_TEST_ENABLE || STORE_DIST_BUILD
