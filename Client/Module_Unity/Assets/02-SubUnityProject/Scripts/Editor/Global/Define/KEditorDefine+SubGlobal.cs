@@ -19,9 +19,9 @@ public static partial class KEditorDefine {
 		Path.GetDirectoryName($"{KCEditorDefine.B_DIR_P_SUB_UNITY_PROJ_RESOURCES}{KCDefine.B_DIR_P_PREFABS}").Replace(KCDefine.B_TOKEN_R_SLASH, KCDefine.B_TOKEN_SLASH),
 		Path.GetDirectoryName($"{KCEditorDefine.B_DIR_P_SUB_UNITY_PROJ_RESOURCES}{KCDefine.B_DIR_P_SCRIPTABLES}").Replace(KCDefine.B_TOKEN_R_SLASH, KCDefine.B_TOKEN_SLASH),
 
-		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Resources/Fonts",
-		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Resources/Prefabs",
-		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Resources/SpriteAtlases"
+		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Client/Resources/Fonts",
+		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Client/Resources/Prefabs",
+		$"{KCEditorDefine.B_DIR_P_PACKAGES}Module.UnityCommon/Client/Resources/SpriteAtlases"
 	};
 
 	public static List<string> G_EXTRA_ASSET_P_PRELOAD_ASSET_LIST = new List<string>() {
