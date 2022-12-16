@@ -252,12 +252,12 @@ namespace LevelEditorScene {
 				// 레벨 정보가 없을 경우
 				if(!CLevelInfoTable.Inst.LevelInfoDictContainer.ExIsValid()) {
 					var oLevelInfo = Factory.MakeLevelInfo(KCDefine.B_VAL_0_INT);
+					CLevelInfoTable.Inst.AddLevelInfo(oLevelInfo);
 
 					Func.SetupEditorLevelInfo(oLevelInfo, new CSubEditorLevelCreateInfo() {
 						m_nNumLevels = KCDefine.B_VAL_0_INT, m_stMinNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS, m_stMaxNumCells = NSEngine.KDefine.E_MIN_NUM_CELLS
 					});
 
-					CLevelInfoTable.Inst.AddLevelInfo(oLevelInfo);
 					CLevelInfoTable.Inst.SaveLevelInfos();
 				}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
