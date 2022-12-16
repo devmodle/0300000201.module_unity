@@ -18,15 +18,15 @@ using Newtonsoft.Json;
 [MessagePackObject]
 [System.Serializable]
 public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallbackReceiver {
-	#region 변수
+#region 변수
 	[Key(0)] public STBaseInfo m_stBaseInfo;
-	#endregion // 변수
+#endregion // 변수
 
-	#region 상수
+#region 상수
 	private const string KEY_OBJ_KINDS = "ObjKinds";
-	#endregion // 상수
+#endregion // 상수
 
-	#region 프로퍼티
+#region 프로퍼티
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	[JsonIgnore]
 	[IgnoreMember]
@@ -41,9 +41,9 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 		set { m_stBaseInfo.m_oStrDict.ExReplaceVal(KEY_OBJ_KINDS, $"{(int)value}"); }
 	}
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 프로퍼티
+#endregion // 프로퍼티
 
-	#region ICloneable
+#region ICloneable
 	/** 사본 객체를 생성한다 */
 	public object Clone() {
 		var stCellObjInfo = new STCellObjInfo();
@@ -52,9 +52,9 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 		stCellObjInfo.OnAfterDeserialize();
 		return stCellObjInfo;
 	}
-	#endregion // ICloneable
+#endregion // ICloneable
 
-	#region IMessagePackSerializationCallbackReceiver
+#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
 	public void OnBeforeSerialize() {
 		// Do Something
@@ -64,16 +64,21 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 	public void OnAfterDeserialize() {
 		// Do Something
 	}
-	#endregion // IMessagePackSerializationCallbackReceiver
+#endregion // IMessagePackSerializationCallbackReceiver
 
-	#region 함수
-	/** 사본 객체를 설정한다 */
-	private void SetupCloneInst(ref STCellObjInfo a_stCellObjInfo) {
-		a_stCellObjInfo.m_stBaseInfo = (STBaseInfo)m_stBaseInfo.Clone();
+#region 함수
+	/** 생성자 */
+	public STCellObjInfo(Dictionary<string, string> a_oStrDict) : this() {
+		m_stBaseInfo = new STBaseInfo(a_oStrDict);
 	}
-	#endregion // 함수
 
-	#region 조건부 함수
+	/** 사본 객체를 설정한다 */
+	private void SetupCloneInst(ref STCellObjInfo a_stOutCellObjInfo) {
+		a_stOutCellObjInfo.m_stBaseInfo = (STBaseInfo)m_stBaseInfo.Clone();
+	}
+#endregion // 함수
+
+#region 조건부 함수
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	/** 직렬화 될 경우 */
 	[OnSerializing]
@@ -87,32 +92,31 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 		this.OnAfterDeserialize();
 	}
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 
 /** 셀 정보 */
 [MessagePackObject]
 [System.Serializable]
 public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackReceiver {
-	#region 변수
+#region 변수
 	[Key(0)] public STBaseInfo m_stBaseInfo;
 	[Key(71)] public List<STCellObjInfo> m_oCellObjInfoList;
-	[Key(161)] public Dictionary<EObjType, List<EObjKinds>> m_oObjKindsDictContainer;
 
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	[JsonIgnore][IgnoreMember][System.NonSerialized] public Vector3Int m_stIdx;
 #else
 	[IgnoreMember][System.NonSerialized] public Vector3Int m_stIdx;
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 변수
+#endregion // 변수
 
-	#region 상수
+#region 상수
 	public static readonly STCellInfo INVALID = new STCellInfo() {
 		m_stIdx = KCDefine.B_IDX_INVALID_3D
 	};
-	#endregion // 상수
+#endregion // 상수
 
-	#region ICloneable
+#region ICloneable
 	/** 사본 객체를 생성한다 */
 	public object Clone() {
 		var stCellInfo = new STCellInfo();
@@ -121,9 +125,9 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 		stCellInfo.OnAfterDeserialize();
 		return stCellInfo;
 	}
-	#endregion // ICloneable
+#endregion // ICloneable
 
-	#region IMessagePackSerializationCallbackReceiver
+#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
 	public void OnBeforeSerialize() {
 		// Do Something
@@ -132,20 +136,22 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 	/** 역직렬화 되었을 경우 */
 	public void OnAfterDeserialize() {
 		m_oCellObjInfoList = m_oCellObjInfoList ?? new List<STCellObjInfo>();
-		m_oObjKindsDictContainer = m_oObjKindsDictContainer ?? new Dictionary<EObjType, List<EObjKinds>>();
 	}
-	#endregion // IMessagePackSerializationCallbackReceiver
+#endregion // IMessagePackSerializationCallbackReceiver
 
-	#region 함수
+#region 함수
+	/** 생성자 */
+	public STCellInfo(Dictionary<string, string> a_oStrDict) : this() {
+		m_stBaseInfo = new STBaseInfo(a_oStrDict);
+	}
+
 	/** 사본 객체를 설정한다 */
-	private void SetupCloneInst(ref STCellInfo a_stCellInfo) {
-		a_stCellInfo.m_stIdx = m_stIdx;
-		a_stCellInfo.m_stBaseInfo = (STBaseInfo)m_stBaseInfo.Clone();
-		a_stCellInfo.m_oCellObjInfoList = new List<STCellObjInfo>();
-		a_stCellInfo.m_oObjKindsDictContainer = new Dictionary<EObjType, List<EObjKinds>>();
+	private void SetupCloneInst(ref STCellInfo a_stOutCellInfo) {
+		a_stOutCellInfo.m_stIdx = m_stIdx;
+		a_stOutCellInfo.m_stBaseInfo = (STBaseInfo)m_stBaseInfo.Clone();
+		a_stOutCellInfo.m_oCellObjInfoList = new List<STCellObjInfo>();
 
-		m_oCellObjInfoList.ExCopyTo(a_stCellInfo.m_oCellObjInfoList, this.MakeCloneCellObjInfo);
-		m_oObjKindsDictContainer.ExCopyTo(a_stCellInfo.m_oObjKindsDictContainer, this.MakeCloneObjKinds);
+		m_oCellObjInfoList.ExCopyTo(a_stOutCellInfo.m_oCellObjInfoList, this.MakeCloneCellObjInfo);
 	}
 
 	/** 사본 셀 객체 정보를 생성한다 */
@@ -160,9 +166,9 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 
 		return oObjKindsList;
 	}
-	#endregion // 함수
+#endregion // 함수
 
-	#region 조건부 함수
+#region 조건부 함수
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	/** 직렬화 될 경우 */
 	[OnSerializing]
@@ -176,18 +182,18 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 		this.OnAfterDeserialize();
 	}
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 
 /** 레벨 정보 */
 [MessagePackObject]
 [System.Serializable]
 public partial class CLevelInfo : CBaseInfo, System.ICloneable {
-	#region 상수
+#region 상수
 	private const string KEY_CELL_INFO_VER = "CellInfoVer";
-	#endregion // 상수
+#endregion // 상수
 
-	#region 변수
+#region 변수
 	[Key(165)] public Dictionary<int, Dictionary<int, STCellInfo>> m_oCellInfoDictContainer = new Dictionary<int, Dictionary<int, STCellInfo>>();
 
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
@@ -195,9 +201,9 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 #else
 	[IgnoreMember][System.NonSerialized] public STIDInfo m_stIDInfo;
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 변수
+#endregion // 변수
 
-	#region 프로퍼티
+#region 프로퍼티
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	[JsonIgnore]
 	[IgnoreMember]
@@ -224,9 +230,9 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 	[IgnoreMember] public ulong ULevelID => CFactory.MakeULevelID(m_stIDInfo.m_nID01, m_stIDInfo.m_nID02, m_stIDInfo.m_nID03);
 	[IgnoreMember] public Vector3Int NumCells => new Vector3Int(m_oCellInfoDictContainer.ExIsValid() ? m_oCellInfoDictContainer.Max((a_stKeyVal) => a_stKeyVal.Value.Count) : KCDefine.B_VAL_0_INT, m_oCellInfoDictContainer.Count, KCDefine.B_VAL_0_INT);
 #endif // #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
-	#endregion // 프로퍼티
+#endregion // 프로퍼티
 
-	#region ICloneable
+#region ICloneable
 	/** 사본 객체를 생성한다 */
 	public virtual object Clone() {
 		var oLevelInfo = new CLevelInfo();
@@ -235,9 +241,9 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 		oLevelInfo.OnAfterDeserialize();
 		return oLevelInfo;
 	}
-	#endregion // ICloneable
+#endregion // ICloneable
 
-	#region IMessagePackSerializationCallbackReceiver
+#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
 	public override void OnBeforeSerialize() {
 		base.OnBeforeSerialize();
@@ -264,22 +270,20 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 		}
 	}
 
+	/** 셀 객체 정보를 설정한다 */
+	protected virtual void SetupCellObjInfo(ref STCellObjInfo a_stOutCellObjInfo) {
+		// Do Something
+	}
+
 	/** 셀 정보를 설정한다 */
 	protected virtual void SetupCellInfo(Vector3Int a_stIdx, ref STCellInfo a_stOutCellInfo) {
 		a_stOutCellInfo.m_stIdx = a_stIdx;
-		a_stOutCellInfo.m_stBaseInfo.m_oStrDict = a_stOutCellInfo.m_stBaseInfo.m_oStrDict ?? new Dictionary<string, string>();
 
 		for(int i = 0; i < a_stOutCellInfo.m_oCellObjInfoList.Count; ++i) {
 			var stCellObjInfo = a_stOutCellInfo.m_oCellObjInfoList[i];
-			stCellObjInfo.m_stBaseInfo.m_oStrDict = stCellObjInfo.m_stBaseInfo.m_oStrDict ?? new Dictionary<string, string>();
+			this.SetupCellObjInfo(ref stCellObjInfo);
 
 			a_stOutCellInfo.m_oCellObjInfoList[i] = stCellObjInfo;
-		}
-
-		foreach(var stKeyVal in a_stOutCellInfo.m_oObjKindsDictContainer) {
-			for(int i = 0; i < stKeyVal.Value.Count; ++i) {
-				// Do Something
-			}
 		}
 
 		// 버전이 다를 경우
@@ -287,9 +291,9 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 			// Do Something
 		}
 	}
-	#endregion // IMessagePackSerializationCallbackReceiver
+#endregion // IMessagePackSerializationCallbackReceiver
 
-	#region 함수
+#region 함수
 	/** 생성자 */
 	public CLevelInfo() : base(KDefine.G_VER_LEVEL_INFO) {
 		this.CellInfoVer = KDefine.G_VER_CELL_INFO;
@@ -324,20 +328,20 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 			a_oLevelInfo.m_oCellInfoDictContainer.TryAdd(i, oCellInfoDict);
 		}
 	}
-	#endregion // 함수
+#endregion // 함수
 }
 
 /** 레벨 정보 테이블 */
 public partial class CLevelInfoTable : CSingleton<CLevelInfoTable> {
-	#region 프로퍼티
+#region 프로퍼티
 	public Dictionary<int, Dictionary<int, Dictionary<int, CLevelInfo>>> LevelInfoDictContainer = new Dictionary<int, Dictionary<int, Dictionary<int, CLevelInfo>>>();
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 	public int NumChapterInfos => this.LevelInfoDictContainer.Count;
 #endif // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 프로퍼티
+#endregion // 프로퍼티
 
-	#region 함수
+#region 함수
 	/** 레벨 정보를 로드한다 */
 	public CLevelInfo LoadLevelInfo(int a_nLevelID, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
 		return this.LoadLevelInfo(this.GetLevelInfoPath(a_nLevelID, a_nStageID, a_nChapterID), a_nLevelID, a_nStageID, a_nChapterID);
@@ -419,9 +423,9 @@ public partial class CLevelInfoTable : CSingleton<CLevelInfoTable> {
 		CFunc.WriteJSONObj(oFilePath.Replace(KCDefine.B_FILE_EXTENSION_BYTES, KCDefine.B_FILE_EXTENSION_JSON), a_oLevelInfo, true);
 #endif // #if MSG_PACK_SERIALIZE_DESERIALIZE_ENABLE
 	}
-	#endregion // 함수
+#endregion // 함수
 
-	#region 조건부 함수
+#region 조건부 함수
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 	/** 레벨 정보 개수를 반환한다 */
 	public int GetNumLevelInfos(int a_nStageID, int a_nChapterID = KCDefine.B_VAL_0_INT) {
@@ -659,6 +663,6 @@ public partial class CLevelInfoTable : CSingleton<CLevelInfoTable> {
 		this.LevelInfoDictContainer.ExReplaceVal(a_nDestID, oSrcChapterLevelInfoDict);
 	}
 #endif // #if (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

@@ -925,7 +925,7 @@ public static partial class Func {
 
 	/** 구글 시트를 로드한다 */
 	public static void LoadGoogleSheet(string a_oID, List<(string, int)> a_oInfoList, System.Action<CServicesManager, STGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode>, bool> a_oCallback) {
-		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stTableInfo.m_oID.Equals(a_oID));
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_oID));
 		a_oInfoList.ExCopyTo(Func.m_oGoogleSheetLoadInfoList, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetJSONNodeDict.Clear();
@@ -977,7 +977,7 @@ public static partial class Func {
 
 	/** 구글 시트를 저장한다 */
 	public static void SaveGoogleSheet(string a_oID, List<(string, List<List<string>>)> a_oInfoListContainer, System.Action<CServicesManager, STGoogleSheetSaveInfo, bool> a_oCallback) {
-		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stTableInfo.m_oID.Equals(a_oID)); ;
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_oID)); ;
 		a_oInfoListContainer.ExCopyTo(Func.m_oGoogleSheetSaveInfoListContainer, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2.Count, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetCallbackDict04.ExReplaceVal(ECallback.SAVE_GOOGLE_SHEET, a_oCallback);
@@ -1061,7 +1061,7 @@ public static partial class Func {
 			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetLoadInfoList.ExIsValid()) {
 				CServicesManager.Inst.LoadGoogleSheet(a_stGoogleSheetLoadInfo.m_oID, Func.m_oGoogleSheetLoadInfoList[KCDefine.B_VAL_0_INT].Item1, Func.OnLoadGoogleSheet, KCDefine.B_VAL_0_INT, Func.m_oGoogleSheetLoadInfoList[KCDefine.B_VAL_0_INT].Item2);
 			} else {
-				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_stTableInfo.m_oID));
+				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_stGoogleSheetLoadInfo.m_oID));
 				var stGoogleSheetLoadInfo = new STGoogleSheetLoadInfo(a_stGoogleSheetLoadInfo.m_oID, stResult.Item1 ? stResult.Item2 : string.Empty, KCDefine.B_VAL_0_INT, nOriginNumRows, a_stGoogleSheetLoadInfo.m_oGoogleSheet);
 
 				CIndicatorManager.Inst.Close();
@@ -1072,7 +1072,7 @@ public static partial class Func {
 
 	/** 구글 시트를 로드했을 경우 */
 	private static void OnLoadGoogleSheets(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
-		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetLoadInfo.m_oID.Equals(a_stTableInfo.m_oID));
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_stGoogleSheetLoadInfo.m_oID));
 
 		Func.m_oLoadGoogleSheetInfoList.ExRemoveValAt(KCDefine.B_VAL_0_INT);
 		Func.m_oGoogleSheetLoadHandlerDict.GetValueOrDefault(stResult.Item2)?.Invoke(a_oSender, a_stGoogleSheetLoadInfo, a_oJSONNodeInfoDict, a_bIsSuccess);
@@ -1136,7 +1136,7 @@ public static partial class Func {
 			if(!SpreadsheetManager.IsError && Func.m_oGoogleSheetSaveInfoListContainer.ExIsValid()) {
 				CServicesManager.Inst.SaveGoogleSheet(a_stGoogleSheetSaveInfo.m_oID, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item1, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item3, Func.OnSaveGoogleSheet, KCDefine.B_VAL_0_INT, Func.m_oGoogleSheetSaveInfoListContainer[KCDefine.B_VAL_0_INT].Item3.Count);
 			} else {
-				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetSaveInfo.m_oID.Equals(a_stTableInfo.m_oID));
+				var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_stGoogleSheetSaveInfo.m_oID));
 				var stGoogleSheetSaveInfo = new STGoogleSheetSaveInfo(a_stGoogleSheetSaveInfo.m_oID, stResult.Item1 ? stResult.Item2 : string.Empty, KCDefine.B_VAL_0_INT, nOriginNumRows);
 
 				CIndicatorManager.Inst.Close();
@@ -1147,7 +1147,7 @@ public static partial class Func {
 
 	/** 구글 시트를 저장했을 경우 */
 	private static void OnSaveGoogleSheets(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
-		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stTableInfo) => a_stGoogleSheetSaveInfo.m_oID.Equals(a_stTableInfo.m_oID));
+		var stResult = KDefine.G_TABLE_INFO_GOOGLE_SHEET_DICT.ExFindVal((a_stKeyVal) => a_stKeyVal.Value.m_oID.Equals(a_stGoogleSheetSaveInfo.m_oID));
 
 		Func.m_oSaveGoogleSheetInfoList.ExRemoveValAt(KCDefine.B_VAL_0_INT);
 		Func.m_oGoogleSheetSaveHandlerDict.GetValueOrDefault(stResult.Item2)?.Invoke(a_oSender, a_stGoogleSheetSaveInfo, a_bIsSuccess);

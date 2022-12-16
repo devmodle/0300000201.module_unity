@@ -41,7 +41,7 @@ namespace GameScene {
 			[HideInInspector] MAX_VAL
 		}
 
-		#region 변수
+#region 변수
 		private NSEngine.CEngine m_oEngine = null;
 		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>();
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>();
@@ -50,9 +50,9 @@ namespace GameScene {
 
 		/** =====> 객체 <===== */
 		[SerializeField] private List<GameObject> m_oRewardAdsUIsList = new List<GameObject>();
-		#endregion // 변수
+#endregion // 변수
 
-		#region 함수
+#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
@@ -435,7 +435,7 @@ namespace GameScene {
 				}));
 			});
 		}
-		#endregion // 함수
+#endregion // 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
