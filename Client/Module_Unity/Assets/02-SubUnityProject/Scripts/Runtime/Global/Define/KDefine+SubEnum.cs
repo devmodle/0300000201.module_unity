@@ -372,11 +372,10 @@ public enum ESkillKinds {
 public enum EObjType {
 	NONE = -1,
 	BG,
-	NORM,
+	GROUND,
 	OVERLAY,
 	PLAYABLE,
 	NON_PLAYABLE,
-	ENEMY,
 	[HideInInspector] MAX_VAL
 }
 
@@ -389,10 +388,10 @@ public enum EObjKinds {
 	BG_EMPTY_01 = (EEnumVal.TYPE * EObjType.BG) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0),
 	#endregion // 배경
 
-	#region 일반
+	#region 바닥
 	// 100,000,000
-	NORM_OBJ_SAMPLE = (EEnumVal.TYPE * EObjType.NORM) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0),
-	#endregion // 일반
+	NORM_OBJ_SAMPLE = (EEnumVal.TYPE * EObjType.GROUND) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0),
+	#endregion // 바닥
 
 	#region 중첩
 	// 200,000,000
@@ -406,16 +405,11 @@ public enum EObjKinds {
 
 	#region 플레이 불가능
 	// 400,000,000
-	NON_PLAYABLE_OBJ_SAMPLE = (EEnumVal.TYPE * EObjType.NON_PLAYABLE) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0),
+	NON_PLAYABLE_NORM_ENEMY_01_01 = (EEnumVal.TYPE * EObjType.NON_PLAYABLE) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0) + (EEnumVal.SUB_TYPE * 0),
+
+	// 410,000,000
+	NON_PLAYABLE_BOSS_ENEMY_01_01 = (EEnumVal.TYPE * EObjType.NON_PLAYABLE) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0) + (EEnumVal.SUB_TYPE * 1),
 	#endregion // 플레이 불가능
-
-	#region 적
-	// 500,000,000
-	ENEMY_NORM_01_01 = (EEnumVal.TYPE * EObjType.ENEMY) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0) + (EEnumVal.SUB_TYPE * 0),
-
-	// 510,000,000
-	ENEMY_BOSS_01_01 = (EEnumVal.TYPE * EObjType.ENEMY) + (EEnumVal.KINDS_TYPE * 0) + (EEnumVal.SUB_KINDS_TYPE * 0) + (EEnumVal.SUB_TYPE * 1),
-	#endregion // 적
 
 	[HideInInspector] MAX_VAL
 }
