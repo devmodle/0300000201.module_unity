@@ -63,21 +63,26 @@ namespace TitleScene {
 				this.SetupStart();
 				this.UpdateUIsState();
 
-				Func.PlayBGSnd(EResKinds.SND_BG_SCENE_TITLE_01);
-
 				// 최초 시작 일 경우
 				if(CCommonAppInfoStorage.Inst.IsFirstStart) {
 					this.UpdateFirstStartState();
 				}
 
-				// 최초 플레이 일 경우
-				if(CCommonAppInfoStorage.Inst.AppInfo.IsFirstPlay) {
-					this.UpdateFirstPlayState();
+				// 최초 실행 일 경우
+				if(CCommonAppInfoStorage.Inst.AppInfo.IsFirstRunning) {
+					this.UpdateFirstRunningState();
 				}
 
-				// 로그인 되었을 경우
-				if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
-					this.OnLogin(CUserInfoStorage.Inst.UserInfo.LoginType, true);
+				// 타이틀 씬이 유효 할 경우
+				if(COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene) {
+					Func.PlayBGSnd(EResKinds.SND_BG_SCENE_TITLE_01);
+
+					// 로그인 되었을 경우
+					if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+						this.OnLogin(CUserInfoStorage.Inst.UserInfo.LoginType, true);
+					}
+				} else {
+					CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 				}
 			}
 		}
@@ -147,7 +152,7 @@ namespace TitleScene {
 		/** 씬을 설정한다 */
 		private void SetupStart() {
 			// 업데이트가 가능 할 경우
-			if(!CAppInfoStorage.Inst.IsIgnoreUpdate && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
+			if(!CAppInfoStorage.Inst.IsIgnoreUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
 				CAppInfoStorage.Inst.SetIgnoreUpdate(true);
 				this.ExLateCallFunc((a_oSender) => Func.ShowUpdatePopup(this.OnReceiveUpdatePopupResult));
 			}
@@ -193,15 +198,11 @@ namespace TitleScene {
 			LogFunc.SendSplashLog();
 
 			CCommonAppInfoStorage.Inst.SetFirstStart(false);
-
-#if(!UNITY_EDITOR && UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_LEVEL_EDITOR);
-#endif // #if (!UNITY_EDITOR && UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		}
 
-		/** 최초 플레이 상태를 갱신한다 */
-		private void UpdateFirstPlayState() {
-			CCommonAppInfoStorage.Inst.AppInfo.IsFirstPlay = false;
+		/** 최초 실행 상태를 갱신한다 */
+		private void UpdateFirstRunningState() {
+			CCommonAppInfoStorage.Inst.AppInfo.IsFirstRunning = false;
 			CCommonAppInfoStorage.Inst.SaveAppInfo();
 
 			// 약관 동의 팝업이 닫혔을 경우
