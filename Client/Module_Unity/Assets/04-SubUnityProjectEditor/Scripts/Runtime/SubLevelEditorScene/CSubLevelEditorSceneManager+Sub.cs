@@ -16,6 +16,39 @@ namespace LevelEditorScene {
 		#endregion // 함수
 
 		#region 조건부 함수
+#if UNITY_EDITOR
+		/** 기즈모를 그린다 */
+		public override void OnDrawGizmos() {
+			base.OnDrawGizmos();
+
+			// 메인 카메라가 존재 할 경우
+			if(CSceneManager.IsExistsMainCamera) {
+				var stPrevColor = Gizmos.color;
+				var stMainCameraPos = CSceneManager.ActiveSceneMainCamera.transform.position;
+				var stPivotPos = stMainCameraPos + new Vector3(KCDefine.B_VAL_0_REAL, KCDefine.B_VAL_0_REAL, this.PlaneDistance);
+
+				try {
+					var oGridPosList = new List<Vector3>() {
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / -KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / -KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / -KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / -KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale
+					};
+
+					for(int i = 0; i < oGridPosList.Count; ++i) {
+						int nIdx01 = (i + KCDefine.B_VAL_0_INT) % oGridPosList.Count;
+						int nIdx02 = (i + KCDefine.B_VAL_1_INT) % oGridPosList.Count;
+
+						Gizmos.color = Color.magenta;
+						Gizmos.DrawLine(oGridPosList[nIdx01], oGridPosList[nIdx02]);
+					}
+				} finally {
+					Gizmos.color = stPrevColor;
+				}
+			}
+		}
+#endif // #if UNITY_EDITOR
+
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -299,17 +332,17 @@ namespace LevelEditorScene {
 
 		/** 터치 시작 이벤트를 처리한다 */
 		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.KDefine.E_SIZE_CELL);
+			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.Access.CellSize);
 		}
 
 		/** 터치 이동 이벤트를 처리한다 */
 		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.KDefine.E_SIZE_CELL);
+			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.Access.CellSize);
 		}
 
 		/** 터치 종료 이벤트를 처리한다 */
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.KDefine.E_SIZE_CELL);
+			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, NSEngine.Access.CellSize);
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		#endregion // 조건부 함수

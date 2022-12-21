@@ -133,7 +133,28 @@ namespace GameScene {
 
 			// 메인 카메라가 존재 할 경우
 			if(CSceneManager.IsExistsMainCamera) {
-				// Do Something
+				var stPrevColor = Gizmos.color;
+				var stMainCameraPos = CSceneManager.ActiveSceneMainCamera.transform.position;
+				var stPivotPos = stMainCameraPos + new Vector3(KCDefine.B_VAL_0_REAL, KCDefine.B_VAL_0_REAL, this.PlaneDistance);
+
+				try {
+					var oGridPosList = new List<Vector3>() {
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / -KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / -KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / -KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale,
+						stPivotPos + this.ObjRootPivotPos + new Vector3(NSEngine.Access.MaxGridSize.x / KCDefine.B_VAL_2_REAL, NSEngine.Access.MaxGridSize.y / -KCDefine.B_VAL_2_REAL, 0.0f) * CAccess.ResolutionUnitScale
+					};
+
+					for(int i = 0; i < oGridPosList.Count; ++i) {
+						int nIdx01 = (i + KCDefine.B_VAL_0_INT) % oGridPosList.Count;
+						int nIdx02 = (i + KCDefine.B_VAL_1_INT) % oGridPosList.Count;
+
+						Gizmos.color = Color.magenta;
+						Gizmos.DrawLine(oGridPosList[nIdx01], oGridPosList[nIdx02]);
+					}
+				} finally {
+					Gizmos.color = stPrevColor;
+				}
 			}
 		}
 #endif // #if UNITY_EDITOR
