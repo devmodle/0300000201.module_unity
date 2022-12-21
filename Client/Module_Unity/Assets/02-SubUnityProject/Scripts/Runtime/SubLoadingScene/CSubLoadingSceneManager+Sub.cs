@@ -9,7 +9,7 @@ namespace LoadingScene {
 	/** 서브 로딩 씬 관리자 */
 	public partial class CSubLoadingSceneManager : CLoadingSceneManager {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

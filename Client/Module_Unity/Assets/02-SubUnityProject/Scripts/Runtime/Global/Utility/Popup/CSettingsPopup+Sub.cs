@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 설정 팝업 */
 public partial class CSettingsPopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

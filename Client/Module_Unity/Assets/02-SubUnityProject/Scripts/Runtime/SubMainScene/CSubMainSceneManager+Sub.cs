@@ -11,7 +11,7 @@ namespace MainScene {
 	/** 서브 메인 씬 관리자 */
 	public partial class CSubMainSceneManager : CMainSceneManager, IEnhancedScrollerDelegate {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

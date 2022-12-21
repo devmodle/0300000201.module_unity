@@ -28,7 +28,7 @@ namespace StartScene {
 			[HideInInspector] MAX_VAL
 		}
 
-#region 변수
+		#region 변수
 		private Dictionary<EKey, System.Text.StringBuilder> m_oStrBuilderDict = new Dictionary<EKey, System.Text.StringBuilder>() {
 			[EKey.STR_BUILDER_01] = new System.Text.StringBuilder(),
 			[EKey.STR_BUILDER_02] = new System.Text.StringBuilder()
@@ -43,9 +43,9 @@ namespace StartScene {
 
 		/** =====> 객체 <===== */
 		private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
-#endregion // 변수
+		#endregion // 변수
 
-#region 함수
+		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
@@ -148,7 +148,7 @@ namespace StartScene {
 			CLocalizeInfoTable.Inst.TryGetFontSetInfo(string.Empty, SystemLanguage.English, EFontSet._1, out STFontSetInfo stFontSetInfo);
 			m_oTextDict.GetValueOrDefault(EKey.LOADING_TEXT).ExSetText(string.Format(KCDefine.B_TEXT_FMT_2_SPACE_COMBINE, m_oStrBuilderDict.GetValueOrDefault(EKey.STR_BUILDER_01).ToString(), oPercentStr), stFontSetInfo);
 		}
-#endregion // 함수
+		#endregion // 함수
 	}
 }
 #endif // #if SCENE_TEMPLATES_MODULE_ENABLE

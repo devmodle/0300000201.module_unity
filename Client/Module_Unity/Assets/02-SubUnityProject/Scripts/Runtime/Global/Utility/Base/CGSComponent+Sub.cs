@@ -9,7 +9,7 @@ namespace GameScene {
 	/** 게임 씬 컴포넌트 */
 	public partial class CGSComponent : CComponent {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

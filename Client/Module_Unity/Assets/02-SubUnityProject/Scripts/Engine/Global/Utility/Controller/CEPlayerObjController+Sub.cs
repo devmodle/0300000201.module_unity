@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 플레이어 객체 제어자 */
 	public partial class CEPlayerObjController : CEObjController {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

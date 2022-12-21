@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 아이템 제어자 */
 	public partial class CEObjController : CEController {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

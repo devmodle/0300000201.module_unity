@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 엔진 컴포넌트 */
 	public partial class CEComponent : CComponent {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

@@ -8,14 +8,14 @@ using UnityEngine.Events;
 namespace NSEngine {
 	/** 엔진 - 설정 */
 	public partial class CEngine : CComponent {
-#region 함수
+		#region 함수
 
-#endregion // 함수
+		#endregion // 함수
 	}
 
 	/** 서브 엔진 - 설정 */
 	public partial class CEngine : CComponent {
-#region 함수
+		#region 함수
 		/** 엔진을 설정한다 */
 		private void SubSetupAwake() {
 			// Do Something
@@ -44,7 +44,7 @@ namespace NSEngine {
 		private void SetupGridLine() {
 			// Do Something
 		}
-#endregion // 함수
+		#endregion // 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

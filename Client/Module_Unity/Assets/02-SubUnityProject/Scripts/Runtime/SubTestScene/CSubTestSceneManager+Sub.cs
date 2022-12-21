@@ -11,7 +11,7 @@ namespace TestScene {
 	/** 서브 테스트 씬 관리자 */
 	public partial class CSubTestSceneManager : CTestSceneManager {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

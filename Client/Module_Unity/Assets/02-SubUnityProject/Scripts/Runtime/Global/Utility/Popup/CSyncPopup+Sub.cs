@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 동기화 팝업 */
 public partial class CSyncPopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

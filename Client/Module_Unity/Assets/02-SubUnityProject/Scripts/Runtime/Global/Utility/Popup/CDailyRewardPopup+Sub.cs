@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 일일 보상 팝업 */
 public partial class CDailyRewardPopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

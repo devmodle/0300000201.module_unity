@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 결과 팝업 */
 public partial class CResultPopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

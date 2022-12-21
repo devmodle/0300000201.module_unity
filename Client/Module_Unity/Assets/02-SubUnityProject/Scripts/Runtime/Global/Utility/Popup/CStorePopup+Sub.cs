@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 상점 팝업 */
 public partial class CStorePopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

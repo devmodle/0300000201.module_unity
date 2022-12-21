@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 셀 객체 제어자 */
 	public partial class CECellObjController : CEObjController {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

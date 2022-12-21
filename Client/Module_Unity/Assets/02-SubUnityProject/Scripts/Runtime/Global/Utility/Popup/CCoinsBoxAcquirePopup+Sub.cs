@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /** 코인 상자 획득 팝업 */
 public partial class CCoinsBoxAcquirePopup : CSubPopup {
 	#region 함수
-	
+
 	#endregion // 함수
 }
 

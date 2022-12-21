@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 스킬 */
 	public partial class CESkill : CEObjComponent {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

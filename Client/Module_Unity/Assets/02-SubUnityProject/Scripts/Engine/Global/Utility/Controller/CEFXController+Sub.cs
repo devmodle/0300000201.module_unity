@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 효과 제어자 */
 	public partial class CEFXController : CEController {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 

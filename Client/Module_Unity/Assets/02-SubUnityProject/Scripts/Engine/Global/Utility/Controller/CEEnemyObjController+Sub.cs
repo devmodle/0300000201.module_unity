@@ -9,7 +9,7 @@ namespace NSEngine {
 	/** 적 객체 제어자 */
 	public partial class CEEnemyObjController : CEObjController {
 		#region 함수
-		
+
 		#endregion // 함수
 	}
 
