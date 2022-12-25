@@ -181,8 +181,8 @@ public partial class CResInfoTable : CSingleton<CResInfoTable> {
 			var eResKinds = oCommonInfos[i][KCDefine.U_KEY_RES_KINDS].ExIsValid() ? (EResKinds)oCommonInfos[i][KCDefine.U_KEY_RES_KINDS].AsInt : EResKinds.NONE;
 
 			// 리소스 정보가 존재 할 경우
-			if(this.ResInfoDict.ContainsKey(eResKinds)) {
-				this.ResInfoDict[eResKinds].SaveResInfo(oCommonInfos[i]);
+			if(this.ResInfoDict.TryGetValue(eResKinds, out STResInfo stResInfo)) {
+				stResInfo.SaveResInfo(oCommonInfos[i]);
 			}
 		}
 

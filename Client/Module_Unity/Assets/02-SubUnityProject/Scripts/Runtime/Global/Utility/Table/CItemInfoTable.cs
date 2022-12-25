@@ -315,8 +315,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 			var eItemKinds = oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 아이템 정보가 존재 할 경우
-			if(this.ItemInfoDict.ContainsKey(eItemKinds)) {
-				this.ItemInfoDict[eItemKinds].SaveItemInfo(oCommonInfos[i]);
+			if(this.ItemInfoDict.TryGetValue(eItemKinds, out STItemInfo stItemInfo)) {
+				stItemInfo.SaveItemInfo(oCommonInfos[i]);
 			}
 		}
 
@@ -324,8 +324,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 			var eItemKinds = oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 구입 아이템 교환 정보가 존재 할 경우
-			if(this.BuyItemTradeInfoDict.ContainsKey(eItemKinds)) {
-				this.BuyItemTradeInfoDict[eItemKinds].SaveItemTradeInfo(oBuyTradeInfos[i]);
+			if(this.BuyItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stBuyItemTradeInfo)) {
+				stBuyItemTradeInfo.SaveItemTradeInfo(oBuyTradeInfos[i]);
 			}
 		}
 
@@ -333,8 +333,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 			var eItemKinds = oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 판매 아이템 교환 정보가 존재 할 경우
-			if(this.SaleItemTradeInfoDict.ContainsKey(eItemKinds)) {
-				this.SaleItemTradeInfoDict[eItemKinds].SaveItemTradeInfo(oSaleTradeInfos[i]);
+			if(this.SaleItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stSaleItemTradeInfo)) {
+				stSaleItemTradeInfo.SaveItemTradeInfo(oSaleTradeInfos[i]);
 			}
 		}
 
@@ -342,8 +342,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 			var eItemKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 강화 아이템 교환 정보가 존재 할 경우
-			if(this.EnhanceItemTradeInfoDict.ContainsKey(eItemKinds)) {
-				this.EnhanceItemTradeInfoDict[eItemKinds].SaveItemTradeInfo(oEnhanceTradeInfos[i]);
+			if(this.EnhanceItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stEnhanceItemTradeInfo)) {
+				stEnhanceItemTradeInfo.SaveItemTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
 

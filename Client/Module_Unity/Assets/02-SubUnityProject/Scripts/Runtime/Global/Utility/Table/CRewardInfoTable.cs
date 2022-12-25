@@ -191,8 +191,8 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable> {
 			var eRewardKinds = oCommonInfos[i][KCDefine.U_KEY_REWARD_KINDS].ExIsValid() ? (ERewardKinds)oCommonInfos[i][KCDefine.U_KEY_REWARD_KINDS].AsInt : ERewardKinds.NONE;
 
 			// 보상 정보가 존재 할 경우
-			if(this.RewardInfoDict.ContainsKey(eRewardKinds)) {
-				this.RewardInfoDict[eRewardKinds].SaveRewardInfo(oCommonInfos[i]);
+			if(this.RewardInfoDict.TryGetValue(eRewardKinds, out STRewardInfo stRewardInfo)) {
+				stRewardInfo.SaveRewardInfo(oCommonInfos[i]);
 			}
 		}
 

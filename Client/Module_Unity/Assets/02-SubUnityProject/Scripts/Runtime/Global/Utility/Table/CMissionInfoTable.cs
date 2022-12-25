@@ -174,8 +174,8 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 			var oMissionKinds = oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].ExIsValid() ? (EMissionKinds)oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].AsInt : EMissionKinds.NONE;
 
 			// 미션 정보가 존재 할 경우
-			if(this.MissionInfoDict.ContainsKey(oMissionKinds)) {
-				this.MissionInfoDict[oMissionKinds].SaveMissionInfo(oCommonInfos[i]);
+			if(this.MissionInfoDict.TryGetValue(oMissionKinds, out STMissionInfo stMissionInfo)) {
+				stMissionInfo.SaveMissionInfo(oCommonInfos[i]);
 			}
 		}
 

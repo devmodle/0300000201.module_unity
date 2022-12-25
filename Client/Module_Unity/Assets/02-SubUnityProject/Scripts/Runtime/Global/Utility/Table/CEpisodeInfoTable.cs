@@ -275,8 +275,8 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 			var stIDInfo = new STIDInfo(oLevelEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
 
 			// 레벨 에피소드 정보가 존재 할 경우
-			if(this.LevelEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID01)) {
-				this.LevelEpisodeInfoDict[stIDInfo.UniqueID01].SaveEpisodeInfo(oLevelEpisodeInfos[i]);
+			if(this.LevelEpisodeInfoDict.TryGetValue(stIDInfo.UniqueID01, out STEpisodeInfo stLevelEpisodeInfo)) {
+				stLevelEpisodeInfo.SaveEpisodeInfo(oLevelEpisodeInfos[i]);
 			}
 		}
 
@@ -284,8 +284,8 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 			var stIDInfo = new STIDInfo(oStageEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
 
 			// 스테이지 에피소드 정보가 존재 할 경우
-			if(this.StageEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID02)) {
-				this.StageEpisodeInfoDict[stIDInfo.UniqueID02].SaveEpisodeInfo(oStageEpisodeInfos[i]);
+			if(this.StageEpisodeInfoDict.TryGetValue(stIDInfo.UniqueID02, out STEpisodeInfo stStageEpisodeInfo)) {
+				stStageEpisodeInfo.SaveEpisodeInfo(oStageEpisodeInfos[i]);
 			}
 		}
 
@@ -293,8 +293,8 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable> {
 			var stIDInfo = new STIDInfo(oChapterEpisodeInfos[i], KCDefine.U_KEY_FMT_ID);
 
 			// 챕터 에피소드 정보가 존재 할 경우
-			if(this.ChapterEpisodeInfoDict.ContainsKey(stIDInfo.UniqueID03)) {
-				this.ChapterEpisodeInfoDict[stIDInfo.UniqueID03].SaveEpisodeInfo(oChapterEpisodeInfos[i]);
+			if(this.ChapterEpisodeInfoDict.TryGetValue(stIDInfo.UniqueID03, out STEpisodeInfo stChapterEpisodeInfo)) {
+				stChapterEpisodeInfo.SaveEpisodeInfo(oChapterEpisodeInfos[i]);
 			}
 		}
 	}

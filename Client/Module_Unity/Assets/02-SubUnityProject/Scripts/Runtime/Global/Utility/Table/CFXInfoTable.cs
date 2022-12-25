@@ -166,8 +166,8 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 			var eFXKinds = oCommonInfos[i][KCDefine.U_KEY_FX_KINDS].ExIsValid() ? (EFXKinds)oCommonInfos[i][KCDefine.U_KEY_FX_KINDS].AsInt : EFXKinds.NONE;
 
 			// 효과 정보가 존재 할 경우
-			if(this.FXInfoDict.ContainsKey(eFXKinds)) {
-				this.FXInfoDict[eFXKinds].SaveFXInfo(oCommonInfos[i]);
+			if(this.FXInfoDict.TryGetValue(eFXKinds, out STFXInfo stFXInfo)) {
+				stFXInfo.SaveFXInfo(oCommonInfos[i]);
 			}
 		}
 	}

@@ -260,8 +260,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 			var eAbilityKinds = oCommonInfos[i][KCDefine.U_KEY_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)oCommonInfos[i][KCDefine.U_KEY_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
 
 			// 어빌리티 정보가 존재 할 경우
-			if(this.AbilityInfoDict.ContainsKey(eAbilityKinds)) {
-				this.AbilityInfoDict[eAbilityKinds].SetupAbilityInfo(oCommonInfos[i]);
+			if(this.AbilityInfoDict.TryGetValue(eAbilityKinds, out STAbilityInfo stAbilityInfo)) {
+				stAbilityInfo.SetupAbilityInfo(oCommonInfos[i]);
 			}
 		}
 
@@ -269,8 +269,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 			var eAbilityKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
 
 			// 강화 어빌리티 교환 정보가 존재 할 경우
-			if(this.EnhanceAbilityTradeInfoDict.ContainsKey(eAbilityKinds)) {
-				this.EnhanceAbilityTradeInfoDict[eAbilityKinds].SetupAbilityTradeInfo(oEnhanceTradeInfos[i]);
+			if(this.EnhanceAbilityTradeInfoDict.TryGetValue(eAbilityKinds, out STAbilityTradeInfo stEnhanceAbilityTradeInfo)) {
+				stEnhanceAbilityTradeInfo.SetupAbilityTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
 

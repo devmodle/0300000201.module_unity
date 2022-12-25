@@ -327,8 +327,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 			var eSkillKinds = oCommonInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 스킬 정보가 존재 할 경우
-			if(this.SkillInfoDict.ContainsKey(eSkillKinds)) {
-				this.SkillInfoDict[eSkillKinds].SaveSkillInfo(oCommonInfos[i]);
+			if(this.SkillInfoDict.TryGetValue(eSkillKinds, out STSkillInfo stSkillInfo)) {
+				stSkillInfo.SaveSkillInfo(oCommonInfos[i]);
 			}
 		}
 
@@ -336,8 +336,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 			var eSkillKinds = oBuyTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 구입 스킬 교환 정보가 존재 할 경우
-			if(this.BuySkillTradeInfoDict.ContainsKey(eSkillKinds)) {
-				this.BuySkillTradeInfoDict[eSkillKinds].SaveSkillTradeInfo(oBuyTradeInfos[i]);
+			if(this.BuySkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stBuySkillTradeInfo)) {
+				stBuySkillTradeInfo.SaveSkillTradeInfo(oBuyTradeInfos[i]);
 			}
 		}
 
@@ -345,8 +345,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 			var eSkillKinds = oSaleTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 판매 스킬 교환 정보가 존재 할 경우
-			if(this.SaleSkillTradeInfoDict.ContainsKey(eSkillKinds)) {
-				this.SaleSkillTradeInfoDict[eSkillKinds].SaveSkillTradeInfo(oSaleTradeInfos[i]);
+			if(this.SaleSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stSaleSkillTradeInfo)) {
+				stSaleSkillTradeInfo.SaveSkillTradeInfo(oSaleTradeInfos[i]);
 			}
 		}
 
@@ -354,8 +354,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 			var eSkillKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 강화 스킬 교환 정보가 존재 할 경우
-			if(this.EnhanceSkillTradeInfoDict.ContainsKey(eSkillKinds)) {
-				this.EnhanceSkillTradeInfoDict[eSkillKinds].SaveSkillTradeInfo(oEnhanceTradeInfos[i]);
+			if(this.EnhanceSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stEnhanceSkillTradeInfo)) {
+				stEnhanceSkillTradeInfo.SaveSkillTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
 

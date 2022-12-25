@@ -166,8 +166,8 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 			var eTutorialKinds = oCommonInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)oCommonInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
 
 			// 튜토리얼 정보가 존재 할 경우
-			if(this.TutorialInfoDict.ContainsKey(eTutorialKinds)) {
-				this.TutorialInfoDict[eTutorialKinds].SaveTutorialInfo(oCommonInfos[i]);
+			if(this.TutorialInfoDict.TryGetValue(eTutorialKinds, out STTutorialInfo stTutorialInfo)) {
+				stTutorialInfo.SaveTutorialInfo(oCommonInfos[i]);
 			}
 		}
 	}

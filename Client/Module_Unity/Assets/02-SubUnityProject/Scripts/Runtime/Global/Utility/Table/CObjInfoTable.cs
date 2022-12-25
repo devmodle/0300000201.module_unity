@@ -333,8 +333,8 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 			var eObjKinds = oCommonInfos[i][KCDefine.U_KEY_OBJ_KINDS].ExIsValid() ? (EObjKinds)oCommonInfos[i][KCDefine.U_KEY_OBJ_KINDS].AsInt : EObjKinds.NONE;
 
 			// 객체 정보가 존재 할 경우
-			if(this.ObjInfoDict.ContainsKey(eObjKinds)) {
-				this.ObjInfoDict[eObjKinds].SaveObjInfo(oCommonInfos[i]);
+			if(this.ObjInfoDict.TryGetValue(eObjKinds, out STObjInfo stObjInfo)) {
+				stObjInfo.SaveObjInfo(oCommonInfos[i]);
 			}
 		}
 
@@ -342,8 +342,8 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 			var eObjKinds = oBuyTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].ExIsValid() ? (EObjKinds)oBuyTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].AsInt : EObjKinds.NONE;
 
 			// 구입 객체 교환 정보가 존재 할 경우
-			if(this.BuyObjTradeInfoDict.ContainsKey(eObjKinds)) {
-				this.BuyObjTradeInfoDict[eObjKinds].SaveObjTradeInfo(oBuyTradeInfos[i]);
+			if(this.BuyObjTradeInfoDict.TryGetValue(eObjKinds, out STObjTradeInfo stBuyObjTradeInfo)) {
+				stBuyObjTradeInfo.SaveObjTradeInfo(oBuyTradeInfos[i]);
 			}
 		}
 
@@ -351,8 +351,8 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 			var eObjKinds = oSaleTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].ExIsValid() ? (EObjKinds)oSaleTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].AsInt : EObjKinds.NONE;
 
 			// 판매 객체 교환 정보가 존재 할 경우
-			if(this.SaleObjTradeInfoDict.ContainsKey(eObjKinds)) {
-				this.SaleObjTradeInfoDict[eObjKinds].SaveObjTradeInfo(oSaleTradeInfos[i]);
+			if(this.SaleObjTradeInfoDict.TryGetValue(eObjKinds, out STObjTradeInfo stSaleObjTradeInfo)) {
+				stSaleObjTradeInfo.SaveObjTradeInfo(oSaleTradeInfos[i]);
 			}
 		}
 
@@ -360,8 +360,8 @@ public partial class CObjInfoTable : CSingleton<CObjInfoTable> {
 			var eObjKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].ExIsValid() ? (EObjKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_OBJ_KINDS].AsInt : EObjKinds.NONE;
 
 			// 강화 객체 교환 정보가 존재 할 경우
-			if(this.EnhanceObjTradeInfoDict.ContainsKey(eObjKinds)) {
-				this.EnhanceObjTradeInfoDict[eObjKinds].SaveObjTradeInfo(oEnhanceTradeInfos[i]);
+			if(this.EnhanceObjTradeInfoDict.TryGetValue(eObjKinds, out STObjTradeInfo stEnhanceObjTradeInfo)) {
+				stEnhanceObjTradeInfo.SaveObjTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
 

@@ -160,8 +160,8 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 			var eCalcKinds = oCommonInfos[i][KCDefine.U_KEY_CALC_KINDS].ExIsValid() ? (ECalcKinds)oCommonInfos[i][KCDefine.U_KEY_CALC_KINDS].AsInt : ECalcKinds.NONE;
 
 			// 수식 정보가 존재 할 경우
-			if(this.CalcInfoDict.ContainsKey(eCalcKinds)) {
-				this.CalcInfoDict[eCalcKinds].SaveCalcInfo(oCommonInfos[i]);
+			if(this.CalcInfoDict.TryGetValue(eCalcKinds, out STCalcInfo stCalcInfo)) {
+				stCalcInfo.SaveCalcInfo(oCommonInfos[i]);
 			}
 		}
 	}
