@@ -90,7 +90,8 @@ public static partial class KDefine {
 	public const string G_IMG_P_FMT_ABILITY = "G_Ability_{0}";
 
 	// 씬 이름
-	public const string G_SCENE_N_G_GOOGLE_SHEET = "_00-G_GoogleSheetScene";
+	public const string G_SCENE_N_G_FIREBASE = "_01-G_FirebaseScene";
+	public const string G_SCENE_N_G_GOOGLE_SHEET = "_02-G_GoogleSheetScene";
 	#endregion // 기본
 
 	#region 런타임 상수
