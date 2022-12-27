@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-/** 서브 에디터 레벨 생성 팝업 */
-public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup {
+/** 서브 에디터 생성 팝업 */
+public partial class CSubEditorCreatePopup : CEditorCreatePopup {
 	/** 매개 변수 */
 	public new struct STParams {
-		public CEditorLevelCreatePopup.STParams m_stBaseParams;
+		public CEditorCreatePopup.STParams m_stBaseParams;
 	}
 
 	#region 변수
@@ -44,10 +44,10 @@ public partial class CSubEditorLevelCreatePopup : CEditorLevelCreatePopup {
 	}
 
 	/** 에디터 레벨 생성 정보를 생성한다 */
-	protected override CEditorLevelCreateInfo CreateEditorLevelCreateInfo() {
-		var oCreateInfo = base.CreateEditorLevelCreateInfo();
+	protected override CEditorCreateInfo CreateEditorCreateInfo() {
+		var oCreateInfo = base.CreateEditorCreateInfo();
 
-		return new CSubEditorLevelCreateInfo() {
+		return new CSubEditorCreateInfo() {
 			m_nNumLevels = oCreateInfo.m_nNumLevels, m_stMinNumCells = oCreateInfo.m_stMinNumCells, m_stMaxNumCells = oCreateInfo.m_stMaxNumCells
 		};
 	}
