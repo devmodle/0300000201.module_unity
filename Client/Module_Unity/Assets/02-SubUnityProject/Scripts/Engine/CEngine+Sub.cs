@@ -111,12 +111,12 @@ namespace NSEngine {
 		/** 초기화한다 */
 		private void SubInit() {
 #if NEVER_USE_THIS
-			// FIXME: 비활성 처리 (필요 시 활성 및 사용 가능) {
+			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
 			var stObjInfo = CObjInfoTable.Inst.GetObjInfo(EObjKinds.PLAYABLE_COMMON_CHARACTER_01);
 			this.PlayerObjList.ExAddVal(this.CreatePlayerObj(stObjInfo, CUserInfoStorage.Inst.GetCharacterUserInfo(CGameInfoStorage.Inst.PlayCharacterID), null));
 
 			CSceneManager.ActiveSceneMainCamera.transform.position = new Vector3(this.SelPlayerObj.transform.position.x, this.SelPlayerObj.transform.position.y + (KDefine.E_OFFSET_MAIN_CAMERA * CAccess.ResolutionUnitScale), CSceneManager.ActiveSceneMainCamera.transform.position.z);
-			// FIXME: 비활성 처리 (필요 시 활성 및 사용 가능) }
+			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) }
 #endif // #if NEVER_USE_THIS
 		}
 
@@ -242,7 +242,12 @@ namespace NSEngine {
 		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+					// Do Something
+				}
 			}
 		}
 
@@ -250,7 +255,12 @@ namespace NSEngine {
 		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+					// Do Something
+				}
 			}
 		}
 
@@ -258,7 +268,12 @@ namespace NSEngine {
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(m_oGridInfoList[this.SelGridInfoIdx].m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+					// Do Something
+				}
 			}
 		}
 		#endregion // 함수
