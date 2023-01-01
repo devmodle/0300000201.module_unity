@@ -26,7 +26,7 @@ namespace MenuScene {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			// 백 키 눌림 이벤트 일 경우
 			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN) {
-				Func.ShowQuitPopup(this.OnReceiveQuitPopupResult);
+				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 			}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		}

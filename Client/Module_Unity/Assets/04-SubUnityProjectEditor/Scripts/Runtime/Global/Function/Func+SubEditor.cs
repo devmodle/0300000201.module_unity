@@ -61,7 +61,6 @@ public static partial class Func {
 					oIdxHList.Add(a_oLevelInfo.m_oCellInfoDictContainer[i][j].m_stIdx);
 
 					a_oLevelInfo.m_oCellInfoDictContainer[i][j].m_oCellObjInfoList.Clear();
-					a_oLevelInfo.m_oCellInfoDictContainer[i][j].m_oCellObjInfoList.ExAddVal(Factory.MakeEditorCellObjInfo(EObjKinds.BG_EMPTY_01));
 				}
 			}
 

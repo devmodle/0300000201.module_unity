@@ -11,7 +11,7 @@ namespace NSEngine {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
-			FX_PARTICLE,
+			PARTICLE_FX,
 			[HideInInspector] MAX_VAL
 		}
 
@@ -34,9 +34,9 @@ namespace NSEngine {
 		public override void Awake() {
 			base.Awake();
 
-			// 파티클을 설정한다
-			CFunc.SetupParticles(new List<(EKey, string, GameObject)>() {
-				(EKey.FX_PARTICLE, $"{EKey.FX_PARTICLE}", this.gameObject)
+			// 파티클 효과를 설정한다
+			CFunc.SetupParticleFXs(new List<(EKey, string, GameObject)>() {
+				(EKey.PARTICLE_FX, $"{EKey.PARTICLE_FX}", this.gameObject)
 			}, m_oParticleDict);
 
 			this.SubSetupAwake();
