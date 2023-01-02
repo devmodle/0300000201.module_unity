@@ -18,6 +18,7 @@ namespace LevelEditorScene {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
+			PREV_GRID_IDX,
 			SCROLL_DELTA_X,
 			SCROLL_DELTA_Y,
 			GRID_BOUNDS_TEX_2D,
@@ -111,12 +112,18 @@ namespace LevelEditorScene {
 		}
 
 		#region 변수
+		private Dictionary<EKey, Vector3Int> m_oVec3IntDict = new Dictionary<EKey, Vector3Int>() {
+			[EKey.PREV_GRID_IDX] = KCDefine.B_IDX_INVALID_3D
+		};
+
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>();
 		private Dictionary<EKey, float> m_oRealDict = new Dictionary<EKey, float>();
+
 		private Dictionary<EKey, EUserType> m_oUserTypeDict = new Dictionary<EKey, EUserType>();
 		private Dictionary<EKey, ETableSrc> m_oTableSrcDict = new Dictionary<EKey, ETableSrc>();
 		private Dictionary<EKey, EObjKinds> m_oObjKindsDict = new Dictionary<EKey, EObjKinds>();
 		private Dictionary<EKey, EInputPopup> m_oInputPopupDict = new Dictionary<EKey, EInputPopup>();
+
 		private Dictionary<EKey, Texture2D> m_oTex2DDict = new Dictionary<EKey, Texture2D>();
 		private Dictionary<EKey, SpriteRenderer> m_oSpriteDict = new Dictionary<EKey, SpriteRenderer>();
 
@@ -451,7 +458,7 @@ namespace LevelEditorScene {
 			for(int i = 0; i <= this.SelLevelInfo.NumCells.x; ++i) {
 				var oLineFX = this.SpawnObj<LineRenderer>(KDefine.LES_OBJ_N_GRID_LINE_FX, KDefine.LES_KEY_LINE_FX_OBJS_POOL);
 				oLineFX.ExSetWidth(KCDefine.B_VAL_5_REAL, KCDefine.B_VAL_5_REAL);
-				oLineFX.ExSetColor(Color.black, Color.black);
+				oLineFX.ExSetColor(Color.cyan, Color.cyan);
 				oLineFX.ExSetSortingOrder(KCDefine.U_SORTING_OI_UNDERGROUND);
 
 				oLineFX.ExSetPositions(new List<Vector3>() {
@@ -465,7 +472,7 @@ namespace LevelEditorScene {
 			for(int i = 0; i <= this.SelLevelInfo.NumCells.y; ++i) {
 				var oLineFX = this.SpawnObj<LineRenderer>(KDefine.LES_OBJ_N_GRID_LINE_FX, KDefine.LES_KEY_LINE_FX_OBJS_POOL);
 				oLineFX.ExSetWidth(KCDefine.B_VAL_5_REAL, KCDefine.B_VAL_5_REAL);
-				oLineFX.ExSetColor(Color.black, Color.black);
+				oLineFX.ExSetColor(Color.cyan, Color.cyan);
 				oLineFX.ExSetSortingOrder(KCDefine.U_SORTING_OI_UNDERGROUND);
 
 				oLineFX.ExSetPositions(new List<Vector3>() {
