@@ -242,11 +242,10 @@ namespace NSEngine {
 		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stPos = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot);
-				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
-				// 그리드 영역 일 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx) && this.SelGridInfo.m_stViewBounds.Contains(stIdx)) {
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -256,11 +255,10 @@ namespace NSEngine {
 		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stPos = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot);
-				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
-				// 그리드 영역 일 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx) && this.SelGridInfo.m_stViewBounds.Contains(stIdx)) {
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -270,11 +268,10 @@ namespace NSEngine {
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			// 구동 모드 일 경우
 			if(m_oBoolDict.GetValueOrDefault(EKey.IS_RUNNING)) {
-				var stPos = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot);
-				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
+				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
-				// 그리드 영역 일 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx) && this.SelGridInfo.m_stViewBounds.Contains(stIdx)) {
+				// 인덱스가 유효 할 경우
+				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
