@@ -25,12 +25,14 @@ public static partial class CMsgPackRegister {
 		if(!CMsgPackRegister.m_bIsRegister) {
 			CMsgPackRegister.m_bIsRegister = true;
 
+#if UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			var oResolverList = new List<IFormatterResolver>() {
 				MessagePack.Resolvers.StandardResolver.Instance, MessagePack.Resolvers.GeneratedResolver.Instance
 			};
 
 			StaticCompositeResolver.Instance.Register(oResolverList.ToArray());
 			MessagePackSerializer.DefaultOptions = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
+#endif // #if UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		}
 	}
 	#endregion // 클래스 함수
