@@ -49,7 +49,6 @@ namespace NSEngine {
 			[EKey.IS_SAVE_USER_INFO] = false
 		};
 
-		private List<CEObj>[,] m_oCellObjLists = null;
 		private List<STGridInfo> m_oGridInfoList = new List<STGridInfo>();
 		private Dictionary<ulong, STTargetInfo> m_oClearTargetInfoDict = new Dictionary<ulong, STTargetInfo>();
 		#endregion // 변수
@@ -57,6 +56,7 @@ namespace NSEngine {
 		#region 프로퍼티
 		public STParams Params { get; private set; }
 		public STRecordInfo RecordInfo { get; private set; }
+		public List<CEObj>[,] CellObjLists { get; private set; } = null;
 
 		public List<CEItem> ItemList { get; } = new List<CEItem>();
 		public List<CESkill> SkillList { get; } = new List<CESkill>();

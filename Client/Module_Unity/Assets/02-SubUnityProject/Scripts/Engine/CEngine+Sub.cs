@@ -245,7 +245,7 @@ namespace NSEngine {
 				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -258,7 +258,7 @@ namespace NSEngine {
 				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -271,7 +271,7 @@ namespace NSEngine {
 				var stIdx = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(m_oCellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
