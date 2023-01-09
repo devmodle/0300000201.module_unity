@@ -44,7 +44,7 @@ namespace StartScene {
 
 			// 초기화 되었을 경우
 			if(CSceneManager.IsInit) {
-				this.SetupAwake();
+				// Do Something
 			}
 		}
 
@@ -57,11 +57,6 @@ namespace StartScene {
 		/** 시작 씬 이벤트를 수신했을 경우 */
 		protected override void OnReceiveStartSceneEvent(EStartSceneEvent a_eEvent) {
 			base.OnReceiveStartSceneEvent(a_eEvent);
-		}
-
-		/** 씬을 설정한다 */
-		private void SetupAwake() {
-			// Do Something
 		}
 
 		/** 텍스트 상태를 갱신한다 */

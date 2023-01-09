@@ -15,7 +15,7 @@ namespace MenuScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.SetupAwake();
+				// Do Something
 			}
 		}
 
@@ -29,11 +29,6 @@ namespace MenuScene {
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 			}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		}
-
-		/** 씬을 설정한다 */
-		private void SetupAwake() {
-			// Do Something
 		}
 
 		/** 종료 팝업 결과를 수신했을 경우 */
