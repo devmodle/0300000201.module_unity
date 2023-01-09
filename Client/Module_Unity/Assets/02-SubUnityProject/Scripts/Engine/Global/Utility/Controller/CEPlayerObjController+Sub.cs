@@ -123,7 +123,7 @@ namespace NSEngine {
 			// Do Something
 		}
 
-		/** 초기화한다 */
+		/** 초기화 */
 		private void SubInit() {
 			this.SetState(EState.IDLE, true);
 		}
