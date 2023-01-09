@@ -36,20 +36,6 @@ namespace MainScene {
 		#endregion // 프로퍼티
 
 		#region 함수
-		/** 제거 되었을 경우 */
-		public override void OnDestroy() {
-			base.OnDestroy();
-
-			try {
-				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
-					// Do Something
-				}
-			} catch(System.Exception oException) {
-				CFunc.ShowLogWarning($"CSubMainSceneManager.OnDestroy Exception: {oException.Message}");
-			}
-		}
-
 		/** 초기화 */
 		private void SubAwake() {
 #if DEBUG || DEVELOPMENT_BUILD
@@ -60,6 +46,26 @@ namespace MainScene {
 		/** 초기화 */
 		private void SubStart() {
 			// Do Something
+		}
+
+		/** 제거 되었을 경우 */
+		private void SubOnDestroy() {
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					// Do Something
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CSubMainSceneManager.SubOnDestroy Exception: {oException.Message}");
+			}
+		}
+
+		/** 상태를 갱신한다 */
+		private void SubOnUpdate(float a_fDeltaTime) {
+			// 앱이 실행 중 일 경우
+			if(CSceneManager.IsAppRunning) {
+				// Do Something
+			}
 		}
 
 		/** UI 상태를 갱신한다 */
