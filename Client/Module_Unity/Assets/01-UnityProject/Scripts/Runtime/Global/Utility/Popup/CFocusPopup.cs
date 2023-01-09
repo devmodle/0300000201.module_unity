@@ -54,7 +54,7 @@ public partial class CFocusPopup : CSubPopup {
 			(EKey.FOCUS_BLIND_IMG, $"{EKey.FOCUS_BLIND_IMG}", this.Contents)
 		}, m_oImgDict);
 
-		this.SubSetupAwake();
+		this.SubAwake();
 	}
 
 	/** 초기화 */

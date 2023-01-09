@@ -32,7 +32,7 @@ namespace NSEngine {
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-			this.SubSetupAwake();
+			this.SubAwake();
 		}
 
 		/** 초기화 */

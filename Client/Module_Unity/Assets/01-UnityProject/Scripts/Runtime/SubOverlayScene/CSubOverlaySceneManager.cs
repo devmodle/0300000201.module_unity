@@ -60,7 +60,7 @@ namespace OverlayScene {
 					(EKey.STORE_BTN, $"{EKey.STORE_BTN}", this.UIsBase, this.OnTouchStoreBtn)
 				}, m_oBtnDict);
 
-				this.SubSetupAwake();
+				this.SubAwake();
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace OverlayScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				this.SubSetupStart();
+				this.SubStart();
 				this.UpdateUIsState();
 			}
 		}
