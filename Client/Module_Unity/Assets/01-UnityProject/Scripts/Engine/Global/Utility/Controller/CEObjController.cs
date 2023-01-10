@@ -25,31 +25,37 @@ namespace NSEngine {
 		}
 
 		#region 변수
+		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
+			[EKey.IS_AUTO_CONTROL] = false
+		};
+
+		private Dictionary<EKey, Vector3> m_oVec3Dict = new Dictionary<EKey, Vector3>() {
+			[EKey.MOVE_POS] = Vector3.zero, [EKey.MOVE_DIRECTION] = Vector3.zero
+		};
+
 		private Dictionary<EKey, STSkillInfo> m_oSkillInfoDict = new Dictionary<EKey, STSkillInfo>() {
 			[EKey.APPLY_SKILL_INFO] = STSkillInfo.INVALID
 		};
 
-		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>();
-		private Dictionary<EKey, Vector3> m_oVec3Dict = new Dictionary<EKey, Vector3>();
-		private Dictionary<EKey, CSkillTargetInfo> m_oSkillTargetInfoDict = new Dictionary<EKey, CSkillTargetInfo>();
+		private Dictionary<EKey, CSkillTargetInfo> m_oSkillTargetInfoDict = new Dictionary<EKey, CSkillTargetInfo>() {
+			[EKey.APPLY_SKILL_TARGET_INFO] = null
+		};
 		#endregion // 변수
 
 		#region 프로퍼티
 		public new STParams Params { get; private set; }
 		public Dictionary<ESkillKinds, System.DateTime> ApplySkillTimeDict { get; } = new Dictionary<ESkillKinds, System.DateTime>();
 
-		public bool IsAutoControl => m_oBoolDict.GetValueOrDefault(EKey.IS_AUTO_CONTROL);
-		public Vector3 MovePos => m_oVec3Dict.GetValueOrDefault(EKey.MOVE_POS);
-		public Vector3 MoveDirection => m_oVec3Dict.GetValueOrDefault(EKey.MOVE_DIRECTION);
-		public CSkillTargetInfo ApplySkillTargetInfo => m_oSkillTargetInfoDict.GetValueOrDefault(EKey.APPLY_SKILL_TARGET_INFO);
+		public bool IsAutoControl => m_oBoolDict[EKey.IS_AUTO_CONTROL];
+		public Vector3 MovePos => m_oVec3Dict[EKey.MOVE_POS];
+		public Vector3 MoveDirection => m_oVec3Dict[EKey.MOVE_DIRECTION];
+		public CSkillTargetInfo ApplySkillTargetInfo => m_oSkillTargetInfoDict[EKey.APPLY_SKILL_TARGET_INFO];
 		#endregion // 프로퍼티
 
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-			m_oVec3Dict.ExReplaceVal(EKey.MOVE_POS, KCDefine.B_POS_INVALID);
-
 			this.SubAwake();
 		}
 
@@ -63,7 +69,21 @@ namespace NSEngine {
 
 		/** 적용 스킬 정보를 리셋한다 */
 		public virtual void ResetApplySkillInfo() {
-			m_oSkillInfoDict.ExReplaceVal(EKey.APPLY_SKILL_INFO, STSkillInfo.INVALID);
+			m_oSkillInfoDict[EKey.APPLY_SKILL_INFO] = STSkillInfo.INVALID;
+		}
+
+		/** 제거 되었을 경우 */
+		public override void OnDestroy() {
+			base.OnDestroy();
+
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					this.SubOnDestroy();
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CEObj.OnDestroy Exception: {oException.Message}");
+			}
 		}
 
 		/** 자동 제어 여부를 변경한다 */
@@ -73,17 +93,17 @@ namespace NSEngine {
 				this.SetState(EState.IDLE);
 			}
 
-			m_oBoolDict.ExReplaceVal(EKey.IS_AUTO_CONTROL, a_bIsAutoControl);
+			m_oBoolDict[EKey.IS_AUTO_CONTROL] = a_bIsAutoControl;
 		}
 
 		/** 이동 위치를 변경한다 */
 		public void SetMovePos(Vector3 a_stPos) {
-			m_oVec3Dict.ExReplaceVal(EKey.MOVE_POS, a_stPos);
+			m_oVec3Dict[EKey.MOVE_POS] = a_stPos;
 		}
 
 		/** 이동 방향을 변경한다 */
 		public void SetMoveDirection(Vector3 a_stDirection) {
-			m_oVec3Dict.ExReplaceVal(EKey.MOVE_DIRECTION, a_stDirection.normalized);
+			m_oVec3Dict[EKey.MOVE_DIRECTION] = a_stDirection.normalized;
 		}
 		#endregion // 함수
 
