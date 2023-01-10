@@ -39,7 +39,7 @@ namespace NSEngine {
 		public new STParams Params { get; private set; }
 		public CDictWrapper<EAbilityKinds, decimal> AbilityValDictWrapper { get; } = new CDictWrapper<EAbilityKinds, decimal>();
 
-		public SpriteRenderer TargetSprite => m_oSpriteDict.GetValueOrDefault(EKey.TARGET_SPRITE);
+		public SpriteRenderer TargetSprite => m_oSpriteDict[EKey.TARGET_SPRITE];
 		#endregion // 프로퍼티
 
 		#region 함수

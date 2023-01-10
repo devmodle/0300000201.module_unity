@@ -47,8 +47,22 @@ namespace NSEngine {
 			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
 
-			m_oParticleDict.GetValueOrDefault(EKey.PARTICLE_FX)?.ExSetSortingOrder(Access.GetSortingOrderInfo(a_stParams.m_stFXInfo.m_eFXKinds));
+			m_oParticleDict[EKey.PARTICLE_FX]?.ExSetSortingOrder(Access.GetSortingOrderInfo(a_stParams.m_stFXInfo.m_eFXKinds));
 			this.SubInit();
+		}
+
+		/** 제거 되었을 경우 */
+		public override void OnDestroy() {
+			base.OnDestroy();
+
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					this.SubOnDestroy();
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CEFX.OnDestroy Exception: {oException.Message}");
+			}
 		}
 
 		/** 어빌리티 값을 설정한다 */
