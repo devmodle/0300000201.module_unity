@@ -9,10 +9,6 @@ namespace NSEngine {
 	/** 서브 엔진 상수 */
 	public static partial class KDefine {
 		#region 기본
-		// 간격
-		public const float E_OFFSET_BOTTOM = 150.0f;
-		public const float E_OFFSET_MAIN_CAMERA = -50.0f;
-
 		// 식별자
 		public const string E_KEY_CELL_OBJ_OBJS_POOL = "CellObjObjsPool";
 		public const string E_KEY_PLAYER_OBJ_OBJS_POOL = "PlayerObjObjsPool";
@@ -25,8 +21,12 @@ namespace NSEngine {
 		#endregion // 기본
 
 		#region 런타임 상수
-		// 간격
+		// 간격 {
+		public static readonly Vector3 E_OFFSET_BOTTOM = new Vector3(0.0f, 150.0f, 0.0f);
+		public static readonly Vector3 E_OFFSET_MAIN_CAMERA = new Vector3(0.0f, -50.0f, 0.0f);
+
 		public static readonly Vector3 E_PADDING_GRID = new Vector3(0.0f, 0.0f, 0.0f);
+		// 간격 }
 
 		// 개수
 		public static readonly Vector3Int E_MIN_NUM_CELLS = new Vector3Int(1, 1, 1);
