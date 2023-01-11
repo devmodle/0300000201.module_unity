@@ -69,7 +69,7 @@ namespace NSEngine {
 		public virtual void Init(STParams a_stParams) {
 			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
-			
+
 			this.SubInit();
 		}
 

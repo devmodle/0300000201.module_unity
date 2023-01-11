@@ -125,7 +125,7 @@ namespace NSEngine {
 		protected virtual bool IsEnableSkillState() {
 			return this.State == EState.NONE || this.State == EState.IDLE || this.State == EState.MOVE;
 		}
-		
+
 		/** 상태를 변경한다 */
 		public void SetState(EState a_eState, bool a_bIsForce = false) {
 			// 강제 변경 모드 일 경우

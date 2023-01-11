@@ -17,7 +17,7 @@ namespace NSEngine {
 		}
 
 		#region 변수
-		
+
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -34,7 +34,7 @@ namespace NSEngine {
 		private void SubInit() {
 			// Do Something
 		}
-		
+
 		/** 제거 되었을 경우 */
 		private void SubOnDestroy() {
 			try {

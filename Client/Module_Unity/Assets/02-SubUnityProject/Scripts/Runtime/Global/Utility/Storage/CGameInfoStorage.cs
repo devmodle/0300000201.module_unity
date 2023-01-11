@@ -17,7 +17,7 @@ public partial class CClearInfo : CBaseInfo {
 	#region 변수
 	[Key(1)] public STRecordInfo m_stRecordInfo;
 	[Key(2)] public STRecordInfo m_stBestRecordInfo;
-	[IgnoreMember][System.NonSerialized] public STIDInfo m_stIDInfo;
+	[IgnoreMember] [System.NonSerialized] public STIDInfo m_stIDInfo;
 	#endregion // 변수
 
 	#region 상수
@@ -334,7 +334,7 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 
 		return oChapterClearInfo;
 	}
-	
+
 	/** 캐릭터 게임 정보를 반환한다 */
 	public bool TryGetCharacterGameInfo(int a_nCharacterID, out CCharacterGameInfo a_oOutCharacterGameInfo) {
 		return this.GameInfo.m_oCharacterGameInfoDict.TryGetValue(a_nCharacterID, out a_oOutCharacterGameInfo);
