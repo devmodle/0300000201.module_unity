@@ -33,6 +33,7 @@ namespace NSEngine {
 			base.Init(a_stParams.m_stBaseParams);
 			this.Params = a_stParams;
 
+			this.SetState(EState.IDLE, true);
 			this.SubInit();
 		}
 
