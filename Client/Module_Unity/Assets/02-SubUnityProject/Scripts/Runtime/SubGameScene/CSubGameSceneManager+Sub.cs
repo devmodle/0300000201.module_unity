@@ -87,17 +87,17 @@ namespace GameScene {
 
 		/** 터치 시작 이벤트를 처리한다 */
 		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			// Do Something
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
 		}
 
 		/** 터치 이동 이벤트를 처리한다 */
 		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			// Do Something
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
 		}
 
 		/** 터치 종료 이벤트를 처리한다 */
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			// Do Something
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
 		}
 		#endregion // 함수
 
