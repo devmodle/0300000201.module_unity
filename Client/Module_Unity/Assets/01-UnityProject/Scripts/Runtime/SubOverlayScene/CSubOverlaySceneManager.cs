@@ -28,7 +28,9 @@ namespace OverlayScene {
 		}
 
 		#region 변수
-		private Dictionary<EKey, string> m_oStrDict = new Dictionary<EKey, string>();
+		private Dictionary<EKey, string> m_oStrDict = new Dictionary<EKey, string>() {
+			[EKey.PURCHASE_PRODUCT_ID] = string.Empty
+		};
 
 		/** =====> UI <===== */
 		private Dictionary<EKey, TMP_Text> m_oTextDict = new Dictionary<EKey, TMP_Text>();
@@ -120,7 +122,7 @@ namespace OverlayScene {
 		/** UI 상태를 갱신한다 */
 		private void UpdateUIsState() {
 			// 텍스트를 갱신한다
-			m_oTextDict.GetValueOrDefault(EKey.NUM_NORM_COINS_TEXT)?.ExSetText($"{Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_NORM_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS)}", EFontSet._1, false);
+			m_oTextDict[EKey.NUM_NORM_COINS_TEXT]?.ExSetText($"{Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_NORM_COINS, ETargetKinds.ABILITY, (int)EAbilityKinds.STAT_NUMS)}", EFontSet._1, false);
 
 			// UI 상태를 갱신한다
 			CSceneManager.GetSceneManager<MainScene.CSubMainSceneManager>(KCDefine.B_SCENE_N_MAIN)?.gameObject.ExSendMsg(string.Empty, KCDefine.U_FUNC_N_UPDATE_UIS_STATE, null, false);
@@ -154,7 +156,7 @@ namespace OverlayScene {
 			// 결제 되었을 경우
 			if(a_bIsSuccess) {
 				Func.AcquireProduct(a_oProductID);
-				m_oStrDict.ExReplaceVal(EKey.PURCHASE_PRODUCT_ID, a_oProductID);
+				m_oStrDict[EKey.PURCHASE_PRODUCT_ID] = a_oProductID;
 
 #if FIREBASE_MODULE_ENABLE
 				this.ExLateCallFunc((a_oFuncSender) => Func.SaveUserInfo(this.OnSaveUserInfo));
@@ -172,7 +174,7 @@ namespace OverlayScene {
 #if FIREBASE_MODULE_ENABLE
 		/** 유저 정보를 저장했을 경우 */
 		private void OnSaveUserInfo(CFirebaseManager a_oSender, bool a_bIsSuccess) {
-			Func.OnPurchaseProduct(CPurchaseManager.Inst, m_oStrDict.GetValueOrDefault(EKey.PURCHASE_PRODUCT_ID, string.Empty), true, null);
+			Func.OnPurchaseProduct(CPurchaseManager.Inst, m_oStrDict[EKey.PURCHASE_PRODUCT_ID], true, null);
 		}
 #endif // #if FIREBASE_MODULE_ENABLE
 #endif // #if PURCHASE_MODULE_ENABLE

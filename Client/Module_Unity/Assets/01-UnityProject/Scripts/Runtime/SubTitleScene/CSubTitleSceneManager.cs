@@ -31,7 +31,10 @@ namespace TitleScene {
 			EKey.PLAY_BTN, EKey.GUEST_LOGIN_BTN, EKey.APPLE_LOGIN_BTN, EKey.FACEBOOK_LOGIN_BTN,
 		};
 
-		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>();
+		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
+			[EKey.IS_TOUCH] = false
+		};
+
 		private Dictionary<EKey, Tween> m_oAniDict = new Dictionary<EKey, Tween>();
 
 		/** =====> UI <===== */
@@ -56,7 +59,7 @@ namespace TitleScene {
 					(EKey.TOUCH_TEXT, $"{EKey.TOUCH_TEXT}", this.UIsBase)
 				}, m_oTextDict);
 
-				m_oTextDict.GetValueOrDefault(EKey.TOUCH_TEXT)?.gameObject.SetActive(false);
+				m_oTextDict[EKey.TOUCH_TEXT]?.gameObject.SetActive(false);
 				// 텍스트를 설정한다 }
 
 				// 버튼을 설정한다
@@ -180,9 +183,9 @@ namespace TitleScene {
 		private void UpdateUIsState() {
 			// 버튼을 갱신한다 {
 #if UNITY_IOS && APPLE_LOGIN_ENABLE
-			m_oBtnDict.GetValueOrDefault(EKey.APPLE_LOGIN_BTN)?.gameObject.SetActive(true);
+			m_oBtnDict[EKey.APPLE_LOGIN_BTN]?.gameObject.SetActive(true);
 #else
-			m_oBtnDict.GetValueOrDefault(EKey.APPLE_LOGIN_BTN)?.gameObject.SetActive(false);
+			m_oBtnDict[EKey.APPLE_LOGIN_BTN]?.gameObject.SetActive(false);
 #endif // #if UNITY_IOS && APPLE_LOGIN_ENABLE
 
 			for(int i = 0; i < m_oLoginBtnKeyList.Count; ++i) {
@@ -265,8 +268,8 @@ namespace TitleScene {
 
 				this.UpdateUIsState();
 
-				m_oTextDict.GetValueOrDefault(EKey.TOUCH_TEXT)?.gameObject.SetActive(true);
-				m_oAniDict.ExAssignVal(EKey.TOUCH_ANI, m_oTextDict.GetValueOrDefault(EKey.TOUCH_TEXT)?.DOFaceFade(KCDefine.B_VAL_1_REAL / KCDefine.B_VAL_2_REAL, KCDefine.B_VAL_1_REAL).SetAutoKill().SetEase(KCDefine.U_EASE_DEF).SetLoops(KCDefine.B_TIMES_INT_INFINITE, LoopType.Yoyo).SetUpdate(true));
+				m_oTextDict[EKey.TOUCH_TEXT]?.gameObject.SetActive(true);
+				m_oAniDict.ExAssignVal(EKey.TOUCH_ANI, m_oTextDict[EKey.TOUCH_TEXT]?.DOFaceFade(KCDefine.B_VAL_1_REAL / KCDefine.B_VAL_2_REAL, KCDefine.B_VAL_1_REAL).SetAutoKill().SetEase(KCDefine.U_EASE_DEF).SetLoops(KCDefine.B_TIMES_INT_INFINITE, LoopType.Yoyo).SetUpdate(true));
 			}
 		}
 		#endregion // 함수
@@ -292,7 +295,7 @@ namespace TitleScene {
 				oHandlerDict.GetValueOrDefault(a_stGoogleSheetLoadInfo.m_oSheetName)?.Invoke();
 			}
 
-			m_oBoolDict.ExReplaceVal(EKey.IS_TOUCH, a_bIsSuccess);
+			m_oBoolDict[EKey.IS_TOUCH] = a_bIsSuccess;
 		}
 
 		/** 구글 시트가 로드 되었을 경우 */
@@ -305,7 +308,7 @@ namespace TitleScene {
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_TABLE_LOAD_FAIL_MSG), null, false);
 			}
 
-			m_oBoolDict.ExReplaceVal(EKey.IS_TOUCH, a_bIsSuccess);
+			m_oBoolDict[EKey.IS_TOUCH] = a_bIsSuccess;
 		}
 
 		/** 버전 정보 구글 시트를 로드했을 경우 */
@@ -318,7 +321,7 @@ namespace TitleScene {
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_TABLE_LOAD_FAIL_MSG), null, false);
 			}
 
-			m_oBoolDict.ExReplaceVal(EKey.IS_TOUCH, a_bIsSuccess);
+			m_oBoolDict[EKey.IS_TOUCH] = a_bIsSuccess;
 		}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		#endregion // 조건부 함수

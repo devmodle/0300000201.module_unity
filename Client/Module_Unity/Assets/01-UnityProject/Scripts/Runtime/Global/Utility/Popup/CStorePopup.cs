@@ -45,7 +45,9 @@ public partial class CStorePopup : CSubPopup {
 	}
 
 	#region 변수
-	private Dictionary<EKey, EProductKinds> m_oProductKindsDict = new Dictionary<EKey, EProductKinds>();
+	private Dictionary<EKey, EProductKinds> m_oProductKindsDict = new Dictionary<EKey, EProductKinds>() {
+		[EKey.SEL_PRODUCT_KINDS] = EProductKinds.NONE
+	};
 
 #if PURCHASE_MODULE_ENABLE
 	private List<Product> m_oRestoreProductList = new List<Product>();
@@ -173,7 +175,7 @@ public partial class CStorePopup : CSubPopup {
 		switch(a_stProductTradeInfo.m_ePurchaseType) {
 			case EPurchaseType.ADS: {
 #if ADS_MODULE_ENABLE
-				m_oProductKindsDict.ExReplaceVal(EKey.SEL_PRODUCT_KINDS, a_stProductTradeInfo.m_eProductKinds);
+				m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS] = a_stProductTradeInfo.m_eProductKinds;
 				Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif // #if ADS_MODULE_ENABLE
 
@@ -226,7 +228,7 @@ public partial class CStorePopup : CSubPopup {
 	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
 		// 광고를 시청했을 경우
 		if(a_bIsSuccess) {
-			var eSelProductKinds = m_oProductKindsDict.GetValueOrDefault(EKey.SEL_PRODUCT_KINDS, EProductKinds.NONE);
+			var eSelProductKinds = m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS];
 			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(eSelProductKinds));
 		}
 

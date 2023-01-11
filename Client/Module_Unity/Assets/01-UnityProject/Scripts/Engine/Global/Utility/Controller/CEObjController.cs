@@ -35,7 +35,8 @@ namespace NSEngine {
 		};
 
 		private Dictionary<EKey, Vector3> m_oVec3Dict = new Dictionary<EKey, Vector3>() {
-			[EKey.MOVE_POS] = Vector3.zero, [EKey.MOVE_DIRECTION] = Vector3.zero
+			[EKey.MOVE_POS] = Vector3.zero,
+			[EKey.MOVE_DIRECTION] = Vector3.zero
 		};
 
 		private Dictionary<EKey, STSkillInfo> m_oSkillInfoDict = new Dictionary<EKey, STSkillInfo>() {
@@ -180,8 +181,8 @@ namespace NSEngine {
 
 		/** 스킬을 적용시킨다 */
 		protected virtual void DoApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo) {
-			m_oSkillInfoDict.ExReplaceVal(EKey.APPLY_SKILL_INFO, a_stSkillInfo);
-			m_oSkillTargetInfoDict.ExReplaceVal(EKey.APPLY_SKILL_TARGET_INFO, a_oSkillTargetInfo);
+			m_oSkillInfoDict[EKey.APPLY_SKILL_INFO] = a_stSkillInfo;
+			m_oSkillTargetInfoDict[EKey.APPLY_SKILL_TARGET_INFO] = a_oSkillTargetInfo;
 		}
 		#endregion // 함수
 
@@ -221,7 +222,7 @@ namespace NSEngine {
 		/** 스킬 적용 가능 여부를 검사한다 */
 		protected virtual bool IsEnableApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo) {
 			// 적용 스킬 타겟 정보가 없을 경우
-			if(m_oSkillInfoDict.GetValueOrDefault(EKey.APPLY_SKILL_INFO).m_eSkillKinds == ESkillKinds.NONE) {
+			if(m_oSkillInfoDict[EKey.APPLY_SKILL_INFO].m_eSkillKinds == ESkillKinds.NONE) {
 				return true;
 			}
 
