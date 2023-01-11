@@ -468,10 +468,10 @@ namespace LevelEditorScene {
 		/** 터치 이벤트를 처리한다 */
 		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
 			base.HandleTouchEvent(a_oSender, a_oEventData, a_eTouchEvent);
-			var stTouchPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
 
 			// 그리드 영역 일 경우
-			if(this.BGTouchDispatcher == a_oSender && (m_oGridInfoList.ExIsValidIdx(this.SelGridInfoIdx) && this.SelGridInfo.m_stViewBounds.Contains(stTouchPos))) {
+			if(this.BGTouchDispatcher == a_oSender && (m_oGridInfoList.ExIsValidIdx(this.SelGridInfoIdx) && this.SelGridInfo.m_stViewBounds.Contains(stPos))) {
 				switch(a_eTouchEvent) {
 					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
 					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
@@ -957,57 +957,6 @@ namespace LevelEditorScene {
 					}
 				}
 			}
-		}
-
-		/** 터치 시작 이벤트를 처리한다 */
-		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
-			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
-
-			// 인덱스가 유효 할 경우
-			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
-				// Do Something
-			}
-
-			this.HandleTouchMoveEvent(a_oSender, a_oEventData);
-		}
-
-		/** 터치 이동 이벤트를 처리한다 */
-		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
-			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
-
-			// 인덱스가 유효 할 경우
-			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
-				var oCellInfo = m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).GetCellInfo(stIdx);
-				var eSelObjKinds = m_oObjKindsDict.GetValueOrDefault(EKey.SEL_OBJ_KINDS);
-
-				// 객체 추가가 가능 할 경우
-				if(Input.GetMouseButton((int)EMouseBtn.LEFT) && eSelObjKinds != EObjKinds.NONE) {
-					var stCellObjInfo = Factory.MakeEditorCellObjInfo(eSelObjKinds);
-					oCellInfo.m_oCellObjInfoList.ExAddVal(stCellObjInfo, (a_stCellObjInfo) => a_stCellObjInfo.ObjKinds == eSelObjKinds);
-				}
-				// 객체 제거가 가능 할 경우
-				else if(Input.GetMouseButton((int)EMouseBtn.RIGHT) && oCellInfo.m_oCellObjInfoList.ExIsValid()) {
-					oCellInfo.m_oCellObjInfoList.ExRemoveValAt(oCellInfo.m_oCellObjInfoList.Count - KCDefine.B_VAL_1_INT);
-				}
-
-				this.UpdateUIsState();
-				m_oVec3IntDict.ExReplaceVal(EKey.PREV_CELL_IDX, stIdx);
-			}
-		}
-
-		/** 터치 종료 이벤트를 처리한다 */
-		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
-			var stIdx = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize).ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
-			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
-
-			// 인덱스가 유효 할 경우
-			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
-				// Do Something
-			}
-
-			m_oVec3IntDict.ExReplaceVal(EKey.PREV_CELL_IDX, KCDefine.B_IDX_INVALID_3D);
 		}
 
 #if GOOGLE_SHEET_ENABLE

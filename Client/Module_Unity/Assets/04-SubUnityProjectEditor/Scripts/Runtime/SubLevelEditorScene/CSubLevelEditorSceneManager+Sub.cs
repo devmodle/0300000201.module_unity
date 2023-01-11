@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
+using UnityEngine.EventSystems;
 using EnhancedUI.EnhancedScroller;
 
 namespace LevelEditorScene {
@@ -92,6 +93,60 @@ namespace LevelEditorScene {
 		/** 객체 스프라이트를 설정한다 */
 		private void SubSetupObjSprite(STCellInfo a_stCellInfo, STCellObjInfo a_stCellObjInfo, SpriteRenderer a_oOutObjSprite) {
 			// Do Something
+		}
+
+		/** 터치 시작 이벤트를 처리한다 */
+		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
+			var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
+			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
+
+			// 인덱스가 유효 할 경우
+			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
+				// Do Something
+			}
+
+			this.HandleTouchMoveEvent(a_oSender, a_oEventData);
+		}
+
+		/** 터치 이동 이벤트를 처리한다 */
+		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
+			var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
+			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
+
+			// 인덱스가 유효 할 경우
+			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
+				var oCellInfo = m_oLevelInfoDict.GetValueOrDefault(EKey.SEL_LEVEL_INFO).GetCellInfo(stIdx);
+				var eSelObjKinds = m_oObjKindsDict.GetValueOrDefault(EKey.SEL_OBJ_KINDS);
+
+				// 객체 추가가 가능 할 경우
+				if(Input.GetMouseButton((int)EMouseBtn.LEFT) && eSelObjKinds != EObjKinds.NONE) {
+					var stCellObjInfo = Factory.MakeEditorCellObjInfo(eSelObjKinds);
+					oCellInfo.m_oCellObjInfoList.ExAddVal(stCellObjInfo, (a_stCellObjInfo) => a_stCellObjInfo.ObjKinds == eSelObjKinds);
+				}
+				// 객체 제거가 가능 할 경우
+				else if(Input.GetMouseButton((int)EMouseBtn.RIGHT) && oCellInfo.m_oCellObjInfoList.ExIsValid()) {
+					oCellInfo.m_oCellObjInfoList.ExRemoveValAt(oCellInfo.m_oCellObjInfoList.Count - KCDefine.B_VAL_1_INT);
+				}
+
+				this.UpdateUIsState();
+				m_oVec3IntDict.ExReplaceVal(EKey.PREV_CELL_IDX, stIdx);
+			}
+		}
+
+		/** 터치 종료 이벤트를 처리한다 */
+		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+			var stPos = a_oEventData.ExGetLocalPos(this.ObjRoot, this.ScreenSize);
+			var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, NSEngine.Access.CellSize);
+			var stPrevIdx = m_oVec3IntDict.GetValueOrDefault(EKey.PREV_CELL_IDX);
+
+			// 인덱스가 유효 할 경우
+			if(!stIdx.Equals(stPrevIdx) && m_oObjSpriteInfoLists.ExIsValidIdx(stIdx)) {
+				// Do Something
+			}
+
+			m_oVec3IntDict.ExReplaceVal(EKey.PREV_CELL_IDX, KCDefine.B_IDX_INVALID_3D);
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		#endregion // 조건부 함수
