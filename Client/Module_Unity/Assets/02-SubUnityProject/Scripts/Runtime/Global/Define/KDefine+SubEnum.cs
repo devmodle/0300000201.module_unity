@@ -389,6 +389,7 @@ public enum EObjKinds {
 	#region 배경
 	// 0
 	BG_EMPTY_01 = (EEnumVal.T * EObjType.BG) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
+	BG_PLACEHOLDER_01 = (EEnumVal.T * EObjType.BG) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 1),
 	#endregion // 배경
 
 	#region 바닥
