@@ -26,18 +26,6 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
-		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
-			base.OnUpdate(a_fDeltaTime);
-
-			// 앱이 실행 중 일 경우
-			if(this.SubState != ESubState.NONE && CSceneManager.IsAppRunning) {
-				switch(this.SubState) {
-					case ESubState.APPLY: this.HandleApplySubState(a_fDeltaTime); break;
-				}
-			}
-		}
-
 		/** 스킬을 적용한다 */
 		public void Apply() {
 			this.SetState(EState.IDLE);
@@ -69,6 +57,26 @@ namespace NSEngine {
 		private void SubInit() {
 			m_oIntDict.Clear();
 			m_oRealDict.Clear();
+		}
+
+		/** 제거 되었을 경우 */
+		private void SubOnDestroy() {
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					// Do Something
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CESkillController.SubOnDestroy Exception: {oException.Message}");
+			}
+		}
+
+		/** 상태를 갱신한다 */
+		private void SubOnUpdate(float a_fDeltaTime) {
+			// 앱이 실행 중 일 경우
+			if(CSceneManager.IsAppRunning) {
+				// Do Something
+			}
 		}
 
 		/** 적용 서브 상태를 처리한다 */

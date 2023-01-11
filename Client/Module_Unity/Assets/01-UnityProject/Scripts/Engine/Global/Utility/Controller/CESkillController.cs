@@ -35,6 +35,34 @@ namespace NSEngine {
 
 			this.SubInit();
 		}
+
+		/** 제거 되었을 경우 */
+		public override void OnDestroy() {
+			base.OnDestroy();
+
+			try {
+				// 앱이 실행 중 일 경우
+				if(CSceneManager.IsAppRunning) {
+					this.SubOnDestroy();
+				}
+			} catch(System.Exception oException) {
+				CFunc.ShowLogWarning($"CESkillController.OnDestroy Exception: {oException.Message}");
+			}
+		}
+
+		/** 상태를 갱신한다 */
+		public override void OnUpdate(float a_fDeltaTime) {
+			base.OnUpdate(a_fDeltaTime);
+
+			// 앱이 실행 중 일 경우
+			if(this.SubState != ESubState.NONE && CSceneManager.IsAppRunning) {
+				switch(this.SubState) {
+					case ESubState.APPLY: this.HandleApplySubState(a_fDeltaTime); break;
+				}
+
+				this.SubOnUpdate(a_fDeltaTime);
+			}
+		}
 		#endregion // 함수
 
 		#region 클래스 함수
