@@ -468,13 +468,16 @@ namespace GameScene {
 			});
 		}
 		#endregion // 함수
+	}
 
-		#region 접근자 함수
+	/** 서브 게임 씬 관리자 - 접근 */
+	public partial class CSubGameSceneManager : CGameSceneManager {
+		#region 함수
 		/** UI 상태 갱신 여부를 변경한다 */
 		public void SetEnableUpdateUIsState(bool a_bIsEnable) {
 			m_oBoolDict.ExReplaceVal(EKey.IS_UPDATE_UIS_STATE, a_bIsEnable);
 		}
-		#endregion // 접근자 함수
+		#endregion // 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

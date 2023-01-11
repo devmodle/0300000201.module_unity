@@ -133,8 +133,11 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 		CFunc.WriteMsgPackObj(a_oFilePath, this.AppInfo, true);
 	}
 	#endregion // 함수
+}
 
-	#region 접근자 함수
+/** 앱 정보 저장소 - 접근 */
+public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
+	#region 함수
 	/** 업데이트 무시 여부를 변경한다 */
 	public void SetIgnoreUpdate(bool a_bIsIgnore) {
 		this.IsIgnoreUpdate = a_bIsIgnore;
@@ -144,9 +147,9 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 	public void SetCloseAgreePopup(bool a_bIsClose) {
 		this.IsCloseAgreePopup = a_bIsClose;
 	}
-	#endregion // 접근자 함수
+	#endregion // 함수
 
-	#region 조건부 접근자 함수
+	#region 조건부 함수
 #if ADS_MODULE_ENABLE
 	/** 광고 스킵 횟수를 변경한다 */
 	public void SetAdsSkipTimes(int a_nTimes) {
@@ -163,6 +166,6 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 		this.PrevFullscreenAdsTime = a_stTime;
 	}
 #endif // #if ADS_MODULE_ENABLE
-	#endregion // 조건부 접근자 함수
+	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

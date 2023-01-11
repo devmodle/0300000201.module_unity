@@ -44,13 +44,6 @@ namespace NSEngine {
 		}
 		#endregion // 함수
 
-		#region 제네릭 접근자 함수
-		/** 타겟을 반환한다 */
-		public T GetTarget<T>(int a_nIdx) where T : CEObjComponent {
-			return this.TargetObjList.ExGetVal(a_nIdx, null) as T;
-		}
-		#endregion // 제네릭 접근자 함수
-
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
 		public static STParams MakeParams(CEngine a_oEngine) {
@@ -59,6 +52,16 @@ namespace NSEngine {
 			};
 		}
 		#endregion // 클래스 함수
+	}
+
+	/** 제어자 - 접근 */
+	public abstract partial class CEController : CEComponent {
+		#region 제네릭 함수
+		/** 타겟을 반환한다 */
+		public T GetTarget<T>(int a_nIdx) where T : CEObjComponent {
+			return this.TargetObjList.ExGetVal(a_nIdx, null) as T;
+		}
+		#endregion // 제네릭 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

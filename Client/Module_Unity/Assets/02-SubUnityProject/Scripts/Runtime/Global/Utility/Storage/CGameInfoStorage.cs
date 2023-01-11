@@ -240,29 +240,6 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 		this.FreeSelItemKindsList.Clear();
 	}
 
-	/** 캐릭터 게임 정보를 반환한다 */
-	public bool TryGetCharacterGameInfo(int a_nCharacterID, out CCharacterGameInfo a_oOutCharacterGameInfo) {
-		return this.GameInfo.m_oCharacterGameInfoDict.TryGetValue(a_nCharacterID, out a_oOutCharacterGameInfo);
-	}
-
-	/** 레벨 클리어 정보를 반환한다 */
-	public bool TryGetLevelClearInfo(int a_nCharacterID, int a_nLevelID, out CClearInfo a_oOutLevelClearInfo, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
-		a_oOutLevelClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oLevelClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(a_nLevelID, a_nStageID, a_nChapterID)) : null;
-		return a_oOutLevelClearInfo != null;
-	}
-
-	/** 스테이지 클리어 정보를 반환한다 */
-	public bool TryGetStageClearInfo(int a_nCharacterID, int a_nStageID, out CClearInfo a_oOutStageClearInfo, int a_nChapterID = KCDefine.B_VAL_0_INT) {
-		a_oOutStageClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oStageClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, a_nStageID, a_nChapterID)) : null;
-		return a_oOutStageClearInfo != null;
-	}
-
-	/** 챕터 클리어 정보를 반환한다 */
-	public bool TryGetChapterClearInfo(int a_nCharacterID, int a_nChapterID, out CClearInfo a_oOutChapterClearInfo) {
-		a_oOutChapterClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oChapterClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, KCDefine.B_VAL_0_INT, a_nChapterID)) : null;
-		return a_oOutChapterClearInfo != null;
-	}
-
 	/** 게임 정보를 로드한다 */
 	public CGameInfo LoadGameInfo() {
 		return this.LoadGameInfo(KDefine.G_DATA_P_GAME_INFO);
@@ -302,9 +279,30 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	public void SaveGameInfo(string a_oFilePath) {
 		CFunc.WriteMsgPackObj(a_oFilePath, this.GameInfo, true);
 	}
-	#endregion // 함수
 
-	#region 접근자 함수
+	/** 레벨 클리어 정보를 추가한다 */
+	public void AddLevelClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
+		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
+		oCharacterGameInfo.m_oLevelClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID01, a_oClearInfo);
+	}
+
+	/** 스테이지 클리어 정보를 추가한다 */
+	public void AddStageClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
+		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
+		oCharacterGameInfo.m_oStageClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID02, a_oClearInfo);
+	}
+
+	/** 챕터 클리어 정보를 추가한다 */
+	public void AddChapterClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
+		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
+		oCharacterGameInfo.m_oChapterClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID03, a_oClearInfo);
+	}
+	#endregion // 함수
+}
+
+/** 게임 정보 저장소 - 접근 */
+public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
+	#region 함수
 	/** 캐릭터 게임 정보를 반환한다 */
 	public CCharacterGameInfo GetCharacterGameInfo(int a_nCharacterID) {
 		bool bIsValid = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
@@ -336,6 +334,29 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 
 		return oChapterClearInfo;
 	}
+	
+	/** 캐릭터 게임 정보를 반환한다 */
+	public bool TryGetCharacterGameInfo(int a_nCharacterID, out CCharacterGameInfo a_oOutCharacterGameInfo) {
+		return this.GameInfo.m_oCharacterGameInfoDict.TryGetValue(a_nCharacterID, out a_oOutCharacterGameInfo);
+	}
+
+	/** 레벨 클리어 정보를 반환한다 */
+	public bool TryGetLevelClearInfo(int a_nCharacterID, int a_nLevelID, out CClearInfo a_oOutLevelClearInfo, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+		a_oOutLevelClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oLevelClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(a_nLevelID, a_nStageID, a_nChapterID)) : null;
+		return a_oOutLevelClearInfo != null;
+	}
+
+	/** 스테이지 클리어 정보를 반환한다 */
+	public bool TryGetStageClearInfo(int a_nCharacterID, int a_nStageID, out CClearInfo a_oOutStageClearInfo, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+		a_oOutStageClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oStageClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, a_nStageID, a_nChapterID)) : null;
+		return a_oOutStageClearInfo != null;
+	}
+
+	/** 챕터 클리어 정보를 반환한다 */
+	public bool TryGetChapterClearInfo(int a_nCharacterID, int a_nChapterID, out CClearInfo a_oOutChapterClearInfo) {
+		a_oOutChapterClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oChapterClearInfoDict.GetValueOrDefault(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, KCDefine.B_VAL_0_INT, a_nChapterID)) : null;
+		return a_oOutChapterClearInfo != null;
+	}
 
 	/** 플레이 캐릭터 식별자를 변경한다 */
 	public void SetPlayCharacterID(int a_nID) {
@@ -356,24 +377,6 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	public void SetPlayLevelInfo(CLevelInfo a_oLevelInfo) {
 		this.PlayLevelInfo = a_oLevelInfo;
 	}
-
-	/** 레벨 클리어 정보를 추가한다 */
-	public void AddLevelClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
-		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
-		oCharacterGameInfo.m_oLevelClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID01, a_oClearInfo);
-	}
-
-	/** 스테이지 클리어 정보를 추가한다 */
-	public void AddStageClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
-		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
-		oCharacterGameInfo.m_oStageClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID02, a_oClearInfo);
-	}
-
-	/** 챕터 클리어 정보를 추가한다 */
-	public void AddChapterClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsEnableAssert = true) {
-		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
-		oCharacterGameInfo.m_oChapterClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID03, a_oClearInfo);
-	}
-	#endregion // 접근자 함수
+	#endregion // 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
