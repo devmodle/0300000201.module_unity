@@ -82,16 +82,6 @@ namespace NSEngine {
 			}
 		}
 
-		/** 이동 상태 가능 여부를 검사한다 */
-		protected virtual bool IsEnableMoveState() {
-			return this.State == EState.NONE || this.State == EState.IDLE || this.State == EState.MOVE;
-		}
-
-		/** 스킬 상태 가능 여부를 검사한다 */
-		protected virtual bool IsEnableSkillState() {
-			return this.State == EState.NONE || this.State == EState.IDLE || this.State == EState.MOVE;
-		}
-
 		/** 대기 상태를 처리한다 */
 		protected virtual void HandleIdleState(float a_fDeltaTime) {
 			// Do Something
@@ -129,6 +119,21 @@ namespace NSEngine {
 
 			this.SetState(EState.NONE);
 			this.SetSubState(ESubState.NONE);
+		}
+		#endregion // 함수
+	}
+
+	/** 서브 제어자 - 접근 */
+	public abstract partial class CEController : CEComponent {
+		#region 함수
+		/** 이동 상태 가능 여부를 검사한다 */
+		protected virtual bool IsEnableMoveState() {
+			return this.State == EState.NONE || this.State == EState.IDLE || this.State == EState.MOVE;
+		}
+
+		/** 스킬 상태 가능 여부를 검사한다 */
+		protected virtual bool IsEnableSkillState() {
+			return this.State == EState.NONE || this.State == EState.IDLE || this.State == EState.MOVE;
 		}
 		#endregion // 함수
 	}

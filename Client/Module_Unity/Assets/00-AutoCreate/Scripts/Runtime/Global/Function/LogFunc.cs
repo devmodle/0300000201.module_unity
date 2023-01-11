@@ -59,12 +59,6 @@ public static partial class LogFunc {
 		}
 	}
 
-	/** 로그 전송 가능 여부를 검사한다 */
-	private static bool IsEnableSendLog(string a_oName) {
-		string oLogTime = System.DateTime.Now.ExToPSTTime().ExToLongStr();
-		return LogFunc.m_oLogTimeDict.ContainsKey(a_oName) ? !LogFunc.m_oLogTimeDict[a_oName].Equals(oLogTime) : true;
-	}
-
 	/** 로그 데이터를 생성한다 */
 	private static Dictionary<string, object> MakeLogDatas(Dictionary<string, object> a_oDataDict) {
 		var oDataDict = a_oDataDict ?? new Dictionary<string, object>();
@@ -128,5 +122,16 @@ public static partial class LogFunc {
 	}
 #endif // #if PURCHASE_MODULE_ENABLE
 	#endregion // 조건부 클래스 함수
+}
+
+/** 기본 로그 함수 - 접근 */
+public static partial class LogFunc {
+	#region 클래스 함수
+	/** 로그 전송 가능 여부를 검사한다 */
+	private static bool IsEnableSendLog(string a_oName) {
+		string oLogTime = System.DateTime.Now.ExToPSTTime().ExToLongStr();
+		return LogFunc.m_oLogTimeDict.ContainsKey(a_oName) ? !LogFunc.m_oLogTimeDict[a_oName].Equals(oLogTime) : true;
+	}
+	#endregion // 클래스 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
