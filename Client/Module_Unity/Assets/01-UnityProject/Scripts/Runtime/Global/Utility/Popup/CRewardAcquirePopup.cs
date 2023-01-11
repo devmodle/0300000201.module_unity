@@ -101,11 +101,11 @@ public partial class CRewardAcquirePopup : CSubPopup {
 
 	/** 보상을 획득한다 */
 	private void AcquireRewards(bool a_bIsWatchRewardAds) {
-		m_oBtnDict.GetValueOrDefault(EKey.ADS_BTN)?.ExSetInteractable(false);
-		m_oBtnDict.GetValueOrDefault(EKey.ACQUIRE_BTN)?.ExSetInteractable(false);
+		m_oBtnDict[EKey.ADS_BTN]?.ExSetInteractable(false);
+		m_oBtnDict[EKey.ACQUIRE_BTN]?.ExSetInteractable(false);
 
 #if ADS_MODULE_ENABLE
-		m_oBtnDict.GetValueOrDefault(EKey.ADS_BTN)?.gameObject.ExRemoveComponent<CRewardAdsTouchInteractable>();
+		m_oBtnDict[EKey.ADS_BTN]?.gameObject.ExRemoveComponent<CRewardAdsTouchInteractable>();
 #endif // #if ADS_MODULE_ENABLE
 
 		var oRewardTargetInfoDict = new Dictionary<ulong, STTargetInfo>();

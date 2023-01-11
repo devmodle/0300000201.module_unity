@@ -64,7 +64,7 @@ public partial class CFocusPopup : CSubPopup {
 
 		// 터치 전달자를 설정한다
 		Func.SetupTouchDispatchers(new List<(GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)>() {
-			(m_oImgDict.GetValueOrDefault(EKey.FOCUS_BLIND_IMG)?.gameObject, (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.BEGIN)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.MOVE)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.END)?.Invoke(this, a_oEventData))
+			(m_oImgDict[EKey.FOCUS_BLIND_IMG]?.gameObject, (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.BEGIN)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.MOVE)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.GetValueOrDefault(ECallback.END)?.Invoke(this, a_oEventData))
 		});
 
 		this.SubInit();
@@ -88,7 +88,7 @@ public partial class CFocusPopup : CSubPopup {
 	/** UI 상태를 갱신한다 */
 	private void UpdateUIsState() {
 		// 이미지를 갱신한다
-		m_oImgDict.GetValueOrDefault(EKey.FOCUS_BLIND_IMG)?.ExSetColor<Image>(KCDefine.U_COLOR_POPUP_BLIND, false);
+		m_oImgDict[EKey.FOCUS_BLIND_IMG]?.ExSetColor<Image>(KCDefine.U_COLOR_POPUP_BLIND, false);
 
 		this.SubUpdateUIsState();
 	}

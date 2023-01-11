@@ -65,7 +65,7 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 		m_oFullUIs?.SetActive(nNumCoinsBoxCoins >= KDefine.G_MAX_NUM_COINS_BOX_COINS);
 
 		// 텍스트를 갱신한다
-		m_oTextDict.GetValueOrDefault(EKey.NUM_COINS_TEXT)?.ExSetText($"{nNumCoinsBoxCoins}", EFontSet._1, false);
+		m_oTextDict[EKey.NUM_COINS_TEXT]?.ExSetText($"{nNumCoinsBoxCoins}", EFontSet._1, false);
 
 		this.SubUpdateUIsState();
 	}
