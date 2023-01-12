@@ -34,13 +34,18 @@ public static partial class KDefine {
 	// 횟수
 	public const int LES_MAX_TIMES_TRY_SETUP_CELL_INFOS = byte.MaxValue;
 
-	// 식별자
+	// 식별자 {
 	public const string LES_KEY_SPRITE_OBJS_POOL = "SpriteObjsPool";
 	public const string LES_KEY_LINE_FX_OBJS_POOL = "LineFXObjsPool";
+	
+	public const string LES_KEY_BTN_OBJS_POOL = "BtnObjsPool";
+	// 식별자 }
 
 	// 이름 {
 	public const string LES_OBJ_N_OBJ_SPRITE = "OBJ_SPRITE";
 	public const string LES_OBJ_N_GRID_LINE_FX = "GRID_LINE_FX";
+
+	public const string LES_OBJ_N_GRID_LINE_BTN = "GRID_LINE_BTN";
 	public const string LES_OBJ_N_FMT_RE_UIS_PAGE_UIS = "RE_UIS_PAGE_UIS_{0:00}";
 
 	public const string LES_FUNC_N_FMT_SETUP_RE_UIS_PAGE_UIS = "SetupREUIsPageUIs{0:00}";
@@ -57,6 +62,10 @@ public static partial class KDefine {
 
 	// 비율
 	public static readonly Vector3 LES_SCALE_EDITOR_OBJ_ROOT = new Vector3(1.2f, 1.2f, 1.2f);
+
+	// 간격
+	public static readonly Vector3 LES_OFFSET_H_GRID_LINE_BTN = new Vector3(0.0F, 30.0f, 0.0f);
+	public static readonly Vector3 LES_OFFSET_V_GRID_LINE_BTN = new Vector3(-30.0f, 0.0f, 0.0f);
 	#endregion // 런타임 상수
 }
 #endif // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
