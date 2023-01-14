@@ -49,6 +49,10 @@ namespace SetupScene {
 			// 공용 앱 정보를 설정한다 {
 			CCommonAppInfoStorage.Inst.SetStoreURL(Access.StoreURL);
 
+#if ADS_MODULE_ENABLE
+			CCommonAppInfoStorage.Inst.SetAdsPlatform(CPluginInfoTable.Inst.AdsPlatform);
+#endif // #if ADS_MODULE_ENABLE
+
 #if LOCALIZE_TEST_ENABLE
 			CCommonAppInfoStorage.Inst.SetSystemLanguage(m_eSystemLanguage);
 #else
