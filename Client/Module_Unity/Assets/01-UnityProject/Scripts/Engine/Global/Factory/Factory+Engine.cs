@@ -17,11 +17,11 @@ namespace NSEngine {
 
 			var stPos = a_stPos + a_stOffset;
 			var stBoundsPos = stPos.ExGetPivotPos(KCDefine.B_ANCHOR_MID_CENTER, a_stPivot, stGridInfo.m_stBounds.size);
-			var stViewBoundsPos = a_stPos.ExGetPivotPos(KCDefine.B_ANCHOR_MID_CENTER, a_stPivot, a_bIsEnableOverflow ? new Vector3(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.x, KCDefine.B_VAL_0_REAL) : new Vector3(Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), KCDefine.B_VAL_0_REAL));
+			var stViewBoundsPos = a_stPos.ExGetPivotPos(KCDefine.B_ANCHOR_MID_CENTER, a_stPivot, a_bIsEnableOverflow ? new Vector3(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.x * (Access.MaxGridSize.y / Access.MaxGridSize.x), KCDefine.B_VAL_0_REAL) : new Vector3(Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), KCDefine.B_VAL_0_REAL));
 
 			try {
 				stGridInfo.m_stBounds = new Bounds(stBoundsPos, stGridInfo.m_stBounds.size);
-				stGridInfo.m_stViewBounds = new Bounds(stViewBoundsPos, a_bIsEnableOverflow ? new Vector3(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.x, KCDefine.B_VAL_0_REAL) : new Vector3(Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), KCDefine.B_VAL_0_REAL));
+				stGridInfo.m_stViewBounds = new Bounds(stViewBoundsPos, a_bIsEnableOverflow ? new Vector3(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.x * (Access.MaxGridSize.y / Access.MaxGridSize.x), KCDefine.B_VAL_0_REAL) : new Vector3(Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), Mathf.Max(stGridInfo.m_stBounds.size.x, stGridInfo.m_stBounds.size.y), KCDefine.B_VAL_0_REAL));
 
 				stGridInfo.m_stPivotPos = new Vector3(stGridInfo.m_stBounds.min.x, stGridInfo.m_stBounds.max.y, KCDefine.B_VAL_0_REAL);
 				stGridInfo.m_stViewPivotPos = new Vector3(stGridInfo.m_stViewBounds.min.x, stGridInfo.m_stViewBounds.max.y, KCDefine.B_VAL_0_REAL);
