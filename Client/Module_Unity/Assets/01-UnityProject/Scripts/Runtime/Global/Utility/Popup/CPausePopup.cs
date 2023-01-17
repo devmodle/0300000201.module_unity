@@ -31,6 +31,12 @@ public partial class CPausePopup : CSubPopup {
 	/** 초기화 */
 	public override void Awake() {
 		base.Awake();
+
+		// 버튼을 설정한다
+		CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
+			(KCDefine.U_OBJ_N_LEAVE_BTN, this.gameObject, this.OnTouchLeaveBtn)
+		});
+
 		this.SubAwake();
 	}
 

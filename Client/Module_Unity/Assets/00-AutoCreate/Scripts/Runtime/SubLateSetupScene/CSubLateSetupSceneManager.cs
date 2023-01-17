@@ -13,6 +13,13 @@ using UnityEngine.Android;
 namespace LateSetupScene {
 	/** 서브 지연 설정 씬 관리자 */
 	public partial class CSubLateSetupSceneManager : CLateSetupSceneManager {
+		/** 팝업 콜백 */
+		private enum EPopupCallback {
+			NONE = -1,
+			NEXT,
+			[HideInInspector] MAX_VAL
+		}
+
 		#region 변수
 		[SerializeField] private EUserType m_eUserType = EUserType.NONE;
 		#endregion // 변수
@@ -83,19 +90,25 @@ namespace LateSetupScene {
 				var oTrackingDescPopup = CPopup.Create<CTrackingDescPopup>(KCDefine.LSS_OBJ_N_TRACKING_DESC_POPUP, KCDefine.LSS_OBJ_P_TRACKING_DESC_POPUP, this.PopupUIs);
 
 				oTrackingDescPopup.Init(CTrackingDescPopup.MakeParams(new Dictionary<CTrackingDescPopup.ECallback, System.Action<CTrackingDescPopup>>() {
-					[CTrackingDescPopup.ECallback.NEXT] = this.OnReceiveTrackingDescPopupResult
+					[CTrackingDescPopup.ECallback.NEXT] = (a_oSender) => this.OnReceivePopupCallback(a_oSender, EPopupCallback.NEXT)
 				}));
 
 				oTrackingDescPopup.Show(null, null);
 			} else {
-				this.OnReceiveTrackingDescPopupResult(null);
+				this.OnReceivePopupCallback(null, EPopupCallback.NEXT);
 			}
 		}
 
-		/** 추적 설명 팝업 결과를 수신했을 경우 */
-		private void OnReceiveTrackingDescPopupResult(CTrackingDescPopup a_oSender) {
-			a_oSender?.Close();
-			this.ExLateCallFunc((a_oSender) => this.ShowTrackingConsentView(), KCDefine.U_DELAY_INIT);
+		/** 팝업 콜백을 수신했을 경우 */
+		private void OnReceivePopupCallback(CPopup a_oSender, EPopupCallback a_eCallback) {
+			switch(a_eCallback) {
+				case EPopupCallback.NEXT: {
+					a_oSender?.Close();
+					this.ExLateCallFunc((a_oSender) => this.ShowTrackingConsentView(), KCDefine.U_DELAY_INIT);
+
+					break;
+				}
+			}
 		}
 		#endregion // 함수
 
