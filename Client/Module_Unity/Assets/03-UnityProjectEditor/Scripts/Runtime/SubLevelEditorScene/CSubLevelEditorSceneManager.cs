@@ -1900,6 +1900,7 @@ namespace LevelEditorScene {
 				}, false);
 
 				this.UpdateUIsState();
+				this.SetMEUIsGridScrollDelta(m_oRealDict[EKey.GRID_SCROLL_DELTA_X], m_oRealDict[EKey.GRID_SCROLL_DELTA_Y]);
 			}
 		}
 
