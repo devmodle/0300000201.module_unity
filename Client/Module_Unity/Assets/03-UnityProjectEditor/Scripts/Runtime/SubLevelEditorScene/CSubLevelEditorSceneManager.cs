@@ -1941,8 +1941,6 @@ namespace LevelEditorScene {
 		/** 오른쪽 에디터 UI 페이지 UI 1 모든 셀 이동 버튼을 눌렀을 경우 */
 		private void OnTouchREUIsPageUIs01MoveAllCellsBtn(EDirection a_eDirection) {
 			var stBaseIdx = this.GetGridBaseIdx(a_eDirection);
-
-			// TODO: 셀 이동 처리 구현 예정
 		}
 
 		/** 오른쪽 에디터 UI 페이지 UI 1 테이블 로드 버튼을 눌렀을 경우 */
