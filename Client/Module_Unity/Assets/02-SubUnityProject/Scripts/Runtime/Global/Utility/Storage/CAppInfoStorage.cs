@@ -101,7 +101,7 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 			return bIsEnable && this.AdsSkipTimes >= KDefine.G_MAX_TIMES_ADS_SKIP && CGameInfoStorage.Inst.GetCharacterGameInfo(CGameInfoStorage.Inst.PlayCharacterID).m_oLevelClearInfoDict.Count >= KDefine.G_MAX_NUM_ADS_SKIP_CLEAR_INFOS;
 		}
 	}
-	
+
 	public bool IsEnableUpdateAdsSkipTimes => true;
 #endif // #if ADS_MODULE_ENABLE
 	#endregion // 프로퍼티

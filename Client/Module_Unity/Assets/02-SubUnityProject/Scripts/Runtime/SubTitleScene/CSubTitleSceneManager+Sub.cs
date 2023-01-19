@@ -88,7 +88,7 @@ namespace TitleScene {
 		/** 터치 종료 이벤트를 처리한다 */
 		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
 			var stPos = a_oEventData.ExGetLocalPos(this.Objs, this.ScreenSize);
-			
+
 			// 터치 모드가 아닐 경우
 			if(!m_oBoolDict[EKey.IS_TOUCH] && CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
 				m_oBoolDict[EKey.IS_TOUCH] = true;

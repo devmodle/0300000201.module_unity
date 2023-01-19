@@ -37,7 +37,7 @@ public static partial class KDefine {
 	// 식별자 {
 	public const string LES_KEY_SPRITE_OBJS_POOL = "SpriteObjsPool";
 	public const string LES_KEY_LINE_FX_OBJS_POOL = "LineFXObjsPool";
-	
+
 	public const string LES_KEY_BTN_OBJS_POOL = "BtnObjsPool";
 	// 식별자 }
 

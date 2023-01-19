@@ -274,7 +274,7 @@ namespace NSEngine {
 
 							this.SelPlayerObj.SetupAbilityVals();
 						}
-						
+
 						m_oBoolDict[EKey.IS_SAVE_USER_INFO] = oAcquireTargetInfoDict.ExIsValid() ? true : m_oBoolDict[EKey.IS_SAVE_USER_INFO];
 					} finally {
 						this.RemoveEObjComponent(a_oSender);

@@ -349,8 +349,10 @@ namespace LevelEditorScene {
 				this.SubStart();
 
 				this.ExLateCallFunc((a_oSender) => {
-					this.OnTouchMEUIsEditorModeToggle(true);
-					this.OnTouchREUIsPageUIs02ScrollerCellViewBtn(EObjKinds.BG_EMPTY_01);
+					bool bIsValid = KDefine.LES_OBJ_KINDS_DICT_CONTAINER.TryGetValue(KCDefine.B_VAL_0_INT, out List<EObjKinds> oObjKindsList);
+
+					this.SetMEUIsEditorMode(true, false);
+					this.OnTouchREUIsPageUIs02ScrollerCellViewBtn(bIsValid ? oObjKindsList.ExGetVal(KCDefine.B_VAL_0_INT, EObjKinds.NONE) : EObjKinds.NONE);
 				}, KCDefine.U_DELAY_INIT);
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 
@@ -372,7 +374,7 @@ namespace LevelEditorScene {
 					this.HandleHotKeys();
 					CSceneManager.ActiveSceneEventSystem.SetSelectedGameObject(null);
 				}
-				
+
 				// 메인 카메라가 존재 할 경우
 				if(CSceneManager.IsExistsMainCamera) {
 					var stMousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.PlaneDistance);
@@ -399,7 +401,7 @@ namespace LevelEditorScene {
 						bool bIsValid02 = m_oGridInfoList.ExIsValidIdx(this.SelGridInfoIdx) && this.SelGridInfo.m_stViewBounds.Contains(stCursorPos);
 
 						Color stColor = this.IsEnableAddCellObjInfo(stIdx, this.GetEditorObjSize(), m_oObjKindsDict[EKey.SEL_OBJ_KINDS]) ? Color.white : Color.red;
-						
+
 						m_oSpriteDict[EKey.SEL_OBJ_SPRITE]?.gameObject.SetActive(bIsValid01 && bIsValid02);
 						m_oSpriteDict[EKey.SEL_OBJ_SPRITE]?.gameObject.ExSetLocalPos(this.SelGridInfo.m_stPivotPos + stIdx.ExToPos(NSEngine.Access.CellCenterOffset, NSEngine.Access.CellSize));
 						m_oSpriteDict[EKey.SEL_OBJ_SPRITE]?.ExSetColor<SpriteRenderer>(stColor.ExGetAlphaColor(KCDefine.B_VAL_1_REAL / KCDefine.B_VAL_2_REAL));
@@ -547,6 +549,11 @@ namespace LevelEditorScene {
 			}
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+			// 에디터 모드 키를 눌렀을 경우
+			if(Input.GetKeyDown(KeyCode.E)) {
+				this.SetMEUIsEditorMode(m_oEditorModeDict[EKey.SEL_EDITOR_MODE] != EEditorMode.DRAW, m_oEditorModeDict[EKey.SEL_EDITOR_MODE] != EEditorMode.PAINT);
+			}
+
 			// 리셋 키를 눌렀을 경우
 			if(Input.GetKeyDown(KeyCode.R)) {
 				this.OnTouchMEUIsResetBtn();
@@ -1279,7 +1286,7 @@ namespace LevelEditorScene {
 						this.SelLevelInfo.TryGetCellInfo(stIdx, out STCellInfo stExtraCellInfo);
 
 						int nIdx = stExtraCellInfo.m_oCellObjInfoList.FindIndex((a_stCellObjInfo) => !stIdx.Equals(a_stIdx) && !a_stCellObjInfo.m_stBaseIdx.Equals(a_stIdx));
-						
+
 						// 셀 객체 추가가 불가능 할 경우
 						if(!a_bIsEnableOverlay && stExtraCellInfo.m_oCellObjInfoList.ExIsValidIdx(nIdx)) {
 							return false;
@@ -1543,12 +1550,10 @@ namespace LevelEditorScene {
 
 		/** 중앙 에디터 UI 에디터 모드 토글을 눌렀을 경우 */
 		private void OnTouchMEUIsEditorModeToggle(bool a_bIsTrue) {
-			// 토글이 존재 할 경우
-			if(m_oToggleDict[EKey.ME_UIS_DRAW_MODE_TOGGLE] != null && m_oToggleDict[EKey.ME_UIS_PAINT_MODE_TOGGLE] != null) {
-				m_oEditorModeDict[EKey.SEL_EDITOR_MODE] = m_oToggleDict[EKey.ME_UIS_DRAW_MODE_TOGGLE].isOn ? EEditorMode.DRAW : EEditorMode.PAINT;
-			}
+			bool bIsDraw = m_oToggleDict[EKey.ME_UIS_DRAW_MODE_TOGGLE] != null && m_oToggleDict[EKey.ME_UIS_DRAW_MODE_TOGGLE].isOn;
+			bool bIsPaint = m_oToggleDict[EKey.ME_UIS_PAINT_MODE_TOGGLE] != null && m_oToggleDict[EKey.ME_UIS_PAINT_MODE_TOGGLE].isOn;
 
-			this.UpdateUIsState();
+			this.SetMEUIsEditorMode(bIsDraw, bIsPaint);
 		}
 
 		/** 중앙 에디터 UI 그리드 스크롤 바 값이 변경 되었을 경우 */
@@ -1563,6 +1568,16 @@ namespace LevelEditorScene {
 
 		#region 조건부 접근자 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+		/** 중앙 에디터 UI 에디터 모드를 변경한다 */
+		private void SetMEUIsEditorMode(bool a_bIsDraw, bool a_bIsPaint) {
+			m_oEditorModeDict[EKey.SEL_EDITOR_MODE] = a_bIsDraw ? EEditorMode.DRAW : EEditorMode.PAINT;
+
+			m_oToggleDict[EKey.ME_UIS_DRAW_MODE_TOGGLE]?.SetIsOnWithoutNotify(a_bIsDraw);
+			m_oToggleDict[EKey.ME_UIS_PAINT_MODE_TOGGLE]?.SetIsOnWithoutNotify(a_bIsPaint);
+
+			this.UpdateUIsState();
+		}
+
 		/** 중앙 에디터 UI 그리드 스크롤 간격을 변경한다 */
 		private void SetMEUIsGridScrollDelta(float a_fDeltaX, float a_fDeltaY) {
 			float fWidth = Mathf.Max(KCDefine.B_VAL_0_REAL, this.SelGridInfo.m_stBounds.size.x - this.SelGridInfo.m_stViewBounds.size.x);
