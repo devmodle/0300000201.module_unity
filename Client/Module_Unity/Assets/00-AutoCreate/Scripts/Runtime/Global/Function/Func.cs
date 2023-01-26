@@ -1030,7 +1030,7 @@ public static partial class Func {
 			if(a_stKeyVal.Key <= KCDefine.B_VAL_1_INT) {
 				oJSONNode.Add(a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value);
 			} else {
-				oJSONNode.Add(a_oOutJSONNode[KCDefine.B_VAL_0_INT][i], a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value.Contains(KCDefine.B_TOKEN_COMMA) ? Func.MakeJSONArray(a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value) : a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value);
+				oJSONNode.Add(a_oOutJSONNode[KCDefine.B_VAL_0_INT][i], a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value.Contains(KCDefine.B_TOKEN_COMMA) ? a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value.ExJSONStrToJSONArray() : a_stGoogleSheetLoadInfo.m_oGoogleSheet.rows[a_stKeyVal.Key][i].value);
 			}
 		}
 
@@ -1210,18 +1210,6 @@ public static partial class Func {
 
 			a_oOutSaveGoogleSheetInfoDict.ExReplaceVal(a_stTableInfo.m_oTableName, stSaveGoogleSheetInfo);
 		}
-	}
-
-	/** JSON 배열을 생성한다 */
-	private static SimpleJSON.JSONNode MakeJSONArray(string a_oJSONStr) {
-		var oTokens = Regex.Replace(a_oJSONStr, KCDefine.B_PATTERN_SPACE, string.Empty).Split(KCDefine.B_TOKEN_COMMA);
-		var oJSONArray = new SimpleJSON.JSONArray();
-
-		for(int i = 0; i < oTokens.Length; ++i) {
-			oJSONArray.Add(oTokens[i]);
-		}
-
-		return oJSONArray;
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 클래스 함수
