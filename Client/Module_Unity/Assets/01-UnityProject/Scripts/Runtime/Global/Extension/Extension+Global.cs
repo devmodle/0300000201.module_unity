@@ -98,11 +98,6 @@ public static partial class Extension {
 		a_oSender?.GetComponentInChildren<CEventDispatcher>()?.SetParticleCallback(a_oCallback);
 	}
 
-	/** 타겟 정보를 탐색한다 */
-	public static CTargetInfo ExFindTargetInfo(this List<CTargetInfo> a_oSender, ETargetType a_eTargetType, string a_oGUID) {
-		return a_oSender.ExTryGetTargetInfo(a_eTargetType, a_oGUID, out CTargetInfo oTargetInfo) ? oTargetInfo : null;
-	}
-
 	/** 게이지 애니메이션을 시작한다 */
 	public static Sequence ExStartGaugeAni(this CGaugeHandler a_oSender, System.Action<float> a_oCallback, System.Action<CGaugeHandler, Sequence> a_oCompleteCallback, float a_fStartVal, float a_fEndVal, float a_fDuration, Ease a_eEase = KCDefine.U_EASE_DEF, bool a_bIsRealtime = false, float a_fDelay = KCDefine.B_VAL_0_REAL) {
 		CAccess.Assert(a_oSender != null);

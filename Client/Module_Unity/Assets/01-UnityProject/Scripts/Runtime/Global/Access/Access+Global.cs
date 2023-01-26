@@ -486,6 +486,11 @@ public static partial class Access {
 		Access.GetAbilityTargetInfo(a_nCharacterID, a_eAbilityKinds, true).m_oAbilityTargetInfoDict.ExReplaceTargetVal(a_eTargetKinds, a_nKinds, a_dmVal);
 	}
 
+	/** 타겟 정보를 탐색한다 */
+	public static CTargetInfo ExFindTargetInfo(this List<CTargetInfo> a_oSender, ETargetType a_eTargetType, string a_oGUID) {
+		return a_oSender.ExTryGetTargetInfo(a_eTargetType, a_oGUID, out CTargetInfo oTargetInfo) ? oTargetInfo : null;
+	}
+
 	/** 아이템 타겟 교환 가능 여부를 검사한다 */
 	private static bool IsEnableItemTargetTrade(STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo) {
 		CAccess.Assert(CItemInfoTable.Inst.TryGetItemInfo((EItemKinds)a_stTargetInfo.Kinds, out STItemInfo stItemInfo));
