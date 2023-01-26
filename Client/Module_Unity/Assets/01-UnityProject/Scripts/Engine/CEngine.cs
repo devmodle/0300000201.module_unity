@@ -360,6 +360,14 @@ namespace NSEngine {
 			this.SubSetupGridLine();
 		}
 
+		/** 엔진 객체 컴포넌트를 설정한다 */
+		private void SetupEObjComponent(CEObjComponent a_oEObjComponent, CComponent a_oOwner, CEController a_oController) {
+			a_oEObjComponent.SetOwner(a_oOwner);
+			a_oEObjComponent.Params.m_oCallbackDict.TryAdd(CEObjComponent.ECallback.ENGINE_OBJ_EVENT, this.OnReceiveEObjEvent);
+
+			a_oController?.SetOwner(a_oEObjComponent);
+		}
+
 		/** 획득 타겟 정보를 설정한다 */
 		private void SetupAcquireTargetInfos(CEObjComponent a_oEObjComponent, Dictionary<ulong, STTargetInfo> a_oOutAcquireTargetInfos) {
 			// 아이템 일 경우
@@ -553,8 +561,21 @@ namespace NSEngine {
 			return oObj;
 		}
 
+		/** 엔진 객체 컴포넌트를 제거한다 */
+		public void RemoveEObjComponent(CEObjComponent a_oEObjComponent) {
+			switch(a_oEObjComponent.Params.m_stBaseParams.m_oObjsPoolKey) {
+				case KDefine.E_KEY_ITEM_OBJS_POOL: this.RemoveItem(a_oEObjComponent as CEItem); break;
+				case KDefine.E_KEY_SKILL_OBJS_POOL: this.RemoveSkill(a_oEObjComponent as CESkill); break;
+				case KDefine.E_KEY_OBJ_OBJS_POOL: this.RemoveObj(a_oEObjComponent as CEObj); break;
+				case KDefine.E_KEY_FX_OBJS_POOL: this.RemoveFX(a_oEObjComponent as CEFX); break;
+				case KDefine.E_KEY_CELL_OBJ_OBJS_POOL: this.RemoveCellObj(a_oEObjComponent as CEObj); break;
+				case KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL: this.RemovePlayerObj(a_oEObjComponent as CEObj); break;
+				case KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL: this.RemoveEnemyObj(a_oEObjComponent as CEObj); break;
+			}
+		}
+
 		/** 아이템을 제거한다 */
-		public void RemoveItem(CEItem a_oItem, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveItem(CEItem a_oItem, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oItem != null && a_oItem.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 아이템이 존재 할 경우
@@ -566,7 +587,7 @@ namespace NSEngine {
 		}
 
 		/** 스킬을 제거한다 */
-		public void RemoveSkill(CESkill a_oSkill, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveSkill(CESkill a_oSkill, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oSkill != null && a_oSkill.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 스킬이 존재 할 경우
@@ -578,7 +599,7 @@ namespace NSEngine {
 		}
 
 		/** 객체를 제거한다 */
-		public void RemoveObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oObj != null && a_oObj.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 객체가 존재 할 경우
@@ -590,7 +611,7 @@ namespace NSEngine {
 		}
 
 		/** 효과를 제거한다 */
-		public void RemoveFX(CEFX a_oFX, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveFX(CEFX a_oFX, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oFX != null && a_oFX.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 효과가 존재 할 경우
@@ -602,7 +623,7 @@ namespace NSEngine {
 		}
 
 		/** 셀 객체를 제거한다 */
-		public void RemoveCellObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveCellObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			var oCellObjList = (a_oObj != null) ? this.CellObjLists.ExGetVal(a_oObj.CellIdx, null) : null;
 			CAccess.Assert(!a_bIsEnableAssert || (a_oObj != null && oCellObjList != null && a_oObj.CellIdx.ExIsValidIdx() && a_oObj.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
@@ -615,7 +636,7 @@ namespace NSEngine {
 		}
 
 		/** 플레이어 객체를 제거한다 */
-		public void RemovePlayerObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemovePlayerObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oObj != null && a_oObj.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 플레이어 객체가 존재 할 경우
@@ -627,7 +648,7 @@ namespace NSEngine {
 		}
 
 		/** 적 객체를 제거한다 */
-		public void RemoveEnemyObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
+		private void RemoveEnemyObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsEnableAssert = true) {
 			CAccess.Assert(!a_bIsEnableAssert || (a_oObj != null && a_oObj.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey.ExIsValid()));
 
 			// 적 객체가 존재 할 경우
@@ -635,27 +656,6 @@ namespace NSEngine {
 				this.EnemyObjList.ExRemoveVal(a_oObj);
 				CFactory.RemoveObj(a_oObj.Params.m_stBaseParams.m_oController, a_bIsEnableAssert: false);
 				CSceneManager.ActiveSceneManager.DespawnObj(a_oObj.Params.m_stBaseParams.m_stBaseParams.m_oObjsPoolKey, a_oObj.gameObject, a_fDelay);
-			}
-		}
-
-		/** 엔진 객체 컴포넌트를 설정한다 */
-		private void SetupEObjComponent(CEObjComponent a_oEObjComponent, CComponent a_oOwner, CEController a_oController) {
-			a_oEObjComponent.SetOwner(a_oOwner);
-			a_oEObjComponent.Params.m_oCallbackDict.TryAdd(CEObjComponent.ECallback.ENGINE_OBJ_EVENT, this.OnReceiveEObjEvent);
-
-			a_oController?.SetOwner(a_oEObjComponent);
-		}
-
-		/** 엔진 객체 컴포넌트를 제거한다 */
-		private void RemoveEObjComponent(CEObjComponent a_oEObjComponent) {
-			switch(a_oEObjComponent.Params.m_stBaseParams.m_oObjsPoolKey) {
-				case KDefine.E_KEY_ITEM_OBJS_POOL: this.RemoveItem(a_oEObjComponent as CEItem); break;
-				case KDefine.E_KEY_SKILL_OBJS_POOL: this.RemoveSkill(a_oEObjComponent as CESkill); break;
-				case KDefine.E_KEY_OBJ_OBJS_POOL: this.RemoveObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_FX_OBJS_POOL: this.RemoveFX(a_oEObjComponent as CEFX); break;
-				case KDefine.E_KEY_CELL_OBJ_OBJS_POOL: this.RemoveCellObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL: this.RemovePlayerObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL: this.RemoveEnemyObj(a_oEObjComponent as CEObj); break;
 			}
 		}
 		#endregion // 함수
