@@ -20,7 +20,7 @@ using Unity.EditorCoroutines.Editor;
 /** 에디터 씬 관리자 */
 [InitializeOnLoad]
 public static partial class CEditorSceneManager {
-#region 클래스 변수
+	#region 클래스 변수
 	private static bool m_bIsEnableSetup = false;
 	private static bool m_bIsEnableSetupDependencies = false;
 
@@ -31,9 +31,9 @@ public static partial class CEditorSceneManager {
 	private static ListRequest m_oListRequest = null;
 	private static List<string> m_oSampleSceneNameList = new List<string>();
 	private static List<AddRequest> m_oAddRequestList = new List<AddRequest>();
-#endregion // 클래스 변수
+	#endregion // 클래스 변수
 
-#region 클래스 함수
+	#region 클래스 함수
 	/** 생성자 */
 	static CEditorSceneManager() {
 		// 플레이 모드가 아닐 경우
@@ -81,7 +81,7 @@ public static partial class CEditorSceneManager {
 				CEditorSceneManager.m_dblUpdateSkipTime = EditorApplication.timeSinceStartup;
 				CEditorSceneManager.SetupExtraPreloadAssets();
 
-				CFunc.EnumerateRootObjs((a_oObj) => {
+				CAccess.EnumerateRootObjs((a_oObj) => {
 					// 최상단 프리팹 객체 일 경우
 					if(KCEditorDefine.B_OBJ_N_ROOT_PREFAB_OBJ_LIST.Contains(a_oObj.name) && !CEditorSceneManager.m_oSampleSceneNameList.Contains(a_oObj.scene.name)) {
 						CEditorSceneManager.SetupPrefabObjs(a_oObj);
@@ -90,14 +90,14 @@ public static partial class CEditorSceneManager {
 					return true;
 				});
 
-				CFunc.EnumerateScenes((a_stScene) => {
+				CAccess.EnumerateScenes((a_stScene) => {
 					var oUIsRoot = a_stScene.ExFindChild(KCDefine.U_OBJ_N_SCENE_UIS_ROOT);
 					string oPrefabPath = (oUIsRoot == null) ? CEditorAccess.GetRootObjPrefabPath(a_stScene, KCDefine.U_OBJ_N_SCENE_UIS_ROOT) : string.Empty;
 
 					// 최상단 UI 가 없을 경우
 					if(oUIsRoot == null && CEditorAccess.IsExistsAsset(oPrefabPath)) {
 						EditorSceneManager.MarkSceneDirty(a_stScene);
-						CEditorFactory.CreatePrefabInstance(KCDefine.U_OBJ_N_SCENE_UIS_ROOT, CEditorFunc.FindAsset<GameObject>(oPrefabPath), null);
+						CEditorFactory.CreatePrefabInstance(KCDefine.U_OBJ_N_SCENE_UIS_ROOT, CEditorAccess.FindAsset<GameObject>(oPrefabPath), null);
 					}
 
 					CSampleSceneManager.SetupSceneManager(a_stScene, KEditorDefine.B_SCENE_MANAGER_TYPE_DICT);
@@ -105,7 +105,10 @@ public static partial class CEditorSceneManager {
 				});
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
-				CFunc.EnumerateScenes((a_stScene) => { CSampleSceneManager.SetupSceneManager(a_stScene, KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT); return true; });
+				CAccess.EnumerateScenes((a_stScene) => {
+					CSampleSceneManager.SetupSceneManager(a_stScene, KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT);
+					return true;
+				});
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE
 
 				var oMonoScripts = MonoImporter.GetAllRuntimeMonoScripts();
@@ -149,7 +152,7 @@ public static partial class CEditorSceneManager {
 
 		// 상태 갱신이 가능 할 경우
 		if(bIsEnableUpdate && (EditorApplication.timeSinceStartup - CEditorSceneManager.m_dblDefineSymbolSkipTime).ExIsGreateEquals(KCDefine.B_VAL_1_REAL)) {
-			var oDefineSymbolInfoTable = CEditorFunc.FindAsset<CDefineSymbolInfoTable>(KCEditorDefine.B_ASSET_P_DEFINE_SYMBOL_INFO_TABLE);
+			var oDefineSymbolInfoTable = CEditorAccess.FindAsset<CDefineSymbolInfoTable>(KCEditorDefine.B_ASSET_P_DEFINE_SYMBOL_INFO_TABLE);
 
 			// 전처리기 심볼 정보 테이블이 존재 할 경우
 			if(oDefineSymbolInfoTable != null) {
@@ -259,7 +262,9 @@ public static partial class CEditorSceneManager {
 		for(int i = 0; i < KEditorDefine.G_EXTRA_DIR_P_PRELOAD_ASSET_LIST.Count; ++i) {
 			// 디렉토리가 존재 할 경우
 			if(AssetDatabase.IsValidFolder(KEditorDefine.G_EXTRA_DIR_P_PRELOAD_ASSET_LIST[i])) {
-				var oAssetList = CEditorFunc.FindAssets<Object>(string.Empty, new List<string>() { KEditorDefine.G_EXTRA_DIR_P_PRELOAD_ASSET_LIST[i] });
+				var oAssetList = CEditorAccess.FindAssets<Object>(string.Empty, new List<string>() {
+					KEditorDefine.G_EXTRA_DIR_P_PRELOAD_ASSET_LIST[i]
+				});
 
 				for(int j = 0; j < oAssetList.Count; ++j) {
 					// 디렉토리 에셋이 아닐 경우
@@ -271,7 +276,7 @@ public static partial class CEditorSceneManager {
 		}
 
 		for(int i = 0; i < KEditorDefine.G_EXTRA_ASSET_P_PRELOAD_ASSET_LIST.Count; ++i) {
-			var oAsset = CEditorFunc.FindAsset<Object>(KEditorDefine.G_EXTRA_ASSET_P_PRELOAD_ASSET_LIST[i]);
+			var oAsset = CEditorAccess.FindAsset<Object>(KEditorDefine.G_EXTRA_ASSET_P_PRELOAD_ASSET_LIST[i]);
 			oPreloadAssetList.ExAddVal(oAsset, (a_oAsset) => (a_oAsset != null && oAsset != null) && oAsset.name.Equals(a_oAsset.name));
 		}
 
@@ -303,6 +308,6 @@ public static partial class CEditorSceneManager {
 			}
 		}
 	}
-#endregion // 클래스 함수
+	#endregion // 클래스 함수
 }
 #endif // #if UNITY_EDITOR
