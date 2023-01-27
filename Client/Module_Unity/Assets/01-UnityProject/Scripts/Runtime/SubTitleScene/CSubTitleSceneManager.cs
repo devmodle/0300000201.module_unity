@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using System.Linq;
 using UnityEngine.EventSystems;
 using TMPro;
+
 using DG.Tweening;
 
 namespace TitleScene {

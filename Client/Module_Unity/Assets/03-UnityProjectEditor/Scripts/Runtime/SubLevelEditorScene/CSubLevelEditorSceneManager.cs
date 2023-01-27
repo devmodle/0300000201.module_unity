@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using System.Linq;
 using System.Globalization;
 using UnityEngine.EventSystems;
+
 using EnhancedUI.EnhancedScroller;
 using DanielLochner.Assets.SimpleScrollSnap;
 
