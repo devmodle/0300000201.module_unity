@@ -26,7 +26,14 @@ public static partial class Factory {
 	#endregion // 클래스 함수
 }
 
-/** 서브 게임 씬 팩토리 */
+/** 서브 플레이 씬 팩토리 */
+public static partial class Factory {
+	#region 클래스 함수
+
+	#endregion // 클래스 함수
+}
+
+/** 서브 결과 씬 팩토리 */
 public static partial class Factory {
 	#region 클래스 함수
 

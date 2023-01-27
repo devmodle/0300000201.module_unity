@@ -49,7 +49,14 @@ public static partial class Access {
 	#endregion // 클래스 함수
 }
 
-/** 서브 게임 씬 접근자 */
+/** 서브 플레이 씬 접근자 */
+public static partial class Access {
+	#region 클래스 함수
+
+	#endregion // 클래스 함수
+}
+
+/** 서브 결과 씬 접근자 */
 public static partial class Access {
 	#region 클래스 함수
 

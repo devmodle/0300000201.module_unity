@@ -685,7 +685,14 @@ public static partial class Func {
 	#endregion // 클래스 함수
 }
 
-/** 게임 씬 함수 */
+/** 플레이 씬 함수 */
+public static partial class Func {
+	#region 클래스 함수
+
+	#endregion // 클래스 함수
+}
+
+/** 결과 씬 함수 */
 public static partial class Func {
 	#region 클래스 함수
 

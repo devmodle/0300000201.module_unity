@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace GameScene {
-	/** 서브 게임 씬 관리자 */
+	/** 서브 플레이 씬 관리자 */
 	public partial class CSubGameSceneManager : CGameSceneManager {
 		/** 식별자 */
 		private enum EKey {
@@ -475,7 +475,7 @@ namespace GameScene {
 		#endregion // 함수
 	}
 
-	/** 서브 게임 씬 관리자 - 접근 */
+	/** 서브 플레이 씬 관리자 - 접근 */
 	public partial class CSubGameSceneManager : CGameSceneManager {
 		#region 함수
 		/** UI 상태 갱신 여부를 변경한다 */

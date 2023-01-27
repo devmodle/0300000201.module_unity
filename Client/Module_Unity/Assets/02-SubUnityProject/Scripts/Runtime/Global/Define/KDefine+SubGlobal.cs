@@ -125,7 +125,7 @@ public static partial class KDefine {
 	#endregion // 기본
 }
 
-/** 서브 게임 씬 상수 */
+/** 서브 플레이 씬 상수 */
 public static partial class KDefine {
 	#region 기본
 	// 단위
@@ -162,6 +162,13 @@ public static partial class KDefine {
 	};
 	// 정렬 순서 }
 	#endregion // 런타임 상수
+}
+
+/** 서브 결과 씬 상수 */
+public static partial class KDefine {
+	#region 기본
+
+	#endregion // 기본
 }
 
 /** 서브 로딩 씬 상수 */
