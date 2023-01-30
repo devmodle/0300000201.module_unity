@@ -38,7 +38,8 @@ namespace NSEngine {
 		}
 
 		#region 변수
-
+		private Dictionary<EState, System.Func<bool>> m_oStateCheckerDict = new Dictionary<EState, System.Func<bool>>();
+		private Dictionary<ESubState, System.Func<bool>> m_oSubStateCheckerDict = new Dictionary<ESubState, System.Func<bool>>();
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -48,9 +49,6 @@ namespace NSEngine {
 		public ESubState SubState { get; private set; } = ESubState.NONE;
 
 		public List<CEObjComponent> TargetObjList { get; } = new List<CEObjComponent>();
-		protected Dictionary<EState, System.Func<bool>> StateCheckerDict { get; } = new Dictionary<EState, System.Func<bool>>();
-		protected Dictionary<ESubState, System.Func<bool>> SubStateCheckerDict { get; } = new Dictionary<ESubState, System.Func<bool>>();
-
 		public virtual bool IsActive => this.State != EState.NONE && this.State != EState.DISAPPEAR;
 		#endregion // 프로퍼티
 
@@ -60,8 +58,8 @@ namespace NSEngine {
 			base.Awake();
 
 			// 상태 검사자를 설정한다
-			this.StateCheckerDict.TryAdd(EState.MOVE, this.IsEnableMoveState);
-			this.StateCheckerDict.TryAdd(EState.SKILL, this.IsEnableSkillState);
+			m_oStateCheckerDict.TryAdd(EState.MOVE, this.IsEnableMoveState);
+			m_oStateCheckerDict.TryAdd(EState.SKILL, this.IsEnableSkillState);
 
 			this.SubAwake();
 		}
@@ -132,7 +130,7 @@ namespace NSEngine {
 			if(a_bIsForce) {
 				this.State = a_eState;
 			} else {
-				this.State = (!this.StateCheckerDict.TryGetValue(a_eState, out System.Func<bool> oStateChecker) || oStateChecker()) ? a_eState : this.State;
+				this.State = (!m_oStateCheckerDict.TryGetValue(a_eState, out System.Func<bool> oStateChecker) || oStateChecker()) ? a_eState : this.State;
 			}
 		}
 
@@ -142,7 +140,7 @@ namespace NSEngine {
 			if(a_bIsForce) {
 				this.SubState = a_eSubState;
 			} else {
-				this.SubState = (!this.SubStateCheckerDict.TryGetValue(a_eSubState, out System.Func<bool> oSubStateChecker) || oSubStateChecker()) ? a_eSubState : this.SubState;
+				this.SubState = (!m_oSubStateCheckerDict.TryGetValue(a_eSubState, out System.Func<bool> oSubStateChecker) || oSubStateChecker()) ? a_eSubState : this.SubState;
 			}
 		}
 		#endregion // 함수
