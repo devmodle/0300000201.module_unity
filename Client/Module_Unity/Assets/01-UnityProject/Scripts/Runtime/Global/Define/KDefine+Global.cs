@@ -26,6 +26,11 @@ public static partial class KDefine {
 	public const string G_GOOGLE_SHEET_ID_OBJ_INFO = "1T9xrG7mZjnKWTWBAHIv7mzZS4EJ2ofU7fb-ElQr16LI";
 	public const string G_GOOGLE_SHEET_ID_ABILITY_INFO = "1XjmdApQzIfJ6VP9-eLd0gZkw8wkN2ipdWlvEArP8hpU";
 	public const string G_GOOGLE_SHEET_ID_PRODUCT_INFO = "1Obdm2KjgzWXkKk1Z93Hy2I5KK0jyUHdgqQMpANbnHZQ";
+
+#if AB_TEST_ENABLE
+	public const string G_GOOGLE_SHEET_ID_ETC_INFO_A = "1wSChiVosdtol2Ki4KAGM0A9U28Sk4EfU5mznX-xdUr8";
+	public const string G_GOOGLE_SHEET_ID_ETC_INFO_B = "1CFQ6eD3B6AASyXFnd30wRGTYs2mvPLdonPiWKaMvCTA";
+#endif // #if AB_TEST_ENABLE
 	// 식별자 }
 	#endregion // 기본
 
