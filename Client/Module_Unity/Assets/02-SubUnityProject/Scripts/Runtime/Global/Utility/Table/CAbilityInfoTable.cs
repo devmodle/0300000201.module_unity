@@ -361,8 +361,8 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadAbilityInfosJSONStr(Access.AbilityInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
 			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
-			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_BUY_TRADE], oEnhanceTradeInfos.AsArray.ExToInfoVals(oBuyTradeKeyInfoList));
-			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_SALE_TRADE], oEnhanceTradeInfos.AsArray.ExToInfoVals(oSaleTradeKeyInfoList));
+			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_BUY_TRADE], oBuyTradeInfos.AsArray.ExToInfoVals(oBuyTradeKeyInfoList));
+			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_SALE_TRADE], oSaleTradeInfos.AsArray.ExToInfoVals(oSaleTradeKeyInfoList));
 			oAbilityInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.AbilityTableInfo)[KCDefine.B_KEY_ENHANCE_TRADE], oEnhanceTradeInfos.AsArray.ExToInfoVals(oEnhanceTradeKeyInfoList));
 		} finally {
 			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
