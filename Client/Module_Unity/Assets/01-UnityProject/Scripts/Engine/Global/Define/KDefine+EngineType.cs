@@ -11,6 +11,8 @@ namespace NSEngine {
 	#region 기본
 	/** 그리드 정보 */
 	public struct STGridInfo {
+		public int m_nIdx;
+
 		public Bounds m_stBounds;
 		public Bounds m_stViewBounds;
 
@@ -20,7 +22,7 @@ namespace NSEngine {
 
 		#region 상수
 		public static STGridInfo INVALID = new STGridInfo() {
-			m_stScale = Vector3.one
+			m_nIdx = KCDefine.B_IDX_INVALID
 		};
 		#endregion // 상수
 	}
