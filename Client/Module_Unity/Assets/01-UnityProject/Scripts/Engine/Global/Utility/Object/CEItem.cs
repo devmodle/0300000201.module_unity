@@ -44,7 +44,7 @@ namespace NSEngine {
 
 			this.SubInit();
 		}
-
+		
 		/** 어빌리티 값을 설정한다 */
 		protected override void DoSetupAbilityVals(bool a_bIsReset = true) {
 			base.DoSetupAbilityVals(a_bIsReset);

@@ -140,7 +140,7 @@ public partial class CStorePopup : CSubPopup {
 			// 버튼을 갱신한다 {
 			var oPurchaseBtn = oPriceUIsDict[EPurchaseType.IN_APP_PURCHASE]?.ExFindComponentInParent<Button>(KCDefine.U_OBJ_N_PURCHASE_BTN);
 			oPurchaseBtn?.ExAddListener(() => this.OnTouchPurchaseBtn(a_stProductTradeInfo));
-
+			
 #if PURCHASE_MODULE_ENABLE
 			var stProductInfo = CProductInfoTable.Inst.GetProductInfo(a_stProductTradeInfo.m_nProductIdx);
 

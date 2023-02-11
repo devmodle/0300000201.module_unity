@@ -43,7 +43,7 @@ namespace NSEngine {
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
-			base.Awake();
+			base.Awake();			
 			this.SubAwake();
 		}
 
@@ -61,7 +61,7 @@ namespace NSEngine {
 
 			this.SubInit();
 		}
-
+		
 		/** 어빌리티 값을 설정한다 */
 		protected override void DoSetupAbilityVals(bool a_bIsReset = true) {
 			base.DoSetupAbilityVals(a_bIsReset);
