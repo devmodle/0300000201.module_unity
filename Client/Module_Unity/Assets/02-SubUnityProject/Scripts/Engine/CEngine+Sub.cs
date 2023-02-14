@@ -127,7 +127,7 @@ namespace NSEngine {
 				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjListsContainer.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -141,7 +141,7 @@ namespace NSEngine {
 				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjListsContainer.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}
@@ -155,7 +155,7 @@ namespace NSEngine {
 				var stIdx = stPos.ExToIdx(this.SelGridInfo.m_stPivotPos, Access.CellSize);
 
 				// 인덱스가 유효 할 경우
-				if(this.CellObjLists.ExIsValidIdx(stIdx)) {
+				if(this.CellObjListsContainer.ExIsValidIdx(stIdx)) {
 					// Do Something
 				}
 			}

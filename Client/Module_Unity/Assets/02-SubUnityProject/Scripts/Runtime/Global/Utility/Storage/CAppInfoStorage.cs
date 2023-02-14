@@ -81,8 +81,6 @@ public partial class CAppInfo : CBaseInfo {
 public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 	#region 프로퍼티
 	public bool IsIgnoreUpdate { get; private set; } = false;
-	public bool IsCloseAgreePopup { get; private set; } = false;
-
 	public CAppInfo AppInfo { get; private set; } = new CAppInfo();
 
 #if ADS_MODULE_ENABLE
@@ -142,11 +140,6 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage> {
 	/** 업데이트 무시 여부를 변경한다 */
 	public void SetIgnoreUpdate(bool a_bIsIgnore) {
 		this.IsIgnoreUpdate = a_bIsIgnore;
-	}
-
-	/** 동의 팝업 닫힘 여부를 변경한다 */
-	public void SetCloseAgreePopup(bool a_bIsClose) {
-		this.IsCloseAgreePopup = a_bIsClose;
 	}
 	#endregion // 함수
 
