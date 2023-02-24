@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
+using System.Linq;
 using UnityEngine.EventSystems;
 
 namespace NSEngine {
@@ -221,7 +222,15 @@ namespace NSEngine {
 	/** 서브 엔진 - 접근 */
 	public partial class CEngine : CComponent {
 		#region 함수
+		/** 클리어 여부를 검사한다 */
+		public bool IsClear() {
+			return m_oClearTargetInfoDict.All((a_stKeyVal) => a_stKeyVal.Value.m_stValInfo01.m_dmVal <= KCDefine.B_VAL_0_INT);
+		}
 
+		/** 클리어 실패 여부를 검사한다 */
+		public bool IsClearFail() {
+			return this.SelPlayerObj != null && this.SelPlayerObj.AbilityValDictWrapper.m_oDict01.ExGetAbilityVal(EAbilityKinds.STAT_HP_01) <= KCDefine.B_VAL_0_INT;
+		}
 		#endregion // 함수
 	}
 
