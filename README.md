@@ -1,6 +1,6 @@
-# 0300010101.Sample_Unity
+# 0300010101.Module_Unity
 
-Sample - Unity 클라이언트 프로젝트
+Module - Unity 프로젝트
 
 ## Getting started
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/lkstudio.dante.individual/0300010101.sample_unity.git
+git remote add origin https://gitlab.com/lkstudio.dante.individual/0300010101.module_unity.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/lkstudio.dante.individual/0300010101.sample_unity/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/lkstudio.dante.individual/0300010101.module_unity/-/settings/integrations)
 
 ## Collaborate with your team
 
