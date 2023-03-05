@@ -15,7 +15,8 @@ namespace FX {
 		}
 
 		#region 변수
-
+		/** =====> 객체 <===== */
+		[SerializeField] private List<GameObject> m_oParticleFXList = new List<GameObject>();
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -63,7 +64,9 @@ namespace FX {
 
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsAppRunning) {
-				// Do Something
+				for(int i = 0; i < m_oParticleFXList.Count; ++i) {
+					m_oParticleFXList[i].transform.Rotate(new Vector3(0.0f, 90.0f * a_fDeltaTime, 0.0f), Space.World);
+				}
 			}
 		}
 
