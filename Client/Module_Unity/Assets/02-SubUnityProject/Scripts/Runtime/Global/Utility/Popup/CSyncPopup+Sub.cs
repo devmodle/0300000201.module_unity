@@ -13,15 +13,15 @@ public partial class CSyncPopup : CSubPopup {
 		[HideInInspector] MAX_VAL
 	}
 
-#region 변수
+	#region 변수
 
-#endregion // 변수
+	#endregion // 변수
 
-#region 프로퍼티
+	#region 프로퍼티
 
-#endregion // 프로퍼티
+	#endregion // 프로퍼티
 
-#region 함수
+	#region 함수
 	/** 초기화 */
 	private void SubAwake() {
 		// Do Something
@@ -36,6 +36,6 @@ public partial class CSyncPopup : CSubPopup {
 	private void SubUpdateUIsState() {
 		// Do Something
 	}
-#endregion // 함수
+	#endregion // 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

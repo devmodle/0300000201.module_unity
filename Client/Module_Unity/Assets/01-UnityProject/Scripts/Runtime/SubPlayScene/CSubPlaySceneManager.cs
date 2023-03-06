@@ -92,7 +92,7 @@ namespace PlayScene {
 					(KCDefine.U_OBJ_N_PAUSE_BTN, this.UIsBase, this.OnTouchPauseBtn),
 					(KCDefine.U_OBJ_N_SETTINGS_BTN, this.UIsBase, this.OnTouchSettingsBtn)
 				});
-				
+
 				// 비율을 설정한다
 				var stSize = new Vector3(Mathf.Max(this.ScreenWidth, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stSize.x), Mathf.Max(this.ScreenHeight, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stSize.y), KCDefine.B_VAL_0_REAL);
 				this.ObjRoot.transform.localScale = m_oEngine.SelGridInfo.m_stScale.ExIsValid() ? m_oEngine.SelGridInfo.m_stScale : Vector3.one;
@@ -273,7 +273,7 @@ namespace PlayScene {
 			var oCallbackDict02 = new Dictionary<NSEngine.CEngine.ECallback, System.Action<NSEngine.CEngine, Dictionary<ulong, STTargetInfo>>>() {
 				[NSEngine.CEngine.ECallback.ACQUIRE] = this.OnReceiveAcquireCallback
 			};
-			
+
 			var oCallbackDict03 = new Dictionary<NSEngine.CEngine.ECallback, System.Action<NSEngine.CEngine, NSEngine.CEObjComponent, NSEngine.EEngineObjEvent, string>>() {
 				[NSEngine.CEngine.ECallback.E_OBJ_EVENT] = this.OnReceiveEObjEventCallback
 			};

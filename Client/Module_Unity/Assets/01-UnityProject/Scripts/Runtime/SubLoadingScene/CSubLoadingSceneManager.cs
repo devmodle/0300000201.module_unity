@@ -14,16 +14,16 @@ namespace LoadingScene {
 			[HideInInspector] MAX_VAL
 		}
 
-#region 변수
+		#region 변수
 
-#endregion // 변수
+		#endregion // 변수
 
-#region 프로퍼티
+		#region 프로퍼티
 		public override Vector3 LoadingTextPos => KDefine.LS_POS_LOADING_TEXT;
 		public override Vector3 LoadingGaugePos => KDefine.LS_POS_LOADING_GAUGE;
-#endregion // 프로퍼티
+		#endregion // 프로퍼티
 
-#region 함수
+		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
@@ -78,7 +78,7 @@ namespace LoadingScene {
 		protected override void OnUpdateAsyncSceneLoadingState(AsyncOperation a_oAsyncOperation, bool a_bIsComplete) {
 			base.OnUpdateAsyncSceneLoadingState(a_oAsyncOperation, a_bIsComplete);
 		}
-#endregion // 함수
+		#endregion // 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

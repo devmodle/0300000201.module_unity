@@ -990,7 +990,7 @@ public static partial class Func {
 		a_oInfoListContainer.ExCopyTo(Func.m_oGoogleSheetSaveInfoListContainer, (a_stInfo) => (a_stInfo.Item1, a_stInfo.Item2.Count, a_stInfo.Item2));
 
 		Func.m_oGoogleSheetCallbackDict04.ExReplaceVal(ECallback.SAVE_GOOGLE_SHEET, a_oCallback);
-		
+
 		// 정보가 존재 할 경우
 		if(a_oInfoListContainer.ExIsValid()) {
 			CIndicatorManager.Inst.Show();
