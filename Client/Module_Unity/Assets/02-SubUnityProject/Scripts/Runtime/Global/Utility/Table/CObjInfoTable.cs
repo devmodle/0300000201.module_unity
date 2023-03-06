@@ -11,6 +11,8 @@ using System.IO;
 [System.Serializable]
 public struct STObjInfo {
 	public STCommonInfo m_stCommonInfo;
+
+	public int m_nOrder;
 	public Vector3 m_stSize;
 
 	public EObjKinds m_eObjKinds;
@@ -41,6 +43,8 @@ public struct STObjInfo {
 	/** 생성자 */
 	public STObjInfo(SimpleJSON.JSONNode a_oObjInfo) {
 		m_stCommonInfo = new STCommonInfo(a_oObjInfo);
+
+		m_nOrder = a_oObjInfo[KCDefine.U_KEY_ORDER].ExIsValid() ? a_oObjInfo[KCDefine.U_KEY_ORDER].AsInt : KCDefine.B_VAL_0_INT;
 		m_stSize = a_oObjInfo[KCDefine.U_KEY_SIZE].ExIsValid() ? new Vector3(a_oObjInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_0_INT].AsFloat, a_oObjInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_1_INT].AsFloat, a_oObjInfo[KCDefine.U_KEY_SIZE][KCDefine.B_VAL_2_INT].AsFloat) : Vector3.zero;
 
 		m_eObjKinds = a_oObjInfo[KCDefine.U_KEY_OBJ_KINDS].ExIsValid() ? (EObjKinds)a_oObjInfo[KCDefine.U_KEY_OBJ_KINDS].AsInt : EObjKinds.NONE;
