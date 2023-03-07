@@ -17,7 +17,8 @@ public struct STFXInfo {
 	public EFXKinds m_ePrevFXKinds;
 	public EFXKinds m_eNextFXKinds;
 
-	List<EResKinds> m_oResKindsList;
+	public List<EResKinds> m_oResKindsList;
+	public List<EFXKinds> m_oExtraFXKindsList;
 
 	#region 상수
 	public static STFXInfo INVALID = new STFXInfo() {
@@ -41,6 +42,7 @@ public struct STFXInfo {
 		m_eNextFXKinds = a_oFXInfo[KCDefine.U_KEY_NEXT_FX_KINDS].ExIsValid() ? (EFXKinds)a_oFXInfo[KCDefine.U_KEY_NEXT_FX_KINDS].AsInt : EFXKinds.NONE;
 
 		m_oResKindsList = Factory.MakeVals(a_oFXInfo, KCDefine.U_KEY_FMT_RES_KINDS, (a_oJSONNode) => (EResKinds)a_oJSONNode.AsInt);
+		m_oExtraFXKindsList = Factory.MakeVals(a_oFXInfo, KCDefine.U_KEY_FMT_EXTRA_FX_KINDS, (a_oJSONNode) => (EFXKinds)a_oJSONNode.AsInt);
 	}
 	#endregion // 함수
 

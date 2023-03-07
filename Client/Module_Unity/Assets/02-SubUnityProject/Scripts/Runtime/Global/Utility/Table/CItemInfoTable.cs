@@ -16,6 +16,8 @@ public struct STItemInfo {
 	public EItemKinds m_ePrevItemKinds;
 	public EItemKinds m_eNextItemKinds;
 
+	public List<EItemKinds> m_oExtraItemKindsList;
+
 	public Dictionary<ulong, STTargetInfo> m_oAttachItemTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oSkillTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oAbilityTargetInfoDict;
@@ -41,6 +43,8 @@ public struct STItemInfo {
 		m_ePrevItemKinds = a_oItemInfo[KCDefine.U_KEY_PREV_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_PREV_ITEM_KINDS].AsInt : EItemKinds.NONE;
 		m_eNextItemKinds = a_oItemInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_NEXT_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
+		m_oExtraItemKindsList = Factory.MakeVals(a_oItemInfo, KCDefine.U_KEY_FMT_EXTRA_ITEM_KINDS, (a_oJSONNode) => (EItemKinds)a_oJSONNode.AsInt);
+		
 		m_oAttachItemTargetInfoDict = Factory.MakeTargetInfos(a_oItemInfo, KCDefine.U_KEY_FMT_ATTACH_ITEM_TARGET_INFO);
 		m_oSkillTargetInfoDict = Factory.MakeTargetInfos(a_oItemInfo, KCDefine.U_KEY_FMT_SKILL_TARGET_INFO);
 		m_oAbilityTargetInfoDict = Factory.MakeTargetInfos(a_oItemInfo, KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO);

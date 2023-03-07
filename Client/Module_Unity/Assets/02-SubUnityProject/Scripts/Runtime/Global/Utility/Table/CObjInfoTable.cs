@@ -21,6 +21,7 @@ public struct STObjInfo {
 	public ESkillKinds m_eActionSkillKinds;
 
 	public List<EResKinds> m_oResKindsList;
+	public List<EObjKinds> m_oExtraObjKindsList;
 
 	public Dictionary<ulong, STTargetInfo> m_oDropItemTargetInfoDict;
 	public Dictionary<ulong, STTargetInfo> m_oEquipItemTargetInfoDict;
@@ -53,6 +54,7 @@ public struct STObjInfo {
 		m_eActionSkillKinds = a_oObjInfo[KCDefine.U_KEY_ACTION_SKILL_KINDS].ExIsValid() ? (ESkillKinds)a_oObjInfo[KCDefine.U_KEY_ACTION_SKILL_KINDS].AsInt : ESkillKinds.NONE;
 
 		m_oResKindsList = Factory.MakeVals(a_oObjInfo, KCDefine.U_KEY_FMT_RES_KINDS, (a_oJSONNode) => (EResKinds)a_oJSONNode.AsInt);
+		m_oExtraObjKindsList = Factory.MakeVals(a_oObjInfo, KCDefine.U_KEY_FMT_EXTRA_OBJ_KINDS, (a_oJSONNode) => (EObjKinds)a_oJSONNode.AsInt);
 
 		m_oDropItemTargetInfoDict = Factory.MakeTargetInfos(a_oObjInfo, KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO);
 		m_oEquipItemTargetInfoDict = Factory.MakeTargetInfos(a_oObjInfo, KCDefine.U_KEY_FMT_EQUIP_ITEM_TARGET_INFO);
