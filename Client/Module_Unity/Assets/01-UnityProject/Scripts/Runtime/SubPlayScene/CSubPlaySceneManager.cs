@@ -14,6 +14,7 @@ namespace PlayScene {
 		private enum EKey {
 			NONE = -1,
 			IS_UPDATE_UIS_STATE,
+
 			SEL_REWARD_ADS_UIS,
 			CONTINUE_TIMES,
 

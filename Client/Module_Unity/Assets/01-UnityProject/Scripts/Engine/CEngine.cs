@@ -18,7 +18,6 @@ namespace NSEngine {
 			NONE = -1,
 			IS_FINISH,
 			IS_RUNNING,
-			IS_SAVE_USER_INFO,
 
 			SEL_GRID_IDX,
 			SEL_PLAYER_OBJ_IDX,
@@ -72,8 +71,7 @@ namespace NSEngine {
 		#region 변수
 		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
 			[EKey.IS_FINISH] = false,
-			[EKey.IS_RUNNING] = false,
-			[EKey.IS_SAVE_USER_INFO] = false
+			[EKey.IS_RUNNING] = false
 		};
 
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>() {
@@ -200,12 +198,6 @@ namespace NSEngine {
 					}
 				}
 
-				// 유저 정보 저장이 필요 할 경우
-				if(m_oBoolDict[EKey.IS_SAVE_USER_INFO]) {
-					CUserInfoStorage.Inst.SaveUserInfo();
-					m_oBoolDict[EKey.IS_SAVE_USER_INFO] = false;
-				}
-
 				this.SubOnUpdate(a_fDeltaTime * m_oRealDict[EKey.TIME_SCALE]);
 			}
 		}
@@ -278,8 +270,6 @@ namespace NSEngine {
 
 								this.SelPlayerObj.SetupAbilityVals();
 							}
-
-							m_oBoolDict[EKey.IS_SAVE_USER_INFO] = oAcquireTargetInfoDict.ExIsValid() ? true : m_oBoolDict[EKey.IS_SAVE_USER_INFO];
 						} finally {
 							this.RemoveEObjComponent(a_oSender);
 							CCollectionManager.Inst.DespawnDict(oAcquireTargetInfoDict);
