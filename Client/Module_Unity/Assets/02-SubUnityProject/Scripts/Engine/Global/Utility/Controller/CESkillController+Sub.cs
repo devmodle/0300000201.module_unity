@@ -81,6 +81,16 @@ namespace NSEngine {
 			}
 		}
 
+		/** 다중 스킬을 적용한다 */
+		private void ApplyMultiSkill() {
+			// Do Something
+		}
+
+		/** 단일 스킬을 적용한다 */
+		private void ApplySingleSkill() {
+			// Do Something
+		}
+
 		/** 적용 서브 상태를 처리한다 */
 		private void HandleApplySubState(float a_fDeltaTime) {
 			m_oSubRealDict[ESubKey.UPDATE_SKIP_TIME] += a_fDeltaTime;
@@ -102,13 +112,8 @@ namespace NSEngine {
 			}
 		}
 
-		/** 다중 스킬을 적용한다 */
-		private void ApplyMultiSkill() {
-			// Do Something
-		}
-
-		/** 단일 스킬을 적용한다 */
-		private void ApplySingleSkill() {
+		/** 완료 서브 상태를 처리한다 */
+		private void HandleCompleteSubState(float a_fDeltaTime) {
 			// Do Something
 		}
 		#endregion // 함수
