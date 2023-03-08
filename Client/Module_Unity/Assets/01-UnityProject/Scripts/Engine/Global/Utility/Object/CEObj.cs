@@ -11,8 +11,6 @@ namespace NSEngine {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
-			CELL_IDX,
-			CELL_OBJ_INFO,
 			[HideInInspector] MAX_VAL
 		}
 
@@ -24,20 +22,11 @@ namespace NSEngine {
 		}
 
 		#region 변수
-		private Dictionary<EKey, Vector3Int> m_oVec3IntDict = new Dictionary<EKey, Vector3Int>() {
-			[EKey.CELL_IDX] = new Vector3Int(KCDefine.B_IDX_INVALID, KCDefine.B_IDX_INVALID, KCDefine.B_IDX_INVALID)
-		};
 
-		private Dictionary<EKey, STCellObjInfo> m_oCellObjInfoDict = new Dictionary<EKey, STCellObjInfo>() {
-			[EKey.CELL_OBJ_INFO] = STCellObjInfo.INVALID
-		};
 		#endregion // 변수
 
 		#region 프로퍼티
 		public new STParams Params { get; private set; }
-
-		public Vector3Int CellIdx => m_oVec3IntDict[EKey.CELL_IDX];
-		public STCellObjInfo CellObjInfo => m_oCellObjInfoDict[EKey.CELL_OBJ_INFO];
 		#endregion // 프로퍼티
 
 		#region 함수
@@ -81,21 +70,6 @@ namespace NSEngine {
 			};
 		}
 		#endregion // 클래스 함수
-	}
-
-	/** 객체 - 접근 */
-	public partial class CEObj : CEObjComponent {
-		#region 함수
-		/** 셀 인덱스를 변경한다 */
-		public void SetCellIdx(Vector3Int a_stIdx) {
-			m_oVec3IntDict[EKey.CELL_IDX] = a_stIdx;
-		}
-
-		/** 셀 객체 정보를 변경한다 */
-		public void SetCellObjInfo(STCellObjInfo a_stCellObjInfo) {
-			m_oCellObjInfoDict[EKey.CELL_OBJ_INFO] = a_stCellObjInfo;
-		}
-		#endregion // 함수
 	}
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
