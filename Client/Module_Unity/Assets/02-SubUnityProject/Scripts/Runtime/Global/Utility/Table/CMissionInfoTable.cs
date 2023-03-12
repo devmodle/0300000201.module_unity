@@ -17,6 +17,7 @@ public struct STMissionInfo {
 	public EMissionKinds m_eNextMissionKinds;
 
 	public List<ERewardKinds> m_oRewardKindsList;
+	public List<EMissionKinds> m_oExtraMissionKindsList;
 
 	#region 상수
 	public static STMissionInfo INVALID = new STMissionInfo() {
@@ -39,6 +40,7 @@ public struct STMissionInfo {
 		m_eNextMissionKinds = a_oMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS].ExIsValid() ? (EMissionKinds)a_oMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS].AsInt : EMissionKinds.NONE;
 
 		m_oRewardKindsList = Factory.MakeVals(a_oMissionInfo, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_oJSONNode) => (ERewardKinds)a_oJSONNode.AsInt);
+		m_oExtraMissionKindsList = Factory.MakeVals(a_oMissionInfo, KCDefine.U_KEY_FMT_EXTRA_MISSION_KINDS, (a_oJSONNode) => (EMissionKinds)a_oJSONNode.AsInt);
 	}
 	#endregion // 함수
 
@@ -53,6 +55,7 @@ public struct STMissionInfo {
 		a_oOutMissionInfo[KCDefine.U_KEY_NEXT_MISSION_KINDS] = $"{(int)m_eNextMissionKinds}";
 
 		Func.SaveVals(m_oRewardKindsList, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_eRewardKinds) => $"{(int)a_eRewardKinds}", a_oOutMissionInfo);
+		Func.SaveVals(m_oExtraMissionKindsList, KCDefine.U_KEY_FMT_EXTRA_MISSION_KINDS, (a_eMissionKinds) => $"{(int)a_eMissionKinds}", a_oOutMissionInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수

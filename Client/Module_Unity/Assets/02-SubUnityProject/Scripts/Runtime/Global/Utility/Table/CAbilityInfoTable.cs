@@ -18,6 +18,7 @@ public struct STAbilityInfo {
 	public EAbilityKinds m_eNextAbilityKinds;
 	public EAbilityValType m_eAbilityValType;
 
+	public List<EAbilityKinds> m_oExtraAbilityKindsList;
 	public Dictionary<ulong, STTargetInfo> m_oExtraAbilityTargetInfoDict;
 
 	#region 상수
@@ -42,6 +43,7 @@ public struct STAbilityInfo {
 		m_eNextAbilityKinds = a_oAbilityInfo[KCDefine.U_KEY_NEXT_ABILITY_KINDS].ExIsValid() ? (EAbilityKinds)a_oAbilityInfo[KCDefine.U_KEY_NEXT_ABILITY_KINDS].AsInt : EAbilityKinds.NONE;
 		m_eAbilityValType = a_oAbilityInfo[KCDefine.U_KEY_ABILITY_VAL_TYPE].ExIsValid() ? (EAbilityValType)a_oAbilityInfo[KCDefine.U_KEY_ABILITY_VAL_TYPE].AsInt : EAbilityValType.NONE;
 
+		m_oExtraAbilityKindsList = Factory.MakeVals(a_oAbilityInfo, KCDefine.U_KEY_FMT_EXTRA_ABILITY_KINDS, (a_oJSONNode) => (EAbilityKinds)a_oJSONNode.AsInt);
 		m_oExtraAbilityTargetInfoDict = Factory.MakeTargetInfos(a_oAbilityInfo, KCDefine.U_KEY_FMT_EXTRA_ABILITY_TARGET_INFO);
 	}
 	#endregion // 함수
@@ -58,6 +60,7 @@ public struct STAbilityInfo {
 		a_oOutAbilityInfo[KCDefine.U_KEY_NEXT_ABILITY_KINDS] = $"{(int)m_eNextAbilityKinds}";
 		a_oOutAbilityInfo[KCDefine.U_KEY_ABILITY_VAL_TYPE] = $"{(int)m_eAbilityValType}";
 
+		Func.SaveVals(m_oExtraAbilityKindsList, KCDefine.U_KEY_FMT_EXTRA_ABILITY_KINDS, (a_eAbilityKinds) => $"{(int)a_eAbilityKinds}", a_oOutAbilityInfo);
 		Func.SaveTargetInfos(m_oExtraAbilityTargetInfoDict, KCDefine.U_KEY_FMT_EXTRA_ABILITY_TARGET_INFO, a_oOutAbilityInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
