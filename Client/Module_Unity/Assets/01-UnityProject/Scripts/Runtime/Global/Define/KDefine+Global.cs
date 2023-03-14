@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -223,7 +224,8 @@ public static partial class KDefine {
 					new STKeyInfo(KCDefine.U_KEY_PREV_FX_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_NEXT_FX_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_TIME_INFO, EKeyType.SINGLE),
-					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI)
+					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_FX_KINDS, EKeyType.MULTI)
 				}
 			}
 		}),
@@ -240,7 +242,8 @@ public static partial class KDefine {
 					new STKeyInfo(KCDefine.U_KEY_MISSION_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_MISSION_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_NEXT_MISSION_KINDS, EKeyType.SINGLE),
-					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI)
+					new STKeyInfo(KCDefine.U_KEY_FMT_REWARD_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_MISSION_KINDS, EKeyType.MULTI)
 				}
 			}
 		}),
@@ -296,6 +299,7 @@ public static partial class KDefine {
 					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_NEXT_ITEM_KINDS, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_ITEM_KINDS, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_ATTACH_ITEM_TARGET_INFO, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_SKILL_TARGET_INFO, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, EKeyType.MULTI)
@@ -348,6 +352,7 @@ public static partial class KDefine {
 
 					new STKeyInfo(KCDefine.U_KEY_FMT_FX_KINDS, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_SKILL_KINDS, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, EKeyType.MULTI)
 				},
 
@@ -396,6 +401,7 @@ public static partial class KDefine {
 					new STKeyInfo(KCDefine.U_KEY_SIZE, EKeyType.SINGLE),
 
 					new STKeyInfo(KCDefine.U_KEY_FMT_RES_KINDS, EKeyType.MULTI),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_OBJ_KINDS, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_EQUIP_ITEM_TARGET_INFO, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_SKILL_TARGET_INFO, EKeyType.MULTI),
@@ -446,6 +452,7 @@ public static partial class KDefine {
 					new STKeyInfo(KCDefine.U_KEY_NEXT_ABILITY_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_ABILITY_VAL_TYPE, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_VAL_INFO, EKeyType.SINGLE),
+					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_ABILITY_KINDS, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_EXTRA_ABILITY_TARGET_INFO, EKeyType.MULTI)
 				},
 
