@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-/** 난이도 보정자 */
-public partial class CDifficultyCorrector : CComponent {
+/** 난이도 UI 처리자 */
+public partial class CDifficultyUIsHandler : CComponent {
 	/** 식별자 */
 	private enum EKey {
 		NONE = -1,
