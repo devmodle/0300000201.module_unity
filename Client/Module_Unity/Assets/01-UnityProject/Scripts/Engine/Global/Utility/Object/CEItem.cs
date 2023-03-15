@@ -8,6 +8,12 @@ using UnityEngine.Events;
 namespace NSEngine {
 	/** 아이템 */
 	public partial class CEItem : CEObjComponent {
+		/** 식별자 */
+		private enum EKey {
+			NONE = -1,
+			[HideInInspector] MAX_VAL
+		}
+
 		/** 매개 변수 */
 		public new struct STParams {
 			public CEObjComponent.STParams m_stBaseParams;
