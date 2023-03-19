@@ -23,9 +23,16 @@ namespace NSEngine {
 		#endregion // 프로퍼티
 
 		#region 함수
-		/** 스킬을 적용한다 */
+		/** 효과를 적용한다 */
 		public void Apply() {
 			this.SetState(EState.IDLE);
+
+			switch(this.GetOwner<CEFX>().Params.m_stFXInfo.m_eFXApplyType) {
+				case EFXApplyType.ANI: this.ApplyAni(); break;
+				case EFXApplyType.TWEEN: this.ApplyTween(); break;
+				case EFXApplyType.ANIMATOR: this.ApplyAnimator(); break;
+				case EFXApplyType.PARTICLE_FX: this.ApplyParticleFX(); break;
+			}
 		}
 
 		/** 대기 상태를 처리한다 */
@@ -75,6 +82,26 @@ namespace NSEngine {
 			if(CSceneManager.IsAppRunning) {
 				// Do Something
 			}
+		}
+
+		/** 애니메이션을 적용한다 */
+		private void ApplyAni() {
+			// Do Something
+		}
+
+		/** 애니메이션을 적용한다 */
+		private void ApplyTween() {
+			// Do Something
+		}
+
+		/** 애니메이터를 적용한다 */
+		private void ApplyAnimator() {
+			// Do Something
+		}
+
+		/** 파티클 효과를 적용한다 */
+		private void ApplyParticleFX() {
+			// Do Something
 		}
 
 		/** 적용 서브 상태를 처리한다 */

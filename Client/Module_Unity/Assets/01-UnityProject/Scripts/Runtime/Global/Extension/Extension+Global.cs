@@ -90,7 +90,7 @@ public static partial class Extension {
 		}
 	}
 
-	/** 효과를 재생한다 */
+	/** 효과를 실행한다 */
 	public static void ExPlay(this ParticleSystem a_oSender, System.Action<CEventDispatcher, string> a_oCallback, bool a_bIsPlayChildren = true, bool a_bIsStopChildren = true, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || a_oSender != null);
 
