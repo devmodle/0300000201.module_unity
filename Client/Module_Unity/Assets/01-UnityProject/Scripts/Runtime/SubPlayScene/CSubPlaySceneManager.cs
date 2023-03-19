@@ -95,7 +95,7 @@ namespace PlayScene {
 
 				// 비율을 설정한다
 				var stSize = new Vector3(Mathf.Max(this.ScreenWidth, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stSize.x), Mathf.Max(this.ScreenHeight, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stSize.y), KCDefine.B_VAL_0_REAL);
-				this.ObjRoot.transform.localScale = m_oEngine.SelGridInfo.m_stScale.ExIsValid() ? m_oEngine.SelGridInfo.m_stScale : Vector3.one;
+				this.SetRootObjsScale(m_oEngine.SelGridInfo.m_stScale.ExIsValid() ? m_oEngine.SelGridInfo.m_stScale : Vector3.one);
 
 				// 스프라이트를 설정한다 {
 				CFunc.SetupComponents(new List<(EKey, string, GameObject, GameObject)>() {
@@ -499,6 +499,14 @@ namespace PlayScene {
 		/** UI 상태 갱신 여부를 변경한다 */
 		public void SetEnableUpdateUIsState(bool a_bIsEnable) {
 			m_oBoolDict[EKey.IS_UPDATE_UIS_STATE] = a_bIsEnable;
+		}
+
+		/** 최상단 객체 비율을 변경한다 */
+		public void SetRootObjsScale(Vector3 a_stScale) {
+			this.ItemRoot.transform.localScale = a_stScale;
+			this.SkillRoot.transform.localScale = a_stScale;
+			this.ObjRoot.transform.localScale = a_stScale;
+			this.FXRoot.transform.localScale = a_stScale;
 		}
 		#endregion // 함수
 	}
