@@ -13,6 +13,8 @@ public struct STFXInfo {
 	public STCommonInfo m_stCommonInfo;
 	public STTimeInfo m_stTimeInfo;
 
+	public int m_nMaxApplyTimes;
+
 	public EFXKinds m_eFXKinds;
 	public EFXKinds m_ePrevFXKinds;
 	public EFXKinds m_eNextFXKinds;
@@ -41,6 +43,8 @@ public struct STFXInfo {
 		m_stCommonInfo = new STCommonInfo(a_oFXInfo);
 		m_stTimeInfo = new STTimeInfo(a_oFXInfo[KCDefine.U_KEY_TIME_INFO]);
 
+		m_nMaxApplyTimes = a_oFXInfo[KCDefine.U_KEY_MAX_APPLY_TIMES].ExIsValid() ? a_oFXInfo[KCDefine.U_KEY_MAX_APPLY_TIMES].AsInt : KCDefine.B_VAL_0_INT;
+
 		m_eFXKinds = a_oFXInfo[KCDefine.U_KEY_FX_KINDS].ExIsValid() ? (EFXKinds)a_oFXInfo[KCDefine.U_KEY_FX_KINDS].AsInt : EFXKinds.NONE;
 		m_ePrevFXKinds = a_oFXInfo[KCDefine.U_KEY_PREV_FX_KINDS].ExIsValid() ? (EFXKinds)a_oFXInfo[KCDefine.U_KEY_PREV_FX_KINDS].AsInt : EFXKinds.NONE;
 		m_eNextFXKinds = a_oFXInfo[KCDefine.U_KEY_NEXT_FX_KINDS].ExIsValid() ? (EFXKinds)a_oFXInfo[KCDefine.U_KEY_NEXT_FX_KINDS].AsInt : EFXKinds.NONE;
@@ -57,6 +61,8 @@ public struct STFXInfo {
 	public void SaveFXInfo(SimpleJSON.JSONNode a_oOutFXInfo) {
 		m_stCommonInfo.SaveCommonInfo(a_oOutFXInfo);
 		m_stTimeInfo.SaveTimeInfo(a_oOutFXInfo);
+
+		a_oOutFXInfo[KCDefine.U_KEY_MAX_APPLY_TIMES] = $"{m_nMaxApplyTimes}";
 
 		a_oOutFXInfo[KCDefine.U_KEY_FX_KINDS] = $"{(int)m_eFXKinds}";
 		a_oOutFXInfo[KCDefine.U_KEY_PREV_FX_KINDS] = $"{(int)m_ePrevFXKinds}";
