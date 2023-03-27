@@ -84,7 +84,7 @@ namespace MainScene {
 							}
 
 							var oLevelClearInfo = CGameInfoStorage.Inst.GetLevelClearInfo(k, j, i);
-							oLevelClearInfo.NumSymbols = KCDefine.B_VAL_1_INT;
+							oLevelClearInfo.NumMarks = KCDefine.B_VAL_1_INT;
 						}
 					}
 				}
