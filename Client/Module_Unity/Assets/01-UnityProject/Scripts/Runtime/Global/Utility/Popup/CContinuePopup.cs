@@ -122,7 +122,10 @@ public partial class CContinuePopup : CSubPopup {
 		this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.LEAVE)?.Invoke(this);
 	}
 	#endregion // 함수
+}
 
+/** 이어하기 팝업 - 팩토리 */
+public partial class CContinuePopup : CSubPopup {
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
 	public static STParams MakeParams(int a_nContinueTimes, Dictionary<ECallback, System.Action<CContinuePopup>> a_oCallbackDict = null) {

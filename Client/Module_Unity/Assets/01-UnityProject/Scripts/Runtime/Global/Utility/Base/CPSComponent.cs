@@ -35,7 +35,10 @@ namespace PlayScene {
 			this.SubInit();
 		}
 		#endregion // 함수
+	}
 
+	/** 플레이 씬 컴포넌트 - 팩토리 */
+	public abstract partial class CPSComponent : CComponent {
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
 		public static STParams MakeParams(NSEngine.CEngine a_oEngine) {
