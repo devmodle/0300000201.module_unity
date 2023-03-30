@@ -119,7 +119,7 @@ public static partial class Func {
 			if(a_bIsResetDailyRewardTime) {
 				oCharacterGameInfo.PrevDailyRewardTime = System.DateTime.Today;
 			}
-
+			
 			oCharacterGameInfo.DailyRewardID = (oCharacterGameInfo.DailyRewardID + KCDefine.B_VAL_1_INT) % KDefine.G_REWARDS_KINDS_DAILY_REWARD_LIST.Count;
 		}
 	}

@@ -191,7 +191,7 @@ namespace NSEngine {
 		}
 
 		/** 객체를 생성한다 */
-		protected CEObj CreateObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null) {
+		protected virtual CEObj CreateObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null) {
 			var oObj = this.Engine.CreateObj(a_stObjInfo, a_oObjTargetInfo, a_oOwner ?? this.GetOwner<CEObjComponent>());
 			this.SetupEObjComponent(oObj);
 
@@ -199,7 +199,7 @@ namespace NSEngine {
 		}
 
 		/** 효과를 생성한다 */
-		protected CEFX CreateFX(STFXInfo a_stFXInfo, CEObjComponent a_oOwner = null) {
+		protected virtual CEFX CreateFX(STFXInfo a_stFXInfo, CEObjComponent a_oOwner = null) {
 			var oFX = this.Engine.CreateFX(a_stFXInfo, a_oOwner ?? this.GetOwner<CEObjComponent>());
 			this.SetupEObjComponent(oFX);
 
@@ -207,7 +207,7 @@ namespace NSEngine {
 		}
 
 		/** 셀 객체를 생성한다 */
-		protected CEObj CreateCellObj(STObjInfo a_stObjInfo, STGridInfo a_stGridInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		protected virtual CEObj CreateCellObj(STObjInfo a_stObjInfo, STGridInfo a_stGridInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
 			var oObj = this.Engine.CreateCellObj(a_stObjInfo, a_stGridInfo, a_oObjTargetInfo, a_oOwner ?? this.GetOwner<CEObjComponent>());
 			this.SetupEObjComponent(oObj);
 
@@ -215,7 +215,7 @@ namespace NSEngine {
 		}
 
 		/** 플레이어 객체를 생성한다 */
-		protected CEObj CreatePlayerObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		protected virtual CEObj CreatePlayerObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
 			var oObj = this.Engine.CreatePlayerObj(a_stObjInfo, a_oObjTargetInfo, a_oOwner ?? this.GetOwner<CEObjComponent>());
 			this.SetupEObjComponent(oObj);
 
@@ -223,7 +223,7 @@ namespace NSEngine {
 		}
 
 		/** 적 객체를 생성한다 */
-		protected CEObj CreateEnemyObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		protected virtual CEObj CreateEnemyObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
 			var oObj = this.Engine.CreateEnemyObj(a_stObjInfo, a_oObjTargetInfo, a_oOwner ?? this.GetOwner<CEObjComponent>());
 			this.SetupEObjComponent(oObj);
 

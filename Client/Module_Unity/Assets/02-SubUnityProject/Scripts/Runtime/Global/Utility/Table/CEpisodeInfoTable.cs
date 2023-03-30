@@ -24,6 +24,9 @@ public struct STEpisodeInfo {
 	public EEpisodeKinds m_eEpisodeKinds;
 	public ETutorialKinds m_eTutorialKinds;
 
+	public List<EItemKinds> m_oGameItemKindsList;
+	public List<EItemKinds> m_oBoosterItemKindsList;
+
 	public List<ERewardKinds> m_oRewardKindsList;
 	public List<STValInfo> m_oRecordValInfoList;
 
@@ -74,6 +77,9 @@ public struct STEpisodeInfo {
 		m_stIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_ID);
 		m_stPrevIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_PREV_ID);
 		m_stNextIDInfo = new STIDInfo(a_oEpisodeInfo, KCDefine.U_KEY_FMT_NEXT_ID);
+		
+		m_oGameItemKindsList = Factory.MakeVals(a_oEpisodeInfo, KCDefine.U_KEY_FMT_GAME_ITEM_KINDS, (a_oJSONNode) => (EItemKinds)a_oJSONNode.AsInt);
+		m_oBoosterItemKindsList = Factory.MakeVals(a_oEpisodeInfo, KCDefine.U_KEY_FMT_BOOSTER_ITEM_KINDS, (a_oJSONNode) => (EItemKinds)a_oJSONNode.AsInt);
 
 		m_oRewardKindsList = Factory.MakeVals(a_oEpisodeInfo, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_oJSONNode) => (ERewardKinds)a_oJSONNode.AsInt);
 		m_oRecordValInfoList = Factory.MakeValInfos(a_oEpisodeInfo, KCDefine.U_KEY_FMT_RECORD_VAL_INFO);
@@ -105,6 +111,9 @@ public struct STEpisodeInfo {
 		m_stIDInfo.SaveIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_ID);
 		m_stPrevIDInfo.SaveIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_PREV_ID);
 		m_stNextIDInfo.SaveIDInfo(a_oOutEpisodeInfo, KCDefine.U_KEY_FMT_NEXT_ID);
+
+		Func.SaveVals(m_oGameItemKindsList, KCDefine.U_KEY_FMT_GAME_ITEM_KINDS, (a_eItemKinds) => $"{(int)a_eItemKinds}", a_oOutEpisodeInfo);
+		Func.SaveVals(m_oBoosterItemKindsList, KCDefine.U_KEY_FMT_BOOSTER_ITEM_KINDS, (a_eItemKinds) => $"{(int)a_eItemKinds}", a_oOutEpisodeInfo);
 
 		Func.SaveVals(m_oRewardKindsList, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_eRewardKinds) => $"{(int)a_eRewardKinds}", a_oOutEpisodeInfo);
 		Func.SaveValInfos(m_oRecordValInfoList, KCDefine.U_KEY_FMT_RECORD_VAL_INFO, a_oOutEpisodeInfo);
