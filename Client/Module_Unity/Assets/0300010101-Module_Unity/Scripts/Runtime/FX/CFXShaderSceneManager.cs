@@ -16,7 +16,7 @@ namespace FX {
 
 		#region 변수
 		/** =====> 객체 <===== */
-		[SerializeField] private List<GameObject> m_oSphereList = new List<GameObject>();
+		[SerializeField] private List<GameObject> m_oTargetList = new List<GameObject>();
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -64,8 +64,8 @@ namespace FX {
 
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsAppRunning) {
-				for(int i = 0; i < m_oSphereList.Count; ++i) {
-					m_oSphereList[i].transform.Rotate(new Vector3(0.0f, 90.0f * a_fDeltaTime, 0.0f), Space.World);
+				for(int i = 0; i < m_oTargetList.Count; ++i) {
+					m_oTargetList[i].transform.Rotate(new Vector3(0.0f, 90.0f * a_fDeltaTime, 0.0f), Space.World);
 				}
 			}
 		}

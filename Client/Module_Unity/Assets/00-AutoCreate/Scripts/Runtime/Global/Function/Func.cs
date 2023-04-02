@@ -416,6 +416,16 @@ public static partial class Func {
 
 	#region 조건부 클래스 함수
 #if ADS_MODULE_ENABLE
+	/** 배너 광고를 로드한다 */
+	public static void LoadBannerAds() {
+		Func.LoadBannerAds(CPluginInfoTable.Inst.AdsPlatform);
+	}
+
+	/** 배너 광고를 로드한다 */
+	public static void LoadBannerAds(EAdsPlatform a_eAdsPlatform) {
+		CAdsManager.Inst.LoadBannerAds(a_eAdsPlatform);
+	}
+
 	/** 배너 광고를 출력한다 */
 	public static void ShowBannerAds(System.Action<CAdsManager, bool> a_oCallback) {
 		Func.ShowBannerAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
@@ -442,6 +452,16 @@ public static partial class Func {
 		CAdsManager.Inst.CloseBannerAds(a_eAdsPlatform, a_oCallback);
 	}
 
+	/** 보상 광고를 로드한다 */
+	public static void LoadRewardAds() {
+		Func.LoadRewardAds(CPluginInfoTable.Inst.AdsPlatform);
+	}
+
+	/** 보상 광고를 로드한다 */
+	public static void LoadRewardAds(EAdsPlatform a_eAdsPlatform) {
+		CAdsManager.Inst.LoadRewardAds(a_eAdsPlatform);
+	}
+
 	/** 보상 광고를 출력한다 */
 	public static void ShowRewardAds(System.Action<CAdsManager, STAdsRewardInfo, bool> a_oCallback) {
 		Func.ShowRewardAds(CPluginInfoTable.Inst.AdsPlatform, a_oCallback);
@@ -463,6 +483,16 @@ public static partial class Func {
 		} else {
 			CFunc.Invoke(ref a_oCallback, CAdsManager.Inst, STAdsRewardInfo.INVALID, false);
 		}
+	}
+
+	/** 전면 광고를 로드한다 */
+	public static void LoadFullscreenAds() {
+		Func.LoadFullscreenAds(CPluginInfoTable.Inst.AdsPlatform);
+	}
+
+	/** 전면 광고를 로드한다 */
+	public static void LoadFullscreenAds(EAdsPlatform a_eAdsPlatform) {
+		CAdsManager.Inst.LoadFullscreenAds(a_eAdsPlatform);
 	}
 
 	/** 전면 광고를 출력한다 */

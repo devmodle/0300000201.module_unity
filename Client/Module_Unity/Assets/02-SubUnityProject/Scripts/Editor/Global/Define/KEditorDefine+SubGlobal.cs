@@ -31,12 +31,22 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
-		// Do Something
+		[typeof(Ads.CAdsAdmobSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Ads.CAdsIronSrcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(Ads.CAdsAppLovinSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+
+		[typeof(FX.CFXShaderSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(FX.CFXParticleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
 	};
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
-		// Do Something
+		[KDefine.G_SCENE_N_ADS_ADMOB] = typeof(Ads.CAdsAdmobSceneManager),
+		[KDefine.G_SCENE_N_ADS_IRON_SRC] = typeof(Ads.CAdsIronSrcSceneManager),
+		[KDefine.G_SCENE_N_ADS_APP_LOVIN] = typeof(Ads.CAdsAppLovinSceneManager),
+
+		[KDefine.G_SCENE_N_FX_SHADER] = typeof(FX.CFXShaderSceneManager),
+		[KDefine.G_SCENE_N_FX_PARTICLE] = typeof(FX.CFXParticleSceneManager)
 	};
 	#endregion // 런타임 상수
 }
