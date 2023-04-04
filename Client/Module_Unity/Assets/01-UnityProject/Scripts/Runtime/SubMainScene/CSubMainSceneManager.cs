@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 using EnhancedUI.EnhancedScroller;
+using DanielLochner.Assets.SimpleScrollSnap;
 
 namespace MainScene {
 	/** 서브 메인 씬 관리자 */
@@ -16,9 +17,12 @@ namespace MainScene {
 		private enum EKey {
 			NONE = -1,
 			SEL_ID_INFO,
+
 			LEVEL_SCROLLER_INFO,
 			STAGE_SCROLLER_INFO,
 			CHAPTER_SCROLLER_INFO,
+
+			CONTENTS_SCROLL_SNAP,
 			[HideInInspector] MAX_VAL
 		}
 
@@ -29,6 +33,9 @@ namespace MainScene {
 
 		/** =====> UI <===== */
 		private Dictionary<EKey, STScrollerInfo> m_oScrollerInfoDict = new Dictionary<EKey, STScrollerInfo>();
+		private Dictionary<EKey, SimpleScrollSnap> m_oScrollSnapDict = new Dictionary<EKey, SimpleScrollSnap>();
+
+		[SerializeField] private List<Button> m_oContentsTapBtnList = new List<Button>();
 		#endregion // 변수
 
 		#region IEnhancedScrollerDelegate
@@ -193,7 +200,7 @@ namespace MainScene {
 			var ePlayMode = CGameInfoStorage.Inst.PlayMode;
 			m_oIDInfoDict[EKey.SEL_ID_INFO] = (ePlayMode == EPlayMode.NORM && CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID01 > KCDefine.B_IDX_INVALID) ? CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo : new STIDInfo(KCDefine.B_VAL_0_INT);
 
-			// 버튼을 설정한다
+			// 버튼을 설정한다 {
 			CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
 				(KCDefine.U_OBJ_N_PLAY_BTN, this.UIsBase, this.OnTouchPlayBtn),
 				(KCDefine.U_OBJ_N_STORE_BTN, this.UIsBase, this.OnTouchStoreBtn),
@@ -201,12 +208,25 @@ namespace MainScene {
 				(KCDefine.U_OBJ_N_SETTINGS_BTN, this.UIsBase, this.OnTouchSettingsBtn)
 			});
 
-			// 스크롤 뷰를 설정한다
+			for(int i = 0; i < m_oContentsTapBtnList.Count; ++i) {
+				int nIdx = i;
+				m_oContentsTapBtnList[i].onClick.AddListener(() => this.OnTouchContentsTapBtn(nIdx));
+			}
+			// 버튼을 설정한다 }
+
+			// 스크롤 뷰를 설정한다 {
 			CFunc.SetupScrollerInfos(new List<(EKey, string, GameObject, EnhancedScrollerCellView, IEnhancedScrollerDelegate)>() {
 				(EKey.LEVEL_SCROLLER_INFO, KCDefine.U_OBJ_N_LEVEL_SCROLL_VIEW, this.UIsBase, CResManager.Inst.GetRes<GameObject>(KCDefine.MS_OBJ_P_LEVEL_SCROLLER_CELL_VIEW)?.GetComponentInChildren<EnhancedScrollerCellView>(), this),
 				(EKey.STAGE_SCROLLER_INFO, KCDefine.U_OBJ_N_STAGE_SCROLL_VIEW, this.UIsBase, CResManager.Inst.GetRes<GameObject>(KCDefine.MS_OBJ_P_STAGE_SCROLLER_CELL_VIEW)?.GetComponentInChildren<EnhancedScrollerCellView>(), this),
 				(EKey.CHAPTER_SCROLLER_INFO, KCDefine.U_OBJ_N_CHAPTER_SCROLL_VIEW, this.UIsBase, CResManager.Inst.GetRes<GameObject>(KCDefine.MS_OBJ_P_CHAPTER_SCROLLER_CELL_VIEW)?.GetComponentInChildren<EnhancedScrollerCellView>(), this)
 			}, m_oScrollerInfoDict);
+
+			CFunc.SetupScrollSnaps(new List<(EKey, string, GameObject, UnityAction<int, int>)>() {
+				(EKey.CONTENTS_SCROLL_SNAP, KCDefine.U_OBJ_N_PAGE_VIEW, this.UIs, (a_nCenterIdx, a_nSelIdx) => this.UpdateUIsState())
+			}, m_oScrollSnapDict);
+
+			m_oScrollSnapDict[EKey.CONTENTS_SCROLL_SNAP]?.ExAddListener(this.OnChangeScrollSnapPage, a_bIsEnableAssert: false);
+			// 스크롤 뷰를 설정한다 }
 
 			this.SubAwake();
 		}
@@ -274,6 +294,12 @@ namespace MainScene {
 			}
 		}
 
+		/** 준비 팝업 콜백을 수신했을 경우 */
+		private void OnReceiveReadyPopupCallback(CPopup a_oSender) {
+			Func.SetupPlayEpisodeInfo(CGameInfoStorage.Inst.PlayCharacterID, (a_oSender as CReadyPopup).Params.m_stIDInfo.m_nID01, EPlayMode.NORM);
+			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_PLAY);
+		}
+
 		/** 플레이 버튼을 눌렀을 경우 */
 		private void OnTouchPlayBtn() {
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
@@ -312,10 +338,14 @@ namespace MainScene {
 			});
 		}
 
-		/** 준비 팝업 콜백을 수신했을 경우 */
-		private void OnReceiveReadyPopupCallback(CPopup a_oSender) {
-			Func.SetupPlayEpisodeInfo(CGameInfoStorage.Inst.PlayCharacterID, (a_oSender as CReadyPopup).Params.m_stIDInfo.m_nID01, EPlayMode.NORM);
-			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_PLAY);
+		/** 컨텐츠 탭 버튼을 눌렀을 경우 */
+		private void OnTouchContentsTapBtn(int a_nIdx) {
+			m_oScrollSnapDict[EKey.CONTENTS_SCROLL_SNAP].GoToPanel(a_nIdx);
+		}
+
+		/** 스크롤 스냅 페이지가 변경 되었을 경우 */
+		private void OnChangeScrollSnapPage(int a_nSrcIdx, int a_nDestIdx) {
+			this.UpdateUIsState();
 		}
 		#endregion // 함수
 
