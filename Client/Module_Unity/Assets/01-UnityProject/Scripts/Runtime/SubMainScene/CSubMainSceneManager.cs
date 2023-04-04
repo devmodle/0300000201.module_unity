@@ -279,9 +279,12 @@ namespace MainScene {
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
 #if NEVER_USE_THIS
 			Func.ShowReadyPopup(this.PopupUIs, (a_oSender) => {
-				// 에피소드 정보가 없을 경우
-				if(!CEpisodeInfoTable.Inst.TryGetLevelEpisodeInfo(Access.GetNumLevelClearInfos(CGameInfoStorage.Inst.PlayCharacterID, KCDefine.B_VAL_0_INT), out STEpisodeInfo stEpisodeInfo)) {
-					stEpisodeInfo = CEpisodeInfoTable.Inst.GetLevelEpisodeInfo(Access.GetNumLevelClearInfos(CGameInfoStorage.Inst.PlayCharacterID, KCDefine.B_VAL_0_INT) - KCDefine.B_VAL_1_INT);
+				int nNumLevelInfos = CLevelInfoTable.Inst.GetNumLevelInfos(KCDefine.B_VAL_0_INT);
+				int nNumLevelClearInfos = Access.GetNumLevelClearInfos(CGameInfoStorage.Inst.PlayCharacterID, KCDefine.B_VAL_0_INT);
+
+				// 레벨 에피소드 정보가 없을 경우
+				if(nNumLevelClearInfos >= nNumLevelInfos || !CEpisodeInfoTable.Inst.TryGetLevelEpisodeInfo(nNumLevelClearInfos, out STEpisodeInfo stEpisodeInfo)) {
+					stEpisodeInfo = CEpisodeInfoTable.Inst.GetLevelEpisodeInfo(nNumLevelClearInfos - KCDefine.B_VAL_1_INT);
 				}
 
 				(a_oSender as CReadyPopup).Init(CReadyPopup.MakeParams(stEpisodeInfo.m_stIDInfo, new Dictionary<CReadyPopup.ECallback, System.Action<CReadyPopup>>() {
@@ -320,7 +323,16 @@ namespace MainScene {
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		/** 단축키를 처리한다 */
 		private void HandleHotKeys() {
-			// Do Something
+			// 초기화 키를 눌렀을 경우
+			if(Input.GetKeyDown(KeyCode.C)) {
+				var oCharacterGameInfo = CGameInfoStorage.Inst.GetCharacterGameInfo(CGameInfoStorage.Inst.PlayCharacterID);
+				oCharacterGameInfo.m_oLevelClearInfoDict.Clear();
+				oCharacterGameInfo.m_oStageClearInfoDict.Clear();
+				oCharacterGameInfo.m_oChapterClearInfoDict.Clear();
+
+				CGameInfoStorage.Inst.SaveGameInfo();
+				this.ExLateCallFunc((a_oSender) => CSceneLoader.Inst.LoadScene(this.SceneName));
+			}
 		}
 #endif // #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 
