@@ -412,6 +412,20 @@ public static partial class Func {
 		CAccess.Assert(!a_bIsEnableAssert || a_eResKinds.ExIsValid());
 		return CResInfoTable.Inst.TryGetResInfo(a_eResKinds, out STResInfo stResInfo) ? CSndManager.Inst.PlayFXSnds(stResInfo.m_oResPath, a_stPos, a_fVolume, a_bIsLoop, a_bIsEnableAssert) : null;
 	}
+
+	/** 저장소를 저장한다 */
+	public static void SaveInfoStorages(bool a_bIsSaveCommonInfoStorages = false) {
+		CAppInfoStorage.Inst.SaveAppInfo();
+		CUserInfoStorage.Inst.SaveUserInfo();
+		CGameInfoStorage.Inst.SaveGameInfo();
+
+		// 공용 저장소 저장 모드 일 경우
+		if(a_bIsSaveCommonInfoStorages) {
+			CCommonAppInfoStorage.Inst.SaveAppInfo();
+			CCommonUserInfoStorage.Inst.SaveUserInfo();
+			CCommonGameInfoStorage.Inst.SaveGameInfo();
+		}
+	}
 	#endregion // 클래스 함수
 
 	#region 조건부 클래스 함수
