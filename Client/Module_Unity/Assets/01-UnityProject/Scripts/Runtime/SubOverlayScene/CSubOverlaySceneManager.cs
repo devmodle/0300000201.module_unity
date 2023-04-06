@@ -168,6 +168,8 @@ namespace OverlayScene {
 			}
 
 			this.UpdateUIsState();
+			Func.SaveInfoStorages();
+			
 			m_oCallbackDict.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oProductID, a_bIsSuccess);
 		}
 
