@@ -94,11 +94,6 @@ namespace PlayScene {
 			// Do Something
 		}
 
-		/** 선택 아이템을 적용한다 */
-		private void ApplySelItem(EItemKinds a_eItemKinds) {
-			// Do Something
-		}
-
 		/** 이전 팝업 콜백을 처리한다 */
 		private void HandlePrevPopupCallback(CPopup a_oPopup) {
 			this.LoadLevel(a_oPopup, Access.GetPrevLevelEpisodeInfo(CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID01, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID02, CGameInfoStorage.Inst.PlayEpisodeInfo.m_stIDInfo.m_nID03));
