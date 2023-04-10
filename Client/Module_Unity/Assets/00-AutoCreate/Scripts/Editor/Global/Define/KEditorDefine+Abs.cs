@@ -73,14 +73,14 @@ public static partial class KEditorDefine {
 		[typeof(CUserInfoStorage)] = KCDefine.U_SCRIPT_O_SINGLETON,
 		[typeof(CGameInfoStorage)] = KCDefine.U_SCRIPT_O_SINGLETON,
 
-		[typeof(TitleScene.CSubTitleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(MainScene.CSubMainSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(PlayScene.CSubPlaySceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(ResultScene.CSubResultSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(TestScene.CSubTestSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(TitleScene.CSubTitleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 
+		[typeof(ResultScene.CSubResultSceneManager)] = KCDefine.U_SCRIPT_O_RESULT_SCENE_MANAGER,
 		[typeof(LoadingScene.CSubLoadingSceneManager)] = KCDefine.U_SCRIPT_O_LOADING_SCENE_MANAGER,
 		[typeof(OverlayScene.CSubOverlaySceneManager)] = KCDefine.U_SCRIPT_O_OVERLAY_SCENE_MANAGER,
-		[typeof(TestScene.CSubTestSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && EDITOR_SCENE_TEMPLATES_MODULE_ENABLE

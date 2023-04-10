@@ -31,6 +31,8 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
+		[typeof(Etc.CEtcScheduleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+
 		[typeof(Ads.CAdsAdmobSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(Ads.CAdsIronSrcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
 		[typeof(Ads.CAdsAppLovinSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
@@ -41,6 +43,8 @@ public static partial class KEditorDefine {
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
+		[KDefine.G_SCENE_N_ETC_SCHEDULE] = typeof(Etc.CEtcScheduleSceneManager),
+
 		[KDefine.G_SCENE_N_ADS_ADMOB] = typeof(Ads.CAdsAdmobSceneManager),
 		[KDefine.G_SCENE_N_ADS_IRON_SRC] = typeof(Ads.CAdsIronSrcSceneManager),
 		[KDefine.G_SCENE_N_ADS_APP_LOVIN] = typeof(Ads.CAdsAppLovinSceneManager),

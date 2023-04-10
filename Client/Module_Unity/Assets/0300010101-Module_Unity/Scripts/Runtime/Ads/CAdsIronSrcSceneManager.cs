@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Ads {
 	/** 아이언 소스 씬 관리자 */
-	public partial class CAdsIronSrcSceneManager : CSceneManager {
+	public partial class CAdsIronSrcSceneManager : StudyScene.CSSceneManager {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
@@ -29,6 +29,7 @@ namespace Ads {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
+				// 버튼을 설정한다
 				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
 					("LOAD_BANNER_ADS", this.UIs, this.OnTouchLoadBannerAdsBtn),
 					("LOAD_REWARD_ADS", this.UIs, this.OnTouchLoadRewardAdsBtn),
