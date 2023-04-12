@@ -313,7 +313,7 @@ public static partial class Func {
 	public static void UpdateComponents<T>(List<T> a_oComponentList, float a_fDeltaTime) where T : CComponent {
 		for(int i = 0; i < a_oComponentList.Count; ++i) {
 			// 상태 갱신이 가능 할 경우
-			if(a_oComponentList[i] != null && (a_oComponentList[i].IsActive && !a_oComponentList[i].IsDestroy && a_oComponentList[i].gameObject.activeInHierarchy)) {
+			if(a_oComponentList[i] != null && (a_oComponentList[i].IsEnable && !a_oComponentList[i].IsDestroy && a_oComponentList[i].gameObject.activeInHierarchy)) {
 				a_oComponentList[i].OnUpdate(a_fDeltaTime);
 			}
 		}
@@ -323,7 +323,7 @@ public static partial class Func {
 	public static void UpdateComponents<K, V>(Dictionary<K, V> a_oComponentDict, float a_fDeltaTime) where V : CComponent {
 		foreach(var stKeyVal in a_oComponentDict) {
 			// 상태 갱신이 가능 할 경우
-			if(stKeyVal.Value != null && (stKeyVal.Value.IsActive && !stKeyVal.Value.IsDestroy && stKeyVal.Value.gameObject.activeInHierarchy)) {
+			if(stKeyVal.Value != null && (stKeyVal.Value.IsEnable && !stKeyVal.Value.IsDestroy && stKeyVal.Value.gameObject.activeInHierarchy)) {
 				stKeyVal.Value.OnUpdate(a_fDeltaTime);
 			}
 		}
@@ -333,7 +333,7 @@ public static partial class Func {
 	public static void LateUpdateComponents<T>(List<T> a_oComponentList, float a_fDeltaTime) where T : CComponent {
 		for(int i = 0; i < a_oComponentList.Count; ++i) {
 			// 상태 갱신이 가능 할 경우
-			if(a_oComponentList[i] != null && (a_oComponentList[i].IsActive && !a_oComponentList[i].IsDestroy && a_oComponentList[i].gameObject.activeInHierarchy)) {
+			if(a_oComponentList[i] != null && (a_oComponentList[i].IsEnable && !a_oComponentList[i].IsDestroy && a_oComponentList[i].gameObject.activeInHierarchy)) {
 				a_oComponentList[i].OnLateUpdate(a_fDeltaTime);
 			}
 		}
@@ -343,7 +343,7 @@ public static partial class Func {
 	public static void LageUpdateComponents<K, V>(Dictionary<K, V> a_oComponentDict, float a_fDeltaTime) where V : CComponent {
 		foreach(var stKeyVal in a_oComponentDict) {
 			// 상태 갱신이 가능 할 경우
-			if(stKeyVal.Value != null && (stKeyVal.Value.IsActive && !stKeyVal.Value.IsDestroy && stKeyVal.Value.gameObject.activeInHierarchy)) {
+			if(stKeyVal.Value != null && (stKeyVal.Value.IsEnable && !stKeyVal.Value.IsDestroy && stKeyVal.Value.gameObject.activeInHierarchy)) {
 				stKeyVal.Value.OnLateUpdate(a_fDeltaTime);
 			}
 		}
