@@ -164,6 +164,7 @@ public static partial class KEditorDefine {
 		["com.unity.feature.characters-animation"] = "1.0.0",
 		["com.unity.feature.cinematic"] = "1.0.0",
 		["com.unity.feature.development"] = "1.0.1",
+		["com.unity.feature.gameplay-storytelling"] = "1.0.0",
 		["com.unity.feature.mobile"] = "1.0.0",
 		["com.unity.feature.worldbuilding"] = "1.0.1",
 
