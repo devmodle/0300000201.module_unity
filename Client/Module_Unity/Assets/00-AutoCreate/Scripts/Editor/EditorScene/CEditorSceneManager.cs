@@ -14,9 +14,9 @@ using UnityEditor.SceneManagement;
 
 using EnhancedHierarchy;
 
-#if EDITOR_COROUTINE_ENABLE
+#if UNITY_EDITOR_WIN && EDITOR_COROUTINE_ENABLE
 using Unity.EditorCoroutines.Editor;
-#endif // #if EDITOR_COROUTINE_ENABLE
+#endif // #if UNITY_EDITOR_WIN && EDITOR_COROUTINE_ENABLE
 
 /** 에디터 씬 관리자 */
 [InitializeOnLoad]
@@ -55,11 +55,11 @@ public static partial class CEditorSceneManager {
 	/** 스크립트가 로드 되었을 경우 */
 	[UnityEditor.Callbacks.DidReloadScripts]
 	public static void OnLoadScript() {
-#if EDITOR_COROUTINE_ENABLE
+#if UNITY_EDITOR_WIN && EDITOR_COROUTINE_ENABLE
 		EditorCoroutineUtility.StartCoroutineOwnerless(CEditorSceneManager.CoSetupEditorSceneManager());
 #else
 		CEditorSceneManager.m_bIsEnableSetup = true;
-#endif // #if EDITOR_COROUTINE_ENABLE
+#endif // #if UNITY_EDITOR_WIN && EDITOR_COROUTINE_ENABLE
 	}
 
 	/** 상태를 갱신한다 */
