@@ -56,6 +56,14 @@ namespace NSEngine {
 			}
 		}
 
+		/** 상태를 갱신한다 */
+		private void SubOnLateUpdate(float a_fDeltaTime) {
+			// 앱이 실행 중 일 경우
+			if(CSceneManager.IsAppRunning) {
+				// Do Something
+			}
+		}
+
 		/** 게임 아이템을 적용한다 */
 		private void ApplyGameItem(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo) {
 			// Do Something
