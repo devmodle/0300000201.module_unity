@@ -140,12 +140,12 @@ namespace LevelEditorScene {
 		}
 
 		#region 변수
-		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
-			[EKey.IS_RESET_NUM_VIEW_CELLS] = false
-		};
-
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>() {
 			[EKey.SEL_GRID_IDX] = KCDefine.B_VAL_0_INT
+		};
+		
+		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
+			[EKey.IS_RESET_NUM_VIEW_CELLS] = false
 		};
 
 		private Dictionary<EKey, float> m_oRealDict = new Dictionary<EKey, float>() {
@@ -1576,7 +1576,7 @@ namespace LevelEditorScene {
 					}
 					// 객체 제거가 가능 할 경우
 					else if(Input.GetMouseButtonUp((int)EMouseBtn.RIGHT) && stCellInfo.m_oCellObjInfoList.ExIsValid()) {
-						this.RemoveAllCellObjInfos(stIdx, Input.GetKey(KeyCode.LeftShift) ? m_oObjKindsDict[EKey.SEL_OBJ_KINDS] : EObjKinds.NONE);
+						this.RemoveAllCellObjInfos(stIdx, Input.GetKey(KeyCode.LeftShift) ? EObjKinds.NONE : m_oObjKindsDict[EKey.SEL_OBJ_KINDS]);
 					}
 				}
 			}
@@ -1597,7 +1597,7 @@ namespace LevelEditorScene {
 					}
 					// 객체 제거가 가능 할 경우
 					else if(Input.GetMouseButtonUp((int)EMouseBtn.RIGHT) && oCellInfoDict[i].m_oCellObjInfoList.ExIsValid()) {
-						this.RemoveAllCellObjInfos(stIdx, Input.GetKey(KeyCode.LeftShift) ? m_oObjKindsDict[EKey.SEL_OBJ_KINDS] : EObjKinds.NONE);
+						this.RemoveAllCellObjInfos(stIdx, Input.GetKey(KeyCode.LeftShift) ? EObjKinds.NONE : m_oObjKindsDict[EKey.SEL_OBJ_KINDS]);
 					}
 				}
 			}
