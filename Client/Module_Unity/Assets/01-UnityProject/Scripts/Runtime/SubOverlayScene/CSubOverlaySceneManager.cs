@@ -166,7 +166,7 @@ namespace OverlayScene {
 			this.UpdateUIsState();
 			Func.SaveInfoStorages();
 			CAppInfoStorage.Inst.SetPrevFullscreenAdsTime(System.DateTime.Now);
-			
+
 			m_oCallbackDict.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oProductID, a_bIsSuccess);
 		}
 

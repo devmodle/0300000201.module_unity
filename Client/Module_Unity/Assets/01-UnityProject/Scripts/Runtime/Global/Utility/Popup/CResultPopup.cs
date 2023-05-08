@@ -110,7 +110,7 @@ public partial class CResultPopup : CSubPopup {
 	protected override void SetupContents() {
 		base.SetupContents();
 		this.UpdateUIsState();
-		
+
 		Func.UpdateSingleSceneUIsState();
 	}
 

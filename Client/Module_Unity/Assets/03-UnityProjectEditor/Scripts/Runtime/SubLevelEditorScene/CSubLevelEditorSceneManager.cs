@@ -143,7 +143,7 @@ namespace LevelEditorScene {
 		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>() {
 			[EKey.SEL_GRID_IDX] = KCDefine.B_VAL_0_INT
 		};
-		
+
 		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
 			[EKey.IS_RESET_NUM_VIEW_CELLS] = false
 		};
