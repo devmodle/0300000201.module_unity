@@ -65,7 +65,7 @@ namespace FX {
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsAppRunning) {
 				for(int i = 0; i < m_oTargetList.Count; ++i) {
-					m_oTargetList[i].transform.Rotate(new Vector3(0.0f, 90.0f * a_fDeltaTime, 0.0f), Space.World);
+					m_oTargetList[i].transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f * a_fDeltaTime), Space.World);
 				}
 			}
 		}
