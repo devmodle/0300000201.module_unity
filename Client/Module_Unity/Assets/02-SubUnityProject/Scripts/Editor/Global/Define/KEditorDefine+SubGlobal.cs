@@ -10,7 +10,7 @@ using UnityEditor;
 
 /** 에디터 서브 전역 상수 */
 public static partial class KEditorDefine {
-	#region 런타임 상수
+#region 런타임 상수
 	// 경로 {
 	public static List<string> G_EXTRA_DIR_P_PRELOAD_ASSET_LIST = new List<string>() {
 		Path.GetDirectoryName($"{KCEditorDefine.B_DIR_P_SUB_UNITY_PROJ_RESOURCES}{KCDefine.B_DIR_P_FXS}").Replace(KCDefine.B_TOKEN_R_SLASH, KCDefine.B_TOKEN_SLASH),
@@ -31,27 +31,13 @@ public static partial class KEditorDefine {
 
 	// 스크립트 순서
 	public static Dictionary<System.Type, int> G_EXTRA_SCRIPT_ORDER_DICT = new Dictionary<System.Type, int>() {
-		[typeof(Etc.CEtcScheduleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-
-		[typeof(Ads.CAdsAdmobSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Ads.CAdsIronSrcSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(Ads.CAdsAppLovinSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-
-		[typeof(FX.CFXShaderSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
-		[typeof(FX.CFXParticleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER
+		// Do Something
 	};
 
 	// 클래스 타입
 	public static readonly Dictionary<string, System.Type> G_EXTRA_SCENE_MANAGER_TYPE_DICT = new Dictionary<string, System.Type>() {
-		[KDefine.G_SCENE_N_ETC_SCHEDULE] = typeof(Etc.CEtcScheduleSceneManager),
-
-		[KDefine.G_SCENE_N_ADS_ADMOB] = typeof(Ads.CAdsAdmobSceneManager),
-		[KDefine.G_SCENE_N_ADS_IRON_SRC] = typeof(Ads.CAdsIronSrcSceneManager),
-		[KDefine.G_SCENE_N_ADS_APP_LOVIN] = typeof(Ads.CAdsAppLovinSceneManager),
-
-		[KDefine.G_SCENE_N_FX_SHADER] = typeof(FX.CFXShaderSceneManager),
-		[KDefine.G_SCENE_N_FX_PARTICLE] = typeof(FX.CFXParticleSceneManager)
+		// Do Something
 	};
-	#endregion // 런타임 상수
+#endregion // 런타임 상수
 }
 #endif // #if UNITY_EDITOR && EXTRA_SCRIPT_MODULE_ENABLE

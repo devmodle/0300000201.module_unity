@@ -140,12 +140,12 @@ namespace LevelEditorScene {
 		}
 
 		#region 변수
-		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>() {
-			[EKey.SEL_GRID_IDX] = KCDefine.B_VAL_0_INT
-		};
-
 		private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
 			[EKey.IS_RESET_NUM_VIEW_CELLS] = false
+		};
+
+		private Dictionary<EKey, int> m_oIntDict = new Dictionary<EKey, int>() {
+			[EKey.SEL_GRID_IDX] = KCDefine.B_VAL_0_INT
 		};
 
 		private Dictionary<EKey, float> m_oRealDict = new Dictionary<EKey, float>() {
@@ -233,7 +233,7 @@ namespace LevelEditorScene {
 		public CLevelInfo SelLevelInfo => m_oLevelInfoDict[EKey.SEL_LEVEL_INFO];
 		public NSEngine.STGridInfo SelGridInfo => m_oGridInfoList[this.SelGridInfoIdx];
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 프로퍼티
+#endregion // 프로퍼티
 
 		#region IEnhancedScrollerDelegate
 		/** 셀 개수를 반환한다 */
@@ -1288,7 +1288,7 @@ namespace LevelEditorScene {
 		}
 #endif // #if GOOGLE_SHEET_ENABLE
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 함수
+#endregion // 조건부 함수
 
 		#region 조건부 접근자 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -1392,7 +1392,7 @@ namespace LevelEditorScene {
 			CGameInfoStorage.Inst.SetPlayLevelInfo(a_oLevelInfo);
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 접근자 함수
+#endregion // 조건부 접근자 함수
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 중앙 에디터 UI */
@@ -1621,7 +1621,7 @@ namespace LevelEditorScene {
 			this.SetMEUIsGridScrollDelta(a_fVal * -fWidth, a_fVal * -fHeight);
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 함수
+#endregion // 조건부 함수
 
 		#region 조건부 접근자 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -1656,7 +1656,7 @@ namespace LevelEditorScene {
 			this.UpdateUIsState();
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 접근자 함수
+#endregion // 조건부 접근자 함수
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 왼쪽 에디터 UI */
@@ -1784,7 +1784,7 @@ namespace LevelEditorScene {
 		}
 #endif // #if AB_TEST_ENABLE
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 함수
+#endregion // 조건부 함수
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 오른쪽 에디터 UI */
@@ -2202,7 +2202,7 @@ namespace LevelEditorScene {
 			this.SetREUIsPageUIs02ObjSize(bIsValid01 ? nSizeX : KCDefine.B_VAL_1_INT, bIsValid02 ? nSizeY : KCDefine.B_VAL_1_INT);
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 함수
+#endregion // 조건부 함수
 
 		#region 조건부 접근자 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -2277,7 +2277,7 @@ namespace LevelEditorScene {
 			this.UpdateUIsState();
 		}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 조건부 접근자 함수
+#endregion // 조건부 접근자 함수
 	}
 
 	/** 서브 레벨 에디터 씬 관리자 - 스크롤러 셀 뷰 */

@@ -19,7 +19,7 @@ namespace NSEngine {
 		#endregion // 변수
 
 		#region 프로퍼티
-
+		
 		#endregion // 프로퍼티
 
 		#region 함수
@@ -56,7 +56,7 @@ namespace NSEngine {
 			if(m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDelay)) {
 				this.SetState(EState.FX);
 				this.SetSubState(ESubState.APPLY);
-
+				
 				m_oRealDict[EKey.UPDATE_SKIP_TIME] = KCDefine.B_VAL_0_REAL;
 			}
 		}
@@ -70,7 +70,7 @@ namespace NSEngine {
 		private void SubInit() {
 			// Do Something
 		}
-
+		
 		/** 제거 되었을 경우 */
 		private void SubOnDestroy() {
 			try {

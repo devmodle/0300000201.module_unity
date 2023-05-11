@@ -24,13 +24,12 @@ namespace InitScene {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		public override Color ClearColor => KDefine.IS_COLOR_CLEAR;
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-		#endregion // 프로퍼티
+#endregion // 프로퍼티
 
 		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
-			CSceneManager.ActiveSceneMainCamera.clearFlags = CameraClearFlags.SolidColor;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			// 이미지를 설정한다 {
@@ -48,21 +47,14 @@ namespace InitScene {
 		/** 씬을 설정한다 */
 		protected override void Setup() {
 			base.Setup();
+			CSceneManager.ActiveSceneMainCamera.clearFlags = CameraClearFlags.SolidColor;
 
-			// 테이블을 로드한다 {
-			CStrTable.Inst.LoadEnumStrs(typeof(EMissionKinds));
-			CStrTable.Inst.LoadEnumStrs(typeof(ERewardKinds));
-			CStrTable.Inst.LoadEnumStrs(typeof(EEpisodeKinds));
-			CStrTable.Inst.LoadEnumStrs(typeof(ETutorialKinds));
-			CStrTable.Inst.LoadEnumStrs(typeof(EResKinds));
-
+			// 테이블을 로드한다
 			CStrTable.Inst.LoadEnumStrs(typeof(EItemKinds));
 			CStrTable.Inst.LoadEnumStrs(typeof(ESkillKinds));
 			CStrTable.Inst.LoadEnumStrs(typeof(EObjKinds));
 			CStrTable.Inst.LoadEnumStrs(typeof(EFXKinds));
 			CStrTable.Inst.LoadEnumStrs(typeof(EAbilityKinds));
-			CStrTable.Inst.LoadEnumStrs(typeof(EProductKinds));
-			// 테이블을 로드한다 }
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			// 테이블을 생성한다 {

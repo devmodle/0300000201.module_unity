@@ -44,10 +44,10 @@ namespace NSEngine {
 
 			return stGridInfo;
 		}
-
+		
 		/** 그리드 정보를 생성한다 */
 		public static void MakeGridInfos(CLevelInfo a_oLevelInfo, List<STGridInfo> a_oOutGridInfoList, float a_fDeltaX = KCDefine.B_VAL_0_REAL, float a_fDeltaY = KCDefine.B_VAL_0_REAL) {
-			Factory.MakeGridInfos(a_oLevelInfo, Access.CellSize, Access.MaxGridSize, a_oOutGridInfoList, a_fDeltaX, a_fDeltaY);
+				Factory.MakeGridInfos(a_oLevelInfo, Access.CellSize, Access.MaxGridSize, a_oOutGridInfoList, a_fDeltaX, a_fDeltaY);
 		}
 
 		/** 그리드 정보를 생성한다 */

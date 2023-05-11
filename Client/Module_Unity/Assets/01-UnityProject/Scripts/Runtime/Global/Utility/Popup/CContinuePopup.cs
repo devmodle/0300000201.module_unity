@@ -149,7 +149,7 @@ public partial class CContinuePopup : CSubPopup {
 		} else {
 			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, stItemTradeInfo);
 			Func.SaveInfoStorages();
-
+			
 			this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.CONTINUE)?.Invoke(this);
 		}
 	}

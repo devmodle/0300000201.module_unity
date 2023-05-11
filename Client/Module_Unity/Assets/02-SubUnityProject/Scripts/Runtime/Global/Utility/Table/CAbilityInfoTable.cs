@@ -64,7 +64,7 @@ public struct STAbilityInfo {
 		Func.SaveTargetInfos(m_oExtraAbilityTargetInfoDict, KCDefine.U_KEY_FMT_EXTRA_ABILITY_TARGET_INFO, a_oOutAbilityInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 
 /** 어빌리티 교환 정보 */
@@ -118,7 +118,7 @@ public struct STAbilityTradeInfo {
 		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutAbilityTradeInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 
 /** 어빌리티 정보 테이블 */
@@ -390,6 +390,6 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 		Access.AbilityTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
