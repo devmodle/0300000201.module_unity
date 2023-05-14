@@ -31,6 +31,8 @@ namespace FX {
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// Do Something
+
+				this.Objs.GetComponentInChildren<Animation>().Play();
 			}
 		}
 
