@@ -15,7 +15,7 @@ namespace FX {
 		}
 
 		#region 변수
-		/** =====> 객체 <===== */
+		[Header("=====> 객체 <=====")]
 		[SerializeField] private List<GameObject> m_oTargetList = new List<GameObject>();
 		#endregion // 변수
 
@@ -31,8 +31,6 @@ namespace FX {
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// Do Something
-
-				this.Objs.GetComponentInChildren<Animation>().Play();
 			}
 		}
 
