@@ -15,7 +15,7 @@ namespace FX {
 		}
 
 		#region 변수
-		[Header("=====> 객체 <=====")]
+		[Header("=====> Objs <=====")]
 		[SerializeField] private List<GameObject> m_oTargetList = new List<GameObject>();
 		#endregion // 변수
 
