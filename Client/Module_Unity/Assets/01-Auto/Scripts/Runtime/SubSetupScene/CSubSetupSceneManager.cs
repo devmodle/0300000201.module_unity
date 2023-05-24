@@ -25,7 +25,7 @@ namespace SetupScene {
 		}
 
 		#region 변수
-		[Header("=====> 속성 <=====")]
+		[Header("=====> Etc <=====")]
 		[SerializeField] private SystemLanguage m_eSystemLanguage = SystemLanguage.Unknown;
 		#endregion // 변수
 
