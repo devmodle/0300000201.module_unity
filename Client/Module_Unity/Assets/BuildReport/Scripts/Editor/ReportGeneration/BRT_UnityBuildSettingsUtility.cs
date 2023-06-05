@@ -416,6 +416,7 @@ namespace BuildReportTool
 			settings.EnableVirtualRealitySupport = UnityEngine.XR.XRSettings.enabled;
 #endif
 
+#if !UNITY_2022_2_OR_NEWER
 			// collect all aspect ratios
 			UnityEditor.AspectRatio[] aspectRatios =
 			{
@@ -440,6 +441,9 @@ namespace BuildReportTool
 			}
 
 			settings.AspectRatiosAllowed = aspectRatiosList.ToArray();
+#else
+			settings.AspectRatiosAllowed = new string[]{"N/A"}; // AspectRatio enum removed in Unity 2022.2
+#endif
 
 #if !UNITY_5_1_AND_LESSER // 5.2 and greater
 			settings.GraphicsAPIsUsed = PlayerSettings.GetGraphicsAPIs(EditorUserBuildSettings.activeBuildTarget)

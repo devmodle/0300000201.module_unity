@@ -8,13 +8,13 @@ public class IronSourceMediatedNetworkSettings : ScriptableObject{
     [Header("AdMob Integration")]
     [SerializeField]
     [Tooltip("This will add AdMob Application ID to AndroidManifest.xml/info.plist")]
-    public bool EnableAdmob = true;
+    public bool EnableAdmob = false;
 
     [SerializeField]
     [Tooltip("This Will be added to your AndroidManifest.xml")]
-    public string AdmobAndroidAppId = "ca-app-pub-8822822499150620~8161842966";
+    public string AdmobAndroidAppId = string.Empty;
 
-	[SerializeField]
+    [SerializeField]
     [Tooltip("This will be added to your info.plist")]
-    public string AdmobIOSAppId = "ca-app-pub-8822822499150620~1354544428";
+    public string AdmobIOSAppId = string.Empty;
 }
