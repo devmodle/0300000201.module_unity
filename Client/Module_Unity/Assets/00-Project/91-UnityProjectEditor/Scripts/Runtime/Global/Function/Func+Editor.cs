@@ -7,11 +7,11 @@ using UnityEngine.Events;
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 /** 에디터 씬 함수 */
 public static partial class Func {
-#region 클래스 함수
+	#region 클래스 함수
 
-#endregion // 클래스 함수
+	#endregion // 클래스 함수
 
-#region 조건부 클래스 함수
+	#region 조건부 클래스 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 	/** 에디터 입력 팝업을 출력한다 */
 	public static void ShowEditorInputPopup(GameObject a_oParent, System.Action<CPopup> a_oInitCallback, System.Action<CPopup> a_oShowCallback = null, System.Action<CPopup> a_oCloseCallback = null) {
@@ -23,16 +23,16 @@ public static partial class Func {
 		Func.ShowPopup<CEditorCreatePopup>(KCDefine.ES_OBJ_N_EDITOR_CREATE_POPUP, KCDefine.ES_OBJ_P_EDITOR_CREATE_POPUP, a_oParent, a_oInitCallback, a_oShowCallback, a_oCloseCallback);
 	}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-#endregion // 조건부 클래스 함수
+	#endregion // 조건부 클래스 함수
 }
 
 /** 레벨 에디터 씬 함수 */
 public static partial class Func {
-#region 클래스 함수
+	#region 클래스 함수
 
-#endregion // 클래스 함수
+	#endregion // 클래스 함수
 
-#region 조건부 클래스 함수
+	#region 조건부 클래스 함수
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 	/** 에디터 레벨 정보를 설정한다 */
 	public static void SetupEditorLevelInfo(CLevelInfo a_oLevelInfo, CEditorCreateInfo a_oCreateInfo, bool a_bIsReset = true) {
@@ -108,6 +108,6 @@ public static partial class Func {
 		a_oLevelInfo.OnAfterDeserialize();
 	}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-#endregion // 조건부 클래스 함수
+	#endregion // 조건부 클래스 함수
 }
 #endif // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)

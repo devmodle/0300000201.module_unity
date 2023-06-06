@@ -15,7 +15,7 @@ namespace NSEngine {
 		}
 
 		#region 변수
-		
+
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -43,7 +43,7 @@ namespace NSEngine {
 			if(m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CESkill>().Params.m_stSkillInfo.m_stTimeInfo.m_fDelay)) {
 				this.SetState(EState.SKILL);
 				this.SetSubState(ESubState.APPLY);
-				
+
 				m_oRealDict[EKey.UPDATE_SKIP_TIME] = KCDefine.B_VAL_0_REAL;
 			}
 		}
@@ -95,7 +95,7 @@ namespace NSEngine {
 			// 적용 간격이 지났을 경우
 			if(m_oIntDict[EKey.APPLY_TIMES] < this.GetOwner<CESkill>().Params.m_stSkillInfo.m_nMaxApplyTimes && m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CESkill>().Params.m_stSkillInfo.m_stTimeInfo.m_fDeltaTime * (m_oIntDict[EKey.APPLY_TIMES] - KCDefine.B_VAL_1_INT))) {
 				m_oIntDict[EKey.APPLY_TIMES] += KCDefine.B_VAL_1_INT;
-				
+
 				switch((EApplyType)((int)this.GetOwner<CESkill>().Params.m_stSkillInfo.m_eSkillApplyKinds).ExKindsToType()) {
 					case EApplyType.MULTI: this.ApplyMultiSkill(); break;
 					case EApplyType.SINGLE: this.ApplySingleSkill(); break;

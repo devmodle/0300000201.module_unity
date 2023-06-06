@@ -227,7 +227,7 @@ namespace NSEngine {
 		private void DoApplyFX(STFXInfo a_stFXInfo, List<CEObjComponent> a_oTargetList) {
 			var oFX = this.CreateFX(a_stFXInfo);
 			a_oTargetList.ExCopyTo(oFX.GetController<CEFXController>().EObjComponentList, (a_oTargetObj) => a_oTargetObj);
-			
+
 			this.Engine.FXListWrapper.ExAddVal(oFX);
 			oFX.GetController<CEFXController>().Apply();
 		}

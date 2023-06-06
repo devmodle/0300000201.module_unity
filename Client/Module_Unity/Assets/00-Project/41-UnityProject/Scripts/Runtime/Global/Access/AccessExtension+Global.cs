@@ -48,10 +48,10 @@ public static partial class AccessExtension {
 
 	/** 누적 타겟 정보 값을 반환한다 */
 	public static (decimal, decimal, decimal) ExGetSkipTargetValInfo(this Dictionary<ulong, STTargetInfo> a_oSender, ETargetKinds a_eTargetKinds, int a_nKinds, int a_nSkipTimes, Dictionary<ulong, STTargetInfo> a_oSkipTargetInfoDict) {
-		a_oSkipTargetInfoDict.ExTryGetTargetInfo(a_eTargetKinds, a_nKinds, out STTargetInfo stSkipTargetInfo);
-
 		decimal dmMaxTargetVal = KCDefine.B_VAL_0_INT;
 		decimal dmPrevMaxTargetVal = KCDefine.B_VAL_0_INT;
+
+		a_oSkipTargetInfoDict.ExTryGetTargetInfo(a_eTargetKinds, a_nKinds, out STTargetInfo stSkipTargetInfo);
 
 		for(int i = 0; i < a_nSkipTimes; ++i) {
 			dmPrevMaxTargetVal = dmMaxTargetVal;
