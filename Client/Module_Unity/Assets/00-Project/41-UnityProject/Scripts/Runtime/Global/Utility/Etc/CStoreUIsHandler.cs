@@ -14,13 +14,6 @@ using UnityEngine.Purchasing;
 
 /** 상점 UI 처리자 */
 public partial class CStoreUIsHandler : CComponent {
-	/** 식별자 */
-	private enum EKey {
-		NONE = -1,
-		SEL_PRODUCT_KINDS,
-		[HideInInspector] MAX_VAL
-	}
-
 	/** 콜백 */
 	public enum ECallback {
 		NONE = -1,
@@ -45,16 +38,15 @@ public partial class CStoreUIsHandler : CComponent {
 	}
 
 	#region 변수
-	private Dictionary<EKey, EProductKinds> m_oProductKindsDict = new Dictionary<EKey, EProductKinds>() {
-		[EKey.SEL_PRODUCT_KINDS] = EProductKinds.NONE
-	};
+	[Header("=====> Objs <=====")]
+	[SerializeField] private List<GameObject> m_oProductBuyUIsList = new List<GameObject>();
+
+	[Header("=====> Fields <=====")]
+	private EProductKinds m_eSelProductKinds = EProductKinds.NONE;
 
 #if PURCHASE_MODULE_ENABLE
 	private List<Product> m_oRestoreProductList = new List<Product>();
 #endif // #if PURCHASE_MODULE_ENABLE
-
-	[Header("=====> Objs <=====")]
-	[SerializeField] private List<GameObject> m_oProductBuyUIsList = new List<GameObject>();
 	#endregion // 변수
 
 	#region 프로퍼티
@@ -77,7 +69,7 @@ public partial class CStoreUIsHandler : CComponent {
 	/** 초기화 */
 	public virtual void Init(STParams a_stParams) {
 		this.Params = a_stParams;
-		a_stParams.m_oProductTradeInfoList.Sort((a_stLhs, a_stRhs) => a_stLhs.m_nProductIdx.CompareTo(a_stRhs.m_nProductIdx));
+		a_stParams.m_oProductTradeInfoList.ExStableSort((a_stLhs, a_stRhs) => a_stLhs.m_nProductIdx.CompareTo(a_stRhs.m_nProductIdx));
 
 		this.SubInit();
 		this.UpdateUIsState();
@@ -174,7 +166,7 @@ public partial class CStoreUIsHandler : CComponent {
 		switch(a_stProductTradeInfo.m_ePurchaseType) {
 			case EPurchaseType.ADS: {
 #if ADS_MODULE_ENABLE
-				m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS] = a_stProductTradeInfo.m_eProductKinds;
+				m_eSelProductKinds = a_stProductTradeInfo.m_eProductKinds;
 				Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif // #if ADS_MODULE_ENABLE
 
@@ -201,8 +193,7 @@ public partial class CStoreUIsHandler : CComponent {
 	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
 		// 광고를 시청했을 경우
 		if(a_bIsSuccess) {
-			var eSelProductKinds = m_oProductKindsDict[EKey.SEL_PRODUCT_KINDS];
-			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(eSelProductKinds));
+			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, CProductTradeInfoTable.Inst.GetBuyProductTradeTradeInfo(m_eSelProductKinds));
 		}
 
 		this.UpdateUIsState();
