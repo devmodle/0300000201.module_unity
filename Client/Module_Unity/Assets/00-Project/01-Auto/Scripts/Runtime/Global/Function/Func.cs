@@ -23,18 +23,6 @@ using GoogleSheetsToUnity;
 
 /** 기본 함수 */
 public static partial class Func {
-	/** 식별자 */
-	private enum EKey {
-		NONE = -1,
-
-#if ADS_MODULE_ENABLE
-		IS_WATCH_REWARD_ADS,
-		IS_WATCH_FULLSCREEN_ADS,
-#endif // #if ADS_MODULE_ENABLE
-
-		[HideInInspector] MAX_VAL
-	}
-
 	/** 콜백 */
 	private enum ECallback {
 		NONE = -1,
@@ -77,8 +65,8 @@ public static partial class Func {
 #endif // #if GAME_CENTER_MODULE_ENABLE
 
 #if PURCHASE_MODULE_ENABLE
-		PURCHASE,
 		RESTORE,
+		PURCHASE,
 #endif // #if PURCHASE_MODULE_ENABLE
 
 #if PLAYFAB_MODULE_ENABLE
@@ -99,15 +87,12 @@ public static partial class Func {
 	}
 
 	#region 클래스 변수
-	private static Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
 #if ADS_MODULE_ENABLE
-		[EKey.IS_WATCH_REWARD_ADS] = false,
-		[EKey.IS_WATCH_FULLSCREEN_ADS] = false
-#endif // #if ADS_MODULE_ENABLE
-	};
+	private static bool m_bIsWatchRewardAds = false;
+	private static bool m_bIsWatchFullscreenAds = false;
 
-#if ADS_MODULE_ENABLE
-	private static STAdsRewardInfo m_stAdsRewardInfo;
+	private static STAdsRewardInfo m_stWatchAdsRewardInfo = STAdsRewardInfo.INVALID;
+
 	private static Dictionary<ECallback, System.Action<CAdsManager, bool>> m_oAdsCallbackDict01 = new Dictionary<ECallback, System.Action<CAdsManager, bool>>();
 	private static Dictionary<ECallback, System.Action<CAdsManager, STAdsRewardInfo, bool>> m_oAdsCallbackDict02 = new Dictionary<ECallback, System.Action<CAdsManager, STAdsRewardInfo, bool>>();
 #endif // #if ADS_MODULE_ENABLE
@@ -502,8 +487,8 @@ public static partial class Func {
 			CIndicatorManager.Inst.Show();
 
 			CUSingleton.Inst.ExLateCallFunc((a_oSender) => {
-				Func.m_oBoolDict[EKey.IS_WATCH_REWARD_ADS] = false;
-				Func.m_stAdsRewardInfo = STAdsRewardInfo.INVALID;
+				Func.m_bIsWatchRewardAds = false;
+				Func.m_stWatchAdsRewardInfo = STAdsRewardInfo.INVALID;
 				Func.m_oAdsCallbackDict02.ExReplaceVal(ECallback.SHOW_REWARD_ADS, a_oCallback);
 
 				CAdsManager.Inst.ShowRewardAds(a_eAdsPlatform, Func.OnReceiveAdsReward, null, Func.OnCloseRewardAds);
@@ -539,7 +524,7 @@ public static partial class Func {
 
 				// 전면 광고 출력이 가능 할 경우
 				if(CAppInfoStorage.Inst.IsEnableShowFullscreenAds) {
-					Func.m_oBoolDict[EKey.IS_WATCH_FULLSCREEN_ADS] = true;
+					Func.m_bIsWatchFullscreenAds = true;
 					Func.m_oAdsCallbackDict01.ExReplaceVal(ECallback.SHOW_FULLSCREEN_ADS, a_oCallback);
 
 					CAdsManager.Inst.ShowFullscreenAds(a_eAdsPlatform, null, Func.OnCloseFullscreenAds);
@@ -566,13 +551,13 @@ public static partial class Func {
 		Func.IncrRewardAdsWatchTimes(KCDefine.B_VAL_1_INT);
 		CAppInfoStorage.Inst.SaveAppInfo();
 
-		Func.m_oAdsCallbackDict02.GetValueOrDefault(ECallback.SHOW_REWARD_ADS)?.Invoke(a_oSender, Func.m_stAdsRewardInfo, Func.m_oBoolDict[EKey.IS_WATCH_REWARD_ADS]);
+		Func.m_oAdsCallbackDict02.GetValueOrDefault(ECallback.SHOW_REWARD_ADS)?.Invoke(a_oSender, Func.m_stWatchAdsRewardInfo, Func.m_bIsWatchRewardAds);
 	}
 
 	/** 광고 보상을 수신했을 경우 */
 	private static void OnReceiveAdsReward(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
-		Func.m_stAdsRewardInfo = a_stAdsRewardInfo;
-		Func.m_oBoolDict[EKey.IS_WATCH_REWARD_ADS] = a_bIsSuccess;
+		Func.m_bIsWatchRewardAds = a_bIsSuccess;
+		Func.m_stWatchAdsRewardInfo = a_stAdsRewardInfo;
 	}
 
 	/** 전면 광고가 닫혔을 경우 */
@@ -583,7 +568,7 @@ public static partial class Func {
 		Func.IncrFullscreenAdsWatchTimes(KCDefine.B_VAL_1_INT);
 
 		CAppInfoStorage.Inst.SaveAppInfo();
-		Func.m_oAdsCallbackDict01.GetValueOrDefault(ECallback.SHOW_FULLSCREEN_ADS)?.Invoke(a_oSender, Func.m_oBoolDict[EKey.IS_WATCH_FULLSCREEN_ADS]);
+		Func.m_oAdsCallbackDict01.GetValueOrDefault(ECallback.SHOW_FULLSCREEN_ADS)?.Invoke(a_oSender, Func.m_bIsWatchFullscreenAds);
 	}
 #endif // #if ADS_MODULE_ENABLE
 
@@ -926,6 +911,14 @@ public static partial class Func {
 #endif // #if GAME_CENTER_MODULE_ENABLE
 
 #if PURCHASE_MODULE_ENABLE
+	/** 상품을 복원한다 */
+	public static void RestoreProducts(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback) {
+		CIndicatorManager.Inst.Show();
+		Func.m_oPurchaseCallbackDict02.ExReplaceVal(ECallback.RESTORE, a_oCallback);
+
+		CPurchaseManager.Inst.RestoreProducts(Func.OnRestoreProducts);
+	}
+
 	/** 상품을 결제한다 */
 	public static void PurchaseProduct(int a_nProductIdx, System.Action<CPurchaseManager, string, bool> a_oCallback, bool a_bIsEnableAssert = true) {
 		Func.PurchaseProduct(CProductInfoTable.Inst.GetProductInfo(a_nProductIdx).m_oID, a_oCallback, a_bIsEnableAssert);
@@ -955,12 +948,10 @@ public static partial class Func {
 		}
 	}
 
-	/** 상품을 복원한다 */
-	public static void RestoreProducts(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback) {
-		CIndicatorManager.Inst.Show();
-		Func.m_oPurchaseCallbackDict02.ExReplaceVal(ECallback.RESTORE, a_oCallback);
-
-		CPurchaseManager.Inst.RestoreProducts(Func.OnRestoreProducts);
+	/** 상품이 복원 되었을 경우 */
+	private static void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess) {
+		CIndicatorManager.Inst.Close();
+		Func.m_oPurchaseCallbackDict02.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
 	}
 
 	/** 상품이 결제 되었을 경우 */
@@ -971,12 +962,6 @@ public static partial class Func {
 		} else {
 			Func.OnConfirmProduct(a_oSender, a_oProductID, a_bIsSuccess);
 		}
-	}
-
-	/** 상품이 복원 되었을 경우 */
-	private static void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess) {
-		CIndicatorManager.Inst.Close();
-		Func.m_oPurchaseCallbackDict02.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
 	}
 
 	/** 상품이 결제 되었을 경우 */
