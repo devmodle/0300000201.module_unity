@@ -50,14 +50,14 @@ namespace NSEngine {
 		/** 대기 상태를 처리한다 */
 		protected override void HandleIdleState(float a_fDeltaTime) {
 			base.HandleIdleState(a_fDeltaTime);
-			m_oRealDict[EKey.UPDATE_SKIP_TIME] += a_fDeltaTime;
+			m_fUpdateSkipTime += a_fDeltaTime;
 
 			// 딜레이 시간이 지났을 경우
-			if(m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDelay)) {
+			if(m_fUpdateSkipTime.ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDelay)) {
 				this.SetState(EState.FX);
 				this.SetSubState(ESubState.APPLY);
 
-				m_oRealDict[EKey.UPDATE_SKIP_TIME] = KCDefine.B_VAL_0_REAL;
+				m_fUpdateSkipTime = KCDefine.B_VAL_0_REAL;
 			}
 		}
 
@@ -133,11 +133,11 @@ namespace NSEngine {
 
 		/** 적용 서브 상태를 처리한다 */
 		private void HandleApplySubState(float a_fDeltaTime) {
-			m_oRealDict[EKey.UPDATE_SKIP_TIME] += a_fDeltaTime;
+			m_fUpdateSkipTime += a_fDeltaTime;
 
 			// 적용 간격이 지났을 경우
-			if(m_oIntDict[EKey.APPLY_TIMES] < this.GetOwner<CEFX>().Params.m_stFXInfo.m_nMaxApplyTimes && m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDeltaTime * (m_oIntDict[EKey.APPLY_TIMES] - KCDefine.B_VAL_1_INT))) {
-				m_oIntDict[EKey.APPLY_TIMES] += KCDefine.B_VAL_1_INT;
+			if(m_nApplyTimes < this.GetOwner<CEFX>().Params.m_stFXInfo.m_nMaxApplyTimes && m_fUpdateSkipTime.ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDeltaTime * (m_nApplyTimes - KCDefine.B_VAL_1_INT))) {
+				m_nApplyTimes += KCDefine.B_VAL_1_INT;
 
 				switch(this.GetOwner<CEFX>().Params.m_stFXInfo.FXApplyType) {
 					case EFXApplyType.ANI: this.ApplyAni(); break;
@@ -148,7 +148,7 @@ namespace NSEngine {
 			}
 
 			// 적용 시간이 지났을 경우
-			if(m_oRealDict[EKey.UPDATE_SKIP_TIME].ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDuration)) {
+			if(m_fUpdateSkipTime.ExIsGreateEquals(this.GetOwner<CEFX>().Params.m_stFXInfo.m_stTimeInfo.m_fDuration)) {
 				this.SetSubState(ESubState.COMPLETE);
 			}
 		}

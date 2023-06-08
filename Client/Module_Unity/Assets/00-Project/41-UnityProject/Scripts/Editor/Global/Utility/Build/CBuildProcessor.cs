@@ -135,12 +135,12 @@ public static partial class CBuildProcessor {
 				oPBXProj.AddFrameworkToProject(oFrameworkGUID, KEditorDefine.B_IOS_EXTRA_FRAMEWORK_LIST[i], false);
 			}
 
-#if NEVER_USE_THIS
+#if DISABLE_THIS
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능)
 			for(int i = 0; i < KEditorDefine.B_IOS_EXTRA_CAPABILITY_TYPE_LIST.Count; ++i) {
 				oPBXProj.AddCapability(oMainGUID, KEditorDefine.B_IOS_EXTRA_CAPABILITY_TYPE_LIST[i]);
 			}
-#endif // #if NEVER_USE_THIS
+#endif // #if DISABLE_THIS
 
 			// 전처리기 심볼 정보 테이블이 존재 할 경우
 			if(CPlatformOptsSetter.DefineSymbolDictContainer != null && CPlatformOptsSetter.DefineSymbolDictContainer.TryGetValue(BuildTargetGroup.iOS, out List<string> oDefineSymbolList)) {
@@ -153,7 +153,7 @@ public static partial class CBuildProcessor {
 			oPBXProj.WriteToFile(oPBXProjPath);
 
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
-#if NEVER_USE_THIS
+#if DISABLE_THIS
 			var oCapability = new ProjectCapabilityManager(oPBXProjPath, KCEditorDefine.B_ENTITLEMENTS_P_CAPABILITY_IOS, null, oMainGUID);
 			
 			for(int i = 0; i < KEditorDefine.B_IOS_EXTRA_CAPABILITY_TYPE_LIST.Count; ++i) {
@@ -178,7 +178,7 @@ public static partial class CBuildProcessor {
 			}
 
 			oCapability.WriteToFile();
-#endif // #if NEVER_USE_THIS
+#endif // #if DISABLE_THIS
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) }
 		}
 #endif // #if UNITY_IOS

@@ -305,7 +305,7 @@ namespace MainScene {
 		/** 플레이 버튼을 눌렀을 경우 */
 		private void OnTouchPlayBtn() {
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
-#if NEVER_USE_THIS
+#if DISABLE_THIS
 			Func.ShowReadyPopup(this.PopupUIs, (a_oSender) => {
 				int nNumLevelInfos = CLevelInfoTable.Inst.GetNumLevelInfos(KCDefine.B_VAL_0_INT);
 				int nNumLevelClearInfos = Access.GetNumLevelClearInfos(CGameInfoStorage.Inst.PlayCharacterID, KCDefine.B_VAL_0_INT);
@@ -319,7 +319,7 @@ namespace MainScene {
 					[CReadyPopup.ECallback.PLAY] = this.OnReceiveReadyPopupCallback
 				}));
 			});
-#endif // #if NEVER_USE_THIS
+#endif // #if DISABLE_THIS
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) }
 		}
 
