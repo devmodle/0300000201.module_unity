@@ -12,7 +12,6 @@ public partial class CContinuePopup : CSubPopup {
 	/** 식별자 */
 	private enum EKey {
 		NONE = -1,
-		IS_WATCH_ADS,
 		PRICE_TEXT,
 		ADS_BTN,
 		[HideInInspector] MAX_VAL
@@ -36,10 +35,6 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	#region 변수
-	private Dictionary<EKey, bool> m_oBoolDict = new Dictionary<EKey, bool>() {
-		[EKey.IS_WATCH_ADS] = false
-	};
-
 	[Header("=====> UIs <=====")]
 	private Dictionary<EKey, TMP_Text> m_oTMPTextDict = new Dictionary<EKey, TMP_Text>();
 	private Dictionary<EKey, Button> m_oBtnDict = new Dictionary<EKey, Button>();
@@ -47,9 +42,9 @@ public partial class CContinuePopup : CSubPopup {
 
 	#region 프로퍼티
 	public STParams Params { get; private set; }
-	public override bool IsIgnoreCloseBtn => true;
+	public bool IsWatchRewardAds { get; private set; } = false;
 
-	public bool IsWatchAds => m_oBoolDict[EKey.IS_WATCH_ADS];
+	public override bool IsIgnoreCloseBtn => true;
 	public EItemKinds ContinueItemKinds => (EItemKinds)Mathf.Min((int)EItemKinds.CONSUMABLE_ITEM_GAME_CONTINUE_MAX_VAL - KCDefine.B_VAL_1_INT, (int)EItemKinds.CONSUMABLE_ITEM_GAME_CONTINUE_01 + this.Params.m_nContinueTimes);
 	#endregion // 프로퍼티
 
@@ -166,7 +161,7 @@ public partial class CContinuePopup : CSubPopup {
 	private void OnCloseRewardAds(CAdsManager a_oSender, STAdsRewardInfo a_stAdsRewardInfo, bool a_bIsSuccess) {
 		// 광고를 시청했을 경우
 		if(a_bIsSuccess) {
-			m_oBoolDict[EKey.IS_WATCH_ADS] = true;
+			this.IsWatchRewardAds = true;
 			this.Params.m_oCallbackDict?.GetValueOrDefault(ECallback.CONTINUE)?.Invoke(this);
 		}
 	}
