@@ -13,10 +13,6 @@ public partial class CTutorialPopup : CFocusPopup {
 		public ETutorialKinds m_eTutorialKinds;
 	}
 
-	#region 변수
-
-	#endregion // 변수
-
 	#region 프로퍼티
 	public new STParams Params { get; private set; }
 	#endregion // 프로퍼티
@@ -49,4 +45,3 @@ public partial class CTutorialPopup : CFocusPopup {
 	#endregion // 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-

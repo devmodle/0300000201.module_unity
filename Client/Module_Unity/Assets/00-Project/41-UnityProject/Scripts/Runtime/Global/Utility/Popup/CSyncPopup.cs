@@ -16,11 +16,10 @@ public partial class CSyncPopup : CSubPopup {
 	}
 
 	#region 변수
+	private bool m_bIsLoadUserInfo = false;
+
 	[Header("=====> Objs <=====")]
 	private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
-
-	[Header("=====> Fields <=====")]
-	private bool m_bIsLoadUserInfo = false;
 	#endregion // 변수
 
 	#region 함수
@@ -155,8 +154,8 @@ public partial class CSyncPopup : CSubPopup {
 			if(CUserInfoStorage.Inst.IsPurchaseRemoveAds) {
 				Func.CloseBannerAds(null);
 
-				CAdsManager.Inst.IsEnableBannerAds = false;
-				CAdsManager.Inst.IsEnableFullscreenAds = false;
+				CAdsManager.Inst.SetEnableBannerAds(false);
+				CAdsManager.Inst.SetEnableFullscreenAds(false);
 			}
 #endif // #if ADS_MODULE_ENABLE
 		}

@@ -493,8 +493,8 @@ public static partial class Func {
 #if ADS_MODULE_ENABLE
 				Func.CloseBannerAds(null);
 
-				CAdsManager.Inst.IsEnableBannerAds = false;
-				CAdsManager.Inst.IsEnableFullscreenAds = false;
+				CAdsManager.Inst.SetEnableBannerAds(false);
+				CAdsManager.Inst.SetEnableFullscreenAds(false);
 #endif // #if ADS_MODULE_ENABLE
 			}
 		}
@@ -739,7 +739,7 @@ public static partial class Func {
 		}
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 클래스 함수
+#endregion // 조건부 클래스 함수
 
 	#region 조건부 제네릭 클래스 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
@@ -750,7 +750,7 @@ public static partial class Func {
 		}
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 제네릭 클래스 함수
+#endregion // 조건부 제네릭 클래스 함수
 }
 
 /** 초기화 씬 함수 */

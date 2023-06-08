@@ -789,7 +789,7 @@ public partial class CLevelInfoTable : CSingleton<CLevelInfoTable> {
 		bool bIsValid = this.NumLevelInfosDictContainer.ContainsKey(a_nChapterID) && this.NumLevelInfosDictContainer[a_nChapterID].ContainsKey(a_nStageID);
 #endif // #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 
-		CAccess.Assert(bIsValid);
+	CAccess.Assert(bIsValid);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return this.LevelInfoDictContainer[a_nChapterID][a_nStageID].Count;

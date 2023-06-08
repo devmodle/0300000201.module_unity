@@ -13,11 +13,7 @@ namespace LoadingScene {
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
-
-		#region 변수
-
-		#endregion // 변수
-
+		
 		#region 프로퍼티
 		public override Vector3 LoadingTextPos => KDefine.LS_POS_LOADING_TEXT;
 		public override Vector3 LoadingGaugePos => KDefine.LS_POS_LOADING_GAUGE;

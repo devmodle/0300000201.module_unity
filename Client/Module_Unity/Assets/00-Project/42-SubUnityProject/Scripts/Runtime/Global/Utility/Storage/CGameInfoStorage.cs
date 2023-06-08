@@ -219,7 +219,7 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	public EPlayMode PlayMode { get; private set; } = EPlayMode.NONE;
 	public STEpisodeInfo PlayEpisodeInfo { get; private set; } = STEpisodeInfo.INVALID;
 	public System.DateTime PlayStartingTime { get; private set; } = System.DateTime.Now;
-
+	
 	public CLevelInfo PlayLevelInfo { get; private set; } = null;
 
 	public List<EItemKinds> SelItemKindsList { get; } = new List<EItemKinds>();

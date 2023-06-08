@@ -58,7 +58,7 @@ public struct STMissionInfo {
 		Func.SaveVals(m_oExtraMissionKindsList, KCDefine.U_KEY_FMT_EXTRA_MISSION_KINDS, (a_eMissionKinds) => $"{(int)a_eMissionKinds}", a_oOutMissionInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 
 /** 미션 정보 테이블 */
@@ -208,6 +208,6 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 		Access.MissionTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-	#endregion // 조건부 함수
+#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
