@@ -432,7 +432,7 @@ namespace LevelEditorScene {
 			if(CSceneManager.IsAppRunning && CNavStackManager.Inst.TopComponent == this) {
 				// 탭 키를 눌렀을 경우
 				if(UnityEngine.Input.GetKeyDown(KeyCode.Tab)) {
-					var oInputListContainer = CCollectionManager.Inst.SpawnList<List<InputField>>();
+					var oInputListContainer = CCollectionPoolManager.Inst.SpawnList<List<InputField>>();
 
 					try {
 						oInputListContainer.ExAddVal(m_oInputList01);
@@ -453,7 +453,7 @@ namespace LevelEditorScene {
 							CSceneManager.ActiveSceneEventSystem.SetSelectedGameObject(oInputListContainer[m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].CenteredPanel].ExGetVal((nIdx + KCDefine.B_VAL_1_INT) % oInputListContainer[m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].CenteredPanel].Count, null)?.gameObject);
 						}
 					} finally {
-						CCollectionManager.Inst.DespawnList(oInputListContainer);
+						CCollectionPoolManager.Inst.DespawnList(oInputListContainer);
 					}
 				}
 			}
@@ -1617,7 +1617,7 @@ namespace LevelEditorScene {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 왼쪽 에디터 UI 를 설정한다 */
 		private void SetupLeftEditorUIs() {
-			var oScrollViewDict = CCollectionManager.Inst.SpawnDict<string, GameObject>();
+			var oScrollViewDict = CCollectionPoolManager.Inst.SpawnDict<string, GameObject>();
 
 			try {
 				// 스크롤 뷰를 설정한다 {
@@ -1673,7 +1673,7 @@ namespace LevelEditorScene {
 				});
 				// 버튼을 설정한다 }
 			} finally {
-				CCollectionManager.Inst.DespawnDict(oScrollViewDict);
+				CCollectionPoolManager.Inst.DespawnDict(oScrollViewDict);
 			}
 		}
 
@@ -2160,7 +2160,7 @@ namespace LevelEditorScene {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		/** 시야 셀 개수를 반환한다 */
 		private Vector3Int GetNumViewCells(CLevelInfo a_oLevelInfo, int a_nIdx, float a_fDeltaX = KCDefine.B_VAL_0_REAL, float a_fDeltaY = KCDefine.B_VAL_0_REAL) {
-			var oGridInfoList = CCollectionManager.Inst.SpawnList<NSEngine.STGridInfo>();
+			var oGridInfoList = CCollectionPoolManager.Inst.SpawnList<NSEngine.STGridInfo>();
 			var stNumViewCells = Vector3Int.zero;
 
 			try {
@@ -2171,7 +2171,7 @@ namespace LevelEditorScene {
 				stNumViewCells.y = Mathf.Clamp((int)(oGridInfoList[a_nIdx].m_stViewBounds.size.y / NSEngine.Access.CellSize.y), NSEngine.KDefine.E_MIN_NUM_CELLS.y, a_oLevelInfo.NumCells.y);
 				stNumViewCells.z = KCDefine.B_VAL_1_INT;
 			} finally {
-				CCollectionManager.Inst.DespawnList(oGridInfoList);
+				CCollectionPoolManager.Inst.DespawnList(oGridInfoList);
 			}
 
 			int nNumViewCellsX = (this.SelLevelInfo.m_stNumViewCells.x <= KCDefine.B_VAL_1_INT) ? stNumViewCells.x : this.SelLevelInfo.m_stNumViewCells.x;

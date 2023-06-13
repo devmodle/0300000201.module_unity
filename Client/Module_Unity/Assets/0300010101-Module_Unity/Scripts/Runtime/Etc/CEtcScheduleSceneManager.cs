@@ -47,6 +47,58 @@ namespace Etc {
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
 				this.UpdateUIsState();
+
+
+
+
+
+
+
+
+
+
+				var oStopwatch = new System.Diagnostics.Stopwatch();
+				oStopwatch.Start();
+
+
+
+				for(int i = 0; i < 10000; ++i) {
+					var oListA = CCollectionPoolManager.Inst.SpawnList<int>();
+					var oListB = CCollectionPoolManager.Inst.SpawnList<int>();
+					var oListC = CCollectionPoolManager.Inst.SpawnList<int>();
+					var oListD = CCollectionPoolManager.Inst.SpawnList<int>();
+					
+					try {
+						// Do Something
+					} finally {
+						CCollectionPoolManager.Inst.DespawnList(oListA);
+						CCollectionPoolManager.Inst.DespawnList(oListB);
+						CCollectionPoolManager.Inst.DespawnList(oListC);
+						CCollectionPoolManager.Inst.DespawnList(oListD);
+					}
+				}
+
+
+				CFunc.ShowLog($"@@@@@@@@@@@@@@@@@: {oStopwatch.ElapsedMilliseconds}");
+				oStopwatch.Restart();
+
+
+				for(int i = 0; i < 10000; ++i) {
+					var oListA = new List<int>();
+					var oListB = new List<int>();
+					var oListC = new List<int>();
+					var oListD = new List<int>();
+
+					try {
+
+					} finally {
+
+					}
+				}
+
+				CFunc.ShowLog($"##################: {oStopwatch.ElapsedMilliseconds}");
+				
+
 			}
 		}
 

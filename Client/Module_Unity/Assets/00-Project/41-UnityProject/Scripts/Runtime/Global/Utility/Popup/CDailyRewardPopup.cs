@@ -94,7 +94,7 @@ public partial class CDailyRewardPopup : CSubPopup {
 	/** 보상 획득 팝업을 출력한다 */
 	private void ShowRewardAcquirePopup(bool a_bIsWatchRewardAds) {
 		Func.ShowRewardAcquirePopup(this.transform.parent.gameObject, (a_oSender) => {
-			var oTargetInfoDict = CCollectionManager.Inst.SpawnDict<ulong, STTargetInfo>();
+			var oTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
 
 			try {
 				var eRewardKinds = Access.GetDailyRewardKinds(CGameInfoStorage.Inst.PlayCharacterID);
@@ -108,7 +108,7 @@ public partial class CDailyRewardPopup : CSubPopup {
 				oTargetInfoDict.ExCopyTo(stRewardInfo.m_oAcquireTargetInfoDict, (a_stTargetInfo) => a_stTargetInfo);
 				(a_oSender as CRewardAcquirePopup).Init(CRewardAcquirePopup.MakeParams(stRewardInfo.m_eRewardQuality, ERewardAcquirePopupType.DAILY, stRewardInfo.m_oAcquireTargetInfoDict));
 			} finally {
-				CCollectionManager.Inst.DespawnDict(oTargetInfoDict);
+				CCollectionPoolManager.Inst.DespawnDict(oTargetInfoDict);
 			}
 		}, null, this.OnCloseRewardAcquirePopup);
 	}

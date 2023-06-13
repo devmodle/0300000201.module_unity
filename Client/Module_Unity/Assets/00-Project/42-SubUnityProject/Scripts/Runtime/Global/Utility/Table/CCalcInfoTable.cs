@@ -168,7 +168,7 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 
 	/** 수식 정보 값을 생성한다 */
 	public void MakeCalcInfoVals(SimpleJSON.JSONNode a_oCalcInfos, Dictionary<string, List<List<string>>> a_oOutCalcInfoValDictContainer) {
-		var oCommonKeyInfoList = CCollectionManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 
 		try {
 			this.SetupKeyInfos(oCommonKeyInfoList);
@@ -176,7 +176,7 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable> {
 
 			a_oOutCalcInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.CalcTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
 		} finally {
-			CCollectionManager.Inst.DespawnList(oCommonKeyInfoList);
+			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 		}
 	}
 
