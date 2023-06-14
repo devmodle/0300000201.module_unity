@@ -50,7 +50,7 @@ namespace PlayScene {
 		private NSEngine.CEngine m_oEngine = null;
 		private Dictionary<EKey, SpriteRenderer> m_oSpriteDict = new Dictionary<EKey, SpriteRenderer>();
 
-		[Header("=====> Objs <=====")]
+		[Header("=====> Game Objects <=====")]
 		[SerializeField] private List<GameObject> m_oRewardAdsUIsList = new List<GameObject>();
 		private Dictionary<EKey, GameObject> m_oObjDict = new Dictionary<EKey, GameObject>();
 		#endregion // 변수
@@ -288,7 +288,7 @@ namespace PlayScene {
 				[NSEngine.CEngine.ECallback.E_OBJ_EVENT] = this.OnReceiveEObjEventCallback
 			};
 
-			m_oEngine = CFactory.CreateObj<NSEngine.CEngine>(KDefine.PS_OBJ_N_ENGINE, this.gameObject);
+			m_oEngine = CFactory.CreateGameObj<NSEngine.CEngine>(KDefine.PS_OBJ_N_ENGINE, this.gameObject);
 			m_oEngine.Init(NSEngine.CEngine.MakeParams(this.ItemRoot, this.SkillRoot, this.ObjRoot, this.FXRoot, oCallbackDict01, oCallbackDict02, oCallbackDict03));
 		}
 
