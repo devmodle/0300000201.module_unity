@@ -69,7 +69,7 @@ namespace TitleScene {
 					oItemKindsList.ExAddVal(EItemKinds.NON_CONSUMABLE_ITEM_WATCH_ADS_01);
 
 					for(int i = 0; i < oItemKindsList.Count; ++i) {
-						// 아이템이 없을 경우
+						// 기본 아이템이 없을 경우
 						if(Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, oItemKindsList[i], ETargetKinds.ABILITY_TARGET, (int)EAbilityKinds.STAT_ABILITY_NUMS) <= KCDefine.B_VAL_0_INT) {
 							var stValInfo = new STValInfo(EValType.INT, int.MaxValue);
 							Func.Acquire(CGameInfoStorage.Inst.PlayCharacterID, new STTargetInfo(ETargetKinds.ITEM_TARGET_NUMS, (int)oItemKindsList[i], stValInfo));
@@ -103,9 +103,9 @@ namespace TitleScene {
 
 			// 앱이 초기화 되었을 경우
 			if(CSceneManager.IsAppInit) {
-				// 업데이트가 가능 할 경우
-				if(!CAppInfoStorage.Inst.IsIgnoreUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
-					CAppInfoStorage.Inst.SetIgnoreUpdate(true);
+				// 앱 업데이트가 가능 할 경우
+				if(!CAppInfoStorage.Inst.IsIgnoreAppUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
+					CAppInfoStorage.Inst.SetIgnoreAppUpdate(true);
 					this.ExLateCallFunc((a_oSender) => Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_UPDATE_P_MSG), this.OnReceiveUpdatePopupResult));
 				}
 
