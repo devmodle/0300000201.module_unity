@@ -9,14 +9,15 @@ using UnityEngine.Events;
 public static partial class KDefine {
 	#region 기본
 	// 씬 이름 {
-	public const string G_SCENE_N_ETC_SCHEDULE = "01-Etc_ScheduleScene";
-
 	public const string G_SCENE_N_ADS_ADMOB = "01-Ads_AdmobScene";
 	public const string G_SCENE_N_ADS_IRON_SRC = "02-Ads_IronSrcScene";
 	public const string G_SCENE_N_ADS_APP_LOVIN = "03-Ads_AppLovinScene";
 
 	public const string G_SCENE_N_FX_SHADER = "01-FX_ShaderScene";
 	public const string G_SCENE_N_FX_PARTICLE = "02-FX_ParticleScene";
+
+	public const string G_SCENE_N_ETC_SCHEDULE = "01-Etc_ScheduleScene";
+	public const string G_SCENE_N_ETC_SERIALIZATION = "02-Etc_SerializationScene";
 	// 씬 이름 }
 	#endregion // 기본
 
