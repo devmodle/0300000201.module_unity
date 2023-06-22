@@ -70,7 +70,7 @@
 #define G_CMD_GET_COUNTRY_CODE			("GetCountryCode")
 #define G_CMD_GET_STORE_VER				("GetStoreVer")
 
-#define G_CMD_SET_ENABLE_ADS_TRACKING			("SetEnableAdsTracking")
+#define G_CMD_SET_ENABLE_ADS_TRACKING			("SetIsEnableAdsTracking")
 
 #define G_CMD_SHOW_ALERT			("ShowAlert")
 #define G_CMD_SHOW_TOAST			("ShowToast")
