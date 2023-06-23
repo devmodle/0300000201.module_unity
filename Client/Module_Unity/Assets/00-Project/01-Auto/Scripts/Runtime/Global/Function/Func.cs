@@ -248,7 +248,7 @@ public static partial class Func {
 		}
 	}
 
-	/** 접촉 전달자를 설정한다 */
+	/** 충돌 전달자를 설정한다 */
 	public static void SetupTriggerDispatchers(List<(GameObject, System.Action<CTriggerDispatcher, Collider>, System.Action<CTriggerDispatcher, Collider>, System.Action<CTriggerDispatcher, Collider>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
@@ -262,7 +262,7 @@ public static partial class Func {
 		}
 	}
 
-	/** 접촉 전달자를 설정한다 */
+	/** 충돌 전달자를 설정한다 */
 	public static void SetupTriggerDispatchers(List<(GameObject, System.Action<CTriggerDispatcher, Collider2D>, System.Action<CTriggerDispatcher, Collider2D>, System.Action<CTriggerDispatcher, Collider2D>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
@@ -276,7 +276,7 @@ public static partial class Func {
 		}
 	}
 
-	/** 접촉 전달자를 설정한다 */
+	/** 충돌 전달자를 설정한다 */
 	public static void SetupTouchDispatchers(List<(string, GameObject, System.Action<CTriggerDispatcher, Collider>, System.Action<CTriggerDispatcher, Collider>, System.Action<CTriggerDispatcher, Collider>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
@@ -290,7 +290,7 @@ public static partial class Func {
 		}
 	}
 
-	/** 접촉 전달자를 설정한다 */
+	/** 충돌 전달자를 설정한다 */
 	public static void SetupTouchDispatchers(List<(string, GameObject, System.Action<CTriggerDispatcher, Collider2D>, System.Action<CTriggerDispatcher, Collider2D>, System.Action<CTriggerDispatcher, Collider2D>)> a_oKeyInfoList, bool a_bIsEnableAssert = true) {
 		CAccess.Assert(!a_bIsEnableAssert || a_oKeyInfoList.ExIsValid());
 
