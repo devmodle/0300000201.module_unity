@@ -156,6 +156,7 @@ PlayerSettings:
   - {fileID: 102900000, guid: 27221a0c63d84415cade7e5bcf7bfc4b, type: 3}
   - {fileID: 102900000, guid: 093760443eecf47f5b34adc1b437c1bd, type: 3}
   - {fileID: 102900000, guid: 5e407b3984ee5410b927f6de4006c6a7, type: 3}
+  - {fileID: 8995057965181221542, guid: e5c38a06e1aa2ca45b92c5f6669b2fb9, type: 2}
   - {fileID: 100100200, guid: 399c3ae39c1bf44c9a45469cd9bf115a, type: 3}
   - {fileID: 100100200, guid: 26b78d2ef79784caaa74bb8812dc678a, type: 3}
   - {fileID: 100100200, guid: ddf3b30dc1c294122bdc187d9164357a, type: 3}
@@ -193,12 +194,14 @@ PlayerSettings:
   - {fileID: 100100200, guid: 38927c86ec3654026bc085cc9eab8502, type: 3}
   - {fileID: 4890085278179872738, guid: 6184cf2c9914048579d48d005fc79bb0, type: 2}
   - {fileID: 11400000, guid: 05f5938fdc2db4f56b56cc3dd1913674, type: 2}
+  - {fileID: 11400000, guid: c836e8b1068044c129f3000b0aa85c0b, type: 2}
   - {fileID: 1263463014167979624, guid: 056ed3e5b86be45c496857526542f225, type: 3}
   - {fileID: 11400000, guid: 5c76718d4a54d4a1891820d7b6709a28, type: 2}
   - {fileID: 8019310881375038877, guid: d63b2d2f1075949faae7607c08bee7b4, type: 3}
   - {fileID: 8019310881375038877, guid: 8f69df76ba0a542d4a967109d5f2cdc7, type: 3}
   - {fileID: 7947261922413523823, guid: c84e01156220d44d991c249f8ed8263d, type: 3}
   - {fileID: 11400000, guid: 64514d6f6b2354b7992a09fdf2c2d433, type: 2}
+  - {fileID: 11400000, guid: 9b42a332535cba34ea29eca0f887848a, type: 2}
   - {fileID: 2263259457666090574, guid: 8b7810a41dd424366b13deace0e7c131, type: 3}
   - {fileID: 4956034379125523778, guid: 56c3ccd47ba6b443ebe368c6323681b0, type: 3}
   - {fileID: 2163081430555252783, guid: d3d52a1de7dba4286909e373ed93feac, type: 3}
@@ -273,6 +276,7 @@ PlayerSettings:
     Standalone: lkstudio.dante.sample
     iPhone: lkstudio.dante.sample
   buildNumber:
+    Bratwurst: 0
     Standalone: 1
     iPhone: 1
     tvOS: 0
@@ -298,6 +302,8 @@ PlayerSettings:
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 12.0
+  bratwurstSdkVersion: 0
+  bratwurstTargetOSVersionString: 16.4
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -345,8 +351,10 @@ PlayerSettings:
   appleDeveloperTeamID: A9997B8HR5
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
+  bratwurstManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 1
   tvOSManualSigningProvisioningProfileType: 0
+  bratwurstManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 2
   iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
@@ -1045,6 +1053,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Android: UNIT_SCALE_CORRECT_ENABLE;MSG_PACK_SERIALIZE_DESERIALIZE_ENABLE;SPRITE_PIXELS_PER_UNIT_CORRECT_ENABLE;UNIVERSAL_RENDERING_PIPELINE_MODULE_ENABLE;ADDRESSABLES_MODULE_ENABLE;BURST_COMPILER_MODULE_ENABLE;LOCALIZE_MODULE_ENABLE;ADS_MODULE_ENABLE;FIREBASE_MODULE_ENABLE;SAMPLE_PROJ;SCENE_TEMPLATES_MODULE_ENABLE;EDITOR_SCENE_TEMPLATES_MODULE_ENABLE;PREFAB_TEMPLATES_MODULE_ENABLE;UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE;MODULE_VER_3_0_0_OR_NEWER;MODULE_VER_3_1_0_OR_NEWER;ENABLE_IL2CPP;ODIN_INSPECTOR;DOTWEEN_ENABLE;MSG_PACK_ENABLE;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EXTRA_SCRIPT_ENABLE;INPUT_SYSTEM_ENABLE;RECEIPT_CHECK_ENABLE;NEWTON_SOFT_JSON_ENABLE;UNITY_POST_PROCESSING_STACK_V2;AB_TEST_ENABLE;DOTWEEN_MODULE_ENABLE;EXTRA_SCRIPT_MODULE_ENABLE;NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE;INPUT_SYSTEM_MODULE_ENABLE;ENABLE_INPUT_SYSTEM;ADAPTIVE_PERFORMANCE_ENABLE;STUDY_MODULE_ENABLE;STUDY_ENABLE;ML_AGENTS_MODULE_ENABLE;ML_AGENTS_ENABLE;CINEMACHINE_MODULE_ENABLE;CINEMACHINE_ENABLE;POST_PROCESSING_MODULE_ENABLE;POST_PROCESSING_ENABLE;SKELETON_2D_ANI_MODULE_ENABLE;SKELETON_2D_ANI_ENABLE;UNIVERSAL_RENDERING_PIPELINE_ENABLE;NOTI_MODULE_ENABLE;NOTI_ENABLE;LIGHT_ENABLE;UIS_ROOT_PREFAB_ENABLE;CAMERA_STACKING_ENABLE;PHYSICS_RAYCASTER_ENABLE;ADDITIONAL_LIGHTS_PIXEL_RENDERING_ENABLE
+    Bratwurst: UNITY_POST_PROCESSING_STACK_V2
     EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
     GameCoreScarlett: UNITY_POST_PROCESSING_STACK_V2
     GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
@@ -1086,7 +1095,6 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
-  selectedPlatform: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 0
