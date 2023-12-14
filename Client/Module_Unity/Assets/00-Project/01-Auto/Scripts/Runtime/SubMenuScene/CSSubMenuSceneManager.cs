@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-#if STUDY_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
+#if RESEARCH_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
 namespace MenuScene {
 	/** 스터디 서브 메뉴 씬 관리자 */
 	public partial class CSSubMenuSceneManager : CSMenuSceneManager {
@@ -42,4 +42,4 @@ namespace MenuScene {
 #endregion // 함수
 	}
 }
-#endif // #if STUDY_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
+#endif // #if RESEARCH_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
