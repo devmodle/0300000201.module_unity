@@ -86,7 +86,7 @@ public enum EApplyType {
 }
 
 /** 적용 종류 */
-public enum EApplyKinds {
+public enum EApplyKinds : long {
 	NONE = -1,
 
 	#region 다중
@@ -117,7 +117,7 @@ public enum EFXApplyType {
 }
 
 /** 효과 적용 종류 */
-public enum EFXApplyKinds {
+public enum EFXApplyKinds : long {
 	NONE = -1,
 
 	#region 애니메이션
@@ -154,7 +154,7 @@ public enum ETargetType {
 }
 
 /** 타겟 종류 */
-public enum ETargetKinds {
+public enum ETargetKinds : long {
 	NONE = -1,
 
 	#region 아이템
@@ -204,7 +204,7 @@ public enum ECalcType {
 }
 
 /** 수식 종류 */
-public enum ECalcKinds {
+public enum ECalcKinds : long {
 	NONE = -1,
 
 	#region 어빌리티
@@ -226,7 +226,7 @@ public enum EMissionType {
 }
 
 /** 미션 종류 */
-public enum EMissionKinds {
+public enum EMissionKinds : long {
 	NONE = -1,
 
 	#region 메인
@@ -265,7 +265,7 @@ public enum ERewardType {
 }
 
 /** 보상 종류 */
-public enum ERewardKinds {
+public enum ERewardKinds : long {
 	NONE = -1,
 
 	#region 무료
@@ -305,23 +305,23 @@ public enum ERewardKinds {
 /** 에피소드 타입 */
 public enum EEpisodeType {
 	NONE = -1,
-	LEVEL,
-	STAGE,
 	CHAPTER,
+	STAGE,
+	LEVEL,
 	[HideInInspector] MAX_VAL
 }
 
 /** 에피소드 종류 */
-public enum EEpisodeKinds {
+public enum EEpisodeKinds : long {
 	NONE = -1,
 
-	#region 레벨
-	// 0
-	LEVEL_EPISODE_NORM_01 = (EEnumVal.T * EEpisodeType.LEVEL) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
+	#region 챕터
+	// 200,000,000
+	CHAPTER_EPISODE_NORM_01 = (EEnumVal.T * EEpisodeType.CHAPTER) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
 
-	// 10,000,000
-	LEVEL_EPISODE_BOSS_01 = (EEnumVal.T * EEpisodeType.LEVEL) + (EEnumVal.ST * 1) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
-	#endregion // 레벨
+	// 210,000,000
+	CHAPTER_EPISODE_BOSS_01 = (EEnumVal.T * EEpisodeType.CHAPTER) + (EEnumVal.ST * 1) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
+	#endregion // 챕터
 
 	#region 스테이지
 	// 100,000,000
@@ -331,13 +331,13 @@ public enum EEpisodeKinds {
 	STAGE_EPISODE_BOSS_01 = (EEnumVal.T * EEpisodeType.STAGE) + (EEnumVal.ST * 1) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
 	#endregion // 스테이지
 
-	#region 챕터
-	// 200,000,000
-	CHAPTER_EPISODE_NORM_01 = (EEnumVal.T * EEpisodeType.CHAPTER) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
+	#region 레벨
+	// 0
+	LEVEL_EPISODE_NORM_01 = (EEnumVal.T * EEpisodeType.LEVEL) + (EEnumVal.ST * 0) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
 
-	// 210,000,000
-	CHAPTER_EPISODE_BOSS_01 = (EEnumVal.T * EEpisodeType.CHAPTER) + (EEnumVal.ST * 1) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
-	#endregion // 챕터
+	// 10,000,000
+	LEVEL_EPISODE_BOSS_01 = (EEnumVal.T * EEpisodeType.LEVEL) + (EEnumVal.ST * 1) + (EEnumVal.KT * 0) + (EEnumVal.SKT * 0),
+	#endregion // 레벨
 
 	[HideInInspector] MAX_VAL
 }
@@ -351,7 +351,7 @@ public enum ETutorialType {
 }
 
 /** 튜토리얼 종류 */
-public enum ETutorialKinds {
+public enum ETutorialKinds : long {
 	NONE = -1,
 
 	#region 플레이
@@ -378,7 +378,7 @@ public enum EResType {
 }
 
 /** 리소스 종류 */
-public enum EResKinds {
+public enum EResKinds : long {
 	NONE = -1,
 
 	#region 폰트
@@ -432,7 +432,7 @@ public enum EItemType {
 }
 
 /** 아이템 종류 */
-public enum EItemKinds {
+public enum EItemKinds : long {
 	NONE = -1,
 
 	#region 재화
@@ -491,7 +491,7 @@ public enum ESkillType {
 }
 
 /** 스킬 종류 */
-public enum ESkillKinds {
+public enum ESkillKinds : long {
 	NONE = -1,
 
 	#region 액션
@@ -533,7 +533,7 @@ public enum EObjType {
 }
 
 /** 객체 종류 */
-public enum EObjKinds {
+public enum EObjKinds : long {
 	NONE = -1,
 
 	#region 배경
@@ -584,7 +584,7 @@ public enum EFXType {
 }
 
 /** 효과 종류 */
-public enum EFXKinds {
+public enum EFXKinds : long {
 	NONE = -1,
 
 	#region 타격
@@ -616,7 +616,7 @@ public enum EAbilityType {
 }
 
 /** 어빌리티 종류 */
-public enum EAbilityKinds {
+public enum EAbilityKinds : long {
 	NONE = -1,
 
 	#region 스탯
@@ -771,7 +771,7 @@ public enum EProductType {
 }
 
 /** 상품 종류 */
-public enum EProductKinds {
+public enum EProductKinds : long {
 	NONE = -1,
 
 	#region 패키지
