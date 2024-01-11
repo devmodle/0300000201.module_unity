@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Etc {
 	/** 직렬화 씬 관리자 */
-	public partial class CEtcSerializationSceneManager : StudyScene.CSSceneManager {
+	public partial class CEtcSerializationSceneManager : ResearchScene.CRSceneManager {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,

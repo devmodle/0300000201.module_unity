@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE
 namespace FX {
 	/** 파티클 씬 관리자 */
-	public partial class CFXParticleSceneManager : StudyScene.CSSceneManager {
+	public partial class CFXParticleSceneManager : ResearchScene.CRSceneManager {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,

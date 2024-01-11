@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Ads {
 	/** 아이언 소스 씬 관리자 */
-	public partial class CAdsIronSrcSceneManager : StudyScene.CSSceneManager {
+	public partial class CAdsIronSrcSceneManager : ResearchScene.CRSceneManager {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,

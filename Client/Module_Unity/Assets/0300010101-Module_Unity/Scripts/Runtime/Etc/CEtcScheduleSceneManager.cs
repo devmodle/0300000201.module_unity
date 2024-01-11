@@ -7,7 +7,7 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE
 namespace Etc {
 	/** 스케줄 씬 관리자 */
-	public partial class CEtcScheduleSceneManager : StudyScene.CSSceneManager {
+	public partial class CEtcScheduleSceneManager : ResearchScene.CRSceneManager {
 		/** 식별자 */
 		private enum EKey {
 			NONE = -1,
