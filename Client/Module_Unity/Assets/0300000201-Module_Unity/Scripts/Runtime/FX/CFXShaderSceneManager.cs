@@ -15,7 +15,6 @@ namespace FX {
 		}
 
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_FX_SHADER;
 		public override bool IsSetupRenderingPipeline => false;
 		#endregion // 프로퍼티
 

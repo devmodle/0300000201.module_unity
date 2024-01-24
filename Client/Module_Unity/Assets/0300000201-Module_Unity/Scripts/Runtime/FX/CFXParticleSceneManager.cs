@@ -14,8 +14,12 @@ namespace FX {
 			[HideInInspector] MAX_VAL
 		}
 
+		#region 변수
+
+		#endregion // 변수
+
 		#region 프로퍼티
-		public override string SceneName => KDefine.G_SCENE_N_FX_PARTICLE;
+
 		#endregion // 프로퍼티
 
 		#region 함수
