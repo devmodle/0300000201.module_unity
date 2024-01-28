@@ -13,7 +13,7 @@ namespace MenuScene {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// Do Something
 			}

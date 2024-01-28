@@ -247,7 +247,7 @@ namespace LevelEditorScene {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 				// 레벨 정보가 없을 경우
@@ -315,7 +315,7 @@ namespace LevelEditorScene {
 		public override void Start() {
 			base.Start();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// 스크롤 뷰를 설정한다
 				m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP]?.gameObject.SetActive(true);
@@ -459,7 +459,7 @@ namespace LevelEditorScene {
 			}
 		}
 
-		/** 제거 되었을 경우 */
+		/** 제거되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
 
@@ -488,7 +488,7 @@ namespace LevelEditorScene {
 			}
 		}
 
-		/** 화면 크기가 변경 되었을 경우 */
+		/** 화면 크기가 변경되었을 경우 */
 		protected override void OnChangeScreenSize(Vector3 a_stScreenSize) {
 			base.OnChangeScreenSize(a_stScreenSize);
 			this.ExLateCallFunc((a_oSender) => CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_LEVEL_EDITOR), KCDefine.B_VAL_0_1_REAL);
@@ -799,6 +799,7 @@ namespace LevelEditorScene {
 
 		/** UI 상태를 갱신한다 */
 		private void UpdateUIsState() {
+			this.SetIsDirtyRebuildLayout(true);
 			this.ResetObjSprites();
 
 			this.UpdateMidEditorUIsState();
@@ -806,10 +807,6 @@ namespace LevelEditorScene {
 			this.UpdateRightEditorUIsState();
 
 			this.SubUpdateUIsState();
-
-			// 레이아웃을 재배치한다
-			this.RebuildLayouts(this.MEUIsInfoUIs);
-			this.RebuildLayouts(this.MEUIsEditorModeUIs);
 		}
 
 		/** 에디터 리셋 팝업 결과를 수신했을 경우 */
@@ -1174,7 +1171,7 @@ namespace LevelEditorScene {
 #if GOOGLE_SHEET_ENABLE
 		/** 구글 시트를 로드했을 경우 */
 		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
-			// 로드 되었을 경우
+			// 로드되었을 경우
 			if(a_bIsSuccess) {
 				var oHandlerDict = new Dictionary<string, System.Action>() {
 					[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = () => CEtcInfoTable.Inst.SaveEtcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
@@ -1194,7 +1191,7 @@ namespace LevelEditorScene {
 
 		/** 버전 정보 구글 시트를 로드했을 경우 */
 		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoDict, bool a_bIsSuccess) {
-			// 로드 되었을 경우
+			// 로드되었을 경우
 			if(a_bIsSuccess) {
 				m_oVerInfos = a_oVerInfos;
 				Func.LoadGoogleSheets(a_oLoadGoogleSheetInfoDict.Values.ToList(), m_oGoogleSheetLoadHandlerDict, this.OnLoadGoogleSheets);
@@ -1205,7 +1202,7 @@ namespace LevelEditorScene {
 
 		/** 구글 시트를 로드했을 경우 */
 		private void OnLoadGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
-			// 로드 되었을 경우
+			// 로드되었을 경우
 			if(a_bIsSuccess) {
 				this.UpdateUIsState();
 				Func.OnLoadGoogleSheets(m_oVerInfos);
@@ -1218,7 +1215,7 @@ namespace LevelEditorScene {
 
 		/** 구글 시트를 저장했을 경우 */
 		private void OnSaveGoogleSheet(CServicesManager a_oSender, STGoogleSheetSaveInfo a_stGoogleSheetSaveInfo, bool a_bIsSuccess) {
-			// 로드 되었을 경우
+			// 로드되었을 경우
 			if(a_bIsSuccess) {
 				var oHandlerDict = new Dictionary<string, System.Action>() {
 					// Do Something
@@ -1230,7 +1227,7 @@ namespace LevelEditorScene {
 
 		/** 구글 시트를 저장했을 경우 */
 		private void OnSaveGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
-			// 로드 되었을 경우
+			// 로드되었을 경우
 			if(a_bIsSuccess) {
 				this.UpdateUIsState();
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_TABLE_SAVE_MSG), null, a_bIsEnableCancelBtn: false);
@@ -1565,7 +1562,7 @@ namespace LevelEditorScene {
 			this.SetMEUIsEditorMode(bIsDraw, bIsPaint);
 		}
 
-		/** 중앙 에디터 UI 그리드 스크롤 바 값이 변경 되었을 경우 */
+		/** 중앙 에디터 UI 그리드 스크롤 바 값이 변경되었을 경우 */
 		private void OnChangeMEUIsGridScrollBarVal(float a_fVal) {
 			float fWidth = Mathf.Max(KCDefine.B_VAL_0_INT, this.SelGridInfo.m_stBounds.size.x - this.SelGridInfo.m_stViewBounds.size.x);
 			float fHeight = Mathf.Max(KCDefine.B_VAL_0_INT, this.SelGridInfo.m_stBounds.size.y - this.SelGridInfo.m_stViewBounds.size.y);

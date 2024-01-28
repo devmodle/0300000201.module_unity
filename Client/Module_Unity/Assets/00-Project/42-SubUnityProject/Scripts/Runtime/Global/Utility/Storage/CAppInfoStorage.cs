@@ -51,7 +51,7 @@ public partial class CAppInfo : CBaseInfo {
 		}
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public override void OnAfterDeserialize() {
 		base.OnAfterDeserialize();
 

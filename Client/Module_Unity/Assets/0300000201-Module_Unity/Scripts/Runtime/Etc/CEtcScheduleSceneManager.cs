@@ -27,7 +27,7 @@ namespace Etc {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// 버튼을 설정한다
 				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
@@ -44,13 +44,13 @@ namespace Etc {
 		public override void Start() {
 			base.Start();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				this.UpdateUIsState();
 			}
 		}
 
-		/** 제거 되었을 경우 */
+		/** 제거되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
 
@@ -109,12 +109,12 @@ namespace Etc {
 			CScheduleManager.Inst.RemoveTimer(this.OnExecuteRepeatTimer);
 		}
 
-		/** 타이머가 실행 되었을 경우 */
+		/** 타이머가 실행되었을 경우 */
 		private void OnExecuteTimer() {
 			CFunc.ShowLog($"CEtcScheduleSceneManager.OnExecuteTimer");
 		}
 
-		/** 반복 타이머가 실행 되었을 경우 */
+		/** 반복 타이머가 실행되었을 경우 */
 		private void OnExecuteRepeatTimer() {
 			CFunc.ShowLog($"CEtcScheduleSceneManager.OnExecuteRepeatTimer");
 		}

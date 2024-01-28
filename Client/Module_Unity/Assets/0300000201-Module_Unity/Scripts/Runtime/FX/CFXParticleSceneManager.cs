@@ -27,7 +27,7 @@ namespace FX {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				// Do Something
 			}
@@ -37,13 +37,13 @@ namespace FX {
 		public override void Start() {
 			base.Start();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				this.UpdateUIsState();
 			}
 		}
 
-		/** 제거 되었을 경우 */
+		/** 제거되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
 

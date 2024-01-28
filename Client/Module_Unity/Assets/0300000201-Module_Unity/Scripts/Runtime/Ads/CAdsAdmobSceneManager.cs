@@ -27,34 +27,38 @@ namespace Ads {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
-			if(CSceneManager.IsAppInit) {
-				// 버튼을 설정한다
-				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
-					("LOAD_BANNER_ADS", this.UIs, this.OnTouchLoadBannerAdsBtn),
-					("LOAD_REWARD_ADS", this.UIs, this.OnTouchLoadRewardAdsBtn),
-					("LOAD_FULLSCREEN_ADS", this.UIs, this.OnTouchLoadFullscreenAdsBtn),
-
-					("SHOW_BANNER_ADS", this.UIs, this.OnTouchShowBannerAdsBtn),
-					("SHOW_REWARD_ADS", this.UIs, this.OnTouchShowRewardAdsBtn),
-					("SHOW_FULLSCREEN_ADS", this.UIs, this.OnTouchShowFullscreenAdsBtn),
-
-					("CLOSE_BANNER_ADS", this.UIs, this.OnTouchCloseBannerAdsBtn)
-				});
+			// 앱 초기화가 필요 할 경우
+			if(!CSceneManager.IsAppInit) {
+				return;
 			}
+
+			// 버튼을 설정한다
+			CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
+				("LOAD_BANNER_ADS", this.UIs, this.OnTouchLoadBannerAdsBtn),
+				("LOAD_REWARD_ADS", this.UIs, this.OnTouchLoadRewardAdsBtn),
+				("LOAD_FULLSCREEN_ADS", this.UIs, this.OnTouchLoadFullscreenAdsBtn),
+
+				("SHOW_BANNER_ADS", this.UIs, this.OnTouchShowBannerAdsBtn),
+				("SHOW_REWARD_ADS", this.UIs, this.OnTouchShowRewardAdsBtn),
+				("SHOW_FULLSCREEN_ADS", this.UIs, this.OnTouchShowFullscreenAdsBtn),
+
+				("CLOSE_BANNER_ADS", this.UIs, this.OnTouchCloseBannerAdsBtn)
+			});
 		}
 
 		/** 초기화 */
 		public override void Start() {
 			base.Start();
 
-			// 앱이 초기화 되었을 경우
-			if(CSceneManager.IsAppInit) {
-				this.UpdateUIsState();
+			// 앱 초기화가 필요 할 경우
+			if(!CSceneManager.IsAppInit) {
+				return;
 			}
+
+			this.UpdateUIsState();
 		}
 
-		/** 제거 되었을 경우 */
+		/** 제거되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
 

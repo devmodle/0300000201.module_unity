@@ -76,7 +76,7 @@ namespace MainScene {
 		public override void Awake() {
 			base.Awake();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 #if CREATIVE_DIST_BUILD
 				for(int i = 0; i < CLevelInfoTable.Inst.NumChapterInfos; ++i) {
@@ -106,7 +106,7 @@ namespace MainScene {
 		public override void Start() {
 			base.Start();
 
-			// 앱이 초기화 되었을 경우
+			// 앱이 초기화되었을 경우
 			if(CSceneManager.IsAppInit) {
 				this.SetupStart();
 				this.UpdateUIsState();
@@ -122,7 +122,7 @@ namespace MainScene {
 			}
 		}
 
-		/** 제거 되었을 경우 */
+		/** 제거되었을 경우 */
 		public override void OnDestroy() {
 			base.OnDestroy();
 
@@ -136,11 +136,11 @@ namespace MainScene {
 			}
 		}
 
-		/** 앱이 정지 되었을 경우 */
+		/** 앱이 정지되었을 경우 */
 		public override void OnApplicationPause(bool a_bIsPause) {
 			base.OnApplicationPause(a_bIsPause);
 
-			// 재개 되었을 경우
+			// 재개되었을 경우
 			if(!a_bIsPause && CSceneManager.IsAppRunning) {
 #if ADS_MODULE_ENABLE
 				// 광고 출력이 가능 할 경우
@@ -341,7 +341,7 @@ namespace MainScene {
 			m_oScrollSnapDict[EKey.CONTENTS_SCROLL_SNAP].GoToPanel(a_nIdx);
 		}
 
-		/** 스크롤 스냅 페이지가 변경 되었을 경우 */
+		/** 스크롤 스냅 페이지가 변경되었을 경우 */
 		private void OnChangeScrollSnapPage(int a_nSrcIdx, int a_nDestIdx) {
 			this.UpdateUIsState();
 		}

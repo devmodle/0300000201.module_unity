@@ -132,12 +132,12 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 		this.SizeZ = m_stSize.z;
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public void OnAfterDeserialize() {
 		this.OnAfterDeserialize(KCDefine.B_IDX_INVALID_3D);
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public void OnAfterDeserialize(Vector3Int a_stBaseIdx) {
 		m_stSize = new Vector3Int(this.SizeX, this.SizeY, this.SizeZ);
 		m_stBaseIdx = a_stBaseIdx;
@@ -165,7 +165,7 @@ public struct STCellObjInfo : System.ICloneable, IMessagePackSerializationCallba
 		this.OnBeforeSerialize();
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	[OnDeserialized]
 	private void OnDeserializedMethod(StreamingContext a_oContext) {
 		this.OnAfterDeserialize();
@@ -212,12 +212,12 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 		// Do Something
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public void OnAfterDeserialize() {
 		this.OnAfterDeserialize(KCDefine.B_IDX_INVALID_3D);
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public void OnAfterDeserialize(Vector3Int a_stIdx) {
 		m_stIdx = a_stIdx;
 		m_oCellObjInfoList = m_oCellObjInfoList ?? new List<STCellObjInfo>();
@@ -249,7 +249,7 @@ public struct STCellInfo : System.ICloneable, IMessagePackSerializationCallbackR
 		this.OnBeforeSerialize();
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	[OnDeserialized]
 	private void OnDeserializedMethod(StreamingContext a_oContext) {
 		this.OnAfterDeserialize();
@@ -385,7 +385,7 @@ public partial class CLevelInfo : CBaseInfo, System.ICloneable {
 		this.NumViewCellsZ = m_stNumViewCells.z;
 	}
 
-	/** 역직렬화 되었을 경우 */
+	/** 역직렬화되었을 경우 */
 	public override void OnAfterDeserialize() {
 		base.OnAfterDeserialize();
 
