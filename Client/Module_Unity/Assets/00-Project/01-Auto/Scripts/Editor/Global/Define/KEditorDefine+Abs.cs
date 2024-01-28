@@ -22,6 +22,7 @@ public static partial class KEditorDefine {
 		[typeof(CSndManager)] = KCDefine.U_SCRIPT_O_LATE,
 		[typeof(CResManager)] = KCDefine.U_SCRIPT_O_LATE,
 		[typeof(CTaskManager)] = KCDefine.U_SCRIPT_O_LATE,
+		[typeof(CNetworkManager)] = KCDefine.U_SCRIPT_O_LATE,
 		
 		[typeof(CScheduleManager)] = KCDefine.U_SCRIPT_O_LATE,
 		[typeof(CNavStackManager)] = KCDefine.U_SCRIPT_O_LATE,
@@ -36,6 +37,14 @@ public static partial class KEditorDefine {
 		[typeof(CCommonAppInfoStorage)] = KCDefine.U_SCRIPT_O_LATE,
 		[typeof(CCommonUserInfoStorage)] = KCDefine.U_SCRIPT_O_LATE,
 		[typeof(CCommonGameInfoStorage)] = KCDefine.U_SCRIPT_O_LATE,
+
+		[typeof(CSampleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(CEditorSampleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+
+#if RESEARCH_MODULE_ENABLE
+		[typeof(CRMenuSampleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+		[typeof(CRResearchSampleSceneManager)] = KCDefine.U_SCRIPT_O_SCENE_MANAGER,
+#endif // #if RESEARCH_MODULE_ENABLE
 
 #if SCENE_TEMPLATES_MODULE_ENABLE
 		[typeof(InitScene.CSubInitSceneManager)] = KCDefine.U_SCRIPT_O_INIT_SCENE_MANAGER,
