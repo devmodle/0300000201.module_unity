@@ -32,12 +32,12 @@ namespace Ads {
 				// 버튼을 설정한다
 				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
 					("LOAD_BANNER_ADS", this.UIs, this.OnTouchLoadBannerAdsBtn),
-					("LOAD_REWARD_ADS", this.UIs, this.OnTouchLoadRewardAdsBtn),
 					("LOAD_FULLSCREEN_ADS", this.UIs, this.OnTouchLoadFullscreenAdsBtn),
+					("LOAD_REWARD_ADS", this.UIs, this.OnTouchLoadRewardAdsBtn),
 
 					("SHOW_BANNER_ADS", this.UIs, this.OnTouchShowBannerAdsBtn),
-					("SHOW_REWARD_ADS", this.UIs, this.OnTouchShowRewardAdsBtn),
 					("SHOW_FULLSCREEN_ADS", this.UIs, this.OnTouchShowFullscreenAdsBtn),
+					("SHOW_REWARD_ADS", this.UIs, this.OnTouchShowRewardAdsBtn),
 
 					("CLOSE_BANNER_ADS", this.UIs, this.OnTouchCloseBannerAdsBtn)
 				});
@@ -100,17 +100,17 @@ namespace Ads {
 #endif // #if ADS_MODULE_ENABLE
 		}
 
-		/** 보상 광고 로드 버튼을 눌렀을 경우 */
-		private void OnTouchLoadRewardAdsBtn() {
-#if ADS_MODULE_ENABLE
-			Func.LoadRewardAds(EAdsPlatform.APP_LOVIN);
-#endif // #if ADS_MODULE_ENABLE
-		}
-
 		/** 전면 광고 로드 버튼을 눌렀을 경우 */
 		private void OnTouchLoadFullscreenAdsBtn() {
 #if ADS_MODULE_ENABLE
 			Func.LoadFullscreenAds(EAdsPlatform.APP_LOVIN);
+#endif // #if ADS_MODULE_ENABLE
+		}
+
+		/** 보상 광고 로드 버튼을 눌렀을 경우 */
+		private void OnTouchLoadRewardAdsBtn() {
+#if ADS_MODULE_ENABLE
+			Func.LoadRewardAds(EAdsPlatform.APP_LOVIN);
 #endif // #if ADS_MODULE_ENABLE
 		}
 
@@ -123,19 +123,19 @@ namespace Ads {
 #endif // #if ADS_MODULE_ENABLE
 		}
 
-		/** 보상 광고 출력 버튼을 눌렀을 경우 */
-		private void OnTouchShowRewardAdsBtn() {
+		/** 전면 광고 출력 버튼을 눌렀을 경우 */
+		private void OnTouchShowFullscreenAdsBtn() {
 #if ADS_MODULE_ENABLE
-			Func.ShowRewardAds(EAdsPlatform.APP_LOVIN, (a_oSender, a_stAdsRewardInfo, a_bIsSuccess) => {
+			Func.ShowFullscreenAds(EAdsPlatform.APP_LOVIN, (a_oSender, a_bIsSuccess) => {
 				CUnityMsgSender.Inst.SendShowToastMsg($"{a_bIsSuccess}");
 			});
 #endif // #if ADS_MODULE_ENABLE
 		}
 
-		/** 전면 광고 출력 버튼을 눌렀을 경우 */
-		private void OnTouchShowFullscreenAdsBtn() {
+		/** 보상 광고 출력 버튼을 눌렀을 경우 */
+		private void OnTouchShowRewardAdsBtn() {
 #if ADS_MODULE_ENABLE
-			Func.ShowFullscreenAds(EAdsPlatform.APP_LOVIN, (a_oSender, a_bIsSuccess) => {
+			Func.ShowRewardAds(EAdsPlatform.APP_LOVIN, (a_oSender, a_stAdsRewardInfo, a_bIsSuccess) => {
 				CUnityMsgSender.Inst.SendShowToastMsg($"{a_bIsSuccess}");
 			});
 #endif // #if ADS_MODULE_ENABLE
