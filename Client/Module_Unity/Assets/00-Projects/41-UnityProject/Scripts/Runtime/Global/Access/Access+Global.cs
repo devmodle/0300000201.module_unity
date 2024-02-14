@@ -14,9 +14,9 @@ public static partial class Access {
 	public static string StoreURL {
 		get {
 #if UNITY_IOS
-			return string.Format(KCDefine.U_FMT_STORE_URL, CProjInfoTable.Inst.ProjInfo.m_oMoreAppsID);
+			return string.Format(KCDefine.B_FMT_STORE_URL, CProjInfoTable.Inst.ProjInfo.m_oMoreAppsID);
 #else
-			return string.Format(KCDefine.U_FMT_STORE_URL, CProjInfoTable.Inst.GetAppID(CProjInfoTable.Inst.ProjInfo));
+			return string.Format(KCDefine.B_FMT_STORE_URL, CProjInfoTable.Inst.GetAppID(CProjInfoTable.Inst.ProjInfo));
 #endif // #if UNITY_IOS
 		}
 	}
@@ -63,7 +63,7 @@ public static partial class Access {
 		}
 	}
 
-	public static string MoreAppsURL => string.Format(KCDefine.U_FMT_MORE_APPS_URL, CProjInfoTable.Inst.ProjInfo.m_oMoreAppsID);
+	public static string MoreAppsURL => string.Format(KCDefine.B_FMT_MORE_APPS_URL, CProjInfoTable.Inst.ProjInfo.m_oMoreAppsID);
 
 	public static string CalcInfoTableLoadPath => Access.EtcInfoTableLoadPath;
 	public static string CalcInfoTableSavePath => Access.EtcInfoTableSavePath;
