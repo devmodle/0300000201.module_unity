@@ -227,7 +227,7 @@ namespace NSEngine {
 			}
 		}
 #endif // #if UNITY_EDITOR
-		#endregion // 조건부 함수
+#endregion // 조건부 함수
 	}
 
 	/** 서브 엔진 - 설정 */
