@@ -154,7 +154,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	/** 어빌리티 정보를 반환한다 */
 	public STAbilityInfo GetAbilityInfo(EAbilityKinds a_eAbilityKinds) {
 		bool bIsValid = this.TryGetAbilityInfo(a_eAbilityKinds, out STAbilityInfo stAbilityInfo);
-		CAccess.Assert(bIsValid);
+		CFunc.Assert(bIsValid);
 
 		return stAbilityInfo;
 	}
@@ -162,7 +162,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	/** 구입 어빌리티 교환 정보를 반환한다 */
 	public STAbilityTradeInfo GetBuyAbilityTradeInfo(EAbilityKinds a_eAbilityKinds) {
 		bool bIsValid = this.TryGetBuyAbilityTradeInfo(a_eAbilityKinds, out STAbilityTradeInfo stAbilityTradeInfo);
-		CAccess.Assert(bIsValid);
+		CFunc.Assert(bIsValid);
 
 		return stAbilityTradeInfo;
 	}
@@ -170,7 +170,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	/** 판매 어빌리티 교환 정보를 반환한다 */
 	public STAbilityTradeInfo GetSaleAbilityTradeInfo(EAbilityKinds a_eAbilityKinds) {
 		bool bIsValid = this.TryGetSaleAbilityTradeInfo(a_eAbilityKinds, out STAbilityTradeInfo stAbilityTradeInfo);
-		CAccess.Assert(bIsValid);
+		CFunc.Assert(bIsValid);
 
 		return stAbilityTradeInfo;
 	}
@@ -178,7 +178,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 	/** 강화 어빌리티 교환 정보를 반환한다 */
 	public STAbilityTradeInfo GetEnhanceAbilityTradeInfo(EAbilityKinds a_eAbilityKinds) {
 		bool bIsValid = this.TryGetEnhanceAbilityTradeInfo(a_eAbilityKinds, out STAbilityTradeInfo stAbilityTradeInfo);
-		CAccess.Assert(bIsValid);
+		CFunc.Assert(bIsValid);
 
 		return stAbilityTradeInfo;
 	}
@@ -215,7 +215,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	/** 어빌리티 정보를 저장한다 */
 	public void SaveAbilityInfos(string a_oJSONStr, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oJSONStr != null);
+		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
 		if(a_oJSONStr != null) {
@@ -244,13 +244,13 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	/** 어빌리티 정보를 로드한다 */
 	private Dictionary<EAbilityKinds, STAbilityInfo> LoadAbilityInfos(string a_oFilePath) {
-		CAccess.Assert(a_oFilePath.ExIsValid());
+		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadAbilityInfos(this.LoadAbilityInfosJSONStr(a_oFilePath));
 	}
 
 	/** 어빌리티 정보 JSON 문자열을 로드한다 */
 	private string LoadAbilityInfosJSONStr(string a_oFilePath) {
-		CAccess.Assert(a_oFilePath.ExIsValid());
+		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
@@ -261,7 +261,7 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable> {
 
 	/** 어빌리티 정보를 로드한다 */
 	private Dictionary<EAbilityKinds, STAbilityInfo> DoLoadAbilityInfos(string a_oJSONStr) {
-		CAccess.Assert(a_oJSONStr.ExIsValid());
+		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
 		for(int i = 0; i < oCommonInfos.Count; ++i) {

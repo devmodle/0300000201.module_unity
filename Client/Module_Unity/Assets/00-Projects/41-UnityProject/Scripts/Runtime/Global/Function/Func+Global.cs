@@ -14,7 +14,7 @@ public static partial class Func {
 	#region 클래스 함수
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_stItemInfo.m_eItemKinds != EItemKinds.NONE && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_stItemInfo.m_eItemKinds != EItemKinds.NONE && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_stItemInfo.m_eItemKinds != EItemKinds.NONE && a_oOutAbilityValDict != null) {
@@ -25,7 +25,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_stSkillInfo.m_eSkillKinds != ESkillKinds.NONE && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_stSkillInfo.m_eSkillKinds != ESkillKinds.NONE && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_stSkillInfo.m_eSkillKinds != ESkillKinds.NONE && a_oOutAbilityValDict != null) {
@@ -36,7 +36,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_stObjInfo.m_eObjKinds != EObjKinds.NONE && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_stObjInfo.m_eObjKinds != EObjKinds.NONE && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_stObjInfo.m_eObjKinds != EObjKinds.NONE && a_oOutAbilityValDict != null) {
@@ -47,7 +47,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(List<STTargetInfo> a_oTargetInfoList, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_oTargetInfoList != null && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_oTargetInfoList != null && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_oTargetInfoList != null && a_oOutAbilityValDict != null) {
@@ -59,7 +59,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(Dictionary<ulong, STTargetInfo> a_oAbilityTargetInfoDict, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_oAbilityTargetInfoDict != null && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_oAbilityTargetInfoDict != null && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_oAbilityTargetInfoDict != null && a_oOutAbilityValDict != null) {
@@ -71,7 +71,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	public static void SetupAbilityVals(Dictionary<EAbilityKinds, decimal> a_oAbilityValDict, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_oAbilityValDict != null && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_oAbilityValDict != null && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_oAbilityValDict != null && a_oOutAbilityValDict != null) {
@@ -98,7 +98,7 @@ public static partial class Func {
 
 	/** 다음 일일 보상 식별자를 설정한다 */
 	public static void SetupNextDailyRewardID(int a_nCharacterID, bool a_bIsResetDailyRewardTime = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo));
+		CFunc.Assert(!a_bIsAssert || CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo));
 
 		// 캐릭터 정보가 존재 할 경우
 		if(CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out oCharacterGameInfo)) {
@@ -113,7 +113,7 @@ public static partial class Func {
 
 	/** 무료 보상 획득 횟수를 증가시킨다 */
 	public static void IncrFreeRewardAcquireTimes(int a_nCharacterID, int a_nRewardTimes, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo));
+		CFunc.Assert(!a_bIsAssert || CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo));
 
 		// 캐릭터 게임 정보가 존재 할 경우
 		if(CGameInfoStorage.Inst.TryGetCharacterGameInfo(a_nCharacterID, out oCharacterGameInfo)) {
@@ -138,7 +138,7 @@ public static partial class Func {
 			Func.Pay(a_nCharacterID, a_stTargetInfo, a_bIsAssert);
 		} else {
 			bool bIsValid = CAbilityInfoTable.Inst.TryGetAbilityInfo((EAbilityKinds)a_stTargetInfo.Kinds, out STAbilityInfo stAbilityInfo);
-			CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+			CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 			// 타겟 정보가 존재 할 경우
 			if(bIsValid && a_oTargetInfo != null && (a_stTargetInfo.Kinds != (int)EAbilityKinds.STAT_ABILITY_EXP && a_stTargetInfo.Kinds != (int)EAbilityKinds.STAT_ABILITY_NUMS)) {
@@ -149,7 +149,7 @@ public static partial class Func {
 
 	/** 지불한다 */
 	public static void Pay(int a_nCharacterID, List<STTargetInfo> a_oTargetInfoList, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoList != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoList != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoList != null) {
@@ -161,7 +161,7 @@ public static partial class Func {
 
 	/** 지불한다 */
 	public static void Pay(int a_nCharacterID, List<STTargetInfo> a_oTargetInfoList, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoList != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoList != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoList != null) {
@@ -173,7 +173,7 @@ public static partial class Func {
 
 	/** 지불한다 */
 	public static void Pay(int a_nCharacterID, Dictionary<ulong, STTargetInfo> a_oTargetInfoDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoDict != null) {
@@ -185,7 +185,7 @@ public static partial class Func {
 
 	/** 지불한다 */
 	public static void Pay(int a_nCharacterID, Dictionary<ulong, STTargetInfo> a_oTargetInfoDict, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoDict != null) {
@@ -212,7 +212,7 @@ public static partial class Func {
 			Func.Acquire(a_nCharacterID, a_stTargetInfo, a_bIsAutoCreate, a_bIsAssert);
 		} else {
 			bool bIsValid = CAbilityInfoTable.Inst.TryGetAbilityInfo((EAbilityKinds)a_stTargetInfo.Kinds, out STAbilityInfo stAbilityInfo);
-			CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+			CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 			// 타겟 정보가 존재 할 경우
 			if(bIsValid && a_oTargetInfo != null && a_stTargetInfo.Kinds != (int)EAbilityKinds.STAT_ABILITY_NUMS) {
@@ -223,7 +223,7 @@ public static partial class Func {
 
 	/** 획득한다 */
 	public static void Acquire(int a_nCharacterID, List<STTargetInfo> a_oTargetInfoList, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoList != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoList != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoList != null) {
@@ -235,7 +235,7 @@ public static partial class Func {
 
 	/** 획득한다 */
 	public static void Acquire(int a_nCharacterID, List<STTargetInfo> a_oTargetInfoList, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoList != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoList != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoList != null) {
@@ -247,7 +247,7 @@ public static partial class Func {
 
 	/** 획득한다 */
 	public static void Acquire(int a_nCharacterID, Dictionary<ulong, STTargetInfo> a_oTargetInfoDict, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoDict != null) {
@@ -259,7 +259,7 @@ public static partial class Func {
 
 	/** 획득한다 */
 	public static void Acquire(int a_nCharacterID, Dictionary<ulong, STTargetInfo> a_oTargetInfoDict, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
+		CFunc.Assert(!a_bIsAssert || a_oTargetInfoDict != null);
 
 		// 타겟 정보가 존재 할 경우
 		if(a_oTargetInfoDict != null) {
@@ -271,7 +271,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STItemTradeInfo a_stItemTradeInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict)) {
@@ -282,7 +282,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STItemTradeInfo a_stItemTradeInfo, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stItemTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo)) {
@@ -293,7 +293,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STSkillTradeInfo a_stSkillTradeInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict)) {
@@ -304,7 +304,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STSkillTradeInfo a_stSkillTradeInfo, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stSkillTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo)) {
@@ -315,7 +315,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STObjTradeInfo a_stObjTradeInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict)) {
@@ -326,7 +326,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STObjTradeInfo a_stObjTradeInfo, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stObjTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo)) {
@@ -337,7 +337,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STProductTradeInfo a_stProductTradeInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict)) {
@@ -348,7 +348,7 @@ public static partial class Func {
 
 	/** 교환한다 */
 	public static void Trade(int a_nCharacterID, STProductTradeInfo a_stProductTradeInfo, CTargetInfo a_oTargetInfo, bool a_bIsAutoCreate = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
+		CFunc.Assert(!a_bIsAssert || Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo));
 
 		// 교환 가능 할 경우
 		if(Access.IsEnableTrade(a_nCharacterID, a_stProductTradeInfo.m_oPayTargetInfoDict, a_oTargetInfo)) {
@@ -399,7 +399,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	private static void SetupAbilityVals(STTargetInfo a_stTargetInfo, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oOutAbilityValDict != null);
+		CFunc.Assert(!a_bIsAssert || a_oOutAbilityValDict != null);
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_oOutAbilityValDict != null && a_stTargetInfo.m_eTargetKinds == ETargetKinds.ABILITY_TARGET && a_stTargetInfo.Kinds > KCDefine.B_IDX_INVALID) {
@@ -420,7 +420,7 @@ public static partial class Func {
 
 	/** 어빌리티 값을 설정한다 */
 	private static void SetupAbilityVals(CTargetInfo a_oTargetInfo, Dictionary<EAbilityKinds, decimal> a_oOutAbilityValDict, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_oTargetInfo != null && a_oOutAbilityValDict != null));
+		CFunc.Assert(!a_bIsAssert || (a_oTargetInfo != null && a_oOutAbilityValDict != null));
 
 		// 어빌리티 값 설정이 가능 할 경우
 		if(a_oTargetInfo != null && a_oOutAbilityValDict != null) {
@@ -438,7 +438,7 @@ public static partial class Func {
 	/** 아이템 타겟을 지불한다 */
 	private static void PayItemTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CItemInfoTable.Inst.TryGetItemInfo((EItemKinds)a_stTargetInfo.Kinds, out STItemInfo stItemInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -449,7 +449,7 @@ public static partial class Func {
 	/** 스킬 타겟을 지불한다 */
 	private static void PaySkillTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CSkillInfoTable.Inst.TryGetSkillInfo((ESkillKinds)a_stTargetInfo.Kinds, out STSkillInfo stSkillInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -460,7 +460,7 @@ public static partial class Func {
 	/** 객체 타겟을 지불한다 */
 	private static void PayObjTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CObjInfoTable.Inst.TryGetObjInfo((EObjKinds)a_stTargetInfo.Kinds, out STObjInfo stObjInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -471,7 +471,7 @@ public static partial class Func {
 	/** 어빌리티 타겟을 지불한다 */
 	private static void PayAbilityTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CAbilityInfoTable.Inst.TryGetAbilityInfo((EAbilityKinds)a_stTargetInfo.Kinds, out STAbilityInfo stAbilityInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -482,7 +482,7 @@ public static partial class Func {
 	/** 아이템 타겟을 획득한다 */
 	private static void AcquireItemTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CItemInfoTable.Inst.TryGetItemInfo((EItemKinds)a_stTargetInfo.Kinds, out STItemInfo stItemInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -503,7 +503,7 @@ public static partial class Func {
 	/** 스킬 타겟을 획득한다 */
 	private static void AcquireSkillTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CSkillInfoTable.Inst.TryGetSkillInfo((ESkillKinds)a_stTargetInfo.Kinds, out STSkillInfo stSkikllInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -514,7 +514,7 @@ public static partial class Func {
 	/** 객체 타겟을 획득한다 */
 	private static void AcquireObjTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CObjInfoTable.Inst.TryGetObjInfo((EObjKinds)a_stTargetInfo.Kinds, out STObjInfo stObjInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -525,7 +525,7 @@ public static partial class Func {
 	/** 어빌리티 타겟을 획득한다 */
 	private static void AcquireAbilityTarget(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsAssert = true) {
 		bool bIsValid = CAbilityInfoTable.Inst.TryGetAbilityInfo((EAbilityKinds)a_stTargetInfo.Kinds, out STAbilityInfo stAbilityInfo);
-		CAccess.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (bIsValid && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(bIsValid && a_oTargetInfo != null) {
@@ -535,7 +535,7 @@ public static partial class Func {
 
 	/** 지불한다 */
 	private static void DoPay(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsCounting = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null) {
@@ -562,7 +562,7 @@ public static partial class Func {
 
 	/** 획득한다 */
 	private static void DoAcquire(int a_nCharacterID, STTargetInfo a_stTargetInfo, CTargetInfo a_oTargetInfo, bool a_bIsCounting = true, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || (a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null));
+		CFunc.Assert(!a_bIsAssert || (a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null));
 
 		// 타겟 정보가 존재 할 경우
 		if(a_stTargetInfo.m_eTargetKinds != ETargetKinds.NONE && a_oTargetInfo != null) {
@@ -674,7 +674,7 @@ public static partial class Func {
 
 	/** 상품을 획득한다 */
 	public static void AcquireProduct(string a_oProductID, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oProductID.ExIsValid());
+		CFunc.Assert(!a_bIsAssert || a_oProductID.ExIsValid());
 
 		// 상품이 존재 할 경우
 		if(a_oProductID.ExIsValid()) {
@@ -693,7 +693,7 @@ public static partial class Func {
 
 	/** 복원 상품을 획득한다 */
 	public static void AcquireRestoreProducts(List<Product> a_oProductList, bool a_bIsAssert = true) {
-		CAccess.Assert(!a_bIsAssert || a_oProductList != null);
+		CFunc.Assert(!a_bIsAssert || a_oProductList != null);
 
 		// 상품이 존재 할 경우
 		if(a_oProductList != null) {
