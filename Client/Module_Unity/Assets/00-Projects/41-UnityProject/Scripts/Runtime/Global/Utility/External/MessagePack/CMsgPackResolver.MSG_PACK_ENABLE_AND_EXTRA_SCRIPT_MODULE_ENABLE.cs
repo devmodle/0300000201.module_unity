@@ -3228,9 +3228,9 @@ namespace MessagePack.Formatters
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::STIdxInfo value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.WriteArrayHeader(3);
-            writer.Write(value.m_nIdx01);
-            writer.Write(value.m_nIdx02);
-            writer.Write(value.m_nIdx03);
+            writer.Write(value.m_nIdxA);
+            writer.Write(value.m_nIdxB);
+            writer.Write(value.m_nIdxC);
         }
 
         public global::STIdxInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -3242,22 +3242,22 @@ namespace MessagePack.Formatters
 
             options.Security.DepthStep(ref reader);
             var length = reader.ReadArrayHeader();
-            var __m_nIdx01__ = default(int);
-            var __m_nIdx02__ = default(int);
-            var __m_nIdx03__ = default(int);
+            var __m_nIdxA__ = default(int);
+            var __m_nIdxB__ = default(int);
+            var __m_nIdxC__ = default(int);
 
             for (int i = 0; i < length; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        __m_nIdx01__ = reader.ReadInt32();
+                        __m_nIdxA__ = reader.ReadInt32();
                         break;
                     case 1:
-                        __m_nIdx02__ = reader.ReadInt32();
+                        __m_nIdxB__ = reader.ReadInt32();
                         break;
                     case 2:
-                        __m_nIdx03__ = reader.ReadInt32();
+                        __m_nIdxC__ = reader.ReadInt32();
                         break;
                     default:
                         reader.Skip();
@@ -3265,7 +3265,7 @@ namespace MessagePack.Formatters
                 }
             }
 
-            var ____result = new global::STIdxInfo(__m_nIdx01__, __m_nIdx02__, __m_nIdx03__);
+            var ____result = new global::STIdxInfo(__m_nIdxA__, __m_nIdxB__, __m_nIdxC__);
             reader.Depth--;
             return ____result;
         }
