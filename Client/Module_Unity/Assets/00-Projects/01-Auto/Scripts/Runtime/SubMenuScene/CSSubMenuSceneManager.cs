@@ -8,7 +8,7 @@ using UnityEngine.Events;
 namespace MenuScene {
 	/** 스터디 서브 메뉴 씬 관리자 */
 	public partial class CSSubMenuSceneManager : CRMenuSceneManager {
-#region 함수
+		#region 함수
 		/** 초기화 */
 		public override void Awake() {
 			base.Awake();
@@ -24,22 +24,25 @@ namespace MenuScene {
 			base.OnReceiveNavStackEvent(a_eEvent);
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN) {
-				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
+			switch(a_eEvent) {
+				case ENavStackEvent.BACK_KEY_DOWN: 
+					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
+					break;
 			}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 		}
 
 		/** 종료 팝업 결과를 수신했을 경우 */
 		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
-			// 확인 버튼을 눌렀을 경우
-			if(a_bIsOK) {
-				a_oSender.SetIsEnableAni(false);
-				this.ExLateCallFunc((a_oSender) => this.QuitApp());
+			// 종료 처리가 불가능 할 경우
+			if(!a_bIsOK) {
+				return;
 			}
+
+			a_oSender.SetIsEnableAni(false);
+			this.ExLateCallFunc((a_oSender) => this.QuitApp());
 		}
-#endregion // 함수
+		#endregion // 함수
 	}
 }
 #endif // #if RESEARCH_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
