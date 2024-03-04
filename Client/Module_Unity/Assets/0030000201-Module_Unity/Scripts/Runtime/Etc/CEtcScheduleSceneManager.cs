@@ -32,10 +32,10 @@ namespace Etc {
 				// 버튼을 설정한다
 				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
 					("ADD_TIMER_BTN", this.UIs, this.OnTouchAddTimerBtn),
-					("ADD_REPEAT_TIMER_BTN", this.UIs, this.OnTouchAddRepeatTimerBtn),
+					("ADD_REPEAT_TIMER_BTN", this.UIs, this.OnTouchAddInfiniteTimerBtn),
 
 					("REMOVE_TIMER_BTN", this.UIs, this.OnTouchRemoveTimerBtn),
-					("REMOVE_REPEAT_TIMER_BTN", this.UIs, this.OnTouchRemoveRepeatTimerBtn)
+					("REMOVE_REPEAT_TIMER_BTN", this.UIs, this.OnTouchRemoveInfiniteTimerBtn)
 				});
 			}
 		}
@@ -94,9 +94,9 @@ namespace Etc {
 			CScheduleManager.Inst.AddTimer(this, 1.0f, 1, this.OnExecuteTimer);
 		}
 
-		/** 반복 타이머 추가 버튼을 눌렀을 경우 */
-		private void OnTouchAddRepeatTimerBtn() {
-			CScheduleManager.Inst.AddRepeatTimer(this, 1.0f, this.OnExecuteRepeatTimer);
+		/** 무한 타이머 추가 버튼을 눌렀을 경우 */
+		private void OnTouchAddInfiniteTimerBtn() {
+			CScheduleManager.Inst.AddInfiniteTimer(this, 1.0f, this.OnExecuteInfiniteTimer);
 		}
 
 		/** 타이머 제거 버튼을 눌렀을 경우 */
@@ -104,9 +104,9 @@ namespace Etc {
 			CScheduleManager.Inst.RemoveTimer(this);
 		}
 
-		/** 반복 타이머 제거 버튼을 눌렀을 경우 */
-		private void OnTouchRemoveRepeatTimerBtn() {
-			CScheduleManager.Inst.RemoveTimer(this.OnExecuteRepeatTimer);
+		/** 무한 타이머 제거 버튼을 눌렀을 경우 */
+		private void OnTouchRemoveInfiniteTimerBtn() {
+			CScheduleManager.Inst.RemoveTimer(this.OnExecuteInfiniteTimer);
 		}
 
 		/** 타이머가 실행되었을 경우 */
@@ -114,9 +114,9 @@ namespace Etc {
 			CFunc.ShowLog($"CEtcScheduleSceneManager.OnExecuteTimer");
 		}
 
-		/** 반복 타이머가 실행되었을 경우 */
-		private void OnExecuteRepeatTimer() {
-			CFunc.ShowLog($"CEtcScheduleSceneManager.OnExecuteRepeatTimer");
+		/** 무한 타이머가 실행되었을 경우 */
+		private void OnExecuteInfiniteTimer() {
+			CFunc.ShowLog($"CEtcScheduleSceneManager.OnExecuteInfiniteTimer");
 		}
 		#endregion // 함수
 	}

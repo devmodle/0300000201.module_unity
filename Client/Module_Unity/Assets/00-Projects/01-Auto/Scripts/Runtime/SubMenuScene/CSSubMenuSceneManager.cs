@@ -39,7 +39,7 @@ namespace MenuScene {
 				return;
 			}
 
-			a_oSender.SetIsEnableAni(false);
+			a_oSender.SetIsEnableAnim(false);
 			this.ExLateCallFunc((a_oSender) => this.QuitApp());
 		}
 		#endregion // 함수

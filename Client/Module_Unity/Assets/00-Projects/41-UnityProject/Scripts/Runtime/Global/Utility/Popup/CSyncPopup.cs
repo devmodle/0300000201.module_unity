@@ -88,7 +88,7 @@ public partial class CSyncPopup : CSubPopup {
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
-				a_oSender.SetIsEnableAni(false);
+				a_oSender.SetIsEnableAnim(false);
 				Func.LoadUserInfo(this.OnLoadUserInfo);
 			}
 #endif // #if FIREBASE_MODULE_ENABLE
@@ -101,7 +101,7 @@ public partial class CSyncPopup : CSubPopup {
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
-				a_oSender.SetIsEnableAni(false);
+				a_oSender.SetIsEnableAnim(false);
 				Func.SaveUserInfo(this.OnSaveUserInfo);
 			}
 #endif // #if FIREBASE_MODULE_ENABLE
