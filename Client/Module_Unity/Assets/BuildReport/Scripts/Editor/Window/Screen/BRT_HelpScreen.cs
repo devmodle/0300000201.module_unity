@@ -13,7 +13,8 @@ namespace BuildReportTool.Window.Screen
 
 		const int LABEL_LENGTH = 16000;
 
-		public override void RefreshData(BuildInfo buildReport, AssetDependencies assetDependencies, TextureData textureData, MeshData meshData, UnityBuildReport unityBuildReport)
+		public override void RefreshData(BuildInfo buildReport, AssetDependencies assetDependencies,
+			TextureData textureData, MeshData meshData, PrefabData prefabData, UnityBuildReport unityBuildReport)
 		{
 			const string README_FILENAME = "README.txt";
 			string readmeContents = BuildReportTool.Util.GetPackageFileContents(README_FILENAME);
@@ -63,7 +64,8 @@ namespace BuildReportTool.Window.Screen
 		static readonly GUILayoutOption[] ButtonsLayout = { GUILayout.Width(230), GUILayout.Height(60) };
 
 		public override void DrawGUI(Rect position,
-			BuildInfo buildReportToDisplay, AssetDependencies assetDependencies, TextureData textureData, MeshData meshData,
+			BuildInfo buildReportToDisplay, AssetDependencies assetDependencies,
+			TextureData textureData, MeshData meshData, PrefabData prefabData,
 			UnityBuildReport unityBuildReport, BuildReportTool.ExtraData extraData,
 			out bool requestRepaint)
 		{

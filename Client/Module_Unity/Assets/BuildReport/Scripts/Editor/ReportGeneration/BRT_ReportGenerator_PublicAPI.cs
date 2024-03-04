@@ -211,6 +211,23 @@ namespace BuildReportTool
 				}
 			}
 
+			if (BuildReportTool.Options.CollectPrefabData)
+			{
+				if (_lastKnownPrefabData == null)
+				{
+					_lastKnownPrefabData = new BuildReportTool.PrefabData();
+				}
+
+				_lastKnownPrefabData.TimeGot = timeBuildStarted;
+			}
+			else
+			{
+				if (_lastKnownPrefabData != null)
+				{
+					_lastKnownPrefabData.Clear();
+				}
+			}
+
 			_lastEditorLogPath = editorLogPathToUse;
 
 			if (BuildReportTool.Options.IncludeUnusedPrefabsInReportCreation)
@@ -226,7 +243,7 @@ namespace BuildReportTool
 
 			CreateBuildReport(_lastKnownBuildInfo);
 
-			var savedFilePath = OnFinishedGetValues(_lastKnownBuildInfo, _lastKnownAssetDependencies, _lastKnownTextureData, _lastKnownMeshData, customSavePath);
+			var savedFilePath = OnFinishedGetValues(_lastKnownBuildInfo, _lastKnownAssetDependencies, _lastKnownTextureData, _lastKnownMeshData, _lastKnownPrefabData, customSavePath);
 
 			return savedFilePath;
 		}
