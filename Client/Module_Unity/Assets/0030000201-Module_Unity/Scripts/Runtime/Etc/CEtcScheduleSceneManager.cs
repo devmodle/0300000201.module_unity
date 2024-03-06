@@ -96,7 +96,7 @@ namespace Etc {
 
 		/** 무한 타이머 추가 버튼을 눌렀을 경우 */
 		private void OnTouchAddInfiniteTimerBtn() {
-			CScheduleManager.Inst.AddInfiniteTimer(this, 1.0f, this.OnExecuteInfiniteTimer);
+			CScheduleManager.Inst.AddTimer(this, 1.0f, this.OnExecuteInfiniteTimer);
 		}
 
 		/** 타이머 제거 버튼을 눌렀을 경우 */
