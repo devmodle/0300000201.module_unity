@@ -420,7 +420,6 @@ public static partial class Func {
 	/** 배경음을 재생한다 */
 	public static CSnd PlayBGSnd(EResKinds a_eResKinds, 
 		float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsAssert = true) {
-
 		CFunc.Assert(!a_bIsAssert || a_eResKinds.ExIsValid());
 
 		try {
@@ -436,7 +435,6 @@ public static partial class Func {
 	/** 배경음을 재생한다 */
 	public static CSnd PlayBGSnd(EResKinds a_eResKinds, 
 		Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = true, bool a_bIsAssert = true) {
-
 		CFunc.Assert(!a_bIsAssert || a_eResKinds.ExIsValid());
 
 		return CResInfoTable.Inst.TryGetResInfo(a_eResKinds, out STResInfo stResInfo) ? 
@@ -446,7 +444,6 @@ public static partial class Func {
 	/** 효과음을 재생한다 */
 	public static CSnd PlayFXSnds(EResKinds a_eResKinds, 
 		float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsAssert = true) {
-
 		CFunc.Assert(!a_bIsAssert || a_eResKinds.ExIsValid());
 
 		try {
@@ -462,7 +459,6 @@ public static partial class Func {
 	/** 효과음을 재생한다 */
 	public static CSnd PlayFXSnds(EResKinds a_eResKinds, 
 		Vector3 a_stPos, float a_fVolume = KCDefine.B_VAL_0_REAL, bool a_bIsLoop = false, bool a_bIsAssert = true) {
-
 		CFunc.Assert(!a_bIsAssert || a_eResKinds.ExIsValid());
 
 		return CResInfoTable.Inst.TryGetResInfo(a_eResKinds, out STResInfo stResInfo) ? 
