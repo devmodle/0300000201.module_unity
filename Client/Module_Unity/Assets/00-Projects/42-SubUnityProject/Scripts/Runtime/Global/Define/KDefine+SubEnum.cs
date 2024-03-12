@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 /** 서브 열거형 값 */
-public static partial class KEnumVal {
+public static partial class KEnumVal
+{
 	#region 기본
 	// 적용 종류
 	public const int AK_RANGE_SUB_TYPE_VAL = 0;
@@ -31,7 +32,8 @@ public static partial class KEnumVal {
 
 	#region 클래스 함수
 	/** 열거형 값을 생성한다 */
-	public static int MakeEnumVal(int a_nType, int a_nSubType, int a_nKindsType, int a_nSubKindsType, int a_nDetailSubKindsType = KCDefine.B_VAL_0_INT) {
+	public static int MakeEnumVal(int a_nType, int a_nSubType, int a_nKindsType, int a_nSubKindsType, int a_nDetailSubKindsType = KCDefine.B_VAL_0_INT)
+	{
 		return ((int)EEnumVal.T * a_nType) + ((int)EEnumVal.ST * a_nSubType) + ((int)EEnumVal.KT * a_nKindsType) + ((int)EEnumVal.SKT * a_nSubKindsType) + a_nDetailSubKindsType;
 	}
 	#endregion // 클래스 함수
@@ -39,7 +41,8 @@ public static partial class KEnumVal {
 
 #region 기본
 /** 보상 수준 */
-public enum ERewardQuality {
+public enum ERewardQuality
+{
 	NONE = -1,
 	NORM,
 	HIGH,
@@ -48,7 +51,8 @@ public enum ERewardQuality {
 }
 
 /** 충돌체 타입 */
-public enum EColliderType {
+public enum EColliderType
+{
 	NONE = -1,
 	BOX,
 	SPHERE,
@@ -59,7 +63,8 @@ public enum EColliderType {
 }
 
 /** 어빌리티 값 타입 */
-public enum EAbilityValType {
+public enum EAbilityValType
+{
 	NONE = -1,
 	NORM,
 	INCR,
@@ -68,7 +73,8 @@ public enum EAbilityValType {
 }
 
 /** 보상 획득 팝업 타입 */
-public enum ERewardAcquirePopupType {
+public enum ERewardAcquirePopupType
+{
 	NONE = -1,
 	FREE,
 	DAILY,
@@ -78,7 +84,8 @@ public enum ERewardAcquirePopupType {
 }
 
 /** 적용 타입 */
-public enum EApplyType {
+public enum EApplyType
+{
 	NONE = -1,
 	MULTI,
 	SINGLE,
@@ -86,7 +93,8 @@ public enum EApplyType {
 }
 
 /** 적용 종류 */
-public enum EApplyKinds {
+public enum EApplyKinds
+{
 	NONE = -1,
 
 	#region 다중
@@ -107,7 +115,8 @@ public enum EApplyKinds {
 }
 
 /** 효과 적용 타입 */
-public enum EFXApplyType {
+public enum EFXApplyType
+{
 	NONE = -1,
 	ANI,
 	TWEEN,
@@ -117,7 +126,8 @@ public enum EFXApplyType {
 }
 
 /** 효과 적용 종류 */
-public enum EFXApplyKinds {
+public enum EFXApplyKinds
+{
 	NONE = -1,
 
 	#region 애니메이션
@@ -144,7 +154,8 @@ public enum EFXApplyKinds {
 }
 
 /** 타겟 타입 */
-public enum ETargetType {
+public enum ETargetType
+{
 	NONE = -1,
 	ITEM,
 	SKILL,
@@ -154,7 +165,8 @@ public enum ETargetType {
 }
 
 /** 타겟 종류 */
-public enum ETargetKinds {
+public enum ETargetKinds
+{
 	NONE = -1,
 
 	#region 아이템
@@ -197,14 +209,16 @@ public enum ETargetKinds {
 }
 
 /** 수식 타입 */
-public enum ECalcType {
+public enum ECalcType
+{
 	NONE = -1,
 	ABILITY,
 	[HideInInspector] MAX_VAL
 }
 
 /** 수식 종류 */
-public enum ECalcKinds {
+public enum ECalcKinds
+{
 	NONE = -1,
 
 	#region 어빌리티
@@ -216,7 +230,8 @@ public enum ECalcKinds {
 }
 
 /** 미션 타입 */
-public enum EMissionType {
+public enum EMissionType
+{
 	NONE = -1,
 	MAIN,
 	FREE,
@@ -226,7 +241,8 @@ public enum EMissionType {
 }
 
 /** 미션 종류 */
-public enum EMissionKinds {
+public enum EMissionKinds
+{
 	NONE = -1,
 
 	#region 메인
@@ -253,7 +269,8 @@ public enum EMissionKinds {
 }
 
 /** 보상 타입 */
-public enum ERewardType {
+public enum ERewardType
+{
 	NONE = -1,
 	FREE,
 	DAILY,
@@ -265,7 +282,8 @@ public enum ERewardType {
 }
 
 /** 보상 종류 */
-public enum ERewardKinds {
+public enum ERewardKinds
+{
 	NONE = -1,
 
 	#region 무료
@@ -303,7 +321,8 @@ public enum ERewardKinds {
 }
 
 /** 에피소드 타입 */
-public enum EEpisodeType {
+public enum EEpisodeType
+{
 	NONE = -1,
 	CHAPTER,
 	STAGE,
@@ -312,7 +331,8 @@ public enum EEpisodeType {
 }
 
 /** 에피소드 종류 */
-public enum EEpisodeKinds {
+public enum EEpisodeKinds
+{
 	NONE = -1,
 
 	#region 챕터
@@ -343,7 +363,8 @@ public enum EEpisodeKinds {
 }
 
 /** 튜토리얼 타입 */
-public enum ETutorialType {
+public enum ETutorialType
+{
 	NONE = -1,
 	PLAY,
 	HELP,
@@ -351,7 +372,8 @@ public enum ETutorialType {
 }
 
 /** 튜토리얼 종류 */
-public enum ETutorialKinds {
+public enum ETutorialKinds
+{
 	NONE = -1,
 
 	#region 플레이
@@ -368,7 +390,8 @@ public enum ETutorialKinds {
 }
 
 /** 리소스 타입 */
-public enum EResType {
+public enum EResType
+{
 	NONE = -1,
 	FONT,
 	SND,
@@ -378,7 +401,8 @@ public enum EResType {
 }
 
 /** 리소스 종류 */
-public enum EResKinds {
+public enum EResKinds
+{
 	NONE = -1,
 
 	#region 폰트
@@ -420,7 +444,8 @@ public enum EResKinds {
 }
 
 /** 아이템 타입 */
-public enum EItemType {
+public enum EItemType
+{
 	NONE = -1,
 	GOODS,
 	CONSUMABLE,
@@ -432,7 +457,8 @@ public enum EItemType {
 }
 
 /** 아이템 종류 */
-public enum EItemKinds {
+public enum EItemKinds
+{
 	NONE = -1,
 
 	#region 재화
@@ -482,7 +508,8 @@ public enum EItemKinds {
 }
 
 /** 스킬 타입 */
-public enum ESkillType {
+public enum ESkillType
+{
 	NONE = -1,
 	ACTION,
 	ACTIVE,
@@ -491,7 +518,8 @@ public enum ESkillType {
 }
 
 /** 스킬 종류 */
-public enum ESkillKinds {
+public enum ESkillKinds
+{
 	NONE = -1,
 
 	#region 액션
@@ -522,7 +550,8 @@ public enum ESkillKinds {
 }
 
 /** 객체 타입 */
-public enum EObjType {
+public enum EObjType
+{
 	NONE = -1,
 	BG,
 	GROUND,
@@ -533,7 +562,8 @@ public enum EObjType {
 }
 
 /** 객체 종류 */
-public enum EObjKinds {
+public enum EObjKinds
+{
 	NONE = -1,
 
 	#region 배경
@@ -575,7 +605,8 @@ public enum EObjKinds {
 }
 
 /** 효과 타입 */
-public enum EFXType {
+public enum EFXType
+{
 	NONE = -1,
 	HIT,
 	BUFF,
@@ -584,7 +615,8 @@ public enum EFXType {
 }
 
 /** 효과 종류 */
-public enum EFXKinds {
+public enum EFXKinds
+{
 	NONE = -1,
 
 	#region 타격
@@ -606,7 +638,8 @@ public enum EFXKinds {
 }
 
 /** 어빌리티 타입 */
-public enum EAbilityType {
+public enum EAbilityType
+{
 	NONE = -1,
 	STAT,
 	BUFF,
@@ -616,7 +649,8 @@ public enum EAbilityType {
 }
 
 /** 어빌리티 종류 */
-public enum EAbilityKinds {
+public enum EAbilityKinds
+{
 	NONE = -1,
 
 	#region 스탯
@@ -763,7 +797,8 @@ public enum EAbilityKinds {
 }
 
 /** 상품 타입 */
-public enum EProductType {
+public enum EProductType
+{
 	NONE = -1,
 	PKGS,
 	SINGLE,
@@ -771,7 +806,8 @@ public enum EProductType {
 }
 
 /** 상품 종류 */
-public enum EProductKinds {
+public enum EProductKinds
+{
 	NONE = -1,
 
 	#region 패키지

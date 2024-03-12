@@ -9,7 +9,8 @@ using System.IO;
 
 /** 효과 정보 */
 [System.Serializable]
-public struct STFXInfo {
+public struct STFXInfo
+{
 	public STCommonInfo m_stCommonInfo;
 	public STTimeInfo m_stTimeInfo;
 
@@ -24,8 +25,11 @@ public struct STFXInfo {
 	public List<EFXKinds> m_oExtraFXKindsList;
 
 	#region 상수
-	public static STFXInfo INVALID = new STFXInfo() {
-		m_eFXKinds = EFXKinds.NONE, m_ePrevFXKinds = EFXKinds.NONE, m_eNextFXKinds = EFXKinds.NONE
+	public static STFXInfo INVALID = new STFXInfo()
+	{
+		m_eFXKinds = EFXKinds.NONE,
+		m_ePrevFXKinds = EFXKinds.NONE,
+		m_eNextFXKinds = EFXKinds.NONE
 	};
 	#endregion // 상수
 
@@ -39,7 +43,8 @@ public struct STFXInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STFXInfo(SimpleJSON.JSONNode a_oFXInfo) {
+	public STFXInfo(SimpleJSON.JSONNode a_oFXInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oFXInfo);
 		m_stTimeInfo = new STTimeInfo(a_oFXInfo[KCDefine.U_KEY_TIME_INFO]);
 
@@ -58,7 +63,8 @@ public struct STFXInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 효과 정보를 저장한다 */
-	public void SaveFXInfo(SimpleJSON.JSONNode a_oOutFXInfo) {
+	public void SaveFXInfo(SimpleJSON.JSONNode a_oOutFXInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutFXInfo);
 		m_stTimeInfo.SaveTimeInfo(a_oOutFXInfo);
 
@@ -77,31 +83,36 @@ public struct STFXInfo {
 }
 
 /** 효과 정보 테이블 */
-public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
+public partial class CFXInfoTable : CSingleton<CFXInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<EFXKinds, STFXInfo> FXInfoDict { get; } = new Dictionary<EFXKinds, STFXInfo>();
 	#endregion // 프로퍼티
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetFXInfos();
 	}
 
 	/** 효과 정보를 리셋한다 */
-	public virtual void ResetFXInfos() {
+	public virtual void ResetFXInfos()
+	{
 		this.FXInfoDict.Clear();
 	}
 
 	/** 효과 정보를 리셋한다 */
-	public virtual void ResetFXInfos(string a_oJSONStr) {
+	public virtual void ResetFXInfos(string a_oJSONStr)
+	{
 		this.ResetFXInfos();
 		this.DoLoadFXInfos(a_oJSONStr);
 	}
 
 	/** 효과 정보를 반환한다 */
-	public STFXInfo GetFXInfo(EFXKinds a_eFXKinds) {
+	public STFXInfo GetFXInfo(EFXKinds a_eFXKinds)
+	{
 		bool bIsValid = this.TryGetFXInfo(a_eFXKinds, out STFXInfo stFXInfo);
 		CFunc.Assert(bIsValid);
 
@@ -109,41 +120,48 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	}
 
 	/** 효과 정보를 반환한다 */
-	public bool TryGetFXInfo(EFXKinds a_eFXKinds, out STFXInfo a_stOutFXInfo) {
+	public bool TryGetFXInfo(EFXKinds a_eFXKinds, out STFXInfo a_stOutFXInfo)
+	{
 		a_stOutFXInfo = this.FXInfoDict.ExGetVal(a_eFXKinds, STFXInfo.INVALID);
 		return this.FXInfoDict.ContainsKey(a_eFXKinds);
 	}
 
 	/** 효과 정보를 로드한다 */
-	public Dictionary<EFXKinds, STFXInfo> LoadFXInfos() {
+	public Dictionary<EFXKinds, STFXInfo> LoadFXInfos()
+	{
 		this.ResetFXInfos();
 		return this.LoadFXInfos(Access.FXInfoTableLoadPath);
 	}
 
 	/** 효과 정보를 저장한다 */
-	public void SaveFXInfos(string a_oJSONStr, bool a_bIsAssert = true) {
+	public void SaveFXInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	{
 		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetFXInfos(a_oJSONStr);
 		}
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos)
+	{
 		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.FXTableInfo);
 		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 효과 정보를 로드한다 */
-	private Dictionary<EFXKinds, STFXInfo> LoadFXInfos(string a_oFilePath) {
+	private Dictionary<EFXKinds, STFXInfo> LoadFXInfos(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadFXInfos(this.LoadFXInfosJSONStr(a_oFilePath));
 	}
 
 	/** 효과 정보 JSON 문자열을 로드한다 */
-	private string LoadFXInfosJSONStr(string a_oFilePath) {
+	private string LoadFXInfosJSONStr(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -154,15 +172,18 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	}
 
 	/** 효과 정보를 로드한다 */
-	private Dictionary<EFXKinds, STFXInfo> DoLoadFXInfos(string a_oJSONStr) {
+	private Dictionary<EFXKinds, STFXInfo> DoLoadFXInfos(string a_oJSONStr)
+	{
 		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stFXInfo = new STFXInfo(oCommonInfos[i]);
 
 			// 효과 정보 추가 가능 할 경우
-			if(stFXInfo.m_eFXKinds.ExIsValid() && (!this.FXInfoDict.ContainsKey(stFXInfo.m_eFXKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stFXInfo.m_eFXKinds.ExIsValid() && (!this.FXInfoDict.ContainsKey(stFXInfo.m_eFXKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.FXInfoDict.ExReplaceVal(stFXInfo.m_eFXKinds, stFXInfo);
 			}
 		}
@@ -174,35 +195,43 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 효과 정보를 저장한다 */
-	public void SaveFXInfos(SimpleJSON.JSONNode a_oOutFXInfos) {
+	public void SaveFXInfos(SimpleJSON.JSONNode a_oOutFXInfos)
+	{
 		this.SetupJSONNodes(a_oOutFXInfos, out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var eFXKinds = oCommonInfos[i][KCDefine.U_KEY_FX_KINDS].ExIsValid() ? (EFXKinds)oCommonInfos[i][KCDefine.U_KEY_FX_KINDS].AsInt : EFXKinds.NONE;
 
 			// 효과 정보가 존재 할 경우
-			if(this.FXInfoDict.TryGetValue(eFXKinds, out STFXInfo stFXInfo)) {
+			if(this.FXInfoDict.TryGetValue(eFXKinds, out STFXInfo stFXInfo))
+			{
 				stFXInfo.SaveFXInfo(oCommonInfos[i]);
 			}
 		}
 	}
 
 	/** 효과 정보 값을 생성한다 */
-	public void MakeFXInfoVals(SimpleJSON.JSONNode a_oFXInfos, Dictionary<string, List<List<string>>> a_oOutFXInfoValDictContainer) {
+	public void MakeFXInfoVals(SimpleJSON.JSONNode a_oFXInfos, Dictionary<string, List<List<string>>> a_oOutFXInfoValDictContainer)
+	{
 		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 
-		try {
+		try
+		{
 			this.SetupKeyInfos(oCommonKeyInfoList);
 			this.SetupJSONNodes(a_oFXInfos, out SimpleJSON.JSONNode oCommonInfos);
 
 			a_oOutFXInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.FXTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 		}
 	}
 
 	/** 키 정보를 설정한다 */
-	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList) {
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList)
+	{
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		Access.FXTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}

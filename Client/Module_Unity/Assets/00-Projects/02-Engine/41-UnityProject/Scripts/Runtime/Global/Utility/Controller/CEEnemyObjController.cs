@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 적 객체 제어자 */
-	public partial class CEEnemyObjController : CEObjController {
+	public partial class CEEnemyObjController : CEObjController
+	{
 		/** 매개 변수 */
-		public new struct STParams {
+		public new struct STParams
+		{
 			public CEObjController.STParams m_stBase;
 		}
 
@@ -23,13 +26,15 @@ namespace NSEngine {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 			this.SubAwake();
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			base.Init(a_stParams.m_stBase);
 			this.Params = a_stParams;
 
@@ -38,31 +43,39 @@ namespace NSEngine {
 		}
 
 		/** 제거되었을 경우 */
-		public override void OnDestroy() {
+		public override void OnDestroy()
+		{
 			base.OnDestroy();
 
-			try {
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					this.SubOnDestroy();
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CEEnemyObjController.OnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
+		public override void OnUpdate(float a_fDeltaTime)
+		{
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
+			if(CSceneManager.IsAppRunning)
+			{
 				this.SubOnUpdate(a_fDeltaTime);
 			}
 		}
 
 		/** 스킬을 적용한다 */
-		public override void ApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo) {
+		public override void ApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo)
+		{
 			base.ApplySkill(a_stSkillInfo, a_oSkillTargetInfo);
 			CSceneManager.GetSceneManager<PlayScene.CSubPlaySceneManager>().SetIsDirtyUpdateState(true);
 		}
@@ -70,10 +83,12 @@ namespace NSEngine {
 	}
 
 	/** 적 객체 제어자 - 접근 */
-	public partial class CEEnemyObjController : CEObjController {
+	public partial class CEEnemyObjController : CEObjController
+	{
 		#region 함수
 		/** 플레이어 객체 공격 가능 여부를 검사한다 */
-		private bool IsEnableAttackPlayerObj() {
+		private bool IsEnableAttackPlayerObj()
+		{
 			var stDelta = this.Engine.SelPlayerObj.transform.localPosition - this.GetOwner<CEObj>().transform.localPosition;
 			return stDelta.sqrMagnitude.ExIsLessEquals(Mathf.Pow((float)this.GetOwner<CEObj>().AbilityValDictWrapper.m_oDictA.ExGetAbilityVal(EAbilityKinds.STAT_ABILITY_ATK_RANGE_01), KCDefine.B_VAL_2_REAL));
 		}
@@ -81,11 +96,14 @@ namespace NSEngine {
 	}
 
 	/** 적 객체 제어자 - 팩토리 */
-	public partial class CEEnemyObjController : CEObjController {
+	public partial class CEEnemyObjController : CEObjController
+	{
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public new static STParams MakeParams(CEngine a_oEngine) {
-			return new STParams() {
+		public new static STParams MakeParams(CEngine a_oEngine)
+		{
+			return new STParams()
+			{
 				m_stBase = CEObjController.MakeParams(a_oEngine)
 			};
 		}

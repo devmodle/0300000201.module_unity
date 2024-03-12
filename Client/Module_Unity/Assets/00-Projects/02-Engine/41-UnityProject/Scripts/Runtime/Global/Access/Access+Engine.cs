@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 엔진 접근자 */
-	public static partial class Access {
+	public static partial class Access
+	{
 		#region 프로퍼티
 		public static Vector3 CellSize => CSceneManager.ActiveSceneManager.IsPortrait ? new Vector3(Access.MaxGridSize.x / (float)KDefine.E_DEF_NUM_CELLS.x, Access.MaxGridSize.x / (float)KDefine.E_DEF_NUM_CELLS.y, KCDefine.B_VAL_0_REAL) : new Vector3(Access.MaxGridSize.y / (float)KDefine.E_DEF_NUM_CELLS.x, Access.MaxGridSize.y / (float)KDefine.E_DEF_NUM_CELLS.y, KCDefine.B_VAL_0_REAL);
 		public static Vector3 MaxGridSize => CSceneManager.ActiveSceneManager.IsPortrait ? KDefine.E_MAX_GRID_SIZE_PORTRAIT : KDefine.E_MAX_GRID_SIZE_LANDSCAPE;
@@ -16,22 +18,26 @@ namespace NSEngine {
 
 		#region 클래스 함수
 		/** 색상을 반환한다 */
-		public static Color GetColor(EItemKinds a_eItemKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Color GetColor(EItemKinds a_eItemKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			return KDefine.E_COLOR_ITEM_DICT.ExGetVal((EItemKinds)((int)a_eItemKinds).ExKindsToAdjustKinds(a_eGroupType), Color.white);
 		}
 
 		/** 색상을 반환한다 */
-		public static Color GetColor(ESkillKinds a_eSkillKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Color GetColor(ESkillKinds a_eSkillKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			return KDefine.E_COLOR_SKILL_DICT.ExGetVal((ESkillKinds)((int)a_eSkillKinds).ExKindsToAdjustKinds(a_eGroupType), Color.white);
 		}
 
 		/** 색상을 반환한다 */
-		public static Color GetColor(EObjKinds a_eObjKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Color GetColor(EObjKinds a_eObjKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			return KDefine.E_COLOR_OBJ_DICT.ExGetVal((EObjKinds)((int)a_eObjKinds).ExKindsToAdjustKinds(a_eGroupType), Color.white);
 		}
 
 		/** 스프라이트를 반환한다 */
-		public static Sprite GetSprite(EItemKinds a_eItemKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Sprite GetSprite(EItemKinds a_eItemKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			string oStr = CStrTable.Inst.GetEnumStr(typeof(EItemKinds), ((int)a_eItemKinds).ExKindsToAdjustKinds(a_eGroupType));
 			string oImgPath = KDefine.E_IMG_P_ITEM_DICT.ExGetVal((EItemKinds)((int)a_eItemKinds).ExKindsToDetailSubKindsType(), oStr);
 
@@ -39,7 +45,8 @@ namespace NSEngine {
 		}
 
 		/** 스프라이트를 반환한다 */
-		public static Sprite GetSprite(ESkillKinds a_eSkillKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Sprite GetSprite(ESkillKinds a_eSkillKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			string oStr = CStrTable.Inst.GetEnumStr(typeof(ESkillKinds), ((int)a_eSkillKinds).ExKindsToAdjustKinds(a_eGroupType));
 			string oImgPath = KDefine.E_IMG_P_SKILL_DICT.ExGetVal((ESkillKinds)((int)a_eSkillKinds).ExKindsToDetailSubKindsType(), oStr);
 
@@ -47,7 +54,8 @@ namespace NSEngine {
 		}
 
 		/** 스프라이트를 반환한다 */
-		public static Sprite GetSprite(EObjKinds a_eObjKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static Sprite GetSprite(EObjKinds a_eObjKinds, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			string oStr = CStrTable.Inst.GetEnumStr(typeof(EObjKinds), ((int)a_eObjKinds).ExKindsToAdjustKinds(a_eGroupType));
 			string oImgPath = KDefine.E_IMG_P_OBJ_DICT.ExGetVal((EObjKinds)((int)a_eObjKinds).ExKindsToDetailSubKindsType(), oStr);
 
@@ -55,25 +63,29 @@ namespace NSEngine {
 		}
 
 		/** 정렬 순서 정보를 반환한다 */
-		public static STSortingOrderInfo GetSortingOrderInfo(EItemKinds a_eItemKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static STSortingOrderInfo GetSortingOrderInfo(EItemKinds a_eItemKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			bool bIsValid = KDefine.E_SORTING_OI_ITEM_DICT.TryGetValue((EItemKinds)((int)a_eItemKinds).ExKindsToDetailSubKindsType(), out STSortingOrderInfo stSortingOrderInfo);
 			return bIsValid ? stSortingOrderInfo.ExGetExtraSortingOrderInfo(a_nExtraOrder) : KDefine.E_SORTING_OI_ITEM_DICT.ExGetVal((EItemKinds)((int)a_eItemKinds).ExKindsToAdjustKinds(a_eGroupType), KDefine.E_SORTING_OI_ITEM_DEF).ExGetExtraSortingOrderInfo(a_nExtraOrder);
 		}
 
 		/** 정렬 순서 정보를 반환한다 */
-		public static STSortingOrderInfo GetSortingOrderInfo(ESkillKinds a_eSkillKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static STSortingOrderInfo GetSortingOrderInfo(ESkillKinds a_eSkillKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			bool bIsValid = KDefine.E_SORTING_OI_SKILL_DICT.TryGetValue((ESkillKinds)((int)a_eSkillKinds).ExKindsToDetailSubKindsType(), out STSortingOrderInfo stSortingOrderInfo);
 			return bIsValid ? stSortingOrderInfo.ExGetExtraSortingOrderInfo(a_nExtraOrder) : KDefine.E_SORTING_OI_SKILL_DICT.ExGetVal((ESkillKinds)((int)a_eSkillKinds).ExKindsToAdjustKinds(a_eGroupType), KDefine.E_SORTING_OI_SKILL_DEF).ExGetExtraSortingOrderInfo(a_nExtraOrder);
 		}
 
 		/** 정렬 순서 정보를 반환한다 */
-		public static STSortingOrderInfo GetSortingOrderInfo(EObjKinds a_eObjKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static STSortingOrderInfo GetSortingOrderInfo(EObjKinds a_eObjKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			bool bIsValid = KDefine.E_SORTING_OI_OBJ_DICT.TryGetValue((EObjKinds)((int)a_eObjKinds).ExKindsToDetailSubKindsType(), out STSortingOrderInfo stSortingOrderInfo);
 			return bIsValid ? stSortingOrderInfo.ExGetExtraSortingOrderInfo(a_nExtraOrder) : KDefine.E_SORTING_OI_OBJ_DICT.ExGetVal((EObjKinds)((int)a_eObjKinds).ExKindsToAdjustKinds(a_eGroupType), KDefine.E_SORTING_OI_OBJ_DEF).ExGetExtraSortingOrderInfo(a_nExtraOrder);
 		}
 
 		/** 정렬 순서 정보를 반환한다 */
-		public static STSortingOrderInfo GetSortingOrderInfo(EFXKinds a_eFXKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE) {
+		public static STSortingOrderInfo GetSortingOrderInfo(EFXKinds a_eFXKinds, int a_nExtraOrder = KCDefine.B_VAL_0_INT, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
+		{
 			bool bIsValid = KDefine.E_SORTING_OI_FX_DICT.TryGetValue((EFXKinds)((int)a_eFXKinds).ExKindsToDetailSubKindsType(), out STSortingOrderInfo stSortingOrderInfo);
 			return bIsValid ? stSortingOrderInfo.ExGetExtraSortingOrderInfo(a_nExtraOrder) : KDefine.E_SORTING_OI_FX_DICT.ExGetVal((EFXKinds)((int)a_eFXKinds).ExKindsToAdjustKinds(a_eGroupType), KDefine.E_SORTING_OI_FX_DEF).ExGetExtraSortingOrderInfo(a_nExtraOrder);
 		}

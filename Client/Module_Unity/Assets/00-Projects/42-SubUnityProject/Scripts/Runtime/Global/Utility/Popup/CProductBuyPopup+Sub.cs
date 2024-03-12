@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 서브 상품 구입 팝업 */
-public partial class CProductBuyPopup : CSubPopup {
+public partial class CProductBuyPopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -23,17 +25,20 @@ public partial class CProductBuyPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	private void SubAwake() {
+	private void SubAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 	#endregion // 함수
@@ -41,9 +46,11 @@ public partial class CProductBuyPopup : CSubPopup {
 	#region 조건부 함수
 #if PURCHASE_MODULE_ENABLE
 	/** 상품이 결제되었을 경우 */
-	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
+	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	{
 		// 결제되었을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			// Do Something
 		}
 

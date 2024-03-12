@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 전역 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 프로퍼티
 	public static string G_DATA_P_APP_INFO => $"{KCDefine.B_DIR_P_WRITABLE}AppInfo.bytes";
 	public static string G_DATA_P_USER_INFO => $"{KCDefine.B_DIR_P_WRITABLE}UserInfo.bytes";
@@ -89,7 +90,8 @@ public static partial class KDefine {
 		new STKeyInfo(KCDefine.U_KEY_DESC, EKeyType.SINGLE)
 	};
 
-	public static readonly Dictionary<string, int> G_TABLE_INFO_NUM_ROWS_DICT = new Dictionary<string, int>() {
+	public static readonly Dictionary<string, int> G_TABLE_INFO_NUM_ROWS_DICT = new Dictionary<string, int>()
+	{
 		[KDefine.G_TABLE_N_VER_INFO] = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS,
 		[KDefine.G_TABLE_N_ETC_INFO] = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS,
 		[KDefine.G_TABLE_N_MISSION_INFO] = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS,
@@ -102,37 +104,49 @@ public static partial class KDefine {
 		[KDefine.G_TABLE_N_PRODUCT_INFO] = KCDefine.U_MAX_NUM_GOOGLE_SHEET_ROWS
 	};
 
-	public static readonly Dictionary<string, STTableInfo> G_TABLE_INFO_GOOGLE_SHEET_DICT = new Dictionary<string, STTableInfo>() {
-		[KDefine.G_TABLE_N_VER_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_VER_INFO, KDefine.G_TABLE_N_VER_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
+	public static readonly Dictionary<string, STTableInfo> G_TABLE_INFO_GOOGLE_SHEET_DICT = new Dictionary<string, STTableInfo>()
+	{
+		[KDefine.G_TABLE_N_VER_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_VER_INFO, KDefine.G_TABLE_N_VER_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
 			// Do Something
 		}),
 
-		[KDefine.G_TABLE_N_ETC_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ETC_INFO, KDefine.G_TABLE_N_ETC_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CCalcInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_ETC_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ETC_INFO, KDefine.G_TABLE_N_ETC_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CCalcInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_CALC
 			},
 
-			[typeof(CEpisodeInfoTable)] = new Dictionary<string, string>() {
+			[typeof(CEpisodeInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.U_KEY_LEVEL_EPISODE] = KCDefine.U_KEY_LEVEL_EPISODE,
 				[KCDefine.U_KEY_STAGE_EPISODE] = KCDefine.U_KEY_STAGE_EPISODE,
 				[KCDefine.U_KEY_CHAPTER_EPISODE] = KCDefine.U_KEY_CHAPTER_EPISODE
 			},
 
-			[typeof(CTutorialInfoTable)] = new Dictionary<string, string>() {
+			[typeof(CTutorialInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_TUTORIAL
 			},
 
-			[typeof(CFXInfoTable)] = new Dictionary<string, string>() {
+			[typeof(CFXInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.U_KEY_FX
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CCalcInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CCalcInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_CALC_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_CALC_KINDS, EKeyType.SINGLE),
@@ -141,7 +155,8 @@ public static partial class KDefine {
 				}
 			},
 
-			[typeof(CEpisodeInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+			[typeof(CEpisodeInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.U_KEY_LEVEL_EPISODE] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_FMT_ID, EKeyType.MULTI),
 					new STKeyInfo(KCDefine.U_KEY_FMT_PREV_ID, EKeyType.MULTI),
@@ -203,7 +218,8 @@ public static partial class KDefine {
 				},
 			},
 
-			[typeof(CTutorialInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+			[typeof(CTutorialInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_TUTORIAL_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_TUTORIAL_KINDS, EKeyType.SINGLE),
@@ -213,7 +229,8 @@ public static partial class KDefine {
 				}
 			},
 
-			[typeof(CFXInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+			[typeof(CFXInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_FX_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_FX_KINDS, EKeyType.SINGLE),
@@ -225,14 +242,19 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_MISSION_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_MISSION_INFO, KDefine.G_TABLE_N_MISSION_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CMissionInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_MISSION_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_MISSION_INFO, KDefine.G_TABLE_N_MISSION_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CMissionInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CMissionInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CMissionInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_MISSION_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_MISSION_KINDS, EKeyType.SINGLE),
@@ -243,14 +265,19 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_REWARD_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_REWARD_INFO, KDefine.G_TABLE_N_REWARD_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CRewardInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_REWARD_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_REWARD_INFO, KDefine.G_TABLE_N_REWARD_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CRewardInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CRewardInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CRewardInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_REWARD_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_REWARD_KINDS, EKeyType.SINGLE),
@@ -261,14 +288,19 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_RES_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_RES_INFO, KDefine.G_TABLE_N_RES_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CResInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_RES_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_RES_INFO, KDefine.G_TABLE_N_RES_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CResInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CResInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CResInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_RES_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_RES_KINDS, EKeyType.SINGLE),
@@ -279,17 +311,22 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_ITEM_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ITEM_INFO, KDefine.G_TABLE_N_ITEM_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CItemInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_ITEM_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ITEM_INFO, KDefine.G_TABLE_N_ITEM_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CItemInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
 				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
 				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
 				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CItemInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CItemInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
@@ -326,17 +363,22 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_SKILL_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_SKILL_INFO, KDefine.G_TABLE_N_SKILL_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CSkillInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_SKILL_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_SKILL_INFO, KDefine.G_TABLE_N_SKILL_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CSkillInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
 				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
 				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
 				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CSkillInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CSkillInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_ITEM_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_ITEM_KINDS, EKeyType.SINGLE),
@@ -377,17 +419,22 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_OBJ_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_OBJ_INFO, KDefine.G_TABLE_N_OBJ_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CObjInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_OBJ_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_OBJ_INFO, KDefine.G_TABLE_N_OBJ_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CObjInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
 				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
 				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
 				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CObjInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CObjInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_OBJ_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_OBJ_KINDS, EKeyType.SINGLE),
@@ -430,17 +477,22 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_ABILITY_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ABILITY_INFO, KDefine.G_TABLE_N_ABILITY_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CAbilityInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_ABILITY_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_ABILITY_INFO, KDefine.G_TABLE_N_ABILITY_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CAbilityInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_COMMON,
 				[KCDefine.B_KEY_BUY_TRADE] = KCDefine.B_KEY_BUY_TRADE,
 				[KCDefine.B_KEY_SALE_TRADE] = KCDefine.B_KEY_SALE_TRADE,
 				[KCDefine.B_KEY_ENHANCE_TRADE] = KCDefine.B_KEY_ENHANCE_TRADE
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
 			// Do Something
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CAbilityInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CAbilityInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_ABILITY_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_ABILITY_KINDS, EKeyType.SINGLE),
@@ -477,18 +529,24 @@ public static partial class KDefine {
 			}
 		}),
 
-		[KDefine.G_TABLE_N_PRODUCT_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_PRODUCT_INFO, KDefine.G_TABLE_N_PRODUCT_INFO, new Dictionary<System.Type, Dictionary<string, string>>() {
-			[typeof(CProductTradeInfoTable)] = new Dictionary<string, string>() {
+		[KDefine.G_TABLE_N_PRODUCT_INFO] = new STTableInfo(KDefine.G_GOOGLE_SHEET_ID_PRODUCT_INFO, KDefine.G_TABLE_N_PRODUCT_INFO, new Dictionary<System.Type, Dictionary<string, string>>()
+		{
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, string>()
+			{
 				[KCDefine.B_KEY_COMMON] = KCDefine.B_KEY_BUY_TRADE
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<string>>>() {
-			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<string>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<string>>>()
+		{
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<string>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<string>() {
 					KCDefine.B_KEY_COMMON, KCDefine.B_PLATFORM_IOS_APPLE, KCDefine.B_PLATFORM_ANDROID_GOOGLE, KCDefine.B_PLATFORM_ANDROID_AMAZON
 				}
 			}
-		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>() {
-			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<STKeyInfo>>() {
+		}, new Dictionary<System.Type, Dictionary<string, List<STKeyInfo>>>()
+		{
+			[typeof(CProductTradeInfoTable)] = new Dictionary<string, List<STKeyInfo>>()
+			{
 				[KCDefine.B_KEY_COMMON] = new List<STKeyInfo>() {
 					new STKeyInfo(KCDefine.U_KEY_PRODUCT_KINDS, EKeyType.SINGLE),
 					new STKeyInfo(KCDefine.U_KEY_PREV_PRODUCT_KINDS, EKeyType.SINGLE),
@@ -505,7 +563,8 @@ public static partial class KDefine {
 }
 
 /** 초기화 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
@@ -517,7 +576,8 @@ public static partial class KDefine {
 }
 
 /** 설정 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
@@ -530,28 +590,32 @@ public static partial class KDefine {
 }
 
 /** 지연 설정 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 타이틀 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 메인 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 플레이 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 이름
 	public const string PS_OBJ_N_ENGINE = "Engine";
@@ -559,14 +623,16 @@ public static partial class KDefine {
 }
 
 /** 결과 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 로딩 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
@@ -579,7 +645,8 @@ public static partial class KDefine {
 }
 
 /** 중첩 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본

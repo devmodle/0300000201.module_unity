@@ -8,9 +8,11 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 이어하기 팝업 */
-public partial class CContinuePopup : CSubPopup {
+public partial class CContinuePopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		PRICE_TEXT,
 		ADS_BTN,
@@ -18,7 +20,8 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 콜백 */
-	public enum ECallback {
+	public enum ECallback
+	{
 		NONE = -1,
 		RETRY,
 		CONTINUE,
@@ -27,7 +30,8 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public int m_nContinueTimes;
 		public int m_nAdsContinueTimes;
 
@@ -50,7 +54,8 @@ public partial class CContinuePopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.SetIsEnableNavStackEvent(false);
 
@@ -75,7 +80,8 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init();
 		this.Params = a_stParams;
 
@@ -83,13 +89,15 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		var stItemTradeInfo = CItemInfoTable.Inst.GetBuyItemTradeInfo(this.ContinueItemKinds);
 
 		// 텍스트를 갱신한다 {
@@ -97,7 +105,8 @@ public partial class CContinuePopup : CSubPopup {
 			(EKey.PRICE_TEXT, ETargetKinds.ITEM_TARGET_NUMS, EItemKinds.GOODS_ITEM_COINS_01)
 		};
 
-		for(int i = 0; i < oTextKeyInfoList.Count; ++i) {
+		for(int i = 0; i < oTextKeyInfoList.Count; ++i)
+		{
 			m_oTMPTextDict.ExGetVal(oTextKeyInfoList[i].Item1)?.ExSetText($"{stItemTradeInfo.m_oPayTargetInfoDict.ExGetTargetVal(oTextKeyInfoList[i].Item2, (int)oTextKeyInfoList[i].Item3)}", EFontSet._1, false);
 		}
 		// 텍스트를 갱신한다 }
@@ -117,31 +126,38 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 닫기 버튼을 눌렀을 경우 */
-	protected override void OnTouchCloseBtn() {
+	protected override void OnTouchCloseBtn()
+	{
 		base.OnTouchCloseBtn();
 		this.OnTouchFinishBtn();
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */
-	private void OnTouchAdsBtn() {
+	private void OnTouchAdsBtn()
+	{
 #if ADS_MODULE_ENABLE
 		Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif // #if ADS_MODULE_ENABLE
 	}
 
 	/** 재시도 버튼을 눌렀을 경우 */
-	private void OnTouchRetryBtn() {
+	private void OnTouchRetryBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.RETRY)?.Invoke(this);
 	}
 
 	/** 이어하기 버튼을 눌렀을 경우 */
-	private void OnTouchContinueBtn() {
+	private void OnTouchContinueBtn()
+	{
 		var stItemTradeInfo = CItemInfoTable.Inst.GetBuyItemTradeInfo(this.ContinueItemKinds);
 
 		// 교환이 불가능 할 경우
-		if(!Access.IsEnableTrade(CGameInfoStorage.Inst.PlayCharacterID, stItemTradeInfo.m_oPayTargetInfoDict)) {
+		if(!Access.IsEnableTrade(CGameInfoStorage.Inst.PlayCharacterID, stItemTradeInfo.m_oPayTargetInfoDict))
+		{
 			CSceneManager.GetSceneManager<OverlayScene.CSubOverlaySceneManager>()?.ShowStorePopup();
-		} else {
+		}
+		else
+		{
 			Func.Trade(CGameInfoStorage.Inst.PlayCharacterID, stItemTradeInfo);
 			Func.SaveInfoStorages();
 
@@ -150,7 +166,8 @@ public partial class CContinuePopup : CSubPopup {
 	}
 
 	/** 그만두기 버튼을 눌렀을 경우 */
-	private void OnTouchFinishBtn() {
+	private void OnTouchFinishBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.FINISH)?.Invoke(this);
 	}
 	#endregion // 함수
@@ -172,13 +189,16 @@ public partial class CContinuePopup : CSubPopup {
 }
 
 /** 이어하기 팝업 - 팩토리 */
-public partial class CContinuePopup : CSubPopup {
+public partial class CContinuePopup : CSubPopup
+{
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(int a_nContinueTimes, int a_nAdsContinueTimes, Dictionary<ECallback, System.Action<CContinuePopup>> a_oCallbackDict = null) {
-		return new STParams() {
-			m_nContinueTimes = a_nContinueTimes, 
-			m_nAdsContinueTimes = a_nAdsContinueTimes, 
+	public static STParams MakeParams(int a_nContinueTimes, int a_nAdsContinueTimes, Dictionary<ECallback, System.Action<CContinuePopup>> a_oCallbackDict = null)
+	{
+		return new STParams()
+		{
+			m_nContinueTimes = a_nContinueTimes,
+			m_nAdsContinueTimes = a_nAdsContinueTimes,
 			m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CContinuePopup>>()
 		};
 	}

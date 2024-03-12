@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 열거형 값 */
-public static partial class KEnumVal {
+public static partial class KEnumVal
+{
 	#region 기본
 
 	#endregion // 기본
@@ -14,7 +15,8 @@ public static partial class KEnumVal {
 
 #region 기본
 /** 플레이 모드 */
-public enum EPlayMode {
+public enum EPlayMode
+{
 	NONE = -1,
 	TEST,
 	NORM,
@@ -23,7 +25,8 @@ public enum EPlayMode {
 }
 
 /** 로그인 타입 */
-public enum ELoginType {
+public enum ELoginType
+{
 	NONE = -1,
 	GUEST,
 	APPLE,
@@ -32,7 +35,8 @@ public enum ELoginType {
 }
 
 /** 결제 타입 */
-public enum EPurchaseType {
+public enum EPurchaseType
+{
 	NONE = -1,
 	ADS,
 	TARGET,

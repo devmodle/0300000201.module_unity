@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 /** 추가 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 씬 이름 {
 	public const string G_SCENE_N_ADS_ADMOB = "01-Ads_AdmobScene";
@@ -26,9 +27,11 @@ public static partial class KDefine {
 	#endregion // 런타임 상수
 }
 
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 엔진 추가 상수 */
-	public static partial class KDefine {
+	public static partial class KDefine
+	{
 		#region 기본
 
 		#endregion // 기본

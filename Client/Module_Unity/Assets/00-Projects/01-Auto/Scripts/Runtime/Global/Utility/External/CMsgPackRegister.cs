@@ -13,7 +13,8 @@ using UnityEditor;
 #endif // #if UNITY_EDITOR
 
 /** 메세지 팩 등록자 */
-public static partial class CMsgPackRegister {
+public static partial class CMsgPackRegister
+{
 	#region 클래스 변수
 	private static bool m_bIsRegister = false;
 	#endregion // 클래스 변수
@@ -21,9 +22,11 @@ public static partial class CMsgPackRegister {
 	#region 클래스 함수
 	/** 메세지 팩을 등록한다 */
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-	private static void RegisterMsgPack() {
+	private static void RegisterMsgPack()
+	{
 		// 등록 가능 할 경우
-		if(!CMsgPackRegister.m_bIsRegister) {
+		if(!CMsgPackRegister.m_bIsRegister)
+		{
 			CMsgPackRegister.m_bIsRegister = true;
 
 #if UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
@@ -42,7 +45,8 @@ public static partial class CMsgPackRegister {
 #if UNITY_EDITOR
 	/** 초기화 */
 	[InitializeOnLoadMethod]
-	public static void EditorInitialize() {
+	public static void EditorInitialize()
+	{
 		CMsgPackRegister.RegisterMsgPack();
 	}
 #endif // #if UNITY_EDITOR

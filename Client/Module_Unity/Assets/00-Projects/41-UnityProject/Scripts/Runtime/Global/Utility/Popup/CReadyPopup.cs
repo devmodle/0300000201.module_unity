@@ -6,23 +6,27 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 준비 팝업 */
-public partial class CReadyPopup : CSubPopup {
+public partial class CReadyPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		TITLE_TEXT,
 		[HideInInspector] MAX_VAL
 	}
 
 	/** 콜백 */
-	public enum ECallback {
+	public enum ECallback
+	{
 		NONE = -1,
 		PLAY,
 		[HideInInspector] MAX_VAL
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public STIDInfo m_stIDInfo;
 		public Dictionary<ECallback, System.Action<CReadyPopup>> m_oCallbackDict;
 	}
@@ -38,7 +42,8 @@ public partial class CReadyPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 텍스트를 설정한다
@@ -55,7 +60,8 @@ public partial class CReadyPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init();
 		this.Params = a_stParams;
 
@@ -63,30 +69,37 @@ public partial class CReadyPopup : CSubPopup {
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		this.SubUpdateUIsState();
 	}
 
 	/** 플레이 버튼을 눌렀을 경우 */
-	private void OnTouchPlayBtn() {
+	private void OnTouchPlayBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.PLAY)?.Invoke(this);
 	}
 	#endregion // 함수
 }
 
 /** 준비 팝업 - 팩토리 */
-public partial class CReadyPopup : CSubPopup {
+public partial class CReadyPopup : CSubPopup
+{
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(STIDInfo a_stIDInfo, Dictionary<ECallback, System.Action<CReadyPopup>> a_oCallbackDict = null) {
-		return new STParams() {
-			m_stIDInfo = a_stIDInfo, m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CReadyPopup>>()
+	public static STParams MakeParams(STIDInfo a_stIDInfo, Dictionary<ECallback, System.Action<CReadyPopup>> a_oCallbackDict = null)
+	{
+		return new STParams()
+		{
+			m_stIDInfo = a_stIDInfo,
+			m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CReadyPopup>>()
 		};
 	}
 	#endregion // 클래스 함수

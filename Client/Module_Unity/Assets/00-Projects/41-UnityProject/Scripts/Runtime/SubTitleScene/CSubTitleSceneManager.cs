@@ -10,11 +10,14 @@ using UnityEngine.EventSystems;
 
 using DG.Tweening;
 
-namespace TitleScene {
+namespace TitleScene
+{
 	/** 서브 타이틀 씬 관리자 */
-	public partial class CSubTitleSceneManager : CTitleSceneManager {
+	public partial class CSubTitleSceneManager : CTitleSceneManager
+	{
 		/** 식별자 */
-		private enum EKey {
+		private enum EKey
+		{
 			NONE = -1,
 			TOUCH_TEXT,
 			PLAY_BTN,
@@ -40,14 +43,17 @@ namespace TitleScene {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit) {
+			if(CSceneManager.IsAppInit)
+			{
 				var oItemKindsList = CCollectionPoolManager.Inst.SpawnList<EItemKinds>();
 
-				try {
+				try
+				{
 					// 텍스트를 설정한다 {
 					CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
 						(EKey.TOUCH_TEXT, $"{EKey.TOUCH_TEXT}", this.UIsBase)
@@ -68,9 +74,11 @@ namespace TitleScene {
 					oItemKindsList.ExAddVal(EItemKinds.NON_CONSUMABLE_ITEM_PURCHASE_01);
 					oItemKindsList.ExAddVal(EItemKinds.NON_CONSUMABLE_ITEM_WATCH_ADS_01);
 
-					for(int i = 0; i < oItemKindsList.Count; ++i) {
+					for(int i = 0; i < oItemKindsList.Count; ++i)
+					{
 						// 기본 아이템이 없을 경우
-						if(Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, oItemKindsList[i], ETargetKinds.ABILITY_TARGET, (int)EAbilityKinds.STAT_ABILITY_NUMS) <= KCDefine.B_VAL_0_INT) {
+						if(Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, oItemKindsList[i], ETargetKinds.ABILITY_TARGET, (int)EAbilityKinds.STAT_ABILITY_NUMS) <= KCDefine.B_VAL_0_INT)
+						{
 							var stValInfo = new STValInfo(EValType.INT, int.MaxValue);
 							Func.Acquire(CGameInfoStorage.Inst.PlayCharacterID, new STTargetInfo(ETargetKinds.ITEM_TARGET_NUMS, (int)oItemKindsList[i], stValInfo));
 						}
@@ -89,7 +97,9 @@ namespace TitleScene {
 					m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_ABILITY_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
 					m_oGoogleSheetLoadHandlerDict.TryAdd(KCDefine.U_TABLE_P_G_PRODUCT_INFO.ExGetFileName(false), this.OnLoadGoogleSheet);
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-				} finally {
+				}
+				finally
+				{
 					CCollectionPoolManager.Inst.DespawnList(oItemKindsList);
 				}
 
@@ -98,13 +108,16 @@ namespace TitleScene {
 		}
 
 		/** 초기화 */
-		public override void Start() {
+		public override void Start()
+		{
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit) {
+			if(CSceneManager.IsAppInit)
+			{
 				// 앱 업데이트가 가능 할 경우
-				if(!CAppInfoStorage.Inst.IsIgnoreAppUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate()) {
+				if(!CAppInfoStorage.Inst.IsIgnoreAppUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate())
+				{
 					CAppInfoStorage.Inst.SetIsIgnoreAppUpdate(true);
 					this.ExLateCallFunc((a_oSender) => Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_UPDATE_P_MSG), this.OnReceiveUpdatePopupResult));
 				}
@@ -113,81 +126,106 @@ namespace TitleScene {
 				this.UpdateUIsState();
 
 				// 최초 시작 일 경우
-				if(CCommonAppInfoStorage.Inst.IsFirstStart) {
+				if(CCommonAppInfoStorage.Inst.IsFirstStart)
+				{
 					this.UpdateFirstStartState();
 				}
 
 				// 최초 실행 일 경우
-				if(CCommonAppInfoStorage.Inst.AppInfo.IsFirstRunning) {
+				if(CCommonAppInfoStorage.Inst.AppInfo.IsFirstRunning)
+				{
 					this.UpdateFirstRunningState();
 				}
 
 				// 타이틀 씬이 유효 할 경우
-				if(COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene) {
+				if(COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene)
+				{
 					Func.PlayBGSnd(EResKinds.SND_RES_BG_SCENE_TITLE_01);
 
 					// 로그인되었을 경우
-					if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+					if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE)
+					{
 						this.OnLogin(CUserInfoStorage.Inst.UserInfo.LoginType, true);
 					}
-				} else {
+				}
+				else
+				{
 					CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 				}
 			}
 		}
 
 		/** 제거되었을 경우 */
-		public override void OnDestroy() {
+		public override void OnDestroy()
+		{
 			base.OnDestroy();
 
-			try {
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					CAccess.AssignVal(ref m_oTouchAni, null);
 					this.SubOnDestroy();
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CSubTitleSceneManager.OnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
+		public override void OnUpdate(float a_fDeltaTime)
+		{
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
+			if(CSceneManager.IsAppRunning)
+			{
 				this.SubOnUpdate(a_fDeltaTime);
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent) {
+		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		{
 			base.OnReceiveNavStackEvent(a_eEvent);
 
 			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN) {
+			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
+			{
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 			}
 		}
 
 		/** 터치 이벤트를 처리한다 */
-		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
+		protected override void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent)
+		{
 			base.HandleTouchEvent(a_oSender, a_oEventData, a_eTouchEvent);
 			double dblDeltaTime = System.DateTime.Now.ExGetDeltaTime(CSceneManager.ActiveSceneAwakeTime);
 
 			// 배경 터치 전달자 일 경우
-			if(this.BGTouchDispatcher == a_oSender && dblDeltaTime.ExIsGreat(KCDefine.B_VAL_1_REAL)) {
-				switch(a_eTouchEvent) {
-					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
-					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
-					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
+			if(this.BGTouchDispatcher == a_oSender && dblDeltaTime.ExIsGreat(KCDefine.B_VAL_1_REAL))
+			{
+				switch(a_eTouchEvent)
+				{
+					case ETouchEvent.BEGIN:
+						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
+						break;
+					case ETouchEvent.MOVE:
+						this.HandleTouchMoveEvent(a_oSender, a_oEventData);
+						break;
+					case ETouchEvent.END:
+						this.HandleTouchEndEvent(a_oSender, a_oEventData);
+						break;
 				}
 			}
 		}
 
 		/** UI 상태를 갱신한다 */
-		private void UpdateUIsState() {
+		private void UpdateUIsState()
+		{
 			// 버튼을 갱신한다 {
 #if APPLE_LOGIN_ENABLE && UNITY_IOS
 			m_oBtnDict[EKey.APPLE_LOGIN_BTN]?.gameObject.SetActive(true);
@@ -199,9 +237,11 @@ namespace TitleScene {
 				EKey.PLAY_BTN, EKey.GUEST_LOGIN_BTN, EKey.APPLE_LOGIN_BTN, EKey.FACEBOOK_LOGIN_BTN,
 			};
 
-			for(int i = 0; i < oLoginBtnKeyList.Count; ++i) {
+			for(int i = 0; i < oLoginBtnKeyList.Count; ++i)
+			{
 				// 로그인되었을 경우
-				if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+				if(CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE)
+				{
 					m_oBtnDict.ExGetVal(oLoginBtnKeyList[i])?.gameObject.SetActive(false);
 				}
 			}
@@ -211,7 +251,8 @@ namespace TitleScene {
 		}
 
 		/** 최초 시작 상태를 갱신한다 */
-		private void UpdateFirstStartState() {
+		private void UpdateFirstStartState()
+		{
 			LogFunc.SendLaunchLog();
 			LogFunc.SendSplashLog();
 
@@ -219,56 +260,67 @@ namespace TitleScene {
 		}
 
 		/** 최초 실행 상태를 갱신한다 */
-		private void UpdateFirstRunningState() {
+		private void UpdateFirstRunningState()
+		{
 			CCommonAppInfoStorage.Inst.AppInfo.IsFirstRunning = false;
 			CCommonAppInfoStorage.Inst.SaveAppInfo();
 		}
 
 		/** 종료 팝업 결과를 수신했을 경우 */
-		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
+		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK)
+		{
 			// 확인 버튼을 눌렀을 경우
-			if(a_bIsOK) {
+			if(a_bIsOK)
+			{
 				a_oSender.SetIsEnableAnim(false);
 				this.ExLateCallFunc((a_oSender) => this.QuitApp());
 			}
 		}
 
 		/** 업데이트 팝업 결과를 수신했을 경우 */
-		private void OnReceiveUpdatePopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
+		private void OnReceiveUpdatePopupResult(CAlertPopup a_oSender, bool a_bIsOK)
+		{
 			// 확인 버튼을 눌렀을 경우
-			if(a_bIsOK) {
+			if(a_bIsOK)
+			{
 				Application.OpenURL(Access.StoreURL);
 			}
 		}
 
 		/** 플레이 버튼을 눌렀을 경우 */
-		private void OnTouchPlayBtn() {
+		private void OnTouchPlayBtn()
+		{
 			CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
 		}
 
 		/** 게스트 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchGuestLoginBtn() {
+		private void OnTouchGuestLoginBtn()
+		{
 			this.OnLogin(ELoginType.GUEST, true);
 		}
 
 		/** 애플 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchAppleLoginBtn() {
+		private void OnTouchAppleLoginBtn()
+		{
 #if APPLE_LOGIN_ENABLE && UNITY_IOS
 			Func.AppleLogin((a_oSender, a_bIsSuccess) => this.OnLogin(ELoginType.APPLE, a_bIsSuccess));
 #endif // #if APPLE_LOGIN_ENABLE && UNITY_IOS
 		}
 
 		/** 페이스 북 로그인 버튼을 눌렀을 경우 */
-		private void OnTouchFacebookLoginBtn() {
+		private void OnTouchFacebookLoginBtn()
+		{
 #if FACEBOOK_MODULE_ENABLE
 			Func.FacebookLogin((a_oSender, a_bIsSuccess) => this.OnLogin(ELoginType.FACEBOOK, a_bIsSuccess));
 #endif // #if FACEBOOK_MODULE_ENABLE
 		}
 
 		/** 로그인되었을 경우 */
-		private void OnLogin(ELoginType a_eLoginType, bool a_bIsSuccess) {
+		private void OnLogin(ELoginType a_eLoginType, bool a_bIsSuccess)
+		{
 			// 로그인되었을 경우
-			if(a_bIsSuccess) {
+			if(a_bIsSuccess)
+			{
 				CUserInfoStorage.Inst.UserInfo.LoginType = a_eLoginType;
 				CUserInfoStorage.Inst.SaveUserInfo();
 
@@ -283,10 +335,13 @@ namespace TitleScene {
 		#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 		/** 구글 시트를 로드했을 경우 */
-		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess) {
+		private void OnLoadGoogleSheet(CServicesManager a_oSender, STGoogleSheetLoadInfo a_stGoogleSheetLoadInfo, Dictionary<string, SimpleJSON.JSONNode> a_oJSONNodeInfoDict, bool a_bIsSuccess)
+		{
 			// 로드되었을 경우
-			if(a_bIsSuccess) {
-				var oHandlerDict = new Dictionary<string, System.Action>() {
+			if(a_bIsSuccess)
+			{
+				var oHandlerDict = new Dictionary<string, System.Action>()
+				{
 					[KCDefine.U_TABLE_P_G_ETC_INFO.ExGetFileName(false)] = () => CEtcInfoTable.Inst.SaveEtcInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
 					[KCDefine.U_TABLE_P_G_MISSION_INFO.ExGetFileName(false)] = () => CMissionInfoTable.Inst.SaveMissionInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
 					[KCDefine.U_TABLE_P_G_REWARD_INFO.ExGetFileName(false)] = () => CRewardInfoTable.Inst.SaveRewardInfos(a_oJSONNodeInfoDict.ExToJSONNode().ToString()),
@@ -305,12 +360,16 @@ namespace TitleScene {
 		}
 
 		/** 구글 시트를 로드했을 경우 */
-		private void OnLoadGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess) {
+		private void OnLoadGoogleSheets(CServicesManager a_oSender, bool a_bIsSuccess)
+		{
 			// 로드되었을 경우
-			if(a_bIsSuccess) {
+			if(a_bIsSuccess)
+			{
 				Func.OnLoadGoogleSheets(m_oVerInfos);
 				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_MAIN);
-			} else {
+			}
+			else
+			{
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_TABLE_LOAD_FAIL_MSG), null, a_bIsEnableCancelBtn: false);
 			}
 
@@ -318,12 +377,16 @@ namespace TitleScene {
 		}
 
 		/** 버전 정보 구글 시트를 로드했을 경우 */
-		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoDict, bool a_bIsSuccess) {
+		private void OnLoadVerInfoGoogleSheet(CServicesManager a_oSender, SimpleJSON.JSONNode a_oVerInfos, Dictionary<string, STLoadGoogleSheetInfo> a_oLoadGoogleSheetInfoDict, bool a_bIsSuccess)
+		{
 			// 로드되었을 경우
-			if(a_bIsSuccess) {
+			if(a_bIsSuccess)
+			{
 				m_oVerInfos = a_oVerInfos;
 				Func.LoadGoogleSheets(a_oLoadGoogleSheetInfoDict.Values.ToList(), m_oGoogleSheetLoadHandlerDict, this.OnLoadGoogleSheets);
-			} else {
+			}
+			else
+			{
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_TABLE_LOAD_FAIL_MSG), null, a_bIsEnableCancelBtn: false);
 			}
 

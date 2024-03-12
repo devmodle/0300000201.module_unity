@@ -9,9 +9,11 @@ using System.Linq;
 using TMPro;
 
 /** 결과 팝업 */
-public partial class CResultPopup : CSubPopup {
+public partial class CResultPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		TITLE_TEXT,
 		RECORD_TEXT,
@@ -27,7 +29,8 @@ public partial class CResultPopup : CSubPopup {
 	}
 
 	/** 콜백 */
-	public enum ECallback {
+	public enum ECallback
+	{
 		NONE = -1,
 		NEXT,
 		RETRY,
@@ -36,7 +39,8 @@ public partial class CResultPopup : CSubPopup {
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public STIDInfo m_stIDInfo;
 		public STRecordInfo m_stRecordInfo;
 
@@ -60,7 +64,8 @@ public partial class CResultPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.SetIsEnableNavStackEvent(false);
 
@@ -99,7 +104,8 @@ public partial class CResultPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init();
 		this.Params = a_stParams;
 
@@ -107,27 +113,32 @@ public partial class CResultPopup : CSubPopup {
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
-		
+
 		Func.UpdateSingleSceneUIsState();
 	}
 
 	/** 닫기 버튼을 눌렀을 경우 */
-	protected override void OnTouchCloseBtn() {
+	protected override void OnTouchCloseBtn()
+	{
 		base.OnTouchCloseBtn();
 		this.OnTouchLeaveBtn();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		int nNumMarks = 0;
 		var oLevelClearInfo = Access.GetLevelClearInfo(CGameInfoStorage.Inst.PlayCharacterID, this.Params.m_stIDInfo.m_nID01, this.Params.m_stIDInfo.m_nID02, this.Params.m_stIDInfo.m_nID03);
 
 		// 클리어 정보가 존재 할 경우
-		if(oLevelClearInfo != null) {
-			for(int i = 0; i < CGameInfoStorage.Inst.PlayEpisodeInfo.m_oRecordValInfoList.Count; ++i) {
+		if(oLevelClearInfo != null)
+		{
+			for(int i = 0; i < CGameInfoStorage.Inst.PlayEpisodeInfo.m_oRecordValInfoList.Count; ++i)
+			{
 				nNumMarks = (CGameInfoStorage.Inst.PlayEpisodeInfo.m_oRecordValInfoList[i].m_eValType.ExIsValid() && this.Params.m_stRecordInfo.m_nIntRecord >= CGameInfoStorage.Inst.PlayEpisodeInfo.m_oRecordValInfoList[i].m_dmVal) ? i + KCDefine.B_VAL_1_INT : nNumMarks;
 			}
 
@@ -152,34 +163,40 @@ public partial class CResultPopup : CSubPopup {
 	}
 
 	/** 다음 버튼을 눌렀을 경우 */
-	private void OnTouchNextBtn() {
+	private void OnTouchNextBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.NEXT)?.Invoke(this);
 	}
 
 	/** 재시도 버튼을 눌렀을 경우 */
-	private void OnTouchRetryBtn() {
+	private void OnTouchRetryBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.RETRY)?.Invoke(this);
 	}
 
 	/** 나가기 버튼을 눌렀을 경우 */
-	private void OnTouchLeaveBtn() {
+	private void OnTouchLeaveBtn()
+	{
 		this.Params.m_oCallbackDict?.ExGetVal(ECallback.LEAVE)?.Invoke(this);
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */
-	private void OnTouchAdsBtn() {
+	private void OnTouchAdsBtn()
+	{
 #if ADS_MODULE_ENABLE
 		Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif // #if ADS_MODULE_ENABLE
 	}
 
 	/** 획득 버튼을 눌렀을 경우 */
-	private void OnTouchAcquireBtn() {
+	private void OnTouchAcquireBtn()
+	{
 		this.AcquireRewards(false);
 	}
 
 	/** 보상을 획득한다 */
-	private void AcquireRewards(bool a_bIsWatchRewardAds) {
+	private void AcquireRewards(bool a_bIsWatchRewardAds)
+	{
 		m_oBtnDict[EKey.ADS_BTN]?.ExSetInteractable(false);
 		m_oBtnDict[EKey.ACQUIRE_BTN]?.ExSetInteractable(false);
 
@@ -189,15 +206,19 @@ public partial class CResultPopup : CSubPopup {
 
 		var oRewardTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
 
-		try {
+		try
+		{
 			var stEpisodeInfo = CEpisodeInfoTable.Inst.GetLevelEpisodeInfo(this.Params.m_stIDInfo.m_nID01, this.Params.m_stIDInfo.m_nID02, this.Params.m_stIDInfo.m_nID03);
 
-			for(int i = 0; i < stEpisodeInfo.m_oRewardKindsList.Count; ++i) {
+			for(int i = 0; i < stEpisodeInfo.m_oRewardKindsList.Count; ++i)
+			{
 				// 보상 종류가 유효 할 경우
-				if(stEpisodeInfo.m_oRewardKindsList[i] != ERewardKinds.NONE) {
+				if(stEpisodeInfo.m_oRewardKindsList[i] != ERewardKinds.NONE)
+				{
 					var stRewardInfo = CRewardInfoTable.Inst.GetRewardInfo(stEpisodeInfo.m_oRewardKindsList[i]);
 
-					foreach(var stKeyVal in stRewardInfo.m_oAcquireTargetInfoDict) {
+					foreach(var stKeyVal in stRewardInfo.m_oAcquireTargetInfoDict)
+					{
 						var stValInfo = new STValInfo(stKeyVal.Value.m_stValInfo01.m_eValType, a_bIsWatchRewardAds ? stKeyVal.Value.m_stValInfo01.m_dmVal * KCDefine.B_VAL_2_INT : stKeyVal.Value.m_stValInfo01.m_dmVal);
 						oRewardTargetInfoDict.TryAdd(stKeyVal.Key, new STTargetInfo(stKeyVal.Value.m_eTargetKinds, stKeyVal.Value.m_nKinds, stValInfo));
 					}
@@ -205,13 +226,16 @@ public partial class CResultPopup : CSubPopup {
 			}
 
 			// 캐릭터 게임 정보가 존재 할 경우
-			if(CGameInfoStorage.Inst.TryGetCharacterGameInfo(CGameInfoStorage.Inst.PlayCharacterID, out CCharacterGameInfo oCharacterGameInfo)) {
+			if(CGameInfoStorage.Inst.TryGetCharacterGameInfo(CGameInfoStorage.Inst.PlayCharacterID, out CCharacterGameInfo oCharacterGameInfo))
+			{
 				oCharacterGameInfo.m_oAcquireRewardULevelIDList.ExAddVal(this.Params.m_stIDInfo.UniqueID01);
 			}
 
 			Func.Acquire(CGameInfoStorage.Inst.PlayCharacterID, oRewardTargetInfoDict, true);
 			this.UpdateUIsState();
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnDict(oRewardTargetInfoDict);
 		}
 	}
@@ -231,12 +255,17 @@ public partial class CResultPopup : CSubPopup {
 }
 
 /** 결과 팝업 - 팩토리 */
-public partial class CResultPopup : CSubPopup {
+public partial class CResultPopup : CSubPopup
+{
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(STIDInfo a_stIDInfo, STRecordInfo a_stRecordInfo, Dictionary<ECallback, System.Action<CResultPopup>> a_oCallbackDict = null) {
-		return new STParams() {
-			m_stIDInfo = a_stIDInfo, m_stRecordInfo = a_stRecordInfo, m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CResultPopup>>()
+	public static STParams MakeParams(STIDInfo a_stIDInfo, STRecordInfo a_stRecordInfo, Dictionary<ECallback, System.Action<CResultPopup>> a_oCallbackDict = null)
+	{
+		return new STParams()
+		{
+			m_stIDInfo = a_stIDInfo,
+			m_stRecordInfo = a_stRecordInfo,
+			m_oCallbackDict = a_oCallbackDict ?? new Dictionary<ECallback, System.Action<CResultPopup>>()
 		};
 	}
 	#endregion // 클래스 함수

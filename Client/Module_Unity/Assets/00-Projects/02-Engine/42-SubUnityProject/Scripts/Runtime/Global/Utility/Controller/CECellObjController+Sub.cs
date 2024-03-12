@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 서브 셀 객체 제어자 */
-	public partial class CECellObjController : CEObjController {
+	public partial class CECellObjController : CEObjController
+	{
 		/** 서브 식별자 */
-		private enum ESubKey {
+		private enum ESubKey
+		{
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
@@ -24,36 +27,46 @@ namespace NSEngine {
 
 		#region 함수
 		/** 초기화 */
-		private void SubAwake() {
+		private void SubAwake()
+		{
 			// Do Something
 		}
 
 		/** 초기화 */
-		private void SubInit() {
+		private void SubInit()
+		{
 			// Do Something
 		}
 
 		/** 객체 정보를 리셋한다 */
-		private void SubResetObjInfo(STObjInfo a_stObjInfo, STCellObjInfo a_stCellObjInfo) {
+		private void SubResetObjInfo(STObjInfo a_stObjInfo, STCellObjInfo a_stCellObjInfo)
+		{
 			// Do Something
 		}
 
 		/** 제거되었을 경우 */
-		private void SubOnDestroy() {
-			try {
+		private void SubOnDestroy()
+		{
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					// Do Something
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CECellObjController.SubOnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		private void SubOnUpdate(float a_fDeltaTime) {
+		private void SubOnUpdate(float a_fDeltaTime)
+		{
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
+			if(CSceneManager.IsAppRunning)
+			{
 				// Do Something
 			}
 		}
@@ -61,27 +74,33 @@ namespace NSEngine {
 	}
 
 	/** 서브 셀 객체 제어자 - 설정 */
-	public partial class CECellObjController : CEObjController {
+	public partial class CECellObjController : CEObjController
+	{
 		#region 함수
 		/** 엔진 객체 컴포넌트를 설정한다 */
-		protected override void SetupEObjComponent(CEObjComponent a_oEObjComponent) {
+		protected override void SetupEObjComponent(CEObjComponent a_oEObjComponent)
+		{
 			base.SetupEObjComponent(a_oEObjComponent);
 
 			// 소유자가 존재 할 경우
-			if(a_oEObjComponent.GetOwner<CEObjComponent>() != null) {
-				switch(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey) {
+			if(a_oEObjComponent.GetOwner<CEObjComponent>() != null)
+			{
+				switch(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey)
+				{
 					// Do Something
 				}
 			}
 		}
 
 		/** 다중 스킬 타겟을 설정한다 */
-		protected override void SetupMultiSkillTargets(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, List<CEObjComponent> a_oOutTargetList) {
+		protected override void SetupMultiSkillTargets(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, List<CEObjComponent> a_oOutTargetList)
+		{
 			base.SetupMultiSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, a_oOutTargetList);
 		}
 
 		/** 단일 스킬 타겟을 설정한다 */
-		protected override void SetupSingleSkillTargets(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, List<CEObjComponent> a_oOutTargetList) {
+		protected override void SetupSingleSkillTargets(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, List<CEObjComponent> a_oOutTargetList)
+		{
 			base.SetupSingleSkillTargets(a_stSkillInfo, a_oSkillTargetInfo, a_oOutTargetList);
 		}
 		#endregion // 함수

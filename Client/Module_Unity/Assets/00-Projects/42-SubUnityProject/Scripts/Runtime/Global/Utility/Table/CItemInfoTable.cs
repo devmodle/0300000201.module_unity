@@ -9,7 +9,8 @@ using System.IO;
 
 /** 아이템 정보 */
 [System.Serializable]
-public struct STItemInfo {
+public struct STItemInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public EItemKinds m_eItemKinds;
@@ -25,8 +26,11 @@ public struct STItemInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
 	#region 상수
-	public static STItemInfo INVALID = new STItemInfo() {
-		m_eItemKinds = EItemKinds.NONE, m_ePrevItemKinds = EItemKinds.NONE, m_eNextItemKinds = EItemKinds.NONE
+	public static STItemInfo INVALID = new STItemInfo()
+	{
+		m_eItemKinds = EItemKinds.NONE,
+		m_ePrevItemKinds = EItemKinds.NONE,
+		m_eNextItemKinds = EItemKinds.NONE
 	};
 	#endregion // 상수
 
@@ -37,7 +41,8 @@ public struct STItemInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STItemInfo(SimpleJSON.JSONNode a_oItemInfo) {
+	public STItemInfo(SimpleJSON.JSONNode a_oItemInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oItemInfo);
 
 		m_eItemKinds = a_oItemInfo[KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemInfo[KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
@@ -57,7 +62,8 @@ public struct STItemInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 아이템 정보를 저장한다 */
-	public void SaveItemInfo(SimpleJSON.JSONNode a_oOutItemInfo) {
+	public void SaveItemInfo(SimpleJSON.JSONNode a_oOutItemInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutItemInfo);
 
 		a_oOutItemInfo[KCDefine.U_KEY_ITEM_KINDS] = $"{(int)m_eItemKinds}";
@@ -73,12 +79,13 @@ public struct STItemInfo {
 		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutItemInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 아이템 교환 정보 */
 [System.Serializable]
-public struct STItemTradeInfo {
+public struct STItemTradeInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public EItemKinds m_eItemKinds;
@@ -89,8 +96,11 @@ public struct STItemTradeInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
 	#region 상수
-	public static STItemTradeInfo INVALID = new STItemTradeInfo() {
-		m_eItemKinds = EItemKinds.NONE, m_ePrevItemKinds = EItemKinds.NONE, m_eNextItemKinds = EItemKinds.NONE
+	public static STItemTradeInfo INVALID = new STItemTradeInfo()
+	{
+		m_eItemKinds = EItemKinds.NONE,
+		m_ePrevItemKinds = EItemKinds.NONE,
+		m_eNextItemKinds = EItemKinds.NONE
 	};
 	#endregion // 상수
 
@@ -101,7 +111,8 @@ public struct STItemTradeInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STItemTradeInfo(SimpleJSON.JSONNode a_oItemTradeInfo) {
+	public STItemTradeInfo(SimpleJSON.JSONNode a_oItemTradeInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oItemTradeInfo);
 
 		m_eItemKinds = a_oItemTradeInfo[KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)a_oItemTradeInfo[KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
@@ -116,7 +127,8 @@ public struct STItemTradeInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 아이템 교환 정보를 저장한다 */
-	public void SaveItemTradeInfo(SimpleJSON.JSONNode a_oOutItemTradeInfo) {
+	public void SaveItemTradeInfo(SimpleJSON.JSONNode a_oOutItemTradeInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutItemTradeInfo);
 
 		a_oOutItemTradeInfo[KCDefine.U_KEY_ITEM_KINDS] = $"{(int)m_eItemKinds}";
@@ -127,11 +139,12 @@ public struct STItemTradeInfo {
 		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutItemTradeInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 아이템 정보 테이블 */
-public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
+public partial class CItemInfoTable : CSingleton<CItemInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<EItemKinds, STItemInfo> ItemInfoDict { get; } = new Dictionary<EItemKinds, STItemInfo>();
 	public Dictionary<EItemKinds, STItemTradeInfo> BuyItemTradeInfoDict { get; } = new Dictionary<EItemKinds, STItemTradeInfo>();
@@ -141,13 +154,15 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetItemInfos();
 	}
 
 	/** 아이템 정보를 리셋한다 */
-	public virtual void ResetItemInfos() {
+	public virtual void ResetItemInfos()
+	{
 		this.ItemInfoDict.Clear();
 		this.BuyItemTradeInfoDict.Clear();
 		this.SaleItemTradeInfoDict.Clear();
@@ -155,13 +170,15 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 리셋한다 */
-	public virtual void ResetItemInfos(string a_oJSONStr) {
+	public virtual void ResetItemInfos(string a_oJSONStr)
+	{
 		this.ResetItemInfos();
 		this.DoLoadItemInfos(a_oJSONStr);
 	}
 
 	/** 아이템 정보를 반환한다 */
-	public STItemInfo GetItemInfo(EItemKinds a_EItemKinds) {
+	public STItemInfo GetItemInfo(EItemKinds a_EItemKinds)
+	{
 		bool bIsValid = this.TryGetItemInfo(a_EItemKinds, out STItemInfo stItemInfo);
 		CFunc.Assert(bIsValid);
 
@@ -169,7 +186,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 구입 아이템 교환 정보를 반환한다 */
-	public STItemTradeInfo GetBuyItemTradeInfo(EItemKinds a_eItemKinds) {
+	public STItemTradeInfo GetBuyItemTradeInfo(EItemKinds a_eItemKinds)
+	{
 		bool bIsValid = this.TryGetBuyItemTradeInfo(a_eItemKinds, out STItemTradeInfo stItemTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -177,7 +195,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 판매 아이템 교환 정보를 반환한다 */
-	public STItemTradeInfo GetSaleItemTradeInfo(EItemKinds a_eItemKinds) {
+	public STItemTradeInfo GetSaleItemTradeInfo(EItemKinds a_eItemKinds)
+	{
 		bool bIsValid = this.TryGetSaleItemTradeInfo(a_eItemKinds, out STItemTradeInfo stItemTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -185,7 +204,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 강화 아이템 교환 정보를 반환한다 */
-	public STItemTradeInfo GetEnhanceItemTradeInfo(EItemKinds a_eItemKinds) {
+	public STItemTradeInfo GetEnhanceItemTradeInfo(EItemKinds a_eItemKinds)
+	{
 		bool bIsValid = this.TryGetEnhanceItemTradeInfo(a_eItemKinds, out STItemTradeInfo stItemTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -193,41 +213,48 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 반환한다 */
-	public bool TryGetItemInfo(EItemKinds a_EItemKinds, out STItemInfo a_stOutItemInfo) {
+	public bool TryGetItemInfo(EItemKinds a_EItemKinds, out STItemInfo a_stOutItemInfo)
+	{
 		a_stOutItemInfo = this.ItemInfoDict.ExGetVal(a_EItemKinds, STItemInfo.INVALID);
 		return this.ItemInfoDict.ContainsKey(a_EItemKinds);
 	}
 
 	/** 구입 아이템 교환 정보를 반환한다 */
-	public bool TryGetBuyItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo) {
+	public bool TryGetBuyItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo)
+	{
 		a_stOutItemTradeInfo = this.BuyItemTradeInfoDict.ExGetVal(a_eItemKinds, STItemTradeInfo.INVALID);
 		return this.BuyItemTradeInfoDict.ContainsKey(a_eItemKinds);
 	}
 
 	/** 판매 아이템 교환 정보를 반환한다 */
-	public bool TryGetSaleItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo) {
+	public bool TryGetSaleItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo)
+	{
 		a_stOutItemTradeInfo = this.SaleItemTradeInfoDict.ExGetVal(a_eItemKinds, STItemTradeInfo.INVALID);
 		return this.SaleItemTradeInfoDict.ContainsKey(a_eItemKinds);
 	}
 
 	/** 강화 아이템 교환 정보를 반환한다 */
-	public bool TryGetEnhanceItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo) {
+	public bool TryGetEnhanceItemTradeInfo(EItemKinds a_eItemKinds, out STItemTradeInfo a_stOutItemTradeInfo)
+	{
 		a_stOutItemTradeInfo = this.EnhanceItemTradeInfoDict.ExGetVal(a_eItemKinds, STItemTradeInfo.INVALID);
 		return this.EnhanceItemTradeInfoDict.ContainsKey(a_eItemKinds);
 	}
 
 	/** 아이템 정보를 로드한다 */
-	public (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos() {
+	public (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos()
+	{
 		this.ResetItemInfos();
 		return this.LoadItemInfos(Access.ItemInfoTableLoadPath);
 	}
 
 	/** 아이템 정보를 저장한다 */
-	public void SaveItemInfos(string a_oJSONStr, bool a_bIsAssert = true) {
+	public void SaveItemInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	{
 		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetItemInfos(a_oJSONStr);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -243,7 +270,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutBuyTradeInfos, out SimpleJSON.JSONNode a_oOutSaleTradeInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutBuyTradeInfos, out SimpleJSON.JSONNode a_oOutSaleTradeInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos)
+	{
 		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.ItemTableInfo);
 		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 		a_oOutBuyTradeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_BUY_TRADE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_BUY_TRADE]] : KCDefine.B_EMPTY_JSON_ARRAY;
@@ -252,13 +280,15 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 로드한다 */
-	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos(string a_oFilePath) {
+	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) LoadItemInfos(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadItemInfos(this.LoadItemInfosJSONStr(a_oFilePath));
 	}
 
 	/** 아이템 정보 JSON 문자열을 로드한다 */
-	private string LoadItemInfosJSONStr(string a_oFilePath) {
+	private string LoadItemInfosJSONStr(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -269,42 +299,51 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보를 로드한다 */
-	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) DoLoadItemInfos(string a_oJSONStr) {
+	private (Dictionary<EItemKinds, STItemInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>, Dictionary<EItemKinds, STItemTradeInfo>) DoLoadItemInfos(string a_oJSONStr)
+	{
 		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyItemTradeInfos, out SimpleJSON.JSONNode oSaleItemTradeInfos, out SimpleJSON.JSONNode oEnhanceItemTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stItemInfo = new STItemInfo(oCommonInfos[i]);
 
 			// 아이템 정보 추가 가능 할 경우
-			if(stItemInfo.m_eItemKinds.ExIsValid() && (!this.ItemInfoDict.ContainsKey(stItemInfo.m_eItemKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stItemInfo.m_eItemKinds.ExIsValid() && (!this.ItemInfoDict.ContainsKey(stItemInfo.m_eItemKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.ItemInfoDict.ExReplaceVal(stItemInfo.m_eItemKinds, stItemInfo);
 			}
 		}
 
-		for(int i = 0; i < oBuyItemTradeInfos.Count; ++i) {
+		for(int i = 0; i < oBuyItemTradeInfos.Count; ++i)
+		{
 			var stItemTradeInfo = new STItemTradeInfo(oBuyItemTradeInfos[i]);
 
 			// 구입 아이템 교환 정보 추가 가능 할 경우
-			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.BuyItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oBuyItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.BuyItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oBuyItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.BuyItemTradeInfoDict.ExReplaceVal(stItemTradeInfo.m_eItemKinds, stItemTradeInfo);
 			}
 		}
 
-		for(int i = 0; i < oSaleItemTradeInfos.Count; ++i) {
+		for(int i = 0; i < oSaleItemTradeInfos.Count; ++i)
+		{
 			var stItemTradeInfo = new STItemTradeInfo(oSaleItemTradeInfos[i]);
 
 			// 판매 아이템 교환 정보 추가 가능 할 경우
-			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.SaleItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oSaleItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.SaleItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oSaleItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.SaleItemTradeInfoDict.ExReplaceVal(stItemTradeInfo.m_eItemKinds, stItemTradeInfo);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceItemTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceItemTradeInfos.Count; ++i)
+		{
 			var stItemTradeInfo = new STItemTradeInfo(oEnhanceItemTradeInfos[i]);
 
 			// 강화 아이템 교환 정보 추가 가능 할 경우
-			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.EnhanceItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oEnhanceItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stItemTradeInfo.m_eItemKinds.ExIsValid() && (!this.EnhanceItemTradeInfoDict.ContainsKey(stItemTradeInfo.m_eItemKinds) || oEnhanceItemTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.EnhanceItemTradeInfoDict.ExReplaceVal(stItemTradeInfo.m_eItemKinds, stItemTradeInfo);
 			}
 		}
@@ -316,42 +355,51 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 아이템 정보를 저장한다 */
-	public void SaveItemInfos() {
+	public void SaveItemInfos()
+	{
 		var oItemInfos = SimpleJSON.JSONNode.Parse(this.LoadItemInfosJSONStr(Access.ItemInfoTableLoadPath));
 		this.SetupJSONNodes(oItemInfos, out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var eItemKinds = oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 아이템 정보가 존재 할 경우
-			if(this.ItemInfoDict.TryGetValue(eItemKinds, out STItemInfo stItemInfo)) {
+			if(this.ItemInfoDict.TryGetValue(eItemKinds, out STItemInfo stItemInfo))
+			{
 				stItemInfo.SaveItemInfo(oCommonInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oBuyTradeInfos.Count; ++i) {
+		for(int i = 0; i < oBuyTradeInfos.Count; ++i)
+		{
 			var eItemKinds = oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 구입 아이템 교환 정보가 존재 할 경우
-			if(this.BuyItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stBuyItemTradeInfo)) {
+			if(this.BuyItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stBuyItemTradeInfo))
+			{
 				stBuyItemTradeInfo.SaveItemTradeInfo(oBuyTradeInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oSaleTradeInfos.Count; ++i) {
+		for(int i = 0; i < oSaleTradeInfos.Count; ++i)
+		{
 			var eItemKinds = oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 판매 아이템 교환 정보가 존재 할 경우
-			if(this.SaleItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stSaleItemTradeInfo)) {
+			if(this.SaleItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stSaleItemTradeInfo))
+			{
 				stSaleItemTradeInfo.SaveItemTradeInfo(oSaleTradeInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i)
+		{
 			var eItemKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].ExIsValid() ? (EItemKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : EItemKinds.NONE;
 
 			// 강화 아이템 교환 정보가 존재 할 경우
-			if(this.EnhanceItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stEnhanceItemTradeInfo)) {
+			if(this.EnhanceItemTradeInfoDict.TryGetValue(eItemKinds, out STItemTradeInfo stEnhanceItemTradeInfo))
+			{
 				stEnhanceItemTradeInfo.SaveItemTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
@@ -360,7 +408,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 아이템 정보 값을 생성한다 */
-	public Dictionary<string, List<List<string>>> MakeItemInfoVals() {
+	public Dictionary<string, List<List<string>>> MakeItemInfoVals()
+	{
 		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 		var oBuyTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 		var oSaleTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
@@ -368,7 +417,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 
 		var oItemInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
-		try {
+		try
+		{
 			this.SetupKeyInfos(oCommonKeyInfoList, oBuyTradeKeyInfoList, oSaleTradeKeyInfoList, oEnhanceTradeKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadItemInfosJSONStr(Access.ItemInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
@@ -376,7 +426,9 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 			oItemInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.ItemTableInfo)[KCDefine.B_KEY_BUY_TRADE], oCommonInfos.AsArray.ExToInfoVals(oBuyTradeKeyInfoList));
 			oItemInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.ItemTableInfo)[KCDefine.B_KEY_SALE_TRADE], oCommonInfos.AsArray.ExToInfoVals(oSaleTradeKeyInfoList));
 			oItemInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.ItemTableInfo)[KCDefine.B_KEY_ENHANCE_TRADE], oCommonInfos.AsArray.ExToInfoVals(oEnhanceTradeKeyInfoList));
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 			CCollectionPoolManager.Inst.DespawnList(oBuyTradeKeyInfoList);
 			CCollectionPoolManager.Inst.DespawnList(oSaleTradeKeyInfoList);
@@ -387,7 +439,8 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 	}
 
 	/** 키 정보를 설정한다 */
-	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutBuyTradeKeyInfoList, List<STKeyInfo> a_oOutSaleTradeKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList) {
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutBuyTradeKeyInfoList, List<STKeyInfo> a_oOutSaleTradeKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList)
+	{
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutBuyTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutSaleTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
@@ -399,6 +452,6 @@ public partial class CItemInfoTable : CSingleton<CItemInfoTable> {
 		Access.ItemTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

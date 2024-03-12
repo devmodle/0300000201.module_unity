@@ -9,7 +9,8 @@ using System.IO;
 
 /** 미션 정보 */
 [System.Serializable]
-public struct STMissionInfo {
+public struct STMissionInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public EMissionKinds m_eMissionKinds;
@@ -20,8 +21,11 @@ public struct STMissionInfo {
 	public List<EMissionKinds> m_oExtraMissionKindsList;
 
 	#region 상수
-	public static STMissionInfo INVALID = new STMissionInfo() {
-		m_eMissionKinds = EMissionKinds.NONE, m_ePrevMissionKinds = EMissionKinds.NONE, m_eNextMissionKinds = EMissionKinds.NONE
+	public static STMissionInfo INVALID = new STMissionInfo()
+	{
+		m_eMissionKinds = EMissionKinds.NONE,
+		m_ePrevMissionKinds = EMissionKinds.NONE,
+		m_eNextMissionKinds = EMissionKinds.NONE
 	};
 	#endregion // 상수
 
@@ -32,7 +36,8 @@ public struct STMissionInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STMissionInfo(SimpleJSON.JSONNode a_oMissionInfo) {
+	public STMissionInfo(SimpleJSON.JSONNode a_oMissionInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oMissionInfo);
 
 		m_eMissionKinds = a_oMissionInfo[KCDefine.U_KEY_MISSION_KINDS].ExIsValid() ? (EMissionKinds)a_oMissionInfo[KCDefine.U_KEY_MISSION_KINDS].AsInt : EMissionKinds.NONE;
@@ -47,7 +52,8 @@ public struct STMissionInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 미션 정보를 저장한다 */
-	public void SaveMissionInfo(SimpleJSON.JSONNode a_oOutMissionInfo) {
+	public void SaveMissionInfo(SimpleJSON.JSONNode a_oOutMissionInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutMissionInfo);
 
 		a_oOutMissionInfo[KCDefine.U_KEY_MISSION_KINDS] = $"{(int)m_eMissionKinds}";
@@ -58,35 +64,40 @@ public struct STMissionInfo {
 		Func.SaveVals(m_oExtraMissionKindsList, KCDefine.U_KEY_FMT_EXTRA_MISSION_KINDS, (a_eMissionKinds) => $"{(int)a_eMissionKinds}", a_oOutMissionInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 미션 정보 테이블 */
-public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
+public partial class CMissionInfoTable : CSingleton<CMissionInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<EMissionKinds, STMissionInfo> MissionInfoDict { get; } = new Dictionary<EMissionKinds, STMissionInfo>();
 	#endregion // 프로퍼티
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetMissionInfos();
 	}
 
 	/** 미션 정보를 리셋한다 */
-	public virtual void ResetMissionInfos() {
+	public virtual void ResetMissionInfos()
+	{
 		this.MissionInfoDict.Clear();
 	}
 
 	/** 미션 정보를 리셋한다 */
-	public virtual void ResetMissionInfos(string a_oJSONStr) {
+	public virtual void ResetMissionInfos(string a_oJSONStr)
+	{
 		this.ResetMissionInfos();
 		this.DoLoadMissionInfos(a_oJSONStr);
 	}
 
 	/** 미션 정보를 반환한다 */
-	public STMissionInfo GetMissionInfo(EMissionKinds a_eMissionKinds) {
+	public STMissionInfo GetMissionInfo(EMissionKinds a_eMissionKinds)
+	{
 		bool bIsValid = this.TryGetMissionInfo(a_eMissionKinds, out STMissionInfo stMissionInfo);
 		CFunc.Assert(bIsValid);
 
@@ -94,23 +105,27 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	}
 
 	/** 미션 정보를 반환한다 */
-	public bool TryGetMissionInfo(EMissionKinds a_eMissionKinds, out STMissionInfo a_stOutMissionInfo) {
+	public bool TryGetMissionInfo(EMissionKinds a_eMissionKinds, out STMissionInfo a_stOutMissionInfo)
+	{
 		a_stOutMissionInfo = this.MissionInfoDict.ExGetVal(a_eMissionKinds, STMissionInfo.INVALID);
 		return this.MissionInfoDict.ContainsKey(a_eMissionKinds);
 	}
 
 	/** 미션 정보를 로드한다 */
-	public Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos() {
+	public Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos()
+	{
 		this.ResetMissionInfos();
 		return this.LoadMissionInfos(Access.MissionInfoTableLoadPath);
 	}
 
 	/** 미션 정보를 저장한다 */
-	public void SaveMissionInfos(string a_oJSONStr, bool a_bIsAssert = true) {
+	public void SaveMissionInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	{
 		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetMissionInfos(a_oJSONStr);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -126,19 +141,22 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos)
+	{
 		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.MissionTableInfo);
 		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 미션 정보를 로드한다 */
-	private Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos(string a_oFilePath) {
+	private Dictionary<EMissionKinds, STMissionInfo> LoadMissionInfos(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadMissionInfos(this.LoadMissionInfosJSONStr(a_oFilePath));
 	}
 
 	/** 미션 정보 JSON 문자열을 로드한다 */
-	private string LoadMissionInfosJSONStr(string a_oFilePath) {
+	private string LoadMissionInfosJSONStr(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -149,15 +167,18 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	}
 
 	/** 미션 정보를 로드한다 */
-	private Dictionary<EMissionKinds, STMissionInfo> DoLoadMissionInfos(string a_oJSONStr) {
+	private Dictionary<EMissionKinds, STMissionInfo> DoLoadMissionInfos(string a_oJSONStr)
+	{
 		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSON.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stMissionInfo = new STMissionInfo(oCommonInfos[i]);
 
 			// 미션 정보 추가 가능 할 경우
-			if(stMissionInfo.m_eMissionKinds.ExIsValid() && (!this.MissionInfoDict.ContainsKey(stMissionInfo.m_eMissionKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stMissionInfo.m_eMissionKinds.ExIsValid() && (!this.MissionInfoDict.ContainsKey(stMissionInfo.m_eMissionKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.MissionInfoDict.ExReplaceVal(stMissionInfo.m_eMissionKinds, stMissionInfo);
 			}
 		}
@@ -169,15 +190,18 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 미션 정보를 저장한다 */
-	public void SaveMissionInfos() {
+	public void SaveMissionInfos()
+	{
 		var oMissionInfos = SimpleJSON.JSONNode.Parse(this.LoadMissionInfosJSONStr(Access.MissionInfoTableLoadPath));
 		this.SetupJSONNodes(oMissionInfos, out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var oMissionKinds = oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].ExIsValid() ? (EMissionKinds)oCommonInfos[i][KCDefine.U_KEY_MISSION_KINDS].AsInt : EMissionKinds.NONE;
 
 			// 미션 정보가 존재 할 경우
-			if(this.MissionInfoDict.TryGetValue(oMissionKinds, out STMissionInfo stMissionInfo)) {
+			if(this.MissionInfoDict.TryGetValue(oMissionKinds, out STMissionInfo stMissionInfo))
+			{
 				stMissionInfo.SaveMissionInfo(oCommonInfos[i]);
 			}
 		}
@@ -186,16 +210,20 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	}
 
 	/** 미션 정보 값을 생성한다 */
-	public Dictionary<string, List<List<string>>> MakeMissionInfoVals() {
+	public Dictionary<string, List<List<string>>> MakeMissionInfoVals()
+	{
 		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 		var oMissionInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
-		try {
+		try
+		{
 			this.SetupKeyInfos(oCommonKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadMissionInfosJSONStr(Access.MissionInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos);
 
 			oMissionInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.MissionTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 		}
 
@@ -203,11 +231,12 @@ public partial class CMissionInfoTable : CSingleton<CMissionInfoTable> {
 	}
 
 	/** 키 정보를 설정한다 */
-	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList) {
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList)
+	{
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		Access.MissionTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

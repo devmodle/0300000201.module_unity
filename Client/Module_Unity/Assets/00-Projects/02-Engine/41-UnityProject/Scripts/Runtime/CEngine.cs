@@ -8,11 +8,14 @@ using UnityEngine.Events;
 using System.Linq;
 using UnityEngine.EventSystems;
 
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 엔진 */
-	public partial class CEngine : CComponent {
+	public partial class CEngine : CComponent
+	{
 		/** 식별자 */
-		private enum EKey {
+		private enum EKey
+		{
 			NONE = -1,
 			CELL_OBJ_ROOT,
 			PLAYER_OBJ_ROOT,
@@ -21,14 +24,16 @@ namespace NSEngine {
 		}
 
 		/** 상태 */
-		public enum EState {
+		public enum EState
+		{
 			NONE = -1,
 			IDLE,
 			[HideInInspector] MAX_VAL
 		}
 
 		/** 서브 상태 */
-		public enum ESubState {
+		public enum ESubState
+		{
 			NONE = -1,
 			PLAY,
 			PAUSE,
@@ -36,7 +41,8 @@ namespace NSEngine {
 		}
 
 		/** 콜백 */
-		public enum ECallback {
+		public enum ECallback
+		{
 			NONE = -1,
 			CLEAR,
 			CLEAR_FAIL,
@@ -46,7 +52,8 @@ namespace NSEngine {
 		}
 
 		/** 매개 변수 */
-		public struct STParams {
+		public struct STParams
+		{
 			public GameObject m_oItemRoot;
 			public GameObject m_oSkillRoot;
 			public GameObject m_oObjRoot;
@@ -112,13 +119,15 @@ namespace NSEngine {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 			this.SubAwake();
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			this.Params = a_stParams;
 
 			this.Setup();
@@ -139,7 +148,8 @@ namespace NSEngine {
 		}
 
 		/** 상태를 리셋한다 */
-		public override void Reset() {
+		public override void Reset()
+		{
 			base.Reset();
 			this.IsRunning = false;
 
@@ -147,34 +157,48 @@ namespace NSEngine {
 		}
 
 		/** 제거되었을 경우 */
-		public override void OnDestroy() {
+		public override void OnDestroy()
+		{
 			base.OnDestroy();
 
-			try {
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					this.SubOnDestroy();
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CEngine.OnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
+		public override void OnUpdate(float a_fDeltaTime)
+		{
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning && this.IsEnableUpdate) {
+			if(CSceneManager.IsAppRunning && this.IsEnableUpdate)
+			{
 				// 실행 중 일 경우
-				if(this.IsRunning) {
-					switch(this.SubState) {
-						case ESubState.PLAY: this.HandlePlaySubState(a_fDeltaTime * this.DeltaTimeScale); break;
-						case ESubState.PAUSE: this.HandlePauseSubState(a_fDeltaTime * this.DeltaTimeScale); break;
+				if(this.IsRunning)
+				{
+					switch(this.SubState)
+					{
+						case ESubState.PLAY:
+							this.HandlePlaySubState(a_fDeltaTime * this.DeltaTimeScale);
+							break;
+						case ESubState.PAUSE:
+							this.HandlePauseSubState(a_fDeltaTime * this.DeltaTimeScale);
+							break;
 					}
 
 					// 플레이어 객체가 존재 할 경우
-					if(this.PlayerObjsListWrapper.ExIsValid()) {
+					if(this.PlayerObjsListWrapper.ExIsValid())
+					{
 						var stMainCameraPos = this.GetMainCameraPos();
 						CSceneManager.ActiveSceneMainCamera.transform.position = Vector3.Lerp(CSceneManager.ActiveSceneMainCamera.transform.position, stMainCameraPos.ExToWorld(this.Params.m_oObjRoot), a_fDeltaTime * KCDefine.B_VAL_9_REAL);
 					}
@@ -185,67 +209,97 @@ namespace NSEngine {
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnLateUpdate(float a_fDeltaTime) {
+		public override void OnLateUpdate(float a_fDeltaTime)
+		{
 			base.OnLateUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning && this.IsEnableUpdate) {
+			if(CSceneManager.IsAppRunning && this.IsEnableUpdate)
+			{
 				this.SubOnLateUpdate(a_fDeltaTime * this.DeltaTimeScale);
 			}
 		}
 
 		/** 플레이어 객체 이동을 처리한다 */
-		public void MovePlayerObj(Vector3 a_stVal, EVecType a_eVecType = EVecType.DIRECTION) {
+		public void MovePlayerObj(Vector3 a_stVal, EVecType a_eVecType = EVecType.DIRECTION)
+		{
 			this.SelPlayerObj.GetController<CEPlayerObjController>().Move(a_stVal, a_eVecType);
 		}
 
 		/** 아이템을 적용한다 */
-		public void ApplyItem(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo) {
+		public void ApplyItem(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo)
+		{
 			// 아이템 적용이 가능 할 경우
-			if(!this.ItemInfoTupleList.FindIndex((a_stItemInfoTuple) => a_stItemInfoTuple.Item1.m_eItemKinds == a_stItemInfo.m_eItemKinds).ExIsValidIdx()) {
+			if(!this.ItemInfoTupleList.FindIndex((a_stItemInfoTuple) => a_stItemInfoTuple.Item1.m_eItemKinds == a_stItemInfo.m_eItemKinds).ExIsValidIdx())
+			{
 				this.ItemInfoTupleList.ExAddVal((a_stItemInfo, a_oItemTargetInfo));
 				global::Func.Pay(CGameInfoStorage.Inst.PlayCharacterID, new STTargetInfo(ETargetKinds.ITEM_TARGET_NUMS, (int)a_stItemInfo.m_eItemKinds, new STValInfo(EValType.INT, KCDefine.B_VAL_1_INT)));
 
-				switch(((int)a_stItemInfo.m_eItemKinds).ExKindsToSubTypeVal()) {
-					case KEnumVal.IK_GAME_ITEM_SUB_TYPE_VAL: this.ApplyGameItem(a_stItemInfo, a_oItemTargetInfo); break;
-					case KEnumVal.IK_BOOSTER_ITEM_SUB_TYPE_VAL: this.ApplyBoosterItem(a_stItemInfo, a_oItemTargetInfo); break;
+				switch(((int)a_stItemInfo.m_eItemKinds).ExKindsToSubTypeVal())
+				{
+					case KEnumVal.IK_GAME_ITEM_SUB_TYPE_VAL:
+						this.ApplyGameItem(a_stItemInfo, a_oItemTargetInfo);
+						break;
+					case KEnumVal.IK_BOOSTER_ITEM_SUB_TYPE_VAL:
+						this.ApplyBoosterItem(a_stItemInfo, a_oItemTargetInfo);
+						break;
 				}
 			}
 		}
 
 		/** 스킬을 적용한다 */
-		public void ApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo) {
+		public void ApplySkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo)
+		{
 			// 스킬 적용이 가능 할 경우
-			if(!this.SkillInfoTupleList.FindIndex((a_stSkillInfoTuple) => a_stSkillInfoTuple.Item1.m_eSkillKinds == a_stSkillInfo.m_eSkillKinds).ExIsValidIdx()) {
+			if(!this.SkillInfoTupleList.FindIndex((a_stSkillInfoTuple) => a_stSkillInfoTuple.Item1.m_eSkillKinds == a_stSkillInfo.m_eSkillKinds).ExIsValidIdx())
+			{
 				this.SkillInfoTupleList.ExAddVal((a_stSkillInfo, a_oSkillTargetInfo));
 			}
 		}
 
 		/** 플레이어 객체 스킬을 적용한다 */
-		public void ApplyPlayerObjSkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo) {
+		public void ApplyPlayerObjSkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo)
+		{
 			this.SelPlayerObj.GetController<CEPlayerObjController>().ApplySkill(a_stSkillInfo, a_oSkillTargetInfo);
 		}
 
 		/** 터치 이벤트를 처리한다 */
-		public void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent) {
+		public void HandleTouchEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData, ETouchEvent a_eTouchEvent)
+		{
 			var stPos = a_oEventData.ExGetLocalPos(this.Params.m_oObjRoot, CSceneManager.ActiveSceneManager.ScreenSize);
 
 			// 그리드 영역 일 경우
-			if(this.GridInfoList.ExIsValidIdx(this.SelGridInfoIdx) && this.SelGridInfo.m_stViewBounds.Contains(stPos)) {
-				switch(a_eTouchEvent) {
-					case ETouchEvent.BEGIN: this.HandleTouchBeginEvent(a_oSender, a_oEventData); break;
-					case ETouchEvent.MOVE: this.HandleTouchMoveEvent(a_oSender, a_oEventData); break;
-					case ETouchEvent.END: this.HandleTouchEndEvent(a_oSender, a_oEventData); break;
+			if(this.GridInfoList.ExIsValidIdx(this.SelGridInfoIdx) && this.SelGridInfo.m_stViewBounds.Contains(stPos))
+			{
+				switch(a_eTouchEvent)
+				{
+					case ETouchEvent.BEGIN:
+						this.HandleTouchBeginEvent(a_oSender, a_oEventData);
+						break;
+					case ETouchEvent.MOVE:
+						this.HandleTouchMoveEvent(a_oSender, a_oEventData);
+						break;
+					case ETouchEvent.END:
+						this.HandleTouchEndEvent(a_oSender, a_oEventData);
+						break;
 				}
 			}
 		}
 
 		/** 엔진 객체 이벤트를 수신했을 경우 */
-		private void OnReceiveEObjEvent(CEObjComponent a_oSender, EEngineObjEvent a_eEvent, string a_oParams) {
-			switch(a_eEvent) {
-				case EEngineObjEvent.AVOID: this.HandleAvoidEObjEvent(a_oSender, a_oParams); break;
-				case EEngineObjEvent.DAMAGE: this.HandleDamageEObjEvent(a_oSender, a_oParams); break;
-				case EEngineObjEvent.CRITICAL_DAMAGE: this.HandleCriticalDamageEObjEvent(a_oSender, a_oParams); break;
+		private void OnReceiveEObjEvent(CEObjComponent a_oSender, EEngineObjEvent a_eEvent, string a_oParams)
+		{
+			switch(a_eEvent)
+			{
+				case EEngineObjEvent.AVOID:
+					this.HandleAvoidEObjEvent(a_oSender, a_oParams);
+					break;
+				case EEngineObjEvent.DAMAGE:
+					this.HandleDamageEObjEvent(a_oSender, a_oParams);
+					break;
+				case EEngineObjEvent.CRITICAL_DAMAGE:
+					this.HandleCriticalDamageEObjEvent(a_oSender, a_oParams);
+					break;
 			}
 
 			// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
@@ -305,20 +359,25 @@ namespace NSEngine {
 	}
 
 	/** 엔진 - 설정 */
-	public partial class CEngine : CComponent {
+	public partial class CEngine : CComponent
+	{
 		#region 함수
 		/** 엔진을 설정한다 */
-		private void Setup() {
-			for(int i = 0; i < KCDefine.B_VAL_1_INT; ++i) {
+		private void Setup()
+		{
+			for(int i = 0; i < KCDefine.B_VAL_1_INT; ++i)
+			{
 				this.CellObjsListsContainer.ExAddVal(new List<CEObj>[CGameInfoStorage.Inst.PlayLevelInfo.NumCells.y, CGameInfoStorage.Inst.PlayLevelInfo.NumCells.x]);
 				this.CellObjStacksContainerH.ExAddVal(new Stack<List<CEObj>>[CGameInfoStorage.Inst.PlayLevelInfo.NumCells.x]);
 				this.CellObjStacksContainerV.ExAddVal(new Stack<List<CEObj>>[CGameInfoStorage.Inst.PlayLevelInfo.NumCells.y]);
 
-				for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.NumCells.x; ++j) {
+				for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.NumCells.x; ++j)
+				{
 					this.CellObjStacksContainerH[i][j] = new Stack<List<CEObj>>();
 				}
 
-				for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.NumCells.y; ++j) {
+				for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.NumCells.y; ++j)
+				{
 					this.CellObjStacksContainerV[i][j] = new Stack<List<CEObj>>();
 				}
 			}
@@ -336,7 +395,8 @@ namespace NSEngine {
 				(EKey.NON_PLAYER_OBJ_ROOT, $"{EKey.NON_PLAYER_OBJ_ROOT}", this.Params.m_oObjRoot, null)
 			}, m_oObjsDict);
 
-			for(int i = 0; i < this.GridInfoList.Count; ++i) {
+			for(int i = 0; i < this.GridInfoList.Count; ++i)
+			{
 				string oName = string.Format(KCDefine.PS_OBJ_N_FMT_CELL_OBJ_ROOT, i + KCDefine.B_VAL_1_INT);
 				m_oCellObjRootList.ExAddVal(CFactory.CreateGameObj(oName, m_oObjsDict[EKey.CELL_OBJ_ROOT]));
 			}
@@ -357,12 +417,17 @@ namespace NSEngine {
 		}
 
 		/** 레벨을 설정한다 */
-		private void SetupLevel() {
+		private void SetupLevel()
+		{
 			// 레벨 정보가 존재 할 경우
-			if(CGameInfoStorage.Inst.PlayLevelInfo != null) {
-				for(int i = 0; i < this.GridInfoList.Count; ++i) {
-					for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.m_oCellInfoDictContainer.Count; ++j) {
-						for(int k = 0; k < CGameInfoStorage.Inst.PlayLevelInfo.m_oCellInfoDictContainer[j].Count; ++k) {
+			if(CGameInfoStorage.Inst.PlayLevelInfo != null)
+			{
+				for(int i = 0; i < this.GridInfoList.Count; ++i)
+				{
+					for(int j = 0; j < CGameInfoStorage.Inst.PlayLevelInfo.m_oCellInfoDictContainer.Count; ++j)
+					{
+						for(int k = 0; k < CGameInfoStorage.Inst.PlayLevelInfo.m_oCellInfoDictContainer[j].Count; ++k)
+						{
 							this.SetupCell(CGameInfoStorage.Inst.PlayLevelInfo.m_oCellInfoDictContainer[j][k], this.GridInfoList[i]);
 						}
 					}
@@ -373,10 +438,12 @@ namespace NSEngine {
 		}
 
 		/** 셀을 설정한다 */
-		private void SetupCell(STCellInfo a_stCellInfo, STGridInfo a_stGridInfo) {
+		private void SetupCell(STCellInfo a_stCellInfo, STGridInfo a_stGridInfo)
+		{
 			var oCellObjsList = new List<CEObj>();
 
-			for(int i = 0; i < a_stCellInfo.m_oCellObjInfoList.Count; ++i) {
+			for(int i = 0; i < a_stCellInfo.m_oCellObjInfoList.Count; ++i)
+			{
 				// FIXME: dante (비활성 처리 - 필요 시 활성 및 사용 가능) {
 #if DISABLE_THIS
 				// 객체 종류가 유효 할 경우
@@ -401,12 +468,14 @@ namespace NSEngine {
 		}
 
 		/** 그리드 라인을 설정한다 */
-		private void SetupGridLine() {
+		private void SetupGridLine()
+		{
 			this.SubSetupGridLine();
 		}
 
 		/** 엔진 객체 컴포넌트를 설정한다 */
-		private void SetupEObjComponent(CEObjComponent a_oEObjComponent, CEComponent a_oOwner, CEController a_oController) {
+		private void SetupEObjComponent(CEObjComponent a_oEObjComponent, CEComponent a_oOwner, CEController a_oController)
+		{
 			a_oEObjComponent.SetOwner(a_oOwner);
 			a_oEObjComponent.Params.m_oCallbackDict.TryAdd(CEObjComponent.ECallback.ENGINE_OBJ_EVENT, this.OnReceiveEObjEvent);
 
@@ -415,13 +484,16 @@ namespace NSEngine {
 		}
 
 		/** 획득 타겟 정보를 설정한다 */
-		private void SetupAcquireTargetInfos(CEObjComponent a_oEObjComponent, Dictionary<ulong, STTargetInfo> a_oOutAcquireTargetInfos) {
+		private void SetupAcquireTargetInfos(CEObjComponent a_oEObjComponent, Dictionary<ulong, STTargetInfo> a_oOutAcquireTargetInfos)
+		{
 			// 아이템 일 경우
-			if(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey.Equals(KDefine.E_KEY_ITEM_OBJS_POOL)) {
+			if(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey.Equals(KDefine.E_KEY_ITEM_OBJS_POOL))
+			{
 				(a_oEObjComponent as CEItem).Params.m_stItemInfo.m_oAcquireTargetInfoDict.ExCopyTo(a_oOutAcquireTargetInfos, (_, a_stTargetInfo) => a_stTargetInfo);
 			}
 			// 적 객체 일 경우
-			else if(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey.Equals(KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL)) {
+			else if(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey.Equals(KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL))
+			{
 				(a_oEObjComponent as CEObj).Params.m_stObjInfo.m_oAcquireTargetInfoDict.ExCopyTo(a_oOutAcquireTargetInfos, (_, a_stTargetInfo) => a_stTargetInfo);
 			}
 		}
@@ -429,12 +501,15 @@ namespace NSEngine {
 	}
 
 	/** 엔진 - 접근 */
-	public partial class CEngine : CComponent {
+	public partial class CEngine : CComponent
+	{
 		#region 함수
 		/** 메인 카메라 위치를 반환한다 */
-		public Vector3 GetMainCameraPos() {
+		public Vector3 GetMainCameraPos()
+		{
 			// 선택 플레이어가 존재 할 경우
-			if(this.SelPlayerObj != null) {
+			if(this.SelPlayerObj != null)
+			{
 				var stSize = this.CameraEpisodeSize.ExToLocal(this.Params.m_oObjRoot, false);
 				var stOffset = KDefine.E_OFFSET_MAIN_CAMERA.ExToLocal(this.Params.m_oObjRoot, false);
 				var stScreenSize = CSceneManager.ActiveSceneManager.ScreenSize.ExToLocal(this.Params.m_oObjRoot, false);
@@ -449,7 +524,8 @@ namespace NSEngine {
 		}
 
 		/** 최상단 셀 객체를 반환한다 */
-		public CEObj GetTopCellObj(Vector3Int a_stIdx) {
+		public CEObj GetTopCellObj(Vector3Int a_stIdx)
+		{
 			bool bIsValid = this.TryGetTopCellObj(a_stIdx, out CEObj oCellObj);
 			CFunc.Assert(bIsValid);
 
@@ -457,7 +533,8 @@ namespace NSEngine {
 		}
 
 		/** 최상단 셀 객체를 반환한다 */
-		public bool TryGetTopCellObj(Vector3Int a_stIdx, out CEObj a_oOutCellObj) {
+		public bool TryGetTopCellObj(Vector3Int a_stIdx, out CEObj a_oOutCellObj)
+		{
 			a_oOutCellObj = this.CellObjsListsContainer.ExIsValidIdx(a_stIdx.z) ?
 				this.CellObjsListsContainer[a_stIdx.z].ExGetVal(a_stIdx).LastOrDefault() : null;
 
@@ -465,44 +542,57 @@ namespace NSEngine {
 		}
 
 		/** 구동 여부를 변경한다 */
-		public void SetIsRunning(bool a_bIsRunning) {
+		public void SetIsRunning(bool a_bIsRunning)
+		{
 			this.IsRunning = a_bIsRunning;
 		}
 
 		/** 플레이어 객체 자동 제어 여부를 변경한다 */
-		public void SetIsAutoControlPlayerObj(bool a_bIsAutoControl) {
+		public void SetIsAutoControlPlayerObj(bool a_bIsAutoControl)
+		{
 			this.SelPlayerObj.GetController<CEPlayerObjController>().SetIsAutoControl(a_bIsAutoControl);
 		}
 
 		/** 시간 간격 비율을 변경한다 */
-		public void SetDeltaTimeScale(float a_fTimeScale) {
+		public void SetDeltaTimeScale(float a_fTimeScale)
+		{
 			this.DeltaTimeScale = a_fTimeScale.ExGetClampVal(KDefine.E_MIN_DELTA_TIME_SCALE, KDefine.E_MAX_DELTA_TIME_SCALE);
 		}
 
 		/** 상태를 변경한다 */
-		public void SetState(EState a_eState, bool a_bIsForce = false) {
+		public void SetState(EState a_eState, bool a_bIsForce = false)
+		{
 			// 강제 변경 모드 일 경우
-			if(a_bIsForce) {
+			if(a_bIsForce)
+			{
 				this.State = a_eState;
-			} else {
+			}
+			else
+			{
 				this.State = (!m_oStateCheckerDict.TryGetValue(a_eState, out System.Func<bool> oStateChecker) || oStateChecker()) ? a_eState : this.State;
 			}
 		}
 
 		/** 서브 상태를 변경한다 */
-		public void SetSubState(ESubState a_eState, bool a_bIsForce = false) {
+		public void SetSubState(ESubState a_eState, bool a_bIsForce = false)
+		{
 			// 강제 변경 모드 일 경우
-			if(a_bIsForce) {
+			if(a_bIsForce)
+			{
 				this.SubState = a_eState;
-			} else {
+			}
+			else
+			{
 				this.SubState = (!m_oSubStateCheckerDict.TryGetValue(a_eState, out System.Func<bool> oStateChecker) || oStateChecker()) ? a_eState : this.SubState;
 			}
 		}
 
 		/** 셀 객체를 탐색한다 */
-		public CEObj FindCellObj(Vector3Int a_stIdx, EObjKinds a_eObjKinds) {
+		public CEObj FindCellObj(Vector3Int a_stIdx, EObjKinds a_eObjKinds)
+		{
 			// 셀 객체가 없을 경우
-			if(!this.CellObjsListsContainer.ExIsValidIdx(a_stIdx.z)) {
+			if(!this.CellObjsListsContainer.ExIsValidIdx(a_stIdx.z))
+			{
 				return null;
 			}
 
@@ -511,10 +601,12 @@ namespace NSEngine {
 		}
 
 		/** 적 객체를 탐색한다 */
-		public CEObj FindEnemyObj(Vector3 a_stPos, float a_fDistance = float.MaxValue) {
+		public CEObj FindEnemyObj(Vector3 a_stPos, float a_fDistance = float.MaxValue)
+		{
 			var oEnemyObj = this.EnemyObjsListWrapper.ExGetVal(KCDefine.B_VAL_0_INT, null);
 
-			for(int i = 1; i < this.EnemyObjsListWrapper.Count; ++i) {
+			for(int i = 1; i < this.EnemyObjsListWrapper.Count; ++i)
+			{
 				float fDistance = (a_stPos - oEnemyObj.transform.localPosition).sqrMagnitude;
 				oEnemyObj = fDistance.ExIsLessEquals((a_stPos - this.EnemyObjsListWrapper[i].transform.localPosition).sqrMagnitude) ? oEnemyObj : this.EnemyObjsListWrapper[i];
 			}
@@ -523,11 +615,13 @@ namespace NSEngine {
 		}
 
 		/** 셀 객체를 탐색한다 */
-		public List<CEObj> FindCellObjs(Vector3Int a_stIdx, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList) {
+		public List<CEObj> FindCellObjs(Vector3Int a_stIdx, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList)
+		{
 			a_oOutCellObjsList = a_oOutCellObjsList ?? new List<CEObj>();
 
 			// 셀 객체가 없을 경우
-			if(!this.CellObjsListsContainer.ExIsValidIdx(a_stIdx.z)) {
+			if(!this.CellObjsListsContainer.ExIsValidIdx(a_stIdx.z))
+			{
 				return a_oOutCellObjsList;
 			}
 
@@ -536,14 +630,18 @@ namespace NSEngine {
 		}
 
 		/** 셀 객체를 탐색한다 */
-		public List<CEObj> FindCellObjs(Vector3Int a_stIdx, Vector3Int a_stOffset, out Vector3Int a_stOutIdx) {
+		public List<CEObj> FindCellObjs(Vector3Int a_stIdx, Vector3Int a_stOffset, out Vector3Int a_stOutIdx)
+		{
 			// 인덱스가 유효 할 경우
-			if(this.SelCellObjsLists.ExIsValidIdx(a_stIdx)) {
+			if(this.SelCellObjsLists.ExIsValidIdx(a_stIdx))
+			{
 				a_stOutIdx = a_stIdx;
 
-				while(this.SelCellObjsLists.ExIsValidIdx(a_stOutIdx)) {
+				while(this.SelCellObjsLists.ExIsValidIdx(a_stOutIdx))
+				{
 					// 셀 객체가 존재 할 경우
-					if(this.SelCellObjsLists[a_stOutIdx.y, a_stOutIdx.x].ExIsValid()) {
+					if(this.SelCellObjsLists[a_stOutIdx.y, a_stOutIdx.x].ExIsValid())
+					{
 						return this.SelCellObjsLists[a_stOutIdx.y, a_stOutIdx.x];
 					}
 
@@ -556,14 +654,17 @@ namespace NSEngine {
 		}
 
 		/** 적 객체를 탐색한다 */
-		public List<CEObj> FindEnemyObjs(Vector3 a_stPos, List<CEObj> a_oOutEnemyObjsList, float a_fDistance = float.MaxValue) {
+		public List<CEObj> FindEnemyObjs(Vector3 a_stPos, List<CEObj> a_oOutEnemyObjsList, float a_fDistance = float.MaxValue)
+		{
 			a_oOutEnemyObjsList = a_oOutEnemyObjsList ?? new List<CEObj>();
 
-			for(int i = 0; i < this.EnemyObjsListWrapper.Count; ++i) {
+			for(int i = 0; i < this.EnemyObjsListWrapper.Count; ++i)
+			{
 				float fDistance = (a_stPos - this.EnemyObjsListWrapper[i].transform.localPosition).sqrMagnitude;
 
 				// 범위 안에 존재 할 경우
-				if(fDistance.ExIsLessEquals(Mathf.Pow(a_fDistance, KCDefine.B_VAL_2_REAL))) {
+				if(fDistance.ExIsLessEquals(Mathf.Pow(a_fDistance, KCDefine.B_VAL_2_REAL)))
+				{
 					a_oOutEnemyObjsList.ExAddVal(this.EnemyObjsListWrapper[i]);
 				}
 			}
@@ -572,43 +673,55 @@ namespace NSEngine {
 		}
 
 		/** 최상단 셀 객체를 탐색한다 */
-		public CEObj FindTopCellObj(Vector3Int a_stIdx) {
+		public CEObj FindTopCellObj(Vector3Int a_stIdx)
+		{
 			return this.FindTopCellObj(a_stIdx, EObjKinds.NONE);
 		}
 
 		/** 최상단 셀 객체를 탐색한다 */
-		public CEObj FindTopCellObj(Vector3Int a_stIdx, EObjKinds a_eObjKinds) {
+		public CEObj FindTopCellObj(Vector3Int a_stIdx, EObjKinds a_eObjKinds)
+		{
 			var oCellObjsList = CCollectionPoolManager.Inst.SpawnList<CEObj>();
 
-			try {
+			try
+			{
 				return (a_eObjKinds != EObjKinds.NONE) ? this.FindCellObjs(a_stIdx, a_eObjKinds, oCellObjsList)?.LastOrDefault() : this.SelCellObjsLists.ExGetVal(a_stIdx, null)?.LastOrDefault();
-			} finally {
+			}
+			finally
+			{
 				CCollectionPoolManager.Inst.DespawnList(oCellObjsList);
 			}
 		}
 
 		/** 주변 셀 객체를 탐색한다 */
-		public List<CEObj> FindAroundCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList) {
+		public List<CEObj> FindAroundCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList)
+		{
 			a_oOutCellObjsList = a_oOutCellObjsList ?? new List<CEObj>();
 
-			for(int i = 0; i < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_0_INT); ++i) {
-				for(int j = 0; j < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_1_INT); ++j) {
+			for(int i = 0; i < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_0_INT); ++i)
+			{
+				for(int j = 0; j < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_1_INT); ++j)
+				{
 					var oCellObjsList = CCollectionPoolManager.Inst.SpawnList<CEObj>();
 
-					try {
+					try
+					{
 						var stIdx = new Vector3Int(j, i, this.SelGridInfoIdx);
 
-						var oFindCellObjsList = (a_eObjKinds != EObjKinds.NONE) ? 
+						var oFindCellObjsList = (a_eObjKinds != EObjKinds.NONE) ?
 							this.FindCellObjs(stIdx, a_eObjKinds, oCellObjsList) : this.CellObjsListsContainer.ExGetVal(a_stIdx.z)?.ExGetVal(stIdx);
 
 						bool bIsValid01 = stIdx.x >= a_stIdx.x - a_stRange.x && stIdx.x <= a_stIdx.x + a_stRange.x;
 						bool bIsValid02 = stIdx.y >= a_stIdx.y - a_stRange.y && stIdx.y <= a_stIdx.y + a_stRange.y;
 
 						// 셀 객체가 존재 할 경우
-						if(bIsValid01 && bIsValid02 && oFindCellObjsList.ExIsValid()) {
+						if(bIsValid01 && bIsValid02 && oFindCellObjsList.ExIsValid())
+						{
 							a_oOutCellObjsList.ExAddVals(oFindCellObjsList);
 						}
-					} finally {
+					}
+					finally
+					{
 						CCollectionPoolManager.Inst.DespawnList(oCellObjsList);
 					}
 				}
@@ -618,16 +731,20 @@ namespace NSEngine {
 		}
 
 		/** 주변 최상단 셀 객체를 탐색한다 */
-		public List<CEObj> FindAroundTopCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, List<CEObj> a_oOutCellObjsList) {
+		public List<CEObj> FindAroundTopCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, List<CEObj> a_oOutCellObjsList)
+		{
 			return this.FindAroundTopCellObjs(a_stIdx, a_stRange, EObjKinds.NONE, a_oOutCellObjsList);
 		}
 
 		/** 주변 최상단 셀 객체를 탐색한다 */
-		public List<CEObj> FindAroundTopCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList) {
+		public List<CEObj> FindAroundTopCellObjs(Vector3Int a_stIdx, Vector3Int a_stRange, EObjKinds a_eObjKinds, List<CEObj> a_oOutCellObjsList)
+		{
 			a_oOutCellObjsList = a_oOutCellObjsList ?? new List<CEObj>();
 
-			for(int i = 0; i < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_0_INT); ++i) {
-				for(int j = 0; j < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_1_INT); ++j) {
+			for(int i = 0; i < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_0_INT); ++i)
+			{
+				for(int j = 0; j < this.SelCellObjsLists.GetLength(KCDefine.B_VAL_1_INT); ++j)
+				{
 					var stIdx = new Vector3Int(j, i, this.SelGridInfoIdx);
 					var oCellObj = (a_eObjKinds != EObjKinds.NONE) ? this.FindTopCellObj(stIdx, a_eObjKinds) : this.FindTopCellObj(stIdx);
 
@@ -635,7 +752,8 @@ namespace NSEngine {
 					bool bIsValid02 = stIdx.y >= a_stIdx.y - a_stRange.y && stIdx.y <= a_stIdx.y + a_stRange.y;
 
 					// 셀 객체가 존재 할 경우
-					if(bIsValid01 && bIsValid02 && oCellObj != null) {
+					if(bIsValid01 && bIsValid02 && oCellObj != null)
+					{
 						a_oOutCellObjsList.ExAddVal(oCellObj);
 					}
 				}
@@ -647,10 +765,12 @@ namespace NSEngine {
 	}
 
 	/** 엔진 - 팩토리 */
-	public partial class CEngine : CComponent {
+	public partial class CEngine : CComponent
+	{
 		#region 함수
 		/** 아이템을 생성한다 */
-		public CEItem CreateItem(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEItem CreateItem(STItemInfo a_stItemInfo, CItemTargetInfo a_oItemTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oItem = CGameObjsPoolManager.Inst.SpawnGameObj<CEItem>(KDefine.E_OBJ_N_ITEM, KDefine.E_KEY_ITEM_OBJS_POOL);
 			var oController = a_bIsEnableController ? oItem.gameObject.ExAddComponent<CEItemController>() : null;
 
@@ -658,13 +778,14 @@ namespace NSEngine {
 			oItem.ExSetTag(KCDefine.B_TAG_ITEM);
 
 			this.SetupEObjComponent(oItem, a_oOwner, oController);
-			
+
 			oController?.Init(CEItemController.MakeParams(this));
 			return oItem;
 		}
 
 		/** 스킬을 생성한다 */
-		public CESkill CreateSkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CESkill CreateSkill(STSkillInfo a_stSkillInfo, CSkillTargetInfo a_oSkillTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oSkill = CGameObjsPoolManager.Inst.SpawnGameObj<CESkill>(KDefine.E_OBJ_N_SKILL, KDefine.E_KEY_SKILL_OBJS_POOL);
 			var oController = a_bIsEnableController ? oSkill.gameObject.ExAddComponent<CESkillController>() : null;
 
@@ -678,7 +799,8 @@ namespace NSEngine {
 		}
 
 		/** 객체를 생성한다 */
-		public CEObj CreateObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEObj CreateObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oObj = CGameObjsPoolManager.Inst.SpawnGameObj<CEObj>(KDefine.E_OBJ_N_OBJ, KDefine.E_KEY_OBJ_OBJS_POOL);
 			var oController = a_bIsEnableController ? oObj.gameObject.ExAddComponent<CEObjController>() : null;
 
@@ -692,7 +814,8 @@ namespace NSEngine {
 		}
 
 		/** 효과를 생성한다 */
-		public CEFX CreateFX(STFXInfo a_stFXInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEFX CreateFX(STFXInfo a_stFXInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oFX = CGameObjsPoolManager.Inst.SpawnGameObj<CEFX>(KDefine.E_OBJ_N_FX, KDefine.E_KEY_FX_OBJS_POOL);
 			var oController = a_bIsEnableController ? oFX.gameObject.ExAddComponent<CEFXController>() : null;
 
@@ -706,7 +829,8 @@ namespace NSEngine {
 		}
 
 		/** 셀 객체를 생성한다 */
-		public CEObj CreateCellObj(STObjInfo a_stObjInfo, STGridInfo a_stGridInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEObj CreateCellObj(STObjInfo a_stObjInfo, STGridInfo a_stGridInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oObj = CGameObjsPoolManager.Inst.SpawnGameObj<CEObj>(KDefine.E_OBJ_N_CELL_OBJ, KDefine.E_KEY_CELL_OBJ_OBJS_POOL);
 			var oController = a_bIsEnableController ? oObj.gameObject.ExAddComponent<CECellObjController>() : null;
 
@@ -721,7 +845,8 @@ namespace NSEngine {
 		}
 
 		/** 플레이어 객체를 생성한다 */
-		public CEObj CreatePlayerObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEObj CreatePlayerObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oObj = CGameObjsPoolManager.Inst.SpawnGameObj<CEObj>(KDefine.E_OBJ_N_PLAYER_OBJ, KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL);
 			var oController = a_bIsEnableController ? oObj.gameObject.ExAddComponent<CEPlayerObjController>() : null;
 
@@ -735,7 +860,8 @@ namespace NSEngine {
 		}
 
 		/** 적 객체를 생성한다 */
-		public CEObj CreateEnemyObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true) {
+		public CEObj CreateEnemyObj(STObjInfo a_stObjInfo, CObjTargetInfo a_oObjTargetInfo, CEObjComponent a_oOwner = null, bool a_bIsEnableController = true)
+		{
 			var oObj = CGameObjsPoolManager.Inst.SpawnGameObj<CEObj>(KDefine.E_OBJ_N_ENEMY_OBJ, KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL);
 			var oController = a_bIsEnableController ? oObj.gameObject.ExAddComponent<CEEnemyObjController>() : null;
 
@@ -749,91 +875,121 @@ namespace NSEngine {
 		}
 
 		/** 엔진 객체 컴포넌트를 제거한다 */
-		public void RemoveEObjComponent(CEObjComponent a_oEObjComponent) {
-			switch(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey) {
-				case KDefine.E_KEY_ITEM_OBJS_POOL: this.RemoveItem(a_oEObjComponent as CEItem); break;
-				case KDefine.E_KEY_SKILL_OBJS_POOL: this.RemoveSkill(a_oEObjComponent as CESkill); break;
-				case KDefine.E_KEY_FX_OBJS_POOL: this.RemoveFX(a_oEObjComponent as CEFX); break;
-				case KDefine.E_KEY_OBJ_OBJS_POOL: this.RemoveObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_CELL_OBJ_OBJS_POOL: this.RemoveCellObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL: this.RemovePlayerObj(a_oEObjComponent as CEObj); break;
-				case KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL: this.RemoveEnemyObj(a_oEObjComponent as CEObj); break;
+		public void RemoveEObjComponent(CEObjComponent a_oEObjComponent)
+		{
+			switch(a_oEObjComponent.Params.m_stBase.m_oGameObjsPoolKey)
+			{
+				case KDefine.E_KEY_ITEM_OBJS_POOL:
+					this.RemoveItem(a_oEObjComponent as CEItem);
+					break;
+				case KDefine.E_KEY_SKILL_OBJS_POOL:
+					this.RemoveSkill(a_oEObjComponent as CESkill);
+					break;
+				case KDefine.E_KEY_FX_OBJS_POOL:
+					this.RemoveFX(a_oEObjComponent as CEFX);
+					break;
+				case KDefine.E_KEY_OBJ_OBJS_POOL:
+					this.RemoveObj(a_oEObjComponent as CEObj);
+					break;
+				case KDefine.E_KEY_CELL_OBJ_OBJS_POOL:
+					this.RemoveCellObj(a_oEObjComponent as CEObj);
+					break;
+				case KDefine.E_KEY_PLAYER_OBJ_OBJS_POOL:
+					this.RemovePlayerObj(a_oEObjComponent as CEObj);
+					break;
+				case KDefine.E_KEY_ENEMY_OBJ_OBJS_POOL:
+					this.RemoveEnemyObj(a_oEObjComponent as CEObj);
+					break;
 			}
 		}
 
 		/** 아이템을 제거한다 */
-		private void RemoveItem(CEItem a_oItem, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveItem(CEItem a_oItem, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oItem != null && a_oItem.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 아이템이 존재 할 경우
-			if(a_oItem != null && a_oItem.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oItem != null && a_oItem.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.ItemListWrapper.ExRemoveVal(a_oItem);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oItem.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oItem.gameObject, a_fDelay);
 			}
 		}
 
 		/** 스킬을 제거한다 */
-		private void RemoveSkill(CESkill a_oSkill, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveSkill(CESkill a_oSkill, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oSkill != null && a_oSkill.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 스킬이 존재 할 경우
-			if(a_oSkill != null && a_oSkill.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oSkill != null && a_oSkill.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.SkillListWrapper.ExRemoveVal(a_oSkill);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oSkill.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oSkill.gameObject, a_fDelay);
 			}
 		}
 
 		/** 객체를 제거한다 */
-		private void RemoveObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 객체가 존재 할 경우
-			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.ObjsListWrapper.ExRemoveVal(a_oObj);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oObj.gameObject, a_fDelay);
 			}
 		}
 
 		/** 효과를 제거한다 */
-		private void RemoveFX(CEFX a_oFX, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveFX(CEFX a_oFX, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oFX != null && a_oFX.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 효과가 존재 할 경우
-			if(a_oFX != null && a_oFX.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oFX != null && a_oFX.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.FXListWrapper.ExRemoveVal(a_oFX);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oFX.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oFX.gameObject, a_fDelay);
 			}
 		}
 
 		/** 셀 객체를 제거한다 */
-		private void RemoveCellObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveCellObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			var oCellObjsList = (a_oObj != null) ? this.CellObjsListsContainer.ExGetVal(a_oObj.GetController<CECellObjController>().CellIdx.z)?.ExGetVal(a_oObj.GetController<CECellObjController>().CellIdx) : null;
 			CFunc.Assert(!a_bIsAssert || (a_oObj != null && oCellObjsList != null && a_oObj.GetController<CECellObjController>().CellIdx.ExIsValidIdx() && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 셀 객체가 존재 할 경우
-			if(a_oObj != null && oCellObjsList != null && a_oObj.GetController<CECellObjController>().CellIdx.ExIsValidIdx() && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oObj != null && oCellObjsList != null && a_oObj.GetController<CECellObjController>().CellIdx.ExIsValidIdx() && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				oCellObjsList.ExRemoveVal(a_oObj);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oObj.gameObject, a_fDelay);
 			}
 		}
 
 		/** 플레이어 객체를 제거한다 */
-		private void RemovePlayerObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemovePlayerObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 플레이어 객체가 존재 할 경우
-			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.PlayerObjsListWrapper.ExRemoveVal(a_oObj);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oObj.gameObject, a_fDelay);
 			}
 		}
 
 		/** 적 객체를 제거한다 */
-		private void RemoveEnemyObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true) {
+		private void RemoveEnemyObj(CEObj a_oObj, float a_fDelay = KCDefine.B_VAL_0_REAL, bool a_bIsAssert = true)
+		{
 			CFunc.Assert(!a_bIsAssert || (a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()));
 
 			// 적 객체가 존재 할 경우
-			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid()) {
+			if(a_oObj != null && a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey.ExIsValid())
+			{
 				this.EnemyObjsListWrapper.ExRemoveVal(a_oObj);
 				CGameObjsPoolManager.Inst.DespawnGameObj(a_oObj.Params.m_stBase.m_stBase.m_oGameObjsPoolKey, a_oObj.gameObject, a_fDelay);
 			}
@@ -842,8 +998,10 @@ namespace NSEngine {
 
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(GameObject a_oItemRoot, GameObject a_oSkillRoot, GameObject a_oObjRoot, GameObject a_oFXRoot, Dictionary<ECallback, System.Action<CEngine>> a_oCallbackDict01 = null, Dictionary<ECallback, System.Action<CEngine, Dictionary<ulong, STTargetInfo>>> a_oCallbackDict02 = null, Dictionary<ECallback, System.Action<CEngine, CEObjComponent, EEngineObjEvent, string>> a_oCallbackDict03 = null) {
-			return new STParams() {
+		public static STParams MakeParams(GameObject a_oItemRoot, GameObject a_oSkillRoot, GameObject a_oObjRoot, GameObject a_oFXRoot, Dictionary<ECallback, System.Action<CEngine>> a_oCallbackDict01 = null, Dictionary<ECallback, System.Action<CEngine, Dictionary<ulong, STTargetInfo>>> a_oCallbackDict02 = null, Dictionary<ECallback, System.Action<CEngine, CEObjComponent, EEngineObjEvent, string>> a_oCallbackDict03 = null)
+		{
+			return new STParams()
+			{
 				m_oItemRoot = a_oItemRoot,
 				m_oSkillRoot = a_oSkillRoot,
 				m_oObjRoot = a_oObjRoot,

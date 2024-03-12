@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 엔진 컴포넌트 */
-	public abstract partial class CEComponent : CComponent {
+	public abstract partial class CEComponent : CComponent
+	{
 		/** 매개 변수 */
-		public struct STParams {
+		public struct STParams
+		{
 			public string m_oGameObjsPoolKey;
 			public CEngine m_oEngine;
 		}
@@ -21,13 +24,15 @@ namespace NSEngine {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 			this.SubAwake();
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			this.Params = a_stParams;
 			this.SubInit();
 		}
@@ -35,12 +40,16 @@ namespace NSEngine {
 	}
 
 	/** 엔진 컴포넌트 - 팩토리 */
-	public abstract partial class CEComponent : CComponent {
+	public abstract partial class CEComponent : CComponent
+	{
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(CEngine a_oEngine, string a_oGameObjsPoolKey) {
-			return new STParams() {
-				m_oGameObjsPoolKey = a_oGameObjsPoolKey, m_oEngine = a_oEngine
+		public static STParams MakeParams(CEngine a_oEngine, string a_oGameObjsPoolKey)
+		{
+			return new STParams()
+			{
+				m_oGameObjsPoolKey = a_oGameObjsPoolKey,
+				m_oEngine = a_oEngine
 			};
 		}
 		#endregion // 클래스 함수

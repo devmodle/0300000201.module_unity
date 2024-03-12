@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 동기화 팝업 */
-public partial class CSyncPopup : CSubPopup {
+public partial class CSyncPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		LOGIN_UIS,
 		LOGOUT_UIS,
@@ -24,7 +26,8 @@ public partial class CSyncPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 객체를 설정한다
@@ -45,19 +48,22 @@ public partial class CSyncPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 		this.SubInit();
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		// 객체를 갱신한다 {
 #if FIREBASE_MODULE_ENABLE
 		m_oUIsDict[EKey.LOGIN_UIS]?.SetActive(CFirebaseManager.Inst.IsLogin);
@@ -69,22 +75,26 @@ public partial class CSyncPopup : CSubPopup {
 	}
 
 	/** 로그인 버튼을 눌렀을 경우 */
-	private void OnTouchLoginBtn() {
+	private void OnTouchLoginBtn()
+	{
 #if FIREBASE_MODULE_ENABLE
 		Func.FirebaseLogin(this.OnLogin);
 #endif // #if FIREBASE_MODULE_ENABLE
 	}
 
 	/** 로그아웃 버튼을 눌렀을 경우 */
-	private void OnTouchLogoutBtn() {
+	private void OnTouchLogoutBtn()
+	{
 #if FIREBASE_MODULE_ENABLE
 		Func.FirebaseLogout(this.OnLogout);
 #endif // #if FIREBASE_MODULE_ENABLE
 	}
 
 	/** 로드 버튼을 눌렀을 경우 */
-	private void OnTouchLoadBtn() {
-		Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_LOAD_P_MSG), (a_oSender, a_bIsOK) => {
+	private void OnTouchLoadBtn()
+	{
+		Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_LOAD_P_MSG), (a_oSender, a_bIsOK) =>
+		{
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {
@@ -96,8 +106,10 @@ public partial class CSyncPopup : CSubPopup {
 	}
 
 	/** 저장 버튼을 눌렀을 경우 */
-	private void OnTouchSaveBtn() {
-		Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_SAVE_P_MSG), (a_oSender, a_bIsOK) => {
+	private void OnTouchSaveBtn()
+	{
+		Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_SAVE_P_MSG), (a_oSender, a_bIsOK) =>
+		{
 #if FIREBASE_MODULE_ENABLE
 			// 확인 버튼을 눌렀을 경우
 			if(a_bIsOK) {

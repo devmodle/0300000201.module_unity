@@ -9,32 +9,35 @@ using UnityEditor;
 
 /** 추가 에디터 씬 관리자 */
 [InitializeOnLoad]
-public static partial class CExtraEditorSceneManager {
+public static partial class CExtraEditorSceneManager
+{
 	#region 클래스 변수
 
 	#endregion // 클래스 변수
 
 	#region 클래스 함수
 	/** 생성자 */
-	static CExtraEditorSceneManager() {
+	static CExtraEditorSceneManager()
+	{
 		// 플레이 모드 일 경우
-		if(EditorApplication.isPlaying) {
+		if(EditorApplication.isPlaying)
+		{
 			return;
 		}
 
 		// 스크립트 순서를 설정한다 {
-		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXShaderSceneManager), 
+		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXShaderSceneManager),
 			KCDefine.B_SCRIPT_O_SCENE_MANAGER);
 
-		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXParticleSceneManager), 
+		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXParticleSceneManager),
 			KCDefine.B_SCRIPT_O_SCENE_MANAGER);
 		// 스크립트 순서를 설정한다 }
 
 		// 클래스 타입을 설정한다 {
-		KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT.TryAdd(KDefine.G_SCENE_N_FX_SHADER, 
+		KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT.TryAdd(KDefine.G_SCENE_N_FX_SHADER,
 			typeof(FX.CFXShaderSceneManager));
 
-		KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT.TryAdd(KDefine.G_SCENE_N_FX_PARTICLE, 
+		KEditorDefine.G_EXTRA_SCENE_MANAGER_TYPE_DICT.TryAdd(KDefine.G_SCENE_N_FX_PARTICLE,
 			typeof(FX.CFXParticleSceneManager));
 		// 클래스 타입을 설정한다 }
 
@@ -42,23 +45,28 @@ public static partial class CExtraEditorSceneManager {
 	}
 
 	/** 상태를 갱신한다 */
-	private static void Update() {
+	private static void Update()
+	{
 		// 상태 갱신이 불가능 할 경우
-		if(CEditorAccess.IsEnableUpdateState) {
+		if(CEditorAccess.IsEnableUpdateState)
+		{
 			return;
 		}
 	}
 
 	/** 상태를 갱신한다 */
-	private static void LateUpdate() {
+	private static void LateUpdate()
+	{
 		// 상태 갱신이 불가능 할 경우
-		if(CEditorAccess.IsEnableUpdateState) {
+		if(CEditorAccess.IsEnableUpdateState)
+		{
 			return;
 		}
 	}
 
 	/** 콜백을 설정한다 */
-	private static void SetupCallbacks() {
+	private static void SetupCallbacks()
+	{
 		EditorApplication.update -= CExtraEditorSceneManager.Update;
 		EditorApplication.update += CExtraEditorSceneManager.Update;
 

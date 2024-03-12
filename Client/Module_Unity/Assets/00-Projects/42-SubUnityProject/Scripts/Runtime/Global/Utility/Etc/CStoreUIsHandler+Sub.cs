@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 상점 UI 처리자 */
-public partial class CStoreUIsHandler : CComponent {
+public partial class CStoreUIsHandler : CComponent
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -23,27 +25,32 @@ public partial class CStoreUIsHandler : CComponent {
 
 	#region 함수
 	/** 초기화 */
-	private void SubAwake() {
+	private void SubAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 
 	/** 패키지 상품 구입 UI 상태를 갱신한다 */
-	private void UpdatePkgsProductBuyUIsState(GameObject a_oProductBuyUI, STProductTradeInfo a_stProductTradeInfo) {
+	private void UpdatePkgsProductBuyUIsState(GameObject a_oProductBuyUI, STProductTradeInfo a_stProductTradeInfo)
+	{
 		// Do Something
 	}
 
 	/** 단일 상품 구입 UI 상태를 갱신한다 */
-	private void UpdateSingleProductBuyUIsState(GameObject a_oProductBuyUI, STProductTradeInfo a_stProductTradeInfo) {
+	private void UpdateSingleProductBuyUIsState(GameObject a_oProductBuyUI, STProductTradeInfo a_stProductTradeInfo)
+	{
 		// Do Something
 	}
 	#endregion // 함수

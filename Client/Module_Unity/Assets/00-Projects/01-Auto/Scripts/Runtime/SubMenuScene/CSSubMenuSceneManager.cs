@@ -5,27 +5,33 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if RESEARCH_MODULE_ENABLE && SCENE_TEMPLATES_MODULE_ENABLE
-namespace MenuScene {
+namespace MenuScene
+{
 	/** 스터디 서브 메뉴 씬 관리자 */
-	public partial class CSSubMenuSceneManager : CRMenuSceneManager {
+	public partial class CSSubMenuSceneManager : CRMenuSceneManager
+	{
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit) {
+			if(CSceneManager.IsAppInit)
+			{
 				// Do Something
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent) {
+		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		{
 			base.OnReceiveNavStackEvent(a_eEvent);
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-			switch(a_eEvent) {
-				case ENavStackEvent.BACK_KEY_DOWN: 
+			switch(a_eEvent)
+			{
+				case ENavStackEvent.BACK_KEY_DOWN:
 					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 					break;
 			}
@@ -33,9 +39,11 @@ namespace MenuScene {
 		}
 
 		/** 종료 팝업 결과를 수신했을 경우 */
-		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK) {
+		private void OnReceiveQuitPopupResult(CAlertPopup a_oSender, bool a_bIsOK)
+		{
 			// 종료 처리가 불가능 할 경우
-			if(!a_bIsOK) {
+			if(!a_bIsOK)
+			{
 				return;
 			}
 
