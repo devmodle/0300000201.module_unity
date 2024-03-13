@@ -9,7 +9,8 @@ using System.IO;
 
 /** 스킬 정보 */
 [System.Serializable]
-public struct STSkillInfo {
+public struct STSkillInfo
+{
 	public STCommonInfo m_stCommonInfo;
 	public STTimeInfo m_stTimeInfo;
 
@@ -28,8 +29,11 @@ public struct STSkillInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAbilityTargetInfoDict;
 
 	#region 상수
-	public static STSkillInfo INVALID = new STSkillInfo() {
-		m_eSkillKinds = ESkillKinds.NONE, m_ePrevSkillKinds = ESkillKinds.NONE, m_eNextSkillKinds = ESkillKinds.NONE
+	public static STSkillInfo INVALID = new STSkillInfo()
+	{
+		m_eSkillKinds = ESkillKinds.NONE,
+		m_ePrevSkillKinds = ESkillKinds.NONE,
+		m_eNextSkillKinds = ESkillKinds.NONE
 	};
 	#endregion // 상수
 
@@ -43,7 +47,8 @@ public struct STSkillInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STSkillInfo(SimpleJSON.JSONNode a_oSkillInfo) {
+	public STSkillInfo(SimpleJSON.JSONNode a_oSkillInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oSkillInfo);
 		m_stTimeInfo = new STTimeInfo(a_oSkillInfo[KCDefine.U_KEY_TIME_INFO]);
 
@@ -66,7 +71,8 @@ public struct STSkillInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 스킬 정보를 저장한다 */
-	public void SaveSkillInfo(SimpleJSON.JSONNode a_oOutSkillInfo) {
+	public void SaveSkillInfo(SimpleJSON.JSONNode a_oOutSkillInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutSkillInfo);
 		m_stTimeInfo.SaveTimeInfo(a_oOutSkillInfo);
 
@@ -85,12 +91,13 @@ public struct STSkillInfo {
 		Func.SaveTargetInfos(m_oAbilityTargetInfoDict, KCDefine.U_KEY_FMT_ABILITY_TARGET_INFO, a_oOutSkillInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 스킬 교환 정보 */
 [System.Serializable]
-public struct STSkillTradeInfo {
+public struct STSkillTradeInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public ESkillKinds m_eSkillKinds;
@@ -101,8 +108,11 @@ public struct STSkillTradeInfo {
 	public Dictionary<ulong, STTargetInfo> m_oAcquireTargetInfoDict;
 
 	#region 상수
-	public static STSkillTradeInfo INVALID = new STSkillTradeInfo() {
-		m_eSkillKinds = ESkillKinds.NONE, m_ePrevSkillKinds = ESkillKinds.NONE, m_eNextSkillKinds = ESkillKinds.NONE
+	public static STSkillTradeInfo INVALID = new STSkillTradeInfo()
+	{
+		m_eSkillKinds = ESkillKinds.NONE,
+		m_ePrevSkillKinds = ESkillKinds.NONE,
+		m_eNextSkillKinds = ESkillKinds.NONE
 	};
 	#endregion // 상수
 
@@ -113,7 +123,8 @@ public struct STSkillTradeInfo {
 
 	#region 함수
 	/** 생성자 */
-	public STSkillTradeInfo(SimpleJSON.JSONNode a_oSkillTradeInfo) {
+	public STSkillTradeInfo(SimpleJSON.JSONNode a_oSkillTradeInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oSkillTradeInfo);
 
 		m_eSkillKinds = a_oSkillTradeInfo[KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)a_oSkillTradeInfo[KCDefine.U_KEY_SKILL_KINDS].AsInt : ESkillKinds.NONE;
@@ -128,7 +139,8 @@ public struct STSkillTradeInfo {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 스킬 교환 정보를 저장한다 */
-	public void SaveSkillTradeInfo(SimpleJSON.JSONNode a_oOutSkillTradeInfo) {
+	public void SaveSkillTradeInfo(SimpleJSON.JSONNode a_oOutSkillTradeInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutSkillTradeInfo);
 
 		a_oOutSkillTradeInfo[KCDefine.U_KEY_SKILL_KINDS] = $"{(int)m_eSkillKinds}";
@@ -139,11 +151,12 @@ public struct STSkillTradeInfo {
 		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutSkillTradeInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 스킬 정보 테이블 */
-public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
+public partial class CSkillInfoTable : CSingleton<CSkillInfoTable>
+{
 	#region 프로퍼티
 	public Dictionary<ESkillKinds, STSkillInfo> SkillInfoDict { get; } = new Dictionary<ESkillKinds, STSkillInfo>();
 	public Dictionary<ESkillKinds, STSkillTradeInfo> BuySkillTradeInfoDict { get; } = new Dictionary<ESkillKinds, STSkillTradeInfo>();
@@ -153,13 +166,15 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetSkillInfos();
 	}
 
 	/** 스킬 정보를 리셋한다 */
-	public virtual void ResetSkillInfos() {
+	public virtual void ResetSkillInfos()
+	{
 		this.SkillInfoDict.Clear();
 		this.BuySkillTradeInfoDict.Clear();
 		this.SaleSkillTradeInfoDict.Clear();
@@ -167,13 +182,15 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 스킬 정보를 리셋한다 */
-	public virtual void ResetSkillInfos(string a_oJSONStr) {
+	public virtual void ResetSkillInfos(string a_oJSONStr)
+	{
 		this.ResetSkillInfos();
 		this.DoLoadSkillInfos(a_oJSONStr);
 	}
 
 	/** 스킬 정보를 반환한다 */
-	public STSkillInfo GetSkillInfo(ESkillKinds a_ESkillKinds) {
+	public STSkillInfo GetSkillInfo(ESkillKinds a_ESkillKinds)
+	{
 		bool bIsValid = this.TryGetSkillInfo(a_ESkillKinds, out STSkillInfo stSkillInfo);
 		CFunc.Assert(bIsValid);
 
@@ -181,7 +198,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 구입 스킬 교환 정보를 반환한다 */
-	public STSkillTradeInfo GetBuySkillTradeInfo(ESkillKinds a_eSkillKinds) {
+	public STSkillTradeInfo GetBuySkillTradeInfo(ESkillKinds a_eSkillKinds)
+	{
 		bool bIsValid = this.TryGetBuySkillTradeInfo(a_eSkillKinds, out STSkillTradeInfo stSkillTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -189,7 +207,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 판매 스킬 교환 정보를 반환한다 */
-	public STSkillTradeInfo GetSaleSkillTradeInfo(ESkillKinds a_eSkillKinds) {
+	public STSkillTradeInfo GetSaleSkillTradeInfo(ESkillKinds a_eSkillKinds)
+	{
 		bool bIsValid = this.TryGetSaleSkillTradeInfo(a_eSkillKinds, out STSkillTradeInfo stSkillTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -197,7 +216,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 강화 스킬 교환 정보를 반환한다 */
-	public STSkillTradeInfo GetEnhanceSkillTradeInfo(ESkillKinds a_eSkillKinds) {
+	public STSkillTradeInfo GetEnhanceSkillTradeInfo(ESkillKinds a_eSkillKinds)
+	{
 		bool bIsValid = this.TryGetEnhanceSkillTradeInfo(a_eSkillKinds, out STSkillTradeInfo stSkillTradeInfo);
 		CFunc.Assert(bIsValid);
 
@@ -205,41 +225,48 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 스킬 정보를 반환한다 */
-	public bool TryGetSkillInfo(ESkillKinds a_ESkillKinds, out STSkillInfo a_stOutSkillInfo) {
+	public bool TryGetSkillInfo(ESkillKinds a_ESkillKinds, out STSkillInfo a_stOutSkillInfo)
+	{
 		a_stOutSkillInfo = this.SkillInfoDict.ExGetVal(a_ESkillKinds, STSkillInfo.INVALID);
 		return this.SkillInfoDict.ContainsKey(a_ESkillKinds);
 	}
 
 	/** 구입 스킬 교환 정보를 반환한다 */
-	public bool TryGetBuySkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo) {
+	public bool TryGetBuySkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo)
+	{
 		a_stOutSkillTradeInfo = this.BuySkillTradeInfoDict.ExGetVal(a_eSkillKinds, STSkillTradeInfo.INVALID);
 		return this.BuySkillTradeInfoDict.ContainsKey(a_eSkillKinds);
 	}
 
 	/** 판매 스킬 교환 정보를 반환한다 */
-	public bool TryGetSaleSkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo) {
+	public bool TryGetSaleSkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo)
+	{
 		a_stOutSkillTradeInfo = this.SaleSkillTradeInfoDict.ExGetVal(a_eSkillKinds, STSkillTradeInfo.INVALID);
 		return this.SaleSkillTradeInfoDict.ContainsKey(a_eSkillKinds);
 	}
 
 	/** 강화 스킬 교환 정보를 반환한다 */
-	public bool TryGetEnhanceSkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo) {
+	public bool TryGetEnhanceSkillTradeInfo(ESkillKinds a_eSkillKinds, out STSkillTradeInfo a_stOutSkillTradeInfo)
+	{
 		a_stOutSkillTradeInfo = this.EnhanceSkillTradeInfoDict.ExGetVal(a_eSkillKinds, STSkillTradeInfo.INVALID);
 		return this.EnhanceSkillTradeInfoDict.ContainsKey(a_eSkillKinds);
 	}
 
 	/** 스킬 정보를 로드한다 */
-	public (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos() {
+	public (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos()
+	{
 		this.ResetSkillInfos();
 		return this.LoadSkillInfos(Access.SkillInfoTableLoadPath);
 	}
 
 	/** 스킬 정보를 저장한다 */
-	public void SaveSkillInfos(string a_oJSONStr, bool a_bIsAssert = true) {
+	public void SaveSkillInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	{
 		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetSkillInfos(a_oJSONStr);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -255,7 +282,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutBuyTradeInfos, out SimpleJSON.JSONNode a_oOutSaleTradeInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos, out SimpleJSON.JSONNode a_oOutBuyTradeInfos, out SimpleJSON.JSONNode a_oOutSaleTradeInfos, out SimpleJSON.JSONNode a_oOutEnhanceTradeInfos)
+	{
 		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.SkillTableInfo);
 		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 		a_oOutBuyTradeInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_BUY_TRADE]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_BUY_TRADE]] : KCDefine.B_EMPTY_JSON_ARRAY;
@@ -264,13 +292,15 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 스킬 정보를 로드한다 */
-	private (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos(string a_oFilePath) {
+	private (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) LoadSkillInfos(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadSkillInfos(this.LoadSkillInfosJSONStr(a_oFilePath));
 	}
 
 	/** 스킬 정보 JSON 문자열을 로드한다 */
-	private string LoadSkillInfosJSONStr(string a_oFilePath) {
+	private string LoadSkillInfosJSONStr(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -281,42 +311,51 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 스킬 정보를 로드한다 */
-	private (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) DoLoadSkillInfos(string a_oJSONStr) {
+	private (Dictionary<ESkillKinds, STSkillInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>, Dictionary<ESkillKinds, STSkillTradeInfo>) DoLoadSkillInfos(string a_oJSONStr)
+	{
 		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stSkillInfo = new STSkillInfo(oCommonInfos[i]);
 
 			// 스킬 정보 추가 가능 할 경우
-			if(stSkillInfo.m_eSkillKinds.ExIsValid() && (!this.SkillInfoDict.ContainsKey(stSkillInfo.m_eSkillKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stSkillInfo.m_eSkillKinds.ExIsValid() && (!this.SkillInfoDict.ContainsKey(stSkillInfo.m_eSkillKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.SkillInfoDict.ExReplaceVal(stSkillInfo.m_eSkillKinds, stSkillInfo);
 			}
 		}
 
-		for(int i = 0; i < oBuyTradeInfos.Count; ++i) {
+		for(int i = 0; i < oBuyTradeInfos.Count; ++i)
+		{
 			var stSkillTradeInfo = new STSkillTradeInfo(oBuyTradeInfos[i]);
 
 			// 구입 스킬 교환 정보 추가 가능 할 경우
-			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.BuySkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oBuyTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.BuySkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oBuyTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.BuySkillTradeInfoDict.ExReplaceVal(stSkillTradeInfo.m_eSkillKinds, stSkillTradeInfo);
 			}
 		}
 
-		for(int i = 0; i < oSaleTradeInfos.Count; ++i) {
+		for(int i = 0; i < oSaleTradeInfos.Count; ++i)
+		{
 			var stSkillTradeInfo = new STSkillTradeInfo(oSaleTradeInfos[i]);
 
 			// 판매 스킬 교환 정보 추가 가능 할 경우
-			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.SaleSkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oSaleTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.SaleSkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oSaleTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.SaleSkillTradeInfoDict.ExReplaceVal(stSkillTradeInfo.m_eSkillKinds, stSkillTradeInfo);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i)
+		{
 			var stSkillTradeInfo = new STSkillTradeInfo(oEnhanceTradeInfos[i]);
 
 			// 강화 스킬 교환 정보 추가 가능 할 경우
-			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.BuySkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oEnhanceTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stSkillTradeInfo.m_eSkillKinds.ExIsValid() && (!this.BuySkillTradeInfoDict.ContainsKey(stSkillTradeInfo.m_eSkillKinds) || oEnhanceTradeInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.EnhanceSkillTradeInfoDict.ExReplaceVal(stSkillTradeInfo.m_eSkillKinds, stSkillTradeInfo);
 			}
 		}
@@ -328,42 +367,51 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 스킬 정보를 저장한다 */
-	public void SaveSkillInfos() {
+	public void SaveSkillInfos()
+	{
 		var oSkillInfos = SimpleJSON.JSONNode.Parse(this.LoadSkillInfosJSONStr(Access.SkillInfoTableLoadPath));
 		this.SetupJSONNodes(oSkillInfos, out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var eSkillKinds = oCommonInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oCommonInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 스킬 정보가 존재 할 경우
-			if(this.SkillInfoDict.TryGetValue(eSkillKinds, out STSkillInfo stSkillInfo)) {
+			if(this.SkillInfoDict.TryGetValue(eSkillKinds, out STSkillInfo stSkillInfo))
+			{
 				stSkillInfo.SaveSkillInfo(oCommonInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oBuyTradeInfos.Count; ++i) {
+		for(int i = 0; i < oBuyTradeInfos.Count; ++i)
+		{
 			var eSkillKinds = oBuyTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oBuyTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 구입 스킬 교환 정보가 존재 할 경우
-			if(this.BuySkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stBuySkillTradeInfo)) {
+			if(this.BuySkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stBuySkillTradeInfo))
+			{
 				stBuySkillTradeInfo.SaveSkillTradeInfo(oBuyTradeInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oSaleTradeInfos.Count; ++i) {
+		for(int i = 0; i < oSaleTradeInfos.Count; ++i)
+		{
 			var eSkillKinds = oSaleTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oSaleTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 판매 스킬 교환 정보가 존재 할 경우
-			if(this.SaleSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stSaleSkillTradeInfo)) {
+			if(this.SaleSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stSaleSkillTradeInfo))
+			{
 				stSaleSkillTradeInfo.SaveSkillTradeInfo(oSaleTradeInfos[i]);
 			}
 		}
 
-		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i) {
+		for(int i = 0; i < oEnhanceTradeInfos.Count; ++i)
+		{
 			var eSkillKinds = oEnhanceTradeInfos[i][KCDefine.U_KEY_SKILL_KINDS].ExIsValid() ? (ESkillKinds)oEnhanceTradeInfos[i][KCDefine.U_KEY_ITEM_KINDS].AsInt : ESkillKinds.NONE;
 
 			// 강화 스킬 교환 정보가 존재 할 경우
-			if(this.EnhanceSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stEnhanceSkillTradeInfo)) {
+			if(this.EnhanceSkillTradeInfoDict.TryGetValue(eSkillKinds, out STSkillTradeInfo stEnhanceSkillTradeInfo))
+			{
 				stEnhanceSkillTradeInfo.SaveSkillTradeInfo(oEnhanceTradeInfos[i]);
 			}
 		}
@@ -372,7 +420,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 스킬 정보 값을 생성한다 */
-	public Dictionary<string, List<List<string>>> MakeSkillInfoVals() {
+	public Dictionary<string, List<List<string>>> MakeSkillInfoVals()
+	{
 		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 		var oBuyTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 		var oSaleTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
@@ -380,7 +429,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 
 		var oSkillInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
-		try {
+		try
+		{
 			this.SetupKeyInfos(oCommonKeyInfoList, oBuyTradeKeyInfoList, oSaleTradeKeyInfoList, oEnhanceTradeKeyInfoList);
 			this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(this.LoadSkillInfosJSONStr(Access.SkillInfoTableSavePath)), out SimpleJSON.JSONNode oCommonInfos, out SimpleJSON.JSONNode oBuyTradeInfos, out SimpleJSON.JSONNode oSaleTradeInfos, out SimpleJSON.JSONNode oEnhanceTradeInfos);
 
@@ -388,7 +438,9 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 			oSkillInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.SkillTableInfo)[KCDefine.B_KEY_BUY_TRADE], oCommonInfos.AsArray.ExToInfoVals(oBuyTradeKeyInfoList));
 			oSkillInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.SkillTableInfo)[KCDefine.B_KEY_SALE_TRADE], oCommonInfos.AsArray.ExToInfoVals(oSaleTradeKeyInfoList));
 			oSkillInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.SkillTableInfo)[KCDefine.B_KEY_ENHANCE_TRADE], oCommonInfos.AsArray.ExToInfoVals(oEnhanceTradeKeyInfoList));
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 			CCollectionPoolManager.Inst.DespawnList(oBuyTradeKeyInfoList);
 			CCollectionPoolManager.Inst.DespawnList(oSaleTradeKeyInfoList);
@@ -399,7 +451,8 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 	}
 
 	/** 키 정보를 설정한다 */
-	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutBuyTradeKeyInfoList, List<STKeyInfo> a_oOutSaleTradeKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList) {
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList, List<STKeyInfo> a_oOutBuyTradeKeyInfoList, List<STKeyInfo> a_oOutSaleTradeKeyInfoList, List<STKeyInfo> a_oOutEnhanceTradeKeyInfoList)
+	{
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutBuyTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutSaleTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
@@ -411,6 +464,6 @@ public partial class CSkillInfoTable : CSingleton<CSkillInfoTable> {
 		Access.SkillTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_ENHANCE_TRADE)?.ExCopyTo(a_oOutEnhanceTradeKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

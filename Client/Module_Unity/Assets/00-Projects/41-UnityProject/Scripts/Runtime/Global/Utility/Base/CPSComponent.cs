@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace PlayScene {
+namespace PlayScene
+{
 	/** 플레이 씬 컴포넌트 */
-	public abstract partial class CPSComponent : CComponent {
+	public abstract partial class CPSComponent : CComponent
+	{
 		/** 매개 변수 */
-		public struct STParams {
+		public struct STParams
+		{
 			public NSEngine.CEngine m_oEngine;
 		}
 
@@ -20,13 +23,15 @@ namespace PlayScene {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 			this.SubAwake();
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			this.Params = a_stParams;
 			this.SubInit();
 		}
@@ -34,11 +39,14 @@ namespace PlayScene {
 	}
 
 	/** 플레이 씬 컴포넌트 - 팩토리 */
-	public abstract partial class CPSComponent : CComponent {
+	public abstract partial class CPSComponent : CComponent
+	{
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(NSEngine.CEngine a_oEngine) {
-			return new STParams() {
+		public static STParams MakeParams(NSEngine.CEngine a_oEngine)
+		{
+			return new STParams()
+			{
 				m_oEngine = a_oEngine
 			};
 		}

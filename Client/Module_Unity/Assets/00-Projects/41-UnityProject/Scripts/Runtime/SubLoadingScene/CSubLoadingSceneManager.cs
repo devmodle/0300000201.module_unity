@@ -5,15 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace LoadingScene {
+namespace LoadingScene
+{
 	/** 서브 로딩 씬 관리자 */
-	public partial class CSubLoadingSceneManager : CLoadingSceneManager {
+	public partial class CSubLoadingSceneManager : CLoadingSceneManager
+	{
 		/** 식별자 */
-		private enum EKey {
+		private enum EKey
+		{
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
-		
+
 		#region 프로퍼티
 		public override Vector3 LoadingTextPos => KDefine.LS_POS_LOADING_TEXT;
 		public override Vector3 LoadingGaugePos => KDefine.LS_POS_LOADING_GAUGE;
@@ -21,57 +24,70 @@ namespace LoadingScene {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit) {
+			if(CSceneManager.IsAppInit)
+			{
 				this.SubAwake();
 			}
 		}
 
 		/** 초기화 */
-		public override void Start() {
+		public override void Start()
+		{
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit) {
+			if(CSceneManager.IsAppInit)
+			{
 				this.SubStart();
 				this.UpdateUIsState();
 			}
 		}
 
 		/** 제거되었을 경우 */
-		public override void OnDestroy() {
+		public override void OnDestroy()
+		{
 			base.OnDestroy();
 
-			try {
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					this.SubOnDestroy();
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CSubLoadingSceneManager.OnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
+		public override void OnUpdate(float a_fDeltaTime)
+		{
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
+			if(CSceneManager.IsAppRunning)
+			{
 				this.SubOnUpdate(a_fDeltaTime);
 			}
 		}
 
 		/** UI 상태를 갱신한다 */
-		private void UpdateUIsState() {
+		private void UpdateUIsState()
+		{
 			this.SubUpdateUIsState();
 		}
 
 		/** 비동기 씬 로딩 수치가 변경되었을 경우 */
-		protected override void OnChangeAsyncSceneLoadingPercent(AsyncOperation a_oAsyncOperation, bool a_bIsComplete) {
+		protected override void OnChangeAsyncSceneLoadingPercent(AsyncOperation a_oAsyncOperation, bool a_bIsComplete)
+		{
 			base.OnChangeAsyncSceneLoadingPercent(a_oAsyncOperation, a_bIsComplete);
 		}
 		#endregion // 함수

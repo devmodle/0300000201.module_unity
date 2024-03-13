@@ -5,18 +5,22 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 엔진 객체 컴포넌트 */
-	public abstract partial class CEObjComponent : CEComponent {
+	public abstract partial class CEObjComponent : CEComponent
+	{
 		/** 콜백 */
-		public enum ECallback {
+		public enum ECallback
+		{
 			NONE = -1,
 			ENGINE_OBJ_EVENT,
 			[HideInInspector] MAX_VAL
 		}
 
 		/** 매개 변수 */
-		public new struct STParams {
+		public new struct STParams
+		{
 			public CEComponent.STParams m_stBase;
 			public CEController m_oController;
 
@@ -42,7 +46,8 @@ namespace NSEngine {
 
 		#region 함수
 		/** 초기화 */
-		public override void Awake() {
+		public override void Awake()
+		{
 			base.Awake();
 
 			// 타겟 컴포넌트를 설정한다
@@ -53,7 +58,8 @@ namespace NSEngine {
 		}
 
 		/** 초기화 */
-		public virtual void Init(STParams a_stParams) {
+		public virtual void Init(STParams a_stParams)
+		{
 			base.Init(a_stParams.m_stBase);
 			this.Params = a_stParams;
 
@@ -69,21 +75,27 @@ namespace NSEngine {
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdate(float a_fDeltaTime) {
+		public override void OnUpdate(float a_fDeltaTime)
+		{
 			base.OnUpdate(a_fDeltaTime);
 			this.Params.m_oController?.OnUpdate(a_fDeltaTime);
 		}
 
 		/** 어빌리티 값을 설정한다 */
-		public virtual void SetupAbilityVals(bool a_bIsReset = true) {
+		public virtual void SetupAbilityVals(bool a_bIsReset = true)
+		{
 			this.DoSetupAbilityVals(a_bIsReset);
 			global::Func.SetupAbilityVals(this.AbilityValDictWrapper.m_oDictC, this.AbilityValDictWrapper.m_oDictB);
 
 			// 리셋 모드 일 경우
-			if(a_bIsReset) {
+			if(a_bIsReset)
+			{
 				this.AbilityValDictWrapper.m_oDictB.ExCopyTo(this.AbilityValDictWrapper.m_oDictA, (_, a_dmAbilityVal) => a_dmAbilityVal);
-			} else {
-				foreach(var stKeyVal in this.AbilityValDictWrapper.m_oDictB) {
+			}
+			else
+			{
+				foreach(var stKeyVal in this.AbilityValDictWrapper.m_oDictB)
+				{
 					decimal dmAbilityVal = this.AbilityValDictWrapper.m_oDictA.GetValueOrDefault(stKeyVal.Key);
 					this.AbilityValDictWrapper.m_oDictA.ExReplaceVal(stKeyVal.Key, CAbilityInfoTable.Inst.GetAbilityInfo(stKeyVal.Key).m_stCommonInfo.m_bIsFlags01 ? System.Math.Min(dmAbilityVal, stKeyVal.Value) : stKeyVal.Value);
 				}
@@ -91,9 +103,11 @@ namespace NSEngine {
 		}
 
 		/** 어빌리티 값을 설정한다 */
-		protected virtual void DoSetupAbilityVals(bool a_bIsReset = true) {
+		protected virtual void DoSetupAbilityVals(bool a_bIsReset = true)
+		{
 			// 리셋 모드 일 경우
-			if(a_bIsReset) {
+			if(a_bIsReset)
+			{
 				this.AbilityValDictWrapper.m_oDictA.Clear();
 			}
 
@@ -103,29 +117,37 @@ namespace NSEngine {
 	}
 
 	/** 엔진 객체 컴포넌트 - 접근 */
-	public abstract partial class CEObjComponent : CEComponent {
+	public abstract partial class CEObjComponent : CEComponent
+	{
 		#region 함수
 		/** 어빌리티 값을 반환한다 */
-		public decimal GetAbilityVal(EAbilityKinds a_eAbilityKinds) {
+		public decimal GetAbilityVal(EAbilityKinds a_eAbilityKinds)
+		{
 			return this.AbilityValDictWrapper.m_oDictA.GetValueOrDefault(a_eAbilityKinds);
 		}
 		#endregion // 함수
 
 		#region 제네릭 함수
 		/** 제어자를 반환한다 */
-		public T GetController<T>() where T : CEController {
+		public T GetController<T>() where T : CEController
+		{
 			return this.Params.m_oController as T;
 		}
 		#endregion // 제네릭 함수
 	}
 
 	/** 엔진 객체 컴포넌트 - 팩토리 */
-	public abstract partial class CEObjComponent : CEComponent {
+	public abstract partial class CEObjComponent : CEComponent
+	{
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(CEngine a_oEngine, CEController a_oController, string a_oGameObjsPoolKey, Dictionary<CEObjComponent.ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>> a_oCallbackDict = null) {
-			return new STParams() {
-				m_stBase = CEComponent.MakeParams(a_oEngine, a_oGameObjsPoolKey), m_oController = a_oController, m_oCallbackDict = a_oCallbackDict ?? new Dictionary<CEObjComponent.ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>>()
+		public static STParams MakeParams(CEngine a_oEngine, CEController a_oController, string a_oGameObjsPoolKey, Dictionary<CEObjComponent.ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>> a_oCallbackDict = null)
+		{
+			return new STParams()
+			{
+				m_stBase = CEComponent.MakeParams(a_oEngine, a_oGameObjsPoolKey),
+				m_oController = a_oController,
+				m_oCallbackDict = a_oCallbackDict ?? new Dictionary<CEObjComponent.ECallback, System.Action<CEObjComponent, EEngineObjEvent, string>>()
 			};
 		}
 		#endregion // 클래스 함수

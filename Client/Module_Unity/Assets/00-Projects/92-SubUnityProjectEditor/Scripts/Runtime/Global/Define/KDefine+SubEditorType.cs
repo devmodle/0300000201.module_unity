@@ -9,13 +9,15 @@ using MessagePack;
 
 #region 기본
 /** 서브 에디터 레벨 생성 정보 */
-public partial class CSubEditorCreateInfo : CEditorCreateInfo {
+public partial class CSubEditorCreateInfo : CEditorCreateInfo
+{
 	// Do Something
 }
 
 /** 서브 에디터 타입 랩퍼 */
 [MessagePackObject]
-public struct STSubEditorTypeWrapper {
+public struct STSubEditorTypeWrapper
+{
 	// Do Something
 }
 #endregion // 기본

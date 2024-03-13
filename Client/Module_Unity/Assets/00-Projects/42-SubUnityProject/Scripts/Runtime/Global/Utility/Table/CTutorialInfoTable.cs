@@ -9,7 +9,8 @@ using System.IO;
 
 /** 튜토리얼 정보 */
 [System.Serializable]
-public struct STTutorialInfo {
+public struct STTutorialInfo
+{
 	public STCommonInfo m_stCommonInfo;
 
 	public ETutorialKinds m_eTutorialKinds;
@@ -19,20 +20,24 @@ public struct STTutorialInfo {
 	public List<string> m_oStrList;
 	public List<ERewardKinds> m_oRewardKindsList;
 
-#region 상수
-	public static STTutorialInfo INVALID = new STTutorialInfo() {
-		m_eTutorialKinds = ETutorialKinds.NONE, m_ePrevTutorialKinds = ETutorialKinds.NONE, m_eNextTutorialKinds = ETutorialKinds.NONE
+	#region 상수
+	public static STTutorialInfo INVALID = new STTutorialInfo()
+	{
+		m_eTutorialKinds = ETutorialKinds.NONE,
+		m_ePrevTutorialKinds = ETutorialKinds.NONE,
+		m_eNextTutorialKinds = ETutorialKinds.NONE
 	};
-#endregion // 상수
+	#endregion // 상수
 
-#region 프로퍼티
+	#region 프로퍼티
 	public ETutorialType TutorialType => (ETutorialType)((int)m_eTutorialKinds).ExKindsToType();
 	public ETutorialKinds BaseTutorialKinds => (ETutorialKinds)((int)m_eTutorialKinds).ExKindsToSubKindsType();
-#endregion // 프로퍼티
+	#endregion // 프로퍼티
 
-#region 함수
+	#region 함수
 	/** 생성자 */
-	public STTutorialInfo(SimpleJSON.JSONNode a_oTutorialInfo) {
+	public STTutorialInfo(SimpleJSON.JSONNode a_oTutorialInfo)
+	{
 		m_stCommonInfo = new STCommonInfo(a_oTutorialInfo);
 
 		m_eTutorialKinds = a_oTutorialInfo[KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)a_oTutorialInfo[KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
@@ -42,12 +47,13 @@ public struct STTutorialInfo {
 		m_oStrList = Factory.MakeVals(a_oTutorialInfo, KCDefine.U_KEY_FMT_STRS, (a_oJSONNode) => a_oJSONNode.Value);
 		m_oRewardKindsList = Factory.MakeVals(a_oTutorialInfo, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_oJSONNode) => (ERewardKinds)a_oJSONNode.AsInt);
 	}
-#endregion // 함수
+	#endregion // 함수
 
-#region 조건부 함수
+	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 튜토리얼 정보를 저장한다 */
-	public void SaveTutorialInfo(SimpleJSON.JSONNode a_oOutTutorialInfo) {
+	public void SaveTutorialInfo(SimpleJSON.JSONNode a_oOutTutorialInfo)
+	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutTutorialInfo);
 
 		a_oOutTutorialInfo[KCDefine.U_KEY_TUTORIAL_KINDS] = $"{(int)m_eTutorialKinds}";
@@ -58,35 +64,40 @@ public struct STTutorialInfo {
 		Func.SaveVals(m_oRewardKindsList, KCDefine.U_KEY_FMT_REWARD_KINDS, (a_eRewardKinds) => $"{(int)a_eRewardKinds}", a_oOutTutorialInfo);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 
 /** 튜토리얼 정보 테이블 */
-public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
-#region 프로퍼티
+public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable>
+{
+	#region 프로퍼티
 	public Dictionary<ETutorialKinds, STTutorialInfo> TutorialInfoDict { get; } = new Dictionary<ETutorialKinds, STTutorialInfo>();
-#endregion // 프로퍼티
+	#endregion // 프로퍼티
 
-#region 함수
+	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 		this.ResetTutorialInfos();
 	}
 
 	/** 튜토리얼 정보를 리셋한다 */
-	public virtual void ResetTutorialInfos() {
+	public virtual void ResetTutorialInfos()
+	{
 		this.TutorialInfoDict.Clear();
 	}
 
 	/** 튜토리얼 정보를 리셋한다 */
-	public virtual void ResetTutorialInfos(string a_oJSONStr) {
+	public virtual void ResetTutorialInfos(string a_oJSONStr)
+	{
 		this.ResetTutorialInfos();
 		this.DoLoadTutorialInfos(a_oJSONStr);
 	}
 
 	/** 튜토리얼 정보를 반환한다 */
-	public STTutorialInfo GetTutorialInfo(ETutorialKinds a_eTutorialKinds) {
+	public STTutorialInfo GetTutorialInfo(ETutorialKinds a_eTutorialKinds)
+	{
 		bool bIsValid = this.TryGetTutorialInfo(a_eTutorialKinds, out STTutorialInfo stTutorialInfo);
 		CFunc.Assert(bIsValid);
 
@@ -94,41 +105,48 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 	}
 
 	/** 튜토리얼 정보를 반환한다 */
-	public bool TryGetTutorialInfo(ETutorialKinds a_eTutorialKinds, out STTutorialInfo a_stOutTutorialInfo) {
+	public bool TryGetTutorialInfo(ETutorialKinds a_eTutorialKinds, out STTutorialInfo a_stOutTutorialInfo)
+	{
 		a_stOutTutorialInfo = this.TutorialInfoDict.ExGetVal(a_eTutorialKinds, STTutorialInfo.INVALID);
 		return this.TutorialInfoDict.ContainsKey(a_eTutorialKinds);
 	}
 
 	/** 튜토리얼 정보를 로드한다 */
-	public Dictionary<ETutorialKinds, STTutorialInfo> LoadTutorialInfos() {
+	public Dictionary<ETutorialKinds, STTutorialInfo> LoadTutorialInfos()
+	{
 		this.ResetTutorialInfos();
 		return this.LoadTutorialInfos(Access.TutorialInfoTableLoadPath);
 	}
 
 	/** 튜토리얼 정보를 저장한다 */
-	public void SaveTutorialInfos(string a_oJSONStr, bool a_bIsAssert = true) {
+	public void SaveTutorialInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	{
 		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null) {
+		if(a_oJSONStr != null)
+		{
 			this.ResetTutorialInfos(a_oJSONStr);
 		}
 	}
 
 	/** JSON 노드를 설정한다 */
-	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos) {
+	private void SetupJSONNodes(SimpleJSON.JSONNode a_oJSONNode, out SimpleJSON.JSONNode a_oOutCommonInfos)
+	{
 		var oSheetNameDictContainer = Access.GetSheetNames(this.GetType(), Access.TutorialTableInfo);
 		a_oOutCommonInfos = a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]].ExIsValid() ? a_oJSONNode[oSheetNameDictContainer[KCDefine.B_KEY_COMMON]] : KCDefine.B_EMPTY_JSON_ARRAY;
 	}
 
 	/** 튜토리얼 정보를 로드한다 */
-	private Dictionary<ETutorialKinds, STTutorialInfo> LoadTutorialInfos(string a_oFilePath) {
+	private Dictionary<ETutorialKinds, STTutorialInfo> LoadTutorialInfos(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 		return this.DoLoadTutorialInfos(this.LoadTutorialInfosJSONStr(a_oFilePath));
 	}
 
 	/** 튜토리얼 정보 JSON 문자열을 로드한다 */
-	private string LoadTutorialInfosJSONStr(string a_oFilePath) {
+	private string LoadTutorialInfosJSONStr(string a_oFilePath)
+	{
 		CFunc.Assert(a_oFilePath.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
@@ -139,59 +157,70 @@ public partial class CTutorialInfoTable : CSingleton<CTutorialInfoTable> {
 	}
 
 	/** 튜토리얼 정보를 로드한다 */
-	private Dictionary<ETutorialKinds, STTutorialInfo> DoLoadTutorialInfos(string a_oJSONStr) {
+	private Dictionary<ETutorialKinds, STTutorialInfo> DoLoadTutorialInfos(string a_oJSONStr)
+	{
 		CFunc.Assert(a_oJSONStr.ExIsValid());
 		this.SetupJSONNodes(SimpleJSON.JSON.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var stTutorialInfo = new STTutorialInfo(oCommonInfos[i]);
 
 			// 튜토리얼 정보 추가 가능 할 경우
-			if(stTutorialInfo.m_eTutorialKinds.ExIsValid() && (!this.TutorialInfoDict.ContainsKey(stTutorialInfo.m_eTutorialKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT)) {
+			if(stTutorialInfo.m_eTutorialKinds.ExIsValid() && (!this.TutorialInfoDict.ContainsKey(stTutorialInfo.m_eTutorialKinds) || oCommonInfos[i][KCDefine.U_KEY_REPLACE].AsInt != KCDefine.B_VAL_0_INT))
+			{
 				this.TutorialInfoDict.ExReplaceVal(stTutorialInfo.m_eTutorialKinds, stTutorialInfo);
 			}
 		}
 
 		return this.TutorialInfoDict;
 	}
-#endregion // 함수
+	#endregion // 함수
 
-#region 조건부 함수
+	#region 조건부 함수
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 	/** 튜토리얼 정보를 저장한다 */
-	public void SaveTutorialInfos(SimpleJSON.JSONNode a_oOutTutorialInfos) {
+	public void SaveTutorialInfos(SimpleJSON.JSONNode a_oOutTutorialInfos)
+	{
 		this.SetupJSONNodes(a_oOutTutorialInfos, out SimpleJSON.JSONNode oCommonInfos);
 
-		for(int i = 0; i < oCommonInfos.Count; ++i) {
+		for(int i = 0; i < oCommonInfos.Count; ++i)
+		{
 			var eTutorialKinds = oCommonInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].ExIsValid() ? (ETutorialKinds)oCommonInfos[i][KCDefine.U_KEY_TUTORIAL_KINDS].AsInt : ETutorialKinds.NONE;
 
 			// 튜토리얼 정보가 존재 할 경우
-			if(this.TutorialInfoDict.TryGetValue(eTutorialKinds, out STTutorialInfo stTutorialInfo)) {
+			if(this.TutorialInfoDict.TryGetValue(eTutorialKinds, out STTutorialInfo stTutorialInfo))
+			{
 				stTutorialInfo.SaveTutorialInfo(oCommonInfos[i]);
 			}
 		}
 	}
 
 	/** 튜토리얼 정보 값을 생성한다 */
-	public void MakeTutorialInfoVals(SimpleJSON.JSONNode a_oTutorialInfos, Dictionary<string, List<List<string>>> a_oOutTutorialInfoValDictContainer) {
+	public void MakeTutorialInfoVals(SimpleJSON.JSONNode a_oTutorialInfos, Dictionary<string, List<List<string>>> a_oOutTutorialInfoValDictContainer)
+	{
 		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
 
-		try {
+		try
+		{
 			this.SetupKeyInfos(oCommonKeyInfoList);
 			this.SetupJSONNodes(a_oTutorialInfos, out SimpleJSON.JSONNode oCommonInfos);
 
 			a_oOutTutorialInfoValDictContainer.TryAdd(Access.GetSheetNames(this.GetType(), Access.TutorialTableInfo)[KCDefine.B_KEY_COMMON], oCommonInfos.AsArray.ExToInfoVals(oCommonKeyInfoList));
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
 		}
 	}
 
 	/** 키 정보를 설정한다 */
-	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList) {
+	private void SetupKeyInfos(List<STKeyInfo> a_oOutCommonKeyInfoList)
+	{
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		Access.TutorialTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
 #endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
-#endregion // 조건부 함수
+	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

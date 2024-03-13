@@ -8,9 +8,11 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 서브 보상 획득 팝업 */
-public partial class CRewardAcquirePopup : CSubPopup {
+public partial class CRewardAcquirePopup : CSubPopup
+{
 	/** 서브 식별자 */
-	private enum ESubKey {
+	private enum ESubKey
+	{
 		NONE = -1,
 		[HideInInspector] MAX_VAL
 	}
@@ -25,22 +27,26 @@ public partial class CRewardAcquirePopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	private void SubAwake() {
+	private void SubAwake()
+	{
 		// Do Something
 	}
 
 	/** 초기화 */
-	private void SubInit() {
+	private void SubInit()
+	{
 		// Do Something
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void SubUpdateUIsState() {
+	private void SubUpdateUIsState()
+	{
 		// Do Something
 	}
 
 	/** 보상 아이템 UI 상태를 갱신한다 */
-	private void UpdateItemUIsState(GameObject a_oItemUIs, STTargetInfo a_stTargetInfo) {
+	private void UpdateItemUIsState(GameObject a_oItemUIs, STTargetInfo a_stTargetInfo)
+	{
 		var oNumText = a_oItemUIs.ExFindComponent<TMP_Text>(KCDefine.U_OBJ_N_NUM_TEXT);
 		oNumText?.ExSetText(string.Format(KCDefine.B_TEXT_FMT_CROSS, a_stTargetInfo.m_stValInfo01.m_dmVal), EFontSet._1, false);
 	}

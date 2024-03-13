@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE
 /** 서브 전역 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 단위 {
 	public const int G_MAX_NUM_COINS_BOX_COINS = 0;
@@ -107,46 +108,54 @@ public static partial class KDefine {
 
 	#region 런타임 상수
 	// 색상
-	public static readonly List<Color> G_COLOR_LIST = new List<Color>() {
+	public static readonly List<Color> G_COLOR_LIST = new List<Color>()
+	{
 		// Do Something
 	};
 
 	// 부스터
-	public static readonly List<EItemKinds> G_ITEM_KINDS_BOOSTER_LIST = new List<EItemKinds>() {
+	public static readonly List<EItemKinds> G_ITEM_KINDS_BOOSTER_LIST = new List<EItemKinds>()
+	{
 		// Do Something
 	};
 
 	// 게임 아이템
-	public static readonly List<EItemKinds> G_ITEM_KINDS_GAME_ITEM_LIST = new List<EItemKinds>() {
+	public static readonly List<EItemKinds> G_ITEM_KINDS_GAME_ITEM_LIST = new List<EItemKinds>()
+	{
 		// Do Something	
 	};
 
 	// 일일 보상
-	public static readonly List<ERewardKinds> G_REWARDS_KINDS_DAILY_REWARD_LIST = new List<ERewardKinds>() {
+	public static readonly List<ERewardKinds> G_REWARDS_KINDS_DAILY_REWARD_LIST = new List<ERewardKinds>()
+	{
 		// Do Something
 	};
 
 	// 상점 상품 종류
-	public static readonly List<EProductKinds> G_PRODUCT_KINDS_STORE_LIST = new List<EProductKinds>() {
+	public static readonly List<EProductKinds> G_PRODUCT_KINDS_STORE_LIST = new List<EProductKinds>()
+	{
 		// Do Something
 	};
 
 	// 특수 패키지 상품 종류
-	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>() {
+	public static readonly List<EProductKinds> G_PRODUCT_KINDS_SPECIAL_PKGS_LIST = new List<EProductKinds>()
+	{
 		// Do Something
 	};
 	#endregion // 런타임 상수
 }
 
 /** 서브 타이틀 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 서브 메인 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 개수
 	public const int MS_MAX_NUM_LEVELS_IN_ROW = 1;
@@ -156,7 +165,8 @@ public static partial class KDefine {
 }
 
 /** 서브 플레이 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 단위
 	public const int PS_MAX_TIMES_CONTINUE = 0;
@@ -182,21 +192,24 @@ public static partial class KDefine {
 }
 
 /** 서브 결과 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 서브 로딩 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본
 }
 
 /** 서브 중첩 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 
 	#endregion // 기본

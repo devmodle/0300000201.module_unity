@@ -8,9 +8,11 @@ using UnityEngine.Events;
 using System.Linq;
 
 /** 보상 획득 팝업 */
-public partial class CRewardAcquirePopup : CSubPopup {
+public partial class CRewardAcquirePopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		ADS_BTN,
 		ACQUIRE_BTN,
@@ -18,7 +20,8 @@ public partial class CRewardAcquirePopup : CSubPopup {
 	}
 
 	/** 매개 변수 */
-	public struct STParams {
+	public struct STParams
+	{
 		public ERewardQuality m_eQuality;
 		public ERewardAcquirePopupType m_eAgreePopup;
 
@@ -41,7 +44,8 @@ public partial class CRewardAcquirePopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		this.SetIsEnableAnim(false);
@@ -57,7 +61,8 @@ public partial class CRewardAcquirePopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public virtual void Init(STParams a_stParams) {
+	public virtual void Init(STParams a_stParams)
+	{
 		base.Init();
 		this.Params = a_stParams;
 
@@ -65,21 +70,25 @@ public partial class CRewardAcquirePopup : CSubPopup {
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		var oRewardTargetInfoKeyList = this.Params.m_oRewardTargetInfoDict.Keys.ToList();
 
 		// 보상 아이템 UI 상태를 갱신한다
-		for(int i = 0; i < m_oItemUIsList.Count; ++i) {
+		for(int i = 0; i < m_oItemUIsList.Count; ++i)
+		{
 			m_oItemUIsList[i].SetActive(i < oRewardTargetInfoKeyList.Count);
 
 			// 보상 정보가 존재 할 경우
-			if(i < oRewardTargetInfoKeyList.Count) {
+			if(i < oRewardTargetInfoKeyList.Count)
+			{
 				ulong nUniqueTargetInfoID = oRewardTargetInfoKeyList[i];
 				this.UpdateItemUIsState(m_oItemUIsList[i], this.Params.m_oRewardTargetInfoDict.ExGetVal(nUniqueTargetInfoID));
 			}
@@ -89,19 +98,22 @@ public partial class CRewardAcquirePopup : CSubPopup {
 	}
 
 	/** 광고 버튼을 눌렀을 경우 */
-	private void OnTouchAdsBtn() {
+	private void OnTouchAdsBtn()
+	{
 #if ADS_MODULE_ENABLE
 		Func.ShowRewardAds(this.OnCloseRewardAds);
 #endif // #if ADS_MODULE_ENABLE
 	}
 
 	/** 획득 버튼을 눌렀을 경우 */
-	private void OnTouchAcquireBtn() {
+	private void OnTouchAcquireBtn()
+	{
 		this.AcquireRewards(false);
 	}
 
 	/** 보상을 획득한다 */
-	private void AcquireRewards(bool a_bIsWatchRewardAds) {
+	private void AcquireRewards(bool a_bIsWatchRewardAds)
+	{
 		m_oBtnDict[EKey.ADS_BTN]?.ExSetInteractable(false);
 		m_oBtnDict[EKey.ACQUIRE_BTN]?.ExSetInteractable(false);
 
@@ -112,15 +124,19 @@ public partial class CRewardAcquirePopup : CSubPopup {
 		this.IsWatchRewardAds = a_bIsWatchRewardAds;
 		var oRewardTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
 
-		try {
-			foreach(var stKeyVal in this.Params.m_oRewardTargetInfoDict) {
+		try
+		{
+			foreach(var stKeyVal in this.Params.m_oRewardTargetInfoDict)
+			{
 				var stValInfo = new STValInfo(stKeyVal.Value.m_stValInfo01.m_eValType, a_bIsWatchRewardAds ? stKeyVal.Value.m_stValInfo01.m_dmVal * KCDefine.B_VAL_2_INT : stKeyVal.Value.m_stValInfo01.m_dmVal);
 				oRewardTargetInfoDict.TryAdd(stKeyVal.Key, new STTargetInfo(stKeyVal.Value.m_eTargetKinds, stKeyVal.Value.m_nKinds, stValInfo));
 			}
 
 			Func.Acquire(CGameInfoStorage.Inst.PlayCharacterID, oRewardTargetInfoDict, true);
 			this.OnTouchCloseBtn();
-		} finally {
+		}
+		finally
+		{
 			CCollectionPoolManager.Inst.DespawnDict(oRewardTargetInfoDict);
 		}
 	}
@@ -140,12 +156,17 @@ public partial class CRewardAcquirePopup : CSubPopup {
 }
 
 /** 보상 획득 팝업 - 팩토리 */
-public partial class CRewardAcquirePopup : CSubPopup {
+public partial class CRewardAcquirePopup : CSubPopup
+{
 	#region 클래스 함수
 	/** 매개 변수를 생성한다 */
-	public static STParams MakeParams(ERewardQuality a_eQuality, ERewardAcquirePopupType a_eAgreePopup, Dictionary<ulong, STTargetInfo> a_oRewardTargetInfoDict) {
-		return new STParams() {
-			m_eQuality = a_eQuality, m_eAgreePopup = a_eAgreePopup, m_oRewardTargetInfoDict = a_oRewardTargetInfoDict
+	public static STParams MakeParams(ERewardQuality a_eQuality, ERewardAcquirePopupType a_eAgreePopup, Dictionary<ulong, STTargetInfo> a_oRewardTargetInfoDict)
+	{
+		return new STParams()
+		{
+			m_eQuality = a_eQuality,
+			m_eAgreePopup = a_eAgreePopup,
+			m_oRewardTargetInfoDict = a_oRewardTargetInfoDict
 		};
 	}
 	#endregion // 클래스 함수

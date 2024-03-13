@@ -7,11 +7,14 @@ using UnityEngine.Events;
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 using UnityEngine.EventSystems;
 
-namespace TitleScene {
+namespace TitleScene
+{
 	/** 서브 타이틀 씬 관리자 - 서브 */
-	public partial class CSubTitleSceneManager : CTitleSceneManager {
+	public partial class CSubTitleSceneManager : CTitleSceneManager
+	{
 		/** 서브 식별자 */
-		private enum ESubKey {
+		private enum ESubKey
+		{
 			NONE = -1,
 			[HideInInspector] MAX_VAL
 		}
@@ -19,7 +22,8 @@ namespace TitleScene {
 #if DEBUG || DEVELOPMENT_BUILD
 		/** 서브 테스트 UI */
 		[System.Serializable]
-		private struct STSubTestUIs {
+		private struct STSubTestUIs
+		{
 			// Do Something
 		}
 #endif // #if DEBUG || DEVELOPMENT_BUILD
@@ -37,60 +41,74 @@ namespace TitleScene {
 
 		#region 함수
 		/** 초기화 */
-		private void SubAwake() {
+		private void SubAwake()
+		{
 #if DEBUG || DEVELOPMENT_BUILD
 			this.SubSetupTestUIs();
 #endif // #if DEBUG || DEVELOPMENT_BUILD
 		}
 
 		/** 초기화 */
-		private void SubStart() {
+		private void SubStart()
+		{
 			// Do Something
 		}
 
 		/** 제거되었을 경우 */
-		private void SubOnDestroy() {
-			try {
+		private void SubOnDestroy()
+		{
+			try
+			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning) {
+				if(CSceneManager.IsAppRunning)
+				{
 					// Do Something
 				}
-			} catch(System.Exception oException) {
+			}
+			catch(System.Exception oException)
+			{
 				CFunc.ShowLogWarning($"CSubTitleSceneManager.SubOnDestroy Exception: {oException.Message}");
 			}
 		}
 
 		/** 상태를 갱신한다 */
-		private void SubOnUpdate(float a_fDeltaTime) {
+		private void SubOnUpdate(float a_fDeltaTime)
+		{
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning) {
+			if(CSceneManager.IsAppRunning)
+			{
 				// Do Something
 			}
 		}
 
 		/** UI 상태를 갱신한다 */
-		private void SubUpdateUIsState() {
+		private void SubUpdateUIsState()
+		{
 #if DEBUG || DEVELOPMENT_BUILD
 			this.SubUpdateTestUIsState();
 #endif // #if DEBUG || DEVELOPMENT_BUILD
 		}
 
 		/** 터치 시작 이벤트를 처리한다 */
-		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+		private void HandleTouchBeginEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData)
+		{
 			var stPos = a_oEventData.ExGetLocalPos(this.Objs, this.ScreenSize);
 		}
 
 		/** 터치 이동 이벤트를 처리한다 */
-		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+		private void HandleTouchMoveEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData)
+		{
 			var stPos = a_oEventData.ExGetLocalPos(this.Objs, this.ScreenSize);
 		}
 
 		/** 터치 종료 이벤트를 처리한다 */
-		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData) {
+		private void HandleTouchEndEvent(CTouchDispatcher a_oSender, PointerEventData a_oEventData)
+		{
 			var stPos = a_oEventData.ExGetLocalPos(this.Objs, this.ScreenSize);
 
 			// 터치 모드가 아닐 경우
-			if(!m_bIsTouch && CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE) {
+			if(!m_bIsTouch && CUserInfoStorage.Inst.UserInfo.LoginType != ELoginType.NONE)
+			{
 				m_bIsTouch = true;
 
 #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
@@ -106,12 +124,14 @@ namespace TitleScene {
 		#region 조건부 함수
 #if DEBUG || DEVELOPMENT_BUILD
 		/** 테스트 UI 를 설정한다 */
-		private void SubSetupTestUIs() {
+		private void SubSetupTestUIs()
+		{
 			// Do Something
 		}
 
 		/** 테스트 UI 상태를 갱신한다 */
-		private void SubUpdateTestUIsState() {
+		private void SubUpdateTestUIsState()
+		{
 			// Do Something
 		}
 #endif // #if DEBUG || DEVELOPMENT_BUILD

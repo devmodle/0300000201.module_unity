@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 /** 설정 팝업 */
-public partial class CSettingsPopup : CSubPopup {
+public partial class CSettingsPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		BG_SND_BTN,
 		FX_SNDS_BTN,
@@ -24,7 +26,8 @@ public partial class CSettingsPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 버튼을 설정한다 {
@@ -46,19 +49,22 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 		this.SubInit();
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 갱신한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		CSndManager.Inst.SetIsMuteBGSnd(CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd);
 		CSndManager.Inst.SetIsMuteFXSnds(CCommonGameInfoStorage.Inst.GameInfo.IsMuteFXSnds);
 
@@ -70,13 +76,14 @@ public partial class CSettingsPopup : CSubPopup {
 			(EKey.NOTI_BTN, KCDefine.U_OBJ_N_ICON_IMG, KDefine.G_IMG_P_SETTINGS_P_NOTI_ON, KDefine.G_IMG_P_SETTINGS_P_NOTI_OFF, CCommonGameInfoStorage.Inst.GameInfo.IsEnableNoti)
 		};
 
-		for(int i = 0; i < oBtnKeyInfoList.Count; ++i) {
+		for(int i = 0; i < oBtnKeyInfoList.Count; ++i)
+		{
 			var oBtn = m_oBtnDict.ExGetVal(oBtnKeyInfoList[i].Item1);
 			var oImg = oBtn?.gameObject.ExFindComponent<Image>(oBtnKeyInfoList[i].Item2);
-			
+
 			string oImgPath = oBtnKeyInfoList[i].Item5 ? oBtnKeyInfoList[i].Item3 : oBtnKeyInfoList[i].Item4;
 
-			oImg?.ExSetPropertyVal<Image>(KCDefine.U_PROPERTY_N_SPRITE, 
+			oImg?.ExSetPropertyVal<Image>(KCDefine.U_PROPERTY_N_SPRITE,
 				CResManager.Inst.GetRes<Sprite>(oImgPath), a_bIsAssert: false);
 		}
 		// 버튼을 갱신한다 }
@@ -85,7 +92,8 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 배경음 버튼을 눌렀을 경우 */
-	private void OnTouchBGSndBtn() {
+	private void OnTouchBGSndBtn()
+	{
 		CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd = !CCommonGameInfoStorage.Inst.GameInfo.IsMuteBGSnd;
 		CCommonGameInfoStorage.Inst.SaveGameInfo();
 
@@ -93,7 +101,8 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 효과음 버튼을 눌렀을 경우 */
-	private void OnTouchFXSndsBtn() {
+	private void OnTouchFXSndsBtn()
+	{
 		CCommonGameInfoStorage.Inst.GameInfo.IsMuteFXSnds = !CCommonGameInfoStorage.Inst.GameInfo.IsMuteFXSnds;
 		CCommonGameInfoStorage.Inst.SaveGameInfo();
 
@@ -101,7 +110,8 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 진동 버튼을 눌렀을 경우 */
-	private void OnTouchVibrateBtn() {
+	private void OnTouchVibrateBtn()
+	{
 		CCommonGameInfoStorage.Inst.GameInfo.IsEnableVibrate = !CCommonGameInfoStorage.Inst.GameInfo.IsEnableVibrate;
 		CCommonGameInfoStorage.Inst.SaveGameInfo();
 
@@ -110,7 +120,8 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 알림 버튼을 눌렀을 경우 */
-	private void OnTouchNotiBtn() {
+	private void OnTouchNotiBtn()
+	{
 		CCommonGameInfoStorage.Inst.GameInfo.IsEnableNoti = !CCommonGameInfoStorage.Inst.GameInfo.IsEnableNoti;
 		CCommonGameInfoStorage.Inst.SaveGameInfo();
 
@@ -118,17 +129,20 @@ public partial class CSettingsPopup : CSubPopup {
 	}
 
 	/** 평가 버튼을 눌렀을 경우 */
-	private void OnTouchReviewBtn() {
+	private void OnTouchReviewBtn()
+	{
 		CUnityMsgSender.Inst.SendShowReviewMsg();
 	}
 
 	/** 지원 버튼을 눌렀을 경우 */
-	private void OnTouchSupportsBtn() {
+	private void OnTouchSupportsBtn()
+	{
 		CUnityMsgSender.Inst.SendMailMsg(string.Empty, string.Empty, CProjInfoTable.Inst.CompanyInfo.m_oSupportsMail);
 	}
 
 	/** 앱 더보기 버튼을 눌렀을 경우 */
-	private void OnTouchMoreAppsBtn() {
+	private void OnTouchMoreAppsBtn()
+	{
 		Application.OpenURL(Access.MoreAppsURL);
 	}
 	#endregion // 함수

@@ -10,7 +10,8 @@ using MessagePack;
 #region 기본
 /** 서브 타입 랩퍼 */
 [MessagePackObject]
-public struct STSubTypeWrapper {
+public struct STSubTypeWrapper
+{
 	// Do Something
 }
 #endregion // 기본

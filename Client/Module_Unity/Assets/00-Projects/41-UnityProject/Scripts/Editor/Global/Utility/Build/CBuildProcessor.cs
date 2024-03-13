@@ -15,9 +15,11 @@ using UnityEditor.iOS.Xcode;
 
 /** 빌드 처리자 */
 [InitializeOnLoad]
-public static partial class CBuildProcessor {
+public static partial class CBuildProcessor
+{
 	#region 변수
-	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oPostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>() {
+	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oPostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>()
+	{
 		[BuildTarget.iOS] = CBuildProcessor.HandleOnPostProcessBuildiOS,
 		[BuildTarget.Android] = CBuildProcessor.HandleOnPostProcessBuildAndroid,
 		[BuildTarget.StandaloneOSX] = CBuildProcessor.HandleOnPostProcessBuildStandalone,
@@ -25,7 +27,8 @@ public static partial class CBuildProcessor {
 		[BuildTarget.StandaloneWindows64] = CBuildProcessor.HandleOnPostProcessBuildStandalone
 	};
 
-	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oLatePostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>() {
+	private static Dictionary<BuildTarget, System.Action<BuildTarget, string>> m_oLatePostProcessHandlerDict = new Dictionary<BuildTarget, System.Action<BuildTarget, string>>()
+	{
 		[BuildTarget.iOS] = CBuildProcessor.HandleOnLatePostProcessBuildiOS,
 		[BuildTarget.Android] = CBuildProcessor.HandleOnLatePostProcessBuildAndroid,
 		[BuildTarget.StandaloneOSX] = CBuildProcessor.HandleOnLatePostProcessBuildStandalone,
@@ -37,28 +40,33 @@ public static partial class CBuildProcessor {
 	#region 클래스 함수
 	/** 빌드가 완료되었을 경우 */
 	[PostProcessBuild(byte.MaxValue * 10)]
-	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	public static void OnPostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 		CBuildProcessor.m_oLatePostProcessHandlerDict.ExGetVal(a_eTarget)?.Invoke(a_eTarget, a_oPath);
 	}
 
 	/** 빌드가 완료되었을 경우 */
 	[PostProcessBuild(byte.MaxValue * 20)]
-	public static void OnLatePostProcessBuild(BuildTarget a_eTarget, string a_oPath) {
+	public static void OnLatePostProcessBuild(BuildTarget a_eTarget, string a_oPath)
+	{
 		// 배치 모드가 아닐 경우
-		if(!Application.isBatchMode) {
+		if(!Application.isBatchMode)
+		{
 			EditorUtility.RevealInFinder(a_oPath);
 		}
 
 		CBuildProcessor.m_oLatePostProcessHandlerDict.ExGetVal(a_eTarget)?.Invoke(a_eTarget, a_oPath);
-	}	
+	}
 	#endregion // 클래스 함수
 }
 
 /** 빌드 처리자 - iOS */
-public static partial class CBuildProcessor {
+public static partial class CBuildProcessor
+{
 	#region 클래스 함수
 	/** iOS 빌드 완료를 처리한다 */
-	private static void HandleOnPostProcessBuildiOS(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnPostProcessBuildiOS(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_IOS
 		string oPlistPath = string.Format(KCEditorDefine.B_DATA_P_FMT_INFO_IOS, a_oPath);
 		string oPBXProjPath = PBXProject.GetPBXProjectPath(a_oPath);
@@ -124,7 +132,8 @@ public static partial class CBuildProcessor {
 	}
 
 	/** iOS 빌드 완료를 처리한다 */
-	private static void HandleOnLatePostProcessBuildiOS(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnLatePostProcessBuildiOS(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_IOS
 		string oPodsPath = string.Format(KCEditorDefine.B_DATA_P_FMT_COCOA_PODS, a_oPath);
 		string oPlistPath = string.Format(KCEditorDefine.B_DATA_P_FMT_INFO_IOS, a_oPath);
@@ -180,17 +189,20 @@ public static partial class CBuildProcessor {
 }
 
 /** 빌드 처리자 - 안드로이드 */
-public static partial class CBuildProcessor {
+public static partial class CBuildProcessor
+{
 	#region 클래스 함수
 	/** 안드로이드 빌드 완료를 처리한다 */
-	private static void HandleOnPostProcessBuildAndroid(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnPostProcessBuildAndroid(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_ANDROID
 		// Do Something
 #endif // #if UNITY_ANDROID
 	}
 
 	/** 안드로이드 빌드 완료를 처리한다 */
-	private static void HandleOnLatePostProcessBuildAndroid(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnLatePostProcessBuildAndroid(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_ANDROID
 		// Do Something
 #endif // #if UNITY_ANDROID
@@ -199,10 +211,12 @@ public static partial class CBuildProcessor {
 }
 
 /** 빌드 처리자 - 독립 플랫폼 */
-public static partial class CBuildProcessor {
+public static partial class CBuildProcessor
+{
 	#region 클래스 함수
 	/** 독립 플랫폼 빌드 완료를 처리한다 */
-	private static void HandleOnPostProcessBuildStandalone(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnPostProcessBuildStandalone(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_STANDALONE
 		string oPath = Path.GetDirectoryName(a_oPath).Replace(KCDefine.B_TOKEN_R_SLASH, KCDefine.B_TOKEN_SLASH);
 		string oDestPath = string.Format(KCEditorDefine.B_DIR_P_FMT_EXTERNAL_DATAS_STANDALONE, oPath);
@@ -212,7 +226,8 @@ public static partial class CBuildProcessor {
 	}
 
 	/** 독립 플랫폼 빌드 완료를 처리한다 */
-	private static void HandleOnLatePostProcessBuildStandalone(BuildTarget a_eTarget, string a_oPath) {
+	private static void HandleOnLatePostProcessBuildStandalone(BuildTarget a_eTarget, string a_oPath)
+	{
 #if UNITY_STANDALONE
 		// Do Something
 #endif // #if UNITY_STANDALONE

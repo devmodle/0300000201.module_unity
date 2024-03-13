@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
-namespace NSEngine {
+namespace NSEngine
+{
 	/** 서브 엔진 상수 */
-	public static partial class KDefine {
+	public static partial class KDefine
+	{
 		#region 기본
 		// 단위
 		public const float E_MIN_DELTA_TIME_SCALE = 1.0f;
@@ -16,15 +18,18 @@ namespace NSEngine {
 
 		#region 런타임 상수
 		// 색상 {
-		public static readonly Dictionary<EItemKinds, Color> E_COLOR_ITEM_DICT = new Dictionary<EItemKinds, Color>() {
+		public static readonly Dictionary<EItemKinds, Color> E_COLOR_ITEM_DICT = new Dictionary<EItemKinds, Color>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<ESkillKinds, Color> E_COLOR_SKILL_DICT = new Dictionary<ESkillKinds, Color>() {
+		public static readonly Dictionary<ESkillKinds, Color> E_COLOR_SKILL_DICT = new Dictionary<ESkillKinds, Color>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<EObjKinds, Color> E_COLOR_OBJ_DICT = new Dictionary<EObjKinds, Color>() {
+		public static readonly Dictionary<EObjKinds, Color> E_COLOR_OBJ_DICT = new Dictionary<EObjKinds, Color>()
+		{
 			// Do Something
 		};
 		// 색상 }
@@ -35,34 +40,41 @@ namespace NSEngine {
 		public static readonly STSortingOrderInfo E_SORTING_OI_OBJ_DEF = new STSortingOrderInfo(KCDefine.B_SORTING_OI_DEF.m_nOrder, KCDefine.B_SORTING_OI_DEF.m_oLayer);
 		public static readonly STSortingOrderInfo E_SORTING_OI_FX_DEF = new STSortingOrderInfo(KCDefine.B_SORTING_OI_FOREGROUND.m_nOrder, KCDefine.B_SORTING_OI_FOREGROUND.m_oLayer);
 
-		public static readonly Dictionary<EItemKinds, STSortingOrderInfo> E_SORTING_OI_ITEM_DICT = new Dictionary<EItemKinds, STSortingOrderInfo>() {
+		public static readonly Dictionary<EItemKinds, STSortingOrderInfo> E_SORTING_OI_ITEM_DICT = new Dictionary<EItemKinds, STSortingOrderInfo>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<ESkillKinds, STSortingOrderInfo> E_SORTING_OI_SKILL_DICT = new Dictionary<ESkillKinds, STSortingOrderInfo>() {
+		public static readonly Dictionary<ESkillKinds, STSortingOrderInfo> E_SORTING_OI_SKILL_DICT = new Dictionary<ESkillKinds, STSortingOrderInfo>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<EObjKinds, STSortingOrderInfo> E_SORTING_OI_OBJ_DICT = new Dictionary<EObjKinds, STSortingOrderInfo>() {
+		public static readonly Dictionary<EObjKinds, STSortingOrderInfo> E_SORTING_OI_OBJ_DICT = new Dictionary<EObjKinds, STSortingOrderInfo>()
+		{
 			[EObjKinds.BG_OBJ_EMPTY_01] = new STSortingOrderInfo(KCDefine.B_SORTING_OI_BACKGROUND.m_nOrder, KCDefine.B_SORTING_OI_BACKGROUND.m_oLayer),
 			[EObjKinds.BG_OBJ_PLACEHOLDER_01] = new STSortingOrderInfo(KCDefine.B_SORTING_OI_UNDERGROUND.m_nOrder, KCDefine.B_SORTING_OI_UNDERGROUND.m_oLayer)
 		};
 
-		public static readonly Dictionary<EFXKinds, STSortingOrderInfo> E_SORTING_OI_FX_DICT = new Dictionary<EFXKinds, STSortingOrderInfo>() {
+		public static readonly Dictionary<EFXKinds, STSortingOrderInfo> E_SORTING_OI_FX_DICT = new Dictionary<EFXKinds, STSortingOrderInfo>()
+		{
 			// Do Something
 		};
 		// 정렬 순서 }
 
 		// 경로 {
-		public static readonly Dictionary<EItemKinds, string> E_IMG_P_ITEM_DICT = new Dictionary<EItemKinds, string>() {
+		public static readonly Dictionary<EItemKinds, string> E_IMG_P_ITEM_DICT = new Dictionary<EItemKinds, string>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<ESkillKinds, string> E_IMG_P_SKILL_DICT = new Dictionary<ESkillKinds, string>() {
+		public static readonly Dictionary<ESkillKinds, string> E_IMG_P_SKILL_DICT = new Dictionary<ESkillKinds, string>()
+		{
 			// Do Something
 		};
 
-		public static readonly Dictionary<EObjKinds, string> E_IMG_P_OBJ_DICT = new Dictionary<EObjKinds, string>() {
+		public static readonly Dictionary<EObjKinds, string> E_IMG_P_OBJ_DICT = new Dictionary<EObjKinds, string>()
+		{
 			[EObjKinds.BG_OBJ_EMPTY_01] = EObjKinds.BG_OBJ_EMPTY_01.ToString(),
 			[EObjKinds.BG_OBJ_PLACEHOLDER_01] = EObjKinds.BG_OBJ_PLACEHOLDER_01.ToString()
 		};

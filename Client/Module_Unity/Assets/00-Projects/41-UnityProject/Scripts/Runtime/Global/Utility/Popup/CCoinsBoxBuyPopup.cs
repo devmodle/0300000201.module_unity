@@ -8,9 +8,11 @@ using UnityEngine.Events;
 using TMPro;
 
 /** 코인 상자 구입 팝업 */
-public partial class CCoinsBoxBuyPopup : CSubPopup {
+public partial class CCoinsBoxBuyPopup : CSubPopup
+{
 	/** 식별자 */
-	private enum EKey {
+	private enum EKey
+	{
 		NONE = -1,
 		NUM_COINS_TEXT,
 		[HideInInspector] MAX_VAL
@@ -27,7 +29,8 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 
 	#region 함수
 	/** 초기화 */
-	public override void Awake() {
+	public override void Awake()
+	{
 		base.Awake();
 
 		// 텍스트를 설정한다
@@ -45,19 +48,22 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	}
 
 	/** 초기화 */
-	public override void Init() {
+	public override void Init()
+	{
 		base.Init();
 		this.SubInit();
 	}
 
 	/** 팝업 컨텐츠를 설정한다 */
-	protected override void SetupContents() {
+	protected override void SetupContents()
+	{
 		base.SetupContents();
 		this.UpdateUIsState();
 	}
 
 	/** UI 상태를 변경한다 */
-	private void UpdateUIsState() {
+	private void UpdateUIsState()
+	{
 		long nNumCoinsBoxCoins = (long)Access.GetItemTargetVal(CGameInfoStorage.Inst.PlayCharacterID, EItemKinds.GOODS_ITEM_COINS_BOX_COINS_01, ETargetKinds.ABILITY_TARGET, (int)EAbilityKinds.STAT_ABILITY_NUMS);
 
 		// 객체를 갱신한다
@@ -71,12 +77,14 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	}
 
 	/** 확인 버튼을 눌렀을 경우 */
-	private void OnTouchOKBtn() {
+	private void OnTouchOKBtn()
+	{
 		this.OnTouchCloseBtn();
 	}
 
 	/** 결제 버튼을 눌렀을 경우 */
-	private void OnTouchPurchaseBtn() {
+	private void OnTouchPurchaseBtn()
+	{
 #if PURCHASE_MODULE_ENABLE
 		Func.PurchaseProduct(EProductKinds.SINGLE_PRODUCT_COINS_BOX_01, this.OnPurchaseProduct);
 #endif // #if PURCHASE_MODULE_ENABLE
@@ -86,9 +94,11 @@ public partial class CCoinsBoxBuyPopup : CSubPopup {
 	#region 조건부 함수
 #if PURCHASE_MODULE_ENABLE
 	/** 상품이 결제되었을 경우 */
-	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess) {
+	private void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	{
 		// 결제되었을 경우
-		if(a_bIsSuccess) {
+		if(a_bIsSuccess)
+		{
 			Func.AcquireProduct(a_oProductID);
 			Func.OnPurchaseProduct(a_oSender, a_oProductID, a_bIsSuccess, null);
 		}

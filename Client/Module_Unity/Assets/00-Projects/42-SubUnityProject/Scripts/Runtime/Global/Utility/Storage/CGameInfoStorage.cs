@@ -12,7 +12,8 @@ using MessagePack;
 /** 클리어 정보 */
 [MessagePackObject]
 [System.Serializable]
-public partial class CClearInfo : CBaseInfo {
+public partial class CClearInfo : CBaseInfo
+{
 	#region 변수
 	[Key(1)] public STRecordInfo m_stRecordInfo;
 	[Key(2)] public STRecordInfo m_stBestRecordInfo;
@@ -25,7 +26,8 @@ public partial class CClearInfo : CBaseInfo {
 
 	#region 프로퍼티
 	[IgnoreMember]
-	public int NumMarks {
+	public int NumMarks
+	{
 		get { return int.Parse(m_oStrDict.ExGetVal(KEY_NUM_MARKS, KCDefine.B_STR_0_INT)); }
 		set { m_oStrDict.ExReplaceVal(KEY_NUM_MARKS, $"{value}"); }
 	}
@@ -35,16 +37,19 @@ public partial class CClearInfo : CBaseInfo {
 
 	#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
-	public override void OnBeforeSerialize() {
+	public override void OnBeforeSerialize()
+	{
 		base.OnBeforeSerialize();
 	}
 
 	/** 역직렬화되었을 경우 */
-	public override void OnAfterDeserialize() {
+	public override void OnAfterDeserialize()
+	{
 		base.OnAfterDeserialize();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_CLEAR_INFO) < KCDefine.B_COMPARE_EQUALS) {
+		if(this.Ver.CompareTo(KDefine.G_VER_CLEAR_INFO) < KCDefine.B_COMPARE_EQUALS)
+		{
 			// Do Something
 		}
 	}
@@ -52,7 +57,8 @@ public partial class CClearInfo : CBaseInfo {
 
 	#region 함수
 	/** 생성자 */
-	public CClearInfo() : base(KDefine.G_VER_CLEAR_INFO) {
+	public CClearInfo() : base(KDefine.G_VER_CLEAR_INFO)
+	{
 		// Do Something
 	}
 	#endregion // 함수
@@ -61,7 +67,8 @@ public partial class CClearInfo : CBaseInfo {
 /** 캐릭터 게임 정보 */
 [MessagePackObject]
 [System.Serializable]
-public partial class CCharacterGameInfo : CBaseInfo {
+public partial class CCharacterGameInfo : CBaseInfo
+{
 	#region 상수
 	private const string KEY_IS_AUTO_CONTROL = "IsAutoControl";
 
@@ -93,37 +100,43 @@ public partial class CCharacterGameInfo : CBaseInfo {
 
 	#region 프로퍼티
 	[IgnoreMember]
-	public bool IsAutoControl {
+	public bool IsAutoControl
+	{
 		get { return bool.Parse(m_oStrDict.ExGetVal(KEY_IS_AUTO_CONTROL, KCDefine.B_TEXT_FALSE)); }
 		set { m_oStrDict.ExReplaceVal(KEY_IS_AUTO_CONTROL, $"{value}"); }
 	}
 
 	[IgnoreMember]
-	public int DailyRewardID {
+	public int DailyRewardID
+	{
 		get { return int.Parse(m_oStrDict.ExGetVal(KEY_DAILY_REWARD_ID, KCDefine.B_STR_0_INT)); }
 		set { m_oStrDict.ExReplaceVal(KEY_DAILY_REWARD_ID, $"{value}"); }
 	}
 
 	[IgnoreMember]
-	public int FreeRewardAcquireTimes {
+	public int FreeRewardAcquireTimes
+	{
 		get { return int.Parse(m_oStrDict.ExGetVal(KEY_FREE_REWARD_ACQUIRE_TIMES, KCDefine.B_STR_0_INT)); }
 		set { m_oStrDict.ExReplaceVal(KEY_FREE_REWARD_ACQUIRE_TIMES, $"{value}"); }
 	}
 
 	[IgnoreMember]
-	public System.DateTime PrevDailyMissionTime {
+	public System.DateTime PrevDailyMissionTime
+	{
 		get { return this.PrevDailyMissionTimeStr.ExIsValid() ? this.AdjustPrevDailyMissionTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_SLASH_YYYY_MM_DD_HH_MM_SS) : System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_INT); }
 		set { m_oStrDict.ExReplaceVal(KEY_PREV_DAILY_MISSION_TIME, value.ExToLongStr()); }
 	}
 
 	[IgnoreMember]
-	public System.DateTime PrevDailyRewardTime {
+	public System.DateTime PrevDailyRewardTime
+	{
 		get { return this.PrevDailyRewardTimeStr.ExIsValid() ? this.AdjustPrevDailyRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_SLASH_YYYY_MM_DD_HH_MM_SS) : System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_INT); }
 		set { m_oStrDict.ExReplaceVal(KEY_PREV_DAILY_REWARD_TIME, value.ExToLongStr()); }
 	}
 
 	[IgnoreMember]
-	public System.DateTime PrevFreeRewardTime {
+	public System.DateTime PrevFreeRewardTime
+	{
 		get { return this.PrevFreeRewardTimeStr.ExIsValid() ? this.AdjustPrevFreeRewardTimeStr.ExToTime(KCDefine.B_DATE_T_FMT_SLASH_YYYY_MM_DD_HH_MM_SS) : System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_INT); }
 		set { m_oStrDict.ExReplaceVal(KEY_PREV_FREE_REWARD_TIME, value.ExToLongStr()); }
 	}
@@ -139,12 +152,14 @@ public partial class CCharacterGameInfo : CBaseInfo {
 
 	#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
-	public override void OnBeforeSerialize() {
+	public override void OnBeforeSerialize()
+	{
 		base.OnBeforeSerialize();
 	}
 
 	/** 역직렬화되었을 경우 */
-	public override void OnAfterDeserialize() {
+	public override void OnAfterDeserialize()
+	{
 		base.OnAfterDeserialize();
 
 		m_oUnlockULevelIDList = m_oUnlockULevelIDList ?? new List<ulong>();
@@ -164,7 +179,8 @@ public partial class CCharacterGameInfo : CBaseInfo {
 		m_oChapterClearInfoDict = m_oChapterClearInfoDict ?? new Dictionary<ulong, CClearInfo>();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_CHARACTER_GAME_INFO) < KCDefine.B_COMPARE_EQUALS) {
+		if(this.Ver.CompareTo(KDefine.G_VER_CHARACTER_GAME_INFO) < KCDefine.B_COMPARE_EQUALS)
+		{
 			// Do Something
 		}
 	}
@@ -172,7 +188,8 @@ public partial class CCharacterGameInfo : CBaseInfo {
 
 	#region 함수
 	/** 생성자 */
-	public CCharacterGameInfo() : base(KDefine.G_VER_CHARACTER_GAME_INFO) {
+	public CCharacterGameInfo() : base(KDefine.G_VER_CHARACTER_GAME_INFO)
+	{
 		// Do Something
 	}
 	#endregion // 함수
@@ -181,24 +198,28 @@ public partial class CCharacterGameInfo : CBaseInfo {
 /** 게임 정보 */
 [MessagePackObject]
 [System.Serializable]
-public partial class CGameInfo : CBaseInfo {
+public partial class CGameInfo : CBaseInfo
+{
 	#region 변수
 	[Key(91)] public Dictionary<int, CCharacterGameInfo> m_oCharacterGameInfoDict = new Dictionary<int, CCharacterGameInfo>();
 	#endregion // 변수
 
 	#region IMessagePackSerializationCallbackReceiver
 	/** 직렬화 될 경우 */
-	public override void OnBeforeSerialize() {
+	public override void OnBeforeSerialize()
+	{
 		base.OnBeforeSerialize();
 	}
 
 	/** 역직렬화되었을 경우 */
-	public override void OnAfterDeserialize() {
+	public override void OnAfterDeserialize()
+	{
 		base.OnAfterDeserialize();
 		m_oCharacterGameInfoDict = m_oCharacterGameInfoDict ?? new Dictionary<int, CCharacterGameInfo>();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_GAME_INFO) < KCDefine.B_COMPARE_EQUALS) {
+		if(this.Ver.CompareTo(KDefine.G_VER_GAME_INFO) < KCDefine.B_COMPARE_EQUALS)
+		{
 			// Do Something
 		}
 	}
@@ -206,29 +227,36 @@ public partial class CGameInfo : CBaseInfo {
 
 	#region 함수
 	/** 생성자 */
-	public CGameInfo() : base(KDefine.G_VER_GAME_INFO) {
+	public CGameInfo() : base(KDefine.G_VER_GAME_INFO)
+	{
 		// Do Something
 	}
 	#endregion // 함수
 }
 
 /** 게임 정보 저장소 */
-public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
+public partial class CGameInfoStorage : CSingleton<CGameInfoStorage>
+{
 	#region 프로퍼티
 	public int PlayCharacterID { get; private set; } = KDefine.G_CHARACTER_ID_COMMON;
 	public EPlayMode PlayMode { get; private set; } = EPlayMode.NONE;
 	public STEpisodeInfo PlayEpisodeInfo { get; private set; } = STEpisodeInfo.INVALID;
 	public System.DateTime PlayStartingTime { get; private set; } = System.DateTime.Now;
-	
+
 	public CLevelInfo PlayLevelInfo { get; private set; } = null;
 
 	public List<EItemKinds> SelItemKindsList { get; } = new List<EItemKinds>();
 	public List<EItemKinds> FreeSelItemKindsList { get; } = new List<EItemKinds>();
 
-	public CGameInfo GameInfo { get; private set; } = new CGameInfo() {
-		m_oCharacterGameInfoDict = new Dictionary<int, CCharacterGameInfo>() {
-			[KDefine.G_CHARACTER_ID_COMMON] = new CCharacterGameInfo() {
-				PrevDailyMissionTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL), PrevDailyRewardTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL), PrevFreeRewardTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL)
+	public CGameInfo GameInfo { get; private set; } = new CGameInfo()
+	{
+		m_oCharacterGameInfoDict = new Dictionary<int, CCharacterGameInfo>()
+		{
+			[KDefine.G_CHARACTER_ID_COMMON] = new CCharacterGameInfo()
+			{
+				PrevDailyMissionTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL),
+				PrevDailyRewardTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL),
+				PrevFreeRewardTime = System.DateTime.Today.AddDays(-KCDefine.B_VAL_1_REAL)
 			}
 		}
 	};
@@ -236,7 +264,8 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 
 	#region 함수
 	/** 게임 정보를 리셋한다 */
-	public virtual void ResetGameInfo(string a_oBase64Str) {
+	public virtual void ResetGameInfo(string a_oBase64Str)
+	{
 		CFunc.ShowLog($"CGameInfoStorage.ResetGameInfo: {a_oBase64Str}");
 		this.GameInfo = a_oBase64Str.ExMsgPackBase64StrToObj<CGameInfo>();
 
@@ -244,51 +273,62 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 선택 아이템을 리셋한다 */
-	public virtual void ResetSelItems() {
+	public virtual void ResetSelItems()
+	{
 		this.SelItemKindsList.Clear();
 		this.FreeSelItemKindsList.Clear();
 	}
 
 	/** 레벨 클리어 정보를 추가한다 */
-	public void AddLevelClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true) {
+	public void AddLevelClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true)
+	{
 		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
 		oCharacterGameInfo.m_oLevelClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID01, a_oClearInfo);
 	}
 
 	/** 스테이지 클리어 정보를 추가한다 */
-	public void AddStageClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true) {
+	public void AddStageClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true)
+	{
 		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
 		oCharacterGameInfo.m_oStageClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID02, a_oClearInfo);
 	}
 
 	/** 챕터 클리어 정보를 추가한다 */
-	public void AddChapterClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true) {
+	public void AddChapterClearInfo(int a_nCharacterID, CClearInfo a_oClearInfo, bool a_bIsAssert = true)
+	{
 		this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
 		oCharacterGameInfo.m_oChapterClearInfoDict.TryAdd(a_oClearInfo.m_stIDInfo.UniqueID03, a_oClearInfo);
 	}
 
 	/** 게임 정보를 로드한다 */
-	public CGameInfo LoadGameInfo() {
+	public CGameInfo LoadGameInfo()
+	{
 		return this.LoadGameInfo(KDefine.G_DATA_P_GAME_INFO);
 	}
 
 	/** 게임 정보를 로드한다 */
-	public CGameInfo LoadGameInfo(string a_oFilePath) {
+	public CGameInfo LoadGameInfo(string a_oFilePath)
+	{
 		// 파일이 존재 할 경우
-		if(File.Exists(a_oFilePath)) {
+		if(File.Exists(a_oFilePath))
+		{
 			this.GameInfo = CFunc.ReadMsgPackObj<CGameInfo>(a_oFilePath, true);
 			CFunc.Assert(this.GameInfo != null);
 
-			foreach(var stKeyVal in this.GameInfo.m_oCharacterGameInfoDict) {
-				foreach(var stLevelKeyVal in stKeyVal.Value.m_oLevelClearInfoDict) {
+			foreach(var stKeyVal in this.GameInfo.m_oCharacterGameInfoDict)
+			{
+				foreach(var stLevelKeyVal in stKeyVal.Value.m_oLevelClearInfoDict)
+				{
 					stLevelKeyVal.Value.m_stIDInfo = new STIDInfo(stLevelKeyVal.Key.ExULevelIDToLevelID(), stLevelKeyVal.Key.ExULevelIDToStageID(), stLevelKeyVal.Key.ExULevelIDToChapterID());
 				}
 
-				foreach(var stStageKeyVal in stKeyVal.Value.m_oStageClearInfoDict) {
+				foreach(var stStageKeyVal in stKeyVal.Value.m_oStageClearInfoDict)
+				{
 					stStageKeyVal.Value.m_stIDInfo = new STIDInfo(KCDefine.B_VAL_0_INT, stStageKeyVal.Key.ExULevelIDToStageID(), stStageKeyVal.Key.ExULevelIDToChapterID());
 				}
 
-				foreach(var stChapterKeyVal in stKeyVal.Value.m_oChapterClearInfoDict) {
+				foreach(var stChapterKeyVal in stKeyVal.Value.m_oChapterClearInfoDict)
+				{
 					stChapterKeyVal.Value.m_stIDInfo = new STIDInfo(KCDefine.B_VAL_0_INT, KCDefine.B_VAL_0_INT, stChapterKeyVal.Key.ExULevelIDToChapterID());
 				}
 			}
@@ -298,19 +338,22 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 게임 정보를 저장한다 */
-	public void SaveGameInfo() {
+	public void SaveGameInfo()
+	{
 		this.SaveGameInfo(KDefine.G_DATA_P_GAME_INFO);
 	}
 
 	/** 게임 정보를 저장한다 */
-	public void SaveGameInfo(string a_oFilePath) {
+	public void SaveGameInfo(string a_oFilePath)
+	{
 		CFunc.WriteMsgPackObj(a_oFilePath, this.GameInfo, true);
 	}
 	#endregion // 함수
 
 	#region 접근 함수
 	/** 캐릭터 게임 정보를 반환한다 */
-	public CCharacterGameInfo GetCharacterGameInfo(int a_nCharacterID) {
+	public CCharacterGameInfo GetCharacterGameInfo(int a_nCharacterID)
+	{
 		bool bIsValid = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo);
 		CFunc.Assert(bIsValid);
 
@@ -318,7 +361,8 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 레벨 클리어 정보를 반환한다 */
-	public CClearInfo GetLevelClearInfo(int a_nCharacterID, int a_nLevelID, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+	public CClearInfo GetLevelClearInfo(int a_nCharacterID, int a_nLevelID, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT)
+	{
 		bool bIsValid = this.TryGetLevelClearInfo(a_nCharacterID, a_nLevelID, out CClearInfo oLevelClearInfo, a_nStageID, a_nChapterID);
 		CFunc.Assert(bIsValid);
 
@@ -326,7 +370,8 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 스테이지 클리어 정보를 반환한다 */
-	public CClearInfo GetStageClearInfo(int a_nCharacterID, int a_nStageID, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+	public CClearInfo GetStageClearInfo(int a_nCharacterID, int a_nStageID, int a_nChapterID = KCDefine.B_VAL_0_INT)
+	{
 		bool bIsValid = this.TryGetStageClearInfo(a_nCharacterID, a_nStageID, out CClearInfo oStageClearInfo, a_nChapterID);
 		CFunc.Assert(bIsValid);
 
@@ -334,7 +379,8 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 챕터 클리어 정보를 반환한다 */
-	public CClearInfo GetChapterClearInfo(int a_nCharacterID, int a_nChapterID) {
+	public CClearInfo GetChapterClearInfo(int a_nCharacterID, int a_nChapterID)
+	{
 		bool bIsValid = this.TryGetChapterClearInfo(a_nCharacterID, a_nChapterID, out CClearInfo oChapterClearInfo);
 		CFunc.Assert(bIsValid);
 
@@ -342,50 +388,59 @@ public partial class CGameInfoStorage : CSingleton<CGameInfoStorage> {
 	}
 
 	/** 캐릭터 게임 정보를 반환한다 */
-	public bool TryGetCharacterGameInfo(int a_nCharacterID, out CCharacterGameInfo a_oOutCharacterGameInfo) {
+	public bool TryGetCharacterGameInfo(int a_nCharacterID, out CCharacterGameInfo a_oOutCharacterGameInfo)
+	{
 		return this.GameInfo.m_oCharacterGameInfoDict.TryGetValue(a_nCharacterID, out a_oOutCharacterGameInfo);
 	}
 
 	/** 레벨 클리어 정보를 반환한다 */
-	public bool TryGetLevelClearInfo(int a_nCharacterID, int a_nLevelID, out CClearInfo a_oOutLevelClearInfo, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+	public bool TryGetLevelClearInfo(int a_nCharacterID, int a_nLevelID, out CClearInfo a_oOutLevelClearInfo, int a_nStageID = KCDefine.B_VAL_0_INT, int a_nChapterID = KCDefine.B_VAL_0_INT)
+	{
 		a_oOutLevelClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oLevelClearInfoDict.ExGetVal(CFactory.MakeULevelID(a_nLevelID, a_nStageID, a_nChapterID)) : null;
 		return a_oOutLevelClearInfo != null;
 	}
 
 	/** 스테이지 클리어 정보를 반환한다 */
-	public bool TryGetStageClearInfo(int a_nCharacterID, int a_nStageID, out CClearInfo a_oOutStageClearInfo, int a_nChapterID = KCDefine.B_VAL_0_INT) {
+	public bool TryGetStageClearInfo(int a_nCharacterID, int a_nStageID, out CClearInfo a_oOutStageClearInfo, int a_nChapterID = KCDefine.B_VAL_0_INT)
+	{
 		a_oOutStageClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oStageClearInfoDict.ExGetVal(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, a_nStageID, a_nChapterID)) : null;
 		return a_oOutStageClearInfo != null;
 	}
 
 	/** 챕터 클리어 정보를 반환한다 */
-	public bool TryGetChapterClearInfo(int a_nCharacterID, int a_nChapterID, out CClearInfo a_oOutChapterClearInfo) {
+	public bool TryGetChapterClearInfo(int a_nCharacterID, int a_nChapterID, out CClearInfo a_oOutChapterClearInfo)
+	{
 		a_oOutChapterClearInfo = this.TryGetCharacterGameInfo(a_nCharacterID, out CCharacterGameInfo oCharacterGameInfo) ? oCharacterGameInfo.m_oChapterClearInfoDict.ExGetVal(CFactory.MakeULevelID(KCDefine.B_VAL_0_INT, KCDefine.B_VAL_0_INT, a_nChapterID)) : null;
 		return a_oOutChapterClearInfo != null;
 	}
 
 	/** 플레이 캐릭터 식별자를 변경한다 */
-	public void SetPlayCharacterID(int a_nID) {
+	public void SetPlayCharacterID(int a_nID)
+	{
 		this.PlayCharacterID = a_nID;
 	}
 
 	/** 플레이 모드를 변경한다 */
-	public void SetPlayMode(EPlayMode a_ePlayMode) {
+	public void SetPlayMode(EPlayMode a_ePlayMode)
+	{
 		this.PlayMode = a_ePlayMode;
 	}
 
 	/** 플레이 에피소드 정보를 변경한다 */
-	public void SetPlayEpisodeInfo(STEpisodeInfo a_stEpisodeInfo) {
+	public void SetPlayEpisodeInfo(STEpisodeInfo a_stEpisodeInfo)
+	{
 		this.PlayEpisodeInfo = a_stEpisodeInfo;
 	}
 
 	/** 플레이 시작 시간을 변경한다 */
-	public void SetPlayStartingTime(System.DateTime a_stTime) {
+	public void SetPlayStartingTime(System.DateTime a_stTime)
+	{
 		this.PlayStartingTime = a_stTime;
 	}
 
 	/** 플레이 레벨 정보를 변경한다 */
-	public void SetPlayLevelInfo(CLevelInfo a_oLevelInfo) {
+	public void SetPlayLevelInfo(CLevelInfo a_oLevelInfo)
+	{
 		this.PlayLevelInfo = a_oLevelInfo;
 	}
 	#endregion // 접근 함수

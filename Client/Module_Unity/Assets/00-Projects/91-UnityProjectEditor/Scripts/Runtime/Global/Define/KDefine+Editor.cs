@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE && (UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 /** 에디터 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 알림
 	public const string ES_MSG_NOTI_SAVE = "레벨 데이터를 저장합니다.";
@@ -29,7 +30,8 @@ public static partial class KDefine {
 }
 
 /** 레벨 에디터 씬 상수 */
-public static partial class KDefine {
+public static partial class KDefine
+{
 	#region 기본
 	// 단위
 	public const int LES_MAX_NUM_OBJ_KINDS_IN_ROW = 4;
