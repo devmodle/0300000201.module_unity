@@ -74,12 +74,9 @@ public partial class CFocusPopup : CSubPopup {
 	protected override void SetupContents() {
 		base.SetupContents();
 
-		// 포커스 UI 가 존재 할 경우
-		if(this.Params.m_oContentsUIsList.ExIsValid()) {
-			for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i) {
-				this.Params.m_oContentsUIsList[i].SetActive(true);
-				this.Params.m_oContentsUIsList[i].ExSetParent(this.ContentsUIs);
-			}
+		for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i) {
+			this.Params.m_oContentsUIsList[i].SetActive(true);
+			this.Params.m_oContentsUIsList[i].ExSetParent(this.ContentsUIs);
 		}
 
 		this.UpdateUIsState();
