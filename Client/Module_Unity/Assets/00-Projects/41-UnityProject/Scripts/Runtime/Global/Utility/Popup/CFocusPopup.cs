@@ -55,7 +55,8 @@ public partial class CFocusPopup : CSubPopup
 		this.SetIsEnableAnim(false);
 
 		// 이미지를 설정한다
-		CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {
+		CFunc.SetupComponents(new List<(EKey, string, GameObject)>()
+		{
 			(EKey.FOCUS_BLIND_IMG, $"{EKey.FOCUS_BLIND_IMG}", this.ContentsUIs)
 		}, m_oImgDict);
 
@@ -69,7 +70,8 @@ public partial class CFocusPopup : CSubPopup
 		this.Params = a_stParams;
 
 		// 터치 전달자를 설정한다
-		Func.SetupTouchDispatchers(new List<(GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)>() {
+		Func.SetupTouchDispatchers(new List<(GameObject, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>, System.Action<CTouchDispatcher, PointerEventData>)>()
+		{
 			(m_oImgDict[EKey.FOCUS_BLIND_IMG]?.gameObject, (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.ExGetVal(ECallback.BEGIN)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.ExGetVal(ECallback.MOVE)?.Invoke(this, a_oEventData), (a_oSender, a_oEventData) => a_stParams.m_oCallbackDict?.ExGetVal(ECallback.END)?.Invoke(this, a_oEventData))
 		});
 
@@ -81,14 +83,10 @@ public partial class CFocusPopup : CSubPopup
 	{
 		base.SetupContents();
 
-		// 포커스 UI 가 존재 할 경우
-		if(this.Params.m_oContentsUIsList.ExIsValid())
+		for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i)
 		{
-			for(int i = 0; i < this.Params.m_oContentsUIsList.Count; ++i)
-			{
-				this.Params.m_oContentsUIsList[i].SetActive(true);
-				this.Params.m_oContentsUIsList[i].ExSetParent(this.ContentsUIs);
-			}
+			this.Params.m_oContentsUIsList[i].SetActive(true);
+			this.Params.m_oContentsUIsList[i].ExSetParent(this.ContentsUIs);
 		}
 
 		this.UpdateUIsState();
@@ -98,7 +96,8 @@ public partial class CFocusPopup : CSubPopup
 	private void UpdateUIsState()
 	{
 		// 이미지를 갱신한다
-		m_oImgDict[EKey.FOCUS_BLIND_IMG]?.ExSetPropertyVal<Image>(KCDefine.U_PROPERTY_N_COLOR, KCDefine.B_COLOR_POPUP_BLIND, a_bIsAssert: false);
+		m_oImgDict[EKey.FOCUS_BLIND_IMG]?.ExSetPropertyVal<Image>(KCDefine.U_PROPERTY_N_COLOR, 
+			KCDefine.B_COLOR_POPUP_BLIND, a_bIsAssert: false);
 
 		this.SubUpdateUIsState();
 	}
