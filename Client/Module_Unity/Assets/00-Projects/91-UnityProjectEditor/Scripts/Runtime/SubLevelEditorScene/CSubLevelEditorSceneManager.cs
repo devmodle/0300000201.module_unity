@@ -185,7 +185,7 @@ namespace LevelEditorScene
 		private Dictionary<EKey, STScrollerInfo> m_oScrollerInfoDict = new Dictionary<EKey, STScrollerInfo>();
 
 		[Header("=====> Game Objects <=====")]
-		private Dictionary<EKey, GameObject> m_oUIsDict = new Dictionary<EKey, GameObject>();
+		private Dictionary<EKey, GameObject> m_oUIDict = new Dictionary<EKey, GameObject>();
 		#endregion // 변수
 
 		#region 프로퍼티
@@ -921,9 +921,9 @@ namespace LevelEditorScene
 		{
 			this.ResetObjSprites();
 
-			this.UpdateMidEditorUIsState();
-			this.UpdateLeftEditorUIsState();
-			this.UpdateRightEditorUIsState();
+			this.UpdateUIsStateMidEditor();
+			this.UpdateUIsStateLeftEditor();
+			this.UpdateUIsStateRightEditor();
 
 			this.SubUpdateUIsState();
 
@@ -1649,7 +1649,7 @@ namespace LevelEditorScene
 		}
 
 		/** 중앙 에디터 UI 상태를 갱신한다 */
-		private void UpdateMidEditorUIsState()
+		private void UpdateUIsStateMidEditor()
 		{
 			int nNumLevelInfos = CLevelInfoTable.Inst.GetNumLevelInfos(this.SelLevelInfo.m_stIDInfo.m_nID02, this.SelLevelInfo.m_stIDInfo.m_nID03);
 
@@ -1959,7 +1959,7 @@ namespace LevelEditorScene
 		}
 
 		/** 왼쪽 에디터 UI 상태를 갱신한다 */
-		private void UpdateLeftEditorUIsState()
+		private void UpdateUIsStateLeftEditor()
 		{
 			// 스크롤 뷰를 갱신한다
 			m_oScrollerInfoDict[EKey.LE_UIS_LEVEL_SCROLLER_INFO].m_oScroller?.ExReloadData(this.SelLevelInfo.m_stIDInfo.m_nID01 - KCDefine.B_VAL_1_INT, false);
@@ -2072,13 +2072,13 @@ namespace LevelEditorScene
 				for(int i = 0; i < m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].NumberOfPanels; ++i)
 				{
 					string oPageUIName = string.Format(KDefine.LES_OBJ_N_FMT_RE_UIS_PAGE_UIS, i + KCDefine.B_VAL_1_INT);
-					m_oUIsDict.TryAdd(EKey.RE_UIS_PAGE_UIS_01 + i, m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].gameObject.ExFindChild(oPageUIName));
+					m_oUIDict.TryAdd(EKey.RE_UIS_PAGE_UIS_01 + i, m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].gameObject.ExFindChild(oPageUIName));
 				}
 
 				for(int i = 0; i < m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].NumberOfPanels; ++i)
 				{
 					m_oMethodInfoDict.ExGetVal(ECallback.SETUP_RE_UIS_PAGE_UIS_01 + i)?.Invoke(this, new object[] {
-						m_oUIsDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_01 + i)
+						m_oUIDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_01 + i)
 					});
 				}
 			}
@@ -2158,9 +2158,9 @@ namespace LevelEditorScene
 					[CTapUIsHandler.ECallback.TAP] = this.OnReceiveREUIsPageUIs02TapCallback
 				}));
 
-				for(int i = 0; i < oTapUIsHandler.ContentsUIsList.Count; ++i)
+				for(int i = 0; i < oTapUIsHandler.ContentsUIList.Count; ++i)
 				{
-					this.SetupREUIsPageUIs02TapContentsUIs(oTapUIsHandler.ContentsUIsList[i], i);
+					this.SetupREUIsPageUIs02TapContentsUIs(oTapUIsHandler.ContentsUIList[i], i);
 				}
 			}
 			// 탭 UI 를 설정한다 }
@@ -2212,7 +2212,7 @@ namespace LevelEditorScene
 		}
 
 		/** 오른쪽 에디터 UI 상태를 갱신한다 */
-		private void UpdateRightEditorUIsState()
+		private void UpdateUIsStateRightEditor()
 		{
 			// 텍스트를 설정한다
 			int nNumLevelInfos = CLevelInfoTable.Inst.GetNumLevelInfos(this.SelLevelInfo.m_stIDInfo.m_nID02, this.SelLevelInfo.m_stIDInfo.m_nID03);
@@ -2244,7 +2244,7 @@ namespace LevelEditorScene
 				for(int i = 0; i < m_oScrollSnapDict[EKey.RE_UIS_PAGE_SCROLL_SNAP].NumberOfPanels; ++i)
 				{
 					m_oMethodInfoDict.ExGetVal(ECallback.UPDATE_RE_UIS_PAGE_UIS_01 + i)?.Invoke(this, new object[] {
-						m_oUIsDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_01 + i)
+						m_oUIDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_01 + i)
 					});
 				}
 			}
@@ -2290,7 +2290,7 @@ namespace LevelEditorScene
 		/** 오른쪽 에디터 UI 페이지 UI 2 탭 콜백을 수신했을 경우 */
 		private void OnReceiveREUIsPageUIs02TapCallback(CTapUIsHandler a_oSender, int a_nIdx)
 		{
-			this.UpdateREUIsPageUIs02(m_oUIsDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_02));
+			this.UpdateREUIsPageUIs02(m_oUIDict.ExGetVal(EKey.RE_UIS_PAGE_UIS_02));
 		}
 
 		/** 오른쪽 에디터 UI 페이지 UI 1 적용 버튼을 눌렀을 경우 */
