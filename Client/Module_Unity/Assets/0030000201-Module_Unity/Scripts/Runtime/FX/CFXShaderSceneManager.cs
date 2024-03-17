@@ -31,22 +31,10 @@ namespace FX
 		{
 			base.Awake();
 
-			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			// 앱 초기화가 필요 할 경우
+			if(!CSceneManager.IsAppInit)
 			{
-				// Do Something
-			}
-		}
-
-		/** 초기화 */
-		public override void Start()
-		{
-			base.Start();
-
-			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
-			{
-				this.UpdateUIsState();
+				return;
 			}
 		}
 
@@ -57,15 +45,27 @@ namespace FX
 
 			try
 			{
-				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				// 앱이 종료되었을 경우
+				if(!CSceneManager.IsAppRunning)
 				{
-					// Do Something
+					return;
 				}
 			}
 			catch(System.Exception oException)
 			{
-				CFunc.ShowLogWarning($"CFXShaderSceneManager.OnDestroy Exception: {oException.Message}");
+				CFunc.ShowLogWarning($"CExtraSceneManager.OnDestroy Exception: {oException.Message}");
+			}
+		}
+
+		/** 상태를 갱신한다 */
+		public override void OnUpdate(float a_fDeltaTime)
+		{
+			base.OnUpdate(a_fDeltaTime);
+
+			// 앱이 종료되었을 경우
+			if(!CSceneManager.IsAppRunning)
+			{
+				return;
 			}
 		}
 
@@ -74,11 +74,18 @@ namespace FX
 		{
 			base.OnReceiveNavStackEvent(a_eEvent);
 
-			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
+			switch(a_eEvent)
 			{
-				// Do Something
+				case ENavStackEvent.BACK_KEY_DOWN:
+					break;
 			}
+		}
+
+		/** 상태를 갱신한다 */
+		public override void UpdateState()
+		{
+			base.UpdateState();
+			this.UpdateUIsState();
 		}
 
 		/** UI 상태를 갱신한다 */
