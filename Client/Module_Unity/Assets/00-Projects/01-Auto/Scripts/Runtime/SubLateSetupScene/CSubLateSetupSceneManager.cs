@@ -115,13 +115,13 @@ namespace LateSetupScene
 		/** 한국 약관 동의 팝업을 출력한다 */
 		protected override void ShowKRAgreePopup(string a_oPrivacy, string a_oServices, System.Action<CPopup> a_oCallback)
 		{
-			this.ShowAgreePopup(a_oPrivacy, a_oServices, EAgreePopup.KR, a_oCallback);
+			this.ShowAgreePopup(a_oPrivacy, a_oServices, CAgreePopup.EAgreePopup.KR, a_oCallback);
 		}
 
 		/** 유럽 연합 약관 동의 팝업을 출력한다 */
 		protected override void ShowEUAgreePopup(string a_oPrivacyURL, string a_oServicesURL, System.Action<CPopup> a_oCallback)
 		{
-			this.ShowAgreePopup(a_oPrivacyURL, a_oServicesURL, EAgreePopup.EU, a_oCallback);
+			this.ShowAgreePopup(a_oPrivacyURL, a_oServicesURL, CAgreePopup.EAgreePopup.EU, a_oCallback);
 		}
 
 		/** 추적 설명 팝업을 출력한다 */
@@ -155,7 +155,8 @@ namespace LateSetupScene
 		}
 
 		/** 약관 동의 팝업을 출력한다 */
-		private void ShowAgreePopup(string a_oPrivacy, string a_oServices, EAgreePopup a_eAgreePopup, System.Action<CPopup> a_oCallback)
+		private void ShowAgreePopup(string a_oPrivacy, 
+			string a_oServices, CAgreePopup.EAgreePopup a_eAgreePopup, System.Action<CPopup> a_oCallback)
 		{
 #if GOOGLE_SHEET_ENABLE && EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
 			Func.SetupGoogleSheetInfoValCreators();
