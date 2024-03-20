@@ -228,7 +228,7 @@ public static partial class Func
 		for(int i = 0; i < a_oKeyInfoList.Count; ++i)
 		{
 			a_oKeyInfoList[i].Item1?.GetComponentInChildren<CEventDispatcher>()?.SetAnimCallback(a_oKeyInfoList[i].Item2);
-			a_oKeyInfoList[i].Item1?.GetComponentInChildren<CEventDispatcher>()?.SetParticleFXCallback(a_oKeyInfoList[i].Item3);
+			a_oKeyInfoList[i].Item1?.GetComponentInChildren<CEventDispatcher>()?.SetParticleCallback(a_oKeyInfoList[i].Item3);
 		}
 	}
 
@@ -246,7 +246,7 @@ public static partial class Func
 		for(int i = 0; i < a_oKeyInfoList.Count; ++i)
 		{
 			a_oKeyInfoList[i].Item2?.ExFindComponent<CEventDispatcher>(a_oKeyInfoList[i].Item1)?.SetAnimCallback(a_oKeyInfoList[i].Item3);
-			a_oKeyInfoList[i].Item2?.ExFindComponent<CEventDispatcher>(a_oKeyInfoList[i].Item1)?.SetParticleFXCallback(a_oKeyInfoList[i].Item4);
+			a_oKeyInfoList[i].Item2?.ExFindComponent<CEventDispatcher>(a_oKeyInfoList[i].Item1)?.SetParticleCallback(a_oKeyInfoList[i].Item4);
 		}
 	}
 
