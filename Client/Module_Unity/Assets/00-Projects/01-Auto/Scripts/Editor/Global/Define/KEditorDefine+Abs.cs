@@ -182,12 +182,8 @@ public static partial class KEditorDefine
 		["com.unity.visualeffectgraph"] = "14.0.10",
 		["com.unity.adaptiveperformance.samsung.android"] = "4.0.2",
 
-#if POST_PROCESSING_ENABLE || POST_PROCESSING_MODULE_ENABLE
-		["com.unity.postprocessing"] = "3.4.0",
-#endif // #if POST_PROCESSING_ENABLE || POST_PROCESSING_MODULE_ENABLE
-
 #if PURCHASE_ENABLE || PURCHASE_MODULE_ENABLE
-		["com.unity.purchasing"] = "4.10.0",
+		["com.unity.purchasing"] = "4.11.0",
 		["com.unity.purchasing.udp"] = "2.2.5",
 #endif // #if PURCHASE_ENABLE || PURCHASE_MODULE_ENABLE
 

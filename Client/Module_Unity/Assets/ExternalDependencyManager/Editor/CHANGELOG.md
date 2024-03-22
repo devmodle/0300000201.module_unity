@@ -1068,7 +1068,7 @@
 * Fixed incorrect "Android Settings" dialog disabled groups.
 * Updated PlayServicesResolver android platform detection to use the package
   manager instead of the 'android' tool.
-* UnityCompat reflection methods 'GetAndroidPlatform' and
+* UnityCompat reflection methods 'GetPlatformAndroid' and
   'GetAndroidBuildToolsVersion' are now Obsolete due to dependence on the
   obsolete 'android' build tool.
 
