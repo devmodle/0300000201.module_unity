@@ -247,15 +247,15 @@ namespace PlayScene
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnLateUpdate(float a_fDeltaTime)
+		public override void OnUpdateLate(float a_fDeltaTime)
 		{
-			base.OnLateUpdate(a_fDeltaTime);
+			base.OnUpdateLate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsAppRunning)
 			{
-				this.SubOnLateUpdate(a_fDeltaTime);
-				m_oEngine.OnLateUpdate(a_fDeltaTime);
+				this.SubOnUpdateLate(a_fDeltaTime);
+				m_oEngine.OnUpdateLate(a_fDeltaTime);
 			}
 		}
 
@@ -268,7 +268,7 @@ namespace PlayScene
 			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
 			{
 				// 이전 씬이 레벨 에디터 씬 일 경우
-				if(CSceneLoader.Inst.PrevActiveSceneName.Equals(KCDefine.B_EDITOR_SCENE_N_LEVEL))
+				if(CSceneLoader.Inst.PrevActiveSceneName.Equals(KCDefine.B_SCENE_N_EDITOR_LEVEL))
 				{
 					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_LEAVE_P_MSG), this.OnReceiveLeavePopupResult);
 				}

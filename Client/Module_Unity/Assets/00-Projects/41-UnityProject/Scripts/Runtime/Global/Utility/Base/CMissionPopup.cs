@@ -11,12 +11,12 @@ public abstract partial class CMissionPopup : CSubPopup
 	/** 매개 변수 */
 	public struct STParams
 	{
-		public List<STMissionInfo> m_oMissionInfoList;
+		public List<STMissionInfo> m_oListMissionInfo;
 	}
 
 	#region 변수
-	[Header("=====> Game Objects <=====")]
-	[SerializeField] private List<GameObject> m_oMissionUIList = new List<GameObject>();
+	[Header("=====> Mission Popup - Game Objects <=====")]
+	[SerializeField] private List<GameObject> m_oListMissionUI = new List<GameObject>();
 	#endregion // 변수
 
 	#region 프로퍼티
@@ -51,9 +51,9 @@ public abstract partial class CMissionPopup : CSubPopup
 	private void UpdateUIsState()
 	{
 		// 미션 UI 상태를 갱신한다
-		for(int i = 0; i < m_oMissionUIList.Count; ++i)
+		for(int i = 0; i < m_oListMissionUI.Count; ++i)
 		{
-			this.UpdateMissionUIState(m_oMissionUIList[i], this.Params.m_oMissionInfoList[i]);
+			this.UpdateMissionUIState(m_oListMissionUI[i], this.Params.m_oListMissionInfo[i]);
 		}
 
 		this.SubUpdateUIsState();

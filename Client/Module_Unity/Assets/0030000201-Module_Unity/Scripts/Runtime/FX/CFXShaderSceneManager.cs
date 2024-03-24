@@ -53,7 +53,7 @@ namespace FX
 			}
 			catch(System.Exception oException)
 			{
-				CFunc.ShowLogWarning($"CExtraSceneManager.OnDestroy Exception: {oException.Message}");
+				CFunc.ShowLogWarning($"CFXShaderSceneManager.OnDestroy Exception: {oException.Message}");
 			}
 		}
 

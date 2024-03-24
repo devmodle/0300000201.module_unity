@@ -82,7 +82,7 @@ namespace PlayScene
 		}
 
 		/** 상태를 갱신한다 */
-		private void SubOnLateUpdate(float a_fDeltaTime)
+		private void SubOnUpdateLate(float a_fDeltaTime)
 		{
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsAppRunning)
@@ -162,7 +162,7 @@ namespace PlayScene
 			if(CGameInfoStorage.Inst.PlayMode == EPlayMode.TEST)
 			{
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE
-				CSceneLoader.Inst.LoadScene(KCDefine.B_EDITOR_SCENE_N_LEVEL);
+				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_EDITOR_LEVEL);
 #endif // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE
 			}
 			else

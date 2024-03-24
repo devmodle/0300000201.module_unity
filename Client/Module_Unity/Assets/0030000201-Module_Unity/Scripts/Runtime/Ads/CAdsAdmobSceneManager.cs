@@ -73,10 +73,10 @@ namespace Ads
 
 			try
 			{
-				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				// 앱이 종료되었을 경우
+				if(!CSceneManager.IsAppRunning)
 				{
-					// Do Something
+					return;
 				}
 			}
 			catch(System.Exception oException)
@@ -90,10 +90,10 @@ namespace Ads
 		{
 			base.OnUpdate(a_fDeltaTime);
 
-			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			// 앱이 종료되었을 경우
+			if(!CSceneManager.IsAppRunning)
 			{
-				// Do Something
+				return;
 			}
 		}
 
