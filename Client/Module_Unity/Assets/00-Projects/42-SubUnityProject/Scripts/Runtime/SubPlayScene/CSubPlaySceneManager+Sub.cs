@@ -162,7 +162,7 @@ namespace PlayScene
 			if(CGameInfoStorage.Inst.PlayMode == EPlayMode.TEST)
 			{
 #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE
-				CSceneLoader.Inst.LoadScene(KCDefine.B_SCENE_N_LEVEL_EDITOR);
+				CSceneLoader.Inst.LoadScene(KCDefine.B_EDITOR_SCENE_N_LEVEL);
 #endif // #if EDITOR_SCENE_TEMPLATES_MODULE_ENABLE
 			}
 			else

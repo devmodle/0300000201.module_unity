@@ -268,7 +268,7 @@ namespace PlayScene
 			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
 			{
 				// 이전 씬이 레벨 에디터 씬 일 경우
-				if(CSceneLoader.Inst.PrevActiveSceneName.Equals(KCDefine.B_SCENE_N_LEVEL_EDITOR))
+				if(CSceneLoader.Inst.PrevActiveSceneName.Equals(KCDefine.B_EDITOR_SCENE_N_LEVEL))
 				{
 					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_LEAVE_P_MSG), this.OnReceiveLeavePopupResult);
 				}
