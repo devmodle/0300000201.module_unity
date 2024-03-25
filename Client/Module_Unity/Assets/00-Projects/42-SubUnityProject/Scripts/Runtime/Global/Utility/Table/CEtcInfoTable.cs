@@ -76,7 +76,7 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
 	#endregion // 함수
 
 	#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	/** 기타 정보를 저장한다 */
 	public void SaveEtcInfos()
 	{
@@ -102,7 +102,7 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
 
 		return oEtcInfoValDictContainer;
 	}
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

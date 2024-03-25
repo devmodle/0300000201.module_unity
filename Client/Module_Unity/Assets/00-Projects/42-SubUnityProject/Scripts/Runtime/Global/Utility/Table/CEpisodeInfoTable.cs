@@ -103,7 +103,7 @@ public struct STEpisodeInfo
 	#endregion // 함수
 
 	#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	/** 에피소드 정보를 저장한다 */
 	public void SaveEpisodeInfo(SimpleJSON.JSONNode a_oOutEpisodeInfo)
 	{
@@ -135,7 +135,7 @@ public struct STEpisodeInfo
 		Func.SaveTargetInfos(m_oDropItemTargetInfoDict, KCDefine.U_KEY_FMT_DROP_ITEM_TARGET_INFO, a_oOutEpisodeInfo);
 		Func.SaveTargetInfos(m_oEnemyObjTargetInfoDict, KCDefine.U_KEY_FMT_ENEMY_OBJ_TARGET_INFO, a_oOutEpisodeInfo);
 	}
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }
 
@@ -310,7 +310,7 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable>
 	#endregion // 함수
 
 	#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	/** 에피소드 정보를 저장한다 */
 	public void SaveEpisodeInfos(SimpleJSON.JSONNode a_oOutEpisodeInfos)
 	{
@@ -385,7 +385,7 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable>
 		Access.EpisodeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_STAGE_EPISODE)?.ExCopyTo(a_oOutStageEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 		Access.EpisodeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.U_KEY_CHAPTER_EPISODE)?.ExCopyTo(a_oOutChapterEpisodeInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

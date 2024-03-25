@@ -55,7 +55,7 @@ public struct STProductTradeInfo
 	#endregion // 함수
 
 	#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	/** 객체 정보를 저장한다 */
 	public void SaveProductTradeInfo(SimpleJSON.JSONNode a_oOutProductTradeInfo)
 	{
@@ -70,7 +70,7 @@ public struct STProductTradeInfo
 		Func.SaveTargetInfos(m_oPayTargetInfoDict, KCDefine.U_KEY_FMT_PAY_TARGET_INFO, a_oOutProductTradeInfo);
 		Func.SaveTargetInfos(m_oAcquireTargetInfoDict, KCDefine.U_KEY_FMT_ACQUIRE_TARGET_INFO, a_oOutProductTradeInfo);
 	}
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }
 
@@ -215,7 +215,7 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 	#endregion // 함수
 
 	#region 조건부 함수
-#if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	/** 상품 교환 정보를 저장한다 */
 	public void SaveProductTradeInfos()
 	{
@@ -263,7 +263,7 @@ public partial class CProductTradeInfoTable : CSingleton<CProductTradeInfoTable>
 		KDefine.G_KEY_INFO_GOOGLE_SHEET_COMMON_LIST.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo);
 		Access.ProductTradeTableInfo.m_oKeyInfoDictContainer[this.GetType()].GetValueOrDefault(KCDefine.B_KEY_COMMON)?.ExCopyTo(a_oOutCommonKeyInfoList, (a_stKeyInfo) => a_stKeyInfo, false, false);
 	}
-#endif // #if GOOGLE_SHEET_ENABLE && (DEBUG || DEVELOPMENT_BUILD)
+#endif // #if ENABLE_GOOGLESHEET && (DEBUG || DEVELOPMENT_BUILD)
 	#endregion // 조건부 함수
 }
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

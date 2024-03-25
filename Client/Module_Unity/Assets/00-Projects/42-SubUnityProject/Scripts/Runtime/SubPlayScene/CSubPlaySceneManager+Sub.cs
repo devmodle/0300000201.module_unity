@@ -72,7 +72,7 @@ namespace PlayScene
 		}
 
 		/** 상태를 갱신한다 */
-		private void SubOnUpdate(float a_fDeltaTime)
+		private void SubOnUpdate(float a_fTimeDelta)
 		{
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsRunningApp)
@@ -82,7 +82,7 @@ namespace PlayScene
 		}
 
 		/** 상태를 갱신한다 */
-		private void SubOnLateUpdate(float a_fDeltaTime)
+		private void SubOnLateUpdate(float a_fTimeDelta)
 		{
 			// 앱이 실행 중 일 경우
 			if(CSceneManager.IsRunningApp)
