@@ -116,7 +116,7 @@ namespace TitleScene
 			if(CSceneManager.IsInitApp)
 			{
 				// 앱 업데이트가 가능 할 경우
-				if(!CAppInfoStorage.Inst.IsIgnoreAppUpdate && COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene && CCommonAppInfoStorage.Inst.IsEnableUpdate())
+				if(!CAppInfoStorage.Inst.IsIgnoreAppUpdate && COptsInfoTable.Inst.InfoOptsEtc.m_bIsEnableSceneTitle && CCommonAppInfoStorage.Inst.IsEnableUpdate())
 				{
 					CAppInfoStorage.Inst.SetIsIgnoreAppUpdate(true);
 					this.ExLateCallFunc((a_oSender) => Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_UPDATE_P_MSG), this.OnReceiveUpdatePopupResult));
@@ -138,7 +138,7 @@ namespace TitleScene
 				}
 
 				// 타이틀 씬이 유효 할 경우
-				if(COptsInfoTable.Inst.EtcOptsInfo.m_bIsEnableTitleScene)
+				if(COptsInfoTable.Inst.InfoOptsEtc.m_bIsEnableSceneTitle)
 				{
 					Func.PlayBGSnd(EResKinds.SND_RES_BG_SCENE_TITLE_01);
 
