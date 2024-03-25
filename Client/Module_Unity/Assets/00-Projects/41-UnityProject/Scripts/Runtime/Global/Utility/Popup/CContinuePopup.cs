@@ -57,7 +57,7 @@ public partial class CContinuePopup : CSubPopup
 	public override void Awake()
 	{
 		base.Awake();
-		this.SetIsEnableNavStackEvent(false);
+		this.SetIsEnableEventNavStack(false);
 
 		// 텍스트를 설정한다
 		CFunc.SetupComponents(new List<(EKey, string, GameObject)>() {

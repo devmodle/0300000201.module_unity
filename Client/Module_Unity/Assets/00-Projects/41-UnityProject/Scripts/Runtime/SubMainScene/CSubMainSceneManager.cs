@@ -88,7 +88,7 @@ namespace MainScene
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 #if CREATIVE_DIST_BUILD
 				for(int i = 0; i < CLevelInfoTable.Inst.NumChapterInfos; ++i) {
@@ -120,7 +120,7 @@ namespace MainScene
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				this.SetupStart();
 				this.UpdateUIsState();
@@ -145,7 +145,7 @@ namespace MainScene
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					this.SubOnDestroy();
 				}
@@ -162,7 +162,7 @@ namespace MainScene
 			base.OnApplicationPause(a_bIsPause);
 
 			// 재개되었을 경우
-			if(!a_bIsPause && CSceneManager.IsAppRunning)
+			if(!a_bIsPause && CSceneManager.IsRunningApp)
 			{
 #if ADS_MODULE_ENABLE
 				// 광고 출력이 가능 할 경우
@@ -179,7 +179,7 @@ namespace MainScene
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
 				this.SubOnUpdate(a_fDeltaTime);
 
@@ -194,12 +194,12 @@ namespace MainScene
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		public override void OnReceiveEventNavStack(EEventNavStack a_eEvent)
 		{
-			base.OnReceiveNavStackEvent(a_eEvent);
+			base.OnReceiveEventNavStack(a_eEvent);
 
 			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
+			if(a_eEvent == EEventNavStack.BACK_KEY_DOWN)
 			{
 				Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 			}

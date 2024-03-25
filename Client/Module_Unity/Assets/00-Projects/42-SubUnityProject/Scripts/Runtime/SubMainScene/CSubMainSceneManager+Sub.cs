@@ -62,7 +62,7 @@ namespace MainScene
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					// Do Something
 				}
@@ -77,7 +77,7 @@ namespace MainScene
 		private void SubOnUpdate(float a_fDeltaTime)
 		{
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
 				// Do Something
 			}

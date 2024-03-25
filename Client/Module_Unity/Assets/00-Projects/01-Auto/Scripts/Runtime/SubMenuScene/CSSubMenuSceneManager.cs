@@ -17,21 +17,21 @@ namespace MenuScene
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				// Do Something
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		public override void OnReceiveEventNavStack(EEventNavStack a_eEvent)
 		{
-			base.OnReceiveNavStackEvent(a_eEvent);
+			base.OnReceiveEventNavStack(a_eEvent);
 
 #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE
 			switch(a_eEvent)
 			{
-				case ENavStackEvent.BACK_KEY_DOWN:
+				case EEventNavStack.BACK_KEY_DOWN:
 					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 					break;
 			}

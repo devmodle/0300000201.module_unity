@@ -34,7 +34,7 @@ public partial class CDailyRewardPopup : CSubPopup
 	public override void Awake()
 	{
 		base.Awake();
-		this.SetIsEnableNavStackEvent(false);
+		this.SetIsEnableEventNavStack(false);
 
 		// 버튼을 설정한다
 		CFunc.SetupButtons(new List<(EKey, string, GameObject, UnityAction)>() {

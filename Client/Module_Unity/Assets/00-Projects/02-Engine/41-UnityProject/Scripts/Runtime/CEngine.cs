@@ -164,7 +164,7 @@ namespace NSEngine
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					this.SubOnDestroy();
 				}
@@ -181,7 +181,7 @@ namespace NSEngine
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning && this.IsEnableUpdate)
+			if(CSceneManager.IsRunningApp && this.IsEnableUpdate)
 			{
 				// 실행 중 일 경우
 				if(this.IsRunning)
@@ -209,14 +209,14 @@ namespace NSEngine
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdateLate(float a_fDeltaTime)
+		public override void OnLateUpdate(float a_fDeltaTime)
 		{
-			base.OnUpdateLate(a_fDeltaTime);
+			base.OnLateUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning && this.IsEnableUpdate)
+			if(CSceneManager.IsRunningApp && this.IsEnableUpdate)
 			{
-				this.SubOnUpdateLate(a_fDeltaTime * this.DeltaTimeScale);
+				this.SubOnLateUpdate(a_fDeltaTime * this.DeltaTimeScale);
 			}
 		}
 

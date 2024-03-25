@@ -32,7 +32,7 @@ namespace FX
 			base.Awake();
 
 			// 앱 초기화가 필요 할 경우
-			if(!CSceneManager.IsAppInit)
+			if(!CSceneManager.IsInitApp)
 			{
 				return;
 			}
@@ -46,7 +46,7 @@ namespace FX
 			try
 			{
 				// 앱이 종료되었을 경우
-				if(!CSceneManager.IsAppRunning)
+				if(!CSceneManager.IsRunningApp)
 				{
 					return;
 				}
@@ -63,20 +63,20 @@ namespace FX
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 종료되었을 경우
-			if(!CSceneManager.IsAppRunning)
+			if(!CSceneManager.IsRunningApp)
 			{
 				return;
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		public override void OnReceiveEventNavStack(EEventNavStack a_eEvent)
 		{
-			base.OnReceiveNavStackEvent(a_eEvent);
+			base.OnReceiveEventNavStack(a_eEvent);
 
 			switch(a_eEvent)
 			{
-				case ENavStackEvent.BACK_KEY_DOWN:
+				case EEventNavStack.BACK_KEY_DOWN:
 					break;
 			}
 		}

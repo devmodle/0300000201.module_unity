@@ -28,7 +28,7 @@ namespace ResultScene
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				this.SubAwake();
 			}
@@ -40,7 +40,7 @@ namespace ResultScene
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				this.SubStart();
 				this.UpdateUIsState();
@@ -55,7 +55,7 @@ namespace ResultScene
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					this.SubOnDestroy();
 				}
@@ -72,7 +72,7 @@ namespace ResultScene
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
 				this.SubOnUpdate(a_fDeltaTime);
 			}

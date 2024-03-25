@@ -67,7 +67,7 @@ namespace PlayScene
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 #if DEBUG || DEVELOPMENT_BUILD
 				// 플레이 레벨 정보가 없을 경우
@@ -160,7 +160,7 @@ namespace PlayScene
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				this.SubStart();
 				this.UpdateUIsState();
@@ -188,7 +188,7 @@ namespace PlayScene
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					this.SubOnDestroy();
 				}
@@ -205,7 +205,7 @@ namespace PlayScene
 			base.OnApplicationPause(a_bIsPause);
 
 			// 재개되었을 경우
-			if(CSceneManager.IsAppRunning && !a_bIsPause)
+			if(CSceneManager.IsRunningApp && !a_bIsPause)
 			{
 #if ADS_MODULE_ENABLE
 				// 광고 출력이 가능 할 경우
@@ -231,7 +231,7 @@ namespace PlayScene
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
 				this.SubOnUpdate(a_fDeltaTime);
 				m_oEngine.OnUpdate(a_fDeltaTime);
@@ -247,25 +247,25 @@ namespace PlayScene
 		}
 
 		/** 상태를 갱신한다 */
-		public override void OnUpdateLate(float a_fDeltaTime)
+		public override void OnLateUpdate(float a_fDeltaTime)
 		{
-			base.OnUpdateLate(a_fDeltaTime);
+			base.OnLateUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
-				this.SubOnUpdateLate(a_fDeltaTime);
-				m_oEngine.OnUpdateLate(a_fDeltaTime);
+				this.SubOnLateUpdate(a_fDeltaTime);
+				m_oEngine.OnLateUpdate(a_fDeltaTime);
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		public override void OnReceiveEventNavStack(EEventNavStack a_eEvent)
 		{
-			base.OnReceiveNavStackEvent(a_eEvent);
+			base.OnReceiveEventNavStack(a_eEvent);
 
 			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
+			if(a_eEvent == EEventNavStack.BACK_KEY_DOWN)
 			{
 				// 이전 씬이 레벨 에디터 씬 일 경우
 				if(CSceneLoader.Inst.PrevActiveSceneName.Equals(KCDefine.B_SCENE_N_EDITOR_LEVEL))

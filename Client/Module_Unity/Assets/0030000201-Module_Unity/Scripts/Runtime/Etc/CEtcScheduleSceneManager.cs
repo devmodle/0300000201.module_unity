@@ -32,7 +32,7 @@ namespace Etc
 			base.Awake();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				// 버튼을 설정한다
 				CFunc.SetupButtons(new List<(string, GameObject, UnityAction)>() {
@@ -51,7 +51,7 @@ namespace Etc
 			base.Start();
 
 			// 앱이 초기화되었을 경우
-			if(CSceneManager.IsAppInit)
+			if(CSceneManager.IsInitApp)
 			{
 				this.UpdateUIsState();
 			}
@@ -65,7 +65,7 @@ namespace Etc
 			try
 			{
 				// 앱이 실행 중 일 경우
-				if(CSceneManager.IsAppRunning)
+				if(CSceneManager.IsRunningApp)
 				{
 					// Do Something
 				}
@@ -82,19 +82,19 @@ namespace Etc
 			base.OnUpdate(a_fDeltaTime);
 
 			// 앱이 실행 중 일 경우
-			if(CSceneManager.IsAppRunning)
+			if(CSceneManager.IsRunningApp)
 			{
 				// Do Something
 			}
 		}
 
 		/** 내비게이션 스택 이벤트를 수신했을 경우 */
-		public override void OnReceiveNavStackEvent(ENavStackEvent a_eEvent)
+		public override void OnReceiveEventNavStack(EEventNavStack a_eEvent)
 		{
-			base.OnReceiveNavStackEvent(a_eEvent);
+			base.OnReceiveEventNavStack(a_eEvent);
 
 			// 백 키 눌림 이벤트 일 경우
-			if(a_eEvent == ENavStackEvent.BACK_KEY_DOWN)
+			if(a_eEvent == EEventNavStack.BACK_KEY_DOWN)
 			{
 				// Do Something
 			}
