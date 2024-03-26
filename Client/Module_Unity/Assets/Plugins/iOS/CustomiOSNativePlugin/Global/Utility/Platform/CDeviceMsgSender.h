@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /** 디바이스 식별자 반환 메세지를 전송한다 */
-- (void)sendGetDeviceIDMsg:(NSString *)a_oDeviceID;
+- (void)sendGetDeviceIDMsg:(NSString *)a_oIDDevice;
 
 /** 국가 코드 반환 메세지를 전송한다 */
 - (void)sendGetCountryCodeMsg:(NSString *)a_pCountryCode;

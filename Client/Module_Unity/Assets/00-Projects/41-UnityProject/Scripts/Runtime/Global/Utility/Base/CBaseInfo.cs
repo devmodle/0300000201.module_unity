@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 public partial struct STBaseInfo : System.ICloneable, IMessagePackSerializationCallbackReceiver
 {
 	#region 변수
-	[Key(0)] public Dictionary<string, string> m_oStrDict;
+	[Key(0)] public Dictionary<string, string> m_oDictStr;
 	#endregion // 변수
 
 	#region ICloneable
@@ -43,7 +43,7 @@ public partial struct STBaseInfo : System.ICloneable, IMessagePackSerializationC
 	/** 역직렬화되었을 경우 */
 	public void OnAfterDeserialize()
 	{
-		m_oStrDict = m_oStrDict ?? new Dictionary<string, string>();
+		m_oDictStr = m_oDictStr ?? new Dictionary<string, string>();
 	}
 	#endregion // IMessagePackSerializationCallbackReceiver
 
@@ -51,13 +51,13 @@ public partial struct STBaseInfo : System.ICloneable, IMessagePackSerializationC
 	/** 생성자 */
 	public STBaseInfo(Dictionary<string, string> a_oStrDict)
 	{
-		m_oStrDict = a_oStrDict ?? new Dictionary<string, string>();
+		m_oDictStr = a_oStrDict ?? new Dictionary<string, string>();
 	}
 
 	/** 사본 객체를 설정한다 */
 	private void SetupCloneInst(ref STBaseInfo a_stOutBaseInfo)
 	{
-		m_oStrDict.ExCopyTo(a_stOutBaseInfo.m_oStrDict, (_, a_oStr) => a_oStr);
+		m_oDictStr.ExCopyTo(a_stOutBaseInfo.m_oDictStr, (_, a_oStr) => a_oStr);
 	}
 	#endregion // 함수
 
@@ -65,14 +65,14 @@ public partial struct STBaseInfo : System.ICloneable, IMessagePackSerializationC
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	/** 직렬화 될 경우 */
 	[OnSerializing]
-	private void OnSerializingMethod(StreamingContext a_oContext)
+	private void OnSerializing(StreamingContext a_oContext)
 	{
 		this.OnBeforeSerialize();
 	}
 
 	/** 역직렬화되었을 경우 */
 	[OnDeserialized]
-	private void OnDeserializedMethod(StreamingContext a_oContext)
+	private void OnDeserialized(StreamingContext a_oContext)
 	{
 		this.OnAfterDeserialize();
 	}
@@ -91,7 +91,7 @@ public partial struct STBaseInfo : System.ICloneable, IMessagePackSerializationC
 public abstract partial class CBaseInfo : IMessagePackSerializationCallbackReceiver
 {
 	#region 변수
-	[Key(0)] public Dictionary<string, string> m_oStrDict = new Dictionary<string, string>();
+	[Key(0)] public Dictionary<string, string> m_oDictStr = new Dictionary<string, string>();
 	#endregion // 변수
 
 	#region 상수
@@ -104,16 +104,16 @@ public abstract partial class CBaseInfo : IMessagePackSerializationCallbackRecei
 	[IgnoreMember]
 	public System.Version Ver
 	{
-		get { return System.Version.Parse(m_oStrDict.ExGetVal(KEY_VER, KCDefine.B_DEF_VER_STR)); }
-		set { m_oStrDict.ExReplaceVal(KEY_VER, value.ToString(KCDefine.B_VAL_3_INT)); }
+		get { return System.Version.Parse(m_oDictStr.ExGetVal(KEY_VER, KCDefine.G_VER_STR_DEF)); }
+		set { m_oDictStr.ExReplaceVal(KEY_VER, value.ToString(KCDefine.B_VAL_3_INT)); }
 	}
 
 	[JsonIgnore][IgnoreMember] public virtual bool IsEnableVer => false;
 #else
 	[IgnoreMember]
 	public System.Version Ver {
-		get { return System.Version.Parse(m_oStrDict.ExGetVal(KEY_VER, KCDefine.B_DEF_VER_STR)); }
-		set { m_oStrDict.ExReplaceVal(KEY_VER, value.ToString(KCDefine.B_VAL_3_INT)); }
+		get { return System.Version.Parse(m_oDictStr.ExGetVal(KEY_VER, KCDefine.G_VER_STR_DEF)); }
+		set { m_oDictStr.ExReplaceVal(KEY_VER, value.ToString(KCDefine.B_VAL_3_INT)); }
 	}
 
 	[IgnoreMember] public virtual bool IsEnableVer => false;
@@ -130,13 +130,13 @@ public abstract partial class CBaseInfo : IMessagePackSerializationCallbackRecei
 			return;
 		}
 
-		m_oStrDict.ExRemoveVal(KEY_VER);
+		m_oDictStr.ExRemoveVal(KEY_VER);
 	}
 
 	/** 역직렬화되었을 경우 */
 	public virtual void OnAfterDeserialize()
 	{
-		m_oStrDict = m_oStrDict ?? new Dictionary<string, string>();
+		m_oDictStr = m_oDictStr ?? new Dictionary<string, string>();
 	}
 	#endregion // IMessagePackSerializationCallbackReceiver
 
@@ -152,14 +152,14 @@ public abstract partial class CBaseInfo : IMessagePackSerializationCallbackRecei
 #if NEWTON_SOFT_JSON_SERIALIZE_DESERIALIZE_ENABLE
 	/** 직렬화 될 경우 */
 	[OnSerializing]
-	private void OnSerializingMethod(StreamingContext a_oContext)
+	private void OnSerializing(StreamingContext a_oContext)
 	{
 		this.OnBeforeSerialize();
 	}
 
 	/** 역직렬화되었을 경우 */
 	[OnDeserialized]
-	private void OnDeserializedMethod(StreamingContext a_oContext)
+	private void OnDeserialized(StreamingContext a_oContext)
 	{
 		this.OnAfterDeserialize();
 	}

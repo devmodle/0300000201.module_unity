@@ -143,7 +143,7 @@ public partial class CResultPopup : CSubPopup
 			}
 
 			oLevelClearInfo.NumMarks = Mathf.Max(nNumMarks, oLevelClearInfo.NumMarks);
-			CGameInfoStorage.Inst.SaveGameInfo();
+			CGameInfoStorage.Inst.SaveInfoGame();
 		}
 
 		// 객체를 갱신한다 {

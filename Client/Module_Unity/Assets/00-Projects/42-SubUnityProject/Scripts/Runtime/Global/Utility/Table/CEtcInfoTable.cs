@@ -21,14 +21,14 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
 	}
 
 	/** 기타 정보를 리셋한다 */
-	public virtual void ResetEtcInfos(string a_oJSONStr)
+	public virtual void ResetEtcInfos(string a_oStrJSON)
 	{
 		this.ResetEtcInfos();
 
-		CCalcInfoTable.Inst.ResetCalcInfos(a_oJSONStr);
-		CEpisodeInfoTable.Inst.ResetEpisodeInfos(a_oJSONStr);
-		CTutorialInfoTable.Inst.ResetTutorialInfos(a_oJSONStr);
-		CFXInfoTable.Inst.ResetFXInfos(a_oJSONStr);
+		CCalcInfoTable.Inst.ResetCalcInfos(a_oStrJSON);
+		CEpisodeInfoTable.Inst.ResetEpisodeInfos(a_oStrJSON);
+		CTutorialInfoTable.Inst.ResetTutorialInfos(a_oStrJSON);
+		CFXInfoTable.Inst.ResetFXInfos(a_oStrJSON);
 	}
 
 	/** 기타 정보를 로드한다 */
@@ -41,19 +41,19 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
 	}
 
 	/** 기타 정보를 저장한다 */
-	public void SaveEtcInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	public void SaveEtcInfos(string a_oStrJSON, bool a_bIsAssert = true)
 	{
-		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
+		CFunc.Assert(!a_bIsAssert || a_oStrJSON != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null)
+		if(a_oStrJSON != null)
 		{
-			this.ResetEtcInfos(a_oJSONStr);
+			this.ResetEtcInfos(a_oStrJSON);
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oJSONStr, false);
+			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oStrJSON, false);
 #else
-			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oJSONStr, true);
+			CFunc.WriteStr(Access.EtcInfoTableSavePath, a_oStrJSON, true);
 #endif // #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 
 #if UNITY_ANDROID && (DEBUG || DEVELOPMENT)
@@ -63,14 +63,14 @@ public partial class CEtcInfoTable : CSingleton<CEtcInfoTable>
 	}
 
 	/** 기타 정보 JSON 문자열을 로드한다 */
-	private string LoadEtcInfosJSONStr(string a_oFilePath)
+	private string LoadEtcInfosJSONStr(string a_oPathFile)
 	{
-		CFunc.Assert(a_oFilePath.ExIsValid());
+		CFunc.Assert(a_oPathFile.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
+		return File.Exists(a_oPathFile) ? CFunc.ReadStr(a_oPathFile, false) : CFunc.ReadStrFromRes(a_oPathFile, false);
 #else
-		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
+		return File.Exists(a_oPathFile) ? CFunc.ReadStr(a_oPathFile, true) : CFunc.ReadStrFromRes(a_oPathFile, false);
 #endif // #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 	}
 	#endregion // 함수

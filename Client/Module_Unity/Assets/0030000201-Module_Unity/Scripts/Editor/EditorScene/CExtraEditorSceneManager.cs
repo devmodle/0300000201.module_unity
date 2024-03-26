@@ -27,10 +27,10 @@ public static partial class CExtraEditorSceneManager
 
 		// 스크립트 순서를 설정한다 {
 		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXShaderSceneManager),
-			KCDefine.B_SCRIPT_O_SCENE_MANAGER);
+			KCDefine.G_SCRIPT_O_MANAGER_SCENE);
 
 		KEditorDefine.G_EXTRA_SCRIPT_ORDER_DICT.TryAdd(typeof(FX.CFXParticleSceneManager),
-			KCDefine.B_SCRIPT_O_SCENE_MANAGER);
+			KCDefine.G_SCRIPT_O_MANAGER_SCENE);
 		// 스크립트 순서를 설정한다 }
 
 		// 클래스 타입을 설정한다 {

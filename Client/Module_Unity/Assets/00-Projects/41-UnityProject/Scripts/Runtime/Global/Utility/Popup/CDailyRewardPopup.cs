@@ -96,7 +96,7 @@ public partial class CDailyRewardPopup : CSubPopup
 	private void OnCloseRewardAcquirePopup(CPopup a_oSender)
 	{
 		Func.SetupNextDailyRewardID(CGameInfoStorage.Inst.PlayCharacterID);
-		CGameInfoStorage.Inst.SaveGameInfo();
+		CGameInfoStorage.Inst.SaveInfoGame();
 
 		this.Close();
 	}

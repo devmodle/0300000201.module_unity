@@ -154,7 +154,7 @@ public static partial class Func
 	/** 문자열 테이블을 설정한다 */
 	public static void SetupStrTable()
 	{
-		Func.SetupStrTable(CCommonAppInfoStorage.Inst.CountryCode, CCommonAppInfoStorage.Inst.SystemLanguage);
+		Func.SetupStrTable(CStorageInfoAppCommon.Inst.CountryCode, CStorageInfoAppCommon.Inst.SystemLanguage);
 	}
 
 	/** 문자열 테이블을 설정한다 */
@@ -528,8 +528,8 @@ public static partial class Func
 	public static void SaveInfoStorages(bool a_bIsSaveCommonInfoStorages = false)
 	{
 		CAppInfoStorage.Inst.SaveAppInfo();
-		CUserInfoStorage.Inst.SaveUserInfo();
-		CGameInfoStorage.Inst.SaveGameInfo();
+		CUserInfoStorage.Inst.SaveInfoUser();
+		CGameInfoStorage.Inst.SaveInfoGame();
 
 		// 공용 저장소 저장 모드가 아닐 경우
 		if(!a_bIsSaveCommonInfoStorages)
@@ -537,9 +537,9 @@ public static partial class Func
 			return;
 		}
 
-		CCommonAppInfoStorage.Inst.SaveAppInfo();
-		CCommonUserInfoStorage.Inst.SaveUserInfo();
-		CCommonGameInfoStorage.Inst.SaveGameInfo();
+		CStorageInfoAppCommon.Inst.SaveAppInfo();
+		CStorageInfoUserCommon.Inst.SaveInfoUser();
+		CStorageInfoGameCommon.Inst.SaveInfoGame();
 	}
 	#endregion // 클래스 함수
 
@@ -759,7 +759,7 @@ public static partial class Func
 #elif (UNITY_IOS || UNITY_ANDROID) && FACEBOOK_MODULE_ENABLE
 		Func.FacebookLogin(Func.OnFirebaseFacebookLogin);
 #else
-		CFirebaseManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, Func.OnFirebaseLogin);
+		CFirebaseManager.Inst.Login(CStorageInfoAppCommon.Inst.AppInfo.DeviceID, Func.OnFirebaseLogin);
 #endif // #if ENABLE_LOGIN_APPLE && UNITY_IOS
 	}
 
@@ -778,15 +778,15 @@ public static partial class Func
 	}
 
 	/** 유저 정보를 로드한다 */
-	public static void LoadUserInfo(System.Action<CFirebaseManager, string, bool> a_oCallback) {
+	public static void LoadInfoUser(System.Action<CFirebaseManager, string, bool> a_oCallback) {
 		CIndicatorManager.Inst.Show();
 		Func.m_oFirebaseCallbackDictC.ExReplaceVal(ECallback.FIREBASE_LOAD_USER_INFO, a_oCallback);
 
 		// 로그인되었을 경우
 		if(CFirebaseManager.Inst.IsLogin) {
-			CFirebaseManager.Inst.LoadDatas(Factory.MakeUserInfoNodes(), Func.OnLoadUserInfo);
+			CFirebaseManager.Inst.LoadDatas(Factory.MakeUserInfoNodes(), Func.OnLoadInfoUser);
 		} else {
-			Func.OnLoadUserInfo(CFirebaseManager.Inst, string.Empty, false);
+			Func.OnLoadInfoUser(CFirebaseManager.Inst, string.Empty, false);
 		}
 	}
 
@@ -817,7 +817,7 @@ public static partial class Func
 	}
 
 	/** 유저 정보를 저장한다 */
-	public static void SaveUserInfo(System.Action<CFirebaseManager, bool> a_oCallback) {
+	public static void SaveInfoUser(System.Action<CFirebaseManager, bool> a_oCallback) {
 		CIndicatorManager.Inst.Show();
 		Func.m_oFirebaseCallbackDictB.ExReplaceVal(ECallback.FIREBASE_SAVE_USER_INFO, a_oCallback);
 
@@ -826,12 +826,12 @@ public static partial class Func
 			var oJSONNode = new SimpleJSON.JSONClass();
 			oJSONNode.Add(KCDefine.B_KEY_JSON_USER_INFO_DATA, CUserInfoStorage.Inst.UserInfo.ExToMsgPackBase64Str());
 			oJSONNode.Add(KCDefine.B_KEY_JSON_GAME_INFO_DATA, CGameInfoStorage.Inst.GameInfo.ExToMsgPackBase64Str());
-			oJSONNode.Add(KCDefine.B_KEY_JSON_COMMON_APP_INFO_DATA, CCommonAppInfoStorage.Inst.AppInfo.ExToMsgPackBase64Str());
-			oJSONNode.Add(KCDefine.B_KEY_JSON_COMMON_USER_INFO_DATA, CCommonUserInfoStorage.Inst.UserInfo.ExToMsgPackBase64Str());
+			oJSONNode.Add(KCDefine.B_KEY_JSON_COMMON_APP_INFO_DATA, CStorageInfoAppCommon.Inst.AppInfo.ExToMsgPackBase64Str());
+			oJSONNode.Add(KCDefine.B_KEY_JSON_COMMON_USER_INFO_DATA, CStorageInfoUserCommon.Inst.UserInfo.ExToMsgPackBase64Str());
 
-			CFirebaseManager.Inst.SaveDatas(Factory.MakeUserInfoNodes(), oJSONNode.ToString(), Func.OnSaveUserInfo);
+			CFirebaseManager.Inst.SaveDatas(Factory.MakeUserInfoNodes(), oJSONNode.ToString(), Func.OnSaveInfoUser);
 		} else {
-			Func.OnSaveUserInfo(CFirebaseManager.Inst, false);
+			Func.OnSaveInfoUser(CFirebaseManager.Inst, false);
 		}
 	}
 
@@ -892,25 +892,25 @@ public static partial class Func
 	}
 
 	/** 유저 정보가 로드되었을 경우 */
-	private static void OnLoadUserInfo(CFirebaseManager a_oSender, string a_oJSONStr, bool a_bIsSuccess) {
+	private static void OnLoadInfoUser(CFirebaseManager a_oSender, string a_oStrJSON, bool a_bIsSuccess) {
 		CIndicatorManager.Inst.Close();
-		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_USER_INFO)?.Invoke(a_oSender, a_oJSONStr, a_bIsSuccess);
+		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_USER_INFO)?.Invoke(a_oSender, a_oStrJSON, a_bIsSuccess);
 	}
 
 	/** 타겟 정보가 로드되었을 경우 */
-	private static void OnLoadTargetInfos(CFirebaseManager a_oSender, string a_oJSONStr, bool a_bIsSuccess) {
+	private static void OnLoadTargetInfos(CFirebaseManager a_oSender, string a_oStrJSON, bool a_bIsSuccess) {
 		CIndicatorManager.Inst.Close();
-		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_TARGET_INFOS)?.Invoke(a_oSender, a_oJSONStr, a_bIsSuccess);
+		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_TARGET_INFOS)?.Invoke(a_oSender, a_oStrJSON, a_bIsSuccess);
 	}
 
 	/** 결제 정보가 로드되었을 경우 */
-	private static void OnLoadPurchaseInfos(CFirebaseManager a_oSender, string a_oJSONStr, bool a_bIsSuccess) {
+	private static void OnLoadPurchaseInfos(CFirebaseManager a_oSender, string a_oStrJSON, bool a_bIsSuccess) {
 		CIndicatorManager.Inst.Close();
-		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_PURCHASE_INFOS)?.Invoke(a_oSender, a_oJSONStr, a_bIsSuccess);
+		Func.m_oFirebaseCallbackDictC.GetValueOrDefault(ECallback.FIREBASE_LOAD_PURCHASE_INFOS)?.Invoke(a_oSender, a_oStrJSON, a_bIsSuccess);
 	}
 
 	/** 유저 정보가 저장되었을 경우 */
-	private static void OnSaveUserInfo(CFirebaseManager a_oSender, bool a_bIsSuccess) {
+	private static void OnSaveInfoUser(CFirebaseManager a_oSender, bool a_bIsSuccess) {
 		CIndicatorManager.Inst.Close();
 		Func.m_oFirebaseCallbackDictB.GetValueOrDefault(ECallback.FIREBASE_SAVE_USER_INFO)?.Invoke(a_oSender, a_bIsSuccess);
 	}
@@ -1028,12 +1028,12 @@ public static partial class Func
 
 #if PURCHASE_MODULE_ENABLE
 	/** 상품을 복원한다 */
-	public static void RestoreProducts(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback)
+	public static void ProductsRestore(System.Action<CPurchaseManager, List<Product>, bool> a_oCallback)
 	{
 		CIndicatorManager.Inst.Show();
 		Func.m_oPurchaseCallbackDictB.ExReplaceVal(ECallback.RESTORE, a_oCallback);
 
-		CPurchaseManager.Inst.RestoreProducts(Func.OnRestoreProducts);
+		CPurchaseManager.Inst.ProductsRestore(Func.OnProductsRestore);
 	}
 
 	/** 상품을 결제한다 */
@@ -1071,31 +1071,31 @@ public static partial class Func
 	}
 
 	/** 상품이 복원되었을 경우 */
-	private static void OnRestoreProducts(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess)
+	private static void OnProductsRestore(CPurchaseManager a_oSender, List<Product> a_oProductList, bool a_bIsSuccess)
 	{
 		CIndicatorManager.Inst.Close();
 		Func.m_oPurchaseCallbackDictB.GetValueOrDefault(ECallback.RESTORE)?.Invoke(a_oSender, a_oProductList, a_bIsSuccess);
 	}
 
 	/** 상품이 결제되었을 경우 */
-	private static void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	private static void OnPurchaseProduct(CPurchaseManager a_oSender, string a_oIDProduct, bool a_bIsSuccess)
 	{
 		// 결제되었을 경우
 		if(a_bIsSuccess)
 		{
-			CPurchaseManager.Inst.ConfirmPurchase(a_oProductID, Func.OnConfirmProduct);
+			CPurchaseManager.Inst.ConfirmPurchase(a_oIDProduct, Func.OnConfirmProduct);
 		}
 		else
 		{
-			Func.OnConfirmProduct(a_oSender, a_oProductID, a_bIsSuccess);
+			Func.OnConfirmProduct(a_oSender, a_oIDProduct, a_bIsSuccess);
 		}
 	}
 
 	/** 상품이 결제되었을 경우 */
-	private static void OnConfirmProduct(CPurchaseManager a_oSender, string a_oProductID, bool a_bIsSuccess)
+	private static void OnConfirmProduct(CPurchaseManager a_oSender, string a_oIDProduct, bool a_bIsSuccess)
 	{
 		CIndicatorManager.Inst.Close();
-		Func.m_oPurchaseCallbackDictA.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oProductID, a_bIsSuccess);
+		Func.m_oPurchaseCallbackDictA.GetValueOrDefault(ECallback.PURCHASE)?.Invoke(a_oSender, a_oIDProduct, a_bIsSuccess);
 	}
 #endif // #if PURCHASE_MODULE_ENABLE
 
@@ -1110,7 +1110,7 @@ public static partial class Func
 #elif (UNITY_IOS || UNITY_ANDROID) && FACEBOOK_MODULE_ENABLE
 		Func.FacebookLogin(Func.OnPlayfabFacebookLogin);
 #else
-		CPlayfabManager.Inst.Login(CCommonAppInfoStorage.Inst.AppInfo.DeviceID, Func.OnPlayfabLogin);
+		CPlayfabManager.Inst.Login(CStorageInfoAppCommon.Inst.AppInfo.DeviceID, Func.OnPlayfabLogin);
 #endif // #if ENABLE_LOGIN_APPLE && UNITY_IOS
 	}
 
@@ -1450,14 +1450,14 @@ public static partial class Func
 		if(a_bIsSuccess)
 		{
 #if AB_TEST_ENABLE
-			oVerInfos = a_oJSONNodeInfoDict.ExToJSONNode()[(CCommonUserInfoStorage.Inst.UserInfo.UserType == EUserType.B) ? $"{EUserType.B}" : $"{EUserType.A}"];
+			oVerInfos = a_oJSONNodeInfoDict.ExToJSONNode()[(CStorageInfoUserCommon.Inst.UserInfo.UserType == EUserType.B) ? $"{EUserType.B}" : $"{EUserType.A}"];
 #else
 			oVerInfos = a_oJSONNodeInfoDict.ExToJSONNode()[KCDefine.B_KEY_COMMON];
 #endif // #if AB_TEST_ENABLE
 
 			for(int i = 0; i < oVerInfos.Count; ++i)
 			{
-				var oVer = CAppInfoStorage.Inst.AppInfo.m_oTableSysVerDict.ExGetVal(oVerInfos[i][KCDefine.U_KEY_NAME], KCDefine.B_VER_INVALID);
+				var oVer = CAppInfoStorage.Inst.AppInfo.m_oTableSysVerDict.ExGetVal(oVerInfos[i][KCDefine.U_KEY_NAME], KCDefine.G_VER_INVALID);
 
 				string oFlags01Key = string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_1_INT);
 				string oFlags02Key = string.Format(KCDefine.U_KEY_FMT_FLAGS, KCDefine.B_VAL_2_INT);

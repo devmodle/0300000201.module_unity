@@ -30,14 +30,14 @@ public partial class CAppInfo : CBaseInfo
 #if ADS_MODULE_ENABLE
 	[IgnoreMember]
 	public int RewardAdsWatchTimes {
-		get { return int.Parse(m_oStrDict.ExGetVal(KEY_REWARD_ADS_WATCH_TIMES, KCDefine.B_STR_0_INT)); }
-		set { m_oStrDict.ExReplaceVal(KEY_REWARD_ADS_WATCH_TIMES, $"{value}"); }
+		get { return int.Parse(m_oDictStr.ExGetVal(KEY_REWARD_ADS_WATCH_TIMES, KCDefine.B_STR_0_INT)); }
+		set { m_oDictStr.ExReplaceVal(KEY_REWARD_ADS_WATCH_TIMES, $"{value}"); }
 	}
 
 	[IgnoreMember]
 	public int FullscreenAdsWatchTimes {
-		get { return int.Parse(m_oStrDict.ExGetVal(KEY_FULLSCREEN_ADS_WATCH_TIMES, KCDefine.B_STR_0_INT)); }
-		set { m_oStrDict.ExReplaceVal(KEY_FULLSCREEN_ADS_WATCH_TIMES, $"{value}"); }
+		get { return int.Parse(m_oDictStr.ExGetVal(KEY_FULLSCREEN_ADS_WATCH_TIMES, KCDefine.B_STR_0_INT)); }
+		set { m_oDictStr.ExReplaceVal(KEY_FULLSCREEN_ADS_WATCH_TIMES, $"{value}"); }
 	}
 #endif // #if ADS_MODULE_ENABLE
 	#endregion // 프로퍼티
@@ -121,12 +121,12 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage>
 	}
 
 	/** 앱 정보를 로드한다 */
-	public CAppInfo LoadAppInfo(string a_oFilePath)
+	public CAppInfo LoadAppInfo(string a_oPathFile)
 	{
 		// 파일이 존재 할 경우
-		if(File.Exists(a_oFilePath))
+		if(File.Exists(a_oPathFile))
 		{
-			this.AppInfo = CFunc.ReadMsgPackObj<CAppInfo>(a_oFilePath, true);
+			this.AppInfo = CFunc.ReadMsgPackObj<CAppInfo>(a_oPathFile, true);
 			CFunc.Assert(this.AppInfo != null);
 		}
 
@@ -140,9 +140,9 @@ public partial class CAppInfoStorage : CSingleton<CAppInfoStorage>
 	}
 
 	/** 앱 정보를 저장한다 */
-	public void SaveAppInfo(string a_oFilePath)
+	public void SaveAppInfo(string a_oPathFile)
 	{
-		CFunc.WriteMsgPackObj(a_oFilePath, this.AppInfo, true);
+		CFunc.WriteMsgPackObj(a_oPathFile, this.AppInfo, true);
 	}
 	#endregion // 함수
 

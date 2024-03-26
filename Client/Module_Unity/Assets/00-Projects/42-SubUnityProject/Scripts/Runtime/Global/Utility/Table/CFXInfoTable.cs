@@ -66,7 +66,7 @@ public struct STFXInfo
 	public void SaveFXInfo(SimpleJSON.JSONNode a_oOutFXInfo)
 	{
 		m_stCommonInfo.SaveCommonInfo(a_oOutFXInfo);
-		m_stTimeInfo.SaveTimeInfo(a_oOutFXInfo);
+		m_stTimeInfo.TimeSaveInfo(a_oOutFXInfo);
 
 		a_oOutFXInfo[KCDefine.U_KEY_MAX_APPLY_TIMES] = $"{m_nMaxApplyTimes}";
 
@@ -104,10 +104,10 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable>
 	}
 
 	/** 효과 정보를 리셋한다 */
-	public virtual void ResetFXInfos(string a_oJSONStr)
+	public virtual void ResetFXInfos(string a_oStrJSON)
 	{
 		this.ResetFXInfos();
-		this.DoLoadFXInfos(a_oJSONStr);
+		this.DoLoadFXInfos(a_oStrJSON);
 	}
 
 	/** 효과 정보를 반환한다 */
@@ -134,14 +134,14 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable>
 	}
 
 	/** 효과 정보를 저장한다 */
-	public void SaveFXInfos(string a_oJSONStr, bool a_bIsAssert = true)
+	public void SaveFXInfos(string a_oStrJSON, bool a_bIsAssert = true)
 	{
-		CFunc.Assert(!a_bIsAssert || a_oJSONStr != null);
+		CFunc.Assert(!a_bIsAssert || a_oStrJSON != null);
 
 		// JSON 문자열이 존재 할 경우
-		if(a_oJSONStr != null)
+		if(a_oStrJSON != null)
 		{
-			this.ResetFXInfos(a_oJSONStr);
+			this.ResetFXInfos(a_oStrJSON);
 		}
 	}
 
@@ -153,29 +153,29 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable>
 	}
 
 	/** 효과 정보를 로드한다 */
-	private Dictionary<EFXKinds, STFXInfo> LoadFXInfos(string a_oFilePath)
+	private Dictionary<EFXKinds, STFXInfo> LoadFXInfos(string a_oPathFile)
 	{
-		CFunc.Assert(a_oFilePath.ExIsValid());
-		return this.DoLoadFXInfos(this.LoadFXInfosJSONStr(a_oFilePath));
+		CFunc.Assert(a_oPathFile.ExIsValid());
+		return this.DoLoadFXInfos(this.LoadFXInfosJSONStr(a_oPathFile));
 	}
 
 	/** 효과 정보 JSON 문자열을 로드한다 */
-	private string LoadFXInfosJSONStr(string a_oFilePath)
+	private string LoadFXInfosJSONStr(string a_oPathFile)
 	{
-		CFunc.Assert(a_oFilePath.ExIsValid());
+		CFunc.Assert(a_oPathFile.ExIsValid());
 
 #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
-		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, false) : CFunc.ReadStrFromRes(a_oFilePath, false);
+		return File.Exists(a_oPathFile) ? CFunc.ReadStr(a_oPathFile, false) : CFunc.ReadStrFromRes(a_oPathFile, false);
 #else
-		return File.Exists(a_oFilePath) ? CFunc.ReadStr(a_oFilePath, true) : CFunc.ReadStrFromRes(a_oFilePath, false);
+		return File.Exists(a_oPathFile) ? CFunc.ReadStr(a_oPathFile, true) : CFunc.ReadStrFromRes(a_oPathFile, false);
 #endif // #if(UNITY_EDITOR || UNITY_STANDALONE) && (DEBUG || DEVELOPMENT_BUILD)
 	}
 
 	/** 효과 정보를 로드한다 */
-	private Dictionary<EFXKinds, STFXInfo> DoLoadFXInfos(string a_oJSONStr)
+	private Dictionary<EFXKinds, STFXInfo> DoLoadFXInfos(string a_oStrJSON)
 	{
-		CFunc.Assert(a_oJSONStr.ExIsValid());
-		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oJSONStr), out SimpleJSON.JSONNode oCommonInfos);
+		CFunc.Assert(a_oStrJSON.ExIsValid());
+		this.SetupJSONNodes(SimpleJSON.JSONNode.Parse(a_oStrJSON), out SimpleJSON.JSONNode oCommonInfos);
 
 		for(int i = 0; i < oCommonInfos.Count; ++i)
 		{

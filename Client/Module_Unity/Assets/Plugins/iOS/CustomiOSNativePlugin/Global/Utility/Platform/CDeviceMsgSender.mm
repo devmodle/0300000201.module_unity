@@ -28,8 +28,8 @@ static CDeviceMsgSender *g_pInst = nil;
 
 #pragma mark - 인스턴스 메서드
 /** 디바이스 식별자 반환 메세지를 전송한다 */
-- (void)sendGetDeviceIDMsg:(NSString *)a_oDeviceID {
-	[self send:@(G_CMD_GET_DEVICE_ID) withDeviceMsg:a_oDeviceID];
+- (void)sendGetDeviceIDMsg:(NSString *)a_oIDDevice {
+	[self send:@(G_CMD_GET_DEVICE_ID) withDeviceMsg:a_oIDDevice];
 }
 
 /** 국가 코드 반환 메세지를 전송한다 */
