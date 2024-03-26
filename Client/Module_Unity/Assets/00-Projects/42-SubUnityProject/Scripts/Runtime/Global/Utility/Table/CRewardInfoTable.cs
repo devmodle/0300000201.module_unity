@@ -228,7 +228,7 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable>
 	/** 보상 정보 값을 생성한다 */
 	public Dictionary<string, List<List<string>>> MakeRewardInfoVals()
 	{
-		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 		var oRewardInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
 		try
@@ -240,7 +240,7 @@ public partial class CRewardInfoTable : CSingleton<CRewardInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oCommonKeyInfoList);
 		}
 
 		return oRewardInfoValDictContainer;

@@ -96,7 +96,7 @@ namespace NSEngine
 				if(m_fUpdateSkipTime.ExIsGreatEquals(KCDefine.U_DELAY_DEF))
 				{
 					m_fUpdateSkipTime = KCDefine.B_VAL_0_REAL;
-					var oAbilityKindsInfoList = CCollectionPoolManager.Inst.SpawnList<(EAbilityKinds, EAbilityKinds)>();
+					var oAbilityKindsInfoList = CManagerPoolCollection.Inst.SpawnList<(EAbilityKinds, EAbilityKinds)>();
 
 					try
 					{
@@ -115,7 +115,7 @@ namespace NSEngine
 					}
 					finally
 					{
-						CCollectionPoolManager.Inst.DespawnList(oAbilityKindsInfoList);
+						CManagerPoolCollection.Inst.DespawnList(oAbilityKindsInfoList);
 					}
 				}
 
@@ -126,7 +126,7 @@ namespace NSEngine
 		/** 공격을 처리한다 */
 		public virtual void Attack(CEObj a_oTargetObj, CESkill a_oSkill)
 		{
-			var oAbilityValDict = CCollectionPoolManager.Inst.SpawnDict<EAbilityKinds, decimal>();
+			var oAbilityValDict = CManagerPoolCollection.Inst.SpawnDict<EAbilityKinds, decimal>();
 
 			try
 			{
@@ -156,7 +156,7 @@ namespace NSEngine
 			}
 			finally
 			{
-				CCollectionPoolManager.Inst.DespawnDict(oAbilityValDict);
+				CManagerPoolCollection.Inst.DespawnDict(oAbilityValDict);
 			}
 		}
 
@@ -174,7 +174,7 @@ namespace NSEngine
 			// 스킬 적용이 가능 할 경우
 			if(this.IsEnableSkillState() && this.IsEnableApplySkill(a_stSkillInfo, a_oSkillTargetInfo))
 			{
-				var oTargetList = CCollectionPoolManager.Inst.SpawnList<CEObjComponent>();
+				var oTargetList = CManagerPoolCollection.Inst.SpawnList<CEObjComponent>();
 
 				try
 				{
@@ -195,7 +195,7 @@ namespace NSEngine
 				}
 				finally
 				{
-					CCollectionPoolManager.Inst.DespawnList(oTargetList);
+					CManagerPoolCollection.Inst.DespawnList(oTargetList);
 				}
 			}
 		}
@@ -203,7 +203,7 @@ namespace NSEngine
 		/** 효과를 적용한다 */
 		public virtual void ApplyFX(STFXInfo a_stFXInfo)
 		{
-			var oTargetList = CCollectionPoolManager.Inst.SpawnList<CEObjComponent>();
+			var oTargetList = CManagerPoolCollection.Inst.SpawnList<CEObjComponent>();
 
 			try
 			{
@@ -218,7 +218,7 @@ namespace NSEngine
 			}
 			finally
 			{
-				CCollectionPoolManager.Inst.DespawnList(oTargetList);
+				CManagerPoolCollection.Inst.DespawnList(oTargetList);
 			}
 		}
 
@@ -299,7 +299,7 @@ namespace NSEngine
 				return true;
 			}
 
-			var oAbilityValDict = CCollectionPoolManager.Inst.SpawnDict<EAbilityKinds, decimal>();
+			var oAbilityValDict = CManagerPoolCollection.Inst.SpawnDict<EAbilityKinds, decimal>();
 
 			try
 			{
@@ -310,7 +310,7 @@ namespace NSEngine
 			}
 			finally
 			{
-				CCollectionPoolManager.Inst.DespawnDict(oAbilityValDict);
+				CManagerPoolCollection.Inst.DespawnDict(oAbilityValDict);
 			}
 		}
 		#endregion // 함수

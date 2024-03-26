@@ -70,8 +70,8 @@ public static partial class Func
 
 		do
 		{
-			var oIdxVDictContainer = CCollectionPoolManager.Inst.SpawnDict<int, List<Vector3Int>>();
-			var oIdxHDictContainer = CCollectionPoolManager.Inst.SpawnDict<int, List<Vector3Int>>();
+			var oIdxVDictContainer = CManagerPoolCollection.Inst.SpawnDict<int, List<Vector3Int>>();
+			var oIdxHDictContainer = CManagerPoolCollection.Inst.SpawnDict<int, List<Vector3Int>>();
 
 			try
 			{
@@ -118,8 +118,8 @@ public static partial class Func
 			}
 			finally
 			{
-				CCollectionPoolManager.Inst.DespawnDict(oIdxVDictContainer);
-				CCollectionPoolManager.Inst.DespawnDict(oIdxHDictContainer);
+				CManagerPoolCollection.Inst.DespawnDict(oIdxVDictContainer);
+				CManagerPoolCollection.Inst.DespawnDict(oIdxHDictContainer);
 			}
 		} while(nTryTimes++ < KDefine.LES_MAX_TIMES_TRY_SETUP_CELL_INFOS && !Func.IsSetupEditorCellInfos(a_oLevelInfo, a_oCreateInfo));
 

@@ -204,7 +204,7 @@ public partial class CResultPopup : CSubPopup
 		m_oBtnDict[EKey.ADS_BTN]?.gameObject.ExRemoveComponent<CRewardAdsTouchInteractable>();
 #endif // #if ADS_MODULE_ENABLE
 
-		var oRewardTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
+		var oRewardTargetInfoDict = CManagerPoolCollection.Inst.SpawnDict<ulong, STTargetInfo>();
 
 		try
 		{
@@ -236,7 +236,7 @@ public partial class CResultPopup : CSubPopup
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnDict(oRewardTargetInfoDict);
+			CManagerPoolCollection.Inst.DespawnDict(oRewardTargetInfoDict);
 		}
 	}
 	#endregion // 함수

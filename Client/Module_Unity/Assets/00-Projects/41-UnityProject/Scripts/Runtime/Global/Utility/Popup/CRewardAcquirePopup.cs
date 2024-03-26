@@ -122,7 +122,7 @@ public partial class CRewardAcquirePopup : CSubPopup
 #endif // #if ADS_MODULE_ENABLE
 
 		this.IsWatchRewardAds = a_bIsWatchRewardAds;
-		var oRewardTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
+		var oRewardTargetInfoDict = CManagerPoolCollection.Inst.SpawnDict<ulong, STTargetInfo>();
 
 		try
 		{
@@ -137,7 +137,7 @@ public partial class CRewardAcquirePopup : CSubPopup
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnDict(oRewardTargetInfoDict);
+			CManagerPoolCollection.Inst.DespawnDict(oRewardTargetInfoDict);
 		}
 	}
 	#endregion // 함수

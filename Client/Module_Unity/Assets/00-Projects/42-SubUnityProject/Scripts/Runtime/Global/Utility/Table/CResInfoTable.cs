@@ -216,7 +216,7 @@ public partial class CResInfoTable : CSingleton<CResInfoTable>
 	/** 리소스 정보 값을 생성한다 */
 	public Dictionary<string, List<List<string>>> MakeResInfoVals()
 	{
-		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 		var oResInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
 		try
@@ -228,7 +228,7 @@ public partial class CResInfoTable : CSingleton<CResInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oCommonKeyInfoList);
 		}
 
 		return oResInfoValDictContainer;

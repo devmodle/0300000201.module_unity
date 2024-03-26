@@ -17,7 +17,7 @@ public static partial class Access
 	/** 에디터 스프라이트를 반환한다 */
 	public static Sprite GetEditorSprite(EObjKinds a_eObjKinds, string a_oPrefix, bool a_bIsIgnoreEditor = false, EKindsGroupType a_eGroupType = EKindsGroupType.SUB_KINDS_TYPE)
 	{
-		var oImgPathDict = CCollectionPoolManager.Inst.SpawnDict<EObjKinds, string>();
+		var oImgPathDict = CManagerPoolCollection.Inst.SpawnDict<EObjKinds, string>();
 
 		try
 		{
@@ -35,7 +35,7 @@ public static partial class Access
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnDict(oImgPathDict);
+			CManagerPoolCollection.Inst.DespawnDict(oImgPathDict);
 		}
 	}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

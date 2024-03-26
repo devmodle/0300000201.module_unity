@@ -401,10 +401,10 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable>
 	/** 어빌리티 정보 값을 생성한다 */
 	public Dictionary<string, List<List<string>>> MakeAbilityInfoVals()
 	{
-		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
-		var oBuyTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
-		var oSaleTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
-		var oEnhanceTradeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
+		var oBuyTradeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
+		var oSaleTradeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
+		var oEnhanceTradeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 
 		var oAbilityInfoValDictContainer = new Dictionary<string, List<List<string>>>();
 
@@ -420,10 +420,10 @@ public partial class CAbilityInfoTable : CSingleton<CAbilityInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
-			CCollectionPoolManager.Inst.DespawnList(oBuyTradeKeyInfoList);
-			CCollectionPoolManager.Inst.DespawnList(oSaleTradeKeyInfoList);
-			CCollectionPoolManager.Inst.DespawnList(oEnhanceTradeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oCommonKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oBuyTradeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oSaleTradeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oEnhanceTradeKeyInfoList);
 		}
 
 		return oAbilityInfoValDictContainer;

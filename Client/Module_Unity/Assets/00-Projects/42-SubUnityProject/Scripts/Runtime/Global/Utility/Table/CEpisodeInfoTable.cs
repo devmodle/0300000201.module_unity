@@ -353,9 +353,9 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable>
 	/** 에피소드 정보 값을 설정한다 */
 	public void MakeEpisodeInfoVals(SimpleJSON.JSONNode a_oEpisodeInfos, Dictionary<string, List<List<string>>> a_oOutEpisodeInfoValDictContainer)
 	{
-		var oLevelEpisodeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
-		var oStageEpisodeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
-		var oChapterEpisodeKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oLevelEpisodeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
+		var oStageEpisodeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
+		var oChapterEpisodeKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 
 		try
 		{
@@ -368,9 +368,9 @@ public partial class CEpisodeInfoTable : CSingleton<CEpisodeInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oLevelEpisodeKeyInfoList);
-			CCollectionPoolManager.Inst.DespawnList(oStageEpisodeKeyInfoList);
-			CCollectionPoolManager.Inst.DespawnList(oChapterEpisodeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oLevelEpisodeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oStageEpisodeKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oChapterEpisodeKeyInfoList);
 		}
 	}
 

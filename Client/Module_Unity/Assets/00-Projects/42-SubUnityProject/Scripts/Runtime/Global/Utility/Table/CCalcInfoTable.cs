@@ -193,7 +193,7 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable>
 	/** 수식 정보 값을 생성한다 */
 	public void MakeCalcInfoVals(SimpleJSON.JSONNode a_oCalcInfos, Dictionary<string, List<List<string>>> a_oOutCalcInfoValDictContainer)
 	{
-		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 
 		try
 		{
@@ -204,7 +204,7 @@ public partial class CCalcInfoTable : CSingleton<CCalcInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oCommonKeyInfoList);
 		}
 	}
 

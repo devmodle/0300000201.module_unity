@@ -13,7 +13,7 @@ namespace NSEngine
 		/** 매개 변수 */
 		public struct STParams
 		{
-			public string m_oGameObjsPoolKey;
+			public string m_oKeyPoolGameObjs;
 			public CEngine m_oEngine;
 		}
 
@@ -44,11 +44,11 @@ namespace NSEngine
 	{
 		#region 클래스 함수
 		/** 매개 변수를 생성한다 */
-		public static STParams MakeParams(CEngine a_oEngine, string a_oGameObjsPoolKey)
+		public static STParams MakeParams(CEngine a_oEngine, string a_oKeyPoolGameObjs)
 		{
 			return new STParams()
 			{
-				m_oGameObjsPoolKey = a_oGameObjsPoolKey,
+				m_oKeyPoolGameObjs = a_oKeyPoolGameObjs,
 				m_oEngine = a_oEngine
 			};
 		}

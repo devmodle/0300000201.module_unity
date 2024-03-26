@@ -214,7 +214,7 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable>
 	/** 효과 정보 값을 생성한다 */
 	public void MakeFXInfoVals(SimpleJSON.JSONNode a_oFXInfos, Dictionary<string, List<List<string>>> a_oOutFXInfoValDictContainer)
 	{
-		var oCommonKeyInfoList = CCollectionPoolManager.Inst.SpawnList<STKeyInfo>();
+		var oCommonKeyInfoList = CManagerPoolCollection.Inst.SpawnList<STKeyInfo>();
 
 		try
 		{
@@ -225,7 +225,7 @@ public partial class CFXInfoTable : CSingleton<CFXInfoTable>
 		}
 		finally
 		{
-			CCollectionPoolManager.Inst.DespawnList(oCommonKeyInfoList);
+			CManagerPoolCollection.Inst.DespawnList(oCommonKeyInfoList);
 		}
 	}
 

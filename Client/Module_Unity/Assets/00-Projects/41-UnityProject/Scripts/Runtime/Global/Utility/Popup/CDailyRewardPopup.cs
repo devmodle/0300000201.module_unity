@@ -106,7 +106,7 @@ public partial class CDailyRewardPopup : CSubPopup
 	{
 		Func.ShowRewardAcquirePopup(this.transform.parent.gameObject, (a_oSender) =>
 		{
-			var oTargetInfoDict = CCollectionPoolManager.Inst.SpawnDict<ulong, STTargetInfo>();
+			var oTargetInfoDict = CManagerPoolCollection.Inst.SpawnDict<ulong, STTargetInfo>();
 
 			try
 			{
@@ -124,7 +124,7 @@ public partial class CDailyRewardPopup : CSubPopup
 			}
 			finally
 			{
-				CCollectionPoolManager.Inst.DespawnDict(oTargetInfoDict);
+				CManagerPoolCollection.Inst.DespawnDict(oTargetInfoDict);
 			}
 		}, null, this.OnCloseRewardAcquirePopup);
 	}
