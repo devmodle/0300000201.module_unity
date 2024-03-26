@@ -32,7 +32,7 @@ namespace MenuScene
 			switch(a_eEvent)
 			{
 				case EEventNavStack.BACK_KEY_DOWN:
-					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
+					Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_QUIT_P_MSG), this.OnReceiveQuitPopupResult);
 					break;
 			}
 #endif // #if EXTRA_SCRIPT_MODULE_ENABLE && UTILITY_SCRIPT_TEMPLATES_MODULE_ENABLE

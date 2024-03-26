@@ -765,9 +765,9 @@ public static partial class Func
 	public static void OnLogin(CFirebaseManager a_oSender, bool a_bIsSuccess, System.Action<CAlertPopup, bool> a_oCallback) {
 		// 로그아웃되었을 경우
 		if(a_bIsSuccess) {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOGIN_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOGIN_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		} else {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOGIN_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOGIN_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 
@@ -775,9 +775,9 @@ public static partial class Func
 	public static void OnLogout(CFirebaseManager a_oSender, bool a_bIsSuccess, System.Action<CAlertPopup, bool> a_oCallback) {
 		// 로그아웃되었을 경우
 		if(a_bIsSuccess) {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOGOUT_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOGOUT_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		} else {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOGOUT_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOGOUT_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 
@@ -785,9 +785,9 @@ public static partial class Func
 	public static void OnLoadUserInfo(CFirebaseManager a_oSender, string a_oJSONStr, bool a_bIsSuccess, System.Action<CAlertPopup, bool> a_oCallback) {
 		// 로드되었을 경우
 		if(a_bIsSuccess) {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOAD_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOAD_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		} else {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_LOAD_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_LOAD_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 
@@ -795,9 +795,9 @@ public static partial class Func
 	public static void OnSaveUserInfo(CFirebaseManager a_oSender, bool a_bIsSuccess, System.Action<CAlertPopup, bool> a_oCallback) {
 		// 저장되었을 경우
 		if(a_bIsSuccess) {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_SAVE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_SAVE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		} else {
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_SAVE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_SAVE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 #endif // #if FIREBASE_MODULE_ENABLE
@@ -809,11 +809,11 @@ public static partial class Func
 		// 복원되었을 경우
 		if(a_bIsSuccess)
 		{
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_RESTORE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_RESTORE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 		else
 		{
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_RESTORE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_RESTORE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 
@@ -823,11 +823,11 @@ public static partial class Func
 		// 결제되었을 경우
 		if(a_bIsSuccess)
 		{
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_PURCHASE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_PURCHASE_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 		else
 		{
-			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.ST_KEY_C_ON_PURCHASE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
+			Func.ShowAlertPopup(CStrTable.Inst.GetStr(KCDefine.G_ST_KEY_C_ON_PURCHASE_FAIL_MSG), a_oCallback, a_bIsEnableCancelBtn: false);
 		}
 	}
 

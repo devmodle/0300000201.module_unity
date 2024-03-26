@@ -121,7 +121,7 @@ namespace BuildReportTool.Window.Screen
 
 			GUILayout.Space(10);
 			GUILayout.Label("Project building took:", bigLabelStyle);
-			GUILayout.Label("How long the project building took. This is the time between <b>OnPreprocessBuild</b> and <b>OnPostprocessBuild</b>.", helpDescriptionStyle);
+			GUILayout.Label("How long the project building took. This is the time between <b>OnPreprocessBuild</b> and <b>OnBuildProcessPost</b>.", helpDescriptionStyle);
 			GUILayout.Label(buildReportToDisplay.BuildDurationTime.ToString(), bigValueStyle);
 
 			GUILayout.Space(10);
