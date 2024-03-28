@@ -1,9 +1,9 @@
 import os
 import sys
 
-oProjName = sys.argv[1]
-oBranchName = sys.argv[2]
+oNameProj = sys.argv[1]
+oNameBranch = sys.argv[2]
 
-os.system(f"python UpdaterModule.py \"{oProjName}\"")
-os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git merge {oBranchName}\"")
-os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git push\"")
+os.system(f"python UpdaterModule.py \"{oNameProj}\"")
+os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git merge {oNameBranch}\"")
+os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git push\"")

@@ -1,40 +1,40 @@
 import os
 import sys
 
-oProjName = sys.argv[1]
-oTagName = sys.argv[2]
-oReplaceTagName = sys.argv[3]
+oNameProj = sys.argv[1]
+oNameTag = sys.argv[2]
+oNameTagReplace = sys.argv[3]
 
-oCurPath = os.getcwd()
-os.system(f"python UpdaterModule.py \"{oProjName}\"")
+oPathCur = os.getcwd()
+os.system(f"python UpdaterModule.py \"{oNameProj}\"")
 
-oCmdInfos = [
+oInfosCmd = [
 	{
-		"Cmd": f"git tag -d \"{oTagName}\"",
-		"SubmoduleCmd": f"python ExecuterCmdModule.py \"{oProjName}\" \"git tag -d {oTagName}\""
+		"Cmd": f"git tag -d \"{oNameTag}\"",
+		"CmdSubmodule": f"python ExecuterCmdModule.py \"{oNameProj}\" \"git tag -d {oNameTag}\""
 	},
 
 	{
-		"Cmd": f"git push origin --delete \"{oTagName}\"",
-		"SubmoduleCmd": f"python ExecuterCmdModule.py \"{oProjName}\" \"git push origin --delete {oTagName}\""
+		"Cmd": f"git push origin --delete \"{oNameTag}\"",
+		"CmdSubmodule": f"python ExecuterCmdModule.py \"{oNameProj}\" \"git push origin --delete {oNameTag}\""
 	},
 
 	{
-		"Cmd": f"git tag \"{oReplaceTagName}\"",
-		"SubmoduleCmd": f"python ExecuterCmdModule.py \"{oProjName}\" \"git tag {oReplaceTagName}\""
+		"Cmd": f"git tag \"{oNameTagReplace}\"",
+		"CmdSubmodule": f"python ExecuterCmdModule.py \"{oNameProj}\" \"git tag {oNameTagReplace}\""
 	},
 
 	{
 		"Cmd": f"git push origin --tags",
-		"SubmoduleCmd": f"python ExecuterCmdModule.py \"{oProjName}\" \"git push origin --tags\""
+		"CmdSubmodule": f"python ExecuterCmdModule.py \"{oNameProj}\" \"git push origin --tags\""
 	},
 ]
 
-for oCmdInfo in oCmdInfos:
-	os.chdir(f"{oCurPath}/../..")
+for oInfoCmd in oInfosCmd:
+	os.chdir(f"{oPathCur}/../..")
 
 	try:
-		os.system(oCmdInfo["Cmd"])
+		os.system(oInfoCmd["Cmd"])
 	finally:
-		os.chdir(oCurPath)
-		os.system(oCmdInfo["SubmoduleCmd"])
+		os.chdir(oPathCur)
+		os.system(oInfoCmd["CmdSubmodule"])

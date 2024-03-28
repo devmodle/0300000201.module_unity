@@ -2,22 +2,22 @@ import os
 import sys
 import platform
 
-oProjName = sys.argv[1]
-oCommitMsg = sys.argv[2]
-oBranchName = sys.argv[3]
+oNameProj = sys.argv[1]
+oMsgCommit = sys.argv[2]
+oNameBranch = sys.argv[3]
 
-os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git add .\"")
-oCommitMsg = f"\"{oCommitMsg}\"" if "WINDOWS" in platform.system().upper() else oCommitMsg
+os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git add .\"")
+oMsgCommit = f"\"{oMsgCommit}\"" if "WINDOWS" in platform.system().upper() else oMsgCommit
 
 # 윈도우즈 플랫폼 일 경우
 if "WINDOWS" in platform.system().upper():
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git commit -m \"{oCommitMsg}\"\"")
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git commit -m \"{oMsgCommit}\"\"")
 else:
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git commit -m \'{oCommitMsg}\'\"")
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git commit -m \'{oMsgCommit}\'\"")
 
 # 브랜치 이름이 유효 할 경우
-if oBranchName:
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git push origin -u {oBranchName}\"")
+if oNameBranch:
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git push origin -u {oNameBranch}\"")
 else:
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git push\"")
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git push\"")
 	

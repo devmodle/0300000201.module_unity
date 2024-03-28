@@ -2,144 +2,144 @@ import os
 import sys
 import platform
 
-oProjName = sys.argv[1]
+oNameProj = sys.argv[1]
 
-oSubmoduleInfos = [
+oInfosSubmodule = [
 	{
-		"Name": ".Module.UnityResearch",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Research",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityResearchDefine",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Research.Define",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityResearchUtility",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Research.Utility",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityResearchImporter",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Research.Importer",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommon",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonDefine",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Define",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAccess",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Access",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFactory",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Factory",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonExtension",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Extension",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFunction",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Function",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonUtility",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Utility",
+		"Path": f"{oNameProj}/Packages"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonExternals",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Externals",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAds",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Ads",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFlurry",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Flurry",
+		"Path": f"{oNameProj}/Packages"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonFacebook",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Facebook",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFirebase",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Firebase",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAppsFlyer",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.AppsFlyer",
+		"Path": f"{oNameProj}/Packages"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonGameCenter",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.GameCenter",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonPurchase",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Purchase",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonNotification",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Notification",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonPlayfab",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Playfab",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": ".Module.UnityCommonImporter",
-		"Path": f"{oProjName}/Packages"
+		"Name": ".Module.Unity.Importer",
+		"Path": f"{oNameProj}/Packages"
 	},
 
 	{
-		"Name": "NativePlugins",
-		"Path": oProjName
+		"Name": ".Module.Unity.PluginsNative",
+		"Path": f"{oNameProj}/Modules"
 	},
 
 	{
-		"Name": "UnityPackages",
-		"Path": oProjName
+		"Name": ".Module.Unity.Packages",
+		"Path": f"{oNameProj}/Modules"
 	}
 ]
 
 # 경로를 탐색한다
-def FindPath(a_oBasePath):
+def FindPath(a_oPathBase):
 	for i in range(0, 10):
 		# 디렉토리가 존재 할 경우
-		if os.path.exists(a_oBasePath):
-			return a_oBasePath
+		if os.path.exists(a_oPathBase):
+			return a_oPathBase
 
-		a_oBasePath = f"../{a_oBasePath}"
+		a_oPathBase = f"../{a_oPathBase}"
 		
-	return a_oBasePath
+	return a_oPathBase
 
-for oSubmoduleInfo in oSubmoduleInfos:
-	oPath = FindPath(f"{oSubmoduleInfo['Path']}/{oSubmoduleInfo['Name']}")
-	oModulePath = FindPath(f".git/modules/Client/{oSubmoduleInfo['Path']}/{oSubmoduleInfo['Name']}")
+for oInfoSubmodule in oInfosSubmodule:
+	oPath = FindPath(f"{oInfoSubmodule['Path']}/{oInfoSubmodule['Name']}")
+	oModulePath = FindPath(f".git/modules/Client/{oInfoSubmodule['Path']}/{oInfoSubmodule['Name']}")
 
 	# 서브 모듈이 존재 할 경우
 	if os.path.exists(oPath):
@@ -150,6 +150,7 @@ for oSubmoduleInfo in oSubmoduleInfos:
 	if "WINDOWS" in platform.system().upper():
 		os.system(f"rmdir /s /q \"{oPath}\"")
 		os.system(f"rmdir /s /q \"{oModulePath}\"")
+
 	else:
 		os.system(f"rm -rf \"{oPath}\"")
 		os.system(f"rm -rf \"{oModulePath}\"")

@@ -1,173 +1,173 @@
 import os
 import sys
 
-oProjName = sys.argv[1]
+oNameProj = sys.argv[1]
 
-oSubmoduleInfos = [
+oInfosSubmodule = [
 	{
-		"Name": ".Module.UnityResearch",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Research",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/lkstudio.dante.common/0300000001.module_unityresearch.git"
 	},
 
 	{
-		"Name": ".Module.UnityResearchDefine",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Research.Define",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/lkstudio.dante.common/0300000001.module_unityresearchdefine.git"
 	},
 
 	{
-		"Name": ".Module.UnityResearchUtility",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Research.Utility",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/lkstudio.dante.common/0300000001.module_unityresearchutility.git"
 	},
 
 	{
-		"Name": ".Module.UnityResearchImporter",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Research.Importer",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/lkstudio.dante.common/0300000001.module_unityresearchimporter.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommon",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommon.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonDefine",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Define",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommondefine.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAccess",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Access",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonaccess.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFactory",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Factory",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonfactory.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonExtension",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Extension",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonextension.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFunction",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Function",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonfunction.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonUtility",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Utility",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonutility.git"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonExternals",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Externals",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonexternals.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAds",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Ads",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonads.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFlurry",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Flurry",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonflurry.git"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonFacebook",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Facebook",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonfacebook.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonFirebase",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Firebase",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonfirebase.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonAppsFlyer",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.AppsFlyer",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonappsflyer.git"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonGameCenter",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.GameCenter",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommongamecenter.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonPurchase",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Purchase",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonpurchase.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonNotification",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Notification",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonnotification.git"
 	},
 
 	{
-		"Name": ".Module.UnityCommonPlayfab",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Playfab",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonplayfab.git"
 	},
 	
 	{
-		"Name": ".Module.UnityCommonImporter",
-		"Path": f"{oProjName}/Packages",
+		"Name": ".Module.Unity.Importer",
+		"Path": f"{oNameProj}/Packages",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitycommonimporter.git"
 	},
 
 	{
-		"Name": "NativePlugins",
-		"Path": oProjName,
+		"Name": ".Module.Unity.PluginsNative",
+		"Path": f"{oNameProj}/Modules",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_nativeplugins.git"
 	},
 
 	{
-		"Name": "UnityPackages",
-		"Path": oProjName,
+		"Name": ".Module.Unity.Packages",
+		"Path": f"{oNameProj}/Modules",
 		"URL": "https://gitlab.com/9tapmodule.repository/0300000001.module_unitypackages.git"
 	}
 ]
 
 # 경로를 탐색한다
-def FindPath(a_oBasePath):
+def FindPath(a_oPathBase):
 	for i in range(0, 10):
 		# 디렉토리가 존재 할 경우
-		if os.path.exists(a_oBasePath):
-			return a_oBasePath
+		if os.path.exists(a_oPathBase):
+			return a_oPathBase
 
-		a_oBasePath = f"../{a_oBasePath}"
+		a_oPathBase = f"../{a_oPathBase}"
 		
-	return a_oBasePath
+	return a_oPathBase
 
-for oSubmoduleInfo in oSubmoduleInfos:
-	oPath = FindPath(f"{oSubmoduleInfo['Path']}/{oSubmoduleInfo['Name']}")
-	oCurPath = os.getcwd()
+for oInfoSubmodule in oInfosSubmodule:
+	oPath = FindPath(f"{oInfoSubmodule['Path']}/{oInfoSubmodule['Name']}")
+	oPathCur = os.getcwd()
 	
 	# 서브 모듈이 존재 할 경우
 	if os.path.exists(oPath):
 		try:
 			os.chdir(oPath)
-			os.system(f"git remote set-url origin \"{oSubmoduleInfo['URL']}\"")
+			os.system(f"git remote set-url origin \"{oInfoSubmodule['URL']}\"")
 		finally:
-			os.chdir(oCurPath)
+			os.chdir(oPathCur)

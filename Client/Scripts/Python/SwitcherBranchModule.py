@@ -1,14 +1,14 @@
 import os
 import sys
 
-oProjName = sys.argv[1]
-oBranchName = sys.argv[2]
-oOriginBranchName = sys.argv[3]
+oNameProj = sys.argv[1]
+oNameBranch = sys.argv[2]
+oNameBranchOrigin = sys.argv[3]
 
-os.system(f"python UpdaterModule.py \"{oProjName}\"")
+os.system(f"python UpdaterModule.py \"{oNameProj}\"")
 
 # 원본 브랜치 이름이 유효 할 경우
-if oOriginBranchName:
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git checkout -b {oBranchName} {oOriginBranchName}\"")
+if oNameBranchOrigin:
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git checkout -b {oNameBranch} {oNameBranchOrigin}\"")
 else:
-	os.system(f"python ExecuterCmdModule.py \"{oProjName}\" \"git checkout {oBranchName}\"")
+	os.system(f"python ExecuterCmdModule.py \"{oNameProj}\" \"git checkout {oNameBranch}\"")
