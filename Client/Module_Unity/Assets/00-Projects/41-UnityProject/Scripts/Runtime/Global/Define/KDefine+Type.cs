@@ -28,7 +28,7 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo>
 	#region 상수
 	public static readonly STTargetInfo INVALID = new STTargetInfo()
 	{
-		m_nKinds = KCDefine.B_IDX_INVALID,
+		m_nKinds = KCDefine.G_IDX_INVALID,
 		m_eTargetKinds = ETargetKinds.NONE,
 		m_eKindsGroupType = EKindsGroupType.NONE,
 		m_stValInfo01 = STValInfo.INVALID,
@@ -65,7 +65,7 @@ public struct STTargetInfo : System.IEquatable<STTargetInfo>
 	/** 생성자 */
 	public STTargetInfo(SimpleJSON.JSONNode a_oTargetInfo, int a_nSrcIdx = KCDefine.B_VAL_0_INT)
 	{
-		m_nKinds = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].ExIsValid() ? a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].AsInt : KCDefine.B_IDX_INVALID;
+		m_nKinds = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].ExIsValid() ? a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_2_INT].AsInt : KCDefine.G_IDX_INVALID;
 		m_eTargetKinds = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_0_INT].ExIsValid() ? (ETargetKinds)a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_0_INT].AsInt : ETargetKinds.NONE;
 		m_eKindsGroupType = a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_1_INT].ExIsValid() ? (EKindsGroupType)a_oTargetInfo[a_nSrcIdx + KCDefine.B_VAL_1_INT].AsInt : EKindsGroupType.NONE;
 

@@ -96,7 +96,7 @@ public abstract partial class CTargetInfo : CBaseInfo
 		foreach(var stKeyVal in m_oAbilityTargetInfoDict)
 		{
 			// 버전이 다를 경우
-			if(a_stVer.CompareTo(KDefine.G_VER_ABILITY_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+			if(a_stVer.CompareTo(KDefine.G_VER_ABILITY_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 			{
 				// Do Something
 			}
@@ -145,7 +145,7 @@ public partial class CItemTargetInfo : CTargetInfo
 		base.OnAfterDeserialize();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_ITEM_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_ITEM_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
@@ -201,7 +201,7 @@ public partial class CSkillTargetInfo : CTargetInfo
 		base.OnAfterDeserialize();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_SKILL_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_SKILL_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
@@ -258,7 +258,7 @@ public partial class CObjTargetInfo : CTargetInfo
 		base.OnAfterDeserialize();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_OBJ_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_OBJ_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
@@ -314,7 +314,7 @@ public partial class CAbilityTargetInfo : CTargetInfo
 		base.OnAfterDeserialize();
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_ABILITY_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_ABILITY_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
@@ -395,7 +395,7 @@ public partial class CCharacterUserInfo : CObjTargetInfo
 		}
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_CHARACTER_OBJ_TARGET_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_CHARACTER_OBJ_TARGET_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
@@ -466,7 +466,7 @@ public partial class CUserInfo : CBaseInfo
 		}
 
 		// 버전이 다를 경우
-		if(this.Ver.CompareTo(KDefine.G_VER_USER_INFO) < KCDefine.B_COMPARE_EQUALS)
+		if(this.Ver.CompareTo(KDefine.G_VER_USER_INFO) < KCDefine.G_COMPARE_EQUALS)
 		{
 			// Do Something
 		}
